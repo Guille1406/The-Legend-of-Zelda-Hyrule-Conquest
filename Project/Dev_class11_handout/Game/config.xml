@@ -19,7 +19,7 @@
   </gui>
     
   <window>
-    <resolution width="768" height="579" scale="1"/>
+    <resolution width="256" height="224" scale="1"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
