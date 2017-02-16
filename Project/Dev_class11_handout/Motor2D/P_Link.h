@@ -4,8 +4,9 @@
 #include "j1Player.h"
 #include "p2Point.h"
 #include "SDL\include\SDL.h"
+#include "Character.h"
 
-class P_Link  {
+class P_Link:public Character  {
 public:
 	P_Link() {};
 	~P_Link() {};
@@ -16,8 +17,8 @@ public:
 
 public:
 
-	SDL_Texture* Link_Sprite;
-	p2Point<int> pos;
+
+
 
 };
 

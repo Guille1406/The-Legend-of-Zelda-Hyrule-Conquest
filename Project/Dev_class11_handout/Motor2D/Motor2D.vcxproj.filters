@@ -70,6 +70,9 @@
     <ClCompile Include="P_Link.cpp">
       <Filter>Desenvolupament  ========\L&amp;Z</Filter>
     </ClCompile>
+    <ClCompile Include="P_Zelda.cpp">
+      <Filter>Desenvolupament  ========\L&amp;Z</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -163,6 +166,9 @@
       <Filter>Desenvolupament  ========\L&amp;Z</Filter>
     </ClInclude>
     <ClInclude Include="P_Zelda.h">
+      <Filter>Desenvolupament  ========\L&amp;Z</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
       <Filter>Desenvolupament  ========\L&amp;Z</Filter>
     </ClInclude>
   </ItemGroup>

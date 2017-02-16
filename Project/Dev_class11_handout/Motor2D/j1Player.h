@@ -5,13 +5,14 @@
 #include "p2Point.h"
 #include "MainScene.h"
 #include "P_Link.h"
+#include "P_Zelda.h"
+#include "Character.h"
 
+using namespace std;
 class P_Link;
+class P_Zelda;
 
-enum Character {
-	link,
-	zelda
-};
+
 
 class j1Player :public j1Module {
 public:
@@ -30,10 +31,13 @@ public:
 
 public:
 	//p2Point<float>* pos;
+	
 	MainScene* actual_scene;
 	int live;
-	Character selected_character;
+	Character* selected_character;
 	P_Link* Link;
+	P_Zelda* Zelda;
+
 };
 
 
