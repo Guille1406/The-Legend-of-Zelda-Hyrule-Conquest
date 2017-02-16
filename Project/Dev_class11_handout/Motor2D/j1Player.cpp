@@ -22,6 +22,7 @@ bool j1Player::Start()
 	Zelda->character_texture = Link->character_texture;
 	
 	selected_character = Link;
+	other_character = Zelda;
 	return true;
 }
 
@@ -33,19 +34,26 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt)
 {
 	
-	if (selected_character == Link) {
-		Link->Move();
-	}
-	else {
-		Zelda->Move();
-	}
+	
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-		if (selected_character == Link)selected_character = Zelda;
-		else selected_character = Link;
+		change = true;
+		if (selected_character == Link) {
+			selected_character = Zelda;
+			other_character = Link;
+		}
+		else {
+			selected_character = Link;
+			other_character = Zelda;
+		}
 	}
 	
 	Draw();
-	Move();
+	if (change == true) {
+		Move_Camera();
+	}
+	else {
+		Move();
+	}
 	return true;
 }
 
@@ -63,11 +71,18 @@ void j1Player::Draw()
 
 void j1Player::Move()
 { //temporal
-	uint x, y;
-	App->win->GetWindowSize(x, y);
-	App->render->camera.x = -selected_character->pos.x + x/2 - 8;
-	App->render->camera.y = -selected_character->pos.y + y/2 - 8;
-
+	
+		if (selected_character == Link) {
+			Link->Move();
+		}
+		else {
+			Zelda->Move();
+		}
+		uint x, y;
+		App->win->GetWindowSize(x, y);
+		App->render->camera.x = -selected_character->pos.x + x / 2 - 8;
+		App->render->camera.y = -selected_character->pos.y + y / 2 - 8;
+	
 }
 
 void j1Player::Change_Player()
@@ -76,4 +91,22 @@ void j1Player::Change_Player()
 
 void j1Player::Chase()
 {
+	
+}
+
+bool j1Player::Move_Camera()
+{
+	static int i = 0;
+	float x = other_character->pos.x - selected_character->pos.x;
+	float y = other_character->pos.y - selected_character->pos.y;
+	App->render->camera.x = App->render->camera.x + x / 20;
+	App->render->camera.y = App->render->camera.y + y / 20;
+
+	if (i >= 20) {
+		change = false;
+		i = 0;
+	}
+	i++;
+	
+	return false;
 }

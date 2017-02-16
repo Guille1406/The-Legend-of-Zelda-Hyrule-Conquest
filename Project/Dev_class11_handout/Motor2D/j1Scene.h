@@ -6,6 +6,8 @@
 #include "SDL\include\SDL.h"
 #include "MainScene.h"
 
+using namespace std;
+
 struct SDL_Texture;
 
 
@@ -46,6 +48,7 @@ private:
 	MainScene* active_scene = nullptr;
 	MainScene* prev_scene = nullptr;
 	MainScene* loaded_scene = nullptr;
+	//std::list<MainScene*>* scene_list = nullptr;
 	p2List<MainScene*>* scene_list  = nullptr;
 
 	

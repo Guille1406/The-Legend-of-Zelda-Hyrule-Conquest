@@ -6,18 +6,17 @@
 #include "SDL\include\SDL.h"
 #include "Character.h"
 
+class Character;
+
 class P_Link:public Character  {
 public:
-	P_Link() {};
-	~P_Link() {};
+	
 
-	void Move();
+
 	void Attack();
 
 
 public:
-
-
 
 
 };
