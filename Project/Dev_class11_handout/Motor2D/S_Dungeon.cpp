@@ -23,7 +23,7 @@ bool S_Dungeon::Update() {
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) {
 		App->scene->Show(inventory);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		App->scene->ChangeScene(world);
 	}
 	App->map->Draw();

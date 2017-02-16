@@ -64,6 +64,12 @@
     <ClCompile Include="S_Dungeon.cpp">
       <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="j1Player.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="P_Link.cpp">
+      <Filter>Desenvolupament  ========\L&amp;Z</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -150,6 +156,15 @@
     <ClInclude Include="S_Dungeon.h">
       <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="j1Player.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="P_Link.h">
+      <Filter>Desenvolupament  ========\L&amp;Z</Filter>
+    </ClInclude>
+    <ClInclude Include="P_Zelda.h">
+      <Filter>Desenvolupament  ========\L&amp;Z</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -172,6 +187,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\GUI">
       <UniqueIdentifier>{00bcdf2c-47ca-474d-b3b6-127e9e55d824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\L&amp;Z">
+      <UniqueIdentifier>{33e19344-f2d6-440f-8d50-b4608a70dfad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

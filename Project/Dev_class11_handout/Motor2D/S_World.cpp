@@ -21,8 +21,8 @@ bool S_World::Start()
 
 			RELEASE_ARRAY(data);
 	}
-	App->render->camera.x = -2500;
-	App->render->camera.y = -3400;
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 
 	
 	LOG("World Open");
@@ -37,7 +37,7 @@ bool S_World::Update()
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) {
 		App->scene->Show(inventory);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		App->scene->ChangeScene(dungeon);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)

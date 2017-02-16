@@ -19,6 +19,7 @@ class j1Map;
 class j1PathFinding;
 class j1Fonts;
 class j1Gui;
+class j1Player;
 
 class j1App
 {
@@ -98,6 +99,7 @@ public:
 	j1PathFinding*		pathfinding = NULL;
 	j1Fonts*			font = NULL;
 	j1Gui*				gui = NULL;
+	j1Player*			player = NULL;
 
 private:
 
@@ -124,6 +126,6 @@ private:
 	int					capped_ms = -1;
 };
 
-extern j1App* App; // No student is asking me about that ... odd :-S
+extern j1App* App;
 
 #endif
