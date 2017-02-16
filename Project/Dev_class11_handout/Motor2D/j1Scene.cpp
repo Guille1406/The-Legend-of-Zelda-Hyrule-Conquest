@@ -19,6 +19,11 @@
 #include <conio.h>
 #include <iostream>
 
+#include "S_Inventory.h"
+#include "S_Map.h"
+#include "S_World.h"
+#include "S_Dungeon.h"
+
 using namespace std;
 
 
@@ -37,6 +42,7 @@ bool j1Scene::Awake()
 {
 	LOG("Loading Scene");
 	
+	
 	bool ret = true;
 	
 	return ret;
@@ -45,14 +51,42 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
+	
+	scene_list = new p2List<MainScene*>();
+	//S_Inventory* temp = new S_Inventory();
+	p2List_item<MainScene*>* Inventory = scene_list->add(new S_Inventory);	
+	Inventory->data->scene_name = inventory;
+
+	p2List_item<MainScene*>* Map = scene_list->add(new S_Map);
+	Map->data->scene_name = map;
+	
+	p2List_item<MainScene*>* World= scene_list->add(new S_World);
+	World->data->scene_name = world;
+
+	p2List_item<MainScene*>* Dungeon = scene_list->add(new S_Dungeon);
+	Dungeon->data->scene_name = dungeon;
+
+	active_scene = World->data;
+	prev_scene = World->data;
+	loaded_scene = World->data;
+	active_scene->Start();
+	
 
 	
+
+	//debug_tex = App->tex->Load("maps/path2.png");
+
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
+	if (active_scene != prev_scene) {
+		active_scene->Start();
+		prev_scene = active_scene;
+	}
+	active_scene->PreUpdate();
 	return true;
 }
 
@@ -60,12 +94,14 @@ bool j1Scene::PreUpdate()
 bool j1Scene::Update(float dt)
 {	
 	
+	active_scene->Update();
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene::PostUpdate()
 {
+	active_scene->PostUpdate();
 	bool ret = true;
 
 	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
@@ -80,6 +116,45 @@ bool j1Scene::CleanUp()
 	LOG("Freeing scene");
 
 	
+	
+	return true;
+}
+
+bool j1Scene::ChangeScene(Scene_ID name)
+{
+
+
+	p2List_item<MainScene*>* temp = scene_list->start;
+	while (temp != NULL) {
+		if (temp->data->scene_name == name) {
+			active_scene->Clean();
+			active_scene = temp->data;
+			loaded_scene = active_scene;
+			return true;
+		}
+		temp = temp->next;
+	}
+	return false;
+}
+
+bool j1Scene::Show(Scene_ID name)
+{
+	p2List_item<MainScene*>* temp = scene_list->start;
+	while (temp != NULL) {
+		if (temp->data->scene_name == name) {
+			active_scene = temp->data;			
+			return true;
+		}
+		temp = temp->next;
+	}
+	return false;
+}
+
+bool j1Scene::Hide()
+{
+	active_scene->Clean();
+	active_scene = loaded_scene;
+	prev_scene = active_scene;
 	
 	return true;
 }

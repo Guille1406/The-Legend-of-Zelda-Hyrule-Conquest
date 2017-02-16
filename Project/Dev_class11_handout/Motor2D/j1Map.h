@@ -136,6 +136,7 @@ private:
 public:
 
 	MapData data;
+	
 
 private:
 

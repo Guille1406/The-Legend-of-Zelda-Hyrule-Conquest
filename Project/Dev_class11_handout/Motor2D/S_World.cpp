@@ -1,0 +1,75 @@
+#include "S_World.h"
+#include "j1Input.h"
+#include "SDL\include\SDL.h"
+#include "j1Scene.h"
+#include "p2Log.h"
+#include "j1App.h"
+#include "j1Map.h"
+#include "j1Render.h"
+#include "j1Textures.h"
+
+bool S_World::Start()
+{
+	test = new char[20];
+
+	if (App->map->Load("zelda_map.tmx") == true)
+	{
+		int w, h;
+		uchar* data = NULL;
+		if (App->map->CreateWalkabilityMap(w, h, &data))
+			//App->pathfinding->SetMap(w, h, data);
+
+			RELEASE_ARRAY(data);
+	}
+	App->render->camera.x = -2500;
+	App->render->camera.y = -3400;
+
+	
+	LOG("World Open");
+	return false;
+}
+
+bool S_World::Update()
+{
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
+		App->scene->Show(map);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) {
+		App->scene->Show(inventory);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) {
+		App->scene->ChangeScene(dungeon);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		App->render->camera.y += 5;
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		App->render->camera.y -= 5;
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		App->render->camera.x += 5;
+
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		App->render->camera.x -= 5;
+
+
+	App->map->Draw();
+
+
+	return false;
+}
+
+bool S_World::Clean()
+{
+	delete test;
+	LOG("World Test Deleted");
+	p2List_item<TileSet*>* temp = App->map->data.tilesets.start;
+	while (temp != NULL) {
+		App->tex->UnLoad(temp->data->texture);
+		temp = temp->next;
+	}
+
+	App->map->CleanUp();
+	
+	return false;
+}

@@ -4,6 +4,7 @@
 #include "j1Module.h"
 #include "j1Gui.h"
 #include "SDL\include\SDL.h"
+#include "MainScene.h"
 
 struct SDL_Texture;
 
@@ -35,12 +36,17 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	
+	bool ChangeScene(Scene_ID);
 
+	bool Show(Scene_ID);
+	bool Hide();
 
 	
 private:
-	
+	MainScene* active_scene = nullptr;
+	MainScene* prev_scene = nullptr;
+	MainScene* loaded_scene = nullptr;
+	p2List<MainScene*>* scene_list  = nullptr;
 
 	
 };

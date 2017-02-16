@@ -40,7 +40,7 @@ void j1Map::Draw()
 	{
 		MapLayer* layer = item->data;
 
-		if(layer->properties.Get("Nodraw") != 0)
+		if(auto temp = layer->properties.Get("Nodraw") != 0)
 			continue;
 
 		for(int y = 0; y < data.height; ++y)
@@ -380,6 +380,7 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	else
 	{
 		set->texture = App->tex->Load(PATH(folder.GetString(), image.attribute("source").as_string()));
+		
 		int w, h;
 		SDL_QueryTexture(set->texture, NULL, NULL, &w, &h);
 		set->tex_width = image.attribute("width").as_int();
@@ -424,11 +425,24 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 		layer->data = new uint[layer->width*layer->height];
 		memset(layer->data, 0, layer->width*layer->height);
 
-		int i = 0;
-		for(pugi::xml_node tile = layer_data.child("tile"); tile; tile = tile.next_sibling("tile"))
-		{
-			layer->data[i++] = tile.attribute("gid").as_int(0);
-		}
+	
+		//for(pugi::xml_node tile = layer_data.child("tile"); tile; tile = tile.next_sibling("tile"))
+		//{
+	
+			pugi::xml_node tile = layer_data.first_child();
+			const char* chain = tile.value();
+			char* temp = strtok((char*)chain, " ,.-");
+			int i = 0;
+			while (temp != nullptr)
+			{
+				int num = atoi(temp);
+				layer->data[i++] = num;
+				temp = strtok(NULL, ",");
+				
+				
+			}
+			
+		
 	}
 
 	return ret;
