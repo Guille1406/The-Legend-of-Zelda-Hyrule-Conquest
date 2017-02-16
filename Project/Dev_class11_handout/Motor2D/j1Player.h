@@ -9,6 +9,7 @@
 #include "Character.h"
 
 using namespace std;
+
 class P_Link;
 class P_Zelda;
 
@@ -27,14 +28,15 @@ public:
 	void Move();
 	void Change_Player();
 	void Chase();
-
+	bool Move_Camera();
 
 public:
 	//p2Point<float>* pos;
-	
+	bool change = false;
 	MainScene* actual_scene;
 	int live;
 	Character* selected_character;
+	Character* other_character;
 	P_Link* Link;
 	P_Zelda* Zelda;
 
