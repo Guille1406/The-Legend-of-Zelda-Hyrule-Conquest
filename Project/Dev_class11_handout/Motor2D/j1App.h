@@ -6,7 +6,7 @@
 #include "j1PerfTimer.h"
 #include "j1Timer.h"
 #include "PugiXml\src\pugixml.hpp"
-
+#include<list>;
 // Modules
 class j1Window;
 class j1Input;
@@ -20,6 +20,8 @@ class j1PathFinding;
 class j1Fonts;
 class j1Gui;
 class j1Player;
+
+using namespace std;
 
 class j1App
 {
@@ -102,8 +104,7 @@ public:
 	j1Player*			player = NULL;
 
 private:
-
-	p2List<j1Module*>	modules;
+	std::list<j1Module*> modules;
 	int					argc;
 	char**				args;
 
