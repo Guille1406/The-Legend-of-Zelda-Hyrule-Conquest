@@ -23,6 +23,7 @@ bool j1Player::Start()
 	
 	selected_character = Link;
 	other_character = Zelda;
+	change = false;
 	return true;
 }
 
@@ -97,14 +98,32 @@ void j1Player::Chase()
 bool j1Player::Move_Camera()
 {
 	static int i = 0;
-	float x = other_character->pos.x - selected_character->pos.x;
-	float y = other_character->pos.y - selected_character->pos.y;
-	App->render->camera.x = App->render->camera.x + x / 20;
-	App->render->camera.y = App->render->camera.y + y / 20;
+	static float rest_x;
+	static float rest_y;
+	int sum_x = 0;
+	int sum_y = 0;
+	int x = other_character->pos.x - selected_character->pos.x;
+	int y = other_character->pos.y - selected_character->pos.y;
+
+	rest_x = rest_x + x % 20;
+	rest_y = rest_y + y % 20;
+
+	if (rest_x >= 20) {
+		sum_x = 1;
+		rest_x = rest_x - 20;
+	}
+	if (rest_y >= 20) {
+		sum_y = 1;
+		rest_y = rest_y - 20;
+	}
+	App->render->camera.x = App->render->camera.x + x / 20 + sum_x;
+	App->render->camera.y = App->render->camera.y + y / 20 + sum_y;
 
 	if (i >= 20) {
 		change = false;
 		i = 0;
+		rest_x = 0;
+		rest_y = 0;
 	}
 	i++;
 	
