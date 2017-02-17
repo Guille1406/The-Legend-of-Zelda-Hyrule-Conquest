@@ -60,34 +60,6 @@ void j1Map::Draw()
 
 	}
 
-
-	/*
-	p2List_item<MapLayer*>* item = data.layers.start;
-
-	for(; item != NULL; item = item->next)
-	{
-		MapLayer* layer = item->data;
-
-		if(auto temp = layer->properties.Get("Nodraw") != 0)
-			continue;
-
-		for(int y = 0; y < data.height; ++y)
-		{
-			for(int x = 0; x < data.width; ++x)
-			{
-				int tile_id = layer->Get(x, y);
-				if(tile_id > 0)
-				{
-					TileSet* tileset = GetTilesetFromTileId(tile_id);
-
-					SDL_Rect r = tileset->GetTileRect(tile_id);
-					iPoint pos = MapToWorld(x, y);
-
-					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
-				}
-			}
-		}
-	}*/
 }
 
 int Properties::Get(const char* value, int default_value) const
@@ -118,19 +90,6 @@ TileSet* j1Map::GetTilesetFromTileId(int id) const
 
 	}
 
-	/*p2List_item<TileSet*>* item = data.tilesets.start;
-	TileSet* set = item->data;
-
-	while(item)
-	{
-		if(id < item->data->firstgid)
-		{
-			set = item->prev->data;
-			break;
-		}
-		set = item->data;
-		item = item->next;
-	}*/
 
 	return set;
 }
@@ -207,15 +166,6 @@ bool j1Map::CleanUp()
 		RELEASE((*item));
 	}
 
-
-	/*p2List_item<TileSet*>* item;
-	item = data.tilesets.start;
-
-	while(item != NULL)
-	{
-		RELEASE(item->data);
-		item = item->next;
-	}*/
 	data.tilesets.clear();
 
 	// Remove all layers
@@ -225,15 +175,6 @@ bool j1Map::CleanUp()
 		RELEASE((*item2));
 	}
 
-
-	/*p2List_item<MapLayer*>* item2;
-	item2 = data.layers.start;
-
-	while(item2 != NULL)
-	{
-		RELEASE(item2->data);
-		item2 = item2->next;
-	}*/
 	data.layers.clear();
 
 	// Clean up the pugui tree
@@ -320,15 +261,6 @@ bool j1Map::Load(const char* file_name)
 
 		}
 
-		/*p2List_item<MapLayer*>* item_layer = data.layers.start;
-		while(item_layer != NULL)
-		{
-			MapLayer* l = item_layer->data;
-			LOG("Layer ----");
-			LOG("name: %s", l->name.GetString());
-			LOG("tile width: %d tile height: %d", l->width, l->height);
-			item_layer = item_layer->next;
-		}*/
 	}
 
 	map_loaded = ret;
@@ -576,51 +508,5 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 
 		break;
 	}
-
-
-
-
-	/*p2List_item<MapLayer*>* item;
-	item = data.layers.start;
-
-	for(item = data.layers.start; item != NULL; item = item->next)
-	{
-		MapLayer* layer = item->data;
-
-		if(layer->properties.Get("Navigation", 0) == 0)
-			continue;
-
-		uchar* map = new uchar[layer->width*layer->height];
-		memset(map, 1, layer->width*layer->height);
-
-		for(int y = 0; y < data.height; ++y)
-		{
-			for(int x = 0; x < data.width; ++x)
-			{
-				int i = (y*layer->width) + x;
-
-				int tile_id = layer->Get(x, y);
-				TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
-				
-				if(tileset != NULL)
-				{
-					map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1;
-					TileType* ts = tileset->GetTileType(tile_id);
-					if(ts != NULL)
-					{
-						map[i] = ts->properties.Get("walkable", 1);
-					}
-				}
-			}
-		}
-
-		*buffer = map;
-		width = data.width;
-		height = data.height;
-		ret = true;
-
-		break;
-	}*/
-
 	return ret;
 }

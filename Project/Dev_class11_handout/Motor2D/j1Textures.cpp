@@ -47,11 +47,10 @@ bool j1Textures::Start()
 bool j1Textures::CleanUp()
 {
 	LOG("Freeing textures and Image library");
-	p2List_item<SDL_Texture*>* item;
 
-	for(item = textures.start; item != NULL; item = item->next)
-	{
-		SDL_DestroyTexture(item->data);
+	std::list<SDL_Texture*>::iterator item = textures.begin();
+	for (; item != textures.cend(); ++item) {
+		SDL_DestroyTexture((*item));
 	}
 
 	textures.clear();
@@ -81,14 +80,14 @@ SDL_Texture* const j1Textures::Load(const char* path)
 // Unload texture
 bool j1Textures::UnLoad(SDL_Texture* texture)
 {
-	p2List_item<SDL_Texture*>* item;
 
-	for(item = textures.start; item != NULL; item = item->next)
-	{
-		if(texture == item->data)
+
+	std::list<SDL_Texture*>::iterator item = textures.begin();
+	for (; item != textures.cend(); ++item) {
+		if (texture == (*item))
 		{
-			SDL_DestroyTexture(item->data);
-			textures.del(item);
+			SDL_DestroyTexture((*item));
+			textures.erase(item);
 			return true;
 		}
 	}
@@ -107,7 +106,7 @@ SDL_Texture* const j1Textures::LoadSurface(SDL_Surface* surface)
 	}
 	else
 	{
-		textures.add(texture);
+		textures.push_back(texture);
 	}
 
 	return texture;
