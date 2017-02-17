@@ -35,10 +35,9 @@ bool S_Dungeon::Clean()
 {
 	delete test;
 	LOG("Dungeon Test Deleted");
-	p2List_item<TileSet*>* temp = App->map->data.tilesets.start;
-	while (temp != NULL) {
-		App->tex->UnLoad(temp->data->texture);
-		temp = temp->next;
+
+	for (std::list <TileSet*>::iterator temp = App->map->data.tilesets.begin(); temp != App->map->data.tilesets.cend(); ++temp) {
+		App->tex->UnLoad((*temp)->texture);
 	}
 
 	App->map->CleanUp();

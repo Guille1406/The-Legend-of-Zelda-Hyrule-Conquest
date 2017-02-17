@@ -102,7 +102,7 @@ bool j1Input::PreUpdate()
 						}
 					}
 					else if (event.key.keysym.sym == SDLK_RIGHT) {
-						if (cursorPos < lastInput.Length()) {
+						if (cursorPos < lastInput.size()) {
 							cursorPos++;
 						}
 					}
@@ -212,5 +212,5 @@ char* j1Input::GetLetter()
 
 const char * j1Input::GetLastInput()
 {	
-	return lastInput.GetString();
+	return lastInput.c_str();
 }

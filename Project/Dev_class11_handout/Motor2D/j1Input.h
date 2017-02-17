@@ -82,7 +82,7 @@ private:
 	int			mouse_x;
 	int			mouse_y;
 
-	p2SString	lastInput;
+	std::string	lastInput;
 	int			cursorPos;
 };
 

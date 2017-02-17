@@ -63,11 +63,17 @@ bool S_World::Clean()
 {
 	delete test;
 	LOG("World Test Deleted");
-	p2List_item<TileSet*>* temp = App->map->data.tilesets.start;
+
+	//std::list <TileSet*>::iterator temp = App->map->data.tilesets.begin();
+	for (std::list <TileSet*>::iterator temp = App->map->data.tilesets.begin(); temp != App->map->data.tilesets.cend(); ++temp) {
+		App->tex->UnLoad((*temp)->texture);
+	}
+
+	/*p2List_item<TileSet*>* temp = App->map->data.tilesets.start;
 	while (temp != NULL) {
 		App->tex->UnLoad(temp->data->texture);
 		temp = temp->next;
-	}
+	}*/
 
 	App->map->CleanUp();
 	
