@@ -97,7 +97,11 @@ void j1Player::Chase()
 
 bool j1Player::Move_Camera()
 {
+
+	int test = -1;
+
 	static int i = 0;
+	
 	static float rest_x;
 	static float rest_y;
 	int sum_x = 0;
@@ -105,20 +109,25 @@ bool j1Player::Move_Camera()
 	int x = other_character->pos.x - selected_character->pos.x;
 	int y = other_character->pos.y - selected_character->pos.y;
 
+	if (x > 0)test = 1;
+
 	rest_x = rest_x + x % 20;
 	rest_y = rest_y + y % 20;
 
-	if (rest_x >= 20) {
-		sum_x = 1;
-		rest_x = rest_x - 20;
+	if (test * rest_x >= 20 ) {
+		sum_x = 1 * test;
+		rest_x = rest_x - 20 * test;
 	}
-	if (rest_y >= 20) {
-		sum_y = 1;
-		rest_y = rest_y - 20;
+
+	test = -1;
+	if (y > 0)test = 1;
+
+	if (test * rest_y >= 20) {
+		sum_y = 1 * test;
+		rest_y = rest_y - 20 * test;
 	}
 	App->render->camera.x = App->render->camera.x + x / 20 + sum_x;
 	App->render->camera.y = App->render->camera.y + y / 20 + sum_y;
-
 	if (i >= 20) {
 		change = false;
 		i = 0;
