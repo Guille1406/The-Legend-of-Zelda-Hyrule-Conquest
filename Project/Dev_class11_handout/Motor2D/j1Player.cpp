@@ -17,9 +17,9 @@ bool j1Player::Start()
 	Link = new P_Link();
 	Link->pos = { 0,0 };
 	Zelda = new P_Zelda();
-	Zelda->pos = { 10,10 };
+	Zelda->pos = { 16,16 };
 
-
+	//Change this for link spritesheet
 	Link->character_texture = App->tex->Load("textures/map.png");
 
 	//Change this for the zelda spritesheet
@@ -42,6 +42,8 @@ bool j1Player::Update(float dt)
 	//std::list<int>::iterator findIter = std::find(App->map->data.layers.begin(), App->map->data.layers.end(),1);
 	uint col_tile = 237;
 	
+
+	//Cambiar esto a una funcion
 	uint tile_pos_x = App->player->selected_character->pos.x / 8;
 	uint tile_pos_y = App->player->selected_character->pos.y / 8;
 
@@ -56,6 +58,9 @@ bool j1Player::Update(float dt)
 	adjacent.right.j = App->map->Colision->Get(tile_pos_x+2, tile_pos_y +1);
 
 	LOG("\n %i %i\n%i\t%i\n%i\t%i\n %i %i", adjacent.up.i, adjacent.up.j,adjacent.left.j,adjacent.right.i,adjacent.left.i,adjacent.right.j,adjacent.down.j,adjacent.down.i);
+	//
+
+	//Cambiar esto a una funcion
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		change = true;
 		if (selected_character == Link) {
@@ -67,6 +72,7 @@ bool j1Player::Update(float dt)
 			other_character = Zelda;
 		}
 	}
+	//
 	
 	Draw();
 	if (change == true) {
@@ -91,7 +97,7 @@ void j1Player::Draw()
 }
 
 void j1Player::Move()
-{ //temporal
+{ 
 	
 
 	// HAY QUE INTENTAR QUE ESTO NO SEA TAN HARD CODE
@@ -172,10 +178,12 @@ void j1Player::Chase()
 bool j1Player::Move_Camera()
 {
 
-	int test = -1;
-
+	int mult = -1;
 	static int i = 0;
 	
+	//Time between character change
+	const int time = 20;
+
 	static float rest_x;
 	static float rest_y;
 	int sum_x = 0;
@@ -183,26 +191,26 @@ bool j1Player::Move_Camera()
 	int x = other_character->pos.x*3 - selected_character->pos.x*3;
 	int y = other_character->pos.y*3 - selected_character->pos.y*3;
 
-	if (x > 0)test = 1;
+	if (x > 0)mult = 1;
 
-	rest_x = rest_x + x % 20;
-	rest_y = rest_y + y % 20;
+	rest_x = rest_x + x % time;
+	rest_y = rest_y + y % time;
 
-	if (test * rest_x >= 20 ) {
-		sum_x = 1 * test;
-		rest_x = rest_x - 20 * test;
+	if (mult * rest_x >= time) {
+		sum_x = mult;
+		rest_x = rest_x - time * mult;
 	}
 
-	test = -1;
-	if (y > 0)test = 1;
+	mult = -1;
+	if (y > 0)mult = 1;
 
-	if (test * rest_y >= 20) {
-		sum_y = 1 * test;
-		rest_y = rest_y - 20 * test;
+	if (mult * rest_y >= time) {
+		sum_y = mult;
+		rest_y = rest_y - time * mult;
 	}
-	App->render->camera.x = App->render->camera.x + x / 20 + sum_x;
-	App->render->camera.y = App->render->camera.y + y / 20 + sum_y;
-	if (i >= 20) {
+	App->render->camera.x = App->render->camera.x + x / time + sum_x;
+	App->render->camera.y = App->render->camera.y + y / time + sum_y;
+	if (i >= time) {
 		change = false;
 		i = 0;
 		rest_x = 0;
