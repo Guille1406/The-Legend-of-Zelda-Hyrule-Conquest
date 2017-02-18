@@ -7,6 +7,7 @@
 #include "j1Map.h"
 #include <math.h>
 #include "j1Gui.h"
+#include "j1Player.h"
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
 {
@@ -371,6 +372,7 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	}
 	else
 	{
+		auto asd = image.attribute("source").as_string();
 		set->texture = App->tex->Load(PATH(folder.GetString(), image.attribute("source").as_string()));
 		
 		int w, h;
@@ -473,7 +475,8 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 	std::list<MapLayer*>::const_iterator item = data.layers.begin();
 	for (; item != data.layers.cend(); ++item) {
 		MapLayer* layer = (*item);
-
+	
+		App->map->Colision = layer;
 		if (layer->properties.Get("Navigation", 0) == 0)
 			continue;
 

@@ -6,13 +6,27 @@
 #include "MainScene.h"
 #include "P_Link.h"
 #include "P_Zelda.h"
-#include "Character.h"
+
+#include "j1Map.h"
 
 using namespace std;
 
 class P_Link;
 class P_Zelda;
+class Character;
 
+struct dir_tiles {
+	uint i;
+	uint j;
+};
+
+struct  adjacent_tiles {
+	dir_tiles up;
+	dir_tiles down;
+	dir_tiles left;
+	dir_tiles right;
+
+};
 
 
 class j1Player :public j1Module {
@@ -39,7 +53,8 @@ public:
 	Character* other_character;
 	P_Link* Link;
 	P_Zelda* Zelda;
-
+	MapLayer* Colision;
+	adjacent_tiles adjacent;
 };
 
 
