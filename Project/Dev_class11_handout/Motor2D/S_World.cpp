@@ -10,7 +10,6 @@
 
 bool S_World::Start()
 {
-	test = new char[20];
 
 	if (App->map->Load("zelda_map.tmx") == true)
 	{
@@ -61,7 +60,7 @@ bool S_World::Update()
 
 bool S_World::Clean()
 {
-	delete test;
+	
 	LOG("World Test Deleted");
 
 	//std::list <TileSet*>::iterator temp = App->map->data.tilesets.begin();

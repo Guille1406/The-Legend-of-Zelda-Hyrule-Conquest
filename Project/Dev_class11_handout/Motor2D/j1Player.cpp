@@ -39,8 +39,7 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt)
 {
 
-	//std::list<int>::iterator findIter = std::find(App->map->data.layers.begin(), App->map->data.layers.end(),1);
-	uint col_tile = 237;
+
 	
 
 	//Cambiar esto a una funcion
@@ -57,7 +56,7 @@ bool j1Player::Update(float dt)
 	adjacent.right.i = App->map->Colision->Get(tile_pos_x+2, tile_pos_y);
 	adjacent.right.j = App->map->Colision->Get(tile_pos_x+2, tile_pos_y +1);
 
-	LOG("\n %i %i\n%i\t%i\n%i\t%i\n %i %i", adjacent.up.i, adjacent.up.j,adjacent.left.j,adjacent.right.i,adjacent.left.i,adjacent.right.j,adjacent.down.j,adjacent.down.i);
+	//LOG("\n %i %i\n%i\t%i\n%i\t%i\n %i %i", adjacent.up.i, adjacent.up.j,adjacent.left.j,adjacent.right.i,adjacent.left.i,adjacent.right.j,adjacent.down.j,adjacent.down.i);
 	//
 
 	//Cambiar esto a una funcion
@@ -114,10 +113,12 @@ void j1Player::Move()
 		if(adjacent.up.i  != TILE_COL_ID && adjacent.up.j != TILE_COL_ID)
 		selected_character->pos.y = pos.y - 1;
 		else if (adjacent.up.i == TILE_COL_ID && adjacent.up.j != TILE_COL_ID) {
+			pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
 			selected_character->pos.y = pos.y - 1;
 			selected_character->pos.x = pos.x + 1;
 		}
 		else if (adjacent.up.i != TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
+			pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
 			selected_character->pos.y = pos.y - 1;
 			selected_character->pos.x = pos.x - 1;
 		}
@@ -126,10 +127,12 @@ void j1Player::Move()
 		if (adjacent.down.i != TILE_COL_ID && adjacent.down.j != TILE_COL_ID)
 			selected_character->pos.y = pos.y + 1;
 		else if (adjacent.down.i == TILE_COL_ID && adjacent.down.j != TILE_COL_ID) {
+			pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
 			selected_character->pos.y = pos.y + 1;
 			selected_character->pos.x = pos.x - 1;
 		}
 		else if (adjacent.down.i != TILE_COL_ID && adjacent.down.j == TILE_COL_ID) {
+			pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
 			selected_character->pos.y = pos.y + 1;
 			selected_character->pos.x = pos.x + 1;
 		}
@@ -137,11 +140,13 @@ void j1Player::Move()
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		if (adjacent.left.i != TILE_COL_ID && adjacent.left.j != TILE_COL_ID)
 			selected_character->pos.x = pos.x - 1;
-		else if (adjacent.left.i == TILE_COL_ID && adjacent.left.j != TILE_COL_ID) {
-			selected_character->pos.y = pos.y - 1;
+		else if (adjacent.left.i == TILE_COL_ID && adjacent.left.j != TILE_COL_ID) {			
+			pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
 			selected_character->pos.x = pos.x - 1;
+			selected_character->pos.y = pos.y - 1;
 		}
 		else if (adjacent.left.i != TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
+			pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
 			selected_character->pos.y = pos.y + 1;
 			selected_character->pos.x = pos.x - 1;
 		}
@@ -150,10 +155,12 @@ void j1Player::Move()
 		if (adjacent.right.i != TILE_COL_ID && adjacent.right.j != TILE_COL_ID)
 			selected_character->pos.x = pos.x + 1;
 		else if (adjacent.right.i == TILE_COL_ID && adjacent.right.j != TILE_COL_ID) {
+			pos.y = pos.x - selected_character->tilepos.x*8 + selected_character->tilepos.y * 8;
 			selected_character->pos.y = pos.y + 1;
 			selected_character->pos.x = pos.x + 1;
 		}
 		else if (adjacent.right.i != TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
+			pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
 			selected_character->pos.y = pos.y - 1;
 			selected_character->pos.x = pos.x + 1;
 		}

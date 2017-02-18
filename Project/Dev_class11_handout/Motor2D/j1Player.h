@@ -45,16 +45,22 @@ public:
 	bool Move_Camera();
 
 public:
-	//p2Point<float>* pos;
+	
 	bool change = false;
 	MainScene* actual_scene;
-	int live;
+
+	
 	Character* selected_character;
 	Character* other_character;
 	P_Link* Link;
 	P_Zelda* Zelda;
+
+	//Colisions
 	MapLayer* Colision;
 	adjacent_tiles adjacent;
+
+
+	int live;
 };
 
 
