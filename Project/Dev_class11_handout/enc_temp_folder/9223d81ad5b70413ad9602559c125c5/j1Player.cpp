@@ -288,7 +288,90 @@ void j1Player::Move()
 		 break;
 	 }
 	
+	 
+	/*
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		if (adjacent.up.i != TILE_COL_ID && adjacent.up.j != TILE_COL_ID)
+		selected_character->pos.y = pos.y - 1;
+		else if (adjacent.up.i == TILE_COL_ID && adjacent.up.j != TILE_COL_ID) {
+			pos.y = 7 - (pos.x - selected_character->tilepos.x * 8) + selected_character->tilepos.y * 8;
+			selected_character->pos.y = pos.y - 1;
+			selected_character->pos.x = pos.x + 1;
+		}
+		else if (adjacent.up.i != TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
+			pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
+			selected_character->pos.y = pos.y - 1;
+			selected_character->pos.x = pos.x - 1;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			if (adjacent.up.i == TILE_COL_ID && adjacent.left.j== TILE_COL_ID) {
+				selected_character->pos.x = pos.x - 1;
+				selected_character->pos.y = pos.y + 1;
+			}
+			else if (adjacent.up.i == TILE_COL_ID && adjacent.left.j != TILE_COL_ID) {
+				selected_character->pos.x = pos.x - 1;
+			}
+			if (adjacent.up.i != TILE_COL_ID)
+				selected_character->pos.x = pos.x - 1;
 
+		}
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			if (adjacent.up.i == TILE_COL_ID && adjacent.right.i == TILE_COL_ID) {
+				selected_character->pos.x = pos.x + 1;
+				/////
+			}
+			if (adjacent.up.i != TILE_COL_ID ){
+				selected_character->pos.x = pos.x + 1;
+
+		}
+
+		}
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+		if (adjacent.down.i != TILE_COL_ID && adjacent.down.j != TILE_COL_ID)
+			selected_character->pos.y = pos.y + 1;
+		else if (adjacent.down.i == TILE_COL_ID && adjacent.down.j != TILE_COL_ID) {
+			pos.y = 7 - (pos.x - selected_character->tilepos.x * 8) + selected_character->tilepos.y * 8;
+			selected_character->pos.y = pos.y + 1;
+			selected_character->pos.x = pos.x - 1;
+		}
+		else if (adjacent.down.i != TILE_COL_ID && adjacent.down.j == TILE_COL_ID) {
+			pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
+			selected_character->pos.y = pos.y + 1;
+			selected_character->pos.x = pos.x + 1;
+		}
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+		if (adjacent.left.i != TILE_COL_ID && adjacent.left.j != TILE_COL_ID)
+			selected_character->pos.x = pos.x - 1;
+		else if (adjacent.left.i == TILE_COL_ID && adjacent.left.j != TILE_COL_ID) {			
+			pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8 ;
+			selected_character->pos.x = pos.x - 1;
+			selected_character->pos.y = pos.y - 1;
+		}
+		else if (adjacent.left.i != TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
+			
+			pos.y = 7 -(pos.x - selected_character->tilepos.x * 8)  + selected_character->tilepos.y * 8 ;
+			selected_character->pos.y = pos.y + 1;
+			selected_character->pos.x = pos.x - 1;
+		}
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+		if (adjacent.right.i != TILE_COL_ID && adjacent.right.j != TILE_COL_ID)
+			selected_character->pos.x = pos.x + 1;
+		else if (adjacent.right.i == TILE_COL_ID && adjacent.right.j != TILE_COL_ID) {
+			pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
+			selected_character->pos.y = pos.y + 1;
+			selected_character->pos.x = pos.x + 1;
+		}
+		else if (adjacent.right.i != TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
+			pos.y = 7 - (pos.x - selected_character->tilepos.x * 8) + selected_character->tilepos.y * 8;
+			selected_character->pos.y = pos.y - 1;
+			selected_character->pos.x = pos.x + 1;
+		}
+	}
+
+	*/
 
 
 		uint x, y;
