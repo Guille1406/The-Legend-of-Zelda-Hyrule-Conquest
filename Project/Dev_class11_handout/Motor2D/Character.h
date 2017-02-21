@@ -1,7 +1,7 @@
 #ifndef _CHARACTER_
 #define _CHARACTER_
 
-#include "j1Player.h"
+
 #include "p2Point.h"
 #include "SDL\include\SDL.h"
 

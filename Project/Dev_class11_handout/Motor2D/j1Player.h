@@ -9,7 +9,7 @@
 
 #include "j1Map.h"
 
-using namespace std;
+
 
 class P_Link;
 class P_Zelda;
