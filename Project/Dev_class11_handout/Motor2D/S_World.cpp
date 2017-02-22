@@ -7,6 +7,7 @@
 #include "j1Map.h"
 #include "j1Render.h"
 #include "j1Textures.h"
+#include "j1Pathfinding.h"
 
 bool S_World::Start()
 {
@@ -16,7 +17,7 @@ bool S_World::Start()
 		int w, h;
 		uchar* data = NULL;
 		if (App->map->CreateWalkabilityMap(w, h, &data))
-			//App->pathfinding->SetMap(w, h, data);
+			App->pathfinding->SetMap(w, h, data);
 
 			RELEASE_ARRAY(data);
 	}

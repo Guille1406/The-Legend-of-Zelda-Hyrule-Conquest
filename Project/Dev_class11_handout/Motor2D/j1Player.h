@@ -43,12 +43,13 @@ public:
 	void Change_Player();
 	void Chase();
 	bool Move_Camera();
+	void GetAdjacents();
 
 public:
 	
 	bool change = false;
 	MainScene* actual_scene;
-
+	bool chase = false;
 	
 	Character* selected_character;
 	Character* other_character;

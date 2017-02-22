@@ -2,7 +2,7 @@
 #include "j1Textures.h"
 #include "j1Render.h"
 #include "j1Window.h"
-
+#include "j1Pathfinding.h"
 #include <algorithm>
 
 
@@ -43,20 +43,11 @@ bool j1Player::Update(float dt)
 	
 
 	//Cambiar esto a una funcion
-	uint tile_pos_x = App->player->selected_character->pos.x / 8;
-	uint tile_pos_y = App->player->selected_character->pos.y / 8;
 
+	GetAdjacents();
+	
 
-	adjacent.down.i = App->map->Colision->Get(tile_pos_x + 1, tile_pos_y + 2);
-	adjacent.down.j = App->map->Colision->Get(tile_pos_x, tile_pos_y + 2);
-	adjacent.up.i = App->map->Colision->Get(tile_pos_x, tile_pos_y -1);
-	adjacent.up.j = App->map->Colision->Get(tile_pos_x +1, tile_pos_y -1);
-	adjacent.left.i = App->map->Colision->Get(tile_pos_x -1, tile_pos_y +1);
-	adjacent.left.j = App->map->Colision->Get(tile_pos_x -1, tile_pos_y);
-	adjacent.right.i = App->map->Colision->Get(tile_pos_x+2, tile_pos_y);
-	adjacent.right.j = App->map->Colision->Get(tile_pos_x+2, tile_pos_y +1);
-
-	LOG("\n %i %i\n%i\t%i\n%i\t%i\n %i %i", adjacent.up.i, adjacent.up.j,adjacent.left.j,adjacent.right.i,adjacent.left.i,adjacent.right.j,adjacent.down.j,adjacent.down.i);
+	//LOG("\n %i %i\n%i\t%i\n%i\t%i\n %i %i", adjacent.up.i, adjacent.up.j,adjacent.left.j,adjacent.right.i,adjacent.left.i,adjacent.right.j,adjacent.down.j,adjacent.down.i);
 	//
 
 	//Cambiar esto a una funcion
@@ -72,14 +63,37 @@ bool j1Player::Update(float dt)
 		}
 	}
 	//
-	
-	Draw();
+
 	if (change == true) {
 		Move_Camera();
 	}
 	else {
 		Move();
 	}
+
+
+/////////////  TEMP
+	bool temp = true;
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && chase != true) {
+		App->pathfinding->CreatePath(other_character->tilepos, selected_character->tilepos);
+		chase = true;
+	}
+	if (temp == true) {
+		App->pathfinding->CreatePath(other_character->tilepos, selected_character->tilepos);
+		chase = true;
+	}
+	if (chase == true) {
+		App->pathfinding->Move(other_character, selected_character);
+		if (other_character->tilepos == selected_character->tilepos || App->pathfinding->GetLastPath()->Count() == 0) {
+			chase = false;
+			App->pathfinding->DeletePath();
+		}
+	}
+
+
+	/////
+	Draw();
+	
 	return true;
 }
 
@@ -115,9 +129,13 @@ void j1Player::Move()
 
 
 	p2Point<int> pos = selected_character->pos;
+	p2Point<int> o_pos = other_character->pos;
 
 	selected_character->tilepos.x = pos.x / 8;
 	selected_character->tilepos.y = pos.y / 8;
+
+	other_character->tilepos.x = o_pos.x / 8;
+	other_character->tilepos.y = o_pos.y / 8;
 
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
@@ -351,4 +369,21 @@ bool j1Player::Move_Camera()
 	i++;
 	
 	return false;
+}
+
+void j1Player::GetAdjacents()
+{
+	uint tile_pos_x = App->player->selected_character->pos.x / 8;
+	uint tile_pos_y = App->player->selected_character->pos.y / 8;
+
+
+	adjacent.down.i = App->map->Colision->Get(tile_pos_x + 1, tile_pos_y + 2);
+	adjacent.down.j = App->map->Colision->Get(tile_pos_x, tile_pos_y + 2);
+	adjacent.up.i = App->map->Colision->Get(tile_pos_x, tile_pos_y - 1);
+	adjacent.up.j = App->map->Colision->Get(tile_pos_x + 1, tile_pos_y - 1);
+	adjacent.left.i = App->map->Colision->Get(tile_pos_x - 1, tile_pos_y + 1);
+	adjacent.left.j = App->map->Colision->Get(tile_pos_x - 1, tile_pos_y);
+	adjacent.right.i = App->map->Colision->Get(tile_pos_x + 2, tile_pos_y);
+	adjacent.right.j = App->map->Colision->Get(tile_pos_x + 2, tile_pos_y + 1);
+
 }

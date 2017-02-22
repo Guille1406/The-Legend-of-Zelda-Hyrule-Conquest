@@ -45,7 +45,10 @@ bool j1PathFinding::CheckBoundaries(const iPoint& pos) const
 // Utility: returns true is the tile is walkable
 bool j1PathFinding::IsWalkable(const iPoint& pos) const
 {
-	uchar t = GetTileAt(pos);
+	iPoint temp;
+	temp.x = pos.x;
+	temp.y = pos.y;
+	uchar t = GetTileAt(temp);
 	return t != INVALID_WALK_CODE && t > 0;
 }
 
@@ -56,6 +59,28 @@ uchar j1PathFinding::GetTileAt(const iPoint& pos) const
 		return map[(pos.y*width) + pos.x];
 
 	return INVALID_WALK_CODE;
+}
+
+void j1PathFinding::Move(Character * character, Character* other)
+{
+	if (last_path.Count()>0) {
+		static int i = 0;
+		
+		int temp = last_path[i].x;
+		int temp2 = last_path[i].y;
+		character->pos.x = character->pos.x + (last_path[i].x - character->tilepos.x);
+		character->pos.y = character->pos.y + (last_path[i].y - character->tilepos.y);
+
+		if (character->tilepos == last_path[i]) {
+			i++;
+		}
+		if (i == last_path.Count() || character->tilepos == other->tilepos) {
+			i = 0;
+			last_path.Clear();
+		}
+		
+
+	}
 }
 
 // To request all tiles involved in the last generated path
@@ -117,27 +142,39 @@ PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), 
 // ----------------------------------------------------------------------------------
 uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
 {
+	iPoint cell1;
+	iPoint cell2;
 	iPoint cell;
 	uint before = list_to_fill.list.count();
 
+int pos_x = pos.x ;
+	int pos_y = pos.y ;
 	// north
-	cell.create(pos.x, pos.y + 1);
-	if(App->pathfinding->IsWalkable(cell))
+	cell1.create(pos.x, pos.y - 1);
+	cell2.create(pos.x + 1, pos.y - 1);
+	cell.create(pos.x, pos.y - 1);
+	if(App->pathfinding->IsWalkable(cell1) && App->pathfinding->IsWalkable(cell2))
 		list_to_fill.list.add(PathNode(-1, -1, cell, this));
 
 	// south
-	cell.create(pos.x, pos.y - 1);
-	if(App->pathfinding->IsWalkable(cell))
+	cell1.create(pos.x, pos.y + 2);
+	cell2.create(pos.x +1, pos.y + 2);
+	cell.create(pos.x, pos.y + 1);
+	if(App->pathfinding->IsWalkable(cell1)&& App->pathfinding->IsWalkable(cell2))
 		list_to_fill.list.add(PathNode(-1, -1, cell, this));
 
 	// east
-	cell.create(pos.x + 1, pos.y);
-	if(App->pathfinding->IsWalkable(cell))
+	cell1.create(pos.x + 2, pos.y);
+	cell2.create(pos.x + 2, pos.y+1);
+	cell.create(pos.x +1, pos.y );
+	if(App->pathfinding->IsWalkable(cell1) && App->pathfinding->IsWalkable(cell2))
 		list_to_fill.list.add(PathNode(-1, -1, cell, this));
 
 	// west
-	cell.create(pos.x - 1, pos.y);
-	if(App->pathfinding->IsWalkable(cell))
+	cell1.create(pos.x - 1, pos.y);
+	cell2.create(pos.x - 1, pos.y+1);
+	cell.create(pos.x - 1, pos.y );
+	if(App->pathfinding->IsWalkable(cell1) && App->pathfinding->IsWalkable(cell2))
 		list_to_fill.list.add(PathNode(-1, -1, cell, this));
 
 	return list_to_fill.list.count();
@@ -167,9 +204,71 @@ int PathNode::CalculateF(const iPoint& destination)
 // ----------------------------------------------------------------------------------
 int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
-	int ret = -1;
+	int ret = 0;
+	
+	if (!IsWalkable(origin) && !IsWalkable(destination))
+		return -1;
 
-	// Nice try :)
+	
+	PathList open;
+	PathList close;
+	open.list.add(PathNode(0, 0, origin, NULL));
+
+
+	while (open.list.count() != 0)
+	{
+
+		p2List_item<PathNode>* activeNode = close.list.add(open.GetNodeLowestScore()->data);
+		open.list.del(open.GetNodeLowestScore());
+
+
+
+		if (activeNode->data.pos == destination)
+		{
+			last_path.Clear();
+			PathNode item = activeNode->data;
+			while (item.parent != NULL)
+			{
+				last_path.PushBack(item.pos);
+				item = *item.parent;
+			}
+			last_path.Flip();
+			return ret;
+			
+		}
+
+
+
+		PathList temp;
+		activeNode->data.FindWalkableAdjacents(temp);
+		p2List_item<PathNode>* tempItem = temp.list.start;
+
+
+
+		while (tempItem)
+		{
+			if (close.Find(tempItem->data.pos) == NULL)
+			{
+				tempItem->data.CalculateF(destination);
+				///Compare G
+				if (p2List_item<PathNode>* comparisor = open.Find(tempItem->data.pos))
+				{
+					if (comparisor->data.g > tempItem->data.g)
+					{
+						comparisor->data.parent = tempItem->data.parent;
+					}
+				}
+				else
+					open.list.add(tempItem->data);
+			}
+
+			tempItem = tempItem->next;
+			ret++;
+		}
+
+	}
+
+	
 
 	return ret;
 }

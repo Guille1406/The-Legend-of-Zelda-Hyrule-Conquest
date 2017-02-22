@@ -40,7 +40,7 @@ public:
 	// Operators
 	VALUE& operator[](unsigned int index)
 	{
-		ASSERT(index < num_elements);
+		assert(index < num_elements);
 		return data[index];
 	}
 
@@ -81,7 +81,18 @@ public:
 		}
 		return false;
 	}
-
+	
+	bool PopFront() {
+		if (num_elements > 0)
+		{
+			for (int i = 0; i < Count()-1; i++) {
+				this[i] = this[i + 1];
+			}
+			num_elements--;
+			return true;
+		}
+		return false;
+	}
 	void Clear()
 	{
 		num_elements = 0;
