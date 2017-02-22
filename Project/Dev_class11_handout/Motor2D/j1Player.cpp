@@ -46,11 +46,9 @@ bool j1Player::Update(float dt)
 
 	GetAdjacents();
 	
-
-	//LOG("\n %i %i\n%i\t%i\n%i\t%i\n %i %i", adjacent.up.i, adjacent.up.j,adjacent.left.j,adjacent.right.i,adjacent.left.i,adjacent.right.j,adjacent.down.j,adjacent.down.i);
 	//
 
-	//Cambiar esto a una funcion
+
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		change = true;
 		if (selected_character == Link) {
@@ -73,10 +71,9 @@ bool j1Player::Update(float dt)
 
 
 /////////////  TEMP
-	bool temp = true;
-	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && chase != true) {
-		App->pathfinding->CreatePath(other_character->tilepos, selected_character->tilepos);
-		chase = true;
+	static bool temp = true;
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+		temp = !temp;
 	}
 	if (temp == true) {
 		App->pathfinding->CreatePath(other_character->tilepos, selected_character->tilepos);
@@ -249,6 +246,7 @@ void j1Player::Move()
 			 selected_character->pos.y = pos.y - 1;
 		 }
 		 else if (adjacent.up.i != TILE_COL_ID && adjacent.left.j != TILE_COL_ID){
+			 pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
 			selected_character->pos.x = pos.x - 1;
 			selected_character->pos.y = pos.y - 1;
 	 }
@@ -266,6 +264,7 @@ void j1Player::Move()
 			 selected_character->pos.y = pos.y - 1;
 		 }
 		 else if (adjacent.up.j != TILE_COL_ID && adjacent.right.i != TILE_COL_ID) {
+			 pos.y = 7 - (pos.x - selected_character->tilepos.x * 8) + selected_character->tilepos.y * 8;
 			 selected_character->pos.x = pos.x + 1;
 			 selected_character->pos.y = pos.y - 1;
 		 }
@@ -283,6 +282,7 @@ void j1Player::Move()
 			 selected_character->pos.y = pos.y + 1;
 		 }
 		 else if (adjacent.down.j != TILE_COL_ID && adjacent.left.i != TILE_COL_ID) {
+			 pos.y = 7 - (pos.x - selected_character->tilepos.x * 8) + selected_character->tilepos.y * 8;
 			 selected_character->pos.x = pos.x - 1;
 			 selected_character->pos.y = pos.y + 1;
 		 }
@@ -300,6 +300,7 @@ void j1Player::Move()
 			 selected_character->pos.y = pos.y + 1;
 		 }
 		 else if (adjacent.down.i != TILE_COL_ID && adjacent.right.j != TILE_COL_ID) {
+			 pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
 			 selected_character->pos.x = pos.x + 1;
 			 selected_character->pos.y = pos.y + 1;
 		 }
