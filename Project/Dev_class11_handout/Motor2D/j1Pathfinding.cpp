@@ -68,8 +68,23 @@ void j1PathFinding::Move(Character * character, Character* other)
 		
 		int temp = last_path[i].x;
 		int temp2 = last_path[i].y;
-		character->pos.x = character->pos.x + (last_path[i].x - character->tilepos.x);
-		character->pos.y = character->pos.y + (last_path[i].y - character->tilepos.y);
+		int x = 0;
+		int y = 0;
+		x  = x + (last_path[i].x - character->tilepos.x);
+		y = y + (last_path[i].y - character->tilepos.y);
+
+		if (last_path.Count() > 1) {
+			x = x + (last_path[i + 1].x - character->tilepos.x);
+			y = y + (last_path[i + 1].y - character->tilepos.y);
+		}
+
+
+		if (x > 1 ) x = 1;
+		if (x < -1)x = -1;
+		if (y > 1) y = 1;
+		if (y < -1)y = -1;
+		character->pos.x += x;
+		character->pos.y += y;
 
 		if (character->tilepos == last_path[i]) {
 			i++;
