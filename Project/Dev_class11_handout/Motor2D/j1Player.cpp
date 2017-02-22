@@ -83,7 +83,7 @@ bool j1Player::Update(float dt)
 	int dist = 0;
 	dist = sqrt((selected_character->tilepos.x - other_character->tilepos.x)* (selected_character->tilepos.x - other_character->tilepos.x) + (selected_character->tilepos.y - other_character->tilepos.y)*(selected_character->tilepos.y - other_character->tilepos.y));
 
-	if (chase == true && dist > 4) {
+	if (chase == true && dist > 3 && temp==true) {
 		App->pathfinding->Move(other_character, selected_character);
 		if (other_character->tilepos == selected_character->tilepos || App->pathfinding->GetLastPath()->Count() == 0) {
 			chase = false;
