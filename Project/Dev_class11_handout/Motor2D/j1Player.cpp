@@ -106,7 +106,7 @@ bool j1Player::PostUpdate()
 void j1Player::Draw()
 {
 	SDL_Rect rect = { 0, 0, 16, 16 };
-	App->render->Blit(Link->character_texture,Link->pos.x,Link->pos.y,&rect);
+	App->render->Blit(Link->character_texture, Link->pos.x , Link->pos.y, &rect);
 	App->render->Blit(Zelda->character_texture, Zelda->pos.x, Zelda->pos.y, &rect);
 }
 
@@ -168,8 +168,8 @@ bool j1Player::Move_Camera()
 
 void j1Player::GetAdjacents()
 {
-	uint tile_pos_x = App->player->selected_character->pos.x / 8;
-	uint tile_pos_y = App->player->selected_character->pos.y / 8;
+	uint tile_pos_x = (App->player->selected_character->pos.x+3) / 8;
+	uint tile_pos_y = (App->player->selected_character->pos.y +3) / 8;
 
 
 	adjacent.down.i = App->map->Colision->Get(tile_pos_x + 1, tile_pos_y + 2);
