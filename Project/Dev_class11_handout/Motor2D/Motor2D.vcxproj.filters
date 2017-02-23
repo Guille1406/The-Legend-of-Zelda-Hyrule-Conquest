@@ -76,6 +76,9 @@
     <ClCompile Include="Character.cpp">
       <Filter>Desenvolupament  ========\L&amp;Z</Filter>
     </ClCompile>
+    <ClCompile Include="Move.cpp">
+      <Filter>Desenvolupament  ========\L&amp;Z</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
