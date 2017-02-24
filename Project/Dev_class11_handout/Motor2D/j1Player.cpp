@@ -39,8 +39,21 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt)
 {
 
-
+	uint x, y;
+	App->win->GetWindowSize(x, y);
 	
+	int movementx = -selected_character->pos.x * App->win->GetScale() + x / 2 - 8;
+	int movementy = -selected_character->pos.y * App->win->GetScale() + y / 2 - 8;
+
+	if (movementx> 0 && movementx > App->map->data.width + App->render->camera.x + App->render->camera.w) {
+		App->render->camera.x = -selected_character->pos.x * App->win->GetScale() + x / 2 - 8;
+	}
+	//MAGIC NUMBER POR AQUI
+	//MAGIC NUMBER POR ALLA 
+	//NANANANANNANA
+	if (movementy<0 && movementy> -(App->map->data.height + App->render->camera.y + App->render->camera.h-200)) {
+		App->render->camera.y = -selected_character->pos.y * App->win->GetScale() + y / 2 - 8;
+	}
 
 	//Cambiar esto a una funcion
 
