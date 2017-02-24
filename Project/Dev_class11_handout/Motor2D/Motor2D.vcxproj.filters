@@ -118,6 +118,9 @@
     <ClCompile Include="j1Console.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleFadeToBlack.cpp">
+      <Filter>Desenvolupament  ========\ToCheckAnim/Fadetoblack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -255,6 +258,12 @@
     <ClInclude Include="j1Console.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Desenvolupament  ========\ToCheckAnim/Fadetoblack</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFadeToBlack.h">
+      <Filter>Desenvolupament  ========\ToCheckAnim/Fadetoblack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -289,6 +298,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\XMLs">
       <UniqueIdentifier>{dc928407-499c-48da-a938-1574d24d0bfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\ToCheckAnim/Fadetoblack">
+      <UniqueIdentifier>{1837afc0-3463-4a37-b91a-09fd84d84640}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

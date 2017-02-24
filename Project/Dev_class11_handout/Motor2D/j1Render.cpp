@@ -74,7 +74,7 @@ bool j1Render::PostUpdate()
 {
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.b, background.a);
 	SDL_RenderPresent(renderer);
-	/*
+	
 	//Code to take some sshoots
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
 	{
@@ -94,7 +94,7 @@ bool j1Render::PostUpdate()
 		SDL_SaveBMP(sshot, tmp_string);
 		SDL_FreeSurface(sshot);
 	}
-	*/
+	
 	return true;
 }
 
