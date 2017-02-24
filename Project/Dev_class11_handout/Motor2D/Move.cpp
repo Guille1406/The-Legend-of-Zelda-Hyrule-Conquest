@@ -448,7 +448,7 @@ void j1Player::Move()
 
 	uint x, y;
 	App->win->GetWindowSize(x, y);
-	App->render->camera.x = -selected_character->pos.x * 3 + x / 2 - 8;
-	App->render->camera.y = -selected_character->pos.y * 3 + y / 2 - 8;
+	App->render->camera.x = -selected_character->pos.x * App->win->GetScale() + x / 2 - 8;
+	App->render->camera.y = -selected_character->pos.y * App->win->GetScale() + y / 2 - 8;
 
 }

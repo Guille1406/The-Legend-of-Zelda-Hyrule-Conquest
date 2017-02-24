@@ -133,8 +133,8 @@ bool j1Player::Move_Camera()
 	static float rest_y;
 	int sum_x = 0;
 	int sum_y = 0;
-	int x = other_character->pos.x*3 - selected_character->pos.x*3;
-	int y = other_character->pos.y*3 - selected_character->pos.y*3;
+	int x = other_character->pos.x * App->win->GetScale(); - selected_character->pos.x * App->win->GetScale();
+	int y = other_character->pos.y * App->win->GetScale(); - selected_character->pos.y * App->win->GetScale();
 
 	if (x > 0)mult = 1;
 

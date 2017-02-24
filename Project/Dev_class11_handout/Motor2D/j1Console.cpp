@@ -105,7 +105,6 @@ bool j1Console::CleanUp()
 
 void j1Console::Print_Console_Label(std::string* newlabelstr, uint tab)
 {
-	/*
 	if (*newlabelstr != empty_char)
 	{
 		int XPos = 5;
@@ -123,7 +122,6 @@ void j1Console::Print_Console_Label(std::string* newlabelstr, uint tab)
 			LOGLabels.push_back(App->gui->CreateLabel(iPoint(XPos, 0), newlabelstr, false, AddGuiTo::console_purpose));
 		LabelNum++;
 	}
-	*/
 }
 
 bool j1Console::IsActive() const
