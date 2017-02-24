@@ -2,6 +2,7 @@
 #define __P2DEFS_H__
 
 #include <stdio.h>
+#include <list>
 
 //  NULL just in case ----------------------
 
@@ -64,5 +65,12 @@ inline const char* const PATH(const char* folder, const char* file)
 // Performance macros
 #define PERF_START(timer) timer.Start()
 #define PERF_PEEK(timer) LOG("%s took %f ms", __FUNCTION__, timer.ReadMs())
+
+//some usefull str
+//doing that, they are created only one time
+const static std::string empty_char = "";
+const static std::string password_char = "*";
+const static std::string true_str = "true";
+const static std::string false_str = "false";
 
 #endif

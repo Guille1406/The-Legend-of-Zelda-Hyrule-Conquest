@@ -6,14 +6,16 @@
 #ifndef __j1MODULE_H__
 #define __j1MODULE_H__
 
+#include <vector>
+
 #include "p2SString.h"
 #include "PugiXml\src\pugixml.hpp"
 
-
-
 class j1App;
-class UI_Component;
-
+enum GuiEvent;
+class Gui;
+struct Command;
+struct CVar;
 
 class j1Module
 {
@@ -76,6 +78,20 @@ public:
 		return true;
 	}
 
+	virtual void OnGui(Gui* ui, GuiEvent event)
+	{
+
+	}
+
+	virtual void OnConsoleCommand(const Command* command, const std::vector<std::string>& commandarguments)
+	{
+
+	}
+
+	virtual void OnConsoleCVar(const CVar* cvar)
+	{
+
+	}
 
 public:
 

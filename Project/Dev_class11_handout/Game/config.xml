@@ -2,12 +2,12 @@
 
 <config>
   <app framerate_cap="">
-    <title>Pathfinding Test</title>
-    <organization>UPC</organization>
+    <title>The Legend of Zelda Hyrule Conquest</title>
+    <organization>Summit Games</organization>
   </app>
 	
   <renderer>
-    <vsync value="true"/>
+    <vsync value="false"/>
   </renderer>
 
   <font>

@@ -55,7 +55,6 @@ public:
 	{
 		return keyboard[id];
 	}
-	char* GetLetter();
 
 	j1KeyState GetMouseButtonDown(int id) const
 	{
@@ -68,22 +67,23 @@ public:
 	// Get mouse / axis position
 	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
-	j1KeyState*	keyboard;
 
-	const char* GetLastInput();
+	//Get mouse wheel movement
+	int GetMouseWheelMotion() const;
 
+	//get text input
+	const std::string* GetInputString() const;
 
 private:
 	bool		windowEvents[WE_COUNT];
-	
+	j1KeyState*	keyboard;
 	j1KeyState	mouse_buttons[NUM_MOUSE_BUTTONS];
-	int			mouse_motion_x;
-	int			mouse_motion_y;
-	int			mouse_x;
-	int			mouse_y;
-
-	std::string	lastInput;
-	int			cursorPos;
+	int			mouse_motion_x = 0;
+	int			mouse_motion_y = 0;
+	int			mouse_x = 0;
+	int			mouse_y = 0;
+	int			mouse_wheel_mov = 0;
+	std::string input_text;
 };
 
 #endif // __j1INPUT_H__

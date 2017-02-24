@@ -6,8 +6,10 @@
 #include "j1PerfTimer.h"
 #include "j1Timer.h"
 #include "PugiXml\src\pugixml.hpp"
+
 #include<list>;
 #include<string>;
+
 // Modules
 class j1Window;
 class j1Input;
@@ -20,9 +22,10 @@ class j1Map;
 class j1PathFinding;
 class j1Fonts;
 class j1Gui;
+class j1Console;
 class j1Player;
 
-using namespace std;
+//using namespace std;
 
 class j1App
 {
@@ -86,8 +89,6 @@ private:
 	bool LoadGameNow();
 	bool SavegameNow() const;
 
-
-
 public:
 
 	// Modules
@@ -103,6 +104,7 @@ public:
 	j1Fonts*			font = NULL;
 	j1Gui*				gui = NULL;
 	j1Player*			player = NULL;
+	j1Console*			console = NULL;
 
 private:
 	std::list<j1Module*> modules;

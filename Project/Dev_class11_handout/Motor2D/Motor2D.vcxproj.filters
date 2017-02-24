@@ -79,6 +79,45 @@
     <ClCompile Include="Move.cpp">
       <Filter>Desenvolupament  ========\L&amp;Z</Filter>
     </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiBar.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiButton.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiCheck.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiImage.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiInputText.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiLabel.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiScrollBar.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiViewport.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiWindow.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Desenvolupament  ========\GUI\Color</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleCommandCVar.cpp">
+      <Filter>Desenvolupament  ========\GUI\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Console.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -177,6 +216,45 @@
     <ClInclude Include="Character.h">
       <Filter>Desenvolupament  ========\L&amp;Z</Filter>
     </ClInclude>
+    <ClInclude Include="Gui.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiBar.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiButton.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiCheck.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiImage.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiInputText.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiLabel.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiScrollBar.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiViewport.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiWindow.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Desenvolupament  ========\GUI\Color</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleCommandCVar.h">
+      <Filter>Desenvolupament  ========\GUI\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Console.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -203,5 +281,19 @@
     <Filter Include="Desenvolupament  ========\L&amp;Z">
       <UniqueIdentifier>{33e19344-f2d6-440f-8d50-b4608a70dfad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Desenvolupament  ========\GUI\Color">
+      <UniqueIdentifier>{2794866d-c70e-452d-912a-4205847d6b93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\GUI\Console">
+      <UniqueIdentifier>{af4f0ae9-3681-43eb-8ec7-2be05e72e83a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\XMLs">
+      <UniqueIdentifier>{dc928407-499c-48da-a938-1574d24d0bfd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Game\config.xml">
+      <Filter>Desenvolupament  ========\XMLs</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
