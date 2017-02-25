@@ -287,6 +287,7 @@ bool j1App::PostUpdate()
 		ret = (*item)->PostUpdate();
 	}
 
+	ret &= !wanttoquit;
 
 	return ret;
 }
@@ -438,4 +439,9 @@ bool j1App::SavegameNow() const
 	data.reset();
 	want_to_save = false;
 	return ret;
+}
+
+void j1App::WantToQuit()
+{
+	wanttoquit = true;
 }

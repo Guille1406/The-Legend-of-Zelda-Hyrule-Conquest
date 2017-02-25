@@ -84,7 +84,6 @@ bool j1Render::PostUpdate()
 		localtime_s(&ltm, &now);
 		// print various components of tm structure.
 		//LOG("Year %i, Month %i, Day %i, Time %i:%i:%i", 1900 + ltm.tm_year, 1 + ltm.tm_mon, ltm.tm_mday, ltm.tm_hour, ltm.tm_min, ltm.tm_sec);
-
 		int w, h = 0;
 		SDL_GetRendererOutputSize(renderer, &w, &h);
 		SDL_Surface *sshot = SDL_CreateRGBSurface(0, w, h, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
@@ -153,10 +152,12 @@ iPoint j1Render::ScreenToWorld(int x, int y) const
 }
 
 // Blit to screen
-bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y) const
+bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y, bool use_scale) const
 {
 	bool ret = true;
-	uint scale = App->win->GetScale();
+	uint scale = 1;
+	if (use_scale)
+		scale = App->win->GetScale();
 
 	SDL_Rect rect;
 	rect.x = (int)(camera.x * speed) + x * scale;

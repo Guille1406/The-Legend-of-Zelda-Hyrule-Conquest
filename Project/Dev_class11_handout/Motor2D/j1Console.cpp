@@ -60,10 +60,8 @@ bool j1Console::PreUpdate()
 // Called each loop iteration
 bool j1Console::Update(float dt)
 {
-	/*
 	if (App->input->GetKey(SDL_SCANCODE_GRAVE) == KEY_DOWN)
 		ConsoleActive = !ConsoleActive;
-	*/
 	if (ConsoleActive)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
@@ -333,8 +331,7 @@ void j1Console::OnConsoleCommand(const Command* command, const std::vector<std::
 {
 	if (command == quit)
 	{
-		//temporal exit, will be done right when it works fine :)
-		exit(0);
+		App->WantToQuit();
 	}
 	if (command == help)
 	{

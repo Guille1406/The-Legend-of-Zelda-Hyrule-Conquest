@@ -76,23 +76,16 @@ bool j1Gui::Update(float dt)
 			(*item)->Draw();
 	if (App->console->IsActive())
 	{
-		App->render->DrawQuad(App->console->ConsoleBackground, Red(0), Red(1), Red(2), CONSOLE_ALPHA, true, true, false);
+		App->render->DrawQuad(App->console->ConsoleBackground, Black(0), Black(1), Black(2), CONSOLE_ALPHA, true, true, false);
 		App->render->DrawQuad(App->console->ConsoleInputTextBackground, Gray(0), Gray(1), Gray(2), CONSOLE_ALPHA, true, true, false);
-		/*
-		App->render->DrawQuad(App->console->ConsoleBackground, Black(0), Black(1), Black(2), CONSOLE_ALPHA);
-		App->render->DrawQuad(App->console->ConsoleInputTextBackground, Gray(0), Gray(1), Gray(2), CONSOLE_ALPHA);
-		*/
 		for (std::list<Gui*>::iterator item = ConsoleElements.begin(); item != ConsoleElements.cend(); ++item)
 		{
 			if (((*item)->type == GuiType::gui_label) && (InFOV(*item)))
 			{
-				(*item)->Draw();
-				/*
 				SDL_Rect ViewportRect = { 0,0,App->console->ConsoleBackground.w,App->console->ConsoleBackground.h };
 				SDL_RenderSetViewport(App->render->renderer, &ViewportRect);
 				(*item)->Draw();
 				SDL_RenderSetViewport(App->render->renderer, NULL);
-				*/
 			}
 			if ((*item)->type == GuiType::gui_inputtext)
 				(*item)->Draw();

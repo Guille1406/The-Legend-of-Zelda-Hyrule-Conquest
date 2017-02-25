@@ -22,7 +22,7 @@ void GuiLabel::Draw()
 		if (LabelString != empty_char)
 		{
 			SDL_Texture* texture_to_blit = App->font->Print(LabelString.c_str(), { 255, 255, 255, 255 }, font);
-			App->render->Blit(texture_to_blit, position.x - App->render->camera.x, position.y - App->render->camera.y);
+			App->render->Blit(texture_to_blit, position.x - App->render->camera.x, position.y - App->render->camera.y, NULL, 1.0f, 0, INT_MAX, INT_MAX, false);
 			SDL_DestroyTexture(texture_to_blit);
 		}
 		if (App->gui->Gui_DebugDraw_isactive())

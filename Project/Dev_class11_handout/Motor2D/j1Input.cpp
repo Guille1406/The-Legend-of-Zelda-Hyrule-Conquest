@@ -132,11 +132,17 @@ bool j1Input::PreUpdate()
 			break;
 
 		case SDL_MOUSEMOTION:
+			/*
 			int scale = App->win->GetScale();
 			mouse_motion_x = event.motion.xrel / scale;
 			mouse_motion_y = event.motion.yrel / scale;
 			mouse_x = event.motion.x / scale;
 			mouse_y = event.motion.y / scale;
+			*/
+			mouse_motion_x = event.motion.xrel;
+			mouse_motion_y = event.motion.yrel;
+			mouse_x = event.motion.x;
+			mouse_y = event.motion.y;
 			//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
 			break;
 		}
