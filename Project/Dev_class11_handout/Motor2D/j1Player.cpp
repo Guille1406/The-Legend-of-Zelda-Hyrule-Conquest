@@ -45,15 +45,22 @@ bool j1Player::Update(float dt)
 	int movementx = -selected_character->pos.x * App->win->GetScale() + x / 2 - 8;
 	int movementy = -selected_character->pos.y * App->win->GetScale() + y / 2 - 8;
 
-	if (movementx> 0 && movementx > App->map->data.width + App->render->camera.x + App->render->camera.w) {
+	if (App->render->camera.x<=0 && movementx>= -1*(App->render->camera.x + App->render->camera.w/ App->win->GetScale() - App->map->data.width*8)) {
 		App->render->camera.x = -selected_character->pos.x * App->win->GetScale() + x / 2 - 8;
 	}
-	//MAGIC NUMBER POR AQUI
-	//MAGIC NUMBER POR ALLA 
-	//NANANANANNANA
-	if (movementy<0 && movementy> -(App->map->data.height + App->render->camera.y + App->render->camera.h-200)) {
+
+	if ((-App->render->camera.x + App->render->camera.w) >= (App->map->data.width*App->map->data.tile_width* App->win->GetScale())) {
+		App->render->camera.x = (App->map->data.width*App->map->data.tile_width* App->win->GetScale() - App->render->camera.w)*(-1);
+	}
+
+	if (App->render->camera.y <= 0 && movementy>= -1*(App->render->camera.y + App->render->camera.h / App->win->GetScale() - App->map->data.height*8)) {
 		App->render->camera.y = -selected_character->pos.y * App->win->GetScale() + y / 2 - 8;
 	}
+
+	if ((-App->render->camera.y + App->render->camera.h)>= (App->map->data.height*App->map->data.tile_height* App->win->GetScale())) {
+		App->render->camera.y = (App->map->data.height*App->map->data.tile_height* App->win->GetScale() - App->render->camera.h)*(-1);
+	}
+
 
 	//Cambiar esto a una funcion
 
