@@ -29,7 +29,9 @@ bool j1Console::Awake(pugi::xml_node& conf)
 // Call before first frame
 bool j1Console::Start()
 {
-	ConsoleBackground = { App->render->camera.x, App->render->camera.y, 768, 285 };
+	int w, h = 0;
+	SDL_GetRendererOutputSize(App->render->renderer, &w, &h);
+	ConsoleBackground = { App->render->camera.x, App->render->camera.y, w, (int)(h * 0.5) };
 	ConsoleInputTextBackground = { App->render->camera.x, ConsoleBackground.h, ConsoleBackground.w, 30 };
 
 	ConsoleInputText = App->gui->CreateInputText(iPoint(ConsoleInputTextBackground.x, ConsoleInputTextBackground.y), &ConsoleInputTextBackground, &std::string(""), false, false, false, AddGuiTo::console_purpose);
