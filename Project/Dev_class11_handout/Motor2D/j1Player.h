@@ -51,6 +51,7 @@ public:
 
 	void Draw();
 
+	void Move(Character*, float dt);
 	key_state Get_Movement_Event_Link();
 	key_state Get_Movement_Event_Zelda();
 	void Change_Player();

@@ -45,73 +45,88 @@ bool j1Player::Update(float dt)
 	int movementx = -selected_character->pos.x * App->win->GetScale() + x / 2 - 8;
 	int movementy = -selected_character->pos.y * App->win->GetScale() + y / 2 - 8;
 
-	if (App->render->camera.x<=0 && movementx>= -1*(App->render->camera.x + App->render->camera.w/ App->win->GetScale() - App->map->data.width*8)) {
-		App->render->camera.x = -selected_character->pos.x * App->win->GetScale() + x / 2 - 8;
+	App->render->camera.x = movementx;
+	App->render->camera.y = movementy;
+	if (App->render->camera.x >= 0) App->render->camera.x = 0;
+	if (-App->render->camera.x >= App->map->data.width * App->map->data.tile_width - App->render->camera.w/ App->win->GetScale()) {
+		App->render->camera.x = -1*(App->map->data.width * App->map->data.tile_width - App->render->camera.w / App->win->GetScale());
 	}
 
-	if ((-App->render->camera.x + App->render->camera.w) >= (App->map->data.width*App->map->data.tile_width* App->win->GetScale())) {
+	if (App->render->camera.y >= 0) App->render->camera.y = 0;
+	if (-App->render->camera.y >= App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale()) {
+		App->render->camera.y = -1 * (App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale());
+	}
+	/*if ((-App->render->camera.x + App->render->camera.w) >= (App->map->data.width*App->map->data.tile_width* App->win->GetScale())) {
 		App->render->camera.x = (App->map->data.width*App->map->data.tile_width* App->win->GetScale() - App->render->camera.w)*(-1);
-	}
+	}*/
 
-	if (App->render->camera.y <= 0 && movementy>= -1*(App->render->camera.y + App->render->camera.h / App->win->GetScale() - App->map->data.height*8)) {
+	/*if (App->render->camera.y <= 0 && movementy>= -1*(App->render->camera.y + App->render->camera.h / App->win->GetScale() - App->map->data.height*8)) {
 		App->render->camera.y = -selected_character->pos.y * App->win->GetScale() + y / 2 - 8;
 	}
 
 	if ((-App->render->camera.y + App->render->camera.h)>= (App->map->data.height*App->map->data.tile_height* App->win->GetScale())) {
 		App->render->camera.y = (App->map->data.height*App->map->data.tile_height* App->win->GetScale() - App->render->camera.h)*(-1);
-	}
+	}*/
 
 
-	//Cambiar esto a una funcion
 
-	GetAdjacents();
-	
-	//
+	GetAdjacents(Link);
+	GetAdjacents(Zelda);
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) cooperative = !cooperative;
 
+	if (cooperative == true) {
+		Move(Link, dt);
+		Move(Zelda,dt);
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-		change = true;
-		if (selected_character == Link) {
-			selected_character = Zelda;
-			other_character = Link;
-		}
-		else {
-			selected_character = Link;
-			other_character = Zelda;
-		}
-	}
-	//
-
-	if (change == true) {
-		Move_Camera();
 	}
 	else {
-		Move();
-	}
 
 
-/////////////  TEMP
-	static bool temp = true;
-	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-		temp = !temp;
-	}
-	if (temp == true) {
-		App->pathfinding->CreatePath(other_character->tilepos, selected_character->tilepos);
-		chase = true;
-	}
 
-	int dist = 0;
-	dist = sqrt((selected_character->tilepos.x - other_character->tilepos.x)* (selected_character->tilepos.x - other_character->tilepos.x) + (selected_character->tilepos.y - other_character->tilepos.y)*(selected_character->tilepos.y - other_character->tilepos.y));
-
-	if (chase == true && dist > 3 && temp==true) {
-		App->pathfinding->Move(other_character, selected_character);
-		if (other_character->tilepos == selected_character->tilepos || App->pathfinding->GetLastPath()->Count() == 0) {
-			chase = false;
-			App->pathfinding->DeletePath();
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+			change = true;
+			if (selected_character == Link) {
+				selected_character = Zelda;
+				other_character = Link;
+			}
+			else {
+				selected_character = Link;
+				other_character = Zelda;
+			}
 		}
+		//
+
+		if (change == true) {
+			Move_Camera();
+		}
+		else {
+			Move(selected_character, dt);
+		}
+
+
+		/////////////  TEMP
+		static bool temp = true;
+		if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+			temp = !temp;
+		}
+		if (temp == true) {
+			App->pathfinding->CreatePath(other_character->tilepos, selected_character->tilepos);
+			chase = true;
+		}
+
+		int dist = 0;
+		dist = sqrt((selected_character->tilepos.x - other_character->tilepos.x)* (selected_character->tilepos.x - other_character->tilepos.x) + (selected_character->tilepos.y - other_character->tilepos.y)*(selected_character->tilepos.y - other_character->tilepos.y));
+
+		if (chase == true && dist > 3 && temp == true) {
+			App->pathfinding->Move(other_character, selected_character);
+			if (other_character->tilepos == selected_character->tilepos || App->pathfinding->GetLastPath()->Count() == 0) {
+				chase = false;
+				App->pathfinding->DeletePath();
+			}
+		}
+
+
 	}
-
-
 	/////
 	Draw();
 	
@@ -186,11 +201,21 @@ bool j1Player::Move_Camera()
 	return false;
 }
 
-void j1Player::GetAdjacents()
+void j1Player::GetAdjacents(Character* character)
 {
-	uint tile_pos_x = (App->player->selected_character->pos.x+3) / 8;
-	uint tile_pos_y = (App->player->selected_character->pos.y +3) / 8;
 
+	Character* Selected_Character = Link;
+	if (character == Link) {
+		Selected_Character = Link;
+	}
+	else if (character == Zelda) {
+		Selected_Character = Zelda;
+	}
+	uint tile_pos_x = (Selected_Character->pos.x+3) / 8;
+	uint tile_pos_y = (Selected_Character->pos.y +3) / 8;
+
+	adjacent_tiles adjacent;
+	
 
 	adjacent.down.i = App->map->Colision->Get(tile_pos_x + 1, tile_pos_y + 2);
 	adjacent.down.j = App->map->Colision->Get(tile_pos_x, tile_pos_y + 2);
@@ -200,5 +225,104 @@ void j1Player::GetAdjacents()
 	adjacent.left.j = App->map->Colision->Get(tile_pos_x - 1, tile_pos_y);
 	adjacent.right.i = App->map->Colision->Get(tile_pos_x + 2, tile_pos_y);
 	adjacent.right.j = App->map->Colision->Get(tile_pos_x + 2, tile_pos_y + 1);
+
+
+	if (character == Link) {
+		adjacent_link = adjacent;
+	}
+	else if (character == Zelda) {
+		adjacent_zelda = adjacent;
+	}
+}
+
+
+key_state j1Player::Get_Movement_Event_Link()
+{
+
+	key_state state = idle;
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			state = left_up;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			state = right_up;
+		}
+		else {
+			state = up;
+		}
+	}
+
+	else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			state = left_down;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			state = right_down;
+		}
+		else {
+			state = down;
+		}
+	}
+
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+
+
+		state = right;
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+
+		state = left;
+	}
+	else state = idle;
+
+
+
+
+	return state;
+}
+
+
+
+key_state j1Player::Get_Movement_Event_Zelda()
+{
+	key_state state = idle;
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) {
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+			state = left_up;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
+			state = right_up;
+		}
+		else {
+			state = up;
+		}
+	}
+
+	else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+			state = left_down;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
+			state = right_down;
+		}
+		else {
+			state = down;
+		}
+	}
+
+	else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
+
+
+		state = right;
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+
+		state = left;
+	}
+	else state = idle;
+
+
+	
+	return state;
 
 }
