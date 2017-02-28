@@ -5,36 +5,50 @@
 
 #define TILE_COL_ID 237
 
-void j1Player::Move()
+
+
+void j1Player::Move(Character* character, float dt)
 {
-	enum key_state {
-		up,
-		down,
-		left,
-		right,
-		left_up,
-		left_down,
-		right_up,
-		right_down,
-		idle
-	};
+
 
 	key_state state = idle;
 	// HAY QUE INTENTAR QUE ESTO NO SEA TAN HARD CODE
 	//ADEMAS HAY ALGUNOS BUGS :S
 
 
-	p2Point<int> pos = selected_character->pos;
+	
+
+	adjacent_tiles adjacent;
+	Character* Selected_Character = character;
+	if (character == Link) {
+		adjacent = adjacent_link;
+		state = Get_Movement_Event_Link();
+
+	}
+	else if (character == Zelda) {
+		if (cooperative == true) {
+			adjacent = adjacent_zelda;
+			state = Get_Movement_Event_Zelda();
+		}
+		else
+		{
+			adjacent = adjacent_zelda;
+			state = Get_Movement_Event_Link();
+		}
+	}
+
+	p2Point<int> pos = Selected_Character->pos;
 	p2Point<int> o_pos = other_character->pos;
 
-	selected_character->tilepos.x = (pos.x + 3) / 8;
-	selected_character->tilepos.y = (pos.y + 3)/ 8;
+	Selected_Character->tilepos.x = (pos.x + 3) / 8;
+	Selected_Character->tilepos.y = (pos.y + 3) / 8;
 
-	other_character->tilepos.x = (o_pos.x + 3)/ 8;
+	other_character->tilepos.x = (o_pos.x + 3) / 8;
 	other_character->tilepos.y = (o_pos.y + 3) / 8;
 
-	int tile_pos_x = selected_character->tilepos.x;
-	int tile_pos_y = selected_character->tilepos.y;
+	int tile_pos_x = Selected_Character->tilepos.x;
+	int tile_pos_y = Selected_Character->tilepos.y;
+
 
 
 	//DIAGONAL TILES
@@ -45,123 +59,88 @@ void j1Player::Move()
 	uint d_l_d = App->map->Colision->Get(tile_pos_x -1, tile_pos_y +2);
 	
 	
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			state = left_up;
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			state = right_up;
-		}
-		else {
-			state = up;
-		}
-	}
-
-	else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			state = left_down;
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			state = right_down;
-		}
-		else {
-			state = down;
-		}
-	}
-
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-
-
-		state = right;
-	}
-	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-
-		state = left;
-	}
-	else state = idle;
-
-
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) {
-		state = right_down;
-	}
+	
 	//}
 	if (state == left_up) {
 		int a = 0;
 	}
-	int t_x = selected_character->tilepos.x;
-	int t_y = selected_character->tilepos.y;
-	int p_x = selected_character->pos.x;
-	int p_y = selected_character->pos.y;
+	int t_x = Selected_Character->tilepos.x;
+	int t_y = Selected_Character->tilepos.y;
+	int p_x = Selected_Character->pos.x;
+	int p_y = Selected_Character->pos.y;
 
+
+	float speed = 1/dt;
+	
 	switch (state) {
 	case up:
 		if (adjacent.up.i != TILE_COL_ID && adjacent.up.j != TILE_COL_ID)
-			selected_character->pos.y = pos.y - 1;
+			Selected_Character->pos.y -=  speed*dt;
 		else if (adjacent.up.i == TILE_COL_ID && adjacent.up.j != TILE_COL_ID) {
 			if (7 - (p_x +6- t_x * 8) > (p_y - t_y * 8)) {
-				selected_character->pos.x++;
+				Selected_Character->pos.x += speed*dt;
 			}
 			else if (7 - (p_x + 6 - t_x * 8) < (p_y - t_y * 8)) {
-				selected_character->pos.y--;
+				Selected_Character->pos.y -= speed*dt;;
 			}
 			else {
-				//pos.y = 7 - (pos.x - selected_character->tilepos.x * 8) + selected_character->tilepos.y * 8;
-				selected_character->pos.y = pos.y - 1;
-				selected_character->pos.x = pos.x + 1;
+				//pos.y = 7 - (pos.x - Selected_Character->tilepos.x * 8) + Selected_Character->tilepos.y * 8;
+				Selected_Character->pos.y -= speed*dt;
+				Selected_Character->pos.x += speed*dt;
 			}
 		}
 		else if (adjacent.up.i != TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
 			if (p_x - t_x * 8 > p_y - t_y * 8) {
-				selected_character->pos.x--;
+				Selected_Character->pos.x -= speed*dt;
 			}
 			else if (p_x - t_x * 8 < p_y - t_y * 8) {
-				selected_character->pos.y--;
+				Selected_Character->pos.y -= speed*dt;;
 			}
 			else {
-				//pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
-				selected_character->pos.y = pos.y - 1;
-				selected_character->pos.x = pos.x - 1;
+				//pos.y = pos.x - Selected_Character->tilepos.x * 8 + Selected_Character->tilepos.y * 8;
+				Selected_Character->pos.y -= speed*dt;
+				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 		else if (adjacent.up.i == TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
 			if ((p_y - 1) / 8 == t_y) {
-				selected_character->pos.y--;
+				Selected_Character->pos.y-= speed*dt;
 			}
 		}
 		break;
 
 	case down:
 		if (adjacent.down.i != TILE_COL_ID && adjacent.down.j != TILE_COL_ID)
-			selected_character->pos.y = pos.y + 1;
+			Selected_Character->pos.y += speed*dt;
 		else if (adjacent.down.i == TILE_COL_ID && adjacent.down.j != TILE_COL_ID) {
-			if (7 - (p_x - t_x * 8) > (p_y - t_y * 8)) {
-				selected_character->pos.x--;
+			if (7 - (p_x +6 - t_x * 8) > (p_y - t_y * 8)) {
+				Selected_Character->pos.x -= speed*dt;
 			}
-			else if (7 - (p_x - t_x * 8) < (p_y - t_y * 8)) {
-				selected_character->pos.y++;
+			else if (7 - (p_x + 6 - t_x * 8) < (p_y - t_y * 8)) {
+				Selected_Character->pos.y += speed*dt;
 			}
 			else {
-				// pos.y = 7 - (pos.x - selected_character->tilepos.x * 8) + selected_character->tilepos.y * 8;
-				selected_character->pos.y = pos.y + 1;
-				selected_character->pos.x = pos.x - 1;
+				// pos.y = 7 - (pos.x - Selected_Character->tilepos.x * 8) + Selected_Character->tilepos.y * 8;
+				Selected_Character->pos.y += speed*dt;
+				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 		else if (adjacent.down.i != TILE_COL_ID && adjacent.down.j == TILE_COL_ID) {
 			if ((p_x - t_x * 8) > (p_y - t_y * 8)) {
-				selected_character->pos.y++;
+				Selected_Character->pos.y += speed*dt;
 			}
 			else if ((p_x - t_x * 8) < (p_y - t_y * 8)) {
-				selected_character->pos.x++;
+				Selected_Character->pos.x += speed*dt;
 			}
 			else {
-				// pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
-				selected_character->pos.y = pos.y + 1;
-				selected_character->pos.x = pos.x + 1;
+				// pos.y = pos.x - Selected_Character->tilepos.x * 8 + Selected_Character->tilepos.y * 8;
+				Selected_Character->pos.y += speed*dt;
+				Selected_Character->pos.x += speed*dt;
 			}
 		}
 		else if (adjacent.down.i == TILE_COL_ID && adjacent.down.j == TILE_COL_ID) {
 			if ((p_y + 8)  / 8 == t_y ) {
-				selected_character->pos.y++;
+				Selected_Character->pos.y += speed*dt;
 			}
 		}
 
@@ -169,72 +148,72 @@ void j1Player::Move()
 
 	case left:
 		if (adjacent.left.i != TILE_COL_ID && adjacent.left.j != TILE_COL_ID)
-			selected_character->pos.x = pos.x - 1;
+			Selected_Character->pos.x -= speed*dt;
 		else if (adjacent.left.i == TILE_COL_ID && adjacent.left.j != TILE_COL_ID) {
 			if ((p_x - t_x * 8) > (p_y - t_y * 8)) {
-				selected_character->pos.x--;
+				Selected_Character->pos.x -= speed*dt;
 			}
 			else if ((p_x - t_x * 8) < (p_y - t_y * 8)) {
-				selected_character->pos.y--;
+				Selected_Character->pos.y -= speed*dt;
 			}
 			else {
-				//pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
-				selected_character->pos.x = pos.x - 1;
-				selected_character->pos.y = pos.y - 1;
+				//pos.y = pos.x - Selected_Character->tilepos.x * 8 + Selected_Character->tilepos.y * 8;
+				Selected_Character->pos.x -= speed*dt;
+				Selected_Character->pos.y -= speed*dt;
 			}
 		}
 		else if (adjacent.left.i != TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
 
 			if (7 - (p_x + 6 - t_x * 8) > (p_y - t_y * 8)) {
-				selected_character->pos.y++;
+				Selected_Character->pos.y += speed*dt;
 			}
 			else if (7 - (p_x +6 - t_x * 8) < (p_y - t_y * 8)) {
-				selected_character->pos.x--;
+				Selected_Character->pos.x -= speed*dt;
 			}
 			else {
-				// pos.y = 7 - (pos.x - selected_character->tilepos.x * 8) + selected_character->tilepos.y * 8;
-				selected_character->pos.y = pos.y + 1;
-				selected_character->pos.x = pos.x - 1;
+				// pos.y = 7 - (pos.x - Selected_Character->tilepos.x * 8) + Selected_Character->tilepos.y * 8;
+				Selected_Character->pos.y += speed*dt;
+				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 		else if (adjacent.left.i == TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
 			if ((p_x - 1) / 8 == t_x) {
-				selected_character->pos.x--;
+				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 		break;
 	case right:
 		if (adjacent.right.i != TILE_COL_ID && adjacent.right.j != TILE_COL_ID)
-			selected_character->pos.x = pos.x + 1;
+			Selected_Character->pos.x += speed*dt;
 		else if (adjacent.right.i == TILE_COL_ID && adjacent.right.j != TILE_COL_ID) {
 			if ((p_x - t_x * 8) > (p_y - t_y * 8)) {
-				selected_character->pos.y++;
+				Selected_Character->pos.y += speed*dt;
 			}
 			else if ((p_x  - t_x * 8) < (p_y - t_y * 8)) {
-				selected_character->pos.x++;
+				Selected_Character->pos.x += speed*dt;
 			}
 			else {
-				//pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
-				selected_character->pos.y = pos.y + 1;
-				selected_character->pos.x = pos.x + 1;
+				//pos.y = pos.x - Selected_Character->tilepos.x * 8 + Selected_Character->tilepos.y * 8;
+				Selected_Character->pos.y += speed*dt;
+				Selected_Character->pos.x += speed*dt;
 			}
 		}
 		else if (adjacent.right.i != TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
 			if (7 - (p_x + 6 - t_x * 8) > (p_y - t_y * 8)) {
-				selected_character->pos.x++;
+				Selected_Character->pos.x += speed*dt;
 			}
 			else if (7 - (p_x + 6 - t_x * 8) < (p_y - t_y * 8)) {
-				selected_character->pos.y--;
+				Selected_Character->pos.y -= speed*dt;
 			}
 			else {
-				// pos.y = 7 - (pos.x - selected_character->tilepos.x * 8) + selected_character->tilepos.y * 8;
-				selected_character->pos.y = pos.y - 1;
-				selected_character->pos.x = pos.x + 1;
+				// pos.y = 7 - (pos.x - Selected_Character->tilepos.x * 8) + Selected_Character->tilepos.y * 8;
+				Selected_Character->pos.y -= speed*dt;
+				Selected_Character->pos.x += speed*dt;
 			}
 		}
 		else if (adjacent.right.i == TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
 			if ((p_x +8) / 8 == t_x ) {
-				selected_character->pos.x++;
+				Selected_Character->pos.x += speed*dt;
 			}
 		}
 		break;
@@ -242,50 +221,50 @@ void j1Player::Move()
 	case left_up:
 		if (adjacent.up.i == TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
 			if ((p_y - 1) / 8 == t_y && (p_x - 1) / 8 == t_x) {
-				selected_character->pos.y--;
-				selected_character->pos.x--;
+				Selected_Character->pos.y -= speed*dt;
+				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 
 		else if (adjacent.up.i == TILE_COL_ID && adjacent.left.j != TILE_COL_ID) {
-			selected_character->pos.x = pos.x - 1;
+			Selected_Character->pos.x -= speed*dt;
 		}
 		else if (adjacent.up.i != TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
-			selected_character->pos.y = pos.y - 1;
+			Selected_Character->pos.y -= speed*dt;
 		}
 		else if (adjacent.up.i != TILE_COL_ID && adjacent.left.j != TILE_COL_ID && d_l_u != TILE_COL_ID) {
 			if ((p_x - t_x * 8) > (p_y - t_y * 8)) {
-				selected_character->pos.x--;
+				Selected_Character->pos.x -= speed*dt;
 			}
 			else if ((p_x - t_x * 8) < (p_y - t_y * 8)) {
-				selected_character->pos.y--;
+				Selected_Character->pos.y -= speed*dt;
 			}
 			else {
 
-				pos.y = pos.x - selected_character->tilepos.x * 8 + selected_character->tilepos.y * 8;
-				selected_character->pos.x = pos.x - 1;
-				selected_character->pos.y = pos.y - 1;
+				pos.y = pos.x - Selected_Character->tilepos.x * 8 + Selected_Character->tilepos.y * 8;
+				Selected_Character->pos.x -= speed*dt;
+				Selected_Character->pos.y -= speed*dt;
 			}
 		}
 		
 		else if (d_l_u == TILE_COL_ID) {
 			if ((p_y - 1) / 8 == t_y && (p_x - 1) / 8 == t_x) {
-				selected_character->pos.y--;
-				selected_character->pos.x--;
+				Selected_Character->pos.y -= speed*dt;
+				Selected_Character->pos.x -= speed*dt;
 			}
 			else {
-				selected_character->pos.y--;
+				Selected_Character->pos.y -= speed*dt;
 			}
 		}
 
 		if (adjacent.left.i == TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
 			if ((p_x - 1) / 8 == t_x) {
-				selected_character->pos.x--;
+				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 		if (adjacent.up.i == TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
 			if ((p_y - 1) / 8 == t_y) {
-				selected_character->pos.y--;
+				Selected_Character->pos.y -= speed*dt;
 			}
 		}
 		break;
@@ -293,49 +272,49 @@ void j1Player::Move()
 	case right_up:
 		if (adjacent.up.j == TILE_COL_ID && adjacent.right.i == TILE_COL_ID) {
 			if ((p_y) / 8 == t_y && (p_x + 8) / 8 == t_x) {
-				selected_character->pos.y--;
-				selected_character->pos.x++;
+				Selected_Character->pos.y -= speed*dt;
+				Selected_Character->pos.x += speed*dt;
 			}
 		}
 
 		else if (adjacent.up.j == TILE_COL_ID && adjacent.right.i != TILE_COL_ID) {
-			selected_character->pos.x = pos.x + 1;
+			Selected_Character->pos.x += speed*dt;
 		}
 		else if (adjacent.up.j != TILE_COL_ID && adjacent.right.i == TILE_COL_ID) {
-			selected_character->pos.y = pos.y - 1;
+			Selected_Character->pos.y -= speed*dt;
 		}
 		else if (adjacent.up.j != TILE_COL_ID && adjacent.right.i != TILE_COL_ID && d_r_u != TILE_COL_ID) {
 			if (7 - (p_x+ 6 - t_x * 8) > (p_y - t_y * 8)) {
-				selected_character->pos.x++;
+				Selected_Character->pos.x += speed*dt;
 			}
 			else if (7 - (p_x+6 - t_x * 8) < (p_y - t_y * 8)) {
-				selected_character->pos.y--;
+				Selected_Character->pos.y -= speed*dt;
 			}
 			else {
 			
-				selected_character->pos.x = pos.x + 1;
-				selected_character->pos.y = pos.y - 1;
+				Selected_Character->pos.x += speed*dt;
+				Selected_Character->pos.y -= speed*dt;
 			}
 		}
 		
 		 else if (d_r_u == TILE_COL_ID) {
 			if ((p_y ) / 8 == t_y && (p_x +8) / 8 == t_x) {
-				selected_character->pos.y--;
-				selected_character->pos.x++;
+				Selected_Character->pos.y -= speed*dt;
+				Selected_Character->pos.x += speed*dt;
 			}
 			else {
-				selected_character->pos.y--;
+				Selected_Character->pos.y -= speed*dt;
 			}
 		}
 
 			if (adjacent.right.i == TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
 			 if ((p_x + 8) / 8 == t_x) {
-				 selected_character->pos.x++;
+				 Selected_Character->pos.x += speed*dt;
 			 }
 		 }
 			if (adjacent.up.i == TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
 			 if ((p_y - 1) / 8 == t_y) {
-				 selected_character->pos.y--;
+				 Selected_Character->pos.y -= speed*dt;
 			 }
 		 }
 		break;
@@ -343,50 +322,50 @@ void j1Player::Move()
 
 		if (adjacent.down.j == TILE_COL_ID && adjacent.left.i == TILE_COL_ID) {
 			if ((p_y + 8) / 8 == t_y && (p_x) / 8 == t_x) {
-				selected_character->pos.y++;
-				selected_character->pos.x--;
+				Selected_Character->pos.y += speed*dt;
+				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 
 		else if (adjacent.down.j == TILE_COL_ID && adjacent.left.i != TILE_COL_ID) {
-			selected_character->pos.x = pos.x - 1;
+			Selected_Character->pos.x -= speed*dt;
 			
 		}
 		else if (adjacent.down.j != TILE_COL_ID && adjacent.left.i == TILE_COL_ID) {
-			selected_character->pos.y = pos.y + 1;
+			Selected_Character->pos.y += speed*dt;
 			
 		}
 		else if (adjacent.down.j != TILE_COL_ID && adjacent.left.i != TILE_COL_ID && d_l_d != TILE_COL_ID) {
 			if (7 - (p_x + 6 - t_x * 8) > (p_y - t_y * 8)) {
-				selected_character->pos.y++;
+				Selected_Character->pos.y += speed*dt;
 			}
 			else if (7 - (p_x + 6- t_x * 8) < (p_y - t_y * 8)) {
-				selected_character->pos.x--;
+				Selected_Character->pos.x -= speed*dt;
 			}
 			else {
-				// pos.y = 7 - (pos.x - selected_character->tilepos.x * 8) + selected_character->tilepos.y * 8;
-				selected_character->pos.x = pos.x - 1;
-				selected_character->pos.y = pos.y + 1;
+				// pos.y = 7 - (pos.x - Selected_Character->tilepos.x * 8) + Selected_Character->tilepos.y * 8;
+				Selected_Character->pos.x -= speed*dt;
+				Selected_Character->pos.y += speed*dt;
 			}
 		}
 		
 		else if (d_l_d == TILE_COL_ID) {
 			if ((p_y + 8) / 8 == t_y && (p_x ) / 8 == t_x) {
-				selected_character->pos.y++;
-				selected_character->pos.x--;
+				Selected_Character->pos.y += speed*dt;
+				Selected_Character->pos.x -= speed*dt;
 			}
 			else {
-				selected_character->pos.y++;
+				Selected_Character->pos.y += speed*dt;
 			}
 		}
 		if (adjacent.left.i == TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
 			if ((p_x - 1) / 8 == t_x) {
-				selected_character->pos.x--;
+				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 		if (adjacent.down.i == TILE_COL_ID && adjacent.down.j == TILE_COL_ID) {
 			if ((p_y + 8) / 8 == t_y) {
-				selected_character->pos.y++;
+				Selected_Character->pos.y += speed*dt;
 			}
 		}
 		break;
@@ -394,48 +373,48 @@ void j1Player::Move()
 	case right_down:
 		if (adjacent.down.i == TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
 			if ((p_y + 8) / 8 == t_y && (p_x + 8) / 8 == t_x) {
-				selected_character->pos.y++;
-				selected_character->pos.x++;
+				Selected_Character->pos.y += speed*dt;
+				Selected_Character->pos.x += speed*dt;
 			}
 		}
 
 		else if (adjacent.down.i == TILE_COL_ID && adjacent.right.j != TILE_COL_ID) {
-			selected_character->pos.x = pos.x + 1;
+			Selected_Character->pos.x += speed*dt;
 		}
 		else if (adjacent.down.i != TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
-			selected_character->pos.y = pos.y + 1;
+			Selected_Character->pos.y += speed*dt;
 		}
 		else if (adjacent.down.i != TILE_COL_ID && adjacent.right.j != TILE_COL_ID && d_r_d != TILE_COL_ID) {
 			if ((p_x - t_x * 8) < (p_y - t_y * 8)) {
-				selected_character->pos.x++;
+				Selected_Character->pos.x += speed*dt;
 			}
 			else if ((p_x  - t_x * 8) > (p_y - t_y * 8)) {
-				selected_character->pos.y++;
+				Selected_Character->pos.y += speed*dt;
 			}
 			else {
 				
-				selected_character->pos.x = pos.x + 1;
-				selected_character->pos.y = pos.y + 1;
+				Selected_Character->pos.x += speed*dt;
+				Selected_Character->pos.y += speed*dt;
 			}
 		}
 		
 		else if (d_r_d == TILE_COL_ID) {
 			if ((p_y + 8) / 8 == t_y && (p_x + 8) / 8 == t_x) {
-				selected_character->pos.y++;
-				selected_character->pos.x++;
+				Selected_Character->pos.y += speed*dt;
+				Selected_Character->pos.x += speed*dt;
 			}
 			else {
-				selected_character->pos.y++;
+				Selected_Character->pos.y += speed*dt;
 			}
 		}
 		if (adjacent.right.i == TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
 			if ((p_x + 8) / 8 == t_x) {
-				selected_character->pos.x++;
+				Selected_Character->pos.x += speed*dt;
 			}
 		}
 		if (adjacent.down.i == TILE_COL_ID && adjacent.down.j == TILE_COL_ID) {
 			if ((p_y + 8) / 8 == t_y) {
-				selected_character->pos.y++;
+				Selected_Character->pos.y += speed*dt;
 			}
 		}
 	
@@ -449,3 +428,4 @@ void j1Player::Move()
 
 
 }
+

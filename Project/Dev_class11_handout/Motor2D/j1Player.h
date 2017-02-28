@@ -10,6 +10,18 @@
 #include "j1Map.h"
 
 
+enum key_state {
+	up,
+	down,
+	left,
+	right,
+	left_up,
+	left_down,
+	right_up,
+	right_down,
+	idle
+};
+
 
 class P_Link;
 class P_Zelda;
@@ -39,18 +51,19 @@ public:
 
 	void Draw();
 
-	void Move();
+	key_state Get_Movement_Event_Link();
+	key_state Get_Movement_Event_Zelda();
 	void Change_Player();
 	void Chase();
 	bool Move_Camera();
-	void GetAdjacents();
+	void GetAdjacents(Character*);
 
 public:
 	
 	bool change = false;
 	MainScene* actual_scene;
 	bool chase = false;
-	
+	bool cooperative = false;
 	Character* selected_character;
 	Character* other_character;
 	P_Link* Link;
@@ -58,7 +71,8 @@ public:
 
 	//Colisions
 	MapLayer* Colision;
-	adjacent_tiles adjacent;
+	adjacent_tiles adjacent_link;
+	adjacent_tiles adjacent_zelda;
 
 
 	int live;

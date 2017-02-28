@@ -19,8 +19,7 @@
 #include <conio.h>
 #include <iostream>
 
-#include "S_Inventory.h"
-#include "S_Map.h"
+
 #include "S_World.h"
 #include "S_Dungeon.h"
 
@@ -54,11 +53,7 @@ bool j1Scene::Start()
 {
 	scene_list = new p2List<MainScene*>();
 	//S_Inventory* temp = new S_Inventory();
-	p2List_item<MainScene*>* Inventory = scene_list->add(new S_Inventory);
-	Inventory->data->scene_name = inventory;
-
-	p2List_item<MainScene*>* Map = scene_list->add(new S_Map);
-	Map->data->scene_name = map;
+	
 
 	p2List_item<MainScene*>* World = scene_list->add(new S_World);
 	World->data->scene_name = world;
@@ -137,25 +132,3 @@ bool j1Scene::ChangeScene(Scene_ID name)
 	return false;
 }
 
-bool j1Scene::Show(Scene_ID name)
-{
-	/*
-	p2List_item<MainScene*>* temp = scene_list->start;
-	while (temp != NULL) {
-		if (temp->data->scene_name == name) {
-			active_scene = temp->data;			
-			return true;
-		}
-		temp = temp->next;
-	}*/
-	return false;
-}
-
-bool j1Scene::Hide()
-{
-	active_scene->Clean();
-	active_scene = loaded_scene;
-	prev_scene = active_scene;
-	
-	return true;
-}

@@ -17,12 +17,7 @@ bool S_Dungeon::Start()
 }
 
 bool S_Dungeon::Update() {
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
-		App->scene->Show(map);
-	}
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) {
-		App->scene->Show(inventory);
-	}
+
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		App->scene->ChangeScene(world);
 	}

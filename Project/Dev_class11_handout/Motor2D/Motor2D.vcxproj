@@ -112,8 +112,6 @@
     <ClCompile Include="P_Link.cpp" />
     <ClCompile Include="P_Zelda.cpp" />
     <ClCompile Include="S_Dungeon.cpp" />
-    <ClCompile Include="S_Inventory.cpp" />
-    <ClCompile Include="S_Map.cpp" />
     <ClCompile Include="S_World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -137,7 +135,6 @@
     <ClInclude Include="P_Link.h" />
     <ClInclude Include="P_Zelda.h" />
     <ClInclude Include="S_Dungeon.h" />
-    <ClInclude Include="S_Inventory.h" />
     <ClInclude Include="j1FileSystem.h" />
     <ClInclude Include="j1Fonts.h" />
     <ClInclude Include="j1Gui.h" />
@@ -162,7 +159,6 @@
     <ClInclude Include="p2SString.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
-    <ClInclude Include="S_Map.h" />
     <ClInclude Include="S_World.h" />
   </ItemGroup>
   <ItemGroup>

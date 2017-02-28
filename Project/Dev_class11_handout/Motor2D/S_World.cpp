@@ -31,15 +31,12 @@ bool S_World::Start()
 
 bool S_World::Update()
 {
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
-		App->scene->Show(map);
-	}
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) {
-		App->scene->Show(inventory);
-	}
+
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		App->scene->ChangeScene(dungeon);
 	}
+
+	/*
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 5;
 
@@ -51,7 +48,7 @@ bool S_World::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 5;
-
+*/
 
 	App->map->Draw();
 
