@@ -124,9 +124,14 @@ bool j1Player::Update(float dt)
 				App->pathfinding->DeletePath();
 			}
 		}
-
+		
 
 	}
+
+	Link->tilepos.x = Link->pos.x / 8;
+	Link->tilepos.y = Link->pos.y / 8;
+	Zelda->tilepos.x = Zelda->pos.x / 8;
+	Zelda->tilepos.y = Zelda->pos.y / 8;
 	/////
 	Draw();
 	
