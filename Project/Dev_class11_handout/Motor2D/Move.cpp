@@ -2,7 +2,7 @@
 #include "j1App.h"
 #include "j1Window.h"
 #include "j1Render.h"
-
+#include "p2Log.h"
 #define TILE_COL_ID 237
 
 
@@ -14,7 +14,7 @@ void j1Player::Move(Character* character, float dt)
 	adjacent_tiles adjacent;
 
 	
-
+	
 	Character* Selected_Character = character;
 	if (character == Link) {
 		adjacent = adjacent_link;
@@ -33,6 +33,7 @@ void j1Player::Move(Character* character, float dt)
 		}
 	}
 
+	LOG(" %i  %i ", adjacent.down.j, adjacent.down.i);
 	p2Point<int> pos = Selected_Character->pos;
 
 	Selected_Character->tilepos.x = (pos.x + 3) / 8;
@@ -94,10 +95,10 @@ void j1Player::Move(Character* character, float dt)
 		if (adjacent.down.i != TILE_COL_ID && adjacent.down.j != TILE_COL_ID)
 			Selected_Character->pos.y += speed*dt;
 		else if (adjacent.down.i == TILE_COL_ID && adjacent.down.j != TILE_COL_ID) {
-			if (7 - (pos_x +6 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
+			if (7 - (pos_x +6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x -= speed*dt;
 			}
-			else if (7 - (pos_x + 6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
+			else if (7 - (pos_x + 6 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y += speed*dt;
 			}
 			else {
