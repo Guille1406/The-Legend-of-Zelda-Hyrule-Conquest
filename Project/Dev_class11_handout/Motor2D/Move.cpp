@@ -9,16 +9,12 @@
 
 void j1Player::Move(Character* character, float dt)
 {
-
-
+	
 	key_state state = idle;
-	// HAY QUE INTENTAR QUE ESTO NO SEA TAN HARD CODE
-	//ADEMAS HAY ALGUNOS BUGS :S
-
+	adjacent_tiles adjacent;
 
 	
 
-	adjacent_tiles adjacent;
 	Character* Selected_Character = character;
 	if (character == Link) {
 		adjacent = adjacent_link;
@@ -38,37 +34,24 @@ void j1Player::Move(Character* character, float dt)
 	}
 
 	p2Point<int> pos = Selected_Character->pos;
-	p2Point<int> o_pos = other_character->pos;
 
 	Selected_Character->tilepos.x = (pos.x + 3) / 8;
 	Selected_Character->tilepos.y = (pos.y + 3) / 8;
 
-	other_character->tilepos.x = (o_pos.x + 3) / 8;
-	other_character->tilepos.y = (o_pos.y + 3) / 8;
-
 	int tile_pos_x = Selected_Character->tilepos.x;
 	int tile_pos_y = Selected_Character->tilepos.y;
 
+	int pos_x = Selected_Character->pos.x;
+	int pos_y = Selected_Character->pos.y;
 
 
 	//DIAGONAL TILES
-
-	uint d_r_u = App->map->Colision->Get(tile_pos_x + 2, tile_pos_y -1);
-	uint d_l_u  = App->map->Colision->Get(tile_pos_x -1, tile_pos_y - 1);
-	uint d_r_d = App->map->Colision->Get(tile_pos_x +2, tile_pos_y +2);
-	uint d_l_d = App->map->Colision->Get(tile_pos_x -1, tile_pos_y +2);
+	uint diagonal_right_up = App->map->Colision->Get(tile_pos_x + 2, tile_pos_y -1);
+	uint diagonal_left_up  = App->map->Colision->Get(tile_pos_x -1, tile_pos_y - 1);
+	uint diagonal_right_down = App->map->Colision->Get(tile_pos_x +2, tile_pos_y +2);
+	uint diagonal_left_down = App->map->Colision->Get(tile_pos_x -1, tile_pos_y +2);
 	
 	
-	
-	//}
-	if (state == left_up) {
-		int a = 0;
-	}
-	int t_x = Selected_Character->tilepos.x;
-	int t_y = Selected_Character->tilepos.y;
-	int p_x = Selected_Character->pos.x;
-	int p_y = Selected_Character->pos.y;
-
 
 	float speed = 1/dt;
 	
@@ -77,33 +60,31 @@ void j1Player::Move(Character* character, float dt)
 		if (adjacent.up.i != TILE_COL_ID && adjacent.up.j != TILE_COL_ID)
 			Selected_Character->pos.y -=  speed*dt;
 		else if (adjacent.up.i == TILE_COL_ID && adjacent.up.j != TILE_COL_ID) {
-			if (7 - (p_x +6- t_x * 8) > (p_y - t_y * 8)) {
+			if (7 - (pos_x +6- tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x += speed*dt;
 			}
-			else if (7 - (p_x + 6 - t_x * 8) < (p_y - t_y * 8)) {
+			else if (7 - (pos_x + 6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y -= speed*dt;;
 			}
 			else {
-				//pos.y = 7 - (pos.x - Selected_Character->tilepos.x * 8) + Selected_Character->tilepos.y * 8;
 				Selected_Character->pos.y -= speed*dt;
 				Selected_Character->pos.x += speed*dt;
 			}
 		}
 		else if (adjacent.up.i != TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
-			if (p_x - t_x * 8 > p_y - t_y * 8) {
+			if (pos_x - tile_pos_x * 8 > pos_y - tile_pos_y * 8) {
 				Selected_Character->pos.x -= speed*dt;
 			}
-			else if (p_x - t_x * 8 < p_y - t_y * 8) {
+			else if (pos_x - tile_pos_x * 8 < pos_y - tile_pos_y * 8) {
 				Selected_Character->pos.y -= speed*dt;;
 			}
 			else {
-				//pos.y = pos.x - Selected_Character->tilepos.x * 8 + Selected_Character->tilepos.y * 8;
 				Selected_Character->pos.y -= speed*dt;
 				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 		else if (adjacent.up.i == TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
-			if ((p_y - 1) / 8 == t_y) {
+			if ((pos_y - 1) / 8 == tile_pos_y) {
 				Selected_Character->pos.y-= speed*dt;
 			}
 		}
@@ -113,33 +94,31 @@ void j1Player::Move(Character* character, float dt)
 		if (adjacent.down.i != TILE_COL_ID && adjacent.down.j != TILE_COL_ID)
 			Selected_Character->pos.y += speed*dt;
 		else if (adjacent.down.i == TILE_COL_ID && adjacent.down.j != TILE_COL_ID) {
-			if (7 - (p_x +6 - t_x * 8) > (p_y - t_y * 8)) {
+			if (7 - (pos_x +6 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x -= speed*dt;
 			}
-			else if (7 - (p_x + 6 - t_x * 8) < (p_y - t_y * 8)) {
+			else if (7 - (pos_x + 6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y += speed*dt;
 			}
 			else {
-				// pos.y = 7 - (pos.x - Selected_Character->tilepos.x * 8) + Selected_Character->tilepos.y * 8;
 				Selected_Character->pos.y += speed*dt;
 				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 		else if (adjacent.down.i != TILE_COL_ID && adjacent.down.j == TILE_COL_ID) {
-			if ((p_x - t_x * 8) > (p_y - t_y * 8)) {
+			if ((pos_x - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y += speed*dt;
 			}
-			else if ((p_x - t_x * 8) < (p_y - t_y * 8)) {
+			else if ((pos_x - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x += speed*dt;
 			}
 			else {
-				// pos.y = pos.x - Selected_Character->tilepos.x * 8 + Selected_Character->tilepos.y * 8;
 				Selected_Character->pos.y += speed*dt;
 				Selected_Character->pos.x += speed*dt;
 			}
 		}
 		else if (adjacent.down.i == TILE_COL_ID && adjacent.down.j == TILE_COL_ID) {
-			if ((p_y + 8)  / 8 == t_y ) {
+			if ((pos_y + 8)  / 8 == tile_pos_y ) {
 				Selected_Character->pos.y += speed*dt;
 			}
 		}
@@ -150,34 +129,32 @@ void j1Player::Move(Character* character, float dt)
 		if (adjacent.left.i != TILE_COL_ID && adjacent.left.j != TILE_COL_ID)
 			Selected_Character->pos.x -= speed*dt;
 		else if (adjacent.left.i == TILE_COL_ID && adjacent.left.j != TILE_COL_ID) {
-			if ((p_x - t_x * 8) > (p_y - t_y * 8)) {
+			if ((pos_x - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x -= speed*dt;
 			}
-			else if ((p_x - t_x * 8) < (p_y - t_y * 8)) {
+			else if ((pos_x - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y -= speed*dt;
 			}
 			else {
-				//pos.y = pos.x - Selected_Character->tilepos.x * 8 + Selected_Character->tilepos.y * 8;
 				Selected_Character->pos.x -= speed*dt;
 				Selected_Character->pos.y -= speed*dt;
 			}
 		}
 		else if (adjacent.left.i != TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
 
-			if (7 - (p_x + 6 - t_x * 8) > (p_y - t_y * 8)) {
+			if (7 - (pos_x + 6 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y += speed*dt;
 			}
-			else if (7 - (p_x +6 - t_x * 8) < (p_y - t_y * 8)) {
+			else if (7 - (pos_x +6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x -= speed*dt;
 			}
 			else {
-				// pos.y = 7 - (pos.x - Selected_Character->tilepos.x * 8) + Selected_Character->tilepos.y * 8;
 				Selected_Character->pos.y += speed*dt;
 				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 		else if (adjacent.left.i == TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
-			if ((p_x - 1) / 8 == t_x) {
+			if ((pos_x - 1) / 8 == tile_pos_x) {
 				Selected_Character->pos.x -= speed*dt;
 			}
 		}
@@ -186,33 +163,31 @@ void j1Player::Move(Character* character, float dt)
 		if (adjacent.right.i != TILE_COL_ID && adjacent.right.j != TILE_COL_ID)
 			Selected_Character->pos.x += speed*dt;
 		else if (adjacent.right.i == TILE_COL_ID && adjacent.right.j != TILE_COL_ID) {
-			if ((p_x - t_x * 8) > (p_y - t_y * 8)) {
+			if ((pos_x - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y += speed*dt;
 			}
-			else if ((p_x  - t_x * 8) < (p_y - t_y * 8)) {
+			else if ((pos_x  - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x += speed*dt;
 			}
 			else {
-				//pos.y = pos.x - Selected_Character->tilepos.x * 8 + Selected_Character->tilepos.y * 8;
 				Selected_Character->pos.y += speed*dt;
 				Selected_Character->pos.x += speed*dt;
 			}
 		}
 		else if (adjacent.right.i != TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
-			if (7 - (p_x + 6 - t_x * 8) > (p_y - t_y * 8)) {
+			if (7 - (pos_x + 6 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x += speed*dt;
 			}
-			else if (7 - (p_x + 6 - t_x * 8) < (p_y - t_y * 8)) {
+			else if (7 - (pos_x + 6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y -= speed*dt;
 			}
 			else {
-				// pos.y = 7 - (pos.x - Selected_Character->tilepos.x * 8) + Selected_Character->tilepos.y * 8;
 				Selected_Character->pos.y -= speed*dt;
 				Selected_Character->pos.x += speed*dt;
 			}
 		}
 		else if (adjacent.right.i == TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
-			if ((p_x +8) / 8 == t_x ) {
+			if ((pos_x +8) / 8 == tile_pos_x ) {
 				Selected_Character->pos.x += speed*dt;
 			}
 		}
@@ -220,7 +195,7 @@ void j1Player::Move(Character* character, float dt)
 
 	case left_up:
 		if (adjacent.up.i == TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
-			if ((p_y - 1) / 8 == t_y && (p_x - 1) / 8 == t_x) {
+			if ((pos_y - 1) / 8 == tile_pos_y && (pos_x - 1) / 8 == tile_pos_x) {
 				Selected_Character->pos.y -= speed*dt;
 				Selected_Character->pos.x -= speed*dt;
 			}
@@ -232,11 +207,11 @@ void j1Player::Move(Character* character, float dt)
 		else if (adjacent.up.i != TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
 			Selected_Character->pos.y -= speed*dt;
 		}
-		else if (adjacent.up.i != TILE_COL_ID && adjacent.left.j != TILE_COL_ID && d_l_u != TILE_COL_ID) {
-			if ((p_x - t_x * 8) > (p_y - t_y * 8)) {
+		else if (adjacent.up.i != TILE_COL_ID && adjacent.left.j != TILE_COL_ID && diagonal_left_up != TILE_COL_ID) {
+			if ((pos_x - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x -= speed*dt;
 			}
-			else if ((p_x - t_x * 8) < (p_y - t_y * 8)) {
+			else if ((pos_x - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y -= speed*dt;
 			}
 			else {
@@ -247,8 +222,8 @@ void j1Player::Move(Character* character, float dt)
 			}
 		}
 		
-		else if (d_l_u == TILE_COL_ID) {
-			if ((p_y - 1) / 8 == t_y && (p_x - 1) / 8 == t_x) {
+		else if (diagonal_left_up == TILE_COL_ID) {
+			if ((pos_y - 1) / 8 == tile_pos_y && (pos_x - 1) / 8 == tile_pos_x) {
 				Selected_Character->pos.y -= speed*dt;
 				Selected_Character->pos.x -= speed*dt;
 			}
@@ -258,12 +233,12 @@ void j1Player::Move(Character* character, float dt)
 		}
 
 		if (adjacent.left.i == TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
-			if ((p_x - 1) / 8 == t_x) {
+			if ((pos_x - 1) / 8 == tile_pos_x) {
 				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 		if (adjacent.up.i == TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
-			if ((p_y - 1) / 8 == t_y) {
+			if ((pos_y - 1) / 8 == tile_pos_y) {
 				Selected_Character->pos.y -= speed*dt;
 			}
 		}
@@ -271,7 +246,7 @@ void j1Player::Move(Character* character, float dt)
 
 	case right_up:
 		if (adjacent.up.j == TILE_COL_ID && adjacent.right.i == TILE_COL_ID) {
-			if ((p_y) / 8 == t_y && (p_x + 8) / 8 == t_x) {
+			if ((pos_y) / 8 == tile_pos_y && (pos_x + 8) / 8 == tile_pos_x) {
 				Selected_Character->pos.y -= speed*dt;
 				Selected_Character->pos.x += speed*dt;
 			}
@@ -283,11 +258,11 @@ void j1Player::Move(Character* character, float dt)
 		else if (adjacent.up.j != TILE_COL_ID && adjacent.right.i == TILE_COL_ID) {
 			Selected_Character->pos.y -= speed*dt;
 		}
-		else if (adjacent.up.j != TILE_COL_ID && adjacent.right.i != TILE_COL_ID && d_r_u != TILE_COL_ID) {
-			if (7 - (p_x+ 6 - t_x * 8) > (p_y - t_y * 8)) {
+		else if (adjacent.up.j != TILE_COL_ID && adjacent.right.i != TILE_COL_ID && diagonal_right_up != TILE_COL_ID) {
+			if (7 - (pos_x+ 6 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x += speed*dt;
 			}
-			else if (7 - (p_x+6 - t_x * 8) < (p_y - t_y * 8)) {
+			else if (7 - (pos_x+6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y -= speed*dt;
 			}
 			else {
@@ -297,8 +272,8 @@ void j1Player::Move(Character* character, float dt)
 			}
 		}
 		
-		 else if (d_r_u == TILE_COL_ID) {
-			if ((p_y ) / 8 == t_y && (p_x +8) / 8 == t_x) {
+		 else if (diagonal_right_up == TILE_COL_ID) {
+			if ((pos_y ) / 8 == tile_pos_y && (pos_x +8) / 8 == tile_pos_x) {
 				Selected_Character->pos.y -= speed*dt;
 				Selected_Character->pos.x += speed*dt;
 			}
@@ -308,12 +283,12 @@ void j1Player::Move(Character* character, float dt)
 		}
 
 			if (adjacent.right.i == TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
-			 if ((p_x + 8) / 8 == t_x) {
+			 if ((pos_x + 8) / 8 == tile_pos_x) {
 				 Selected_Character->pos.x += speed*dt;
 			 }
 		 }
 			if (adjacent.up.i == TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
-			 if ((p_y - 1) / 8 == t_y) {
+			 if ((pos_y - 1) / 8 == tile_pos_y) {
 				 Selected_Character->pos.y -= speed*dt;
 			 }
 		 }
@@ -321,7 +296,7 @@ void j1Player::Move(Character* character, float dt)
 	case left_down:
 
 		if (adjacent.down.j == TILE_COL_ID && adjacent.left.i == TILE_COL_ID) {
-			if ((p_y + 8) / 8 == t_y && (p_x) / 8 == t_x) {
+			if ((pos_y + 8) / 8 == tile_pos_y && (pos_x) / 8 == tile_pos_x) {
 				Selected_Character->pos.y += speed*dt;
 				Selected_Character->pos.x -= speed*dt;
 			}
@@ -335,22 +310,21 @@ void j1Player::Move(Character* character, float dt)
 			Selected_Character->pos.y += speed*dt;
 			
 		}
-		else if (adjacent.down.j != TILE_COL_ID && adjacent.left.i != TILE_COL_ID && d_l_d != TILE_COL_ID) {
-			if (7 - (p_x + 6 - t_x * 8) > (p_y - t_y * 8)) {
+		else if (adjacent.down.j != TILE_COL_ID && adjacent.left.i != TILE_COL_ID && diagonal_left_down != TILE_COL_ID) {
+			if (7 - (pos_x + 6 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y += speed*dt;
 			}
-			else if (7 - (p_x + 6- t_x * 8) < (p_y - t_y * 8)) {
+			else if (7 - (pos_x + 6- tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x -= speed*dt;
 			}
 			else {
-				// pos.y = 7 - (pos.x - Selected_Character->tilepos.x * 8) + Selected_Character->tilepos.y * 8;
 				Selected_Character->pos.x -= speed*dt;
 				Selected_Character->pos.y += speed*dt;
 			}
 		}
 		
-		else if (d_l_d == TILE_COL_ID) {
-			if ((p_y + 8) / 8 == t_y && (p_x ) / 8 == t_x) {
+		else if (diagonal_left_down == TILE_COL_ID) {
+			if ((pos_y + 8) / 8 == tile_pos_y && (pos_x ) / 8 == tile_pos_x) {
 				Selected_Character->pos.y += speed*dt;
 				Selected_Character->pos.x -= speed*dt;
 			}
@@ -359,12 +333,12 @@ void j1Player::Move(Character* character, float dt)
 			}
 		}
 		if (adjacent.left.i == TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
-			if ((p_x - 1) / 8 == t_x) {
+			if ((pos_x - 1) / 8 == tile_pos_x) {
 				Selected_Character->pos.x -= speed*dt;
 			}
 		}
 		if (adjacent.down.i == TILE_COL_ID && adjacent.down.j == TILE_COL_ID) {
-			if ((p_y + 8) / 8 == t_y) {
+			if ((pos_y + 8) / 8 == tile_pos_y) {
 				Selected_Character->pos.y += speed*dt;
 			}
 		}
@@ -372,7 +346,7 @@ void j1Player::Move(Character* character, float dt)
 
 	case right_down:
 		if (adjacent.down.i == TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
-			if ((p_y + 8) / 8 == t_y && (p_x + 8) / 8 == t_x) {
+			if ((pos_y + 8) / 8 == tile_pos_y && (pos_x + 8) / 8 == tile_pos_x) {
 				Selected_Character->pos.y += speed*dt;
 				Selected_Character->pos.x += speed*dt;
 			}
@@ -384,11 +358,11 @@ void j1Player::Move(Character* character, float dt)
 		else if (adjacent.down.i != TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
 			Selected_Character->pos.y += speed*dt;
 		}
-		else if (adjacent.down.i != TILE_COL_ID && adjacent.right.j != TILE_COL_ID && d_r_d != TILE_COL_ID) {
-			if ((p_x - t_x * 8) < (p_y - t_y * 8)) {
+		else if (adjacent.down.i != TILE_COL_ID && adjacent.right.j != TILE_COL_ID && diagonal_right_down != TILE_COL_ID) {
+			if ((pos_x - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x += speed*dt;
 			}
-			else if ((p_x  - t_x * 8) > (p_y - t_y * 8)) {
+			else if ((pos_x  - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y += speed*dt;
 			}
 			else {
@@ -398,8 +372,8 @@ void j1Player::Move(Character* character, float dt)
 			}
 		}
 		
-		else if (d_r_d == TILE_COL_ID) {
-			if ((p_y + 8) / 8 == t_y && (p_x + 8) / 8 == t_x) {
+		else if (diagonal_right_down == TILE_COL_ID) {
+			if ((pos_y + 8) / 8 == tile_pos_y && (pos_x + 8) / 8 == tile_pos_x) {
 				Selected_Character->pos.y += speed*dt;
 				Selected_Character->pos.x += speed*dt;
 			}
@@ -408,24 +382,17 @@ void j1Player::Move(Character* character, float dt)
 			}
 		}
 		if (adjacent.right.i == TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
-			if ((p_x + 8) / 8 == t_x) {
+			if ((pos_x + 8) / 8 == tile_pos_x) {
 				Selected_Character->pos.x += speed*dt;
 			}
 		}
 		if (adjacent.down.i == TILE_COL_ID && adjacent.down.j == TILE_COL_ID) {
-			if ((p_y + 8) / 8 == t_y) {
+			if ((pos_y + 8) / 8 == tile_pos_y) {
 				Selected_Character->pos.y += speed*dt;
 			}
 		}
 	
-
 		break;
-	}
-
-
-
-
-
-
+	}	
 }
 

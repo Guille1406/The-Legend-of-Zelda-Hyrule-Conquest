@@ -64,10 +64,12 @@ uchar j1PathFinding::GetTileAt(const iPoint& pos) const
 void j1PathFinding::Move(Character * character, Character* other)
 {
 	if (last_path.Count()>0) {
+
 		static int i = 0;
 		
 		int temp = last_path[i].x;
 		int temp2 = last_path[i].y;
+
 		int x = 0;
 		int y = 0;
 		x  = x + (last_path[i].x - character->tilepos.x);
