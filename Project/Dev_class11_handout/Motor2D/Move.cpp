@@ -33,7 +33,7 @@ void j1Player::Move(Character* character, float dt)
 		}
 	}
 
-	LOG(" %i  %i ", adjacent.down.j, adjacent.down.i);
+
 	p2Point<int> pos = Selected_Character->pos;
 
 	Selected_Character->tilepos.x = (pos.x + 3) / 8;

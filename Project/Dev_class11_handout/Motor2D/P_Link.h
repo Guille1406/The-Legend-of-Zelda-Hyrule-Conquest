@@ -14,7 +14,7 @@ public:
 
 
 	void Attack();
-
+	void LoadAnimation(const char*);
 
 public:
 

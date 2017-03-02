@@ -7,16 +7,22 @@
 
 
 #define TILE_COL_ID 237
-bool j1Player::Awake(pugi::xml_node&)
+bool j1Player::Awake(pugi::xml_node& config)
 {
+	Link = new P_Link();
+	Zelda = new P_Zelda();
+
+	Link->sprites_vector = new std::vector<Animation>;
+	Link->sprites_folder.create(config.child("folder").child_value());
+	Zelda->sprites_folder.create(config.child("folder").child_value());
 	return true;
 }
 
 bool j1Player::Start()
 {
-	Link = new P_Link();
+	
 	Link->pos = { 0,0 };
-	Zelda = new P_Zelda();
+
 	Zelda->pos = { 16,16 };
 
 	//Change this for link spritesheet
@@ -25,6 +31,9 @@ bool j1Player::Start()
 	//Change this for the zelda spritesheet
 	Zelda->character_texture = Link->character_texture;
 	
+
+	Link->LoadAnimation("sprites/Link_Sprites.xml");
+
 	selected_character = Link;
 	other_character = Zelda;
 	change = false;
@@ -146,7 +155,7 @@ bool j1Player::PostUpdate()
 void j1Player::Draw()
 {
 	SDL_Rect rect = { 0, 0, 16, 16 };
-	App->render->Blit(Link->character_texture, Link->pos.x , Link->pos.y, &rect);
+	App->render->Blit(Link->character_texture, Link->pos.x - 6 , Link->pos.y - 12, &Link->actual_animation.GetCurrentFrame());
 	App->render->Blit(Zelda->character_texture, Zelda->pos.x, Zelda->pos.y, &rect);
 }
 
@@ -248,12 +257,14 @@ key_state j1Player::Get_Movement_Event_Link()
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			state = left_up;
+			
 		}
 		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			state = right_up;
 		}
 		else {
 			state = up;
+			
 		}
 	}
 
@@ -266,6 +277,7 @@ key_state j1Player::Get_Movement_Event_Link()
 		}
 		else {
 			state = down;
+			
 		}
 	}
 
@@ -273,13 +285,28 @@ key_state j1Player::Get_Movement_Event_Link()
 
 
 		state = right;
+		
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 
 		state = left;
+		
 	}
 	else state = idle;
 
+
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+		Link->actual_animation = Link->sprites_vector[0][up];
+	}
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) {
+		Link->actual_animation = Link->sprites_vector[0][left];
+	}
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+		Link->actual_animation = Link->sprites_vector[0][down];
+	}
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) {
+		Link->actual_animation = Link->sprites_vector[0][right];
+	}
 
 
 

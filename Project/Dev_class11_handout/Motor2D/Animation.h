@@ -9,11 +9,12 @@ class Animation
 public:
 	bool loop = true;
 	float speed = 1.0f;
+	//std::vector<SDL_Rect> frames;
 	SDL_Rect frames[MAX_FRAMES];
-
+	int last_frame = 0;
 private:
 	float current_frame = 0.0f;
-	int last_frame = 0;
+
 	int loops = 0;
 
 public:
