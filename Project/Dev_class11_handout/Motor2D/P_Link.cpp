@@ -89,3 +89,64 @@ void P_Link::ChangeAnimation(movement_animation animation)
 
 
 }
+
+key_state P_Link::GetEvent()
+{
+	key_state state = idle;
+	movement_animation animation_state = animation_idle_down;
+	static movement_animation last_state = animation_idle_down;
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			state = left_up;
+			animation_state = animation_up;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			state = right_up;
+			animation_state = animation_up;
+		}
+		else {
+			state = up;
+			animation_state = animation_up;
+
+		}
+	}
+
+	else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			state = left_down;
+			animation_state = animation_down;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			state = right_down;
+			animation_state = animation_down;
+		}
+		else {
+			state = down;
+			animation_state = animation_down;
+
+		}
+	}
+
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+
+
+		state = right;
+		animation_state = animation_right;
+
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+
+		state = left;
+		animation_state = animation_left;
+
+	}
+	else {
+		state = idle;
+		animation_state = animation_idle_down;
+	}
+
+
+	this->ChangeAnimation(animation_state);
+
+	return state;
+}

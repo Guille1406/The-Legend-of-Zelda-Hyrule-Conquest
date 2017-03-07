@@ -15,6 +15,7 @@ class P_Link;
 class P_Zelda;
 
 enum movement_animation;
+enum key_state;
 
 class Character {
 public:
@@ -24,6 +25,7 @@ public:
 	void Attack() {};
 	virtual void LoadAnimation(const char*);
 	virtual void ChangeAnimation(movement_animation);
+	virtual key_state GetEvent();
 
 public:
 	

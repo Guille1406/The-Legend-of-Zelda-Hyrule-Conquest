@@ -17,6 +17,7 @@ public:
 	void Attack();
 	void LoadAnimation(const char*);
 	void ChangeAnimation(movement_animation);
+	key_state GetEvent();
 
 public:
 

@@ -41,24 +41,12 @@ void j1Player::Move(Character* character, float dt)
 	Character* Selected_Character = character;
 	if (character == Link) {
 		adjacent = adjacent_link;
-		state = Get_Movement_Event_Link();
-
-
-		
-
+		state = character->GetEvent();
 	}
 	else if (character == Zelda) {
-		if (cooperative == true) {
+		
 			adjacent = adjacent_zelda;
-			state = Get_Movement_Event_Zelda();
-			
-		}
-		else
-		{
-			adjacent = adjacent_zelda;
-			state = Get_Movement_Event_Link();
-			
-		}
+			state = character->GetEvent();
 	}
 
 
@@ -86,8 +74,15 @@ void j1Player::Move(Character* character, float dt)
 	
 	switch (state) {
 	case up:
-		if (adjacent.up.i != TILE_COL_ID && adjacent.up.j != TILE_COL_ID)
-			Selected_Character->pos.y -=  speed*dt;
+		if (adjacent.up.i != TILE_COL_ID && adjacent.up.j != TILE_COL_ID) {
+			Selected_Character->pos.y -= speed*dt;
+			if (adjacent.left.j == TILE_COL_ID && Selected_Character->pos.x< Selected_Character->tilepos.x*8) {
+				Selected_Character->pos.x += speed*dt;
+			}
+			if (adjacent.right.i == TILE_COL_ID && Selected_Character->pos.x > Selected_Character->tilepos.x  * 8) {
+				Selected_Character->pos.x -= speed*dt;
+			}
+		}
 		else if (adjacent.up.i == TILE_COL_ID && adjacent.up.j != TILE_COL_ID) {
 			if (7 - (pos_x +6- tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x += speed*dt;
@@ -120,8 +115,15 @@ void j1Player::Move(Character* character, float dt)
 		break;
 
 	case down:
-		if (adjacent.down.i != TILE_COL_ID && adjacent.down.j != TILE_COL_ID)
+		if (adjacent.down.i != TILE_COL_ID && adjacent.down.j != TILE_COL_ID) {
 			Selected_Character->pos.y += speed*dt;
+			if (adjacent.left.i == TILE_COL_ID && Selected_Character->pos.x < Selected_Character->tilepos.x * 8) {
+				Selected_Character->pos.x += speed*dt;
+			}
+			if (adjacent.right.j == TILE_COL_ID && Selected_Character->pos.x > Selected_Character->tilepos.x * 8) {
+				Selected_Character->pos.x -= speed*dt;
+			}
+		}
 		else if (adjacent.down.i == TILE_COL_ID && adjacent.down.j != TILE_COL_ID) {
 			if (7 - (pos_x +6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x -= speed*dt;
@@ -156,7 +158,15 @@ void j1Player::Move(Character* character, float dt)
 
 	case left:
 		if (adjacent.left.i != TILE_COL_ID && adjacent.left.j != TILE_COL_ID)
+		{
 			Selected_Character->pos.x -= speed*dt;
+			if (adjacent.up.i == TILE_COL_ID && Selected_Character->pos.y< Selected_Character->tilepos.y * 8) {
+				Selected_Character->pos.y += speed*dt;
+			}
+			if (adjacent.down.j == TILE_COL_ID && Selected_Character->pos.y > Selected_Character->tilepos.y * 8) {
+				Selected_Character->pos.y -= speed*dt;
+			}
+		}
 		else if (adjacent.left.i == TILE_COL_ID && adjacent.left.j != TILE_COL_ID) {
 			if ((pos_x - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.x -= speed*dt;
@@ -190,7 +200,15 @@ void j1Player::Move(Character* character, float dt)
 		break;
 	case right:
 		if (adjacent.right.i != TILE_COL_ID && adjacent.right.j != TILE_COL_ID)
+		{
 			Selected_Character->pos.x += speed*dt;
+			if (adjacent.up.j == TILE_COL_ID && Selected_Character->pos.y< Selected_Character->tilepos.y * 8) {
+				Selected_Character->pos.y += speed*dt;
+			}
+			if (adjacent.down.i == TILE_COL_ID && Selected_Character->pos.y > Selected_Character->tilepos.y * 8) {
+				Selected_Character->pos.y -= speed*dt;
+			}
+		}
 		else if (adjacent.right.i == TILE_COL_ID && adjacent.right.j != TILE_COL_ID) {
 			if ((pos_x - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				Selected_Character->pos.y += speed*dt;
