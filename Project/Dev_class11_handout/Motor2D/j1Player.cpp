@@ -13,6 +13,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Zelda = new P_Zelda();
 
 	Link->sprites_vector = new std::vector<Animation>;
+	Zelda->sprites_vector = new std::vector<Animation>;
 	Link->sprites_folder.create(config.child("folder").child_value());
 	Zelda->sprites_folder.create(config.child("folder").child_value());
 	return true;
@@ -33,6 +34,7 @@ bool j1Player::Start()
 	
 
 	Link->LoadAnimation("sprites/Link_Sprites.xml");
+	Zelda->LoadAnimation("sprites/Link_Sprites.xml");
 
 	selected_character = Link;
 	other_character = Zelda;
@@ -47,36 +49,6 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
-
-	uint x, y;
-	App->win->GetWindowSize(x, y);
-	
-	int movementx = -selected_character->pos.x * App->win->GetScale() + x / 2 - 8;
-	int movementy = -selected_character->pos.y * App->win->GetScale() + y / 2 - 8;
-
-	App->render->camera.x = movementx;
-	App->render->camera.y = movementy;
-	if (App->render->camera.x >= 0) App->render->camera.x = 0;
-	if (-App->render->camera.x >= App->map->data.width * App->map->data.tile_width - App->render->camera.w/ App->win->GetScale()) {
-		App->render->camera.x = -1*(App->map->data.width * App->map->data.tile_width - App->render->camera.w / App->win->GetScale());
-	}
-
-	if (App->render->camera.y >= 0) App->render->camera.y = 0;
-	if (-App->render->camera.y >= App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale()) {
-		App->render->camera.y = -1 * (App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale());
-	}
-	/*if ((-App->render->camera.x + App->render->camera.w) >= (App->map->data.width*App->map->data.tile_width* App->win->GetScale())) {
-		App->render->camera.x = (App->map->data.width*App->map->data.tile_width* App->win->GetScale() - App->render->camera.w)*(-1);
-	}*/
-
-	/*if (App->render->camera.y <= 0 && movementy>= -1*(App->render->camera.y + App->render->camera.h / App->win->GetScale() - App->map->data.height*8)) {
-		App->render->camera.y = -selected_character->pos.y * App->win->GetScale() + y / 2 - 8;
-	}
-
-	if ((-App->render->camera.y + App->render->camera.h)>= (App->map->data.height*App->map->data.tile_height* App->win->GetScale())) {
-		App->render->camera.y = (App->map->data.height*App->map->data.tile_height* App->win->GetScale() - App->render->camera.h)*(-1);
-	}*/
-
 
 
 	GetAdjacents(Link);
@@ -141,6 +113,7 @@ bool j1Player::Update(float dt)
 	Link->tilepos.y = Link->pos.y / 8;
 	Zelda->tilepos.x = Zelda->pos.x / 8;
 	Zelda->tilepos.y = Zelda->pos.y / 8;
+
 	/////
 	Draw();
 	
@@ -156,7 +129,7 @@ void j1Player::Draw()
 {
 	SDL_Rect rect = { 0, 0, 16, 16 };
 	App->render->Blit(Link->character_texture, Link->pos.x - 6 , Link->pos.y - 12, &Link->actual_animation.GetCurrentFrame());
-	App->render->Blit(Zelda->character_texture, Zelda->pos.x, Zelda->pos.y, &rect);
+	App->render->Blit(Zelda->character_texture, Zelda->pos.x - 6, Zelda->pos.y - 12 , &Zelda->actual_animation.GetCurrentFrame());
 }
 
 
@@ -254,16 +227,20 @@ key_state j1Player::Get_Movement_Event_Link()
 {
 
 	key_state state = idle;
+	movement_animation animation_state = animation_idle;
+	static movement_animation last_state = animation_idle;
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			state = left_up;
-			
+			animation_state = animation_up;
 		}
 		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			state = right_up;
+			animation_state = animation_up;
 		}
 		else {
 			state = up;
+			animation_state = animation_up;
 			
 		}
 	}
@@ -271,12 +248,15 @@ key_state j1Player::Get_Movement_Event_Link()
 	else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			state = left_down;
+			animation_state = animation_down;
 		}
 		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			state = right_down;
+			animation_state = animation_down;
 		}
 		else {
 			state = down;
+			animation_state = animation_down;
 			
 		}
 	}
@@ -285,29 +265,25 @@ key_state j1Player::Get_Movement_Event_Link()
 
 
 		state = right;
+		animation_state = animation_right;
 		
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 
 		state = left;
+		animation_state = animation_left;
 		
 	}
-	else state = idle;
-
-
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
-		Link->actual_animation = Link->sprites_vector[0][up];
-	}
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) {
-		Link->actual_animation = Link->sprites_vector[0][left];
-	}
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
-		Link->actual_animation = Link->sprites_vector[0][down];
-	}
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) {
-		Link->actual_animation = Link->sprites_vector[0][right];
+	else {
+		state = idle;
+		animation_state = animation_idle;
 	}
 
+
+	if (last_state != animation_state) {
+		Link->actual_animation =Link->sprites_vector[0][animation_state];
+		last_state = animation_state;
+}
 
 
 	return state;
@@ -318,27 +294,36 @@ key_state j1Player::Get_Movement_Event_Link()
 key_state j1Player::Get_Movement_Event_Zelda()
 {
 	key_state state = idle;
+	movement_animation animation_state = animation_idle;
+	static movement_animation last_state = animation_idle;
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) {
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
 			state = left_up;
+			animation_state = animation_up;
 		}
 		else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
 			state = right_up;
+			animation_state = animation_up;
 		}
 		else {
 			state = up;
+			animation_state = animation_up;
+			
 		}
 	}
 
 	else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
 			state = left_down;
+			animation_state = animation_left;
 		}
 		else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
 			state = right_down;
+			animation_state = animation_down;
 		}
 		else {
 			state = down;
+			animation_state = animation_down;
 		}
 	}
 
@@ -346,14 +331,22 @@ key_state j1Player::Get_Movement_Event_Zelda()
 
 
 		state = right;
+		animation_state = animation_right;
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
 
 		state = left;
+		animation_state = animation_left;
 	}
-	else state = idle;
+	else {
+		state = idle;
+		animation_state = animation_idle;
+	}
 
-
+	if (last_state != animation_state) {
+		Zelda->actual_animation = Zelda->sprites_vector[0][animation_state];
+		last_state = animation_state;
+	}
 	
 	return state;
 

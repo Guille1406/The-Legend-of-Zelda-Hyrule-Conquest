@@ -17,7 +17,8 @@ enum movement_animation {
 	animation_up,
 	animation_down,
 	animation_left,
-	animation_right
+	animation_right,
+	animation_idle
 };
 
 class Character {

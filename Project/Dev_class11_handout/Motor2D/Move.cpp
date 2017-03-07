@@ -9,8 +9,28 @@
 
 void j1Player::Move(Character* character, float dt)
 {
-	
+
+	uint x, y;
+	App->win->GetWindowSize(x, y);
+
+
+	int movementx = -selected_character->pos.x * App->win->GetScale() + x / 2 - 8;
+	int movementy = -selected_character->pos.y * App->win->GetScale() + y / 2 - 8;
+
+	App->render->camera.x = movementx;
+	App->render->camera.y = movementy;
+	if (App->render->camera.x >= 0) App->render->camera.x = 0;
+	if (-App->render->camera.x >= App->map->data.width * App->map->data.tile_width - App->render->camera.w / App->win->GetScale()) {
+		App->render->camera.x = -1 * (App->map->data.width * App->map->data.tile_width - App->render->camera.w / App->win->GetScale());
+	}
+
+	if (App->render->camera.y >= 0) App->render->camera.y = 0;
+	if (-App->render->camera.y >= App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale()) {
+		App->render->camera.y = -1 * (App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale());
+	}
+
 	key_state state = idle;
+	static key_state last_state = idle;
 	adjacent_tiles adjacent;
 
 	
@@ -20,16 +40,21 @@ void j1Player::Move(Character* character, float dt)
 		adjacent = adjacent_link;
 		state = Get_Movement_Event_Link();
 
+
+		
+
 	}
 	else if (character == Zelda) {
 		if (cooperative == true) {
 			adjacent = adjacent_zelda;
 			state = Get_Movement_Event_Zelda();
+			
 		}
 		else
 		{
 			adjacent = adjacent_zelda;
 			state = Get_Movement_Event_Link();
+			
 		}
 	}
 

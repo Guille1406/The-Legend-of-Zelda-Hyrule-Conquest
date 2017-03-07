@@ -81,10 +81,11 @@ void j1PathFinding::Move(Character * character, Character* other)
 		}
 
 
-		if (x > 1 ) x = 1;
-		if (x < -1)x = -1;
-		if (y > 1) y = 1;
-		if (y < -1)y = -1;
+		//Change this
+		if (x > 1) { x = 1; character->actual_animation = character->sprites_vector[0][3]; }
+		if (x < -1) { x = -1; character->actual_animation = character->sprites_vector[0][2]; }
+		if (y > 1) { y = 1; character->actual_animation = character->sprites_vector[0][1]; }
+		if (y < -1) { y = -1; character->actual_animation = character->sprites_vector[0][0]; }
 		character->pos.x += x;
 		character->pos.y += y;
 

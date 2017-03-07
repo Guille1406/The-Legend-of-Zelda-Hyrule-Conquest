@@ -13,7 +13,7 @@ void P_Link::Attack()
 
 void P_Link::LoadAnimation(const char * path)
 {
-
+	
 	p2SString tmp("%s%s", sprites_folder.GetString(), path);
 
 	char* buf;
@@ -72,15 +72,7 @@ void P_Link::LoadAnimation(const char * path)
 		animations = animations.next_sibling();
 	}
 
-	sprites_vector[0][0].speed = 0.2;
-	/*auto reverse_temp = sprites_vector;
-	int rev_size = sprites_vector->size();
-	if (size > 0) {
-		for (int i = 0; i < rev_size; i++) {
-			sprites_vector[0][i] = reverse_temp[0][rev_size-1-i];
-		}
-	}
-	int asd = 0;
-	*/
+
+
 	
 }
