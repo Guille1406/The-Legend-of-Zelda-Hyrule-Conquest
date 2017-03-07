@@ -10,16 +10,11 @@
 #include <vector>
 #include "p2Log.h"
 
+
 class P_Link;
 class P_Zelda;
 
-enum movement_animation {
-	animation_up,
-	animation_down,
-	animation_left,
-	animation_right,
-	animation_idle
-};
+enum movement_animation;
 
 class Character {
 public:
@@ -28,6 +23,7 @@ public:
 	
 	void Attack() {};
 	virtual void LoadAnimation(const char*);
+	virtual void ChangeAnimation(movement_animation);
 
 public:
 	
@@ -37,8 +33,8 @@ public:
 
 	p2SString					sprites_folder;
 	pugi::xml_document			sprites_file;
-	std::vector<Animation>*	sprites_vector;
-	Animation actual_animation;
+	std::vector<Animation>*		sprites_vector;
+	Animation					actual_animation;
 };
 
 #endif

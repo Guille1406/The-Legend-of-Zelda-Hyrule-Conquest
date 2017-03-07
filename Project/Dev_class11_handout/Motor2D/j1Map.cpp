@@ -288,10 +288,10 @@ bool j1Map::LoadMap()
 		data.tile_height = map.attribute("tileheight").as_int();
 		p2SString bg_color(map.attribute("backgroundcolor").as_string());
 
-		data.background_color.r = 0;
+		data.background_color.r = 255;
 		data.background_color.g = 0;
 		data.background_color.b = 0;
-		data.background_color.a = 0;
+		data.background_color.a = 255;
 
 		if(bg_color.Length() > 0)
 		{

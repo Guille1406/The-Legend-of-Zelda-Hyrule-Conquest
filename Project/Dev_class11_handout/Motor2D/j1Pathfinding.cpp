@@ -2,6 +2,7 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1PathFinding.h"
+#include "j1Player.h"
 
 j1PathFinding::j1PathFinding() : j1Module(), map(NULL), last_path(DEFAULT_PATH_LENGTH),width(0), height(0)
 {
@@ -82,10 +83,12 @@ void j1PathFinding::Move(Character * character, Character* other)
 
 
 		//Change this
-		if (x > 1) { x = 1; character->actual_animation = character->sprites_vector[0][3]; }
-		if (x < -1) { x = -1; character->actual_animation = character->sprites_vector[0][2]; }
-		if (y > 1) { y = 1; character->actual_animation = character->sprites_vector[0][1]; }
-		if (y < -1) { y = -1; character->actual_animation = character->sprites_vector[0][0]; }
+		if (x > 1) { x = 1; character->ChangeAnimation(animation_right); }
+		if (x < -1) { x = -1; character->ChangeAnimation(animation_left); }
+		if (y > 1) { y = 1; character->ChangeAnimation(animation_down); }
+		if (y < -1) { y = -1; character->ChangeAnimation(animation_up); }
+
+		
 		character->pos.x += x;
 		character->pos.y += y;
 

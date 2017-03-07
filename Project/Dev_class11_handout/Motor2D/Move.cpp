@@ -14,6 +14,7 @@ void j1Player::Move(Character* character, float dt)
 	App->win->GetWindowSize(x, y);
 
 
+	////Camera
 	int movementx = -selected_character->pos.x * App->win->GetScale() + x / 2 - 8;
 	int movementy = -selected_character->pos.y * App->win->GetScale() + y / 2 - 8;
 
@@ -28,6 +29,8 @@ void j1Player::Move(Character* character, float dt)
 	if (-App->render->camera.y >= App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale()) {
 		App->render->camera.y = -1 * (App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale());
 	}
+
+	////
 
 	key_state state = idle;
 	static key_state last_state = idle;

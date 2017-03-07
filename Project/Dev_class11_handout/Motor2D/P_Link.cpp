@@ -2,7 +2,7 @@
 #include "j1App.h"
 #include "j1Input.h"
 #include "j1FileSystem.h"
-
+#include "j1Player.h"
 
 
 void P_Link::Attack()
@@ -75,4 +75,17 @@ void P_Link::LoadAnimation(const char * path)
 
 
 	
+}
+
+void P_Link::ChangeAnimation(movement_animation animation)
+{
+	static movement_animation last_animation = animation_idle_down;
+	
+	if (last_animation != animation) {
+		this->actual_animation = this->sprites_vector[0][animation];
+		last_animation = animation;
+	}
+
+
+
 }

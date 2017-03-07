@@ -22,6 +22,16 @@ enum key_state {
 	idle
 };
 
+enum movement_animation {
+	animation_up,
+	animation_down,
+	animation_left,
+	animation_right,
+	animation_idle_up,
+	animation_idle_down,
+	animation_idle_left,
+	animation_idle_right,
+};
 
 class P_Link;
 class P_Zelda;

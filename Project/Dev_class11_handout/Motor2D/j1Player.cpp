@@ -36,6 +36,8 @@ bool j1Player::Start()
 	Link->LoadAnimation("sprites/Link_Sprites.xml");
 	Zelda->LoadAnimation("sprites/Link_Sprites.xml");
 
+	Link->actual_animation = Link->sprites_vector[0][animation_idle_down];
+	Zelda->actual_animation = Zelda->sprites_vector[0][animation_idle_down];
 	selected_character = Link;
 	other_character = Zelda;
 	change = false;
@@ -53,7 +55,11 @@ bool j1Player::Update(float dt)
 
 	GetAdjacents(Link);
 	GetAdjacents(Zelda);
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) cooperative = !cooperative;
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) { 
+		cooperative = !cooperative; 
+		selected_character = Link;
+		other_character = Zelda;
+	}
 
 	if (cooperative == true) {
 		Move(Link, dt);
@@ -86,11 +92,11 @@ bool j1Player::Update(float dt)
 
 
 		/////////////  TEMP
-		static bool temp = true;
+		static bool pathfinding_active = true;
 		if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-			temp = !temp;
+			pathfinding_active = !pathfinding_active;
 		}
-		if (temp == true) {
+		if (pathfinding_active == true) {
 			App->pathfinding->CreatePath(other_character->tilepos, selected_character->tilepos);
 			chase = true;
 		}
@@ -98,12 +104,15 @@ bool j1Player::Update(float dt)
 		int dist = 0;
 		dist = sqrt((selected_character->tilepos.x - other_character->tilepos.x)* (selected_character->tilepos.x - other_character->tilepos.x) + (selected_character->tilepos.y - other_character->tilepos.y)*(selected_character->tilepos.y - other_character->tilepos.y));
 
-		if (chase == true && dist > 3 && temp == true) {
+		if (chase == true && dist > 3 && pathfinding_active == true) {
 			App->pathfinding->Move(other_character, selected_character);
 			if (other_character->tilepos == selected_character->tilepos || App->pathfinding->GetLastPath()->Count() == 0) {
 				chase = false;
 				App->pathfinding->DeletePath();
 			}
+		}
+		else {
+			other_character->ChangeAnimation(animation_idle_down);
 		}
 		
 
@@ -227,8 +236,8 @@ key_state j1Player::Get_Movement_Event_Link()
 {
 
 	key_state state = idle;
-	movement_animation animation_state = animation_idle;
-	static movement_animation last_state = animation_idle;
+	movement_animation animation_state = animation_idle_down;
+	static movement_animation last_state = animation_idle_down;
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			state = left_up;
@@ -276,15 +285,11 @@ key_state j1Player::Get_Movement_Event_Link()
 	}
 	else {
 		state = idle;
-		animation_state = animation_idle;
+		animation_state = animation_idle_down;
 	}
 
 
-	if (last_state != animation_state) {
-		Link->actual_animation =Link->sprites_vector[0][animation_state];
-		last_state = animation_state;
-}
-
+	selected_character->ChangeAnimation(animation_state);
 
 	return state;
 }
@@ -294,8 +299,8 @@ key_state j1Player::Get_Movement_Event_Link()
 key_state j1Player::Get_Movement_Event_Zelda()
 {
 	key_state state = idle;
-	movement_animation animation_state = animation_idle;
-	static movement_animation last_state = animation_idle;
+	movement_animation animation_state = animation_idle_down;
+	static movement_animation last_state = animation_idle_down;
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) {
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
 			state = left_up;
@@ -340,13 +345,10 @@ key_state j1Player::Get_Movement_Event_Zelda()
 	}
 	else {
 		state = idle;
-		animation_state = animation_idle;
+		animation_state = animation_idle_down;
 	}
 
-	if (last_state != animation_state) {
-		Zelda->actual_animation = Zelda->sprites_vector[0][animation_state];
-		last_state = animation_state;
-	}
+	Zelda->ChangeAnimation(animation_state);
 	
 	return state;
 
