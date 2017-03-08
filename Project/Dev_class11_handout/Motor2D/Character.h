@@ -11,6 +11,19 @@
 #include "p2Log.h"
 
 
+struct dir_tiles {
+	uint i;
+	uint j;
+};
+
+struct  adjacent_tiles {
+	dir_tiles up;
+	dir_tiles down;
+	dir_tiles left;
+	dir_tiles right;
+
+};
+
 class P_Link;
 class P_Zelda;
 
@@ -23,15 +36,20 @@ public:
 	~Character() {};
 	
 	void Attack() {};
+	void Move(float);
 	virtual void LoadAnimation(const char*);
 	virtual void ChangeAnimation(movement_animation);
 	virtual key_state GetEvent();
+	void GetAdjacents();
+
+	
 
 public:
 	
 	SDL_Texture* character_texture;
 	p2Point<int> pos;
 	p2Point<int> tilepos;
+	adjacent_tiles adjacent;
 
 	p2SString					sprites_folder;
 	pugi::xml_document			sprites_file;

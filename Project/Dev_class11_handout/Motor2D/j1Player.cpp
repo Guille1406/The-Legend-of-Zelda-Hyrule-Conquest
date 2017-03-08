@@ -12,7 +12,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Link = new P_Link();
 	Zelda = new P_Zelda();
 
-	Link->sprites_vector = new std::vector<Animation>;
+	//Link->sprites_vector = new std::vector<Animation>;
 	Zelda->sprites_vector = new std::vector<Animation>;
 	Link->sprites_folder.create(config.child("folder").child_value());
 	Zelda->sprites_folder.create(config.child("folder").child_value());
@@ -21,10 +21,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 
 bool j1Player::Start()
 {
-	
-	Link->pos = { 0,0 };
 
-	Zelda->pos = { 16,16 };
 
 	//Change this for link spritesheet
 	Link->character_texture = App->tex->Load("textures/map.png");
@@ -53,8 +50,8 @@ bool j1Player::Update(float dt)
 {
 
 
-	GetAdjacents(Link);
-	GetAdjacents(Zelda);
+	Link->GetAdjacents();
+	Zelda->GetAdjacents();
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) { 
 		cooperative = !cooperative; 
 		selected_character = Link;
@@ -62,8 +59,8 @@ bool j1Player::Update(float dt)
 	}
 
 	if (cooperative == true) {
-		Move(Link, dt);
-		Move(Zelda,dt);
+		Link->Move( dt);
+		Zelda->Move(dt);
 
 	}
 	else {
@@ -87,7 +84,7 @@ bool j1Player::Update(float dt)
 			Move_Camera();
 		}
 		else {
-			Move(selected_character, dt);
+			selected_character->Move( dt);
 		}
 
 
@@ -138,8 +135,8 @@ bool j1Player::PostUpdate()
 void j1Player::Draw()
 {
 	SDL_Rect rect = { 0, 0, 16, 16 };
-	App->render->Blit(Link->character_texture, Link->pos.x - 6 , Link->pos.y - 12, &Link->actual_animation.GetCurrentFrame());
-	App->render->Blit(Zelda->character_texture, Zelda->pos.x - 6, Zelda->pos.y - 12 , &Zelda->actual_animation.GetCurrentFrame());
+	App->render->Blit(Link->character_texture, Link->pos.x - 3 , Link->pos.y - 12, &Link->actual_animation.GetCurrentFrame());
+	App->render->Blit(Zelda->character_texture, Zelda->pos.x - 3, Zelda->pos.y - 12 , &Zelda->actual_animation.GetCurrentFrame());
 }
 
 

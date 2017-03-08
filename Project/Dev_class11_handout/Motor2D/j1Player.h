@@ -37,18 +37,7 @@ class P_Link;
 class P_Zelda;
 class Character;
 
-struct dir_tiles {
-	uint i;
-	uint j;
-};
 
-struct  adjacent_tiles {
-	dir_tiles up;
-	dir_tiles down;
-	dir_tiles left;
-	dir_tiles right;
-
-};
 
 
 class j1Player :public j1Module {
@@ -61,7 +50,7 @@ public:
 
 	void Draw();
 
-	void Move(Character*, float dt);
+	//void Move(Character*, float dt);
 	void Change_Player();
 	void Chase();
 	bool Move_Camera();

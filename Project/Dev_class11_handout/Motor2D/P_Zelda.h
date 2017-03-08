@@ -10,8 +10,12 @@ class Character;
 
 class P_Zelda:public Character {
 public:
-	P_Zelda() {};
-	~P_Zelda() {};
+	P_Zelda() {
+		sprites_vector = new std::vector<Animation>;
+	};
+	~P_Zelda() {
+		delete sprites_vector;
+	};
 
 
 	void Attack();

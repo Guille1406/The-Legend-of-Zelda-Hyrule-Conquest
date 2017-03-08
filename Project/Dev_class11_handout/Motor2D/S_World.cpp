@@ -8,6 +8,8 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Pathfinding.h"
+#include "j1App.h"
+#include "j1Player.h"
 
 bool S_World::Start()
 {
@@ -23,6 +25,10 @@ bool S_World::Start()
 	}
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
+
+
+	App->player->Link->pos = { 0,0 };
+	App->player->Zelda->pos = { 16,16 };
 
 	
 	LOG("World Open");
