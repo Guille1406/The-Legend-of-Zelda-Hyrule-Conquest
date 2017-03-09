@@ -54,7 +54,7 @@ public:
 	void Change_Player();
 	void Chase();
 	bool Move_Camera();
-	void GetAdjacents(Character*);
+	
 
 public:
 	
@@ -69,8 +69,7 @@ public:
 
 	//Colisions
 	MapLayer* Colision;
-	adjacent_tiles adjacent_link;
-	adjacent_tiles adjacent_zelda;
+	
 
 
 	int live;

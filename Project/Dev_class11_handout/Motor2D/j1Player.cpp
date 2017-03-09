@@ -195,37 +195,3 @@ bool j1Player::Move_Camera()
 	return false;
 }
 
-void j1Player::GetAdjacents(Character* character)
-{
-
-	Character* Selected_Character = Link;
-	if (character == Link) {
-		Selected_Character = Link;
-	}
-	else if (character == Zelda) {
-		Selected_Character = Zelda;
-	}
-	uint tile_pos_x = (Selected_Character->pos.x+3) / 8;
-	uint tile_pos_y = (Selected_Character->pos.y +3) / 8;
-
-	adjacent_tiles adjacent;
-	
-
-	adjacent.down.i = App->map->Colision->Get(tile_pos_x + 1, tile_pos_y + 2);
-	adjacent.down.j = App->map->Colision->Get(tile_pos_x, tile_pos_y + 2);
-	adjacent.up.i = App->map->Colision->Get(tile_pos_x, tile_pos_y - 1);
-	adjacent.up.j = App->map->Colision->Get(tile_pos_x + 1, tile_pos_y - 1);
-	adjacent.left.i = App->map->Colision->Get(tile_pos_x - 1, tile_pos_y + 1);
-	adjacent.left.j = App->map->Colision->Get(tile_pos_x - 1, tile_pos_y);
-	adjacent.right.i = App->map->Colision->Get(tile_pos_x + 2, tile_pos_y);
-	adjacent.right.j = App->map->Colision->Get(tile_pos_x + 2, tile_pos_y + 1);
-
-
-	if (character == Link) {
-		adjacent_link = adjacent;
-	}
-	else if (character == Zelda) {
-		adjacent_zelda = adjacent;
-	}
-}
-

@@ -85,78 +85,38 @@ void P_Zelda::ChangeAnimation(movement_animation animation)
 
 }
 
+SDL_Scancode UP = SDL_SCANCODE_W;
+
 key_state P_Zelda::GetEvent()
 {
+	SDL_Scancode UP;
+	SDL_Scancode DOWN;	
+	SDL_Scancode LEFT;
+	SDL_Scancode RIGHT;
+
 	if (App->player->cooperative == false) {
-		key_state state = idle;
-		movement_animation animation_state = animation_idle_down;
-		static movement_animation last_state = animation_idle_down;
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-				state = left_up;
-				animation_state = animation_up;
-			}
-			else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-				state = right_up;
-				animation_state = animation_up;
-			}
-			else {
-				state = up;
-				animation_state = animation_up;
+		UP = SDL_SCANCODE_W;
+		DOWN = SDL_SCANCODE_S;
+		LEFT = SDL_SCANCODE_A;
+		RIGHT = SDL_SCANCODE_D;
 
-			}
-		}
-
-		else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-				state = left_down;
-				animation_state = animation_down;
-			}
-			else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-				state = right_down;
-				animation_state = animation_down;
-			}
-			else {
-				state = down;
-				animation_state = animation_down;
-
-			}
-		}
-
-		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-
-
-			state = right;
-			animation_state = animation_right;
-
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-
-			state = left;
-			animation_state = animation_left;
-
-		}
-		else {
-			state = idle;
-			animation_state = animation_idle_down;
-		}
-
-
-		this->ChangeAnimation(animation_state);
-
-		return state;
 	}
-
 	else {
+		UP = SDL_SCANCODE_UP;
+		DOWN = SDL_SCANCODE_DOWN;
+		LEFT = SDL_SCANCODE_LEFT;
+		RIGHT = SDL_SCANCODE_RIGHT;
+
+	}
 		key_state state = idle;
 		movement_animation animation_state = animation_idle_down;
 		static movement_animation last_state = animation_idle_down;
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) {
-			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+		if (App->input->GetKey(UP) == KEY_REPEAT) {
+			if (App->input->GetKey(LEFT) == KEY_REPEAT) {
 				state = left_up;
 				animation_state = animation_up;
 			}
-			else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
+			else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
 				state = right_up;
 				animation_state = animation_up;
 			}
@@ -167,41 +127,47 @@ key_state P_Zelda::GetEvent()
 			}
 		}
 
-		else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
-			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+		else if (App->input->GetKey(DOWN) == KEY_REPEAT) {
+			if (App->input->GetKey(LEFT) == KEY_REPEAT) {
 				state = left_down;
-				animation_state = animation_left;
+				animation_state = animation_down;
 			}
-			else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
+			else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
 				state = right_down;
 				animation_state = animation_down;
 			}
 			else {
 				state = down;
 				animation_state = animation_down;
+
 			}
 		}
 
-		else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
+		else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
 
 
 			state = right;
 			animation_state = animation_right;
+
 		}
-		else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+		else if (App->input->GetKey(LEFT) == KEY_REPEAT) {
 
 			state = left;
 			animation_state = animation_left;
+
 		}
 		else {
 			state = idle;
 			animation_state = animation_idle_down;
 		}
 
+
 		this->ChangeAnimation(animation_state);
 
 		return state;
 	}
-}
+
+	
+
 
 
