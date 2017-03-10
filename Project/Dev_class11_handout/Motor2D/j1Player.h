@@ -50,9 +50,7 @@ public:
 
 	void Draw();
 
-	//void Move(Character*, float dt);
-	void Change_Player();
-	void Chase();
+	void ActivatePathfinding();
 	bool Move_Camera();
 	
 
@@ -70,9 +68,8 @@ public:
 	//Colisions
 	MapLayer* Colision;
 	
-
-
 	int live;
+
 };
 
 

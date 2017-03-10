@@ -14,7 +14,7 @@
 bool S_World::Start()
 {
 
-	if (App->map->Load("zelda_map.tmx") == true)
+	if (App->map->Load("zelda_map_2.tmx") == true)
 	{
 		int w, h;
 		uchar* data = NULL;

@@ -88,31 +88,7 @@ bool j1Player::Update(float dt)
 		}
 
 
-		/////////////  TEMP
-		static bool pathfinding_active = true;
-		if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-			pathfinding_active = !pathfinding_active;
-		}
-		if (pathfinding_active == true) {
-			App->pathfinding->CreatePath(other_character->tilepos, selected_character->tilepos);
-			chase = true;
-		}
-
-		int dist = 0;
-		dist = sqrt((selected_character->tilepos.x - other_character->tilepos.x)* (selected_character->tilepos.x - other_character->tilepos.x) + (selected_character->tilepos.y - other_character->tilepos.y)*(selected_character->tilepos.y - other_character->tilepos.y));
-
-		if (chase == true && dist > 3 && pathfinding_active == true) {
-			App->pathfinding->Move(other_character, selected_character);
-			if (other_character->tilepos == selected_character->tilepos || App->pathfinding->GetLastPath()->Count() == 0) {
-				chase = false;
-				App->pathfinding->DeletePath();
-			}
-		}
-		else {
-			//TEMP
-			other_character->ChangeAnimation(animation_idle_down);
-		}
-		
+		ActivatePathfinding();
 
 	}
 
@@ -140,13 +116,37 @@ void j1Player::Draw()
 }
 
 
-void j1Player::Change_Player()
-{
-}
 
-void j1Player::Chase()
+
+void j1Player::ActivatePathfinding()
 {
-	
+
+	static bool pathfinding_active = true;
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+		pathfinding_active = !pathfinding_active;
+	}
+	if (pathfinding_active == true) {
+		App->pathfinding->CreatePath(other_character->tilepos, selected_character->tilepos);
+		chase = true;
+	}
+
+	int dist = 0;
+	dist = sqrt((selected_character->tilepos.x - other_character->tilepos.x)* (selected_character->tilepos.x - other_character->tilepos.x) + (selected_character->tilepos.y - other_character->tilepos.y)*(selected_character->tilepos.y - other_character->tilepos.y));
+
+	if (chase == true && dist > 3 && pathfinding_active == true) {
+		App->pathfinding->Move(other_character, selected_character);
+		if (other_character->tilepos == selected_character->tilepos || App->pathfinding->GetLastPath()->Count() == 0) {
+			chase = false;
+			App->pathfinding->DeletePath();
+		}
+	}
+	else {
+		//TEMP
+		other_character->ChangeAnimation(animation_idle_down);
+	}
+
+
+
 }
 
 bool j1Player::Move_Camera()

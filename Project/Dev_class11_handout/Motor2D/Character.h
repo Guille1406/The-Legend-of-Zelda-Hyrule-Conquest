@@ -46,10 +46,10 @@ public:
 
 public:
 	
-	SDL_Texture* character_texture;
-	p2Point<int> pos;
-	p2Point<int> tilepos;
-	adjacent_tiles adjacent;
+	SDL_Texture*	character_texture;
+	p2Point<int>	pos;
+	p2Point<int>	tilepos;
+	adjacent_tiles	adjacent;
 
 	p2SString					sprites_folder;
 	pugi::xml_document			sprites_file;
