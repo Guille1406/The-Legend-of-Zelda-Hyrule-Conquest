@@ -297,10 +297,10 @@ void Character::Move( float dt)
 			pos_y -= speed*dt;
 		}
 		else if (adjacent.up.j != TILE_COL_ID && adjacent.right.i != TILE_COL_ID && diagonal_right_up != TILE_COL_ID) {
-			if (7 - (pos_x+ 6 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
+			if (7 - (pos_x+ 8 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				pos_x += speed*dt;
 			}
-			else if (7 - (pos_x+6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
+			else if (7 - (pos_x+8 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				pos_y -= speed*dt;
 			}
 			else {
@@ -349,10 +349,10 @@ void Character::Move( float dt)
 			
 		}
 		else if (adjacent.down.j != TILE_COL_ID && adjacent.left.i != TILE_COL_ID && diagonal_left_down != TILE_COL_ID) {
-			if (7 - (pos_x + 6 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
+			if (7 - (pos_x + 8 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				pos_y += speed*dt;
 			}
-			else if (7 - (pos_x + 6- tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
+			else if (7 - (pos_x + 8 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				pos_x -= speed*dt;
 			}
 			else {
