@@ -74,9 +74,9 @@ void P_Zelda::LoadAnimation(const char * path)
 
 }
 
-void P_Zelda::ChangeAnimation(movement_animation animation)
+void P_Zelda::ChangeAnimation(int animation)
 {
-	static movement_animation last_animation = animation_idle_down;
+	static int last_animation =0;
 
 	if (last_animation != animation) {
 		this->actual_animation = this->sprites_vector[0][animation];
@@ -85,9 +85,9 @@ void P_Zelda::ChangeAnimation(movement_animation animation)
 
 }
 
-SDL_Scancode UP = SDL_SCANCODE_W;
 
-key_state P_Zelda::GetEvent()
+
+player_event P_Zelda::GetEvent()
 {
 	SDL_Scancode UP;
 	SDL_Scancode DOWN;	
@@ -108,63 +108,60 @@ key_state P_Zelda::GetEvent()
 		RIGHT = SDL_SCANCODE_RIGHT;
 
 	}
-		key_state state = idle;
-		movement_animation animation_state = animation_idle_down;
-		static movement_animation last_state = animation_idle_down;
+		
+	
+	
 		if (App->input->GetKey(UP) == KEY_REPEAT) {
 			if (App->input->GetKey(LEFT) == KEY_REPEAT) {
-				state = left_up;
-				animation_state = animation_up;
+				movement_direction = move_up_left;				
 			}
 			else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
-				state = right_up;
-				animation_state = animation_up;
+				movement_direction = move_up_right;
 			}
 			else {
-				state = up;
-				animation_state = animation_up;
+				movement_direction = move_up;
 
 			}
+			character_direction = up;
+			actual_event = move;
 		}
 
 		else if (App->input->GetKey(DOWN) == KEY_REPEAT) {
 			if (App->input->GetKey(LEFT) == KEY_REPEAT) {
-				state = left_down;
-				animation_state = animation_down;
+				movement_direction = move_down_left;
 			}
 			else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
-				state = right_down;
-				animation_state = animation_down;
+				movement_direction = move_down_right;
 			}
 			else {
-				state = down;
-				animation_state = animation_down;
+				movement_direction = move_down;
 
 			}
+			character_direction = down;
+			actual_event = move;
 		}
 
 		else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
 
 
-			state = right;
-			animation_state = animation_right;
-
+			movement_direction = move_right;
+			character_direction = right;
+			actual_event = move;
 		}
 		else if (App->input->GetKey(LEFT) == KEY_REPEAT) {
 
-			state = left;
-			animation_state = animation_left;
-
+			movement_direction = move_left;
+			character_direction = left;
+			actual_event = move;
 		}
 		else {
-			state = idle;
-			animation_state = animation_idle_down;
+			movement_direction = move_idle;
+			actual_event = idle;
 		}
 
+	
 
-		this->ChangeAnimation(animation_state);
-
-		return state;
+		return actual_event;
 	}
 
 	

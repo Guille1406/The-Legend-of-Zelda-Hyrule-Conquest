@@ -80,13 +80,13 @@ void j1PathFinding::Move(Character * character, Character* other)
 			x = x + (last_path[i + 1].x - character->tilepos.x);
 			y = y + (last_path[i + 1].y - character->tilepos.y);
 		}
-
-
+		character->actual_event = move;
+		
 		//Change this
-		if (x > 1) { x = 1; character->ChangeAnimation(animation_right); }
-		if (x < -1) { x = -1; character->ChangeAnimation(animation_left); }
-		if (y > 1) { y = 1; character->ChangeAnimation(animation_down); }
-		if (y < -1) { y = -1; character->ChangeAnimation(animation_up); }
+		if (x > 1) { x = 1; character->character_direction = right;		}
+		if (x < -1) { x = -1;  character->character_direction = left;		}
+		if (y > 1) { y = 1; character->character_direction = down;		}
+		if (y < -1) { y = -1; character->character_direction = up;		}
 
 		
 		character->pos.x += x;
@@ -102,6 +102,7 @@ void j1PathFinding::Move(Character * character, Character* other)
 		
 
 	}
+	
 }
 
 // To request all tiles involved in the last generated path

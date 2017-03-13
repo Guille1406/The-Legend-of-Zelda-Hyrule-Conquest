@@ -10,34 +10,12 @@
 #include "j1Map.h"
 
 
-enum key_state {
-	up,
-	down,
-	left,
-	right,
-	left_up,
-	left_down,
-	right_up,
-	right_down,
-	idle
-};
 
-enum movement_animation {
-	animation_up,
-	animation_down,
-	animation_left,
-	animation_right,
-	animation_idle_up,
-	animation_idle_down,
-	animation_idle_left,
-	animation_idle_right,
-};
+
 
 class P_Link;
 class P_Zelda;
 class Character;
-
-
 
 
 class j1Player :public j1Module {
