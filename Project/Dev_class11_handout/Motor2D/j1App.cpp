@@ -18,7 +18,7 @@
 #include "j1App.h"
 #include "j1Console.h"
 #include "j1Player.h"
-
+#include"j1FadeToBlack.h"
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
@@ -37,7 +37,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	gui = new j1Gui();
 	console = new j1Console();
 	player = new j1Player();
-	
+	fadetoblack = new j1FadeToBlack();
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(fs);
@@ -55,7 +55,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 
 	// gui after all to print above all
 	AddModule(gui);
-
+	AddModule(fadetoblack);
 	//Console
 	AddModule(console);
 
@@ -111,11 +111,17 @@ bool j1App::Awake()
 		}
 	}
 
+
+	player->Disable();
+
+
 	if(ret == true)
 	{
 		for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.cend() && ret == true; ++item)
 			ret = (*item)->Awake(config.child((*item)->name.GetString()));
-		
+
+		for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.cend() && ret == true; ++item)
+			ret = (*item)->IsEnabled() ? (*item)->Start() : true;
 	}
 
 	PERF_PEEK(ptimer);

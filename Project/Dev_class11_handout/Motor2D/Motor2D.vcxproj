@@ -102,7 +102,8 @@
     <ClCompile Include="j1Player.cpp" />
     <ClCompile Include="j1Scene.cpp" />
     <ClCompile Include="j1Timer.cpp" />
-    <ClCompile Include="ModuleFadeToBlack.cpp" />
+    <ClCompile Include="S_MainMenu.cpp" />
+    <ClCompile Include="j1FadeToBlack.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="p2Log.cpp" />
     <ClCompile Include="j1Render.cpp" />
@@ -131,7 +132,8 @@
     <ClInclude Include="GuiWindow.h" />
     <ClInclude Include="j1Console.h" />
     <ClInclude Include="j1Player.h" />
-    <ClInclude Include="ModuleFadeToBlack.h" />
+    <ClInclude Include="S_MainMenu.h" />
+    <ClInclude Include="j1FadeToBlack.h" />
     <ClInclude Include="P_Link.h" />
     <ClInclude Include="P_Zelda.h" />
     <ClInclude Include="S_Dungeon.h" />

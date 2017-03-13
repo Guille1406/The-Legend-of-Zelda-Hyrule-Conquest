@@ -22,7 +22,7 @@
 
 #include "S_World.h"
 #include "S_Dungeon.h"
-
+#include"S_MainMenu.h"
 #include <list>;
 using namespace std;
 
@@ -54,16 +54,18 @@ bool j1Scene::Start()
 	scene_list = new p2List<MainScene*>();
 	//S_Inventory* temp = new S_Inventory();
 	
-
+	p2List_item<MainScene*>* MainMenu= scene_list->add(new S_MainMenu);
+	MainMenu->data->scene_name = mainmenu;
+	
 	p2List_item<MainScene*>* World = scene_list->add(new S_World);
 	World->data->scene_name = world;
 
 	p2List_item<MainScene*>* Dungeon = scene_list->add(new S_Dungeon);
 	Dungeon->data->scene_name = dungeon;
 
-	active_scene = World->data;
-	prev_scene = World->data;
-	loaded_scene = World->data;
+	active_scene = MainMenu->data;
+	prev_scene = MainMenu->data;
+	loaded_scene = MainMenu->data;
 	active_scene->Start();
 
 
@@ -117,7 +119,7 @@ bool j1Scene::CleanUp()
 
 bool j1Scene::ChangeScene(Scene_ID name)
 {
-	/*
+	
 
 	p2List_item<MainScene*>* temp = scene_list->start;
 	while (temp != NULL) {
@@ -128,7 +130,7 @@ bool j1Scene::ChangeScene(Scene_ID name)
 			return true;
 		}
 		temp = temp->next;
-	}*/
+	}
 	return false;
 }
 

@@ -13,7 +13,7 @@
 
 bool S_World::Start()
 {
-
+	App->player->Enable();
 	if (App->map->Load("zelda_map_2.tmx") == true)
 	{
 		int w, h;

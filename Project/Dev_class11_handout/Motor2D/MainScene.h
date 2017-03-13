@@ -6,12 +6,13 @@
 #include "j1Input.h"
 #include "SDL\include\SDL.h"
 #include "p2Log.h"
-
+#include"Gui.h";
 enum Scene_ID {
 	inventory,
 	map,
 	world,
-	dungeon
+	dungeon,
+	mainmenu
 };
 
 class MainScene {
@@ -40,7 +41,7 @@ public:
 public:
 	Scene_ID scene_name;
 	SDL_Texture* atlas;
-
+	
 	/*
 	Map
 	Textures
@@ -49,7 +50,6 @@ public:
 	.
 	.
 	*/
-
 };
 
 #endif // !_MAINSCENE_

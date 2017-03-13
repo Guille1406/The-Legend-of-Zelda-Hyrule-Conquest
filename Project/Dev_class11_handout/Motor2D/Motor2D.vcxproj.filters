@@ -112,7 +112,10 @@
     <ClCompile Include="j1Console.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleFadeToBlack.cpp">
+    <ClCompile Include="S_MainMenu.cpp">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="j1FadeToBlack.cpp">
       <Filter>Desenvolupament  ========\ToCheckAnim/Fadetoblack</Filter>
     </ClCompile>
   </ItemGroup>
@@ -249,7 +252,10 @@
     <ClInclude Include="Animation.h">
       <Filter>Desenvolupament  ========\ToCheckAnim/Fadetoblack</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleFadeToBlack.h">
+    <ClInclude Include="S_MainMenu.h">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="j1FadeToBlack.h">
       <Filter>Desenvolupament  ========\ToCheckAnim/Fadetoblack</Filter>
     </ClInclude>
   </ItemGroup>

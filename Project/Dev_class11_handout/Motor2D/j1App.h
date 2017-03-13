@@ -24,7 +24,7 @@ class j1Fonts;
 class j1Gui;
 class j1Console;
 class j1Player;
-
+class j1FadeToBlack;
 //using namespace std;
 
 class j1App
@@ -92,19 +92,20 @@ private:
 public:
 
 	// Modules
-	j1Window*			win = NULL;
-	j1Input*			input = NULL;
-	j1Render*			render = NULL;
-	j1Textures*			tex = NULL;
-	j1Audio*			audio = NULL;
-	j1Scene*			scene = NULL;
-	j1FileSystem*		fs = NULL;
-	j1Map*				map = NULL;
-	j1PathFinding*		pathfinding = NULL;
-	j1Fonts*			font = NULL;
-	j1Gui*				gui = NULL;
-	j1Player*			player = NULL;
-	j1Console*			console = NULL;
+	j1Window*			win = nullptr;
+	j1Input*			input = nullptr;
+	j1Render*			render = nullptr;
+	j1Textures*			tex = nullptr;
+	j1Audio*			audio = nullptr;
+	j1Scene*			scene = nullptr;
+	j1FileSystem*		fs = nullptr;
+	j1Map*				map = nullptr;
+	j1PathFinding*		pathfinding = nullptr;
+	j1Fonts*			font = nullptr;
+	j1Gui*				gui = nullptr;
+	j1Player*			player = nullptr;
+	j1Console*			console = nullptr;
+	j1FadeToBlack*		fadetoblack = nullptr;
 
 private:
 	std::list<j1Module*> modules;

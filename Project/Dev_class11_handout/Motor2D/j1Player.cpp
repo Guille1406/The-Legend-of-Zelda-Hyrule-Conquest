@@ -9,6 +9,7 @@
 #define TILE_COL_ID 237
 bool j1Player::Awake(pugi::xml_node& config)
 {
+	
 	Link = new P_Link();
 	Zelda = new P_Zelda();
 
@@ -49,56 +50,57 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt)
 {
 
-
-	Link->GetAdjacents();
-	Zelda->GetAdjacents();
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) { 
-		cooperative = !cooperative; 
-		selected_character = Link;
-		other_character = Zelda;
-	}
-
-	if (cooperative == true) {
-		Link->Move( dt);
-		Zelda->Move(dt);
-
-	}
-	else {
-
-
-
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-			change = true;
-			if (selected_character == Link) {
-				selected_character = Zelda;
-				other_character = Link;
-			}
-			else {
-				selected_character = Link;
-				other_character = Zelda;
-			}
+	
+		Link->GetAdjacents();
+		Zelda->GetAdjacents();
+		if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+			cooperative = !cooperative;
+			selected_character = Link;
+			other_character = Zelda;
 		}
-		//
 
-		if (change == true) {
-			Move_Camera();
+		if (cooperative == true) {
+			Link->Move(dt);
+			Zelda->Move(dt);
+
 		}
 		else {
-			selected_character->Move( dt);
+
+
+
+			if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+				change = true;
+				if (selected_character == Link) {
+					selected_character = Zelda;
+					other_character = Link;
+				}
+				else {
+					selected_character = Link;
+					other_character = Zelda;
+				}
+			}
+			//
+
+			if (change == true) {
+				Move_Camera();
+			}
+			else {
+				selected_character->Move(dt);
+			}
+
+
+			ActivatePathfinding();
+
 		}
 
+		Link->tilepos.x = Link->pos.x / 8;
+		Link->tilepos.y = Link->pos.y / 8;
+		Zelda->tilepos.x = Zelda->pos.x / 8;
+		Zelda->tilepos.y = Zelda->pos.y / 8;
 
-		ActivatePathfinding();
 
-	}
-
-	Link->tilepos.x = Link->pos.x / 8;
-	Link->tilepos.y = Link->pos.y / 8;
-	Zelda->tilepos.x = Zelda->pos.x / 8;
-	Zelda->tilepos.y = Zelda->pos.y / 8;
-
+		Draw();
 	
-	Draw();
 	
 	return true;
 }
