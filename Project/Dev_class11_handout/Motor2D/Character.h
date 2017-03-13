@@ -78,6 +78,7 @@ public:
 	virtual player_event GetEvent();
 	virtual void ExecuteEvent(float);
 	void GetAdjacents();
+	int GetLogic();
 
 	
 

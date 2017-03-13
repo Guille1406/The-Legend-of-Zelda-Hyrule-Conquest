@@ -61,7 +61,7 @@ void j1Map::Draw()
 							SDL_Rect r = tileset->GetTileRect(tile_id);
 							iPoint pos = MapToWorld(x, y);
 
-							//if (layer->properties.Get("Navigation") == false) 
+							
 							App->render->Blit(tileset->texture, pos.x, pos.y, &r);
 							
 
@@ -526,3 +526,44 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 	}
 	return ret;
 }
+
+bool j1Map::CreateLogicMap() const
+{
+	bool ret = false;
+
+
+	std::list<MapLayer*>::const_iterator item = data.layers.begin();
+	for (; item != data.layers.cend(); ++item) {
+		MapLayer* layer = (*item);
+
+		App->map->Logic = layer;
+		if (layer->properties.Get("Logic", 0) == 0)
+			continue;
+
+		uchar* map = new uchar[layer->width*layer->height];
+		memset(map, 1, layer->width*layer->height);
+
+		for (int y = 0; y < data.height; ++y)
+		{
+			for (int x = 0; x < data.width; ++x)
+			{
+				int i = (y*layer->width) + x;
+
+				int tile_id = layer->Get(x, y);
+				TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
+
+				if (tileset != NULL)
+				{
+					map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1;
+					
+				}
+			}
+		}
+		
+		ret = true;
+
+		break;
+	}
+	return ret;
+}
+

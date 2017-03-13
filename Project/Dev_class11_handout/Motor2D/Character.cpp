@@ -36,9 +36,6 @@ void Character::ExecuteEvent(float dt)
 void Character::GetAdjacents()
 {
 
-	//adjacent_tiles adjacent;
-
-	
 
 	this->adjacent.down.i = App->map->Colision->Get(tilepos.x + 1, tilepos.y + 2);
 	this->adjacent.down.j = App->map->Colision->Get(tilepos.x, tilepos.y + 2);
@@ -49,5 +46,34 @@ void Character::GetAdjacents()
 	this->adjacent.right.i = App->map->Colision->Get(tilepos.x + 2, tilepos.y);
 	this->adjacent.right.j = App->map->Colision->Get(tilepos.x + 2, tilepos.y + 1);
 
+}
+
+int Character::GetLogic()
+{
+	int i, j;
+	switch (character_direction)
+	{
+	case up:
+		i = App->map->Logic->Get(tilepos.x, tilepos.y -1);
+		j = App->map->Logic->Get(tilepos.x +1, tilepos.y - 1);
+		break;
+	case down:
+		i = App->map->Logic->Get(tilepos.x, tilepos.y +2);
+		j = App->map->Logic->Get(tilepos.x +1, tilepos.y +2);
+		break;
+
+	case left:
+
+		break;
+		i = App->map->Logic->Get(tilepos.x - 1, tilepos.y );
+		j = App->map->Logic->Get(tilepos.x - 1, tilepos.y +1);
+	case right:
+		i = App->map->Logic->Get(tilepos.x + 2, tilepos.y);
+		j = App->map->Logic->Get(tilepos.x + 2, tilepos.y + 1);
+		break;
+	}
+	if (i != 0)return i;
+	if (j != 0)return j;
+	return 0;
 }
 

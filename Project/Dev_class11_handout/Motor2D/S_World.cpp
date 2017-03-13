@@ -24,13 +24,16 @@ bool S_World::Start()
 			App->pathfinding->SetMap(w, h, data);
 
 			RELEASE_ARRAY(data);
+			App->map->CreateLogicMap();
 	}
+	
+
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
 
-	App->player->Link->pos = { 0,0 };
-	App->player->Zelda->pos = { 16,16 };
+	App->player->Link->pos = { 50,50 };
+	App->player->Zelda->pos = { 60,60 };
 
 	
 	LOG("World Open");

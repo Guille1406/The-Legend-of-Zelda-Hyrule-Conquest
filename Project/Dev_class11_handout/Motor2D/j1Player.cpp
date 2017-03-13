@@ -52,10 +52,16 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt)
 {
 
-	
+	Link->tilepos.x = (Link->pos.x + 4) / 8;
+	Link->tilepos.y = (Link->pos.y + 4) / 8;
+	Zelda->tilepos.x = (Zelda->pos.x + 4) / 8;
+	Zelda->tilepos.y = (Zelda->pos.y + 4) / 8;
+
 	Link->GetAdjacents();
 	Zelda->GetAdjacents();
 
+	
+		
 	//2 Players
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		cooperative = !cooperative;

@@ -6,7 +6,7 @@
 #include "Character.h"
 
 
-#define TILE_COL_ID 237
+#define TILE_COL_ID 419
 
 void Character::Move( float dt)
 {
@@ -19,8 +19,7 @@ void Character::Move( float dt)
 	int pos_x = this->pos.x;
 	int pos_y = this->pos.y;
 
-	this->tilepos.x = (this->pos.x + 4) / 8;
-	this->tilepos.y = (this->pos.y + 4) / 8;
+	
 
 	int tile_pos_x = this->tilepos.x;
 	int tile_pos_y = this->tilepos.y;
