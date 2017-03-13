@@ -77,9 +77,9 @@ void P_Link::LoadAnimation(const char * path)
 	
 }
 
-void P_Link::ChangeAnimation(movement_animation animation)
+void P_Link::ChangeAnimation(int animation)
 {
-	static movement_animation last_animation = animation_idle_down;
+	static int last_animation = 0;
 	
 	if (last_animation != animation) {
 		this->actual_animation = this->sprites_vector[0][animation];
@@ -90,63 +90,60 @@ void P_Link::ChangeAnimation(movement_animation animation)
 
 }
 
-key_state P_Link::GetEvent()
+player_event P_Link::GetEvent()
 {
-	key_state state = idle;
-	movement_animation animation_state = animation_idle_down;
-	static movement_animation last_state = animation_idle_down;
+	
+	
+
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			state = left_up;
-			animation_state = animation_up;
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			movement_direction = move_up_right;
 		}
-		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			state = right_up;
-			animation_state = animation_up;
+		else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			movement_direction = move_up_left;
 		}
 		else {
-			state = up;
-			animation_state = animation_up;
+			movement_direction = move_up;
 
 		}
+		character_direction = up;
+		actual_event = move;
 	}
 
 	else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			state = left_down;
-			animation_state = animation_down;
+			movement_direction = move_down_left;
 		}
 		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			state = right_down;
-			animation_state = animation_down;
+			movement_direction = move_down_right;
 		}
 		else {
-			state = down;
-			animation_state = animation_down;
-
+			movement_direction = move_down;
+			
 		}
+		character_direction = down;
+		actual_event = move;
 	}
 
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-
-
-		state = right;
-		animation_state = animation_right;
-
+		
+		movement_direction = move_right;
+		character_direction = right;
+		actual_event = move;
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 
-		state = left;
-		animation_state = animation_left;
-
+		movement_direction = move_left;
+		character_direction = left;
+		actual_event = move;
 	}
 	else {
-		state = idle;
-		animation_state = animation_idle_down;
+		movement_direction = move_idle;
+		actual_event = idle;
 	}
 
 
-	this->ChangeAnimation(animation_state);
+	
 
-	return state;
+	return actual_event;
 }
