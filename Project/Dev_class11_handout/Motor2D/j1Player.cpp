@@ -99,10 +99,10 @@ bool j1Player::Update(float dt)
 
 
 
-	Link->tilepos.x = Link->pos.x / 8;
-	Link->tilepos.y = Link->pos.y / 8;
-	Zelda->tilepos.x = Zelda->pos.x / 8;
-	Zelda->tilepos.y = Zelda->pos.y / 8;
+	//Link->tilepos.x = Link->pos.x / 8;
+	//Link->tilepos.y = Link->pos.y / 8;
+	//Zelda->tilepos.x = Zelda->pos.x / 8;
+	//Zelda->tilepos.y = Zelda->pos.y / 8;
 
 	
 	Draw();
@@ -122,7 +122,8 @@ void j1Player::Draw()
 	App->render->Blit(Link->character_texture, Link->pos.x - 3 , Link->pos.y - 12, &Link->actual_animation.GetCurrentFrame());
 	App->render->Blit(Zelda->character_texture, Zelda->pos.x - 3, Zelda->pos.y - 12 , &Zelda->actual_animation.GetCurrentFrame());
 	App->render->DrawQuad(rect, 0, 0, 255, 255, true, true);
-	LOG("%i %i", Link->adjacent.down.j, Link->adjacent.down.i);
+	LOG("\n  %i %i\n %i    %i\n %i    %i\n  %i %i", Link->adjacent.up.i, Link->adjacent.up.j, Link->adjacent.left.j, Link->adjacent.right.i, Link->adjacent.left.i, Link->adjacent.right.j
+		,Link->adjacent.down.j, Link->adjacent.down.i);
 }
 
 

@@ -19,8 +19,8 @@ void Character::Move( float dt)
 	int pos_x = this->pos.x;
 	int pos_y = this->pos.y;
 
-	this->tilepos.x = (this->pos.x + 3) / 8;
-	this->tilepos.y = (this->pos.y + 3) / 8;
+	this->tilepos.x = (this->pos.x + 4) / 8;
+	this->tilepos.y = (this->pos.y + 4) / 8;
 
 	int tile_pos_x = this->tilepos.x;
 	int tile_pos_y = this->tilepos.y;
@@ -45,10 +45,8 @@ void Character::Move( float dt)
 		App->render->camera.y = -1 * (App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale());
 	}
 	
-	key_state state = idle;
-	static key_state last_state = idle;
 
-	state = GetEvent();
+	
 	
 
 	//DIAGONAL TILES
@@ -61,8 +59,8 @@ void Character::Move( float dt)
 	/////
 	float speed = 1/dt;
 	
-	switch (state) {
-	case up:
+	switch (movement_direction) {
+	case move_up:
 		
 		if (adjacent.up.i != TILE_COL_ID && adjacent.up.j != TILE_COL_ID) {
 			pos_y -= speed*dt;
@@ -74,10 +72,10 @@ void Character::Move( float dt)
 			}
 		}
 		else if (adjacent.up.i == TILE_COL_ID && adjacent.up.j != TILE_COL_ID) {
-			if (7 - (pos_x +6- tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
+			if (7 - (pos_x +8- tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				pos_x += speed*dt;
 			}
-			else if (7 - (pos_x + 6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
+			else if (7 - (pos_x + 8 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				pos_y -= speed*dt;;
 			}
 			else {
@@ -105,7 +103,7 @@ void Character::Move( float dt)
 		
 		break;
 
-	case down:
+	case  move_down:
 		
 		if (adjacent.down.i != TILE_COL_ID && adjacent.down.j != TILE_COL_ID) {
 			pos_y += speed*dt;
@@ -117,10 +115,10 @@ void Character::Move( float dt)
 			}
 		}
 		else if (adjacent.down.i == TILE_COL_ID && adjacent.down.j != TILE_COL_ID) {
-			if (7 - (pos_x +6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
+			if (7 - (pos_x+8 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				pos_x -= speed*dt;
 			}
-			else if (7 - (pos_x + 6 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
+			else if (7 - (pos_x+8 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				pos_y += speed*dt;
 			}
 			else {
@@ -149,7 +147,7 @@ void Character::Move( float dt)
 
 		break;
 
-	case left:
+	case move_left:
 		if (adjacent.left.i != TILE_COL_ID && adjacent.left.j != TILE_COL_ID)
 		{
 			pos_x -= speed*dt;
@@ -174,10 +172,10 @@ void Character::Move( float dt)
 		}
 		else if (adjacent.left.i != TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
 
-			if (7 - (pos_x + 6 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
+			if (7 - (pos_x + 8 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				pos_y += speed*dt;
 			}
-			else if (7 - (pos_x +6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
+			else if (7 - (pos_x +8 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				pos_x -= speed*dt;
 			}
 			else {
@@ -191,7 +189,7 @@ void Character::Move( float dt)
 			}
 		}
 		break;
-	case right:
+	case move_right:
 		if (adjacent.right.i != TILE_COL_ID && adjacent.right.j != TILE_COL_ID)
 		{
 			pos_x += speed*dt;
@@ -215,10 +213,10 @@ void Character::Move( float dt)
 			}
 		}
 		else if (adjacent.right.i != TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
-			if (7 - (pos_x + 6 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
+			if (7 - (pos_x + 8 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8)) {
 				pos_x += speed*dt;
 			}
-			else if (7 - (pos_x + 6 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
+			else if (7 - (pos_x + 8 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8)) {
 				pos_y -= speed*dt;
 			}
 			else {
@@ -233,7 +231,7 @@ void Character::Move( float dt)
 		}
 		break;
 
-	case left_up:
+	case move_up_left:
 		if (adjacent.up.i == TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
 			if ((pos_y - 1) / 8 == tile_pos_y && (pos_x - 1) / 8 == tile_pos_x) {
 				pos_y -= speed*dt;
@@ -284,7 +282,7 @@ void Character::Move( float dt)
 		}
 		break;
 
-	case right_up:
+	case move_up_right:
 		if (adjacent.up.j == TILE_COL_ID && adjacent.right.i == TILE_COL_ID) {
 			if ((pos_y) / 8 == tile_pos_y && (pos_x + 8) / 8 == tile_pos_x) {
 				pos_y -= speed*dt;
@@ -333,7 +331,7 @@ void Character::Move( float dt)
 			 }
 		 }
 		break;
-	case left_down:
+	case move_down_left:
 
 		if (adjacent.down.j == TILE_COL_ID && adjacent.left.i == TILE_COL_ID) {
 			if ((pos_y + 8) / 8 == tile_pos_y && (pos_x) / 8 == tile_pos_x) {
@@ -384,7 +382,7 @@ void Character::Move( float dt)
 		}
 		break;
 
-	case right_down:
+	case move_down_right:
 		if (adjacent.down.i == TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
 			if ((pos_y + 8) / 8 == tile_pos_y && (pos_x + 8) / 8 == tile_pos_x) {
 				pos_y += speed*dt;
