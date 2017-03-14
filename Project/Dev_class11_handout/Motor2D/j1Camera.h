@@ -2,6 +2,24 @@
 #define __j1CAMERA_H__
 
 #include "j1Module.h"
+#include "p2Point.h"
+
+struct CamEllipse
+{
+	iPoint ellipsecentre = { 0,0 };
+	uint semimajoraxis = 0;
+	uint semiminoraxis = 0;
+
+	float InsideEllipseValue(int x, int y)
+	{
+		return ((((x - ellipsecentre.x) * (x - ellipsecentre.x)) / (semimajoraxis * semimajoraxis)) + (((y - ellipsecentre.y) * (y - ellipsecentre.y)) / (semiminoraxis * semiminoraxis)));
+	}
+
+	bool InsideEllipse(int x, int y)
+	{
+		return (((((x - ellipsecentre.x) * (x - ellipsecentre.x)) / (semimajoraxis * semimajoraxis)) + (((y - ellipsecentre.y) * (y - ellipsecentre.y)) / (semiminoraxis * semiminoraxis))) <= 1);
+	}
+};
 
 enum GuiEvent;
 class Gui;
@@ -38,6 +56,11 @@ public:
 	void OnConsoleCommand(const Command* command, const std::vector<std::string>& commandarguments);
 
 	void OnConsoleCVar(const CVar* cvar);
+
+private:
+	CamEllipse LitleEllipse;
+	CamEllipse BigEllipse;
+
 };
 
 #endif // __j1CAMERA_H__
