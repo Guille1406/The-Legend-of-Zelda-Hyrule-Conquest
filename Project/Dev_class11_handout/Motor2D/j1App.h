@@ -25,6 +25,7 @@ class j1Gui;
 class j1Console;
 class j1Player;
 class j1FadeToBlack;
+class j1Camera;
 //using namespace std;
 
 class j1App
@@ -106,6 +107,7 @@ public:
 	j1Player*			player = nullptr;
 	j1Console*			console = nullptr;
 	j1FadeToBlack*		fadetoblack = nullptr;
+	j1Camera*			camera = nullptr;
 
 private:
 	std::list<j1Module*> modules;

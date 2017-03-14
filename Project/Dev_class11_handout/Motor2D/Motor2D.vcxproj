@@ -88,6 +88,7 @@
     <ClCompile Include="GuiScrollBar.cpp" />
     <ClCompile Include="GuiViewport.cpp" />
     <ClCompile Include="GuiWindow.cpp" />
+    <ClCompile Include="j1Camera.cpp" />
     <ClCompile Include="j1Console.cpp" />
     <ClCompile Include="j1FileSystem.cpp" />
     <ClCompile Include="j1Fonts.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="GuiScrollBar.h" />
     <ClInclude Include="GuiViewport.h" />
     <ClInclude Include="GuiWindow.h" />
+    <ClInclude Include="j1Camera.h" />
     <ClInclude Include="j1Console.h" />
     <ClInclude Include="j1Player.h" />
     <ClInclude Include="S_MainMenu.h" />

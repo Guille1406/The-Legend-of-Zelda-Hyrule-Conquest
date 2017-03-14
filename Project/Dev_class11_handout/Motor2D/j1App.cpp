@@ -18,7 +18,8 @@
 #include "j1App.h"
 #include "j1Console.h"
 #include "j1Player.h"
-#include"j1FadeToBlack.h"
+#include "j1FadeToBlack.h"
+#include "j1Camera.h"
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
@@ -38,6 +39,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	console = new j1Console();
 	player = new j1Player();
 	fadetoblack = new j1FadeToBlack();
+	camera = new j1Camera();
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(fs);
@@ -56,8 +58,12 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// gui after all to print above all
 	AddModule(gui);
 	AddModule(fadetoblack);
+
 	//Console
 	AddModule(console);
+
+	//camera
+	AddModule(camera);
 
 	// render last to swap buffer
 	AddModule(render);
