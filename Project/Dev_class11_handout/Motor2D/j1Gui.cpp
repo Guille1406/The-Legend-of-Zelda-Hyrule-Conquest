@@ -5,6 +5,7 @@
 #include "j1Textures.h"
 #include "j1Fonts.h"
 #include "j1Input.h"
+#include "j1Scene.h"
 #include "j1Console.h"
 #include "j1Gui.h"
 #include "GuiImage.h"
@@ -61,8 +62,24 @@ bool j1Gui::PreUpdate()
 	const Gui* mouse_hover = FindMouseHover();
 	for (std::list<Gui*>::iterator item = list_to_iterate->begin(); item != list_to_iterate->cend(); ++item)
 	{
-		(*item)->CheckInput(mouse_hover, nullptr);
-		(*item)->Update(mouse_hover, nullptr);
+		if ((*item)->GetModuleListener() != nullptr)
+		{
+			(*item)->CheckInput(mouse_hover, nullptr);
+			(*item)->Update(mouse_hover, nullptr);
+		}
+		if ((*item)->GetSceneListener() != nullptr)//if is scene
+		{
+			if ((*item)->GetSceneListener() == App->scene->GetActiveScene())
+			{
+				(*item)->CheckInput(mouse_hover, nullptr);
+				(*item)->Update(mouse_hover, nullptr);
+			}
+		}
+		if (App->console->IsActive())
+		{
+			(*item)->CheckInput(mouse_hover, nullptr);
+			(*item)->Update(mouse_hover, nullptr);
+		}
 	}
 	return true;
 }
@@ -72,8 +89,19 @@ bool j1Gui::Update(float dt)
 {
 	// Draw all guis
 	for (std::list<Gui*>::iterator item = GuiElements.begin(); item != GuiElements.cend(); ++item)
-		if((*item)->GetPurpose() != AddGuiTo::viewport_purpose)
-			(*item)->Draw();
+		if ((*item)->GetPurpose() != AddGuiTo::viewport_purpose)
+		{
+			if ((*item)->GetModuleListener() != nullptr)
+			{
+				(*item)->Draw();
+			}
+			if ((*item)->GetSceneListener() != nullptr)//if is scene
+			{
+				if((*item)->GetSceneListener() == App->scene->GetActiveScene())
+					(*item)->Draw();
+			}
+		}
+
 	if (App->console->IsActive())
 	{
 		App->render->DrawQuad(App->console->ConsoleBackground, Black(0), Black(1), Black(2), CONSOLE_ALPHA, true, true, false);

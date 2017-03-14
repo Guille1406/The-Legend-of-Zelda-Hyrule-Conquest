@@ -12,6 +12,7 @@ public:
 	bool Start();
 	bool Update();
 	bool Clean();
+	void OnGui(Gui* ui, GuiEvent event);
 public:
 	GuiButton* idle_hoover_pressed_button = nullptr;
 

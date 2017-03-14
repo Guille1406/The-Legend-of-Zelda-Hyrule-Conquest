@@ -6,7 +6,9 @@
 #include "j1Input.h"
 #include "SDL\include\SDL.h"
 #include "p2Log.h"
-#include"Gui.h";
+
+#include <vector>
+
 enum Scene_ID {
 	inventory,
 	map,
@@ -14,6 +16,11 @@ enum Scene_ID {
 	dungeon,
 	mainmenu
 };
+
+enum GuiEvent;
+class Gui;
+struct Command;
+struct CVar;
 
 class MainScene {
 public:
@@ -37,7 +44,15 @@ public:
 	virtual bool Clean() {
 		return true;
 	}
-
+	virtual void OnGui(Gui* ui, GuiEvent event)
+	{
+	}
+	virtual void OnConsoleCommand(const Command* command, const std::vector<std::string>& commandarguments)
+	{
+	}
+	virtual void OnConsoleCVar(const CVar* cvar)
+	{
+	}
 public:
 	Scene_ID scene_name;
 	SDL_Texture* atlas;

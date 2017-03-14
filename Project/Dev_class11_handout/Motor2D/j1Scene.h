@@ -43,6 +43,12 @@ public:
 	bool Show(Scene_ID);
 	bool Hide();
 
+	const MainScene* GetActiveScene() const
+	{
+		return active_scene;
+	}
+
+
 	
 private:
 	MainScene* active_scene = nullptr;

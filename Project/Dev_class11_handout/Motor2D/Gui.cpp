@@ -42,7 +42,12 @@ fPoint Gui::GetDragVelocity() const
 
 void Gui::SetListener(j1Module* module)
 {
-	listener = module;
+	module_listener = module;
+}
+
+void Gui::SetListener(MainScene* module)
+{
+	scene_listener = module;
 }
 
 void Gui::SetVisible(bool visible)
@@ -74,11 +79,25 @@ void Gui::CheckInput(const Gui* mouse_hover, const Gui* focus)
 {
 	bool inside = (mouse_hover == this);
 
+	j1Module* listener = nullptr;
+
+	if (module_listener != nullptr)
+	{
+		listener = module_listener;
+	}
+	if (scene_listener != nullptr)
+	{
+		listener = (j1Module*)scene_listener;
+	}
+
 	if (mouse_inside != inside)
 	{
 		mouse_inside = inside;
 		if (listener != nullptr)
-			listener->OnGui(this, (inside) ? GuiEvent::mouse_enter : GuiEvent::mouse_leave);
+			if (module_listener != nullptr)
+				listener->OnGui(this, (inside) ? GuiEvent::mouse_enter : GuiEvent::mouse_leave);
+			else
+				((MainScene*)listener)->OnGui(this, (inside) ? GuiEvent::mouse_enter : GuiEvent::mouse_leave);
 	}
 
 	if (inside == true)
@@ -86,22 +105,40 @@ void Gui::CheckInput(const Gui* mouse_hover, const Gui* focus)
 		if (listener != nullptr)
 		{
 			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == j1KeyState::KEY_DOWN)
-				listener->OnGui(this, GuiEvent::mouse_lclk_down);
+				if (module_listener != nullptr)
+					listener->OnGui(this, GuiEvent::mouse_lclk_down);
+				else
+					((MainScene*)listener)->OnGui(this, GuiEvent::mouse_lclk_down);
 
 			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == j1KeyState::KEY_REPEAT)
-				listener->OnGui(this, GuiEvent::mouse_lclk_repeat);
+				if (module_listener != nullptr)
+					listener->OnGui(this, GuiEvent::mouse_lclk_repeat);
+				else
+					((MainScene*)listener)->OnGui(this, GuiEvent::mouse_lclk_repeat);
 
 			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == j1KeyState::KEY_UP)
-				listener->OnGui(this, GuiEvent::mouse_lclk_up);
+				if (module_listener != nullptr)
+					listener->OnGui(this, GuiEvent::mouse_lclk_up);
+				else
+					((MainScene*)listener)->OnGui(this, GuiEvent::mouse_lclk_up);
 
 			if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == j1KeyState::KEY_DOWN)
-				listener->OnGui(this, GuiEvent::mouse_rclk_down);
+				if (module_listener != nullptr)
+					listener->OnGui(this, GuiEvent::mouse_rclk_down);
+				else
+					((MainScene*)listener)->OnGui(this, GuiEvent::mouse_rclk_down);
 
 			if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == j1KeyState::KEY_REPEAT)
-				listener->OnGui(this, GuiEvent::mouse_rclk_repeat);
+				if (module_listener != nullptr)
+					listener->OnGui(this, GuiEvent::mouse_rclk_repeat);
+				else
+					((MainScene*)listener)->OnGui(this, GuiEvent::mouse_rclk_repeat);
 
 			if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == j1KeyState::KEY_UP)
-				listener->OnGui(this, GuiEvent::mouse_rclk_up);
+				if (module_listener != nullptr)
+					listener->OnGui(this, GuiEvent::mouse_rclk_up);
+				else
+					((MainScene*)listener)->OnGui(this, GuiEvent::mouse_rclk_up);
 		}
 
 		if (drag_vel.x != 0.0f || drag_vel.y != 0.0f)

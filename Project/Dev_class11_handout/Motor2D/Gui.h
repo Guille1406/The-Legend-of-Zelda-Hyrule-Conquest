@@ -3,6 +3,7 @@
 
 #include "p2Log.h"
 #include "j1Module.h"
+#include "MainScene.h"
 #include "p2Point.h"
 #include "SDL\include\SDL.h"
 #include "Color.h"
@@ -70,6 +71,8 @@ enum BarType
 	unknown
 };
 
+class MainScene;
+
 class Gui
 {
 	friend class j1Gui;
@@ -97,17 +100,29 @@ public:
 	void SetDragVelocity(float x, float y);
 	fPoint GetDragVelocity() const;
 	void SetListener(j1Module* module);
+	void SetListener(MainScene* module);
 	void SetVisible(bool visible);
 	bool PointContained(int x, int y) const;
 	void CheckInput(const Gui* mouse_hover, const Gui* focus);
 	AddGuiTo GetPurpose() const;
 	bool InFOV();
 
+	const j1Module* GetModuleListener() const
+	{
+		return module_listener;
+	}
+
+	const MainScene* GetSceneListener() const
+	{
+		return scene_listener;
+	}
+
 protected:
 	AddGuiTo purpose;
 	fPoint drag_vel = { 0.0f, 0.0f };
 	iPoint position;
-	j1Module* listener = nullptr;
+	j1Module* module_listener = nullptr;
+	MainScene* scene_listener = nullptr;
 	GuiType type = GuiType::undefined;
 	bool visible = true;
 	bool movable = false;
