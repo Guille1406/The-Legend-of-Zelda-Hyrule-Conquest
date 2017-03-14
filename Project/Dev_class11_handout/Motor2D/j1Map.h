@@ -133,7 +133,8 @@ public:
 
 	MapData data;
 	MapLayer* Colision;
-	MapLayer* Logic;
+	std::vector<MapLayer*> V_Logic;
+	//MapLayer* Logic;
 
 private:
 

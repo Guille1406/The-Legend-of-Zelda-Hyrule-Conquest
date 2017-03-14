@@ -54,26 +54,34 @@ int Character::GetLogic()
 	switch (character_direction)
 	{
 	case up:
-		i = App->map->Logic->Get(tilepos.x, tilepos.y -1);
-		j = App->map->Logic->Get(tilepos.x +1, tilepos.y - 1);
+
+
+
+		i = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y - 1);
+		j = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x + 1, tilepos.y - 1);
 		break;
 	case down:
-		i = App->map->Logic->Get(tilepos.x, tilepos.y +2);
-		j = App->map->Logic->Get(tilepos.x +1, tilepos.y +2);
+		i = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y +2);
+		j = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x +1, tilepos.y +2);
 		break;
 
 	case left:
 
 		break;
-		i = App->map->Logic->Get(tilepos.x - 1, tilepos.y );
-		j = App->map->Logic->Get(tilepos.x - 1, tilepos.y +1);
+		i = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y );
+		j = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y +1);
 	case right:
-		i = App->map->Logic->Get(tilepos.x + 2, tilepos.y);
-		j = App->map->Logic->Get(tilepos.x + 2, tilepos.y + 1);
+		i = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y);
+		j = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y + 1);
 		break;
 	}
 	if (i != 0)return i;
 	if (j != 0)return j;
 	return 0;
+}
+
+uint Character::GetLogicHeightPlayer()
+{
+	return i_logic_height_player;
 }
 

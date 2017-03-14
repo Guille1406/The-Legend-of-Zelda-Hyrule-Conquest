@@ -536,9 +536,10 @@ bool j1Map::CreateLogicMap() const
 	for (; item != data.layers.cend(); ++item) {
 		MapLayer* layer = (*item);
 
-		App->map->Logic = layer;
+		//App->map->Logic = layer;
 		if (layer->properties.Get("Logic", 0) == 0)
 			continue;
+		App->map->V_Logic.push_back(layer);
 
 		uchar* map = new uchar[layer->width*layer->height];
 		memset(map, 1, layer->width*layer->height);

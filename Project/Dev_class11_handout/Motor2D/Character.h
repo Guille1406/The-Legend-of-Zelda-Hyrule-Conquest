@@ -79,7 +79,7 @@ public:
 	virtual void ExecuteEvent(float);
 	void GetAdjacents();
 	int GetLogic();
-
+	uint GetLogicHeightPlayer();
 	
 
 public:
@@ -97,7 +97,8 @@ public:
 	player_event				actual_event;
 	direction					character_direction;
 	move_direction				movement_direction;
-
+private:
+	uint i_logic_height_player = 0;
 };
 
 #endif
