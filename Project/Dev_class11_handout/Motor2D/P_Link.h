@@ -18,7 +18,6 @@ public:
 		delete sprites_vector;
 	}
 
-
 	void Attack();
 	void LoadAnimation(const char*);
 	void ChangeAnimation(int);

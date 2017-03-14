@@ -4,19 +4,16 @@
 #include "j1FileSystem.h"
 #include "j1Player.h"
 
-
 void P_Link::Attack()
 {
+
 }
-
-
 
 void P_Link::LoadAnimation(const char * path)
 {
-	
 	p2SString tmp("%s%s", sprites_folder.GetString(), path);
 
-	char* buf;
+	char* buf = nullptr;
 	int size = App->fs->Load(tmp.GetString(), &buf);
 	pugi::xml_parse_result result = sprites_file.load_buffer(buf, size);
 
@@ -41,9 +38,7 @@ void P_Link::LoadAnimation(const char * path)
 	SDL_Rect anim = { x,y,w,h };
 	Animation temp_animation;
 	
-	
 	char* name = (char*)animations.attribute("name").as_string();
-	temp_animation;
 	auto temp = animations;
 	last_name = name;
 	while (animations) {
@@ -56,13 +51,10 @@ void P_Link::LoadAnimation(const char * path)
 		anim = { x,y,w,h };
 		
 		if (strcmp(name,last_name)) {
-			
 			temp_animation.speed = 0.2;
 			sprites_vector->push_back(temp_animation);
 			temp_animation.Reset();
 			temp_animation.last_frame = 0;
-			
-			//temp_animation = new Animation();
 			temp_animation.PushBack(anim);
 			last_name = name;
 		}
@@ -71,10 +63,6 @@ void P_Link::LoadAnimation(const char * path)
 		}
 		animations = animations.next_sibling();
 	}
-
-
-
-	
 }
 
 void P_Link::ChangeAnimation(int animation)
@@ -85,16 +73,10 @@ void P_Link::ChangeAnimation(int animation)
 		this->actual_animation = this->sprites_vector[0][animation];
 		last_animation = animation;
 	}
-
-
-
 }
 
 player_event P_Link::GetEvent()
 {
-	
-	
-
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			movement_direction = move_up_right;
@@ -141,9 +123,6 @@ player_event P_Link::GetEvent()
 		movement_direction = move_idle;
 		actual_event = idle;
 	}
-
-
-	
 
 	return actual_event;
 }

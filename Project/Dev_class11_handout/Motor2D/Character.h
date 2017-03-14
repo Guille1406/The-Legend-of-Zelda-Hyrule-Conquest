@@ -21,7 +21,6 @@ struct  adjacent_tiles {
 	dir_tiles down;
 	dir_tiles left;
 	dir_tiles right;
-
 };
 
 
@@ -31,13 +30,12 @@ enum player_event {
 	jump,
 	attack,
 	rise,
-	fall,
+	fall
 	/*
 	.
 	.
 	.
 	*/
-
 };
 
 enum direction {
@@ -56,8 +54,7 @@ enum move_direction {
 	move_up_left,
 	move_up_right,
 	move_down_left,
-	move_down_right,
-
+	move_down_right
 };
 
 class P_Link;
@@ -81,22 +78,22 @@ public:
 	int GetLogic();
 	uint GetLogicHeightPlayer();
 	
-
 public:
 	
 	SDL_Texture*	character_texture;
-	p2Point<int>	pos;
-	p2Point<int>	tilepos;
+	iPoint	pos;
+	iPoint	tilepos;
 	adjacent_tiles	adjacent;
 
 	p2SString					sprites_folder;
 	pugi::xml_document			sprites_file;
 	std::vector<Animation>*		sprites_vector;
-	Animation					actual_animation;
+	Animation					actual_animation; // pointer?
 
 	player_event				actual_event;
 	direction					character_direction;
 	move_direction				movement_direction;
+
 private:
 	uint i_logic_height_player = 0;
 };
