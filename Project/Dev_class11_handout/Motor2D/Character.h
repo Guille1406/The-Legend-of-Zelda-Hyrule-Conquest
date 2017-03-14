@@ -70,6 +70,7 @@ public:
 	
 	void Attack() {};
 	void Move(float);
+	void Jump(float);
 	virtual void LoadAnimation(const char*);
 	virtual void ChangeAnimation(int);
 	virtual player_event GetEvent();
@@ -84,6 +85,7 @@ public:
 	iPoint	pos;
 	iPoint	tilepos;
 	adjacent_tiles	adjacent;
+	
 
 	p2SString					sprites_folder;
 	pugi::xml_document			sprites_file;
@@ -93,6 +95,8 @@ public:
 	player_event				actual_event;
 	direction					character_direction;
 	move_direction				movement_direction;
+
+	bool doing_script = false;
 
 private:
 	uint i_logic_height_player = 0;

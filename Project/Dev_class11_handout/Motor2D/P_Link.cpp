@@ -77,52 +77,61 @@ void P_Link::ChangeAnimation(int animation)
 
 player_event P_Link::GetEvent()
 {
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			movement_direction = move_up_right;
+	
+	if (doing_script == false) {
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+				movement_direction = move_up_right;
+			}
+			else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+				movement_direction = move_up_left;
+			}
+			else {
+				movement_direction = move_up;
+
+			}
+			character_direction = up;
+			actual_event = move;
+		}
+
+		else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+				movement_direction = move_down_left;
+			}
+			else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+				movement_direction = move_down_right;
+			}
+			else {
+				movement_direction = move_down;
+
+			}
+			character_direction = down;
+			actual_event = move;
+		}
+
+		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+
+			movement_direction = move_right;
+			character_direction = right;
+			actual_event = move;
 		}
 		else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			movement_direction = move_up_left;
+
+			movement_direction = move_left;
+			character_direction = left;
+			actual_event = move;
 		}
 		else {
-			movement_direction = move_up;
-
+			movement_direction = move_idle;
+			actual_event = idle;
 		}
-		character_direction = up;
-		actual_event = move;
-	}
 
-	else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			movement_direction = move_down_left;
+		if (GetLogic() == 424) {
+			actual_event = jump;
+			doing_script = true;
+			LOG("I'm Jumping :DDDD");
 		}
-		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			movement_direction = move_down_right;
-		}
-		else {
-			movement_direction = move_down;
-			
-		}
-		character_direction = down;
-		actual_event = move;
-	}
 
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		
-		movement_direction = move_right;
-		character_direction = right;
-		actual_event = move;
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-
-		movement_direction = move_left;
-		character_direction = left;
-		actual_event = move;
-	}
-	else {
-		movement_direction = move_idle;
-		actual_event = idle;
-	}
-
 	return actual_event;
 }

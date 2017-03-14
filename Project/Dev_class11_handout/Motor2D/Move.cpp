@@ -36,10 +36,10 @@ void Character::Move( float dt)
 	}
 	
 	//DIAGONAL TILES
-	uint diagonal_right_up = App->map->Colision->Get(tile_pos_x + 2, tile_pos_y -1);
-	uint diagonal_left_up  = App->map->Colision->Get(tile_pos_x -1, tile_pos_y - 1);
-	uint diagonal_right_down = App->map->Colision->Get(tile_pos_x +2, tile_pos_y +2);
-	uint diagonal_left_down = App->map->Colision->Get(tile_pos_x -1, tile_pos_y +2);
+	uint diagonal_right_up = App->map->Colision->Get(this->tilepos.x + 2, tile_pos_y -1);
+	uint diagonal_left_up  = App->map->Colision->Get(this->tilepos.x -1, tile_pos_y - 1);
+	uint diagonal_right_down = App->map->Colision->Get(this->tilepos.x +2, tile_pos_y +2);
+	uint diagonal_left_down = App->map->Colision->Get(this->tilepos.x -1, tile_pos_y +2);
 	
 	/////
 	float speed = 1/dt;
@@ -337,3 +337,5 @@ void Character::Move( float dt)
 	this->pos.x = pos_x; this->pos.y = pos_y;
 	this->tilepos.x = tile_pos_x; this->tilepos.y = tile_pos_y;
 }
+
+
