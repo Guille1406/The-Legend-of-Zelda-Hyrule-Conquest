@@ -3,6 +3,7 @@
 #include "j1Input.h"
 #include "j1FileSystem.h"
 #include "j1Player.h"
+#include "j1InputManager.h"
 
 void P_Link::Attack()
 {
@@ -63,6 +64,7 @@ void P_Link::LoadAnimation(const char * path)
 		}
 		animations = animations.next_sibling();
 	}
+	
 }
 
 void P_Link::ChangeAnimation(int animation)
@@ -79,7 +81,28 @@ player_event P_Link::GetEvent()
 {
 	
 	if (doing_script == false) {
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+
+
+
+
+		
+		if (App->inputM->EventPressed(INPUTEVENT::MUP) == EVENTSTATE::E_REPEAT)
+		{
+			movement_direction = move_up;
+			character_direction = up;
+			actual_event = move;
+		}
+
+
+		else if(App->inputM->EventPressed(INPUTEVENT::MDOWN) == EVENTSTATE::E_REPEAT)
+		{
+			movement_direction = move_down;
+			character_direction = down;
+			actual_event = move;
+		}
+
+
+		else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 				movement_direction = move_up_right;
 			}

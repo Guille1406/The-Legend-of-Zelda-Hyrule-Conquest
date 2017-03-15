@@ -121,6 +121,9 @@
     <ClCompile Include="j1Camera.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="j1InputManager.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -262,6 +265,9 @@
       <Filter>Desenvolupament  ========\ToCheckAnim/Fadetoblack</Filter>
     </ClInclude>
     <ClInclude Include="j1Camera.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1InputManager.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
   </ItemGroup>
