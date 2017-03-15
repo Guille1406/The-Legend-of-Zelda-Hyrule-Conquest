@@ -81,7 +81,7 @@ public:
 
 private:
 	void MoveFuntion(float dt);
-	void JumpFuntion(float dt, int& pos, bool add, bool initialbiggerthanfinal);
+	void JumpFuntion(float dt, int& pos, bool add);
 	
 public:
 	

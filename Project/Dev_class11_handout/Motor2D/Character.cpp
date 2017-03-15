@@ -84,21 +84,21 @@ void Character::Jump(float dt)
 {
 	switch (character_direction) {
 	case up:
-		JumpFuntion(dt, pos.y, false, true);
+		JumpFuntion(dt, pos.y, false);
 		break;
 	case down:
-		JumpFuntion(dt, pos.y, true, false);
+		JumpFuntion(dt, pos.y, true);
 		break;
 	case left:
-		JumpFuntion(dt, pos.x, false, true);
+		JumpFuntion(dt, pos.x, false);
 		break;
 	case right:
-		JumpFuntion(dt, pos.x, true, false);
+		JumpFuntion(dt, pos.x, true);
 		break;
 	}
 }
 
-void Character::JumpFuntion(float dt, int& pos, bool add, bool initialbiggerthanfinal)
+void Character::JumpFuntion(float dt, int& pos, bool add)
 {
 	int i = 1;
 	if (!add)
@@ -108,10 +108,7 @@ void Character::JumpFuntion(float dt, int& pos, bool add, bool initialbiggerthan
 		final_pos = pos + (i * JUMP_DISTANCE);
 	temp = true;
 
-	if ((initialbiggerthanfinal == true) && (pos > final_pos)) {
-		pos = pos + (i * 2);
-	}
-	else if ((initialbiggerthanfinal == false) && (pos < final_pos)) {
+	if (( i * pos <  i*final_pos)) {
 		pos = pos + (i * 2);
 	}
 	else {
