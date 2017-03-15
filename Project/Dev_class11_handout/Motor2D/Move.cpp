@@ -7,7 +7,7 @@
 
 #define TILE_COL_ID 419
 
-void Character::Move( float dt)
+void Character::Move(float dt)
 {
 	uint x, y;
 	App->win->GetWindowSize(x, y);

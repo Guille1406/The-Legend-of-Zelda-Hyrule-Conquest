@@ -2,6 +2,8 @@
 #include "j1Map.h"
 #include "j1App.h"
 
+static const uint JUMP_DISTANCE = 48;
+
 void Character::LoadAnimation(const char* path)
 {
 }
@@ -73,66 +75,47 @@ int Character::GetLogic()
 	return 0;
 }
 
-void Character::Jump(float)
-{
-	int jump_distance = 48;
-	static int final_pos;
-
-	//Sirve para guardar la posicion final solo una vez
-	static bool temp = false;
-
-	switch (character_direction) {
-	case up:		
-		if(!temp)final_pos = pos.y - jump_distance;
-		temp = true;
-		if (pos.y > final_pos) {
-			pos.y -= 2;
-		}
-		else {
-			temp = false;
-			doing_script = false;
-		}
-		break;
-
-	case down:
-		if (!temp)
-			final_pos = pos.y + jump_distance;
-		temp = true;
-		if (pos.y < final_pos) {
-			pos.y+= 2;
-		}
-		else {
-			temp = false;
-			doing_script = false;
-		}
-		break;
-	case left:
-		if (!temp)final_pos = pos.x - jump_distance;
-		temp = true;
-		if (pos.x > final_pos) {
-			pos.x-= 2;
-		}
-		else {
-			temp = false;
-			doing_script = false;
-		}
-		break;
-	case right:
-		if (!temp)final_pos = pos.x + jump_distance;
-		temp = true;
-		if (pos.x < final_pos) {
-			pos.x+= 2;
-		}
-		else {
-			temp = false;
-			doing_script = false;
-		}
-		break;
-	}
-}
-
 uint Character::GetLogicHeightPlayer()
 {
 	return i_logic_height_player;
 }
 
+void Character::Jump(float dt)
+{
+	switch (character_direction) {
+	case up:
+		JumpFuntion(dt, pos.y, false, true);
+		break;
+	case down:
+		JumpFuntion(dt, pos.y, true, false);
+		break;
+	case left:
+		JumpFuntion(dt, pos.x, false, true);
+		break;
+	case right:
+		JumpFuntion(dt, pos.x, true, false);
+		break;
+	}
+}
+
+void Character::JumpFuntion(float dt, int& pos, bool add, bool initialbiggerthanfinal)
+{
+	int i = 1;
+	if (!add)
+		i = -1;
+
+	if (!temp)
+		final_pos = pos + (i * JUMP_DISTANCE);
+	temp = true;
+
+	if ((initialbiggerthanfinal == true) && (pos > final_pos)) {
+		pos = pos + (i * 2);
+	}
+	else if ((initialbiggerthanfinal == false) && (pos < final_pos)) {
+		pos = pos + (i * 2);
+	}
+	else {
+		temp = false;
+		doing_script = false;
+	}
+}

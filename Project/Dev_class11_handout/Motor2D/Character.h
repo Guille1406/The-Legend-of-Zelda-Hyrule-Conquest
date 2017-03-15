@@ -69,8 +69,8 @@ public:
 	~Character() {};
 	
 	void Attack() {};
-	void Move(float);
-	void Jump(float);
+	void Move(float dt);
+	void Jump(float dt);
 	virtual void LoadAnimation(const char*);
 	virtual void ChangeAnimation(int);
 	virtual player_event GetEvent();
@@ -78,6 +78,10 @@ public:
 	void GetAdjacents();
 	int GetLogic();
 	uint GetLogicHeightPlayer();
+
+private:
+	void MoveFuntion(float dt);
+	void JumpFuntion(float dt, int& pos, bool add, bool initialbiggerthanfinal);
 	
 public:
 	
@@ -100,6 +104,10 @@ public:
 
 private:
 	uint i_logic_height_player = 0;
+
+	//For jump
+	int final_pos = 0;
+	bool temp = false; //Needed to save position only one time
 };
 
 #endif
