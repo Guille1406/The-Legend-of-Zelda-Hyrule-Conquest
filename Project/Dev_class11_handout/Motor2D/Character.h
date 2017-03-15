@@ -11,6 +11,8 @@
 #include "p2Log.h"
 
 
+#define TILE_COL_ID 419
+
 struct dir_tiles {
 	uint i;
 	uint j;
@@ -80,8 +82,9 @@ public:
 	uint GetLogicHeightPlayer();
 
 private:
-	void MoveFuntion(float dt);
-	void JumpFuntion(float dt, int& pos, bool add);
+	void MoveFunction(float dt, int& pos,int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down = false);
+	void MoveDiagonalFunction(float dt, int& pos_one, int& pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile);
+	void JumpFunction(float dt, int& pos, bool add);
 	
 public:
 	

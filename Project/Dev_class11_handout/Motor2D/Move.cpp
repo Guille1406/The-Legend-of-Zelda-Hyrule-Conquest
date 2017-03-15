@@ -5,7 +5,6 @@
 #include "p2Log.h"
 #include "Character.h"
 
-#define TILE_COL_ID 419
 
 void Character::Move(float dt)
 {
@@ -46,144 +45,31 @@ void Character::Move(float dt)
 
 	switch (movement_direction) {
 	case move_up:
-		if (adjacent.up.i != TILE_COL_ID && adjacent.up.j != TILE_COL_ID) {
-			pos_y -= speed*dt;
-			if (adjacent.left.j == TILE_COL_ID && pos_x < tile_pos_x * 8)
-				pos_x += speed*dt;
-			if (adjacent.right.i == TILE_COL_ID && pos_x > tile_pos_x * 8)
-				pos_x -= speed*dt;
-		}
-		else if (adjacent.up.i == TILE_COL_ID && adjacent.up.j != TILE_COL_ID) {
-			if (7 - (pos_x + 8 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8))
-				pos_x += speed*dt;
-			else if (7 - (pos_x + 8 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8))
-				pos_y -= speed*dt;
-			else {
-				pos_y -= speed*dt;
-				pos_x += speed*dt;
-			}
-		}
-		else if (adjacent.up.i != TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
-			if (pos_x - tile_pos_x * 8 > pos_y - tile_pos_y * 8)
-				pos_x -= speed*dt;
-			else if (pos_x - tile_pos_x * 8 < pos_y - tile_pos_y * 8)
-				pos_y -= speed*dt;
-			else {
-				pos_y -= speed*dt;
-				pos_x -= speed*dt;
-			}
-		}
-		else if (adjacent.up.i == TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
-			if ((pos_y - 1) / 8 == tile_pos_y)
-				pos_y -= speed*dt;
-		}
+
+		MoveFunction(dt, pos.y, pos.x, false, adjacent.up, adjacent.left.i, adjacent.right.i);
+	
 		break;
 
 	case  move_down:
-		if (adjacent.down.i != TILE_COL_ID && adjacent.down.j != TILE_COL_ID) {
-			pos_y += speed*dt;
-			if (adjacent.left.i == TILE_COL_ID && pos_x < tile_pos_x * 8)
-				pos_x += speed*dt;
-			if (adjacent.right.j == TILE_COL_ID && pos_x > tile_pos_x * 8)
-				pos_x -= speed*dt;
-		}
-		else if (adjacent.down.i == TILE_COL_ID && adjacent.down.j != TILE_COL_ID) {
-			if (7 - (pos_x + 8 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8))
-				pos_x -= speed*dt;
-			else if (7 - (pos_x + 8 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8))
-				pos_y += speed*dt;
-			else {
-				pos_y += speed*dt;
-				pos_x -= speed*dt;
-			}
-		}
-		else if (adjacent.down.i != TILE_COL_ID && adjacent.down.j == TILE_COL_ID) {
-			if ((pos_x - tile_pos_x * 8) > (pos_y - tile_pos_y * 8))
-				pos_y += speed*dt;
-			else if ((pos_x - tile_pos_x * 8) < (pos_y - tile_pos_y * 8))
-				pos_x += speed*dt;
-			else {
-				pos_y += speed*dt;
-				pos_x += speed*dt;
-			}
-		}
-		else if (adjacent.down.i == TILE_COL_ID && adjacent.down.j == TILE_COL_ID) {
-			if ((pos_y + 8) / 8 == tile_pos_y)
-				pos_y += speed*dt;
-		}
+		MoveFunction(dt, pos.y, pos.x, true, adjacent.down, adjacent.left.j,  adjacent.right.j, true);
+	
 		break;
 
 	case move_left:
-		if (adjacent.left.i != TILE_COL_ID && adjacent.left.j != TILE_COL_ID) {
-			pos_x -= speed*dt;
-			if (adjacent.up.i == TILE_COL_ID && pos_y < tile_pos_y * 8)
-				pos_y += speed*dt;
-			if (adjacent.down.j == TILE_COL_ID && pos_y > tile_pos_y * 8)
-				pos_y -= speed*dt;
-		}
-		else if (adjacent.left.i == TILE_COL_ID && adjacent.left.j != TILE_COL_ID) {
-			if ((pos_x - tile_pos_x * 8) > (pos_y - tile_pos_y * 8))
-				pos_x -= speed*dt;
-			else if ((pos_x - tile_pos_x * 8) < (pos_y - tile_pos_y * 8))
-				pos_y -= speed*dt;
-			else {
-				pos_x -= speed*dt;
-				pos_y -= speed*dt;
-			}
-		}
-		else if (adjacent.left.i != TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
-			if (7 - (pos_x + 8 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8))
-				pos_y += speed*dt;
-			else if (7 - (pos_x + 8 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8))
-				pos_x -= speed*dt;
-			else {
-				pos_y += speed*dt;
-				pos_x -= speed*dt;
-			}
-		}
-		else if (adjacent.left.i == TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
-			if ((pos_x - 1) / 8 == tile_pos_x)
-				pos_x -= speed*dt;
-		}
+		MoveFunction(dt, pos.x, pos.y, false, adjacent.left, adjacent.up.i, adjacent.down.i);
+		
 		break;
 
 	case move_right:
-		if (adjacent.right.i != TILE_COL_ID && adjacent.right.j != TILE_COL_ID) {
-			pos_x += speed*dt;
-			if (adjacent.up.j == TILE_COL_ID && pos_y < tile_pos_y * 8)
-				pos_y += speed*dt;
-			if (adjacent.down.i == TILE_COL_ID && pos_y > tile_pos_y * 8)
-				pos_y -= speed*dt;
-		}
-		else if (adjacent.right.i == TILE_COL_ID && adjacent.right.j != TILE_COL_ID) {
-			if ((pos_x - tile_pos_x * 8) > (pos_y - tile_pos_y * 8))
-				pos_y += speed*dt;
-			else if ((pos_x - tile_pos_x * 8) < (pos_y - tile_pos_y * 8))
-				pos_x += speed*dt;
-			else {
-				pos_y += speed*dt;
-				pos_x += speed*dt;
-			}
-		}
-		else if (adjacent.right.i != TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
-			if (7 - (pos_x + 8 - tile_pos_x * 8) > (pos_y - tile_pos_y * 8))
-				pos_x += speed*dt;
-			else if (7 - (pos_x + 8 - tile_pos_x * 8) < (pos_y - tile_pos_y * 8))
-				pos_y -= speed*dt;
-			else {
-				pos_y -= speed*dt;
-				pos_x += speed*dt;
-			}
-		}
-		else if (adjacent.right.i == TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
-			if ((pos_x + 8) / 8 == tile_pos_x)
-				pos_x += speed*dt;
-		}
+		MoveFunction(dt, pos.x, pos.y, true, adjacent.right, adjacent.up.j, adjacent.down.j, true);
+		
 		break;
 
 	case move_up_left:
+		MoveDiagonalFunction(dt, pos.y, pos.x, false, false, adjacent.up.i, adjacent.left.i, diagonal_left_up);
+		/*
 		if (adjacent.up.i == TILE_COL_ID && adjacent.left.j == TILE_COL_ID) {
-			if ((pos_y - 1) / 8 == tile_pos_y && (pos_x - 1) / 8 == tile_pos_x) {
+			if ((pos_y ) / 8 == tile_pos_y && (pos_x) / 8 == tile_pos_x) {
 				pos_y -= speed*dt;
 				pos_x -= speed*dt;
 			}
@@ -218,12 +104,14 @@ void Character::Move(float dt)
 		if (adjacent.up.i == TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
 			if ((pos_y - 1) / 8 == tile_pos_y)
 				pos_y -= speed*dt;
-		}
+		}*/
 		break;
 
 	case move_up_right:
+		MoveDiagonalFunction(dt, pos.y, pos.x, false, true, adjacent.up.j, adjacent.right.i, diagonal_right_up);
+		/*
 		if (adjacent.up.j == TILE_COL_ID && adjacent.right.i == TILE_COL_ID) {
-			if ((pos_y) / 8 == tile_pos_y && (pos_x + 8) / 8 == tile_pos_x) {
+			if ((pos_y ) / 8 == tile_pos_y && (pos_x + 8) / 8 == tile_pos_x) {
 				pos_y -= speed*dt;
 				pos_x += speed*dt;
 			}
@@ -256,9 +144,12 @@ void Character::Move(float dt)
 		if (adjacent.up.i == TILE_COL_ID && adjacent.up.j == TILE_COL_ID)
 			if ((pos_y - 1) / 8 == tile_pos_y)
 				pos_y -= speed*dt;
+				*/
 		break;
 
 	case move_down_left:
+		MoveDiagonalFunction(dt, pos.y, pos.x, true, false, adjacent.down.i, adjacent.left.j, diagonal_left_down);
+		/*
 		if (adjacent.down.j == TILE_COL_ID && adjacent.left.i == TILE_COL_ID) {
 			if ((pos_y + 8) / 8 == tile_pos_y && (pos_x) / 8 == tile_pos_x) {
 				pos_y += speed*dt;
@@ -293,9 +184,12 @@ void Character::Move(float dt)
 		if (adjacent.down.i == TILE_COL_ID && adjacent.down.j == TILE_COL_ID)
 			if ((pos_y + 8) / 8 == tile_pos_y)
 				pos_y += speed*dt;
+				*/
 		break;
 
 	case move_down_right:
+		MoveDiagonalFunction(dt, pos.y, pos.x, true, true, adjacent.down.j, adjacent.right.j, diagonal_right_down);
+		/*
 		if (adjacent.down.i == TILE_COL_ID && adjacent.right.j == TILE_COL_ID) {
 			if ((pos_y + 8) / 8 == tile_pos_y && (pos_x + 8) / 8 == tile_pos_x) {
 				pos_y += speed*dt;
@@ -330,12 +224,14 @@ void Character::Move(float dt)
 		if (adjacent.down.i == TILE_COL_ID && adjacent.down.j == TILE_COL_ID)
 			if ((pos_y + 8) / 8 == tile_pos_y)
 				pos_y += speed*dt;
-
+*/
 		break;
 	}
 
-	this->pos.x = pos_x; this->pos.y = pos_y;
-	this->tilepos.x = tile_pos_x; this->tilepos.y = tile_pos_y;
+	//if (movement_direction != move_up && movement_direction != move_down && movement_direction != move_left  && movement_direction != move_right && movement_direction != move_up_right) {
+		//this->pos.x = pos_x; this->pos.y = pos_y;
+		//this->tilepos.x = tile_pos_x; this->tilepos.y = tile_pos_y;
+	//}
 }
 
 
