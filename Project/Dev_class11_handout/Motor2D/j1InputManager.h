@@ -28,14 +28,15 @@ enum EVENTSTATE
 	E_UP,
 	E_REPEAT
 };
-
-class j1InputListener
+enum JSTATE
 {
-public:
-	j1InputListener() : input_active(false) {}
-	bool input_active;
-	virtual void OnInputCallback(INPUTEVENT, EVENTSTATE) {};
+	J_NONE,
+	J_POSITIVE,
+	J_NEGATIVE
+
+
 };
+
 
 class j1InputManager : public j1Module
 {
@@ -62,6 +63,7 @@ public:
 
 	//When detected input
 	void InputDetected(int, EVENTSTATE);
+	void JoystickDetected(int, JSTATE);
 
 	//To Change the action button
 	void ChangeInputEvent(INPUTEVENT);
@@ -71,8 +73,7 @@ public:
 	EVENTSTATE EventPressed(INPUTEVENT) const;
 
 	//For Callback system
-	void AddListener(j1InputListener*);
-	void CallListeners();
+
 
 private:
 
@@ -84,8 +85,7 @@ private:
 	//All the actions in this frame
 	std::multimap<INPUTEVENT, EVENTSTATE> current_action;
 
-	//All listeners for the callbacks
-	std::list<j1InputListener*> listeners;
+	
 
 	//To Change the action button
 	bool		next_input_change = false;

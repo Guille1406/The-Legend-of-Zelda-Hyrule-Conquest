@@ -46,8 +46,6 @@ bool j1InputManager::PreUpdate()
 
 bool j1InputManager::Update(float dt)
 {
-	CallListeners();
-
 	if (EventPressed(PAUSE) == E_DOWN)
 	{
 		ChangeInputEvent(MUP);
@@ -93,6 +91,48 @@ void j1InputManager::InputDetected(int button, EVENTSTATE state)
 	else
 	{
 		ChangeEventButton(button);
+	}
+}
+
+void j1InputManager::JoystickDetected(int axis, JSTATE state)
+{
+
+	std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
+
+	switch (axis)
+	{
+	case SDL_CONTROLLER_AXIS_LEFTX:
+		if (state == J_POSITIVE)
+		{
+			new_current_action.first = MRIGHT;
+			new_current_action.second = E_REPEAT;
+			current_action.insert(new_current_action);
+		}
+		else
+		{
+			new_current_action.first = MLEFT;
+			new_current_action.second = E_REPEAT;
+			current_action.insert(new_current_action);
+		}
+		break;
+
+	case SDL_CONTROLLER_AXIS_LEFTY:
+
+		if (state == J_POSITIVE)
+		{
+			new_current_action.first = MDOWN;
+			new_current_action.second = E_REPEAT;
+			current_action.insert(new_current_action);
+		}
+		else
+		{
+			new_current_action.first = MUP;
+			new_current_action.second = E_REPEAT;
+			current_action.insert(new_current_action);
+		}
+		break;
+
+
 	}
 }
 
@@ -146,38 +186,6 @@ EVENTSTATE j1InputManager::EventPressed(INPUTEVENT action) const
 
 	return E_NOTHING;
 }
-
-void j1InputManager::AddListener(j1InputListener* new_listener)
-{
-	//To improve this: Search if the listener is actually in the list
-
-	if (new_listener)
-	{
-		new_listener->input_active = true;
-		listeners.push_back(new_listener);
-	}
-
-}
-
-void j1InputManager::CallListeners()
-{
-	if (!current_action.empty())
-	{
-		for (std::list<j1InputListener*>::iterator it = listeners.begin(); it != listeners.end(); it++)
-		{
-			if ((*it)->input_active)
-			{
-				std::multimap<INPUTEVENT, EVENTSTATE>::iterator frame_actions = current_action.begin();
-				while (frame_actions != current_action.end())
-				{
-					(*it)->OnInputCallback(frame_actions->first, frame_actions->second);
-					frame_actions++;
-				}
-			}
-		}
-	}
-}
-
 
 
 

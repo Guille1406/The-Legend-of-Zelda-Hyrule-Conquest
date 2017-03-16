@@ -30,6 +30,13 @@ enum j1KeyState
 	KEY_UP
 };
 
+enum j1JoystickState
+{
+	JOYSTICK_POSITIVE,
+	JOYSTICK_NEGATIVE,
+	JOYSTICK_IDDLE
+};
+
 class j1Input : public j1Module
 {
 
@@ -91,9 +98,8 @@ private:
 	std::string input_text;
 
 	SDL_GameController*	gamepad = nullptr;
-	SDL_Joystick*		joystick = nullptr;
-
 	j1KeyState			controller_buttons[NUM_CONTROLLER_BUTTONS];
+	j1JoystickState	controller_axis[NUM_CONTROLLER_AXIS];
 
 };
 

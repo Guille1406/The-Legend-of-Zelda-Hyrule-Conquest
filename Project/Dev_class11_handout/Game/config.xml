@@ -33,5 +33,27 @@
   <map>
     <folder>maps/</folder>
   </map>
+  
+  <inputManager>
+    <!--JUMP-->
+    <action  button="0" event="0" />
+
+    <!--Move UP-->
+    <action  button="11" event="1" />
+
+    <!--Move DOWN-->
+    <action  button="12" event="2" />
+
+    <!--Move LEFT-->
+    <action  button="13" event="3" />
+
+    <!--Move RIGHT-->
+    <action  button="14" event="4" />
+
+    <!--PAUSE-->
+    <action  button="6"  event="5" />
+
+
+  </inputManager>
 
 </config>

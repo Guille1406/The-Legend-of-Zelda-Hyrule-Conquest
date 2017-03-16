@@ -15,6 +15,7 @@ j1Input::j1Input() : j1Module()
 	keyboard = new j1KeyState[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(j1KeyState) * MAX_KEYS);
 	memset(mouse_buttons, KEY_IDLE, sizeof(j1KeyState) * NUM_MOUSE_BUTTONS);
+	memset(controller_axis, JOYSTICK_IDDLE, sizeof(j1JoystickState)* NUM_CONTROLLER_AXIS);
 }
 
 // Destructor
@@ -30,7 +31,7 @@ bool j1Input::Awake(pugi::xml_node& config)
 	bool ret = true;
 	SDL_Init(0);
 
-	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
+	if(SDL_InitSubSystem(SDL_INIT_EVENTS | SDL_INIT_GAMECONTROLLER) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
@@ -78,14 +79,17 @@ bool j1Input::PreUpdate()
 			controller_buttons[i] = KEY_IDLE;
 	}
 
+	for (int i = 0; i < NUM_CONTROLLER_AXIS; ++i)
+	{
+		if (controller_axis[i] == j1JoystickState::JOYSTICK_NEGATIVE)
+			App->inputM->JoystickDetected(i, JSTATE::J_NEGATIVE);
 
 
-	
+		if (controller_axis[i] == j1JoystickState::JOYSTICK_POSITIVE)
+			App->inputM->JoystickDetected(i, JSTATE::J_POSITIVE);
 
+	}
 
-
-
-	
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 
 	mouse_motion_x = 0;
@@ -124,6 +128,54 @@ bool j1Input::PreUpdate()
 	{
 		switch (event.type)
 		{
+
+		case SDL_CONTROLLERAXISMOTION:
+
+
+			if (event.caxis.value < -DEAD_ZONE)
+				controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_NEGATIVE;
+
+			else
+			{
+				if (event.caxis.value > DEAD_ZONE)
+					controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_POSITIVE;
+
+				else controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_IDDLE;
+			}
+
+
+			break;
+
+		case SDL_CONTROLLERBUTTONDOWN:
+
+			LOG("BOTON: %i", event.cbutton.button);
+			controller_buttons[event.cbutton.button] = KEY_DOWN;
+			App->inputM->InputDetected(event.cbutton.button, EVENTSTATE::E_DOWN);
+			break;
+
+		case SDL_CONTROLLERBUTTONUP:
+			controller_buttons[event.cbutton.button] = KEY_UP;
+			App->inputM->InputDetected(event.cbutton.button, EVENTSTATE::E_UP);
+			break;
+
+
+		case SDL_CONTROLLERDEVICEADDED:
+
+			if (SDL_IsGameController(event.cdevice.which))
+				gamepad = SDL_GameControllerOpen(event.cdevice.which);
+
+			break;
+
+		case SDL_CONTROLLERDEVICEREMOVED:
+			if (gamepad)
+				SDL_GameControllerClose(gamepad);
+			break;
+
+
+
+
+
+
 		case SDL_QUIT:
 			windowEvents[WE_QUIT] = true;
 			SDL_StopTextInput();
@@ -183,30 +235,7 @@ bool j1Input::PreUpdate()
 			break;
 
 	//			gamepad			//
-		case SDL_CONTROLLERBUTTONDOWN:
-
-			LOG("BOTON: %i", event.cbutton.button);
-			controller_buttons[event.cbutton.button] = KEY_DOWN;
-			App->inputM->InputDetected(event.cbutton.button, EVENTSTATE::E_DOWN);
-			break;
-
-		case SDL_CONTROLLERBUTTONUP:
-			controller_buttons[event.cbutton.button] = KEY_UP;
-			App->inputM->InputDetected(event.cbutton.button, EVENTSTATE::E_UP);
-			break;
-
-
-		case SDL_CONTROLLERDEVICEADDED:
-
-			if (SDL_IsGameController(event.cdevice.which))
-				gamepad = SDL_GameControllerOpen(event.cdevice.which);
-
-			break;
-
-		case SDL_CONTROLLERDEVICEREMOVED:
-			if (gamepad)
-				SDL_GameControllerClose(gamepad);
-			break;
+		
 
 
 		}

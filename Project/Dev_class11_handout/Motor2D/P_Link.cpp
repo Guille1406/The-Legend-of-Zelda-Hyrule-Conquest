@@ -71,25 +71,53 @@ void P_Link::LoadAnimation(const char * path)
 
 player_event P_Link::GetEvent()
 {
-	
+
 	if (doing_script == false) {
 
+	
 
 
 
-		
-		if (App->inputM->EventPressed(INPUTEVENT::MUP) == EVENTSTATE::E_REPEAT)
-		{
-			movement_direction = move_up;
+		 if (App->inputM->EventPressed(INPUTEVENT::MUP) == EVENTSTATE::E_REPEAT) {
+			if (App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT) {
+				movement_direction = move_up_right;
+			}
+			else if (App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT) {
+				movement_direction = move_up_left;
+			}
+			else {
+				movement_direction = move_up;
+
+			}
 			character_direction = up;
 			actual_event = move;
 		}
 
+		else if (App->inputM->EventPressed(INPUTEVENT::MDOWN) == EVENTSTATE::E_REPEAT) {
+			if (App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT) {
+				movement_direction = move_down_left;
+			}
+			else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT) {
+				movement_direction = move_down_right;
+			}
+			else {
+				movement_direction = move_down;
 
-		else if(App->inputM->EventPressed(INPUTEVENT::MDOWN) == EVENTSTATE::E_REPEAT)
-		{
-			movement_direction = move_down;
+			}
 			character_direction = down;
+			actual_event = move;
+		}
+
+		else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT) {
+
+			movement_direction = move_right;
+			character_direction = right;
+			actual_event = move;
+		}
+		else if (App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT) {
+
+			movement_direction = move_left;
+			character_direction = left;
 			actual_event = move;
 		}
 
@@ -139,14 +167,15 @@ player_event P_Link::GetEvent()
 		else {
 			movement_direction = move_idle;
 			actual_event = idle;
-		}
 
-		if (GetLogic() == 424) {
-			actual_event = jump;
-			doing_script = true;
-			LOG("I'm Jumping :DDDD");
-		}
 
+			if (GetLogic() == 424) {
+				actual_event = jump;
+				doing_script = true;
+				LOG("I'm Jumping :DDDD");
+			}
+
+		}
+		return actual_event;
 	}
-	return actual_event;
 }
