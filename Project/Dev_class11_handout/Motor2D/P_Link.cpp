@@ -167,7 +167,7 @@ player_event P_Link::GetEvent()
 		else {
 			movement_direction = move_idle;
 			actual_event = idle;
-
+		}
 
 			if (GetLogic() == 424) {
 				actual_event = jump;
@@ -175,7 +175,7 @@ player_event P_Link::GetEvent()
 				LOG("I'm Jumping :DDDD");
 			}
 
-		}
+		
 		return actual_event;
 	}
 }
