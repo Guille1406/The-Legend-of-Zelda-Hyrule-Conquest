@@ -16,7 +16,7 @@ enum GuiEvent;
 class Gui;
 struct Command;
 struct CVar;
-
+class Collider;
 class j1Module
 {
 public:
@@ -90,6 +90,11 @@ public:
 
 	virtual void OnConsoleCVar(const CVar* cvar)
 	{
+
+	}
+
+	virtual void OnCollision(Collider* collider1, Collider* collider2) {
+
 
 	}
 

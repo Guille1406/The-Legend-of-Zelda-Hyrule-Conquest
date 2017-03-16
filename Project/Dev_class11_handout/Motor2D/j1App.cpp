@@ -21,6 +21,7 @@
 #include "j1FadeToBlack.h"
 #include "j1Camera.h"
 #include "j1InputManager.h"
+#include"j1Collision.h"
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
@@ -42,6 +43,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	fadetoblack = new j1FadeToBlack();
 	camera = new j1Camera();
 	inputM = new j1InputManager();
+	collision = new j1Collision();
+
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(fs);
@@ -57,7 +60,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// scene last
 	AddModule(scene);
 	AddModule(player);
-
+	AddModule(collision);
 	// gui after all to print above all
 	AddModule(gui);
 	AddModule(fadetoblack);
