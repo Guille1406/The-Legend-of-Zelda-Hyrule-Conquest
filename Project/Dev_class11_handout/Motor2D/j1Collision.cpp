@@ -1,13 +1,13 @@
 #include"j1Collision.h"
 #include"j1App.h"
 #include"j1Player.h"
+#include"j1Render.h"
 j1Collision::j1Collision()
 {
 	for (uint i = 0; i < colliders.size(); ++i)
 		colliders[i] = nullptr;
 
-	//matrix[COLLIDER_HOLE][COLLIDER_WALL] = false;
-
+	//matrix[player][enemy] = true;
 }
 
 // Destructor
@@ -69,7 +69,7 @@ bool j1Collision::PreUpdate()
 
 
 // Called before render is available
-bool j1Collision::Update()
+bool j1Collision::Update(float dt)
 {
 	Collider* c1;
 	Collider* c2;
@@ -133,8 +133,8 @@ void j1Collision::DebugDraw()
 
 		switch (colliders[i]->type)
 		{
-		case COLLIDER_NONE: // white
-			//App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
+		case link: // white
+			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
 			break;
 		}
 	}
@@ -160,15 +160,9 @@ bool j1Collision::CleanUp()
 Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback)
 {
 	Collider* ret = nullptr;
-
-	for (uint i = 0; i < colliders.size(); ++i)
-	{
-		if (colliders[i] == nullptr)
-		{
-			ret = colliders[i] = new Collider(rect, type, callback);
-			break;
-		}
-	}
+	
+			ret = new Collider(rect, type, callback);
+			colliders.push_back(ret);
 
 	return ret;
 }

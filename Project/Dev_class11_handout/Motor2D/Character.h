@@ -104,7 +104,7 @@ public:
 	move_direction				movement_direction;
 
 	bool doing_script = false;
-
+	Collider* collision;
 	int last_animation = 0;
 
 private:

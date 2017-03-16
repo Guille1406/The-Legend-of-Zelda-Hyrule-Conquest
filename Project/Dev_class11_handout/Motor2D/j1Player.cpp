@@ -4,7 +4,7 @@
 #include "j1Window.h"
 #include "j1Pathfinding.h"
 #include <algorithm>
-
+#include"j1Collision.h"
 
 #define TILE_COL_ID 237
 bool j1Player::Awake(pugi::xml_node& config)
@@ -23,6 +23,8 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Zelda->actual_event = player_event::idle;
 	Link->character_direction = direction::down;
 	Zelda->character_direction = direction::down;
+
+	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,16,16 }, link, this);
 	return true;
 }
 
@@ -117,7 +119,7 @@ bool j1Player::Update(float dt)
 
 
 	Draw();
-
+	Link->collision->SetPos(Link->pos.x, Link->pos.y);
 	return true;
 }
 

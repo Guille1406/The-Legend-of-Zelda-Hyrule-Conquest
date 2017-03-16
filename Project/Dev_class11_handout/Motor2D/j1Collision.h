@@ -9,6 +9,8 @@ enum COLLIDER_TYPE
 {
 	//example
 	COLLIDER_NONE = -1,
+	link,
+	zelda,
 };
 
 struct Collider
@@ -41,7 +43,7 @@ public:
 	~j1Collision();
 
 	bool PreUpdate();
-	bool Update();
+	bool Update(float dt);
 	//update_status PostUpdate();
 	bool CleanUp();
 
