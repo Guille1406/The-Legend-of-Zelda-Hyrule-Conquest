@@ -131,9 +131,6 @@ bool j1App::Awake()
 	{
 		for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.cend() && ret == true; ++item)
 			ret = (*item)->Awake(config.child((*item)->name.GetString()));
-
-		for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.cend() && ret == true; ++item)
-			ret = (*item)->IsEnabled() ? (*item)->Start() : true;
 	}
 
 	PERF_PEEK(ptimer);
@@ -149,7 +146,7 @@ bool j1App::Start()
 	bool ret = true;
 
 	for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.cend() && ret == true; ++item)
-		ret = (*item)->Start();
+		ret = (*item)->IsEnabled() ? (*item)->Start() : true;
 
 	startup_time.Start();
 
