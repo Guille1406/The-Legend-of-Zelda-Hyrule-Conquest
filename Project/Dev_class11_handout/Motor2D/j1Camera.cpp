@@ -42,17 +42,26 @@ bool j1Camera::Start()
 // Called each loop iteration
 bool j1Camera::PreUpdate()
 {
+	//Calculate camera centre
 	uint Scale = App->win->GetScale();
 	App->render->camera.x = ((-1) * (int)(((App->player->Link->pos.x + App->player->Zelda->pos.x) * 0.5f) * Scale)) + Half_w;
 	App->render->camera.y = ((-1) * (int)(((App->player->Link->pos.y + App->player->Zelda->pos.y) * 0.5f) * Scale)) + Half_h;
-	LitleEllipse.ellipsecentre = BigEllipse.ellipsecentre = { App->render->camera.x,App->render->camera.y };
-
+	LitleEllipse.ellipsecentre = BigEllipse.ellipsecentre = { App->render->camera.x - Half_w,App->render->camera.y - Half_h };
 	return true;
 }
 
 // Called each loop iteration
 bool j1Camera::Update(float dt)
 {
+	/*
+	App->player->Link->pos;
+	App->player->Zelda->pos;
+	LitleEllipse.InsideEllipse();
+	LitleEllipse.InsideEllipseValue();
+	BigEllipse.InsideEllipse();
+	BigEllipse.InsideEllipseValue();
+	*/
+
 	return true;
 }
 

@@ -10,14 +10,14 @@ struct CamEllipse
 	uint semimajoraxis = 0;
 	uint semiminoraxis = 0;
 
-	float InsideEllipseValue(int x, int y)
+	float InsideEllipseValue(iPoint pos)
 	{
-		return ((((x - ellipsecentre.x) * (x - ellipsecentre.x)) / (semimajoraxis * semimajoraxis)) + (((y - ellipsecentre.y) * (y - ellipsecentre.y)) / (semiminoraxis * semiminoraxis)));
+		return ((((pos.x - ellipsecentre.x) * (pos.x - ellipsecentre.x)) / (semimajoraxis * semimajoraxis)) + (((pos.y - ellipsecentre.y) * (pos.y - ellipsecentre.y)) / (semiminoraxis * semiminoraxis)));
 	}
 
-	bool InsideEllipse(int x, int y)
+	bool InsideEllipse(iPoint pos)
 	{
-		return (((((x - ellipsecentre.x) * (x - ellipsecentre.x)) / (semimajoraxis * semimajoraxis)) + (((y - ellipsecentre.y) * (y - ellipsecentre.y)) / (semiminoraxis * semiminoraxis))) <= 1);
+		return (((((pos.x - ellipsecentre.x) * (pos.x - ellipsecentre.x)) / (semimajoraxis * semimajoraxis)) + (((pos.y - ellipsecentre.y) * (pos.y - ellipsecentre.y)) / (semiminoraxis * semiminoraxis))) <= 1);
 	}
 };
 
