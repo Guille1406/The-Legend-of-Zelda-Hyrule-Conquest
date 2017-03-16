@@ -19,6 +19,7 @@ void Character::Move(float dt)
 	int tile_pos_y = this->tilepos.y;
 
 	////Camera
+	/*
 	int movementx = pos_x * App->win->GetScale() + x / 2 - 8;
 	int movementy = pos_y * App->win->GetScale() + y / 2 - 8;
 
@@ -33,6 +34,7 @@ void Character::Move(float dt)
 	if (-App->render->camera.y >= App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale()) {
 		App->render->camera.y = -1 * (App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale());
 	}
+	*/
 	
 	//DIAGONAL TILES
 	uint diagonal_right_up = App->map->Colision->Get(this->tilepos.x + 2, tile_pos_y -1);

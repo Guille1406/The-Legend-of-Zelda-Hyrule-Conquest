@@ -58,6 +58,8 @@ public:
 	void OnConsoleCVar(const CVar* cvar);
 
 private:
+	int Half_w = 0;
+	int Half_h = 0;
 	CamEllipse LitleEllipse;
 	CamEllipse BigEllipse;
 

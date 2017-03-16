@@ -2,6 +2,8 @@
 #include "j1Render.h"
 #include "p2Log.h"
 #include "j1Camera.h"
+#include "j1Player.h"
+#include "j1Window.h"
 
 j1Camera::j1Camera()
 {
@@ -23,19 +25,28 @@ bool j1Camera::Awake(pugi::xml_node&)
 	BigEllipse.ellipsecentre = { 0,0 };
 	BigEllipse.semimajoraxis = 320;
 	BigEllipse.semiminoraxis = 180;
+
 	return true;
 }
 
 // Called before the first frame
 bool j1Camera::Start()
 {
+	int w, h = 0;
+	SDL_GetRendererOutputSize(App->render->renderer, &w, &h);
+	Half_w = (int)(w * 0.5f);
+	Half_h = (int)(h * 0.5f);
 	return true;
 }
 
 // Called each loop iteration
 bool j1Camera::PreUpdate()
 {
+	uint Scale = App->win->GetScale();
+	App->render->camera.x = ((-1) * (int)(((App->player->Link->pos.x + App->player->Zelda->pos.x) * 0.5f) * Scale)) + Half_w;
+	App->render->camera.y = ((-1) * (int)(((App->player->Link->pos.y + App->player->Zelda->pos.y) * 0.5f) * Scale)) + Half_h;
 	LitleEllipse.ellipsecentre = BigEllipse.ellipsecentre = { App->render->camera.x,App->render->camera.y };
+
 	return true;
 }
 

@@ -44,13 +44,30 @@ void j1Map::Draw()
 
 		for (int y = 0; y < data.height; ++y)
 		{
+			for (int x = 0; x < data.width; ++x)
+			{
+				int tile_id = layer->Get(x, y);
+				if (tile_id > 0)
+				{
+					TileSet* tileset = GetTilesetFromTileId(tile_id);
+
+					SDL_Rect r = tileset->GetTileRect(tile_id);
+					iPoint pos = MapToWorld(x, y);
+
+					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+				}
+			}
+		}
+		/*
+		for (int y = 0; y < data.height; ++y)
+		{
 			//ESTO 
-			if (y * 8 > App->render->camera.y - 8 && y * 8 < App->render->camera.y + App->render->camera.h/2) {
+			if (y * 8 > App->render->camera.y - 8 && y * 8 < App->render->camera.y + App->render->camera.h / 2) {
 				//
 				for (int x = 0; x < data.width; ++x)
 				{
 					// Y ESTO
-					if (x * 8 > App->render->camera.x-8 && x * 8 < App->render->camera.x + App->render->camera.w / 2) {
+					if (x * 8 > App->render->camera.x - 8 && x * 8 < App->render->camera.x + App->render->camera.w / 2) {
 						//
 
 						int tile_id = layer->Get(x, y);
@@ -61,19 +78,14 @@ void j1Map::Draw()
 							SDL_Rect r = tileset->GetTileRect(tile_id);
 							iPoint pos = MapToWorld(x, y);
 
-							
 							App->render->Blit(tileset->texture, pos.x, pos.y, &r);
-							
-
 						}
 					}
 				}
-
 			}
 		}
-
+		*/
 	}
-
 }
 
 int Properties::Get(const char* value, int default_value) const

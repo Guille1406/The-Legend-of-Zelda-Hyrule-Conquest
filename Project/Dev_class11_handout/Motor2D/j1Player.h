@@ -9,14 +9,9 @@
 
 #include "j1Map.h"
 
-
-
-
-
 class P_Link;
 class P_Zelda;
 class Character;
-
 
 class j1Player :public j1Module {
 public:
