@@ -19,17 +19,20 @@ struct Collider
 	bool to_delete = false;
 	COLLIDER_TYPE type;
 	j1Module* callback = nullptr;
-
+	uint logic_height;
 	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback = nullptr) :
 		rect(rectangle),
 		type(type),
 		callback(callback)
-	{}
+	{
+		logic_height = 1;
+	}
 
-	void SetPos(int x, int y)
+	void SetPos(int x, int y, int n_logic_height)
 	{
 		rect.x = x;
 		rect.y = y;
+		logic_height = n_logic_height;
 	}
 
 	bool CheckCollision(const SDL_Rect& r) const;

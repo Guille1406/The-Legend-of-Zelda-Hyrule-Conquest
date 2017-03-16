@@ -119,7 +119,7 @@ bool j1Player::Update(float dt)
 
 
 	Draw();
-	Link->collision->SetPos(Link->pos.x, Link->pos.y);
+	Link->collision->SetPos(Link->pos.x, Link->pos.y, Link->GetLogicHeightPlayer());
 	return true;
 }
 
