@@ -71,6 +71,7 @@ SDL_Texture* const j1Textures::Load(const char* path)
 	else
 	{
 		texture = LoadSurface(surface);
+
 		SDL_FreeSurface(surface);
 	}
 

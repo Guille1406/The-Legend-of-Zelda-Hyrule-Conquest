@@ -19,7 +19,7 @@ public:
 
 	void Attack();
 	void LoadAnimation(const char*);
-	void ChangeAnimation(int);
+
 	player_event GetEvent();
 
 public:

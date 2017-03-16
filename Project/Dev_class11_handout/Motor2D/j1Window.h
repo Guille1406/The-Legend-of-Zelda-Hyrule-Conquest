@@ -36,12 +36,12 @@ public:
 
 	//The surface contained by the window
 	SDL_Surface* screen_surface;
-	
+	float		scale;
 private:
 	p2SString	title;
 	uint		width;
 	uint		height;
-	float		scale;
+	
 };
 
 #endif // __j1WINDOW_H__

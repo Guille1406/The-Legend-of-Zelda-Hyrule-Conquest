@@ -8,8 +8,12 @@ void Character::LoadAnimation(const char* path)
 {
 }
 
-void Character::ChangeAnimation(int)
+void Character::ChangeAnimation(int animation)
 {
+		if (last_animation != animation) {
+		this->actual_animation = this->sprites_vector[0][animation];
+		last_animation = animation;
+	}
 }
 
 player_event Character::GetEvent()

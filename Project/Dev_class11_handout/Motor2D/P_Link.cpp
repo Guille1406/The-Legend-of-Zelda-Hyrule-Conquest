@@ -67,15 +67,7 @@ void P_Link::LoadAnimation(const char * path)
 	
 }
 
-void P_Link::ChangeAnimation(int animation)
-{
-	static int last_animation = 0;
-	
-	if (last_animation != animation) {
-		this->actual_animation = this->sprites_vector[0][animation];
-		last_animation = animation;
-	}
-}
+
 
 player_event P_Link::GetEvent()
 {

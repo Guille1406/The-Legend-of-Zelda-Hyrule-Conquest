@@ -7,7 +7,11 @@
 #include "j1Render.h"
 #include "j1Input.h"
 
+#include <cmath>
 #define VSYNC true
+
+
+
 
 j1Render::j1Render() : j1Module()
 {
@@ -151,6 +155,7 @@ iPoint j1Render::ScreenToWorld(int x, int y) const
 	return ret;
 }
 
+
 // Blit to screen
 bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y, bool use_scale) const
 {
@@ -159,22 +164,33 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 	if (use_scale)
 		scale = App->win->GetScale();
 
-	SDL_Rect rect;
+	fPoint  f_rect = { 0,0 };
+
+	
+	SDL_Rect rect = {0,0,0,0};
+	
 	rect.x = (int)(camera.x * speed) + x * scale;
 	rect.y = (int)(camera.y * speed) + y * scale;
-
 	if (section != NULL)
 	{
-		rect.w = section->w;
-		rect.h = section->h;
+		
+		rect.w = f_rect.x = section->w;
+		rect.w = f_rect.y = section->h;
 	}
+	
+
 	else
 	{
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+		f_rect.x = rect.w;
+		f_rect.y = rect.h;
 	}
 
-	rect.w *= scale;
-	rect.h *= scale;
+	f_rect.x *= scale;
+	f_rect.y *= scale;
+	rect.w = ceil(f_rect.x);
+	rect.h = ceil(f_rect.y);
+
 
 	SDL_Point* p = NULL;
 	SDL_Point pivot;
@@ -282,3 +298,4 @@ bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, U
 
 	return ret;
 }
+

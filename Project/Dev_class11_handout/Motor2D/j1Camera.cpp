@@ -43,7 +43,9 @@ bool j1Camera::Start()
 bool j1Camera::PreUpdate()
 {
 	//Calculate camera centre
-	uint Scale = App->win->GetScale();
+	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) App->win->scale += 0.005;
+	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT) App->win->scale -= 0.005;
+	float Scale = App->win->GetScale();
 	App->render->camera.x = ((-1) * (int)(((App->player->Link->pos.x + App->player->Zelda->pos.x) * 0.5f) * Scale)) + Half_w;
 	App->render->camera.y = ((-1) * (int)(((App->player->Link->pos.y + App->player->Zelda->pos.y) * 0.5f) * Scale)) + Half_h;
 	LitleEllipse.ellipsecentre = BigEllipse.ellipsecentre = { App->render->camera.x - Half_w,App->render->camera.y - Half_h };

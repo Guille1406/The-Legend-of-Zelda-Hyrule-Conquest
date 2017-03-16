@@ -105,6 +105,8 @@ public:
 
 	bool doing_script = false;
 
+	int last_animation = 0;
+
 private:
 	uint i_logic_height_player = 0;
 
