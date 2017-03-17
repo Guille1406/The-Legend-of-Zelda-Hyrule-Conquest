@@ -22,6 +22,7 @@
 #include "j1Camera.h"
 #include "j1InputManager.h"
 #include"j1Collision.h"
+#include "j1Entity.h"
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
@@ -44,6 +45,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	camera = new j1Camera();
 	inputM = new j1InputManager();
 	collision = new j1Collision();
+	entity = new j1Entity();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -59,6 +61,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	
 	// scene last
 	AddModule(scene);
+	AddModule(entity);
 	AddModule(player);
 	AddModule(collision);
 	// gui after all to print above all

@@ -109,6 +109,8 @@ public:
 	Collider* collision;
 	int last_animation = 0;
 
+	std::vector<bool> allow_collision;
+
 private:
 	uint i_logic_height_player = 0;
 

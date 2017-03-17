@@ -28,6 +28,7 @@ class j1FadeToBlack;
 class j1Camera;
 class j1InputManager;
 class j1Collision;
+class j1Entity;
 //using namespace std;
 
 class j1App
@@ -112,6 +113,7 @@ public:
 	j1Camera*			camera = nullptr;
 	j1InputManager*		inputM = nullptr;
 	j1Collision*		collision = nullptr;
+	j1Entity*			entity = nullptr;
 
 private:
 	std::list<j1Module*> modules;

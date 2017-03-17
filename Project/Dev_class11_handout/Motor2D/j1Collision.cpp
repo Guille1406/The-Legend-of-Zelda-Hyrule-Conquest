@@ -15,6 +15,14 @@ j1Collision::j1Collision()
 j1Collision::~j1Collision()
 {}
 
+bool j1Collision::Start()
+{
+	matrix_colliders.push_back(App->player->Link->allow_collision);
+	matrix_colliders.push_back(App->player->Zelda->allow_collision);
+
+	return true;
+}
+
 bool j1Collision::PreUpdate()
 {
 	// Remove all colliders scheduled for deletion

@@ -127,6 +127,9 @@
     <ClCompile Include="j1Collision.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="j1Entity.cpp">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -276,6 +279,9 @@
     <ClInclude Include="j1Collision.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="j1Entity.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -313,6 +319,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\ToCheckAnim/Fadetoblack">
       <UniqueIdentifier>{1837afc0-3463-4a37-b91a-09fd84d84640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Entity">
+      <UniqueIdentifier>{ffc50d08-487a-4cf4-8483-bd4795b55643}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

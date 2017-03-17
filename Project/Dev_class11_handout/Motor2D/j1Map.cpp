@@ -544,7 +544,7 @@ bool j1Map::CreateLogicMap() const
 {
 	bool ret = false;
 
-
+	
 	std::list<MapLayer*>::const_iterator item = data.layers.begin();
 	for (; item != data.layers.cend(); ++item) {
 		MapLayer* layer = (*item);

@@ -25,7 +25,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Zelda->character_direction = direction::down;
 
 	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,16,16 }, link, this);
-	//Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,16,16 }, zelda, this);
+	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,16,16 }, zelda, this);
 	return true;
 }
 
@@ -121,6 +121,7 @@ bool j1Player::Update(float dt)
 
 	Draw();
 	Link->collision->SetPos(Link->pos.x, Link->pos.y, Link->GetLogicHeightPlayer());
+	Zelda->collision->SetPos(Zelda->pos.x, Zelda->pos.y, Zelda->GetLogicHeightPlayer());
 	
 
 	return true;
