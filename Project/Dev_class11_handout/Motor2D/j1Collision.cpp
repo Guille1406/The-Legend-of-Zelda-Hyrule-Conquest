@@ -20,6 +20,9 @@ bool j1Collision::Start()
 	matrix_colliders.push_back(App->player->Link->allow_collision);
 	matrix_colliders.push_back(App->player->Zelda->allow_collision);
 
+	// CHANGE THIS
+	matrix_colliders.push_back(App->player->Zelda->allow_collision);
+
 	return true;
 }
 
@@ -149,6 +152,9 @@ void j1Collision::DebugDraw()
 		case zelda: // pink
 			App->render->DrawQuad(colliders[i]->rect, 245, 25, 219, alpha);
 			break;
+		case collider_chest: 
+			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
+			break;
 		}
 	}
 }
@@ -170,11 +176,11 @@ bool j1Collision::CleanUp()
 	return true;
 }
 
-Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback)
+Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type,Entity* parent, j1Module* callback)
 {
 	Collider* ret = nullptr;
 	
-			ret = new Collider(rect, type, callback);
+			ret = new Collider(rect, type, parent, callback);
 			colliders.push_back(ret);
 
 	return ret;

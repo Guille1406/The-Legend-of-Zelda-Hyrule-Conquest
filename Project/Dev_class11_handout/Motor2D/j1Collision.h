@@ -5,12 +5,14 @@
 #include"j1App.h"
 #include"j1Module.h"
 #include "SDL\include\SDL.h"
+#include "j1Object.h"
 enum COLLIDER_TYPE
 {
 	//example
 	COLLIDER_NONE = -1,
 	link,
 	zelda,
+	collider_chest,
 };
 
 struct Collider
@@ -20,10 +22,13 @@ struct Collider
 	COLLIDER_TYPE type;
 	j1Module* callback = nullptr;
 	uint logic_height;
-	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback = nullptr) :
+	Entity* parent = nullptr;
+
+	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, Entity* parent, j1Module* callback = nullptr) :
 		rect(rectangle),
 		type(type),
-		callback(callback)
+		callback(callback),
+		parent(parent)
 	{
 		logic_height = 1;
 	}
@@ -51,7 +56,7 @@ public:
 	//update_status PostUpdate();
 	bool CleanUp();
 
-	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);
+	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type,Entity* parent, j1Module* callback = nullptr);
 	bool EraseCollider(Collider* collider);
 	void DebugDraw();
 

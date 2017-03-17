@@ -264,6 +264,16 @@ bool j1Map::Load(const char* file_name)
 			data.layers.push_back(lay);
 	}
 
+	pugi::xml_node object_layer;
+	for (object_layer = map_file.child("map").child("objectgroup"); object_layer && ret; object_layer = object_layer.next_sibling("objectgroup"))
+	{
+		ObjectLayer* obj = new ObjectLayer();
+		ret = LoadObjectLayer(object_layer, obj);
+		if (ret == true)
+			data.objects.push_back(obj);
+		
+	}
+
 	if(ret == true)
 	{
 		LOG("Successfully parsed map XML file: %s", file_name);
@@ -397,27 +407,27 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	}
 	else
 	{
-		auto asd = image.attribute("source").as_string();
-		set->texture = App->tex->Load(PATH(folder.GetString(), image.attribute("source").as_string()));
-		
-		int w, h;
-		SDL_QueryTexture(set->texture, NULL, NULL, &w, &h);
-		set->tex_width = image.attribute("width").as_int();
+	auto asd = image.attribute("source").as_string();
+	set->texture = App->tex->Load(PATH(folder.GetString(), image.attribute("source").as_string()));
 
-		if(set->tex_width <= 0)
-		{
-			set->tex_width = w;
-		}
+	int w, h;
+	SDL_QueryTexture(set->texture, NULL, NULL, &w, &h);
+	set->tex_width = image.attribute("width").as_int();
 
-		set->tex_height = image.attribute("height").as_int();
+	if (set->tex_width <= 0)
+	{
+		set->tex_width = w;
+	}
 
-		if(set->tex_height <= 0)
-		{
-			set->tex_height = h;
-		}
+	set->tex_height = image.attribute("height").as_int();
 
-		set->num_tiles_width = set->tex_width / set->tile_width;
-		set->num_tiles_height = set->tex_height / set->tile_height;
+	if (set->tex_height <= 0)
+	{
+		set->tex_height = h;
+	}
+
+	set->num_tiles_width = set->tex_width / set->tile_width;
+	set->num_tiles_height = set->tex_height / set->tile_height;
 	}
 
 	return ret;
@@ -433,7 +443,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	LoadProperties(node, layer->properties);
 	pugi::xml_node layer_data = node.child("data");
 
-	if(layer_data == NULL)
+	if (layer_data == NULL)
 	{
 		LOG("Error parsing map xml file: Cannot find 'layer/data' tag.");
 		ret = false;
@@ -444,24 +454,59 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 		layer->data = new uint[layer->width*layer->height];
 		memset(layer->data, 0, layer->width*layer->height);
 
-	
+
 		//for(pugi::xml_node tile = layer_data.child("tile"); tile; tile = tile.next_sibling("tile"))
 		//{
+
+		pugi::xml_node tile = layer_data.first_child();
+		const char* chain = tile.value();
+		char* temp = strtok((char*)chain, " ,.-");
+		int i = 0;
+		while (temp != nullptr)
+		{
+			int num = atoi(temp);
+			layer->data[i++] = num;
+			temp = strtok(NULL, ",");
+
+
+		}
+
+
+	}
+
+	return ret;
+}
+
+bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer)
+{
+	bool ret = true;
+
+	layer->name = node.attribute("name").as_string();
 	
-			pugi::xml_node tile = layer_data.first_child();
-			const char* chain = tile.value();
-			char* temp = strtok((char*)chain, " ,.-");
-			int i = 0;
-			while (temp != nullptr)
-			{
-				int num = atoi(temp);
-				layer->data[i++] = num;
-				temp = strtok(NULL, ",");
-				
-				
-			}
+	LoadProperties(node, layer->properties);
+	pugi::xml_node layer_data = node.child("object");
+
+	if (layer_data == NULL)
+	{
+		LOG("Error parsing map xml file: Cannot find 'layer/data' tag.");
+		ret = false;
+		RELEASE(layer);
+	}
+	else
+	{		
+	
+		for (pugi::xml_node object = layer_data; object; object = object.next_sibling("object")) {
 			
-		
+			
+			auto iterator = object.child("properties").child("property");
+			while (iterator.attribute("name").as_string() != "type" && iterator){
+				iterator = iterator.next_sibling();
+}
+			char* type_name = (char*)object.child("properties").child("property").attribute("value").as_string();
+			Object* temp = App->entity->CreateObject(type_name, object);
+						
+		}
+				
 	}
 
 	return ret;
@@ -545,16 +590,19 @@ bool j1Map::CreateLogicMap() const
 	bool ret = false;
 
 	
-	std::list<MapLayer*>::const_iterator item = data.layers.begin();
-	for (; item != data.layers.cend(); ++item) {
-		MapLayer* layer = (*item);
-
+	std::list<ObjectLayer*>::const_iterator item = data.objects.begin();
+	for (; item != data.objects.cend(); ++item) {
+		ObjectLayer* layer = (*item);
+		
 		//App->map->Logic = layer;
 		if (layer->properties.Get("Logic", 0) == 0)
 			continue;
-		App->map->V_Logic.push_back(layer);
+		//App->map->V_Logic.push_back(layer);
 
-		uchar* map = new uchar[layer->width*layer->height];
+		
+
+
+		/*uchar* map = new uchar[layer->width*layer->height];
 		memset(map, 1, layer->width*layer->height);
 
 		for (int y = 0; y < data.height; ++y)
@@ -576,7 +624,7 @@ bool j1Map::CreateLogicMap() const
 		
 		ret = true;
 
-		break;
+		break;*/
 	}
 	return ret;
 }

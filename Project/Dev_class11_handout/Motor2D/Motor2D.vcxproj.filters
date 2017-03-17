@@ -127,7 +127,7 @@
     <ClCompile Include="j1Collision.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="j1Entity.cpp">
+    <ClCompile Include="j1Object.cpp">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClCompile>
   </ItemGroup>
@@ -279,7 +279,10 @@
     <ClInclude Include="j1Collision.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="j1Entity.h">
+    <ClInclude Include="j1Object.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Chest.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
   </ItemGroup>

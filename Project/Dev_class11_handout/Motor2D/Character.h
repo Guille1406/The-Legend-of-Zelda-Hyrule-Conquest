@@ -9,6 +9,7 @@
 #include "j1Textures.h"
 #include <vector>
 #include "p2Log.h"
+#include "j1Object.h"
 
 
 #define TILE_COL_ID 419
@@ -65,7 +66,7 @@ class P_Zelda;
 enum movement_animation;
 enum key_state;
 
-class Character {
+class Character : public Entity {
 public:
 	Character() {};
 	~Character() {};

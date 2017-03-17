@@ -105,7 +105,7 @@
     <ClCompile Include="j1Player.cpp" />
     <ClCompile Include="j1Scene.cpp" />
     <ClCompile Include="j1Timer.cpp" />
-    <ClCompile Include="j1Entity.cpp" />
+    <ClCompile Include="j1Object.cpp" />
     <ClCompile Include="S_MainMenu.cpp" />
     <ClCompile Include="j1FadeToBlack.cpp" />
     <ClCompile Include="Move.cpp" />
@@ -124,6 +124,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ConsoleCommandCVar.h" />
+    <ClInclude Include="O_Chest.h" />
     <ClInclude Include="Gui.h" />
     <ClInclude Include="GuiBar.h" />
     <ClInclude Include="GuiButton.h" />
@@ -137,7 +138,7 @@
     <ClInclude Include="j1Camera.h" />
     <ClInclude Include="j1Collision.h" />
     <ClInclude Include="j1Console.h" />
-    <ClInclude Include="j1Entity.h" />
+    <ClInclude Include="j1Object.h" />
     <ClInclude Include="j1InputManager.h" />
     <ClInclude Include="j1Player.h" />
     <ClInclude Include="S_MainMenu.h" />

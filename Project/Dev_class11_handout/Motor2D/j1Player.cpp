@@ -24,8 +24,8 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Link->character_direction = direction::down;
 	Zelda->character_direction = direction::down;
 
-	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,16,16 }, link, this);
-	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,16,16 }, zelda, this);
+	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,16,16 }, link, Link, this);
+	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,16,16 }, zelda, Zelda, this);
 	return true;
 }
 

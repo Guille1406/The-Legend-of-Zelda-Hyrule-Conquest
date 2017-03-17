@@ -5,6 +5,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "j1Module.h"
+#include "j1Object.h"
 
 // ----------------------------------------------------
 struct Properties
@@ -52,6 +53,19 @@ struct MapLayer
 	}
 };
 
+struct ObjectLayer {
+	p2SString	name;
+	Properties	properties;
+	ObjectLayer() 
+	{}
+
+	~ObjectLayer()
+	{
+		
+	}
+
+};
+
 // ----------------------------------------------------
 struct TileSet
 {
@@ -88,8 +102,9 @@ struct MapData
 	int					tile_height;
 	SDL_Color			background_color;
 	MapTypes			type;
-	std::list <TileSet*>	tilesets;
-	std::list <MapLayer*>layers;
+	std::list <TileSet*>		tilesets;
+	std::list <MapLayer*>		layers;
+	std::list <ObjectLayer*>	objects;
 };
 
 // ----------------------------------------------------
@@ -125,6 +140,7 @@ private:
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
+	bool LoadObjectLayer(pugi::xml_node& node, ObjectLayer* layer);
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
 	TileSet* GetTilesetFromTileId(int id) const;

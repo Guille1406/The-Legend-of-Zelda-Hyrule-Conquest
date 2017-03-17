@@ -15,6 +15,7 @@ public:
 		sprites_vector = new std::vector<Animation>;
 		allow_collision.push_back(true);
 		allow_collision.push_back(true);
+		allow_collision.push_back(true);
 	}
 	~P_Link() {
 		delete sprites_vector;
