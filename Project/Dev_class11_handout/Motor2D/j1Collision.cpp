@@ -4,10 +4,11 @@
 #include"j1Render.h"
 j1Collision::j1Collision()
 {
-	for (uint i = 0; i < colliders.size(); ++i)
-		colliders[i] = nullptr;
+	//for (uint i = 0; i < colliders.size(); ++i)
+		//colliders[i] = nullptr;
 
-	//matrix[player][enemy] = true;
+	//matrix_colliders[link][zelda] = true;
+	//matrix_colliders[zelda][link] = true;
 }
 
 // Destructor
@@ -45,6 +46,7 @@ bool j1Collision::PreUpdate()
 
 			c2 = colliders[k];
 
+			//UNCOMMENT THIS
 			if (c1->CheckCollision(c2->rect) == true)
 			{
 				if (matrix_colliders[c1->type][c2->type] && c1->callback)
@@ -95,9 +97,9 @@ bool j1Collision::Update(float dt)
 			{
 				if (matrix_colliders[c1->type][c2->type] && c1->callback)
 				{
-
+				
 					c1->callback->OnCollision(c1, c2);
-					//	App->render->Blit(App->player->graphics, App->player->PreviousPos.x, App->player->PreviousPos.y-1, &(App->player->current_animation->GetCurrentFrame()));
+						//App->render->Blit(App->player->graphics, App->player->PreviousPos.x, App->player->PreviousPos.y-1, &(App->player->current_animation->GetCurrentFrame()));
 
 				}
 
@@ -106,7 +108,7 @@ bool j1Collision::Update(float dt)
 				{
 					c2->callback->OnCollision(c2, c1);
 				}
-
+				
 			}
 		}
 	}
@@ -133,8 +135,11 @@ void j1Collision::DebugDraw()
 
 		switch (colliders[i]->type)
 		{
-		case link: // white
-			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
+		case link: // green
+			App->render->DrawQuad(colliders[i]->rect, 12, 198, 0, alpha);
+			break;
+		case zelda: // pink
+			App->render->DrawQuad(colliders[i]->rect, 245, 25, 219, alpha);
 			break;
 		}
 	}

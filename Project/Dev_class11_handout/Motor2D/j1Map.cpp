@@ -501,9 +501,10 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 	for (; item != data.layers.cend(); ++item) {
 		MapLayer* layer = (*item);
 	
-		App->map->Colision = layer;
+		//App->map->Colision = layer;
 		if (layer->properties.Get("Navigation", 0) == 0)
 			continue;
+		App->map->V_Colision.push_back(layer);
 
 		uchar* map = new uchar[layer->width*layer->height];
 		memset(map, 1, layer->width*layer->height);

@@ -169,12 +169,15 @@ player_event P_Link::GetEvent()
 			actual_event = idle;
 		}
 
-			if (GetLogic() == 424) {
+		if (GetLogic() == 424) {
 				actual_event = jump;
 				doing_script = true;
 				LOG("I'm Jumping :DDDD");
-			}
-
+		}
+		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT) {
+			actual_event = roll;
+			doing_script = true;
+		}
 		
 		return actual_event;
 	}

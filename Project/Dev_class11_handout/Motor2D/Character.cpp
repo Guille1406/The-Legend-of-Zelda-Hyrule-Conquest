@@ -34,44 +34,51 @@ void Character::ExecuteEvent(float dt)
 	case jump:
 		Jump(dt);
 		break;
-	}
+	case roll:
+		Roll(dt);
+		break;
 
-	int animation = (int)actual_event * 4 + (int)character_direction;
+	}
+		int animation = (int)actual_event * 4 + (int)character_direction;
 	this->ChangeAnimation(animation);
 }
 
 void Character::GetAdjacents()
 {
-	this->adjacent.down.i = App->map->Colision->Get(tilepos.x, tilepos.y + 2);
-	this->adjacent.down.j =  App->map->Colision->Get(tilepos.x + 1, tilepos.y + 2);
-	this->adjacent.up.i = App->map->Colision->Get(tilepos.x, tilepos.y - 1);
-	this->adjacent.up.j = App->map->Colision->Get(tilepos.x + 1, tilepos.y - 1);
-	this->adjacent.left.i = App->map->Colision->Get(tilepos.x - 1, tilepos.y);
-	this->adjacent.left.j =  App->map->Colision->Get(tilepos.x - 1, tilepos.y + 1);
-	this->adjacent.right.i = App->map->Colision->Get(tilepos.x + 2, tilepos.y);
-	this->adjacent.right.j = App->map->Colision->Get(tilepos.x + 2, tilepos.y + 1);
+	this->adjacent.down.i = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y + 2);
+	this->adjacent.down.j =  App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 1, tilepos.y + 2);
+	this->adjacent.up.i = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y - 1);
+	this->adjacent.up.j = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 1, tilepos.y - 1);
+	this->adjacent.left.i = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y);
+	this->adjacent.left.j =  App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y + 1);
+	this->adjacent.right.i = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y);
+	this->adjacent.right.j = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y + 1);
 }
 
-int Character::GetLogic()
+int Character::GetLogic(bool collisions)
 {
+	std::vector<MapLayer*> vector_temp = App->map->V_Logic;
+	if (collisions)
+		vector_temp = App->map->V_Colision;
+
 	int i, j;
 	switch (character_direction)
 	{
 	case up:
-		i = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y - 1);
-		j = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x + 1, tilepos.y - 1);
+		i = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y - 1);
+		j = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x + 1, tilepos.y - 1);
 		break;
 	case down:
-		i = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y +2);
-		j = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x +1, tilepos.y +2);
+		i = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y +2);
+		j = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x +1, tilepos.y +2);
 		break;
 	case left:
-		i = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y );
-		j = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y +1);
+		i = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y );
+		j = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y +1);
 		break;
 	case right:
-		i = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y);
-		j = App->map->V_Logic[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y + 1);
+		i = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y);
+		j = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y + 1);
 		break;
 	}
 	if (i != 0)return i;
@@ -98,6 +105,24 @@ void Character::Jump(float dt)
 		break;
 	case right:
 		JumpFunction(dt, pos.x, true);
+		break;
+	}
+}
+
+void Character::Roll(float dt)
+{
+	switch (character_direction) {
+	case up:
+		RollFunction(dt, pos.y, false);
+		break;
+	case down:
+		RollFunction(dt, pos.y, true);
+		break;
+	case left:
+		RollFunction(dt, pos.x, false);
+		break;
+	case right:
+		RollFunction(dt, pos.x, true);
 		break;
 	}
 }
@@ -227,4 +252,25 @@ void Character::JumpFunction(float dt, int& pos, bool add)
 		temp = false;
 		doing_script = false;
 	}
+}
+
+void Character::RollFunction(float dt, int & pos, bool add)
+{
+
+	int i = 1;
+	if (!add)
+		i = -1;
+
+	if (!temp)
+		final_pos = pos + (i * JUMP_DISTANCE);
+	temp = true;
+
+	if ((i * pos <  i*final_pos) && GetLogic(true) != TILE_COL_ID ) {
+		pos = pos + (i * 2);
+	}
+	else {
+		temp = false;
+		doing_script = false;
+	}
+
 }

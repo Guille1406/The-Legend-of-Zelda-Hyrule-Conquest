@@ -31,7 +31,7 @@ enum player_event {
 	idle,
 	jump,
 	attack,
-	rise,
+	roll,
 	fall
 	/*
 	.
@@ -73,18 +73,20 @@ public:
 	void Attack() {};
 	void Move(float dt);
 	void Jump(float dt);
+	void Roll(float dt);
 	virtual void LoadAnimation(const char*);
 	virtual void ChangeAnimation(int);
 	virtual player_event GetEvent();
 	virtual void ExecuteEvent(float);
 	void GetAdjacents();
-	int GetLogic();
+	int GetLogic(bool collisions = false);
 	uint GetLogicHeightPlayer();
 
 private:
 	void MoveFunction(float dt, int& pos,int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down = false);
 	void MoveDiagonalFunction(float dt, int& pos_one, int& pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile);
 	void JumpFunction(float dt, int& pos, bool add);
+	void RollFunction(float dt, int& pos, bool add);
 	
 public:
 	
