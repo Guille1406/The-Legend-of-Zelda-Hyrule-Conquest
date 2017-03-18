@@ -130,9 +130,9 @@ void Character::Roll(float dt)
 
 void Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down)
 {
-	int tile_pos = (pos + 4) / 8;
-	int other_tile_pos = (other_pos + 4) / 8;
-	float speed = 1 / dt;
+	int tile_pos = (pos + 8) / 16;
+	int other_tile_pos = (other_pos + 8) / 16;
+	float speed = 2 / dt;
 	int i = 1;
 	if (!add)
 		i = -1;
@@ -141,15 +141,15 @@ void Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 		n = -1;
 	if (tiles.i != TILE_COL_ID && tiles.j != TILE_COL_ID) {
 		pos = pos +  i *  speed*dt;
-		if (side_tile_one == TILE_COL_ID && other_pos < other_tile_pos * 8)
+		if (side_tile_one == TILE_COL_ID && other_pos < other_tile_pos * 16)
 			other_pos +=  speed*dt;
-		if (side_tile_two == TILE_COL_ID && other_pos > other_tile_pos * 8)
+		if (side_tile_two == TILE_COL_ID && other_pos > other_tile_pos * 16)
 			other_pos -= speed*dt;
 	}
 	else if (tiles.i == TILE_COL_ID && tiles.j != TILE_COL_ID) {
-		if (n* ((!add* 7) + i* (other_pos +(!add * 8) - other_tile_pos * 8)) > n*(pos - tile_pos * 8))
+		if (n* ((!add* 14) + i* (other_pos +(!add * 16) - other_tile_pos * 16)) > n*(pos - tile_pos * 16))
 			other_pos +=  speed*dt;
-		else if (n* ((!add * 7) + i* (other_pos + (!add * 8) - other_tile_pos * 8)) < n*(pos - tile_pos * 8))
+		else if (n* ((!add * 14) + i* (other_pos + (!add * 16) - other_tile_pos * 16)) < n*(pos - tile_pos * 16))
 			pos += i * speed*dt;
 		else {
 			pos += i * speed*dt;
@@ -157,9 +157,9 @@ void Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 		}
 	}
 	else if (tiles.i != TILE_COL_ID && tiles.j == TILE_COL_ID) {
-		if (n*((add*7) -i*(other_pos + add*8 - other_tile_pos * 8)) > n*(pos - tile_pos * 8))
+		if (n*((add*14) -i*(other_pos + add*16 - other_tile_pos * 16)) > n*(pos - tile_pos * 16))
 			other_pos -= speed*dt;
-		else if (n*((add * 7) -i* (other_pos + add * 8 - other_tile_pos * 8)) <  n*(pos - tile_pos * 8))
+		else if (n*((add * 14) -i* (other_pos + add * 16 - other_tile_pos * 16)) <  n*(pos - tile_pos * 16))
 			pos += i *  (speed*dt);
 		else {
 			pos += i* speed*dt;
@@ -167,7 +167,7 @@ void Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 		}
 	}
 	else if (tiles.i == TILE_COL_ID && tiles.j == TILE_COL_ID) {
-		if ((pos -1*!add + 8*add ) / 8 == tile_pos)
+		if ((pos -1*!add + 16*add ) / 16 == tile_pos)
 			pos +=  i * speed*dt;
 	}
 
@@ -194,12 +194,12 @@ void Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 	}
 
 
-	float speed = 1 / dt;
-	int tile_pos_one = (pos_one + 4) / 8;
-	int tile_pos_side = (pos_two + 4) / 8;
+	float speed = 2 / dt;
+	int tile_pos_one = (pos_one + 8) / 16;
+	int tile_pos_side = (pos_two + 8) / 16;
 	
 	if (front_tile == TILE_COL_ID && side_tile == TILE_COL_ID) {
-		if ((pos_one) / 8 == tile_pos_one && (pos_two + add_two*8) / 8 == tile_pos_side) {
+		if ((pos_one) / 16 == tile_pos_one && (pos_two + add_two*32) / 16 == tile_pos_side) {
 			pos_one += i*speed*dt;
 			pos_two += n*speed*dt;
 		}
@@ -209,9 +209,9 @@ void Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 	else if (front_tile != TILE_COL_ID && side_tile == TILE_COL_ID)
 		pos_one += i*speed*dt;
 	else if (front_tile != TILE_COL_ID && side_tile != TILE_COL_ID && diagonal_tile != TILE_COL_ID) {
-		if ((add*7 +i*n*  (pos_two + add*8 - tile_pos_side * 8)) > (pos_one - tile_pos_one * 8))
+		if ((add*14 +i*n*  (pos_two + add*16 - tile_pos_side * 16)) > (pos_one - tile_pos_one * 16))
 			pos_two += n*speed*dt;
-		else if ((add*7 + i*n* (pos_two + add*8 - tile_pos_side * 8)) < (pos_one - tile_pos_one * 8))
+		else if ((add*14 + i*n* (pos_two + add*16 - tile_pos_side * 16)) < (pos_one - tile_pos_one * 16))
 			pos_one += i*speed*dt;
 		else {
 			pos_one += i*speed*dt;
@@ -219,21 +219,21 @@ void Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 		}
 	}
 	else if ( diagonal_tile == TILE_COL_ID) {
-		if ((pos_one) / 8 == tile_pos_one && (pos_two + (add_two*8)) / 8 == tile_pos_side) {
+		if ((pos_one) / 16 == tile_pos_one && (pos_two + (add_two*16)) / 16 == tile_pos_side) {
 			pos_one += i*speed*dt;
 			pos_two += n*speed*dt;
 		}
 		else
 			pos_one += i*speed*dt;
 	}
-	/*
-	if (side_tile == TILE_COL_ID && side_tile.j == TILE_COL_ID)
-		if ((pos_two + 8) / 8 == tile_pos_side)
+	
+	if (side_tile == TILE_COL_ID )
+		if ((pos_two + add_two*16) / 16 == tile_pos_side)
 			pos_two += n*speed*dt;
-	if (front_tile.j == TILE_COL_ID && front_tile.i == TILE_COL_ID)
-		if ((pos_one - 1) / 8 == tile_pos_one)
+	if (front_tile == TILE_COL_ID)
+		if ((pos_one + add_one*16) / 16 == tile_pos_one)
 			pos_one += i*speed*dt;
-*/
+
 }
 
 void Character::JumpFunction(float dt, int& pos, bool add)

@@ -36,7 +36,7 @@ bool j1Camera::Awake(pugi::xml_node&)
 bool j1Camera::Start()
 {
 	//Get some useful variables
-	App->win->scale = f_Max_scale = 2.0f;
+	App->win->scale = f_Max_scale = 1.0f;
 	f_Min_scale = 1.0f;
 	int w, h = 0;
 	SDL_GetRendererOutputSize(App->render->renderer, &w, &h);

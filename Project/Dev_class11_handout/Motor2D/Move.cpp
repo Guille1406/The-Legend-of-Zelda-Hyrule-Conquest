@@ -28,7 +28,7 @@ void Character::Move(float dt)
 	uint diagonal_left_down = App->map->V_Colision[GetLogicHeightPlayer()]->Get(this->tilepos.x -1, tile_pos_y +2);
 	
 	/////
-	float speed = 1/dt;
+	float speed = 2/dt;
 
 	switch (movement_direction) {
 	case move_up:

@@ -6,7 +6,7 @@
 #include <algorithm>
 #include"j1Collision.h"
 
-#define TILE_COL_ID 237
+
 bool j1Player::Awake(pugi::xml_node& config)
 {
 	
@@ -61,10 +61,10 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt)
 {
 
-	Link->tilepos.x = (Link->pos.x + 4) / 8;
-	Link->tilepos.y = (Link->pos.y + 4) / 8;
-	Zelda->tilepos.x = (Zelda->pos.x + 4) / 8;
-	Zelda->tilepos.y = (Zelda->pos.y + 4) / 8;
+	Link->tilepos.x = (Link->pos.x + 8) / 16;
+	Link->tilepos.y = (Link->pos.y + 8) / 16;
+	Zelda->tilepos.x = (Zelda->pos.x + 8) / 16;
+	Zelda->tilepos.y = (Zelda->pos.y + 8) / 16;
 
 	Link->GetAdjacents();
 	Zelda->GetAdjacents();
@@ -138,10 +138,10 @@ bool j1Player::PostUpdate()
 void j1Player::Draw()
 {
 	SDL_Rect rect;
-	rect = { Link->tilepos.x*8, Link->tilepos.y*8, 16, 16 };
+	rect = { Link->tilepos.x*16, Link->tilepos.y*16, 32, 32 };
 	App->render->Blit(Link->character_texture, Link->pos.x - 3 , Link->pos.y - 12, &Link->actual_animation.GetCurrentFrame());
 	App->render->Blit(Zelda->character_texture, Zelda->pos.x - 3, Zelda->pos.y - 12 , &Zelda->actual_animation.GetCurrentFrame());
-	//App->render->DrawQuad(rect, 0, 0, 255, 255, true, true);
+	App->render->DrawQuad(rect, 0, 0, 255, 255, true, true);
 	//LOG("\n  %i %i\n %i    %i\n %i    %i\n  %i %i", Link->adjacent.up.i, Link->adjacent.up.j, Link->adjacent.left.j, Link->adjacent.right.i, Link->adjacent.left.i, Link->adjacent.right.j
 //		,Link->adjacent.down.j, Link->adjacent.down.i);
 }
