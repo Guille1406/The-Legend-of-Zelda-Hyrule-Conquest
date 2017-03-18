@@ -65,6 +65,31 @@ bool j1Camera::PreUpdate()
 // Called each loop iteration
 bool j1Camera::Update(float dt)
 {
+
+
+
+
+	/*
+	//Is inside the little ellipse
+	if (LitleEllipse.InsideEllipse(App->player->Link->pos))
+		App->win->scale = f_Max_scale;
+	//Is out the little ellipse
+	else
+	{
+		//Is between the big ellipse and the little one
+		if (BigEllipse.InsideEllipse(App->player->Link->pos))
+		{
+			//Scale between f_Max_scale and f_Min_scale
+
+
+
+
+		}
+		//Is out the big ellipse
+		else
+			App->win->scale = f_Min_scale;
+	}
+	*/
 	/*
 	App->player->Link->pos;
 	App->player->Zelda->pos;
