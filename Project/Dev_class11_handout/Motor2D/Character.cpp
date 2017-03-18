@@ -57,9 +57,9 @@ void Character::GetAdjacents()
 
 int Character::GetLogic(bool collisions)
 {
-	/*
-	std::vector<MapLayer*> vector_temp = App->map->V_Logic;
-	if (collisions)
+	
+	std::vector<MapLayer*> vector_temp;
+
 		vector_temp = App->map->V_Colision;
 
 	int i, j;
@@ -83,7 +83,7 @@ int Character::GetLogic(bool collisions)
 		break;
 	}
 	if (i != 0)return i;
-	if (j != 0)return j;*/
+	if (j != 0)return j;
 	return 0;
 }
 
