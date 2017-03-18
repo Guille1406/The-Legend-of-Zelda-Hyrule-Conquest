@@ -7,17 +7,17 @@
 struct CamEllipse
 {
 	iPoint ellipsecentre = { 0,0 };
-	uint semimajoraxis = 0;
-	uint semiminoraxis = 0;
+	int semimajoraxis = 0;
+	int semiminoraxis = 0;
 
-	float InsideEllipseValue(iPoint pos)
+	float InsideEllipseValue(iPoint point)
 	{
-		return ((((pos.x - ellipsecentre.x) * (pos.x - ellipsecentre.x)) / (semimajoraxis * semimajoraxis)) + (((pos.y - ellipsecentre.y) * (pos.y - ellipsecentre.y)) / (semiminoraxis * semiminoraxis)));
+		return (((float)((point.x - ellipsecentre.x) * (point.x - ellipsecentre.x)) / (float)(semimajoraxis * semimajoraxis)) + ((float)((point.y - ellipsecentre.y) * (point.y - ellipsecentre.y)) / (float)(semiminoraxis * semiminoraxis)));
 	}
 
-	bool InsideEllipse(iPoint pos)
+	bool InsideEllipse(iPoint point)
 	{
-		return (((((pos.x - ellipsecentre.x) * (pos.x - ellipsecentre.x)) / (semimajoraxis * semimajoraxis)) + (((pos.y - ellipsecentre.y) * (pos.y - ellipsecentre.y)) / (semiminoraxis * semiminoraxis))) <= 1);
+		return (((((point.x - ellipsecentre.x) * (point.x - ellipsecentre.x)) / (semimajoraxis * semimajoraxis)) + (((point.y - ellipsecentre.y) * (point.y - ellipsecentre.y)) / (semiminoraxis * semiminoraxis))) <= 1);
 	}
 };
 
@@ -58,10 +58,13 @@ public:
 	void OnConsoleCVar(const CVar* cvar);
 
 private:
-	int Half_w = 0;
-	int Half_h = 0;
-	CamEllipse LitleEllipse;
-	CamEllipse BigEllipse;
+	float		f_Max_scale = 0.0f;
+	float		f_Min_scale = 0.0f;
+	int			i_Half_w = 0;
+	int			i_Half_h = 0;
+	CamEllipse	LitleEllipse;
+	CamEllipse  BigEllipse;
+	float		f_border_between_ellipses = 0.0f;
 
 };
 
