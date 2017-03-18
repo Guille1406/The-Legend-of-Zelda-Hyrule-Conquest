@@ -5,6 +5,7 @@
 #include "j1Pathfinding.h"
 #include <algorithm>
 #include"j1Collision.h"
+#include "O_ChangeHeight.h"
 
 
 bool j1Player::Awake(pugi::xml_node& config)
@@ -68,7 +69,7 @@ bool j1Player::Update(float dt)
 
 	Link->GetAdjacents();
 	Zelda->GetAdjacents();
-
+	int asd = Link->GetLogicHeightPlayer();
 	
 		
 	//2 Players
@@ -234,6 +235,15 @@ bool j1Player::Move_Camera()
 
 void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 {
+	Character* character = nullptr;
+	if (collider1->type == collider_link || collider2->type == collider_link) {
+
+		character = Link;
+	}
+	else if (collider1->type == collider_zelda || collider2->type == collider_zelda)
+	{
+		character = Zelda;
+	}
 	if (collider1->type == collider_button) {
 		auto temp = (Object*)collider1->parent;
 		if (App->input->GetKey(SDL_SCANCODE_T)==KEY_DOWN) {
@@ -247,8 +257,16 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		}
 	}
 
+	else if (collider1->type == collider_change_height) {
+		auto temp = (ChangeHeight*)collider1->parent;
+		character->ChangeLogicHeightPlayer(temp->height);
+	}
+	else if (collider2->type == collider_change_height) {
+		auto temp = (ChangeHeight*)collider2->parent;
+		character->ChangeLogicHeightPlayer(temp->height);
 
-
+	}
+	
 
 }
 

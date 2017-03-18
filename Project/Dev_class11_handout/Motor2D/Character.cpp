@@ -45,6 +45,8 @@ void Character::ExecuteEvent(float dt)
 
 void Character::GetAdjacents()
 {
+	if (GetLogicHeightPlayer())
+		int x = 0;
 	this->adjacent.down.i = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y + 2);
 	this->adjacent.down.j =  App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 1, tilepos.y + 2);
 	this->adjacent.up.i = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y - 1);
@@ -90,6 +92,11 @@ int Character::GetLogic(bool collisions)
 uint Character::GetLogicHeightPlayer()
 {
 	return i_logic_height_player;
+}
+
+void Character::ChangeLogicHeightPlayer(int height)
+{
+	i_logic_height_player = height;
 }
 
 void Character::Jump(float dt)

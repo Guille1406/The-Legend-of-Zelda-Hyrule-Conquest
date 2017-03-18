@@ -502,7 +502,10 @@ bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer)
 			while (iterator.attribute("name").as_string() != "type" && iterator){
 				iterator = iterator.next_sibling();
 }
-			char* type_name = (char*)object.child("properties").child("property").attribute("value").as_string();
+			auto attribute = object.child("properties").child("property");
+			while (strcmp(attribute.attribute("name").value(), "type"))
+				attribute = attribute.next_sibling();
+			char* type_name = (char*)attribute.attribute("value").as_string();
 			Object* temp = App->entity->CreateObject(type_name, object);
 						
 		}
@@ -545,11 +548,11 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 	std::list<MapLayer*>::const_iterator item = data.layers.begin();
 	for (; item != data.layers.cend(); ++item) {
 		MapLayer* layer = (*item);
-	
+
 		//App->map->Colision = layer;
-		if (layer->properties.Get("Navigation", 0) == 0)
-			continue;
-		App->map->V_Colision.push_back(layer);
+		if (layer->properties.Get("Navigation", 0) != 0){
+
+			App->map->V_Colision.push_back(layer);
 
 		uchar* map = new uchar[layer->width*layer->height];
 		memset(map, 1, layer->width*layer->height);
@@ -580,7 +583,8 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 		height = data.height;
 		ret = true;
 
-		break;
+		
+	}
 	}
 	return ret;
 }

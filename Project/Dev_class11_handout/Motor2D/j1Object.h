@@ -7,6 +7,7 @@
 enum objectType {
 	chest,
 	button,
+	change_height,
 	door,
 	locked_door,
 	cliff,
@@ -76,6 +77,7 @@ public:
 	Object* CreateButton(pugi::xml_node);
 	Object* CreateText(pugi::xml_node);
 	Object* CreateDoor(pugi::xml_node);
+	Object* CreateChangeHeight(pugi::xml_node object);
 
 public: 
 	std::vector<Object*>* V_Objects;

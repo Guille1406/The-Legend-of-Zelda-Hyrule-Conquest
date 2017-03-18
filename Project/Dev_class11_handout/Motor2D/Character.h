@@ -82,6 +82,7 @@ public:
 	void GetAdjacents();
 	int GetLogic(bool collisions = false);
 	uint GetLogicHeightPlayer();
+	void ChangeLogicHeightPlayer(int);
 
 private:
 	void MoveFunction(float dt, int& pos,int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down = false);

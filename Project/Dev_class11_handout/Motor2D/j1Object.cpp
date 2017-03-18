@@ -2,6 +2,7 @@
 #include "j1Map.h"
 #include"O_Button.h"
 #include "O_Chest.h"
+#include "O_ChangeHeight.h"
 #include "j1Collision.h"
 bool j1Object::Start()
 {
@@ -39,7 +40,8 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object)
 		ret = CreateDoor(object);
 	else if (!strcmp(type_name, "button"))
 		ret = CreateButton(object);
-	
+	else if (!strcmp(type_name, "change_height"))
+		ret = CreateChangeHeight(object);
 	return ret;
 }
 
@@ -89,4 +91,26 @@ Object * j1Object::CreateDoor(pugi::xml_node object)
 	return nullptr;
 }
 
+
+Object * j1Object::CreateChangeHeight(pugi::xml_node object)
+{
+	ChangeHeight temp_height;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+	temp_height.rect = { x,y,w,h };
+	temp_height.type = objectType::change_height;
+	temp_height.active = true;
+	auto attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "height")) {
+		attribute = attribute.next_sibling();
+	}
+
+	temp_height.height = attribute.attribute("value").as_int();
+	Object* ret = new ChangeHeight(temp_height);
+	ret->collider = App->collision->AddCollider({ temp_height.rect }, collider_change_height, (Entity*)ret, this);
+	V_Objects->push_back(ret);
+	return nullptr;
+}
 

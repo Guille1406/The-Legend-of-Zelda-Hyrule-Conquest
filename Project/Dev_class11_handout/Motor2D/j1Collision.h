@@ -16,6 +16,7 @@ enum COLLIDER_TYPE
 	front_zelda,
 	collider_chest,
 	collider_button,
+	collider_change_height,
 };
 
 struct Collider

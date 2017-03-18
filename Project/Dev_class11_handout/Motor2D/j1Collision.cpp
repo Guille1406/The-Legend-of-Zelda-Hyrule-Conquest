@@ -11,6 +11,10 @@ j1Collision::j1Collision()
 	matrix[collider_zelda][collider_link] = true;
 	matrix[collider_button][collider_link] = true;
 	matrix[collider_link][collider_button] = true;
+	matrix[collider_link][collider_change_height] = true;
+	matrix[collider_change_height][collider_link] = true;
+	matrix[collider_zelda][collider_change_height] = true;
+	matrix[collider_change_height][collider_zelda] = true;
 }
 
 // Destructor
