@@ -11,7 +11,9 @@ enum COLLIDER_TYPE
 	//example
 	COLLIDER_NONE = -1,
 	link,
+	front_link,
 	zelda,
+	front_zelda,
 	collider_chest,
 };
 

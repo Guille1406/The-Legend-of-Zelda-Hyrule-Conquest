@@ -108,6 +108,7 @@ public:
 
 	bool doing_script = false;
 	Collider* collision;
+	Collider* front_collider;
 	int last_animation = 0;
 
 	std::vector<bool> allow_collision;
