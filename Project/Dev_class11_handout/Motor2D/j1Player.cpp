@@ -24,10 +24,10 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Link->character_direction = direction::down;
 	Zelda->character_direction = direction::down;
 
-	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,16,16 }, link, Link, this);
-	Link->front_collider = App->collision->AddCollider({ Link->pos.x,Link->pos.y + 16,16,8 }, link, Link, this);
-	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,16,16 }, zelda, Zelda, this);
-	Zelda->front_collider = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,16,8}, zelda, Zelda, this);
+	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,16,16 }, collider_link, Link, this);
+	//Link->front_collider = App->collision->AddCollider({ Link->pos.x,Link->pos.y + 16,16,8 }, link, Link, this);
+	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,16,16 }, collider_zelda, Zelda, this);
+	//Zelda->front_collider = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,16,8}, zelda, Zelda, this);
 	return true;
 }
 
@@ -124,8 +124,8 @@ bool j1Player::Update(float dt)
 	Draw();
 	Link->collision->SetPos(Link->pos.x, Link->pos.y, Link->GetLogicHeightPlayer());
 	Zelda->collision->SetPos(Zelda->pos.x, Zelda->pos.y, Zelda->GetLogicHeightPlayer());
-	Link->front_collider->SetPos(Link->pos.x, Link->pos.y+16, Link->GetLogicHeightPlayer());
-	Zelda->front_collider->SetPos(Zelda->pos.x, Zelda->pos.y+16, Zelda->GetLogicHeightPlayer());
+	//Link->front_collider->SetPos(Link->pos.x, Link->pos.y+16, Link->GetLogicHeightPlayer());
+	//Zelda->front_collider->SetPos(Zelda->pos.x, Zelda->pos.y+16, Zelda->GetLogicHeightPlayer());
 
 	return true;
 }
@@ -230,5 +230,25 @@ bool j1Player::Move_Camera()
 	i++;
 	
 	return false;
+}
+
+void j1Player::OnCollision(Collider * collider1, Collider * collider2)
+{
+	if (collider1->type == collider_button) {
+		auto temp = (Object*)collider1->parent;
+		if (App->input->GetKey(SDL_SCANCODE_T)==KEY_DOWN) {
+			temp->Action();
+		}
+	}
+	else if(collider2->type == collider_button) {
+		auto temp = (Object*)collider2->parent;
+		if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
+			temp->Action();
+		}
+	}
+
+
+
+
 }
 

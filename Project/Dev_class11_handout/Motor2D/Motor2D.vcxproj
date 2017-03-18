@@ -124,6 +124,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ConsoleCommandCVar.h" />
+    <ClInclude Include="O_Button.h" />
     <ClInclude Include="O_Chest.h" />
     <ClInclude Include="Gui.h" />
     <ClInclude Include="GuiBar.h" />

@@ -13,7 +13,7 @@ public:
 	
 	P_Link() {
 		sprites_vector = new std::vector<Animation>;
-		allow_collision.push_back(true);
+		allow_collision.push_back(false);
 		allow_collision.push_back(true);
 		allow_collision.push_back(true);
 	}

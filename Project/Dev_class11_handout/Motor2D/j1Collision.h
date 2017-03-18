@@ -10,11 +10,12 @@ enum COLLIDER_TYPE
 {
 	//example
 	COLLIDER_NONE = -1,
-	link,
+	collider_link,
 	front_link,
-	zelda,
+	collider_zelda,
 	front_zelda,
 	collider_chest,
+	collider_button,
 };
 
 struct Collider
@@ -65,7 +66,8 @@ public:
 private:
 
 	std::vector<Collider*> colliders;
-	std::vector<std::vector<bool>> matrix_colliders;
+	bool matrix[MAX_COLLIDERS][MAX_COLLIDERS];
+	//std::vector<std::vector<bool>> matrix_colliders;
 	bool debug = false;
 };
 

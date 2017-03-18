@@ -1,5 +1,6 @@
 #include "j1Object.h"
 #include "j1Map.h"
+#include"O_Button.h"
 #include "O_Chest.h"
 #include "j1Collision.h"
 bool j1Object::Start()
@@ -36,7 +37,8 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object)
 		ret = CreateText(object);
 	else if (!strcmp(type_name, "door"))
 		ret = CreateDoor(object);
-
+	else if (!strcmp(type_name, "button"))
+		ret = CreateButton(object);
 	
 	return ret;
 }
@@ -54,6 +56,24 @@ Object * j1Object::CreateChest(pugi::xml_node object)
 
 	Object* ret = new Chest(temp_chest);
 	ret->collider = App->collision->AddCollider({ temp_chest.rect }, collider_chest, (Entity*)ret, this);
+	V_Objects->push_back(ret);
+
+	return ret;
+}
+
+Object * j1Object::CreateButton(pugi::xml_node object)
+{
+	Button temp_button;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+	temp_button.rect = { x,y,w,h };
+	temp_button.type = objectType::button;
+	temp_button.active = true;
+
+	Object* ret = new Button(temp_button);
+	ret->collider = App->collision->AddCollider({ temp_button.rect }, collider_button, (Entity*)ret, this);
 	V_Objects->push_back(ret);
 
 	return ret;
