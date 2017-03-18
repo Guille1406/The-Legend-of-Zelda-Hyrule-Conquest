@@ -7,8 +7,10 @@ j1Collision::j1Collision()
 	//for (uint i = 0; i < colliders.size(); ++i)
 		//colliders[i] = nullptr;
 
-	//matrix_colliders[link][zelda] = true;
-	//matrix_colliders[zelda][link] = true;
+	matrix[collider_link][collider_zelda] = true;
+	matrix[collider_zelda][collider_link] = true;
+	matrix[collider_button][collider_link] = true;
+	matrix[collider_link][collider_button] = true;
 }
 
 // Destructor
@@ -19,13 +21,13 @@ bool j1Collision::Start()
 {
 
 	// CHANGE THIS
-	matrix_colliders.push_back(App->player->Link->allow_collision);
+	/*matrix_colliders.push_back(App->player->Link->allow_collision);
 	matrix_colliders.push_back(App->player->Zelda->allow_collision);
 
 	matrix_colliders.push_back(App->player->Zelda->allow_collision);
 	matrix_colliders.push_back(App->player->Zelda->allow_collision);
 	matrix_colliders.push_back(App->player->Zelda->allow_collision);
-
+	matrix_colliders.push_back(App->player->Zelda->allow_collision);*/
 	return true;
 }
 
@@ -40,44 +42,7 @@ bool j1Collision::PreUpdate()
 			colliders[i] = nullptr;
 		}
 	}
-	Collider* c1;
-	Collider* c2;
-
-	for (uint i = 0; i < colliders.size(); ++i)
-	{
-		// skip empty colliders
-		if (colliders[i] == nullptr)
-			continue;
-
-		c1 = colliders[i];
-
-		// avoid checking collisions already checked
-		for (uint k = i + 1; k < colliders.size(); ++k)
-		{
-			// skip empty colliders
-			if (colliders[k] == nullptr)
-				continue;
-
-			c2 = colliders[k];
-
-			//UNCOMMENT THIS
-			if (c1->CheckCollision(c2->rect) == true)
-			{
-				if (matrix_colliders[c1->type][c2->type] && c1->callback)
-				{
-						c1->callback->OnCollision(c1, c2);
-					}
-
-				}
-
-
-				if (matrix_colliders[c2->type][c1->type] && c2->callback)
-				{
-					c2->callback->OnCollision(c2, c1);
-				}
-
-			}
-		}
+	
 	return true;
 	}
 
@@ -109,7 +74,7 @@ bool j1Collision::Update(float dt)
 
 			if (c1->CheckCollision(c2->rect) == true)
 			{
-				if (matrix_colliders[c1->type][c2->type] && c1->callback)
+				if (matrix[c1->type][c2->type] && c1->callback)
 				{
 				
 					c1->callback->OnCollision(c1, c2);
@@ -118,7 +83,7 @@ bool j1Collision::Update(float dt)
 				}
 
 
-				if (matrix_colliders[c2->type][c1->type] && c2->callback)
+				if (matrix[c2->type][c1->type] && c2->callback)
 				{
 					c2->callback->OnCollision(c2, c1);
 				}
@@ -149,14 +114,17 @@ void j1Collision::DebugDraw()
 
 		switch (colliders[i]->type)
 		{
-		case link: // green
+		case collider_link: // green
 			App->render->DrawQuad(colliders[i]->rect, 12, 198, 0, alpha);
 			break;
-		case zelda: // pink
+		case collider_zelda: // pink
 			App->render->DrawQuad(colliders[i]->rect, 245, 25, 219, alpha);
 			break;
 		case collider_chest: 
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
+			break;
+		case collider_button:
+			App->render->DrawQuad(colliders[i]->rect, 150, 65, 255, 255);
 			break;
 		}
 	}

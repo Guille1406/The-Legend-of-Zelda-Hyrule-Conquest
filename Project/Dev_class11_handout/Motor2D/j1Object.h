@@ -6,6 +6,7 @@
 
 enum objectType {
 	chest,
+	button,
 	door,
 	locked_door,
 	cliff,
@@ -33,7 +34,7 @@ public:
 	};
 	~Object() {};
 
-	void Action() {};
+	virtual void Action() {};
 
 public:
 
@@ -72,6 +73,7 @@ public:
 
 	Object* CreateObject(char*, pugi::xml_node);
 	Object* CreateChest(pugi::xml_node);
+	Object* CreateButton(pugi::xml_node);
 	Object* CreateText(pugi::xml_node);
 	Object* CreateDoor(pugi::xml_node);
 
