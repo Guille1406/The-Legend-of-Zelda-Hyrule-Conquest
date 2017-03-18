@@ -15,7 +15,6 @@ enum COLLIDER_TYPE
 	zelda,
 	front_zelda,
 	collider_chest,
-	collider_height,
 };
 
 struct Collider
