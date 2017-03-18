@@ -24,14 +24,7 @@ j1Collision::~j1Collision()
 bool j1Collision::Start()
 {
 
-	// CHANGE THIS
-	/*matrix_colliders.push_back(App->player->Link->allow_collision);
-	matrix_colliders.push_back(App->player->Zelda->allow_collision);
-
-	matrix_colliders.push_back(App->player->Zelda->allow_collision);
-	matrix_colliders.push_back(App->player->Zelda->allow_collision);
-	matrix_colliders.push_back(App->player->Zelda->allow_collision);
-	matrix_colliders.push_back(App->player->Zelda->allow_collision);*/
+	
 	return true;
 }
 
@@ -129,6 +122,9 @@ void j1Collision::DebugDraw()
 			break;
 		case collider_button:
 			App->render->DrawQuad(colliders[i]->rect, 150, 65, 255, 255);
+			break;
+		case collider_change_height:
+			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
 			break;
 		}
 	}
