@@ -24,7 +24,7 @@ bool S_World::Start()
 			App->pathfinding->SetMap(w, h, data);
 
 			RELEASE_ARRAY(data);
-			App->map->CreateLogicMap();
+			//App->map->CreateLogicMap();
 	}
 	
 

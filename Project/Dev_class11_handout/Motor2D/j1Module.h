@@ -94,7 +94,7 @@ public:
 	}
 
 	virtual void OnCollision(Collider* collider1, Collider* collider2) {
-
+		int x = 0;
 
 	}
 

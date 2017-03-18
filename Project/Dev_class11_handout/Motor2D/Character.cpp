@@ -166,8 +166,8 @@ void Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 			other_pos -= speed*dt;
 		}
 	}
-	else if (adjacent.up.i == TILE_COL_ID && adjacent.up.j == TILE_COL_ID) {
-		if ((pos - 1) / 8 == tile_pos)
+	else if (tiles.i == TILE_COL_ID && tiles.j == TILE_COL_ID) {
+		if ((pos -1*!add + 8*add ) / 8 == tile_pos)
 			pos +=  i * speed*dt;
 	}
 

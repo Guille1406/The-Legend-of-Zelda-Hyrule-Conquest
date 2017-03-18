@@ -33,6 +33,10 @@ public:
 	};
 	~Object() {};
 
+	void Action() {};
+
+public:
+
 	SDL_Rect rect;
 	bool active;
 	objectType type;
