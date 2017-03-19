@@ -176,7 +176,7 @@ player_event P_Link::GetEvent()
 				LOG("I'm Jumping :DDDD");
 				can_jump = false;
 		}
-		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT) {
+		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 			actual_event = roll;
 			doing_script = true;
 		}
