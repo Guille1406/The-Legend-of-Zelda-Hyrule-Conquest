@@ -2,6 +2,7 @@
 #include "j1Map.h"
 #include "j1App.h"
 #include "j1Collision.h"
+
 static const uint JUMP_DISTANCE = 112;
 
 void Character::LoadAnimation(const char* path)
@@ -202,12 +203,10 @@ bool Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 			pos +=  i * speed*dt;
 		else {
 			ret = false;
-		}
-		
+		}		
 	}
 	return ret;
-
-
+	
 }
 
 bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile)
