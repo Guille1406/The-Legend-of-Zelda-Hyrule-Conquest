@@ -58,7 +58,8 @@ bool j1Camera::PreUpdate()
 	Centre.x = ((-1) * (int)((((float)(App->player->Link->pos.x + App->player->Zelda->pos.x)) * 0.5f) * Scale));
 	Centre.y = ((-1) * (int)((((float)(App->player->Link->pos.y + App->player->Zelda->pos.y)) * 0.5f) * Scale));
 	//Camera position
-	App->render->camera = { Centre.x + i_Half_w ,Centre.y + i_Half_h };
+	App->render->camera.x = Centre.x + i_Half_w;
+	App->render->camera.y = Centre.y + i_Half_h;
 	//Ellipses centre
 	LitleEllipse.ellipsecentre = BigEllipse.ellipsecentre = { (int)(App->render->camera.x - Centre.x * Scale), (int)(App->render->camera.y - Centre.y * Scale) };
 	return true;
