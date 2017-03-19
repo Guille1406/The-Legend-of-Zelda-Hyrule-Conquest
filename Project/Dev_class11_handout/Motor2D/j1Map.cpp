@@ -31,7 +31,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 
 void j1Map::Draw()
 {
-	int scale = App->win->GetScale();
+	float scale = App->win->GetScale();
 
 	if(map_loaded == false)
 		return;
