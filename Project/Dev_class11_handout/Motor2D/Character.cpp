@@ -106,19 +106,19 @@ void Character::UpdateColliderFront()
 	switch (character_direction) {
 	case up:
 		front_collider->rect = { 0,0,32,16 };
-		front_collider->SetPos(pos.x, pos.y - 16, i_logic_height_player);
+		front_collider->SetPos(tilepos.x * 16, tilepos.y * 16 - 16, i_logic_height_player);
 		break;
 	case down:
 		front_collider->rect = { 0,0,32,16 };
-		front_collider->SetPos(pos.x, pos.y + 32, i_logic_height_player);
+		front_collider->SetPos(tilepos.x * 16, tilepos.y * 16 + 32, i_logic_height_player);
 		break;
 	case left:
 		front_collider->rect = { 0,0,16,32 };
-		front_collider->SetPos(pos.x - 16, pos.y , i_logic_height_player);
+		front_collider->SetPos(tilepos.x * 16 - 16, tilepos.y * 16, i_logic_height_player);
 		break;
 	case right:
 		front_collider->rect = { 0,0,16,32 };
-		front_collider->SetPos(pos.x+ 32, pos.y , i_logic_height_player);
+		front_collider->SetPos(tilepos.x * 16 + 32, tilepos.y * 16, i_logic_height_player);
 		break;
 	}
 
