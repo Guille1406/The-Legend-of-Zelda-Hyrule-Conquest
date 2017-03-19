@@ -13,7 +13,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	
 	Link = new P_Link();
 	Zelda = new P_Zelda();
-
+	cooperative = true;
 	Link->movement_direction = move_idle;
 	Zelda->movement_direction = move_idle;
 	Link->sprites_vector = new std::vector<Animation>;
@@ -74,7 +74,7 @@ bool j1Player::Update(float dt)
 		
 	//2 Players
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-		cooperative = !cooperative;
+	//	cooperative = !cooperative;
 		selected_character = Link;
 		other_character = Zelda;
 	}
