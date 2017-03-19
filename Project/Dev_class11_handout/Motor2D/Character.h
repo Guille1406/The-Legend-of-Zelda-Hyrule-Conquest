@@ -107,8 +107,8 @@ public:
 	player_event				actual_event;
 	direction					character_direction;
 	move_direction				movement_direction;
-	bool						can_move;
-	bool						can_jump;
+	bool						can_move=false;
+	bool						can_jump=false;
 
 	bool doing_script = false;
 	Collider* collision;
