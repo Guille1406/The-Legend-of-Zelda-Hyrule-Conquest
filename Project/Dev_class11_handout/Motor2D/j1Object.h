@@ -60,9 +60,7 @@ public:
 	j1Object() {
 		V_Objects = new std::vector<Object*>;
 
-		allow_collision.push_back(true);
-		allow_collision.push_back(true);
-		allow_collision.push_back(true);
+	
 	};
 	~j1Object() {};
 
@@ -78,10 +76,11 @@ public:
 	Object* CreateText(pugi::xml_node);
 	Object* CreateDoor(pugi::xml_node);
 	Object* CreateChangeHeight(pugi::xml_node object);
+	Object* CreateJump(pugi::xml_node object);
 
 public: 
 	std::vector<Object*>* V_Objects;
-	std::vector<bool> allow_collision;
+
 };
 
 

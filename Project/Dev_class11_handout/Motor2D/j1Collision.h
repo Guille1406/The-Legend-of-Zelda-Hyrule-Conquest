@@ -17,6 +17,7 @@ enum COLLIDER_TYPE
 	collider_chest,
 	collider_button,
 	collider_change_height,
+	collider_jump,
 };
 
 struct Collider

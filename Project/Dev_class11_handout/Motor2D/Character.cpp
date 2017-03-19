@@ -1,8 +1,8 @@
 #include "Character.h"
 #include "j1Map.h"
 #include "j1App.h"
-
-static const uint JUMP_DISTANCE = 48;
+#include "j1Collision.h"
+static const uint JUMP_DISTANCE = 112;
 
 void Character::LoadAnimation(const char* path)
 {
@@ -59,9 +59,9 @@ void Character::GetAdjacents()
 
 int Character::GetLogic(bool collisions)
 {
-	/*
-	std::vector<MapLayer*> vector_temp = App->map->V_Logic;
-	if (collisions)
+	
+	std::vector<MapLayer*> vector_temp;
+
 		vector_temp = App->map->V_Colision;
 
 	int i, j;
@@ -85,7 +85,7 @@ int Character::GetLogic(bool collisions)
 		break;
 	}
 	if (i != 0)return i;
-	if (j != 0)return j;*/
+	if (j != 0)return j;
 	return 0;
 }
 
@@ -97,6 +97,29 @@ uint Character::GetLogicHeightPlayer()
 void Character::ChangeLogicHeightPlayer(int height)
 {
 	i_logic_height_player = height;
+}
+
+void Character::UpdateColliderFront()
+{
+	switch (character_direction) {
+	case up:
+		front_collider->rect = { 0,0,32,16 };
+		front_collider->SetPos(pos.x, pos.y - 16, i_logic_height_player);
+		break;
+	case down:
+		front_collider->rect = { 0,0,32,16 };
+		front_collider->SetPos(pos.x, pos.y + 32, i_logic_height_player);
+		break;
+	case left:
+		front_collider->rect = { 0,0,16,32 };
+		front_collider->SetPos(pos.x - 16, pos.y , i_logic_height_player);
+		break;
+	case right:
+		front_collider->rect = { 0,0,16,32 };
+		front_collider->SetPos(pos.x+ 32, pos.y , i_logic_height_player);
+		break;
+	}
+
 }
 
 void Character::Jump(float dt)
@@ -135,8 +158,9 @@ void Character::Roll(float dt)
 	}
 }
 
-void Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down)
+bool Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down)
 {
+	bool ret = true;
 	int tile_pos = (pos + 8) / 16;
 	int other_tile_pos = (other_pos + 8) / 16;
 	float speed = 2 / dt;
@@ -176,14 +200,19 @@ void Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 	else if (tiles.i == TILE_COL_ID && tiles.j == TILE_COL_ID) {
 		if ((pos -1*!add + 16*add ) / 16 == tile_pos)
 			pos +=  i * speed*dt;
+		else {
+			ret = false;
+		}
+		
 	}
-
+	return ret;
 
 
 }
 
-void Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile)
+bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile)
 {
+	bool ret = false;
 	//pos_one y;
 	//pos_two x;
 	int i = 1;
@@ -210,6 +239,7 @@ void Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 			pos_one += i*speed*dt;
 			pos_two += n*speed*dt;
 		}
+		else ret = false;
 	}
 	else if (front_tile == TILE_COL_ID && side_tile != TILE_COL_ID)
 		pos_two += n*speed*dt;
@@ -241,6 +271,8 @@ void Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 		if ((pos_one + add_one*16) / 16 == tile_pos_one)
 			pos_one += i*speed*dt;
 
+
+	return ret;
 }
 
 void Character::JumpFunction(float dt, int& pos, bool add)
@@ -254,11 +286,12 @@ void Character::JumpFunction(float dt, int& pos, bool add)
 	temp = true;
 
 	if (( i * pos <  i*final_pos)) {
-		pos = pos + (i * 2);
+		pos = pos + (i * 4);
 	}
 	else {
 		temp = false;
 		doing_script = false;
+		ChangeLogicHeightPlayer(GetLogicHeightPlayer() - 1);
 	}
 }
 
@@ -274,7 +307,7 @@ void Character::RollFunction(float dt, int & pos, bool add)
 	temp = true;
 
 	if ((i * pos <  i*final_pos) && GetLogic(true) != TILE_COL_ID ) {
-		pos = pos + (i * 2);
+		pos = pos + (i * 4);
 	}
 	else {
 		temp = false;

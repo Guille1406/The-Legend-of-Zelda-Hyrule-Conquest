@@ -15,6 +15,8 @@ j1Collision::j1Collision()
 	matrix[collider_change_height][collider_link] = true;
 	matrix[collider_zelda][collider_change_height] = true;
 	matrix[collider_change_height][collider_zelda] = true;
+	matrix[front_link][collider_jump] = true;
+	matrix[collider_jump][front_link] = true;
 }
 
 // Destructor
@@ -114,9 +116,16 @@ void j1Collision::DebugDraw()
 		case collider_link: // green
 			App->render->DrawQuad(colliders[i]->rect, 12, 198, 0, alpha);
 			break;
+		case front_link: // pink
+			App->render->DrawQuad(colliders[i]->rect, 245, 25, 219, alpha);
+			break;
 		case collider_zelda: // pink
 			App->render->DrawQuad(colliders[i]->rect, 245, 25, 219, alpha);
 			break;
+		case front_zelda: // pink
+			App->render->DrawQuad(colliders[i]->rect, 245, 25, 219, alpha);
+			break;
+
 		case collider_chest: 
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
 			break;
@@ -125,6 +134,9 @@ void j1Collision::DebugDraw()
 			break;
 		case collider_change_height:
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
+			break;
+		case collider_jump:
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, 255);
 			break;
 		}
 	}

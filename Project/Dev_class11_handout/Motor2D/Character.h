@@ -83,10 +83,11 @@ public:
 	int GetLogic(bool collisions = false);
 	uint GetLogicHeightPlayer();
 	void ChangeLogicHeightPlayer(int);
+	void UpdateColliderFront();
 
 private:
-	void MoveFunction(float dt, int& pos,int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down = false);
-	void MoveDiagonalFunction(float dt, int& pos_one, int& pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile);
+	bool MoveFunction(float dt, int& pos,int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down = false);
+	bool MoveDiagonalFunction(float dt, int& pos_one, int& pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile);
 	void JumpFunction(float dt, int& pos, bool add);
 	void RollFunction(float dt, int& pos, bool add);
 	
@@ -101,11 +102,13 @@ public:
 	p2SString					sprites_folder;
 	pugi::xml_document			sprites_file;
 	std::vector<Animation>*		sprites_vector;
-	Animation					actual_animation; // pointer?
+	Animation					actual_animation; 
 
 	player_event				actual_event;
 	direction					character_direction;
 	move_direction				movement_direction;
+	bool						can_move;
+	bool						can_jump;
 
 	bool doing_script = false;
 	Collider* collision;

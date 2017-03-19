@@ -33,42 +33,42 @@ void Character::Move(float dt)
 	switch (movement_direction) {
 	case move_up:
 
-		MoveFunction(dt, pos.y, pos.x, false, adjacent.up, adjacent.left.i, adjacent.right.i);
+		can_move = MoveFunction(dt, pos.y, pos.x, false, adjacent.up, adjacent.left.i, adjacent.right.i);
 	
 		break;
 
 	case  move_down:
-		MoveFunction(dt, pos.y, pos.x, true, adjacent.down, adjacent.left.j,  adjacent.right.j, true);
+		can_move = MoveFunction(dt, pos.y, pos.x, true, adjacent.down, adjacent.left.j,  adjacent.right.j, true);
 	
 		break;
 
 	case move_left:
-		MoveFunction(dt, pos.x, pos.y, false, adjacent.left, adjacent.up.i, adjacent.down.i);
+		can_move = MoveFunction(dt, pos.x, pos.y, false, adjacent.left, adjacent.up.i, adjacent.down.i);
 		
 		break;
 
 	case move_right:
-		MoveFunction(dt, pos.x, pos.y, true, adjacent.right, adjacent.up.j, adjacent.down.j, true);
+		can_move = MoveFunction(dt, pos.x, pos.y, true, adjacent.right, adjacent.up.j, adjacent.down.j, true);
 		
 		break;
 
 	case move_up_left:
-		MoveDiagonalFunction(dt, pos.y, pos.x, false, false, adjacent.up.i, adjacent.left.i, diagonal_left_up);
+		can_move = MoveDiagonalFunction(dt, pos.y, pos.x, false, false, adjacent.up.i, adjacent.left.i, diagonal_left_up);
 		
 		break;
 
 	case move_up_right:
-		MoveDiagonalFunction(dt, pos.y, pos.x, false, true, adjacent.up.j, adjacent.right.i, diagonal_right_up);
+		can_move = MoveDiagonalFunction(dt, pos.y, pos.x, false, true, adjacent.up.j, adjacent.right.i, diagonal_right_up);
 		
 		break;
 
 	case move_down_left:
-		MoveDiagonalFunction(dt, pos.y, pos.x, true, false, adjacent.down.i, adjacent.left.j, diagonal_left_down);
+		can_move = MoveDiagonalFunction(dt, pos.y, pos.x, true, false, adjacent.down.i, adjacent.left.j, diagonal_left_down);
 		
 		break;
 
 	case move_down_right:
-		MoveDiagonalFunction(dt, pos.y, pos.x, true, true, adjacent.down.j, adjacent.right.j, diagonal_right_down);
+		can_move = MoveDiagonalFunction(dt, pos.y, pos.x, true, true, adjacent.down.j, adjacent.right.j, diagonal_right_down);
 		
 		break;
 	}

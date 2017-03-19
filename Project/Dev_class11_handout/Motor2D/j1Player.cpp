@@ -25,10 +25,10 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Link->character_direction = direction::down;
 	Zelda->character_direction = direction::down;
 
-	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,16,16 }, collider_link, Link, this);
-	//Link->front_collider = App->collision->AddCollider({ Link->pos.x,Link->pos.y + 16,16,8 }, link, Link, this);
-	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,16,16 }, collider_zelda, Zelda, this);
-	//Zelda->front_collider = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,16,8}, zelda, Zelda, this);
+	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
+	Link->front_collider = App->collision->AddCollider({ Link->pos.x,Link->pos.y + 32,32,16 }, front_link, Link, this);
+	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,32,32 }, collider_zelda, Zelda, this);
+	Zelda->front_collider = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y + 32,32,16}, front_zelda, Zelda, this);
 	return true;
 }
 
@@ -125,8 +125,8 @@ bool j1Player::Update(float dt)
 	Draw();
 	Link->collision->SetPos(Link->pos.x, Link->pos.y, Link->GetLogicHeightPlayer());
 	Zelda->collision->SetPos(Zelda->pos.x, Zelda->pos.y, Zelda->GetLogicHeightPlayer());
-	//Link->front_collider->SetPos(Link->pos.x, Link->pos.y+16, Link->GetLogicHeightPlayer());
-	//Zelda->front_collider->SetPos(Zelda->pos.x, Zelda->pos.y+16, Zelda->GetLogicHeightPlayer());
+	Link->UpdateColliderFront();
+	Zelda->UpdateColliderFront();
 
 	return true;
 }
@@ -236,14 +236,16 @@ bool j1Player::Move_Camera()
 void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 {
 	Character* character = nullptr;
-	if (collider1->type == collider_link || collider2->type == collider_link) {
-
-		character = Link;
-	}
+	if (collider1->type == collider_link || collider2->type == collider_link)
+		character = Link;	
 	else if (collider1->type == collider_zelda || collider2->type == collider_zelda)
-	{
 		character = Zelda;
-	}
+	else if (collider1->type == front_zelda || collider2->type == front_zelda)
+		character = Zelda;
+	else if (collider1->type == front_link || collider2->type == front_link)
+		character = Link;
+
+
 	if (collider1->type == collider_button) {
 		auto temp = (Object*)collider1->parent;
 		if (App->input->GetKey(SDL_SCANCODE_T)==KEY_DOWN) {
@@ -266,7 +268,17 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		character->ChangeLogicHeightPlayer(temp->height);
 
 	}
-	
+	else if (collider1->type == collider_jump) {
+		if (character->can_move == false && character->doing_script == false) {
+			character->can_jump = true;
 
+		}
+	}
+	else if (collider2->type == collider_jump) {
+		if (character->can_move == false && character->doing_script == false) {
+			character->can_jump = true;
+
+		}
+	}
 }
 
