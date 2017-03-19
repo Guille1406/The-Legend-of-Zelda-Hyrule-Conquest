@@ -10,9 +10,6 @@
 #include <cmath>
 #define VSYNC true
 
-
-
-
 j1Render::j1Render() : j1Module()
 {
 	name.create("renderer");
@@ -147,14 +144,24 @@ void j1Render::ResetViewPort()
 iPoint j1Render::ScreenToWorld(int x, int y) const
 {
 	iPoint ret;
-	int scale = App->win->GetScale();
+	float scale = App->win->GetScale();
 
-	ret.x = (x - camera.x / scale);
-	ret.y = (y - camera.y / scale);
+	ret.x = (int)((float)(x - camera.x) / scale);
+	ret.y = (int)((float)(y - camera.y) / scale);
 
 	return ret;
 }
 
+iPoint j1Render::WorldToScreen(int x, int y) const
+{
+	iPoint ret;
+	float scale = App->win->GetScale();
+
+	ret.x = (int)((float)(x * scale) + camera.x);
+	ret.y = (int)((float)(y * scale) + camera.y);
+
+	return ret;
+}
 
 // Blit to screen
 bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y, bool use_scale) const

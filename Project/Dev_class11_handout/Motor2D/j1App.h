@@ -138,6 +138,11 @@ private:
 	float				dt = 0.0f;
 	int					capped_ms = -1;
 
+	float				avg_fps = 0.0f;
+	float				seconds_since_startup = 0.0f;
+	uint32				last_frame_ms = 0;
+	uint32				frames_on_last_update = 0;
+
 	bool				wanttoquit = false;
 };
 

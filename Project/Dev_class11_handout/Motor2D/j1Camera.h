@@ -17,7 +17,7 @@ struct CamEllipse
 
 	bool InsideEllipse(iPoint point)
 	{
-		return (((((point.x - ellipsecentre.x) * (point.x - ellipsecentre.x)) / (semimajoraxis * semimajoraxis)) + (((point.y - ellipsecentre.y) * (point.y - ellipsecentre.y)) / (semiminoraxis * semiminoraxis))) <= 1);
+		return (InsideEllipseValue(point) <= 1.0f);
 	}
 };
 
