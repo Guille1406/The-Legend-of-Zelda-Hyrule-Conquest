@@ -120,14 +120,14 @@ public:
 protected:
 	AddGuiTo purpose;
 	fPoint drag_vel = { 0.0f, 0.0f };
-	iPoint position;
+	iPoint position = { 0,0 };
 	j1Module* module_listener = nullptr;
 	MainScene* scene_listener = nullptr;
 	GuiType type = GuiType::undefined;
 	bool visible = true;
 	bool movable = false;
 	bool mouse_inside = false;
-	SDL_Rect Gui_Collider;
+	SDL_Rect Gui_Collider = { 0,0,0,0 };
 
 };
 

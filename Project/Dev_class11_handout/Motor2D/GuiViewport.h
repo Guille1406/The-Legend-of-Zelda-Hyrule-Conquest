@@ -18,9 +18,9 @@ private:
 	void DebugDraw() const;
 
 private:
-	SDL_Rect viewport_rect;
+	SDL_Rect viewport_rect = { 0,0,0,0 };
 	std::list<Gui*> ViewportElements;
-	iPoint OriginalPosition;
+	iPoint OriginalPosition = { 0,0 };
 
 };
 

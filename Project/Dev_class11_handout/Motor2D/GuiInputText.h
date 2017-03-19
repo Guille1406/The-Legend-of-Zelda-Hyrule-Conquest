@@ -28,7 +28,7 @@ private:
 
 private:
 	bool has_background = false;
-	SDL_Rect texture_writablearea_rect;
+	SDL_Rect texture_writablearea_rect = { 0,0,0,0 };
 	GuiLabel* InputTextString = nullptr;
 	std::string OriginalString;
 	std::string string;
@@ -36,8 +36,8 @@ private:
 	int InputTextString_w = 0;
 	int InputTextString_h = 0;
 	bool is_password = false;
-	iPoint InputTextStringPos;
-	iPoint OriginalPosition;
+	iPoint InputTextStringPos = { 0,0 };
+	iPoint OriginalPosition = { 0,0 };
 	uint previous_str_len = 0;
 	uint new_str_len = 0;
 

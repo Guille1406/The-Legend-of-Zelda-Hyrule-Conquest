@@ -67,8 +67,8 @@ private:
 private:
 	bool ConsoleActive = false;
 	bool ConsoleModuleActive = false;
-	SDL_Rect ConsoleBackground;
-	SDL_Rect ConsoleInputTextBackground;
+	SDL_Rect ConsoleBackground = { 0,0,0,0 };
+	SDL_Rect ConsoleInputTextBackground = { 0,0,0,0 };
 
 	GuiInputText* ConsoleInputText = nullptr;
 	std::list<Gui*> LOGLabels;
@@ -78,7 +78,7 @@ private:
 	std::list<CVar> CVars;
 	std::vector<std::string> ArgumentsVect;
 
-	iPoint CameraPos;
+	iPoint CameraPos = { 0,0 };
 
 	const Command* quit = nullptr;
 	const Command* help = nullptr;

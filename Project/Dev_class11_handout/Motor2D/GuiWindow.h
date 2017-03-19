@@ -18,9 +18,9 @@ private:
 
 private:
 	bool has_background = false;
-	SDL_Rect background_rect;
+	SDL_Rect background_rect = { 0,0,0,0 };
 	std::list<Gui*> WindowElements;
-	iPoint OriginalPosition;
+	iPoint OriginalPosition = { 0,0 };
 
 };
 

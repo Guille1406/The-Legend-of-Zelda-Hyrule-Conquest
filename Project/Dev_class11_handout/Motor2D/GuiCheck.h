@@ -21,9 +21,9 @@ private:
 	bool bakedcheck = false;
 	bool checked = false;
 	SDL_Rect* curent_state_texture = nullptr;
-	SDL_Rect idle_texture_rect;
-	SDL_Rect pressed_texture_rect;
-	SDL_Rect check_texture_rect;
+	SDL_Rect idle_texture_rect = { 0,0,0,0 };
+	SDL_Rect pressed_texture_rect = { 0,0,0,0 };
+	SDL_Rect check_texture_rect = { 0,0,0,0 };
 
 };
 

@@ -20,9 +20,9 @@ private:
 
 private:
 	GuiButton* ScrollBarButton = nullptr;
-	SDL_Rect scrollbarbackground;
-	SDL_Rect scrollbarbar;
-	iPoint ButtonWH;
+	SDL_Rect scrollbarbackground = { 0,0,0,0 };
+	SDL_Rect scrollbarbar = { 0,0,0,0 };
+	iPoint ButtonWH = { 0,0 };
 	bool has_bar = true;
 	bool vertical = true;
 	int scroll_max_value = 0;

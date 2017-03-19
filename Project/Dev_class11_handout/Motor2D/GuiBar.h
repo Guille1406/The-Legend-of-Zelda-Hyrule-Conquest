@@ -29,9 +29,9 @@ private:
 	Color* bar_color;
 	int bar_color_alpha = 255;
 	bool has_background = false;
-	SDL_Rect background_texture_rect;
-	SDL_Rect bar_rect;
-	SDL_Rect original_bar_rect;
+	SDL_Rect background_texture_rect = { 0,0,0,0 };
+	SDL_Rect bar_rect = { 0,0,0,0 };
+	SDL_Rect original_bar_rect = { 0,0,0,0 };
 
 };
 

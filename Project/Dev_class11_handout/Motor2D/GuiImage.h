@@ -15,7 +15,7 @@ private:
 	void DebugDraw() const;
 
 private:
-	SDL_Rect texture_rect;
+	SDL_Rect texture_rect = { 0,0,0,0 };
 
 };
 

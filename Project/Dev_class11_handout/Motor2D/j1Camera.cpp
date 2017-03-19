@@ -82,8 +82,8 @@ bool j1Camera::Update(float dt)
 		{
 			//Scale between f_Max_scale and f_Min_scale
 			float f_pos_value = BigEllipse.InsideEllipseValue(LinkPos);
-
-
+			float f_porcentual_value = (((float)(f_pos_value - f_border_between_ellipses)) / ((float)(1.0f - f_border_between_ellipses))) * 100.0f;
+			LOG("Porcentual value: %.3f", f_porcentual_value);
 
 
 

@@ -33,14 +33,14 @@ private:
 	GuiLabel* ButtonString = nullptr;
 	int ButtonString_w = 0;
 	int ButtonString_h = 0;
-	iPoint ButtonStringPos;
-	iPoint OriginalPosition;
+	iPoint ButtonStringPos = { 0,0 };
+	iPoint OriginalPosition = { 0,0 };
 	ButtonType button_type = ButtonType::undef;
 	ButtonState Button_State = ButtonState::Idle_Button;
 	SDL_Rect* curent_state_texture = nullptr;
-	SDL_Rect idle_texture_rect;
-	SDL_Rect hover_texture_rect;
-	SDL_Rect pressed_texture_rect;
+	SDL_Rect idle_texture_rect = { 0,0,0,0 };
+	SDL_Rect hover_texture_rect = { 0,0,0,0 };
+	SDL_Rect pressed_texture_rect = { 0,0,0,0 };
 
 };
 
