@@ -139,5 +139,16 @@ player_event P_Zelda::GetEvent()
 		actual_event = idle;
 	}
 
+	if (can_jump) {
+		actual_event = jump;
+		doing_script = true;
+		LOG("I'm Jumping :DDDD");
+		can_jump = false;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
+		actual_event = roll;
+		doing_script = true;
+	}
+
 	return actual_event;
 }

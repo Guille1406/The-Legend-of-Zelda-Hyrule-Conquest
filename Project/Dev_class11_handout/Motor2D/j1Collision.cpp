@@ -17,6 +17,8 @@ j1Collision::j1Collision()
 	matrix[collider_change_height][collider_zelda] = true;
 	matrix[front_link][collider_jump] = true;
 	matrix[collider_jump][front_link] = true;
+	matrix[front_zelda][collider_jump] = true;
+	matrix[collider_jump][front_zelda] = true;
 }
 
 // Destructor

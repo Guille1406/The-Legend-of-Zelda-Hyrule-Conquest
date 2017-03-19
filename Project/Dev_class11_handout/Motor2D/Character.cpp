@@ -30,6 +30,7 @@ void Character::ExecuteEvent(float dt)
 		break;
 
 	case attack:
+
 		break;
 
 	case jump:
@@ -237,7 +238,7 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 	int tile_pos_side = (pos_two + 8) / 16;
 	
 	if (front_tile == TILE_COL_ID && side_tile == TILE_COL_ID) {
-		if ((pos_one + add_one*16) / 16 == tile_pos_one && (pos_two + add_two*16) / 16 == tile_pos_side) {
+		if ((pos_one + add_one*16 ) / 16 == tile_pos_one && (pos_two + add_two*16) / 16 == tile_pos_side) {
 			pos_one += i*speed*dt;
 			pos_two += n*speed*dt;
 		}
@@ -267,10 +268,10 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 	}
 	
 	if (side_tile == TILE_COL_ID )
-		if ((pos_two + add_two*16) / 16 == tile_pos_side)
+		if ((pos_two + add_two*16 - !add_two) / 16 == tile_pos_side)
 			pos_two += n*speed*dt;
 	if (front_tile == TILE_COL_ID)
-		if ((pos_one + add_one*16) / 16 == tile_pos_one)
+		if ((pos_one + add_one*16 - !add_one) / 16 == tile_pos_one)
 			pos_one += i*speed*dt;
 
 

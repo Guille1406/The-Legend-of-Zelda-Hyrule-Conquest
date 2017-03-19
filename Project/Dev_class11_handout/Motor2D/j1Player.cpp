@@ -51,6 +51,7 @@ bool j1Player::Start()
 	selected_character = Link;
 	other_character = Zelda;
 	change = false;
+	cooperative = true;
 	return true;
 }
 
@@ -88,6 +89,7 @@ bool j1Player::Update(float dt)
 	}
 
 	//1 Player
+	/*
 	else {
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 			change = true;
@@ -114,7 +116,7 @@ bool j1Player::Update(float dt)
 
 	}
 
-
+	*/
 	Draw();
 	Link->collision->SetPos(Link->pos.x, Link->pos.y, Link->GetLogicHeightPlayer());
 	Zelda->collision->SetPos(Zelda->pos.x, Zelda->pos.y, Zelda->GetLogicHeightPlayer());
