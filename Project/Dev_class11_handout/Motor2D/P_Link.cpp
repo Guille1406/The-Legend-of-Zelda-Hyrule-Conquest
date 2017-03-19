@@ -38,13 +38,13 @@ void P_Link::LoadAnimation(const char * path)
 	int h = animations.attribute("h").as_int();
 	SDL_Rect anim = { x,y,w,h };
 	Animation temp_animation;
-	
-	char* name = (char*)animations.attribute("name").as_string();
+	int i = 0;
+	char* name = (char*)animations.attribute("n").as_string();
 	auto temp = animations;
 	last_name = name;
 	while (animations) {
 		auto temp = animations;
-		name = (char*)animations.attribute("name").as_string();
+		name = (char*)animations.attribute("n").as_string();
 		x = temp.attribute("x").as_int();
 		y = temp.attribute("y").as_int();
 		w = temp.attribute("w").as_int();
@@ -60,6 +60,7 @@ void P_Link::LoadAnimation(const char * path)
 			last_name = name;
 		}
 		else {
+			i++;
 			temp_animation.PushBack(anim);
 		}
 		animations = animations.next_sibling();

@@ -43,8 +43,8 @@ bool j1Player::Start()
 	Zelda->character_texture = Link->character_texture;
 	
 
-	Link->LoadAnimation("sprites/Link_Sprites.xml");
-	Zelda->LoadAnimation("sprites/Link_Sprites.xml");
+	Link->LoadAnimation("sprites/Link_Sprites_trim.xml");
+	Zelda->LoadAnimation("sprites/Link_Sprites_trim.xml");
 
 	Link->actual_animation = Link->sprites_vector[0][0];
 	Zelda->actual_animation = Zelda->sprites_vector[0][0];
@@ -135,7 +135,7 @@ void j1Player::Draw()
 	rect = { Link->tilepos.x*16, Link->tilepos.y*16, 32, 32 };
 	App->render->Blit(Link->character_texture, Link->pos.x - 3 , Link->pos.y - 12, &Link->actual_animation.GetCurrentFrame());
 	App->render->Blit(Zelda->character_texture, Zelda->pos.x - 3, Zelda->pos.y - 12 , &Zelda->actual_animation.GetCurrentFrame());
-	App->render->DrawQuad(rect, 0, 0, 255, 255, true, true);
+	//App->render->DrawQuad(rect, 0, 0, 255, 255, true, true);
 	
 }
 
