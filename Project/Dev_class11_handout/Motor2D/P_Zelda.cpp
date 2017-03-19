@@ -75,6 +75,8 @@ player_event P_Zelda::GetEvent()
 	SDL_Scancode LEFT;
 	SDL_Scancode RIGHT;
 
+
+
 	if (App->player->cooperative == false) {
 		UP = SDL_SCANCODE_W;
 		DOWN = SDL_SCANCODE_S;

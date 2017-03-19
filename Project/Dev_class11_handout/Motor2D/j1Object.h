@@ -43,6 +43,7 @@ public:
 	bool active;
 	objectType type;
 	Collider* collider;
+	int logic_height;
 	/* 
 	Contenido del cofre
 	Puntero a escena donde lleva

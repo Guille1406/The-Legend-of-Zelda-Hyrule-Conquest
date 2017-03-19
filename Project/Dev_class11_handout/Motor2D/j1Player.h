@@ -32,7 +32,7 @@ public:
 	bool change = false;
 	MainScene* actual_scene;
 	bool chase = false;
-	bool cooperative = false;
+	bool cooperative = true;
 	Character* selected_character;
 	Character* other_character;
 	P_Link* Link;

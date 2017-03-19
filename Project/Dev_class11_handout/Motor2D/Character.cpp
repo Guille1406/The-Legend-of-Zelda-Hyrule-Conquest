@@ -209,7 +209,7 @@ bool Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 	
 }
 
-bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile)
+bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile, bool is_down)
 {
 	bool ret = false;
 	//pos_one y;
@@ -221,6 +221,10 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 	if (!add_two)
 		n = -1;
 
+	int change = 1;
+	if (is_down)
+		change = -1;
+
 	bool add = true;
 	int negative = 1;
 	if (add_one == add_two) {
@@ -228,13 +232,12 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 	negative = -1;
 	}
 
-
 	float speed = 2 / dt;
 	int tile_pos_one = (pos_one + 8) / 16;
 	int tile_pos_side = (pos_two + 8) / 16;
 	
 	if (front_tile == TILE_COL_ID && side_tile == TILE_COL_ID) {
-		if ((pos_one) / 16 == tile_pos_one && (pos_two + add_two*32) / 16 == tile_pos_side) {
+		if ((pos_one + add_one*16) / 16 == tile_pos_one && (pos_two + add_two*16) / 16 == tile_pos_side) {
 			pos_one += i*speed*dt;
 			pos_two += n*speed*dt;
 		}
@@ -245,9 +248,9 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 	else if (front_tile != TILE_COL_ID && side_tile == TILE_COL_ID)
 		pos_one += i*speed*dt;
 	else if (front_tile != TILE_COL_ID && side_tile != TILE_COL_ID && diagonal_tile != TILE_COL_ID) {
-		if ((add*14 +i*n*  (pos_two + add*16 - tile_pos_side * 16)) > (pos_one - tile_pos_one * 16))
+		if (change * (add*14 +i*n*  (pos_two + add*16 - tile_pos_side * 16)) > change * (pos_one - tile_pos_one * 16))
 			pos_two += n*speed*dt;
-		else if ((add*14 + i*n* (pos_two + add*16 - tile_pos_side * 16)) < (pos_one - tile_pos_one * 16))
+		else if (change * (add*14 + i*n* (pos_two + add*16 - tile_pos_side * 16)) < change * (pos_one - tile_pos_one * 16))
 			pos_one += i*speed*dt;
 		else {
 			pos_one += i*speed*dt;
@@ -255,7 +258,7 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 		}
 	}
 	else if ( diagonal_tile == TILE_COL_ID) {
-		if ((pos_one) / 16 == tile_pos_one && (pos_two + (add_two*16)) / 16 == tile_pos_side) {
+		if ((pos_one + add_one * 16) / 16 == tile_pos_one && (pos_two + (add_two*16)) / 16 == tile_pos_side) {
 			pos_one += i*speed*dt;
 			pos_two += n*speed*dt;
 		}

@@ -87,7 +87,7 @@ public:
 
 private:
 	bool MoveFunction(float dt, int& pos,int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down = false);
-	bool MoveDiagonalFunction(float dt, int& pos_one, int& pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile);
+	bool MoveDiagonalFunction(float dt, int& pos_one, int& pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile, bool is_down = false);
 	void JumpFunction(float dt, int& pos, bool add);
 	void RollFunction(float dt, int& pos, bool add);
 	

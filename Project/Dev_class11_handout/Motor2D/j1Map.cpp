@@ -267,11 +267,12 @@ bool j1Map::Load(const char* file_name)
 	pugi::xml_node object_layer;
 	for (object_layer = map_file.child("map").child("objectgroup"); object_layer && ret; object_layer = object_layer.next_sibling("objectgroup"))
 	{
+		int height = 0;
 		ObjectLayer* obj = new ObjectLayer();
-		ret = LoadObjectLayer(object_layer, obj);
+		ret = LoadObjectLayer(object_layer, obj,height );
 		if (ret == true)
 			data.objects.push_back(obj);
-		
+		height++;
 	}
 
 	if(ret == true)
@@ -477,7 +478,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	return ret;
 }
 
-bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer)
+bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer, int height)
 {
 	bool ret = true;
 
@@ -507,6 +508,7 @@ bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer)
 				attribute = attribute.next_sibling();
 			char* type_name = (char*)attribute.attribute("value").as_string();
 			Object* temp = App->entity->CreateObject(type_name, object);
+			temp->logic_height = height;
 						
 		}
 				
