@@ -91,64 +91,66 @@ player_event P_Zelda::GetEvent()
 		RIGHT = SDL_SCANCODE_RIGHT;
 
 	}
-	if (App->input->GetKey(UP) == KEY_REPEAT) {
-		if (App->input->GetKey(LEFT) == KEY_REPEAT) {
-			movement_direction = move_up_left;
+	if (doing_script == false) {
+		if (App->input->GetKey(UP) == KEY_REPEAT) {
+			if (App->input->GetKey(LEFT) == KEY_REPEAT) {
+				movement_direction = move_up_left;
+			}
+			else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
+				movement_direction = move_up_right;
+			}
+			else {
+				movement_direction = move_up;
+
+			}
+			character_direction = up;
+			actual_event = move;
 		}
+
+		else if (App->input->GetKey(DOWN) == KEY_REPEAT) {
+			if (App->input->GetKey(LEFT) == KEY_REPEAT) {
+				movement_direction = move_down_left;
+			}
+			else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
+				movement_direction = move_down_right;
+			}
+			else {
+				movement_direction = move_down;
+
+			}
+			character_direction = down;
+			actual_event = move;
+		}
+
 		else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
-			movement_direction = move_up_right;
+
+
+			movement_direction = move_right;
+			character_direction = right;
+			actual_event = move;
+		}
+		else if (App->input->GetKey(LEFT) == KEY_REPEAT) {
+
+			movement_direction = move_left;
+			character_direction = left;
+			actual_event = move;
 		}
 		else {
-			movement_direction = move_up;
-
+			movement_direction = move_idle;
+			actual_event = idle;
 		}
-		character_direction = up;
-		actual_event = move;
-	}
 
-	else if (App->input->GetKey(DOWN) == KEY_REPEAT) {
-		if (App->input->GetKey(LEFT) == KEY_REPEAT) {
-			movement_direction = move_down_left;
+		if (can_jump) {
+			actual_event = jump;
+			doing_script = true;
+			LOG("I'm Jumping :DDDD");
+			can_jump = false;
 		}
-		else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
-			movement_direction = move_down_right;
+		if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
+			actual_event = roll;
+			doing_script = true;
 		}
-		else {
-			movement_direction = move_down;
 
-		}
-		character_direction = down;
-		actual_event = move;
+		return actual_event;
 	}
-
-	else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
-
-
-		movement_direction = move_right;
-		character_direction = right;
-		actual_event = move;
-	}
-	else if (App->input->GetKey(LEFT) == KEY_REPEAT) {
-
-		movement_direction = move_left;
-		character_direction = left;
-		actual_event = move;
-	}
-	else {
-		movement_direction = move_idle;
-		actual_event = idle;
-	}
-
-	if (can_jump) {
-		actual_event = jump;
-		doing_script = true;
-		LOG("I'm Jumping :DDDD");
-		can_jump = false;
-	}
-	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
-		actual_event = roll;
-		doing_script = true;
-	}
-
-	return actual_event;
 }
