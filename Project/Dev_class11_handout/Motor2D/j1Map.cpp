@@ -8,7 +8,7 @@
 #include <math.h>
 #include "j1Gui.h"
 #include "j1Player.h"
-
+#include"j1Window.h"
 j1Map::j1Map() : j1Module(), map_loaded(false)
 {
 	name.create("map");
@@ -31,6 +31,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 
 void j1Map::Draw()
 {
+	int scale = App->win->GetScale();
 
 	if(map_loaded == false)
 		return;
@@ -44,17 +45,19 @@ void j1Map::Draw()
 
 		for (int y = 0; y < data.height; ++y)
 		{
-			for (int x = 0; x < data.width; ++x)
-			{
-				int tile_id = layer->Get(x, y);
-				if (tile_id > 0)
+				for (int x = 0; x < data.width; ++x)
 				{
-					TileSet* tileset = GetTilesetFromTileId(tile_id);
+						int tile_id = layer->Get(x, y);
+						if (tile_id > 0)
+						{
+							TileSet* tileset = GetTilesetFromTileId(tile_id);
 
-					SDL_Rect r = tileset->GetTileRect(tile_id);
-					iPoint pos = MapToWorld(x, y);
+							SDL_Rect r = tileset->GetTileRect(tile_id);
+							iPoint pos = MapToWorld(x, y);
 
-					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+							App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+						}
+					}
 				}
 			}
 		}
