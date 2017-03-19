@@ -45,8 +45,10 @@ void j1Map::Draw()
 
 		for (int y = 0; y < data.height; ++y)
 		{
+			if (y * data.tile_height >= -App->render->camera.y / scale && y *data.tile_height < -App->render->camera.y / scale + App->render->camera.h / scale) {
 				for (int x = 0; x < data.width; ++x)
 				{
+					if (x*data.tile_width >= -App->render->camera.x / scale && x*data.tile_width < -App->render->camera.x / scale + App->render->camera.w / scale) {
 						int tile_id = layer->Get(x, y);
 						if (tile_id > 0)
 						{
