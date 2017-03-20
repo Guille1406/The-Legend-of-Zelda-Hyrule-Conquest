@@ -11,6 +11,7 @@ void P_Zelda::Attack()
 
 void P_Zelda::LoadAnimation(const char * path)
 {
+
 	p2SString tmp("%s%s", sprites_folder.GetString(), path);
 
 	char* buf = nullptr;
@@ -75,7 +76,7 @@ player_event P_Zelda::GetEvent()
 	SDL_Scancode LEFT;
 	SDL_Scancode RIGHT;
 
-
+	//Change the actual event, direction and move_direction depending ont he key pressed
 
 	if (App->player->cooperative == false) {
 		UP = SDL_SCANCODE_W;

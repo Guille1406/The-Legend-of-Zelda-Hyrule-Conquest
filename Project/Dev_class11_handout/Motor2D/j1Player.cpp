@@ -62,7 +62,7 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
-
+	//Change the tile_pos
 	Link->tilepos.x = (Link->pos.x + 8) / 16;
 	Link->tilepos.y = (Link->pos.y + 8) / 16;
 	Zelda->tilepos.x = (Zelda->pos.x + 8) / 16;
@@ -88,36 +88,10 @@ bool j1Player::Update(float dt)
 
 	}
 
-	//1 Player
-	/*
-	else {
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-			change = true;
-			if (selected_character == Link) {
-				selected_character = Zelda;
-				other_character = Link;
-			}
-			else {
-				selected_character = Link;
-				other_character = Zelda;
-			}
-		}
-
-		if (change == true) {
-			Move_Camera();
-		}
-		else {
-			selected_character->GetEvent();
-			selected_character->ExecuteEvent(dt);;
-			other_character->ExecuteEvent(dt);;
-		}
-
-		ActivatePathfinding();
-
-	}
-
-	*/
+	//Draw the two characters
 	Draw();
+
+	//Change the positions of player colliders
 	Link->collision->SetPos(Link->pos.x, Link->pos.y, Link->GetLogicHeightPlayer());
 	Zelda->collision->SetPos(Zelda->pos.x, Zelda->pos.y, Zelda->GetLogicHeightPlayer());
 	Link->UpdateColliderFront();

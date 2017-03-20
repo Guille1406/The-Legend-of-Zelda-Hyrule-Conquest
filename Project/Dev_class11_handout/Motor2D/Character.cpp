@@ -11,6 +11,7 @@ void Character::LoadAnimation(const char* path)
 
 void Character::ChangeAnimation(int animation)
 {
+		//If the animation is diferent than the actual, change it
 		if (last_animation != animation) {
 		this->actual_animation = this->sprites_vector[0][animation];
 		last_animation = animation;
@@ -24,6 +25,7 @@ player_event Character::GetEvent()
 
 void Character::ExecuteEvent(float dt)
 {
+	//Execute the diferent functions depending on the actual_event of each character
 	switch (actual_event) {
 	case move:
 		Move(dt);
@@ -41,14 +43,19 @@ void Character::ExecuteEvent(float dt)
 		break;
 
 	}
+
+	//Dependiendo del evento actual i de la direccion cambia la animacion:
+	//
+	//Ejemplo: el evento Idle (1) - left (2) cogera la animación 1*4 + 2 = 6
+	//El orden de estas animaciones se establece en el xml.
 		int animation = (int)actual_event * 4 + (int)character_direction;
 	this->ChangeAnimation(animation);
 }
 
 void Character::GetAdjacents()
 {
-	if (GetLogicHeightPlayer())
-		int x = 0;
+	//Take the tile_id of the adjacents. This depends on the logic height of each character.
+
 	this->adjacent.down.i = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y + 2);
 	this->adjacent.down.j =  App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 1, tilepos.y + 2);
 	this->adjacent.up.i = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y - 1);
@@ -62,30 +69,31 @@ void Character::GetAdjacents()
 int Character::GetLogic(bool collisions)
 {
 	
-	std::vector<MapLayer*> vector_temp;
-
-		vector_temp = App->map->V_Colision;
+	//Takes the id of the two front tiles of each player, depending on the locig height of each player
+	std::vector<MapLayer*> vector = App->map->V_Colision;
+			
 
 	int i, j;
 	switch (character_direction)
 	{
 	case up:
-		i = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y - 1);
-		j = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x + 1, tilepos.y - 1);
+		i = vector[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y - 1);
+		j = vector[GetLogicHeightPlayer()]->Get(tilepos.x + 1, tilepos.y - 1);
 		break;
 	case down:
-		i = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y +2);
-		j = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x +1, tilepos.y +2);
+		i = vector[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y +2);
+		j = vector[GetLogicHeightPlayer()]->Get(tilepos.x +1, tilepos.y +2);
 		break;
 	case left:
-		i = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y );
-		j = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y +1);
+		i = vector[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y );
+		j = vector[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y +1);
 		break;
 	case right:
-		i = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y);
-		j = vector_temp[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y + 1);
+		i = vector[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y);
+		j = vector[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y + 1);
 		break;
 	}
+	
 	if (i != 0)return i;
 	if (j != 0)return j;
 	return 0;
@@ -103,6 +111,8 @@ void Character::ChangeLogicHeightPlayer(int height)
 
 void Character::UpdateColliderFront()
 {
+
+	//Updates the position of the front collider
 	switch (character_direction) {
 	case up:
 		front_collider->rect = { 0,0,32,16 };
@@ -126,6 +136,7 @@ void Character::UpdateColliderFront()
 
 void Character::Jump(float dt)
 {
+	//Calls the jump function depending on the player direction
 	switch (character_direction) {
 	case up:
 		JumpFunction(dt, pos.y, false);
@@ -144,6 +155,7 @@ void Character::Jump(float dt)
 
 void Character::Roll(float dt)
 {
+	//Calls the roll function depending on the player direction
 	switch (character_direction) {
 	case up:
 		RollFunction(dt, pos.y, false);
@@ -162,6 +174,8 @@ void Character::Roll(float dt)
 
 bool Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down)
 {
+
+	
 	bool ret = true;
 	int tile_pos = (pos + 8) / 16;
 	int other_tile_pos = (other_pos + 8) / 16;
@@ -280,6 +294,9 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 
 void Character::JumpFunction(float dt, int& pos, bool add)
 {
+	//with "temp" we calculate the final position of the jump just one time
+	// "i" is used for changing the sign of the operation
+
 	int i = 1;
 	if (!add)
 		i = -1;
@@ -291,6 +308,7 @@ void Character::JumpFunction(float dt, int& pos, bool add)
 	if (( i * pos <  i*final_pos)) {
 		pos = pos + (i * 4);
 	}
+	// if player reached the final pos, player height decreases 1
 	else {
 		temp = false;
 		doing_script = false;
@@ -300,7 +318,7 @@ void Character::JumpFunction(float dt, int& pos, bool add)
 
 void Character::RollFunction(float dt, int & pos, bool add)
 {
-
+	//same as jump function
 	int i = 1;
 	if (!add)
 		i = -1;
@@ -309,6 +327,7 @@ void Character::RollFunction(float dt, int & pos, bool add)
 		final_pos = pos + (i * JUMP_DISTANCE);
 	temp = true;
 
+	//if player have wall in front the roll will stop
 	if ((i * pos <  i*final_pos) && GetLogic(true) != TILE_COL_ID ) {
 		pos = pos + (i * 4);
 	}

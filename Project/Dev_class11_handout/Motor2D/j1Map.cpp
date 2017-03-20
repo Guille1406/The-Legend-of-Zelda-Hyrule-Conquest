@@ -64,33 +64,7 @@ void j1Map::Draw()
 				}
 			}
 		}
-		/*
-		for (int y = 0; y < data.height; ++y)
-		{
-			//ESTO 
-			if (y * 8 > App->render->camera.y - 8 && y * 8 < App->render->camera.y + App->render->camera.h / 2) {
-				//
-				for (int x = 0; x < data.width; ++x)
-				{
-					// Y ESTO
-					if (x * 8 > App->render->camera.x - 8 && x * 8 < App->render->camera.x + App->render->camera.w / 2) {
-						//
-
-						int tile_id = layer->Get(x, y);
-						if (tile_id > 0)
-						{
-							TileSet* tileset = GetTilesetFromTileId(tile_id);
-
-							SDL_Rect r = tileset->GetTileRect(tile_id);
-							iPoint pos = MapToWorld(x, y);
-
-							App->render->Blit(tileset->texture, pos.x, pos.y, &r);
-						}
-					}
-				}
-			}
-		}
-		*/
+		
 	}
 }
 
@@ -271,6 +245,8 @@ bool j1Map::Load(const char* file_name)
 	}
 
 	pugi::xml_node object_layer;
+
+	//Iterates all the object layers
 	for (object_layer = map_file.child("map").child("objectgroup"); object_layer && ret; object_layer = object_layer.next_sibling("objectgroup"))
 	{
 		int height = 0;
@@ -278,6 +254,7 @@ bool j1Map::Load(const char* file_name)
 		ret = LoadObjectLayer(object_layer, obj,height );
 		if (ret == true)
 			data.objects.push_back(obj);
+
 		height++;
 	}
 
@@ -486,6 +463,8 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 
 bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer, int height)
 {
+
+	//Loads all the objects in a layer created in Tiled
 	bool ret = true;
 
 	layer->name = node.attribute("name").as_string();
@@ -501,7 +480,7 @@ bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer, int heig
 	}
 	else
 	{		
-	
+	//Iterates all the objects
 		for (pugi::xml_node object = layer_data; object; object = object.next_sibling("object")) {
 			
 			
@@ -514,6 +493,8 @@ bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer, int heig
 				attribute = attribute.next_sibling();
 			char* type_name = (char*)attribute.attribute("value").as_string();
 			Object* temp = App->entity->CreateObject(type_name, object);
+
+			//Change the logic height of the new object
 			temp->logic_height = height;
 						
 		}

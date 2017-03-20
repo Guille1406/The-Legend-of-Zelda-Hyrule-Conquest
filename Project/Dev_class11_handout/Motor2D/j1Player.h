@@ -35,6 +35,7 @@ public:
 	bool cooperative = true;
 	Character* selected_character;
 	Character* other_character;
+
 	P_Link* Link;
 	P_Zelda* Zelda;
 

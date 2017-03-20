@@ -71,21 +71,37 @@ public:
 	Character() {};
 	~Character() {};
 	
+	
 	void Attack() {};
 	void Move(float dt);
 	void Jump(float dt);
 	void Roll(float dt);
-	virtual void LoadAnimation(const char*);
+
+	//Load the character animations in .xml. Recieves the path of the file
+	virtual void LoadAnimation(const char* path);
+
 	virtual void ChangeAnimation(int);
+
+	//Get the actual player event
 	virtual player_event GetEvent();
+
+	//Executes the event
 	virtual void ExecuteEvent(float);
+
 	void GetAdjacents();
+
+	//Takes the id of front tiles
 	int GetLogic(bool collisions = false);
+
+
 	uint GetLogicHeightPlayer();
 	void ChangeLogicHeightPlayer(int);
+
+	//Updates the front collider
 	void UpdateColliderFront();
 
 private:
+	//Diferent action functions
 	bool MoveFunction(float dt, int& pos,int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down = false);
 	bool MoveDiagonalFunction(float dt, int& pos_one, int& pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile, bool is_down = false);
 	void JumpFunction(float dt, int& pos, bool add);
@@ -93,30 +109,32 @@ private:
 	
 public:
 	
-	SDL_Texture*	character_texture;
-	iPoint	pos;
-	iPoint	tilepos;
-	adjacent_tiles	adjacent;
+	SDL_Texture*				character_texture;
+	iPoint						pos;
+	iPoint						tilepos;
+	adjacent_tiles				adjacent;
 	
-
+	//Needed for animation
 	p2SString					sprites_folder;
 	pugi::xml_document			sprites_file;
 	std::vector<Animation>*		sprites_vector;
 	Animation					actual_animation; 
 
+	//Needed for player movement and events
 	player_event				actual_event;
 	direction					character_direction;
 	move_direction				movement_direction;
 	bool						can_move=false;
 	bool						can_jump=false;
 
-	bool doing_script = false;
-	Collider* collision;
-	Collider* front_collider;
-	int last_animation = 0;
+	//Diferent colliders
+	Collider*	collision;
+	Collider*	front_collider;
 
-	std::vector<bool> allow_collision;
+	bool		doing_script = false;
+	int			last_animation = 0;
 
+	
 private:
 	uint i_logic_height_player = 0;
 

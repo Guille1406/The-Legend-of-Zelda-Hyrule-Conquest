@@ -12,9 +12,7 @@ class P_Zelda:public Character {
 public:
 	P_Zelda() {
 		sprites_vector = new std::vector<Animation>;
-		allow_collision.push_back(true);
-		allow_collision.push_back(false);
-		allow_collision.push_back(true);
+	
 	};
 	~P_Zelda() {
 		delete sprites_vector;
