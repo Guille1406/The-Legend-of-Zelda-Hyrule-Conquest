@@ -5,6 +5,7 @@
 #include "j1Player.h"
 #include "j1Window.h"
 #include "Color.h"
+#include "GuiLabel.h"
 
 j1Camera::j1Camera()
 {
@@ -47,6 +48,11 @@ bool j1Camera::Start()
 	SDL_GetRendererOutputSize(App->render->renderer, &w, &h);
 	i_Half_w = (int)(w * 0.5f);
 	i_Half_h = (int)(h * 0.5f);
+
+	//Fill up debug performance data vector
+	for (int i = 0, pos = 10; i < 6; i++, pos += 15) //6, number of debug strings
+		DebugPerformanceData.push_back(App->gui->CreateLabel({ 10,pos }, &std::string(""), false, AddGuiTo::none));
+
 	return true;
 }
 
@@ -54,8 +60,10 @@ bool j1Camera::Start()
 bool j1Camera::PreUpdate()
 {
 	//Calculate camera centre
+	/*
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) App->win->scale += 0.005;
 	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT) App->win->scale -= 0.005;
+	*/
 	float Scale = App->win->GetScale();
 	iPoint Centre = { 0,0 };
 	Centre.x = ((-1) * (int)((((float)(App->player->Link->pos.x + App->player->Zelda->pos.x)) * 0.5f) * Scale));
@@ -65,6 +73,10 @@ bool j1Camera::PreUpdate()
 	App->render->camera.y = Centre.y + i_Half_h;
 	//Ellipses centre
 	LitleEllipse.ellipsecentre = BigEllipse.ellipsecentre = { (int)(App->render->camera.x - Centre.x * Scale), (int)(App->render->camera.y - Centre.y * Scale) };
+
+	//Debug Performance Data
+	DebugPerformanceData_Rect.x = -App->render->camera.x;
+	DebugPerformanceData_Rect.y = -App->render->camera.y;
 	return true;
 }
 
@@ -116,14 +128,52 @@ bool j1Camera::Update(float dt)
 	App->render->DrawCircle(BigEllipse.ellipsecentre.x, BigEllipse.ellipsecentre.y - BigEllipse.semiminoraxis, 10, 255, 0, 0);
 	*/
 
-	//WIP
-	//Here we will do a debug window with perdformance data
-	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %lu ",
-		App->avg_fps, App->last_frame_ms, App->frames_on_last_update, App->dt, App->seconds_since_startup, App->frame_count);
-	App->win->SetTitle(title);
+	//Debug window with perdformance data
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+		f_DebugPerformanceData = !f_DebugPerformanceData;
 
-	App->render->DrawQuad(DebugPerformanceData_Rect, Blue(0), Blue(1), Blue(2), 80, true, true, false);
+	if (f_DebugPerformanceData)
+	{
+		App->render->DrawQuad(DebugPerformanceData_Rect, Red(0), Red(1), Red(2), 150, true, true, false);
+
+		for (int i = 0; i < DebugPerformanceData.size(); i++)
+		{
+			switch (i)
+			{
+			case 0:
+				static char AvFPS[25];
+				sprintf_s(AvFPS, 25, "Av.FPS: %.2f", App->avg_fps);
+				DebugPerformanceData[i]->EditLabelStr(&std::string(AvFPS));
+				break;
+			case 1:
+				static char LastFrameMs[25];
+				sprintf_s(LastFrameMs, 25, "Last Frame Ms: %u", App->last_frame_ms);
+				DebugPerformanceData[i]->EditLabelStr(&std::string(LastFrameMs));
+				break;
+			case 2:
+				static char Lastsecframes[25];
+				sprintf_s(Lastsecframes, 25, "Last sec frames: %i", App->frames_on_last_update);
+				DebugPerformanceData[i]->EditLabelStr(&std::string(Lastsecframes));
+				break;
+			case 3:
+				static char Lastdt[15];
+				sprintf_s(Lastdt, 15, "Last dt: %.3f", App->dt);
+				DebugPerformanceData[i]->EditLabelStr(&std::string(Lastdt));
+				break;
+			case 4:
+				static char Timesincestartup[100];
+				sprintf_s(Timesincestartup, 100, "Time since startup: %.3f", App->seconds_since_startup);
+				DebugPerformanceData[i]->EditLabelStr(&std::string(Timesincestartup));
+				break;
+			case 5:
+				static char FrameCount[100];
+				sprintf_s(FrameCount, 100, "Frame Count: %lu", App->frame_count);
+				DebugPerformanceData[i]->EditLabelStr(&std::string(FrameCount));
+				break;
+			}
+			DebugPerformanceData[i]->Draw();
+		}
+	}
 
 	return true;
 }
@@ -143,7 +193,8 @@ bool j1Camera::CleanUp()
 
 void j1Camera::OnGui(Gui* ui, GuiEvent event)
 {
-
+	//If button clicked
+	//ShellExecute(NULL, "open", "https://github.com/Guille1406/The-Legend-of-Zelda-Hyrule-Conquest/issues", NULL, NULL, SW_SHOWMAXIMIZED);
 }
 
 void j1Camera::OnConsoleCommand(const Command* command, const std::vector<std::string>& commandarguments)

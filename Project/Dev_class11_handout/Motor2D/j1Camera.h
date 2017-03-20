@@ -71,8 +71,10 @@ private:
 	float		f_border_between_ellipses = 0.0f;
 
 	//Debug performance info
+	bool f_DebugPerformanceData = false;
 	std::vector<GuiLabel*> DebugPerformanceData;
 	SDL_Rect DebugPerformanceData_Rect = { 0,0,0,0 };
+	GuiButton* IssueButton = nullptr;
 
 };
 
