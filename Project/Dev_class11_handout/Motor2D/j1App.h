@@ -33,6 +33,7 @@ class j1Object;
 
 class j1App
 {
+	friend class j1Camera;
 public:
 
 	// Constructor

@@ -1,8 +1,12 @@
 #ifndef __j1CAMERA_H__
 #define __j1CAMERA_H__
 
+#include <vector>
+
 #include "j1Module.h"
 #include "p2Point.h"
+#include "j1Gui.h"
+
 
 struct CamEllipse
 {
@@ -65,6 +69,10 @@ private:
 	CamEllipse	LitleEllipse;
 	CamEllipse  BigEllipse;
 	float		f_border_between_ellipses = 0.0f;
+
+	//Debug performance info
+	std::vector<GuiLabel*> DebugPerformanceData;
+	SDL_Rect DebugPerformanceData_Rect = { 0,0,0,0 };
 
 };
 

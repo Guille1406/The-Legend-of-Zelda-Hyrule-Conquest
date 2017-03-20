@@ -4,6 +4,7 @@
 #include "j1Camera.h"
 #include "j1Player.h"
 #include "j1Window.h"
+#include "Color.h"
 
 j1Camera::j1Camera()
 {
@@ -20,14 +21,16 @@ bool j1Camera::Awake(pugi::xml_node&)
 {
 	//Create the ellipses
 	LitleEllipse.ellipsecentre = { 0,0 };
-	LitleEllipse.semimajoraxis = (int)(160 * 1.5f);
-	LitleEllipse.semiminoraxis = (int)(90 * 1.5f);
+	LitleEllipse.semimajoraxis = (int)(320);
+	LitleEllipse.semiminoraxis = (int)(180);
 
 	BigEllipse.ellipsecentre = { 0,0 };
-	BigEllipse.semimajoraxis = (int)(320 * 1.5f);
-	BigEllipse.semiminoraxis = (int)(180 * 1.5f);
+	BigEllipse.semimajoraxis = (int)(640);
+	BigEllipse.semiminoraxis = (int)(360);
 
 	f_border_between_ellipses = BigEllipse.InsideEllipseValue({ 0,LitleEllipse.semiminoraxis});
+
+	DebugPerformanceData_Rect = { App->render->camera.x,App->render->camera.y,20,20 };
 
 	return true;
 }
@@ -68,7 +71,6 @@ bool j1Camera::PreUpdate()
 // Called each loop iteration
 bool j1Camera::Update(float dt)
 {
-	/*
 	iPoint LinkPos = { 0,0 };
 	LinkPos = App->render->WorldToScreen(App->player->Link->pos.x, App->player->Link->pos.y);
 	//Is inside the little ellipse
@@ -81,27 +83,20 @@ bool j1Camera::Update(float dt)
 		if (BigEllipse.InsideEllipse(LinkPos))
 		{
 			//Scale between f_Max_scale and f_Min_scale
-			float f_pos_value = BigEllipse.InsideEllipseValue(LinkPos);
-			float f_porcentual_value = (((float)(f_pos_value - f_border_between_ellipses)) / ((float)(1.0f - f_border_between_ellipses))) * 100.0f;
-			LOG("Porcentual value: %.3f", f_porcentual_value);
-
-
-
-
+			float f_percentual_value = (((float)(BigEllipse.InsideEllipseValue(LinkPos) - f_border_between_ellipses)) / ((float)(1.0f - f_border_between_ellipses))) * 100.0f;
+			float f_invert_percentual_value = 100.0f - f_percentual_value;
+			if (f_invert_percentual_value < 0.0f)
+				f_invert_percentual_value = 0.0f;
+			else if (f_invert_percentual_value > 100.0f)
+				f_invert_percentual_value = 100.0f;
+			App->win->scale = (((f_Max_scale - f_Min_scale) * f_invert_percentual_value) / (100.0f)) + f_Min_scale;
 		}
 		//Is out the big ellipse
 		else
 			App->win->scale = f_Min_scale;
 	}
-	*/
 
-	//Some debug values
-	/*
-	float f_pos_value = LitleEllipse.InsideEllipseValue(App->player->Link->pos);
-	LOG("Value: %.3f", f_pos_value);
-	*/
-
-	//Some debug draw for testing
+	//Some ellipses debug draw for testing
 	/*
 	//Little ellipse
 	//Centre
@@ -120,6 +115,15 @@ bool j1Camera::Update(float dt)
 	App->render->DrawCircle(BigEllipse.ellipsecentre.x, BigEllipse.ellipsecentre.y + BigEllipse.semiminoraxis, 10, 255, 0, 0);
 	App->render->DrawCircle(BigEllipse.ellipsecentre.x, BigEllipse.ellipsecentre.y - BigEllipse.semiminoraxis, 10, 255, 0, 0);
 	*/
+
+	//WIP
+	//Here we will do a debug window with perdformance data
+	static char title[256];
+	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %lu ",
+		App->avg_fps, App->last_frame_ms, App->frames_on_last_update, App->dt, App->seconds_since_startup, App->frame_count);
+	App->win->SetTitle(title);
+
+	App->render->DrawQuad(DebugPerformanceData_Rect, Blue(0), Blue(1), Blue(2), 80, true, true, false);
 
 	return true;
 }
