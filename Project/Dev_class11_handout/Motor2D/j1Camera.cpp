@@ -31,7 +31,7 @@ bool j1Camera::Awake(pugi::xml_node&)
 
 	f_border_between_ellipses = BigEllipse.InsideEllipseValue({ 0,LitleEllipse.semiminoraxis});
 
-	DebugPerformanceData_Rect = { App->render->camera.x,App->render->camera.y,20,20 };
+	DebugPerformanceData_Rect = { App->render->camera.x,App->render->camera.y,250,110 };
 
 	return true;
 }
@@ -132,9 +132,12 @@ bool j1Camera::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		f_DebugPerformanceData = !f_DebugPerformanceData;
 
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+		ShellExecute(NULL, "open", "https://github.com/Guille1406/The-Legend-of-Zelda-Hyrule-Conquest/issues", NULL, NULL, SW_SHOWMAXIMIZED);
+
 	if (f_DebugPerformanceData)
 	{
-		App->render->DrawQuad(DebugPerformanceData_Rect, Red(0), Red(1), Red(2), 150, true, true, false);
+		App->render->DrawQuad(DebugPerformanceData_Rect, Blue(0), Blue(1), Blue(2), 150, true, true, false);
 
 		for (int i = 0; i < DebugPerformanceData.size(); i++)
 		{
@@ -193,8 +196,7 @@ bool j1Camera::CleanUp()
 
 void j1Camera::OnGui(Gui* ui, GuiEvent event)
 {
-	//If button clicked
-	//ShellExecute(NULL, "open", "https://github.com/Guille1406/The-Legend-of-Zelda-Hyrule-Conquest/issues", NULL, NULL, SW_SHOWMAXIMIZED);
+
 }
 
 void j1Camera::OnConsoleCommand(const Command* command, const std::vector<std::string>& commandarguments)
