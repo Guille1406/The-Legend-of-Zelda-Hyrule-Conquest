@@ -9,63 +9,7 @@ void P_Zelda::Attack()
 
 }
 
-void P_Zelda::LoadAnimation(const char * path)
-{
 
-	p2SString tmp("%s%s", sprites_folder.GetString(), path);
-
-	char* buf = nullptr;
-	int size = App->fs->Load(tmp.GetString(), &buf);
-	pugi::xml_parse_result result = sprites_file.load_buffer(buf, size);
-
-	if (result == NULL)
-	{
-		//LOG("Could not load map xml file %s. pugi error: %s", file_name, result.description());
-		//ret = false;
-	}
-
-	pugi::xml_node info = sprites_file.child("TextureAtlas");
-	char* imagepath = (char*)info.attribute("imagePath").as_string();
-
-	character_texture = App->tex->Load(imagepath);
-
-	pugi::xml_node animations = info.first_child();
-
-	char* last_name = nullptr;
-	int x = animations.attribute("x").as_int();
-	int y = animations.attribute("y").as_int();
-	int w = animations.attribute("w").as_int();
-	int h = animations.attribute("h").as_int();
-	SDL_Rect anim = { x,y,w,h };
-	Animation temp_animation;
-
-	char* name = (char*)animations.attribute("n").as_string();
-
-	auto temp = animations;
-	last_name = name;
-	while (animations) {
-		auto temp = animations;
-		name = (char*)animations.attribute("n").as_string();
-		x = temp.attribute("x").as_int();
-		y = temp.attribute("y").as_int();
-		w = temp.attribute("w").as_int();
-		h = temp.attribute("h").as_int();
-		anim = { x,y,w,h };
-
-		if (strcmp(name, last_name)) {
-			temp_animation.speed = 0.2;
-			sprites_vector->push_back(temp_animation);
-			temp_animation.Reset();
-			temp_animation.last_frame = 0;
-			temp_animation.PushBack(anim);
-			last_name = name;
-		}
-		else {
-			temp_animation.PushBack(anim);
-		}
-		animations = animations.next_sibling();
-	}
-}
 
 
 

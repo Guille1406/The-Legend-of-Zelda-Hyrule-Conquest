@@ -20,7 +20,7 @@ public:
 	}
 
 	void Attack();
-	void LoadAnimation(const char*);
+	
 
 	player_event GetEvent();
 
