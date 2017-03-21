@@ -159,5 +159,5 @@ private:
 	p2SString			folder;
 	bool				map_loaded;
 };
-
+static int I_CAMERAMARGINTILE = 16;
 #endif // __j1MAP_H__
