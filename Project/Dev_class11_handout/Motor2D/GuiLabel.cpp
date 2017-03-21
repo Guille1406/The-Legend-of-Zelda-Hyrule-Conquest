@@ -21,7 +21,7 @@ void GuiLabel::Draw()
 	{
 		if (LabelString != empty_char)
 		{
-			SDL_Texture* texture_to_blit = App->font->Print(LabelString.c_str(), { 255, 255, 255, 255 }, font);
+			SDL_Texture* texture_to_blit = App->font->Print(LabelString.c_str(), { (Uint8)(*color)(0), (Uint8)(*color)(1), (Uint8)(*color)(2), 255 }, font);
 			App->render->Blit(texture_to_blit, position.x - App->render->camera.x, position.y - App->render->camera.y, NULL, 1.0f, 0, INT_MAX, INT_MAX, false);
 			SDL_DestroyTexture(texture_to_blit);
 		}
@@ -55,6 +55,11 @@ void GuiLabel::SetFont(_TTF_Font* newfont)
 _TTF_Font* GuiLabel::GetFont()
 {
 	return font;
+}
+
+void GuiLabel::SetLabelColor(Color* newcolor)
+{
+	color = newcolor;
 }
 
 void GuiLabel::Clear()

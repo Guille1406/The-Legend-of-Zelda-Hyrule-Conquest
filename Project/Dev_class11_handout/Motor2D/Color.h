@@ -1,11 +1,13 @@
 #ifndef __COLOR_H__
 #define __COLOR_H__
 
+#include "p2Defs.h"
+
 struct Color
 {
 	//This struct is for RGB colors from 255 to 0, not from 1.0 to 0.0
 
-	int r, g, b, a;
+	uint r, g, b, a = 0;
 
 	Color() : r(0), g(0), b(0), a(100)
 	{}

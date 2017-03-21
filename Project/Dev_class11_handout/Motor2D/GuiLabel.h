@@ -16,6 +16,7 @@ public:
 	void EditLabelStr(std::string* newstr);
 	void SetFont(_TTF_Font* newfont);
 	_TTF_Font* GetFont();
+	void SetLabelColor(Color* newcolor);
 	void Clear();
 
 private:
@@ -25,6 +26,7 @@ private:
 private:
 	std::string LabelString;
 	_TTF_Font*  font;
+	Color* color = &White;
 };
 
 #endif // __GUILABEL_H__

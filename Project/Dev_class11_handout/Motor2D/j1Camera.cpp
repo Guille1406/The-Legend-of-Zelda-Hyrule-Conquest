@@ -31,7 +31,7 @@ bool j1Camera::Awake(pugi::xml_node&)
 
 	f_border_between_ellipses = BigEllipse.InsideEllipseValue({ 0,LitleEllipse.semiminoraxis});
 
-	DebugPerformanceData_Rect = { App->render->camera.x,App->render->camera.y,250,110 };
+	DebugPerformanceData_Rect = { App->render->camera.x,App->render->camera.y,250,125 };
 
 	return true;
 }
@@ -50,8 +50,10 @@ bool j1Camera::Start()
 	i_Half_h = (int)(h * 0.5f);
 
 	//Fill up debug performance data vector
-	for (int i = 0, pos = 10; i < 6; i++, pos += 15) //6, number of debug strings
+	for (int i = 0, pos = 10; i < 7; i++, pos += 15) //7, number of debug strings
 		DebugPerformanceData.push_back(App->gui->CreateLabel({ 10,pos }, &std::string(""), false, AddGuiTo::none));
+	DebugPerformanceData[6]->EditLabelStr(&std::string("Press F10 to report a bug."));
+	DebugPerformanceData[6]->SetLabelColor(&Yellow);
 
 	return true;
 }
