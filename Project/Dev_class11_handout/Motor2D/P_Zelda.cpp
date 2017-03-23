@@ -16,7 +16,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 {
 	static int final_pos = 0;
 	int temp_pos = pos;
-	static bool can_pass_wall = true;
+	bool can_pass_wall = true;
 	bool is_on_collision = false;
 	bool count = true;
 	int i = 1;
@@ -32,15 +32,12 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 		before_wall_pos = final_pos;
 
 		while ((i * temp_pos <  i*final_pos)) {
-			temp_pos = temp_pos + (i * 4);
-			temp_point.x = (temp_pos / 16) * is_horitzontal + temp_point.x * !is_horitzontal;
-			temp_point.y = (temp_pos / 16) * !is_horitzontal + temp_point.y * is_horitzontal;
 
 			if (GetLogic(count, temp_point) == TILE_COL_ID && !is_on_collision) {
 				is_on_collision = true;
 				before_wall_pos = temp_pos;
 				if (!can_pass_wall) {
-					before_wall_pos = temp_pos + i * 48;
+					before_wall_pos = temp_pos + i * 64;
 				}
 				can_pass_wall = !can_pass_wall;
 				count = false;
@@ -48,6 +45,10 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 			else if (GetLogic(count, temp_point) != TILE_COL_ID) {
 				is_on_collision = false;
 			}
+			temp_pos = temp_pos + (i * 4);
+			temp_point.x = (temp_pos / 16) * is_horitzontal + temp_point.x * !is_horitzontal;
+			temp_point.y = (temp_pos / 16) * !is_horitzontal + temp_point.y * is_horitzontal;
+
 		}
 	}
 	
