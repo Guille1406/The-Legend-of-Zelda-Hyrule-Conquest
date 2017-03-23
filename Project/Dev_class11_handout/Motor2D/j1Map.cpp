@@ -57,7 +57,7 @@ void j1Map::Draw()
 							SDL_Rect r = tileset->GetTileRect(tile_id);
 							iPoint pos = MapToWorld(x, y);
 
-							if (layer->properties.Get("Navigation") == false)
+							if (layer->properties.Get("Navigation") == false && layer->properties.Get("Enemies") == false)
 							App->render->Blit(tileset->texture, pos.x, pos.y, &r);
 						}
 					}
@@ -232,10 +232,12 @@ bool j1Map::Load(const char* file_name)
 		MapLayer* lay = new MapLayer();
 
 		ret = LoadLayer(layer, lay);
-
+		
 		if(ret == true)
 			data.layers.push_back(lay);
 	}
+
+
 
 	pugi::xml_node object_layer;
 
@@ -558,3 +560,51 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 	return ret;
 }
 
+bool j1Map::CreateEnemyMap(int& width, int& height, uchar** buffer) const
+{
+	bool ret = false;
+
+
+	std::list<MapLayer*>::const_iterator item = data.layers.begin();
+	for (; item != data.layers.cend(); ++item) {
+		MapLayer* layer = (*item);
+
+		//App->map->Colision = layer;
+		if (layer->properties.Get("Enemies", 0) != 0) {
+
+			App->map->V_Enemies.push_back(layer);
+
+			uchar* map = new uchar[layer->width*layer->height];
+			memset(map, 1, layer->width*layer->height);
+
+			for (int y = 0; y < data.height; ++y)
+			{
+				for (int x = 0; x < data.width; ++x)
+				{
+					int i = (y*layer->width) + x;
+
+					int tile_id = layer->Get(x, y);
+					TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
+
+					if (tileset != NULL)
+					{
+						map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1;
+						/*TileType* ts = tileset->GetTileType(tile_id);
+						if(ts != NULL)
+						{
+						map[i] = ts->properties.Get("walkable", 1);
+						}*/
+					}
+				}
+			}
+
+			*buffer = map;
+			width = data.width;
+			height = data.height;
+			ret = true;
+
+
+		}
+	}
+	return ret;
+}

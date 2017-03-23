@@ -142,6 +142,9 @@ void j1Collision::DebugDraw()
 		case collider_jump:
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, 255);
 			break;
+		case collider_enemy:
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
+			break;
 		}
 	}
 }

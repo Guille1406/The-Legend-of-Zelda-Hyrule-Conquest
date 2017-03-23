@@ -4,9 +4,11 @@
 #include "j1Module.h"
 #include "SDL\include\SDL.h"
 #include"j1Object.h"
+#include"p2Point.h"
 class Green_Enemy;
+
 enum enemyType {
-	green_enemy,
+	green_enemy = 106,
 
 };
 
@@ -22,9 +24,9 @@ public:
 
 public:
 
-	//SDL_Rect rect;
+	SDL_Rect rect;
 	enemyType type;
-
+	iPoint pos;
 
 };
 
@@ -32,24 +34,24 @@ class j1Enemy : public j1Module {
 
 public:
 	j1Enemy() {
-		V_Enemies = new std::vector<Enemy*>;
+		//V_MyEnemies = new std::vector<Enemy*>;
 
 
 	};
 	~j1Enemy() {};
-
+	bool Awake(pugi::xml_node&);
 	bool Start();
 	bool PreUpdate();
 	bool Update(float);
 	bool PostUpdate();
 	bool CleanUp();
 
-	Enemy* Create_Enemy(char*,pugi::xml_node);
+	Enemy* Create_Enemy(uint, iPoint Pos);
 
 
 public:
-	std::vector<Enemy*>* V_Enemies;
-
+	std::vector<Enemy*> V_MyEnemies;
+	SDL_Texture* green_soldier_tex;
 };
 
 
