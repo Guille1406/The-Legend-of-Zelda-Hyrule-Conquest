@@ -43,9 +43,6 @@ bool S_World::Start()
 bool S_World::Update()
 {
 
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
-		App->scene->ChangeScene(dungeon);
-	}
 
 	/*
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)

@@ -120,6 +120,7 @@ player_event P_Link::GetEvent()
 				App->player->Zelda->ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 				actual_event = pick;
 				im_lifting = true;
+				can_pick_up = false;
 			}
 
 		}

@@ -81,6 +81,8 @@ player_event P_Zelda::GetEvent()
 			actual_event = move;
 		}
 
+
+
 		else {
 			movement_direction = move_idle;
 			actual_event = idle;
@@ -93,10 +95,18 @@ player_event P_Zelda::GetEvent()
 			can_jump = false;
 		}
 
+
 		if (is_picked) {
+			static bool can_throw = false;
 			actual_event = pick;
 			pos = App->player->Link->pos;
-			
+			if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && can_throw) {
+				actual_event = jump;
+				doing_script = true;
+				is_picked = false;
+				App->player->Link->im_lifting = false;
+			}
+			can_throw = true;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
 			actual_event = roll;
