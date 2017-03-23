@@ -24,7 +24,7 @@ public:
 	player_event GetEvent();
 
 public:
-
+	bool is_picked = false;
 };
 
 #endif

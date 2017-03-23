@@ -32,6 +32,8 @@ enum player_event {
 	idle,
 	jump,
 	roll,
+	pick,
+	lifting,
 	attack,	
 	fall
 	/*

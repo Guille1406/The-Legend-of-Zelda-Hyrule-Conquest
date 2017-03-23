@@ -198,6 +198,7 @@ bool j1Player::Move_Camera()
 
 void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 {
+
 	Character* character = nullptr;
 	if (collider1->type == collider_link || collider2->type == collider_link)
 		character = Link;	
@@ -242,6 +243,16 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			character->can_jump = true;
 
 		}
+	}
+	else if (collider1->type == front_link) {
+		if(collider2->type == collider_zelda)
+		Link->can_pick_up = true;
+		
+	}
+	else if (collider2->type == front_link ) {
+		if (collider1->type == collider_zelda)
+			Link->can_pick_up = true;
+		
 	}
 }
 

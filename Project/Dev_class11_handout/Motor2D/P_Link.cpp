@@ -18,10 +18,6 @@ player_event P_Link::GetEvent()
 
 	if (doing_script == false) {
 
-	
-
-
-
 		 if (App->inputM->EventPressed(INPUTEVENT::MUP) == EVENTSTATE::E_REPEAT) {
 			if (App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT) {
 				movement_direction = move_up_right;
@@ -108,9 +104,24 @@ player_event P_Link::GetEvent()
 			character_direction = left;
 			actual_event = move;
 		}
+		else if (im_lifting) {
+			actual_event = lifting;
+			can_pick_up = false;
+		}
+			
 		else {
 			movement_direction = move_idle;
 			actual_event = idle;
+		}
+
+		if (can_pick_up) {
+			if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
+				App->player->Zelda->is_picked = true;
+				App->player->Zelda->ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
+				actual_event = pick;
+				im_lifting = true;
+			}
+
 		}
 
 		if (can_jump) {
@@ -119,6 +130,8 @@ player_event P_Link::GetEvent()
 				LOG("I'm Jumping :DDDD");
 				can_jump = false;
 		}
+		
+
 		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 			actual_event = roll;
 			doing_script = true;

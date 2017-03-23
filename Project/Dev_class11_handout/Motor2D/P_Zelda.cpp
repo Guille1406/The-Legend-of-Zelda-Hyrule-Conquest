@@ -52,6 +52,7 @@ player_event P_Zelda::GetEvent()
 			actual_event = move;
 		}
 
+
 		else if (App->input->GetKey(DOWN) == KEY_REPEAT) {
 			if (App->input->GetKey(LEFT) == KEY_REPEAT) {
 				movement_direction = move_down_left;
@@ -67,19 +68,19 @@ player_event P_Zelda::GetEvent()
 			actual_event = move;
 		}
 
+
 		else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
-
-
 			movement_direction = move_right;
 			character_direction = right;
 			actual_event = move;
 		}
-		else if (App->input->GetKey(LEFT) == KEY_REPEAT) {
 
+		else if (App->input->GetKey(LEFT) == KEY_REPEAT) {
 			movement_direction = move_left;
 			character_direction = left;
 			actual_event = move;
 		}
+
 		else {
 			movement_direction = move_idle;
 			actual_event = idle;
@@ -90,6 +91,12 @@ player_event P_Zelda::GetEvent()
 			doing_script = true;
 			LOG("I'm Jumping :DDDD");
 			can_jump = false;
+		}
+
+		if (is_picked) {
+			actual_event = pick;
+			pos = App->player->Link->pos;
+			
 		}
 		if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
 			actual_event = roll;
