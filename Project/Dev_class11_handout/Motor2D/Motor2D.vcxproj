@@ -107,6 +107,8 @@
     <ClCompile Include="j1Scene.cpp" />
     <ClCompile Include="j1Timer.cpp" />
     <ClCompile Include="j1Object.cpp" />
+    <ClCompile Include="S_Campain.cpp" />
+    <ClCompile Include="S_GameStart.cpp" />
     <ClCompile Include="S_MainMenu.cpp" />
     <ClCompile Include="j1FadeToBlack.cpp" />
     <ClCompile Include="Move.cpp" />
@@ -118,6 +120,8 @@
     <ClCompile Include="P_Link.cpp" />
     <ClCompile Include="P_Zelda.cpp" />
     <ClCompile Include="S_Dungeon.cpp" />
+    <ClCompile Include="S_Options.cpp" />
+    <ClCompile Include="S_QuitGame.cpp" />
     <ClCompile Include="S_World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +150,8 @@
     <ClInclude Include="j1InputManager.h" />
     <ClInclude Include="j1Player.h" />
     <ClInclude Include="O_Jump.h" />
+    <ClInclude Include="S_Campain.h" />
+    <ClInclude Include="S_GameStart.h" />
     <ClInclude Include="S_MainMenu.h" />
     <ClInclude Include="j1FadeToBlack.h" />
     <ClInclude Include="P_Link.h" />
@@ -175,6 +181,8 @@
     <ClInclude Include="p2SString.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="S_Options.h" />
+    <ClInclude Include="S_QuitGame.h" />
     <ClInclude Include="S_World.h" />
   </ItemGroup>
   <ItemGroup>

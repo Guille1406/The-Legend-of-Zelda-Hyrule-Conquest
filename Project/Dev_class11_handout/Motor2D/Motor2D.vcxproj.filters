@@ -133,6 +133,18 @@
     <ClCompile Include="j1Enemy.cpp">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="S_Campain.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="S_GameStart.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="S_Options.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="S_QuitGame.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -299,6 +311,18 @@
     </ClInclude>
     <ClInclude Include="j1Enemy.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Campain.h">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="S_GameStart.h">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Options.h">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="S_QuitGame.h">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
