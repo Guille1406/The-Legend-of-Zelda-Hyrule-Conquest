@@ -23,7 +23,6 @@ public:
 public:
 
 	//SDL_Rect rect;
-	bool active;
 	enemyType type;
 
 
@@ -45,7 +44,7 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
-	Green_Enemy* Create_GreenEnemy(char*,pugi::xml_node);
+	Enemy* Create_Enemy(char*,pugi::xml_node);
 
 
 public:
