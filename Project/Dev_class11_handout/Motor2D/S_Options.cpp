@@ -23,7 +23,7 @@ bool S_Options::Start()
 	((Gui*)video)->SetListener(this);
 	audio = App->gui->CreateButton(iPoint(1000, 530), &std::string("Audio Settings"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	((Gui*)audio)->SetListener(this);
-	gameplay = App->gui->CreateButton(iPoint(1000, 610), &std::string("Gamplay Settings"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	gameplay = App->gui->CreateButton(iPoint(1000, 610), &std::string("Gameplay Settings"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	((Gui*)gameplay)->SetListener(this);
 	back = App->gui->CreateButton(iPoint(500, 610), &std::string("Back"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	((Gui*)back)->SetListener(this);

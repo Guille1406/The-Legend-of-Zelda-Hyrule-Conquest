@@ -41,8 +41,8 @@ bool j1Camera::Start()
 {
 	//Get some useful variables
 	f_Max_scale = App->win->scale;
-	f_Min_scale = f_Max_scale - 1.0f;
-	if (f_Min_scale <= 0.0f)
+	f_Min_scale = f_Max_scale - 0.3f;
+	if (f_Min_scale < 0.8f)
 		f_Min_scale = 0.8f;
 	int w, h = 0;
 	SDL_GetRendererOutputSize(App->render->renderer, &w, &h);
@@ -64,19 +64,21 @@ bool j1Camera::Start()
 bool j1Camera::PreUpdate()
 {
 	//Calculate camera centre
-	/*
+	/**/
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) App->win->scale += 0.005;
 	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT) App->win->scale -= 0.005;
-	*/
+	/**/
 	float Scale = App->win->GetScale();
 	iPoint Centre = { 0,0 };
-	Centre.x = ((-1) * (int)((((float)(App->player->Link->pos.x + App->player->Zelda->pos.x)) * 0.5f) * Scale));
-	Centre.y = ((-1) * (int)((((float)(App->player->Link->pos.y + App->player->Zelda->pos.y)) * 0.5f) * Scale));
+	Centre.x = (int)((((float)(App->player->Link->pos.x + App->player->Zelda->pos.x)) * 0.5f));
+	Centre.y = (int)((((float)(App->player->Link->pos.y + App->player->Zelda->pos.y)) * 0.5f) );
 	//Camera position
-	App->render->camera.x = Centre.x + i_Half_w;
-	App->render->camera.y = Centre.y + i_Half_h;
-	//Ellipses centre
-	LitleEllipse.ellipsecentre = BigEllipse.ellipsecentre = { (int)(App->render->camera.x - Centre.x * Scale), (int)(App->render->camera.y - Centre.y * Scale) };
+	App->render->camera.x = -Centre.x * Scale + i_Half_w;
+	App->render->camera.y = -Centre.y * Scale + i_Half_h;
+	//Ellipss centre
+	iPoint CentrePos = { 0,0 };
+	CentrePos = App->render->WorldToScreen(Centre.x, Centre.y);
+	LitleEllipse.ellipsecentre = BigEllipse.ellipsecentre = { (int)(CentrePos.x), (int)(CentrePos.y) };
 
 	//Debug Performance Data
 	DebugPerformanceData_Rect.x = -App->render->camera.x;
@@ -89,6 +91,7 @@ bool j1Camera::Update(float dt)
 {
 	iPoint LinkPos = { 0,0 };
 	LinkPos = App->render->WorldToScreen(App->player->Link->pos.x, App->player->Link->pos.y);
+	/**/
 	//Is inside the little ellipse
 	if (LitleEllipse.InsideEllipse(LinkPos))
 		App->win->scale = f_Max_scale;
@@ -111,6 +114,7 @@ bool j1Camera::Update(float dt)
 		else
 			App->win->scale = f_Min_scale;
 	}
+	/**/
 
 	//Some ellipses debug draw for testing
 	/*
@@ -124,7 +128,8 @@ bool j1Camera::Update(float dt)
 	App->render->DrawCircle(LitleEllipse.ellipsecentre.x, LitleEllipse.ellipsecentre.y - LitleEllipse.semiminoraxis, 5, 0, 0, 255);
 
 	//Big ellipse
-	App->render->DrawCircle(BigEllipse.ellipsecentre.x, BigEllipse.ellipsecentre.y, 10, 255,0,0);
+	//Centre
+	App->render->DrawCircle(BigEllipse.ellipsecentre.x, BigEllipse.ellipsecentre.y, 10, 255, 0, 0);
 	//Axis
 	App->render->DrawCircle(BigEllipse.ellipsecentre.x + BigEllipse.semimajoraxis, BigEllipse.ellipsecentre.y, 10, 255, 0, 0);
 	App->render->DrawCircle(BigEllipse.ellipsecentre.x - BigEllipse.semimajoraxis, BigEllipse.ellipsecentre.y, 10, 255, 0, 0);
