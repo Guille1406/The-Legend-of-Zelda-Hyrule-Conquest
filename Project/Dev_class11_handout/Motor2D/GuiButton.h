@@ -22,6 +22,7 @@ public:
 	void Update(const Gui* mouse_hover, const Gui* focus);
 	void Draw();
 	void EditButtonStr(std::string* newstr);
+	void SetButtonColor(Color* newcolor);
 
 private:
 	void CreateButtonLabel(iPoint position, std::string* str, bool movable);

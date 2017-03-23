@@ -105,6 +105,11 @@ void GuiButton::EditButtonStr(std::string* newstr)
 	CalculateStrWH(newstr);
 }
 
+void GuiButton::SetButtonColor(Color* newcolor)
+{
+	ButtonString->SetLabelColor(newcolor);
+}
+
 void GuiButton::CalculateStrWH(std::string* str)
 {
 	App->font->CalcSize(str->c_str(), ButtonString_w, ButtonString_h);

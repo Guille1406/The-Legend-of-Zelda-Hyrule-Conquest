@@ -14,8 +14,10 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	GuiButton* idle_hoover_pressed_button = nullptr;
-
+	GuiButton* campain = nullptr;
+	GuiButton* options = nullptr;
+	GuiButton* credits = nullptr;
+	GuiButton* quit = nullptr;
 };
 
 #endif // #pragma once
