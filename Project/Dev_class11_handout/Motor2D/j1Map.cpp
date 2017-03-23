@@ -481,18 +481,18 @@ bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer, int heig
 	else
 	{		
 	//Iterates all the objects
-		for (pugi::xml_node object = layer_data; object; object = object.next_sibling("object")) {
+		for (pugi::xml_node node_object = layer_data; node_object; node_object = node_object.next_sibling("object")) {
 			
 			
-			auto iterator = object.child("properties").child("property");
+			auto iterator = node_object.child("properties").child("property");
 			while (iterator.attribute("name").as_string() != "type" && iterator){
 				iterator = iterator.next_sibling();
 }
-			auto attribute = object.child("properties").child("property");
+			auto attribute = node_object.child("properties").child("property");
 			while (strcmp(attribute.attribute("name").value(), "type"))
 				attribute = attribute.next_sibling();
 			char* type_name = (char*)attribute.attribute("value").as_string();
-			Object* temp = App->entity->CreateObject(type_name, object);
+			Object* temp = App->object->CreateObject(type_name, node_object);
 
 			//Change the logic height of the new object
 			temp->logic_height = height;

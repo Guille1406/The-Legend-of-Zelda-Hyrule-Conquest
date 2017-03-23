@@ -29,6 +29,7 @@ class j1Camera;
 class j1InputManager;
 class j1Collision;
 class j1Object;
+class j1Enemy;
 //using namespace std;
 
 class j1App
@@ -114,7 +115,8 @@ public:
 	j1Camera*			camera = nullptr;
 	j1InputManager*		inputM = nullptr;
 	j1Collision*		collision = nullptr;
-	j1Object*			entity = nullptr;
+	j1Object*			object = nullptr;
+	j1Enemy*			enemy = nullptr;
 
 private:
 	std::list<j1Module*> modules;

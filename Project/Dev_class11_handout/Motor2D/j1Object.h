@@ -25,7 +25,8 @@ public:
 	~Entity() {};
 
 public:
-	
+	int logic_height;
+	Collider* collider;
 };
 
 class Object : public Entity {
@@ -42,8 +43,8 @@ public:
 	SDL_Rect rect;
 	bool active;
 	objectType type;
-	Collider* collider;
-	int logic_height;
+
+
 	/* 
 	Contenido del cofre
 	Puntero a escena donde lleva

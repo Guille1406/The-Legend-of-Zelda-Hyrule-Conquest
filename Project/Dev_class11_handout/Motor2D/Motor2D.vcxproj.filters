@@ -130,6 +130,9 @@
     <ClCompile Include="S_MainMenu.cpp">
       <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
     </ClCompile>
+    <ClCompile Include="j1Enemy.cpp">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -293,6 +296,9 @@
     </ClInclude>
     <ClInclude Include="S_MainMenu.h">
       <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Enemy.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
