@@ -125,33 +125,33 @@ void Character::GetAdjacents()
 	this->adjacent.right.j = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y + 1);
 }
 
-int Character::GetLogic(bool minus_height)
+int Character::GetLogic(bool minus_height, iPoint pos)
 {
 	
 	//Takes the id of the two front tiles of each player, depending on the locig height of each player
 	std::vector<MapLayer*> vector = App->map->V_Colision;
 	
-	
+	iPoint tile_pos = pos;
 	
 
 	int i, j;
 	switch (character_direction)
 	{
 	case up:
-		i = vector[GetLogicHeightPlayer()- minus_height]->Get(tilepos.x, tilepos.y - 1);
-		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x + 1, tilepos.y - 1);
+		i = vector[GetLogicHeightPlayer()- minus_height]->Get(tile_pos.x, tile_pos.y - 1);
+		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x + 1, tile_pos.y - 1);
 		break;
 	case down:
-		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x, tilepos.y +2);
-		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x +1, tilepos.y +2);
+		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x, tile_pos.y +2);
+		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x +1, tile_pos.y +2);
 		break;
 	case left:
-		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x - 1, tilepos.y );
-		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x - 1, tilepos.y +1);
+		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x - 1, tile_pos.y );
+		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x - 1, tile_pos.y +1);
 		break;
 	case right:
-		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x + 2, tilepos.y);
-		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x + 2, tilepos.y + 1);
+		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x + 2, tile_pos.y);
+		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x + 2, tile_pos.y + 1);
 		break;
 	}
 	
@@ -237,16 +237,16 @@ void Character::Throw(float dt)
 {
 	switch (character_direction) {
 	case up:
-		ThrowFunction(dt, pos.y, false);
+		ThrowFunction(dt, pos.y, false,false);
 		break;
 	case down:
-		ThrowFunction(dt, pos.y, true);
+		ThrowFunction(dt, pos.y, true, false);
 		break;
 	case left:
-		ThrowFunction(dt, pos.x, false);
+		ThrowFunction(dt, pos.x, false, true);
 		break;
 	case right:
-		ThrowFunction(dt, pos.x, true);
+		ThrowFunction(dt, pos.x, true, true);
 		break;
 	}
 
@@ -410,7 +410,7 @@ void Character::RollFunction(float dt, int & pos, bool add)
 	temp = true;
 
 	//if player have wall in front the roll will stop
-	if ((i * pos <  i*final_pos) && GetLogic(true) != TILE_COL_ID ) {
+	if ((i * pos <  i*final_pos) && GetLogic(false, tilepos) != TILE_COL_ID ) {
 		pos = pos + (i * 4);
 	}
 	else {
@@ -420,6 +420,6 @@ void Character::RollFunction(float dt, int & pos, bool add)
 
 }
 
-void Character::ThrowFunction(float dt, int & pos, bool add)
+void Character::ThrowFunction(float dt, int & pos, bool add, bool is_horitzontal)
 {
 }

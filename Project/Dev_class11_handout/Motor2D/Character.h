@@ -95,7 +95,7 @@ public:
 	void GetAdjacents();
 
 	//Takes the id of front tiles
-	int GetLogic(bool collisions = false);
+	int GetLogic(bool collisions, iPoint tilepos);
 
 
 	uint GetLogicHeightPlayer();
@@ -104,13 +104,15 @@ public:
 	//Updates the front collider
 	void UpdateColliderFront();
 
+	virtual void ThrowFunction(float dt, int& pos, bool add, bool is_horitzontal);
+
 private:
 	//Diferent action functions
 	bool MoveFunction(float dt, int& pos,int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down = false);
 	bool MoveDiagonalFunction(float dt, int& pos_one, int& pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile, bool is_down = false);
 	void JumpFunction(float dt, int& pos, bool add);
 	void RollFunction(float dt, int& pos, bool add);
-	virtual void ThrowFunction(float dt, int& pos, bool add);
+	
 	
 public:
 	

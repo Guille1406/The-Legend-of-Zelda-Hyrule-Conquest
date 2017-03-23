@@ -19,7 +19,7 @@ public:
 	};
 
 	void Attack();
-	void ThrowFunction(float dt, int&, bool);
+	void ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal);
 
 	player_event GetEvent();
 
