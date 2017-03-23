@@ -105,8 +105,9 @@ player_event P_Zelda::GetEvent()
 				doing_script = true;
 				is_picked = false;
 				App->player->Link->im_lifting = false;
+				can_throw = false;
 			}
-			can_throw = true;
+			else can_throw = true;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
 			actual_event = roll;
