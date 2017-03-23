@@ -22,16 +22,16 @@ bool j1Camera::Awake(pugi::xml_node&)
 {
 	//Create the ellipses
 	LitleEllipse.ellipsecentre = { 0,0 };
-	LitleEllipse.semimajoraxis = (int)(320);
-	LitleEllipse.semiminoraxis = (int)(180);
+	LitleEllipse.semimajoraxis = 320;
+	LitleEllipse.semiminoraxis = 180;
 
 	BigEllipse.ellipsecentre = { 0,0 };
-	BigEllipse.semimajoraxis = (int)(640);
-	BigEllipse.semiminoraxis = (int)(360);
+	BigEllipse.semimajoraxis = 640;
+	BigEllipse.semiminoraxis = 360;
 
 	f_border_between_ellipses = BigEllipse.InsideEllipseValue({ 0,LitleEllipse.semiminoraxis});
 
-	DebugPerformanceData_Rect = { App->render->camera.x,App->render->camera.y,250,125 };
+	DebugPerformanceData_Rect = { App->render->camera.x,App->render->camera.y,255,135 };
 
 	return true;
 }
@@ -50,10 +50,12 @@ bool j1Camera::Start()
 	i_Half_h = (int)(h * 0.5f);
 
 	//Fill up debug performance data vector
-	for (int i = 0, pos = 10; i < 7; i++, pos += 15) //7, number of debug strings
+	for (int i = 0, pos = 10; i < 8; i++, pos += 15) //7, number of debug strings
 		DebugPerformanceData.push_back(App->gui->CreateLabel({ 10,pos }, &std::string(""), false, AddGuiTo::none));
-	DebugPerformanceData[6]->EditLabelStr(&std::string("Press F10 to report a bug."));
+	DebugPerformanceData[6]->EditLabelStr(&std::string("Press F9 to toggle this window visibility."));
 	DebugPerformanceData[6]->SetLabelColor(&Yellow);
+	DebugPerformanceData[7]->EditLabelStr(&std::string("Press F10 to report a bug."));
+	DebugPerformanceData[7]->SetLabelColor(&Yellow);
 
 	return true;
 }

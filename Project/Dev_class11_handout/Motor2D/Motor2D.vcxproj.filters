@@ -112,9 +112,6 @@
     <ClCompile Include="j1Console.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="S_MainMenu.cpp">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="j1FadeToBlack.cpp">
       <Filter>Desenvolupament  ========\ToCheckAnim/Fadetoblack</Filter>
     </ClCompile>
@@ -129,6 +126,9 @@
     </ClCompile>
     <ClCompile Include="j1Object.cpp">
       <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="S_MainMenu.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -264,9 +264,6 @@
     <ClInclude Include="Animation.h">
       <Filter>Desenvolupament  ========\ToCheckAnim/Fadetoblack</Filter>
     </ClInclude>
-    <ClInclude Include="S_MainMenu.h">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="j1FadeToBlack.h">
       <Filter>Desenvolupament  ========\ToCheckAnim/Fadetoblack</Filter>
     </ClInclude>
@@ -293,6 +290,9 @@
     </ClInclude>
     <ClInclude Include="O_Jump.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="S_MainMenu.h">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +334,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Entity">
       <UniqueIdentifier>{ffc50d08-487a-4cf4-8483-bd4795b55643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\Main Menu">
+      <UniqueIdentifier>{04365003-7c1f-4107-958e-d4f404dc3f3f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

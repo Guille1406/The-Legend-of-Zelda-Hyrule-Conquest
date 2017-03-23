@@ -14,7 +14,17 @@ enum Scene_ID {
 	map,
 	world,
 	dungeon,
-	mainmenu
+
+	//Main menu
+	summitlogo,
+	discreminder,
+	//chooselanguage,
+	welcomepage,
+	mainmenu,
+	campain,
+	options,
+	credits,
+	quitgame
 };
 
 enum GuiEvent;

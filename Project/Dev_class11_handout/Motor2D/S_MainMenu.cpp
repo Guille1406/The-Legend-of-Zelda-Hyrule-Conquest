@@ -23,9 +23,6 @@ bool S_MainMenu::Start()
 
 bool S_MainMenu::Update()
 {
-	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
-		App->scene->ChangeScene(dungeon);
-	}
 	return true;
 }
 
