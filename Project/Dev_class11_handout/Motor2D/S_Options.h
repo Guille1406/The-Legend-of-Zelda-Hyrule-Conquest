@@ -16,10 +16,12 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	GuiButton* campain = nullptr;
-	GuiButton* options = nullptr;
-	GuiButton* credits = nullptr;
-	GuiButton* quit = nullptr;
+	GuiLabel* OptionsLabel = nullptr;
+	GuiButton* controls = nullptr;
+	GuiButton* video = nullptr;
+	GuiButton* audio = nullptr;
+	GuiButton* gameplay = nullptr;
+	GuiButton* back = nullptr;
 };
 
 #endif // #pragma once

@@ -12,20 +12,22 @@ S_Options::~S_Options()
 
 bool S_Options::Start()
 {
-	/*
-	App->player->Disable();
 	SDL_Rect idle_button_rect = { 410,165,231,73 };
 	SDL_Rect hover_button_rect = { -1,109,231,73 };
 	SDL_Rect pressed_button_rect = { 641,165,231,73 };
-	campain = App->gui->CreateButton(iPoint(1000, 370), &std::string("Campain"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
-	((Gui*)campain)->SetListener(this);
-	options = App->gui->CreateButton(iPoint(1000, 450), &std::string("Options"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
-	((Gui*)options)->SetListener(this);
-	credits = App->gui->CreateButton(iPoint(1000, 530), &std::string("Credits"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
-	((Gui*)credits)->SetListener(this);
-	quit = App->gui->CreateButton(iPoint(1000, 610), &std::string("Quit"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
-	((Gui*)quit)->SetListener(this);
-	*/
+	OptionsLabel = App->gui->CreateLabel(iPoint(500, 200), &std::string("Options Menu"), false);
+	((Gui*)OptionsLabel)->SetListener(this);
+	controls = App->gui->CreateButton(iPoint(1000, 370), &std::string("Controls Settings"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	((Gui*)controls)->SetListener(this);
+	video = App->gui->CreateButton(iPoint(1000, 450), &std::string("Video Settings"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	((Gui*)video)->SetListener(this);
+	audio = App->gui->CreateButton(iPoint(1000, 530), &std::string("Audio Settings"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	((Gui*)audio)->SetListener(this);
+	gameplay = App->gui->CreateButton(iPoint(1000, 610), &std::string("Gamplay Settings"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	((Gui*)gameplay)->SetListener(this);
+	back = App->gui->CreateButton(iPoint(500, 610), &std::string("Back"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	((Gui*)back)->SetListener(this);
+
 	return true;
 }
 
@@ -41,25 +43,8 @@ bool S_Options::Clean()
 
 void S_Options::OnGui(Gui* ui, GuiEvent event)
 {
-	/*
-	if ((ui == (Gui*)campain) && (event == GuiEvent::mouse_lclk_down))
+	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(world);
+		App->scene->ChangeScene(Scene_ID::mainmenu);
 	}
-
-	if ((ui == (Gui*)options) && (event == GuiEvent::mouse_lclk_down))
-	{
-		//App->scene->ChangeScene(world);
-	}
-
-	if ((ui == (Gui*)credits) && (event == GuiEvent::mouse_lclk_down))
-	{
-		//App->scene->ChangeScene(world);
-	}
-
-	if ((ui == (Gui*)quit) && (event == GuiEvent::mouse_lclk_down))
-	{
-		//App->scene->ChangeScene(world);
-	}
-	*/
 }

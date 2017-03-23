@@ -48,7 +48,7 @@ void S_MainMenu::OnGui(Gui* ui, GuiEvent event)
 
 	if ((ui == (Gui*)options) && (event == GuiEvent::mouse_lclk_down))
 	{
-		//App->scene->ChangeScene(Scene_ID::world);
+		App->scene->ChangeScene(Scene_ID::options);
 	}
 
 	if ((ui == (Gui*)credits) && (event == GuiEvent::mouse_lclk_down))

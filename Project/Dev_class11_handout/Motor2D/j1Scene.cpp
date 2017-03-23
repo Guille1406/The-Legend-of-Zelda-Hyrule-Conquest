@@ -23,6 +23,7 @@
 #include "S_World.h"
 #include "S_Dungeon.h"
 #include "S_MainMenu.h"
+#include "S_Options.h"
 #include "S_QuitGame.h"
 #include <list>;
 using namespace std;
@@ -55,12 +56,17 @@ bool j1Scene::Start()
 	scene_list = new p2List<MainScene*>();
 	//S_Inventory* temp = new S_Inventory();
 	
+	//Main menu
 	p2List_item<MainScene*>* MainMenu= scene_list->add(new S_MainMenu);
 	MainMenu->data->scene_name = Scene_ID::mainmenu;
+
+	p2List_item<MainScene*>* Options = scene_list->add(new S_Options);
+	Options->data->scene_name = Scene_ID::options;
 
 	p2List_item<MainScene*>* QuitGame = scene_list->add(new S_QuitGame);
 	QuitGame->data->scene_name = Scene_ID::quitgame;
 	
+	//World
 	p2List_item<MainScene*>* World = scene_list->add(new S_World);
 	World->data->scene_name = Scene_ID::world;
 
