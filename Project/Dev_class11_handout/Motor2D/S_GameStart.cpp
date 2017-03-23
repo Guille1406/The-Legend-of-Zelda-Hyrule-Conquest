@@ -1,17 +1,18 @@
-#include "S_MainMenu.h"
-#include"j1Player.h"
+#include "S_GameStart.h"
+#include "j1Player.h"
 #include "Gui.h"
 
-S_MainMenu::S_MainMenu()
+S_GameStart::S_GameStart()
 {
 }
 
-S_MainMenu::~S_MainMenu()
+S_GameStart::~S_GameStart()
 {
 }
 
-bool S_MainMenu::Start()
+bool S_GameStart::Start()
 {
+	/*
 	App->player->Disable();
 	SDL_Rect idle_button_rect = { 410,165,231,73 };
 	SDL_Rect hover_button_rect = { -1,109,231,73 };
@@ -24,38 +25,41 @@ bool S_MainMenu::Start()
 	((Gui*)credits)->SetListener(this);
 	quit = App->gui->CreateButton(iPoint(1000, 610), &std::string("Quit"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	((Gui*)quit)->SetListener(this);
+	*/
 	return true;
 }
 
-bool S_MainMenu::Update()
+bool S_GameStart::Update()
 {
 	return true;
 }
 
-bool S_MainMenu::Clean()
+bool S_GameStart::Clean()
 {
 	return true;
 }
 
-void S_MainMenu::OnGui(Gui* ui, GuiEvent event)
+void S_GameStart::OnGui(Gui* ui, GuiEvent event)
 {
+	/*
 	if ((ui == (Gui*)campain) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::world);
+		App->scene->ChangeScene(world);
 	}
 
 	if ((ui == (Gui*)options) && (event == GuiEvent::mouse_lclk_down))
 	{
-		//App->scene->ChangeScene(Scene_ID::world);
+		//App->scene->ChangeScene(world);
 	}
 
 	if ((ui == (Gui*)credits) && (event == GuiEvent::mouse_lclk_down))
 	{
-		//App->scene->ChangeScene(Scene_ID::world);
+		//App->scene->ChangeScene(world);
 	}
 
 	if ((ui == (Gui*)quit) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::quitgame);
+		//App->scene->ChangeScene(world);
 	}
+	*/
 }

@@ -16,10 +16,8 @@ enum Scene_ID {
 	dungeon,
 
 	//Main menu
-	summitlogo,
-	discreminder,
+	gamestart,
 	//chooselanguage,
-	welcomepage,
 	mainmenu,
 	campain,
 	options,

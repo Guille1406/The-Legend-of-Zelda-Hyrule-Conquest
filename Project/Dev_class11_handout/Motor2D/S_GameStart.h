@@ -1,16 +1,16 @@
-#ifndef _S_MAIN_MENU_
-#define _S_MAIN_MENU_
+#ifndef _S_GAME_START_
+#define _S_GAME_START_
 
 #include "j1App.h"
 #include "j1Scene.h"
 #include "MainScene.h"
 #include "Gui.h"
 
-class S_MainMenu : public MainScene {
+class S_GameStart : public MainScene {
 
 public:
-	S_MainMenu();
-	~S_MainMenu();
+	S_GameStart();
+	~S_GameStart();
 	bool Start();
 	bool Update();
 	bool Clean();
