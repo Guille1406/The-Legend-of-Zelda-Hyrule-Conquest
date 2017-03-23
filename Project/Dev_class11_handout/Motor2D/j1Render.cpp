@@ -171,9 +171,8 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 	if (use_scale)
 		scale = App->win->GetScale();
 
-	fPoint  f_rect = { 0,0 };
+	fPoint  f_rect = { 0.0f,0.0f };
 
-	
 	SDL_Rect rect = {0,0,0,0};
 	
 	rect.x = (int)(camera.x * speed) + x * scale;
@@ -200,7 +199,7 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 
 
 	SDL_Point* p = NULL;
-	SDL_Point pivot;
+	SDL_Point pivot = { 0,0 };
 
 	if (pivot_x != INT_MAX && pivot_y != INT_MAX)
 	{

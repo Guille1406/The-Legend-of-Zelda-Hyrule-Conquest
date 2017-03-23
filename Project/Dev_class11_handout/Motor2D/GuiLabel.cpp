@@ -22,7 +22,7 @@ void GuiLabel::Draw()
 		if (LabelString != empty_char)
 		{
 			SDL_Texture* texture_to_blit = App->font->Print(LabelString.c_str(), { (Uint8)(*color)(0), (Uint8)(*color)(1), (Uint8)(*color)(2), 255 }, font);
-			App->render->Blit(texture_to_blit, position.x - App->render->camera.x, position.y - App->render->camera.y, NULL, 1.0f, 0, INT_MAX, INT_MAX, false);
+			App->render->Blit(texture_to_blit, position.x - App->render->camera.x, position.y - App->render->camera.y, nullptr, 1.0f, 0, INT_MAX, INT_MAX, false);
 			SDL_DestroyTexture(texture_to_blit);
 		}
 		if (App->gui->Gui_DebugDraw_isactive())
@@ -32,7 +32,7 @@ void GuiLabel::Draw()
 
 void GuiLabel::DebugDraw() const
 {
-	App->render->DrawQuad(Gui_Collider, LightSeaGreen(0), LightSeaGreen(1), LightSeaGreen(2), DEBUG_DRAW_ALPHA, true, false);
+	App->render->DrawQuad(Gui_Collider, LightSeaGreen(0), LightSeaGreen(1), LightSeaGreen(2), DEBUG_DRAW_ALPHA, true, false, false);
 }
 
 const std::string* GuiLabel::GetLabelStr() const

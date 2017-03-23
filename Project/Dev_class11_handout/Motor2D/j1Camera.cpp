@@ -31,7 +31,7 @@ bool j1Camera::Awake(pugi::xml_node&)
 
 	f_border_between_ellipses = BigEllipse.InsideEllipseValue({ 0,LitleEllipse.semiminoraxis});
 
-	DebugPerformanceData_Rect = { App->render->camera.x,App->render->camera.y,255,135 };
+	DebugPerformanceData_Rect = { App->render->camera.x,App->render->camera.y,260,135 };
 
 	return true;
 }

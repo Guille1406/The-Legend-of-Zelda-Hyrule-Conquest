@@ -110,9 +110,9 @@ void GuiScrollBar::Draw()
 	if (this->visible == true)
 	{
 		//Background
-		App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, &scrollbarbackground);
+		App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, &scrollbarbackground, 1.0f, 0, INT_MAX, INT_MAX, false);
 		//Bar
-		//App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, &scrollbarbar);
+		//App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, &scrollbarbar, 1.0f, 0, INT_MAX, INT_MAX, false);
 		//Button
 		ScrollBarButton->Draw();
 		//Debug
@@ -128,7 +128,7 @@ void GuiScrollBar::EditButtonStr(std::string* newstr)
 
 void GuiScrollBar::DebugDraw() const
 {
-	App->render->DrawQuad(Gui_Collider, Cyan(0), Cyan(1), Cyan(2), DEBUG_DRAW_ALPHA, true, false);
+	App->render->DrawQuad(Gui_Collider, Cyan(0), Cyan(1), Cyan(2), DEBUG_DRAW_ALPHA, true, false, false);
 }
 
 float GuiScrollBar::GetPercentualValue() const

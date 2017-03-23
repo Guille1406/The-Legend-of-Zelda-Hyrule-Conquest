@@ -43,7 +43,7 @@ void GuiWindow::Draw()
 	if (this->visible == true)
 	{
 		if (has_background)
-			App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, &background_rect);
+			App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, &background_rect, 1.0f, 0, INT_MAX, INT_MAX, false);
 		if (App->gui->Gui_DebugDraw_isactive())
 			this->DebugDraw();
 	}
@@ -51,7 +51,7 @@ void GuiWindow::Draw()
 
 void GuiWindow::DebugDraw() const
 {
-	App->render->DrawQuad(Gui_Collider, DarkBlue(0), DarkBlue(1), DarkBlue(2), DEBUG_DRAW_ALPHA, true, false);
+	App->render->DrawQuad(Gui_Collider, DarkBlue(0), DarkBlue(1), DarkBlue(2), DEBUG_DRAW_ALPHA, true, false, false);
 }
 
 void GuiWindow::push_back_item(Gui* newitem)

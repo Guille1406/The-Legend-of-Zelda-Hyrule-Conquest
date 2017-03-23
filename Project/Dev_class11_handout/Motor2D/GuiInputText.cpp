@@ -63,7 +63,7 @@ void GuiInputText::Draw()
 		ShowHidePassword();
 		//background
 		if (has_background)
-			App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, &texture_writablearea_rect);
+			App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, &texture_writablearea_rect, 1.0f, 0, INT_MAX, INT_MAX, false);
 		//Label
 		if (OriginalPosition != position)
 			MoveStr();
@@ -77,7 +77,7 @@ void GuiInputText::Draw()
 
 void GuiInputText::DebugDraw() const
 {
-	App->render->DrawQuad(Gui_Collider, Green(0), Green(1), Green(2), DEBUG_DRAW_ALPHA, true, false);
+	App->render->DrawQuad(Gui_Collider, Green(0), Green(1), Green(2), DEBUG_DRAW_ALPHA, true, false, false);
 }
 
 void GuiInputText::SetFont(_TTF_Font* newfont)

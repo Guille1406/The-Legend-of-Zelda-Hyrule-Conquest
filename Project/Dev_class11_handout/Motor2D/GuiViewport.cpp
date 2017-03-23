@@ -44,7 +44,7 @@ void GuiViewport::Draw()
 
 void GuiViewport::DebugDraw() const
 {
-	App->render->DrawQuad(Gui_Collider, Blue(0), Blue(1), Blue(2), DEBUG_DRAW_ALPHA, true, false);
+	App->render->DrawQuad(Gui_Collider, Blue(0), Blue(1), Blue(2), DEBUG_DRAW_ALPHA, true, false, false);
 }
 
 void GuiViewport::push_back_item(Gui* newitem)

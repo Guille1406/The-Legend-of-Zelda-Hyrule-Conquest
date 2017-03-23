@@ -10,15 +10,16 @@
 #include "j1Pathfinding.h"
 #include "j1App.h"
 #include "j1Player.h"
+#include "j1Camera.h"
 
 bool S_World::Start()
 {
-
+	App->camera->Enable();
 	App->player->Enable();
 	if (App->map->Load("TestMap.tmx") == true)
 
 	{
-		int w, h;
+		int w, h = 0;
 		uchar* data = NULL;
 		if (App->map->CreateWalkabilityMap(w, h, &data))
 			App->pathfinding->SetMap(w, h, data);

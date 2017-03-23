@@ -65,7 +65,7 @@ void GuiBar::Draw()
 	if (this->visible == true)
 	{
 		if(has_background)
-			App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, &background_texture_rect);
+			App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, &background_texture_rect, 1.0f, 0, INT_MAX, INT_MAX, false);
 		if(value > min_value)
 			App->render->DrawQuad(bar_rect, (*bar_color)(0), (*bar_color)(1), (*bar_color)(2), bar_color_alpha, true, false);
 		if (App->gui->Gui_DebugDraw_isactive())
@@ -75,7 +75,7 @@ void GuiBar::Draw()
 
 void GuiBar::DebugDraw() const
 {
-	App->render->DrawQuad(Gui_Collider, Red(0), Red(1), Red(2), DEBUG_DRAW_ALPHA, true, false);
+	App->render->DrawQuad(Gui_Collider, Red(0), Red(1), Red(2), DEBUG_DRAW_ALPHA, true, false, false);
 }
 
 void GuiBar::SetValue(int newvalue)

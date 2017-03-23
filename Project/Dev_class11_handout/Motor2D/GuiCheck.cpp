@@ -41,9 +41,9 @@ void GuiCheck::Draw()
 {
 	if (this->visible == true)
 	{
-		App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, curent_state_texture);
+		App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, curent_state_texture, 1.0f, 0, INT_MAX, INT_MAX, false);
 		if (checked && !bakedcheck)
-			App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, &check_texture_rect);
+			App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, &check_texture_rect, 1.0f, 0, INT_MAX, INT_MAX, false);
 		//Debug
 		if (App->gui->Gui_DebugDraw_isactive())
 			this->DebugDraw();
@@ -52,7 +52,7 @@ void GuiCheck::Draw()
 
 void GuiCheck::DebugDraw() const
 {
-	App->render->DrawQuad(Gui_Collider, Yellow(0), Yellow(1), Yellow(2), DEBUG_DRAW_ALPHA, true, false);
+	App->render->DrawQuad(Gui_Collider, Yellow(0), Yellow(1), Yellow(2), DEBUG_DRAW_ALPHA, true, false, false);
 }
 
 bool GuiCheck::Checked() const

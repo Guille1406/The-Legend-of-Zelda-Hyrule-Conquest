@@ -80,7 +80,7 @@ void GuiButton::Draw()
 	if (this->visible == true)
 	{
 		//Button
-		App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, curent_state_texture, 1.0f, 0, INT_MAX,INT_MAX,false);
+		App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, curent_state_texture, 1.0f, 0, INT_MAX, INT_MAX, false);
 		//Label
 		ButtonString->Draw();
 		//Debug
@@ -91,7 +91,7 @@ void GuiButton::Draw()
 
 void GuiButton::DebugDraw() const
 {
-	App->render->DrawQuad(Gui_Collider, Orange(0), Orange(1), Orange(2), DEBUG_DRAW_ALPHA, true, false,false);
+	App->render->DrawQuad(Gui_Collider, Orange(0), Orange(1), Orange(2), DEBUG_DRAW_ALPHA, true, false, false);
 }
 
 void GuiButton::CreateButtonLabel(iPoint position, std::string* str, bool movable)
