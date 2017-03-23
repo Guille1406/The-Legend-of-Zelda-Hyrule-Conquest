@@ -36,16 +36,14 @@ bool j1Fonts::Awake(pugi::xml_node& conf)
 		default = Load(path, size);
 
 		path = "fonts/The Legend of Zelda Fonts/SherwoodRegular.ttf";
-		size = 12;
-		Sherwood12 = Load(path, size);
-		size = 20;
-		Sherwood12 = Load(path, size);
+		Sherwood12 = Load(path, 12);
+		Sherwood20 = Load(path, 20);
+		Sherwood28 = Load(path, 28);
 
 		path = "fonts/The Legend of Zelda Fonts/ReturnofGanon.ttf";
-		size = 12;
-		ReturnofGanon12 = Load(path, size);
-		size = 20;
-		ReturnofGanon12 = Load(path, size);
+		ReturnofGanon12 = Load(path, 12);
+		ReturnofGanon20 = Load(path, 20);
+		ReturnofGanon28 = Load(path, 28);
 		
 	}
 

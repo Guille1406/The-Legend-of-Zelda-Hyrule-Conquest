@@ -118,11 +118,10 @@ void GuiButton::SetFont(_TTF_Font* newfont)
 
 void GuiButton::CalculateStrWH(const std::string* str)
 {
-	if(temp)
+	if(ButtonString != nullptr)
 		App->font->CalcSize(str->c_str(), ButtonString_w, ButtonString_h, ButtonString->GetFont());
 	else
 		App->font->CalcSize(str->c_str(), ButtonString_w, ButtonString_h);
-	temp = true;
 	CenterStr();
 }
 
@@ -130,5 +129,7 @@ void GuiButton::CenterStr()
 {
 	ButtonStringPos.x = position.x + ((Gui_Collider.w - ButtonString_w) * 0.5f);
 	ButtonStringPos.y = position.y + ((Gui_Collider.h - ButtonString_h) * 0.5f);
+	if (ButtonString != nullptr)
+		ButtonString->SetLocalPos(ButtonStringPos.x, ButtonStringPos.y);
 	OriginalPosition = position;
 }

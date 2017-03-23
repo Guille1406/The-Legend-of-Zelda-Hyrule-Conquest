@@ -20,16 +20,16 @@ bool S_MainMenu::Start()
 	SDL_Rect hover_button_rect = { -1,109,231,73 };
 	SDL_Rect pressed_button_rect = { 641,165,231,73 };
 	campain = App->gui->CreateButton(iPoint(1000, 370), &std::string("Campain"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
-	campain->SetFont(App->font->Sherwood12);
+	campain->SetFont(App->font->Sherwood20);
 	((Gui*)campain)->SetListener(this);
 	options = App->gui->CreateButton(iPoint(1000, 450), &std::string("Options"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
-	options->SetFont(App->font->Sherwood12);
+	options->SetFont(App->font->Sherwood20);
 	((Gui*)options)->SetListener(this);
 	credits = App->gui->CreateButton(iPoint(1000, 530), &std::string("Credits"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
-	credits->SetFont(App->font->Sherwood12);
+	credits->SetFont(App->font->Sherwood20);
 	((Gui*)credits)->SetListener(this);
 	quit = App->gui->CreateButton(iPoint(1000, 610), &std::string("Quit"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
-	quit->SetFont(App->font->Sherwood12);
+	quit->SetFont(App->font->Sherwood20);
 	((Gui*)quit)->SetListener(this);
 	return true;
 }

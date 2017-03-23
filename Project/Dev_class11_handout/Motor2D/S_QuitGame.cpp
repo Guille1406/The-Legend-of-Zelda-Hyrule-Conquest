@@ -1,6 +1,8 @@
 #include "S_QuitGame.h"
 #include "j1Player.h"
 #include "Gui.h"
+#include "GuiLabel.h"
+#include "GuiButton.h"
 
 S_QuitGame::S_QuitGame()
 {
@@ -17,10 +19,13 @@ bool S_QuitGame::Start()
 	SDL_Rect hover_button_rect = { -1,109,231,73 };
 	SDL_Rect pressed_button_rect = { 641,165,231,73 };
 	Label = App->gui->CreateLabel(iPoint(500, 200), &std::string("Are you sure you want to quit?"), false);
+	Label->SetFont(App->font->Sherwood28);
 	((Gui*)Label)->SetListener(this);
 	Yes = App->gui->CreateButton(iPoint(350, 250), &std::string("Yes"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	Yes->SetFont(App->font->Sherwood20);
 	((Gui*)Yes)->SetListener(this);
 	No = App->gui->CreateButton(iPoint(650, 250), &std::string("No"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	No->SetFont(App->font->Sherwood20);
 	((Gui*)No)->SetListener(this);
 	return true;
 }
