@@ -37,7 +37,9 @@ public:
 
 	//p2List<_TTF_Font*>	fonts;
 	std::list<_TTF_Font*> fonts;
-	_TTF_Font*			default;
+	_TTF_Font*			default = nullptr;
+	_TTF_Font*			Sherwood12 = nullptr;		//Menus
+	_TTF_Font*			ReturnofGanon12 = nullptr;	//Text
 };
 
 

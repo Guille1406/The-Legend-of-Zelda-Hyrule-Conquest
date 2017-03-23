@@ -110,9 +110,19 @@ void GuiButton::SetButtonColor(Color* newcolor)
 	ButtonString->SetLabelColor(newcolor);
 }
 
-void GuiButton::CalculateStrWH(std::string* str)
+void GuiButton::SetFont(_TTF_Font* newfont)
 {
-	App->font->CalcSize(str->c_str(), ButtonString_w, ButtonString_h);
+	ButtonString->SetFont(newfont);
+	CalculateStrWH(ButtonString->GetLabelStr());
+}
+
+void GuiButton::CalculateStrWH(const std::string* str)
+{
+	if(temp)
+		App->font->CalcSize(str->c_str(), ButtonString_w, ButtonString_h, ButtonString->GetFont());
+	else
+		App->font->CalcSize(str->c_str(), ButtonString_w, ButtonString_h);
+	temp = true;
 	CenterStr();
 }
 

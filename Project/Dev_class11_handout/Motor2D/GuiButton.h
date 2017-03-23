@@ -22,12 +22,13 @@ public:
 	void Update(const Gui* mouse_hover, const Gui* focus);
 	void Draw();
 	void EditButtonStr(std::string* newstr);
+	void SetFont(_TTF_Font* newfont);
 	void SetButtonColor(Color* newcolor);
 
 private:
 	void CreateButtonLabel(iPoint position, std::string* str, bool movable);
 	void DebugDraw() const;
-	void CalculateStrWH(std::string* str);
+	void CalculateStrWH(const std::string* str);
 	void CenterStr();
 
 private:
@@ -42,6 +43,7 @@ private:
 	SDL_Rect idle_texture_rect = { 0,0,0,0 };
 	SDL_Rect hover_texture_rect = { 0,0,0,0 };
 	SDL_Rect pressed_texture_rect = { 0,0,0,0 };
+	bool temp = false;
 
 };
 
