@@ -19,12 +19,13 @@ public:
 	};
 
 	void Attack();
-	
+	void ThrowFunction(float dt, int&, bool);
 
 	player_event GetEvent();
 
 public:
 	bool is_picked = false;
+	bool temp = false;
 };
 
 #endif

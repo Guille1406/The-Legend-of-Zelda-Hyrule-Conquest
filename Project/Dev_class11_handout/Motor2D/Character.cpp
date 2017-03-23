@@ -97,6 +97,10 @@ void Character::ExecuteEvent(float dt)
 		Roll(dt);
 		break;
 
+	case throw_:
+		Throw(dt);
+		break;
+
 	}
 
 	//Dependiendo del evento actual i de la direccion cambia la animacion:
@@ -121,31 +125,33 @@ void Character::GetAdjacents()
 	this->adjacent.right.j = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y + 1);
 }
 
-int Character::GetLogic(bool collisions)
+int Character::GetLogic(bool minus_height)
 {
 	
 	//Takes the id of the two front tiles of each player, depending on the locig height of each player
 	std::vector<MapLayer*> vector = App->map->V_Colision;
-			
+	
+	
+	
 
 	int i, j;
 	switch (character_direction)
 	{
 	case up:
-		i = vector[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y - 1);
-		j = vector[GetLogicHeightPlayer()]->Get(tilepos.x + 1, tilepos.y - 1);
+		i = vector[GetLogicHeightPlayer()- minus_height]->Get(tilepos.x, tilepos.y - 1);
+		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x + 1, tilepos.y - 1);
 		break;
 	case down:
-		i = vector[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y +2);
-		j = vector[GetLogicHeightPlayer()]->Get(tilepos.x +1, tilepos.y +2);
+		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x, tilepos.y +2);
+		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x +1, tilepos.y +2);
 		break;
 	case left:
-		i = vector[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y );
-		j = vector[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y +1);
+		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x - 1, tilepos.y );
+		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x - 1, tilepos.y +1);
 		break;
 	case right:
-		i = vector[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y);
-		j = vector[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y + 1);
+		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x + 2, tilepos.y);
+		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tilepos.x + 2, tilepos.y + 1);
 		break;
 	}
 	
@@ -225,6 +231,25 @@ void Character::Roll(float dt)
 		RollFunction(dt, pos.x, true);
 		break;
 	}
+}
+
+void Character::Throw(float dt)
+{
+	switch (character_direction) {
+	case up:
+		ThrowFunction(dt, pos.y, false);
+		break;
+	case down:
+		ThrowFunction(dt, pos.y, true);
+		break;
+	case left:
+		ThrowFunction(dt, pos.x, false);
+		break;
+	case right:
+		ThrowFunction(dt, pos.x, true);
+		break;
+	}
+
 }
 
 bool Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_tiles tiles, int side_tile_one, int side_tile_two, bool is_down)
@@ -349,6 +374,7 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 
 void Character::JumpFunction(float dt, int& pos, bool add)
 {
+	static int final_pos = 0;
 	//with "temp" we calculate the final position of the jump just one time
 	// "i" is used for changing the sign of the operation
 
@@ -373,6 +399,7 @@ void Character::JumpFunction(float dt, int& pos, bool add)
 
 void Character::RollFunction(float dt, int & pos, bool add)
 {
+	static int final_pos = 0;
 	//same as jump function
 	int i = 1;
 	if (!add)
@@ -391,4 +418,8 @@ void Character::RollFunction(float dt, int & pos, bool add)
 		doing_script = false;
 	}
 
+}
+
+void Character::ThrowFunction(float dt, int & pos, bool add)
+{
 }

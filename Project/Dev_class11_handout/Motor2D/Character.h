@@ -35,7 +35,8 @@ enum player_event {
 	pick,
 	lifting,
 	attack,	
-	fall
+	fall,
+	throw_,
 	/*
 	.
 	.
@@ -78,6 +79,7 @@ public:
 	void Move(float dt);
 	void Jump(float dt);
 	void Roll(float dt);
+	void Throw(float dt);
 
 	//Load the character animations in .xml. Recieves the path of the file
 	virtual void LoadAnimation(const char* path);
@@ -108,6 +110,7 @@ private:
 	bool MoveDiagonalFunction(float dt, int& pos_one, int& pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile, bool is_down = false);
 	void JumpFunction(float dt, int& pos, bool add);
 	void RollFunction(float dt, int& pos, bool add);
+	virtual void ThrowFunction(float dt, int& pos, bool add);
 	
 public:
 	
@@ -141,8 +144,8 @@ private:
 	uint i_logic_height_player = 0;
 
 	//For jump
-	int final_pos = 0;
-	bool temp = false; //Needed to save position only one time
+	bool temp = false;
+	 //Needed to save position only one time
 };
 
 #endif

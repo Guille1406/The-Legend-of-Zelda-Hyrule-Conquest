@@ -28,6 +28,8 @@ public:
 	
 	bool can_pick_up = false;
 	bool im_lifting = false;
+
+	bool temp = false;
 };
 
 #endif

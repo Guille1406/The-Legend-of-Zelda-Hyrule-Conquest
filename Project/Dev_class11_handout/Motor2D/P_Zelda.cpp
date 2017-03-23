@@ -4,8 +4,47 @@
 #include "j1FileSystem.h"
 #include "j1Player.h"
 
+#define JUMP_DISTANCE 112
+
 void P_Zelda::Attack()
 {
+
+}
+
+void P_Zelda::ThrowFunction(float dt, int &pos, bool add)
+{
+	static int final_pos = 0;;
+	int temp_pos = pos;
+	int before_wall_pos = 0;
+
+	static bool can_pass_wall = true;
+	int i = 1;
+	if (!add)
+		i = -1;
+
+	if (!temp)
+		final_pos = pos + (i * JUMP_DISTANCE);
+	temp = true;
+
+	while ((i * temp_pos <  i*final_pos) ) {
+		temp_pos = temp_pos + (i * 4);
+		if (GetLogic(true) == TILE_COL_ID) {
+			before_wall_pos = temp_pos;
+			if (!can_pass_wall) {
+				before_wall_pos = temp_pos + 32;
+			}
+			can_pass_wall = !can_pass_wall;
+		}
+	}
+	if ((i * pos < i*before_wall_pos)) {
+		pos = pos + (i * 4);
+	}
+	// if player reached the final pos, player height decreases 1
+	else {
+		temp = false;
+		doing_script = false;
+		ChangeLogicHeightPlayer(GetLogicHeightPlayer() - 1);
+	}
 
 }
 
@@ -101,7 +140,7 @@ player_event P_Zelda::GetEvent()
 			actual_event = pick;
 			pos = App->player->Link->pos;
 			if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && can_throw) {
-				actual_event = jump;
+				actual_event = throw_;
 				doing_script = true;
 				is_picked = false;
 				App->player->Link->im_lifting = false;
