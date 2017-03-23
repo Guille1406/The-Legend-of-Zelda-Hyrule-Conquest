@@ -6,7 +6,7 @@
 #include <algorithm>
 #include"j1Collision.h"
 #include "O_ChangeHeight.h"
-
+#include"j1Enemy.h"
 
 bool j1Player::Awake(pugi::xml_node& config)
 {
@@ -254,5 +254,20 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			Link->can_pick_up = true;
 		
 	}
+	else if (collider1->type == COLLIDER_TYPE::collider_enemy) {
+		
+	}
+	else if (collider2->type == COLLIDER_TYPE::collider_enemy) {
+		/*Enemy* temp = (Enemy*)collider2->parent;
+		for (std::) {
+
+		}
+		App->enemy->V_MyEnemies.erase();*/
+		live--;
+		LOG("Link life: %i", live);
+	}
+
+
+
 }
 

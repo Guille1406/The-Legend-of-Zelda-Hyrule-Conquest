@@ -61,7 +61,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfinding);
 	AddModule(font);
 	
-	// scene last
+	// scene lastAddModule(scene);
 	AddModule(scene);
 	AddModule(object);
 	AddModule(enemy);
@@ -131,7 +131,7 @@ bool j1App::Awake()
 
 
 	player->Disable();
-
+	enemy->Disable();
 
 	if(ret == true)
 	{

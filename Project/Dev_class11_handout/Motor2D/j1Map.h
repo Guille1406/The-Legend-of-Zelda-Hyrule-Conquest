@@ -132,7 +132,7 @@ public:
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
-	
+	bool CreateEnemyMap(int& width, int& height, uchar** buffer) const;
 
 private:
 
@@ -142,7 +142,7 @@ private:
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadObjectLayer(pugi::xml_node& node, ObjectLayer* layer, int height);
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
-
+	
 	TileSet* GetTilesetFromTileId(int id) const;
 
 public:
@@ -150,6 +150,7 @@ public:
 	MapData data;
 	std::vector<MapLayer*> V_Colision;
 	std::vector<MapLayer*> V_Logic;
+	std::vector<MapLayer*> V_Enemies;
 	//MapLayer* Logic;
 
 private:

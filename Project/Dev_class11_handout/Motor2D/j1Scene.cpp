@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <conio.h>
+#include <iostream>
+
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
@@ -10,15 +14,7 @@
 #include "j1PathFinding.h"
 #include "j1Gui.h"
 #include "j1Scene.h"
-
 #include "j1Gui.h"
-
-
-
-#include <stdio.h>
-#include <conio.h>
-#include <iostream>
-
 
 #include "S_World.h"
 #include "S_Dungeon.h"
@@ -26,8 +22,6 @@
 #include "S_Options.h"
 #include "S_QuitGame.h"
 #include <list>;
-using namespace std;
-
 
 j1Scene::j1Scene() : j1Module()
 {

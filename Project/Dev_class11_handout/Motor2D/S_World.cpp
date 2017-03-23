@@ -11,6 +11,7 @@
 #include "j1App.h"
 #include "j1Player.h"
 #include "j1Camera.h"
+#include "j1Enemy.h"
 
 bool S_World::Start()
 {
@@ -24,10 +25,16 @@ bool S_World::Start()
 		if (App->map->CreateWalkabilityMap(w, h, &data))
 			App->pathfinding->SetMap(w, h, data);
 
+		int w_two, h_two = 0;
+		uchar* data_two = NULL;
+		if (App->map->CreateEnemyMap(w_two, h_two, &data_two))
+			App->enemy->Enable();
+
 			RELEASE_ARRAY(data);
 			//App->map->CreateLogicMap();
 	}
 	
+
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;

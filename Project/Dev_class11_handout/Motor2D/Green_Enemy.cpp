@@ -5,7 +5,6 @@ Green_Enemy::Green_Enemy():Enemy(enemyType::green_enemy)
 }
 Green_Enemy::Green_Enemy(const Green_Enemy& g_enemy) :Enemy(enemyType::green_enemy)
 {
-	this->active = g_enemy.active;
 	this->collider = g_enemy.collider;
 	this->logic_height = g_enemy.logic_height;
 }
