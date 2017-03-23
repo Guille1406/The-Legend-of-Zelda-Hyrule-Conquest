@@ -18,8 +18,6 @@ bool j1Enemy::Start()
 		for (int y = 0; y < App->map->data.height; ++y) {
 			for (int x = 0; x < App->map->data.width; ++x) {
 				if (App->map->V_Enemies[i]->Get(x, y) != 0) {
-					//SDL_Rect enemy_rect = { 0,0,44,60 };
-					//App->render->Blit(green_soldier_tex, x*App->map->data.tile_width, y*App->map->data.tile_height, &enemy_rect);
 					Create_Enemy(App->map->V_Enemies[i]->Get(x, y), iPoint(x*App->map->data.tile_width, y*App->map->data.tile_height));
 
 				}
@@ -39,7 +37,7 @@ bool j1Enemy::Update(float)
 {
 	SDL_Rect rect = { 0,0,44,60 };
 	for (int i = 0; i < V_MyEnemies.size(); i++) {
-		App->render->Blit(green_soldier_tex, V_MyEnemies[i]->pos.x, V_MyEnemies[i]->pos.y, &rect);
+		App->render->Blit(green_soldier_tex, V_MyEnemies[i]->pos.x, V_MyEnemies[i]->pos.y, &V_MyEnemies[i]->rect);
 	}
 
 
@@ -64,6 +62,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint Pos)
 	switch (id_enemy) {
 	case enemyType::green_enemy:
 		ret = new Green_Enemy();
+		ret->rect = { 0,0,44,60 };
 		break;
 
 
