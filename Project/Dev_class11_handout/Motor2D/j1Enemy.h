@@ -4,15 +4,16 @@
 #include "j1Module.h"
 #include "SDL\include\SDL.h"
 #include"j1Object.h"
+class Green_Enemy;
 enum enemyType {
-	test_enemy,
+	green_enemy,
 
 };
 
 
 class Enemy : public Entity {
 public:
-	Enemy() {
+	Enemy(enemyType type): type(type) {
 
 	};
 	~Enemy() {};
@@ -27,6 +28,7 @@ public:
 
 
 };
+
 class j1Enemy : public j1Module {
 
 public:
@@ -43,7 +45,7 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
-	Enemy* CreateEnemy(char*,pugi::xml_node);
+	Green_Enemy* Create_GreenEnemy(char*,pugi::xml_node);
 
 
 public:

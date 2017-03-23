@@ -78,6 +78,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="ConsoleCommandCVar.cpp" />
+    <ClCompile Include="Green_Enemy.cpp" />
     <ClCompile Include="Gui.cpp" />
     <ClCompile Include="GuiBar.cpp" />
     <ClCompile Include="GuiButton.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ConsoleCommandCVar.h" />
+    <ClInclude Include="Green_Enemy.h" />
     <ClInclude Include="j1Enemy.h" />
     <ClInclude Include="O_Button.h" />
     <ClInclude Include="O_ChangeHeight.h" />

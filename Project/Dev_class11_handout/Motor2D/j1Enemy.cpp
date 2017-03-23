@@ -1,5 +1,6 @@
 #include "j1Enemy.h"
-
+#include"Green_Enemy.h"
+#include"j1Collision.h"
 bool j1Enemy::Start()
 {
 	return true;
@@ -25,7 +26,18 @@ bool j1Enemy::CleanUp()
 	return true;
 }
 
-Enemy * j1Enemy::CreateEnemy(char *, pugi::xml_node)
+Green_Enemy * j1Enemy::Create_GreenEnemy(char* type_name, pugi::xml_node object)
 {
-	return new Enemy();
+	Green_Enemy* ret = nullptr;
+	if (!strcmp(type_name, "green enemy")) {
+	
+		SDL_Rect rect={ 150,150,50,50 };
+		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, this);
+		ret->logic_height = 1;
+		ret->active = true;
+		//problems with constructors
+		//ret = new Green_Enemy(ret);
+	}
+
+	return ret;
 }

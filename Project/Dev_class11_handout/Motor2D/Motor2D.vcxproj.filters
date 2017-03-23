@@ -145,6 +145,9 @@
     <ClCompile Include="S_QuitGame.cpp">
       <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
     </ClCompile>
+    <ClCompile Include="Green_Enemy.cpp">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -324,6 +327,9 @@
     <ClInclude Include="S_QuitGame.h">
       <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
     </ClInclude>
+    <ClInclude Include="Green_Enemy.h">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -367,6 +373,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Scenes\Main Menu">
       <UniqueIdentifier>{04365003-7c1f-4107-958e-d4f404dc3f3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Entity\Enemy">
+      <UniqueIdentifier>{33648bbf-a353-47e1-8e95-171863323af9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
