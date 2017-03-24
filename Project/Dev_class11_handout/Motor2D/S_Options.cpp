@@ -1,5 +1,4 @@
 #include "S_Options.h"
-#include "j1Player.h"
 #include "Gui.h"
 #include "GuiLabel.h"
 #include "GuiButton.h"
@@ -17,7 +16,7 @@ bool S_Options::Start()
 	SDL_Rect idle_button_rect = { 410,165,231,73 };
 	SDL_Rect hover_button_rect = { -1,109,231,73 };
 	SDL_Rect pressed_button_rect = { 641,165,231,73 };
-	OptionsLabel = App->gui->CreateLabel(iPoint(500, 200), &std::string("Options menu"), false);
+	OptionsLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string("Options menu"), false);
 	OptionsLabel->SetFont(App->font->Sherwood28);
 	((Gui*)OptionsLabel)->SetListener(this);
 	controls = App->gui->CreateButton(iPoint(1000, 370), &std::string("Controls Settings"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
@@ -51,6 +50,22 @@ bool S_Options::Clean()
 
 void S_Options::OnGui(Gui* ui, GuiEvent event)
 {
+	if ((ui == (Gui*)controls) && (event == GuiEvent::mouse_lclk_down))
+	{
+		App->scene->ChangeScene(Scene_ID::optionscontrols);
+	}
+	if ((ui == (Gui*)video) && (event == GuiEvent::mouse_lclk_down))
+	{
+		App->scene->ChangeScene(Scene_ID::optionsvideo);
+	}
+	if ((ui == (Gui*)audio) && (event == GuiEvent::mouse_lclk_down))
+	{
+		App->scene->ChangeScene(Scene_ID::optionsaudio);
+	}
+	if ((ui == (Gui*)gameplay) && (event == GuiEvent::mouse_lclk_down))
+	{
+		App->scene->ChangeScene(Scene_ID::optionsgameplay);
+	}
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->scene->ChangeScene(Scene_ID::mainmenu);

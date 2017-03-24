@@ -16,11 +16,11 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	GuiLabel* OptionsLabel = nullptr;
-	GuiButton* controls = nullptr;
-	GuiButton* video = nullptr;
-	GuiButton* audio = nullptr;
-	GuiButton* gameplay = nullptr;
+	GuiLabel* ControlsLabel = nullptr;
+	GuiLabel* ControllerSensibility = nullptr;
+	GuiLabel* MouseSensibility = nullptr;
+	GuiButton* ControllerLayout = nullptr;
+	GuiButton* MouseLayout = nullptr;
 	GuiButton* back = nullptr;
 };
 

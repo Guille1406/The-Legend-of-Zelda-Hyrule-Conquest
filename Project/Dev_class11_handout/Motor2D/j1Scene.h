@@ -10,7 +10,6 @@ using namespace std;
 
 struct SDL_Texture;
 
-
 class j1Scene : public j1Module
 {
 public:

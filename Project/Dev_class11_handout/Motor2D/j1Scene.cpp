@@ -57,20 +57,21 @@ bool j1Scene::Start()
 	//Main menu
 	p2List_item<MainScene*>* MainMenu= scene_list->add(new S_MainMenu);
 	MainMenu->data->scene_name = Scene_ID::mainmenu;
+	//Campain
 
+	//Options menu
 	p2List_item<MainScene*>* Options = scene_list->add(new S_Options);
 	Options->data->scene_name = Scene_ID::options;
-	/*
-	p2List_item<MainScene*>* S_OptionsAudio = scene_list->add(new S_OptionsAudio);
-	S_OptionsAudio->data->scene_name = Scene_ID::optionsaudio;
-	p2List_item<MainScene*>* S_OptionsControls = scene_list->add(new S_OptionsControls);
-	S_OptionsControls->data->scene_name = Scene_ID::optionscontrols;
-	p2List_item<MainScene*>* S_OptionsGameplay = scene_list->add(new S_OptionsGameplay);
-	S_OptionsGameplay->data->scene_name = Scene_ID::optionsgameplay;
-	p2List_item<MainScene*>* S_OptionsVideo = scene_list->add(new S_OptionsVideo);
-	S_OptionsVideo->data->scene_name = Scene_ID::optionsvideo;
-	*/
-
+	p2List_item<MainScene*>* OptionsAudio = scene_list->add(new S_OptionsAudio);
+	OptionsAudio->data->scene_name = Scene_ID::optionsaudio;
+	p2List_item<MainScene*>* OptionsControls = scene_list->add(new S_OptionsControls);
+	OptionsControls->data->scene_name = Scene_ID::optionscontrols;
+	p2List_item<MainScene*>* OptionsGameplay = scene_list->add(new S_OptionsGameplay);
+	OptionsGameplay->data->scene_name = Scene_ID::optionsgameplay;
+	p2List_item<MainScene*>* OptionsVideo = scene_list->add(new S_OptionsVideo);
+	OptionsVideo->data->scene_name = Scene_ID::optionsvideo;
+	//Credits
+	//Quit Game
 	p2List_item<MainScene*>* QuitGame = scene_list->add(new S_QuitGame);
 	QuitGame->data->scene_name = Scene_ID::quitgame;
 	
@@ -85,9 +86,6 @@ bool j1Scene::Start()
 	prev_scene = MainMenu->data;
 	loaded_scene = MainMenu->data;
 	active_scene->Start();
-
-
-	
 
 	//debug_tex = App->tex->Load("maps/path2.png");
 
