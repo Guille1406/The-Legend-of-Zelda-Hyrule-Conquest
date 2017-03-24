@@ -21,6 +21,10 @@ enum Scene_ID {
 	mainmenu,
 	campain,
 	options,
+	optionsaudio,
+	optionscontrols,
+	optionsvideo,
+	optionsgameplay,
 	credits,
 	quitgame
 };

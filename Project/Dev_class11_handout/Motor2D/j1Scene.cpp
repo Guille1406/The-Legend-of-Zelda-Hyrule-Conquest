@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <iostream>
+#include <list>
 
 #include "p2Defs.h"
 #include "p2Log.h"
@@ -20,8 +21,11 @@
 #include "S_Dungeon.h"
 #include "S_MainMenu.h"
 #include "S_Options.h"
+#include "S_OptionsAudio.h"
+#include "S_OptionsControls.h"
+#include "S_OptionsGameplay.h"
+#include "S_OptionsVideo.h"
 #include "S_QuitGame.h"
-#include <list>;
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -56,6 +60,16 @@ bool j1Scene::Start()
 
 	p2List_item<MainScene*>* Options = scene_list->add(new S_Options);
 	Options->data->scene_name = Scene_ID::options;
+	/*
+	p2List_item<MainScene*>* S_OptionsAudio = scene_list->add(new S_OptionsAudio);
+	S_OptionsAudio->data->scene_name = Scene_ID::optionsaudio;
+	p2List_item<MainScene*>* S_OptionsControls = scene_list->add(new S_OptionsControls);
+	S_OptionsControls->data->scene_name = Scene_ID::optionscontrols;
+	p2List_item<MainScene*>* S_OptionsGameplay = scene_list->add(new S_OptionsGameplay);
+	S_OptionsGameplay->data->scene_name = Scene_ID::optionsgameplay;
+	p2List_item<MainScene*>* S_OptionsVideo = scene_list->add(new S_OptionsVideo);
+	S_OptionsVideo->data->scene_name = Scene_ID::optionsvideo;
+	*/
 
 	p2List_item<MainScene*>* QuitGame = scene_list->add(new S_QuitGame);
 	QuitGame->data->scene_name = Scene_ID::quitgame;

@@ -122,6 +122,10 @@
     <ClCompile Include="P_Zelda.cpp" />
     <ClCompile Include="S_Dungeon.cpp" />
     <ClCompile Include="S_Options.cpp" />
+    <ClCompile Include="S_OptionsAudio.cpp" />
+    <ClCompile Include="S_OptionsControls.cpp" />
+    <ClCompile Include="S_OptionsGameplay.cpp" />
+    <ClCompile Include="S_OptionsVideo.cpp" />
     <ClCompile Include="S_QuitGame.cpp" />
     <ClCompile Include="S_World.cpp" />
   </ItemGroup>
@@ -184,6 +188,10 @@
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
     <ClInclude Include="S_Options.h" />
+    <ClInclude Include="S_OptionsAudio.h" />
+    <ClInclude Include="S_OptionsControls.h" />
+    <ClInclude Include="S_OptionsGameplay.h" />
+    <ClInclude Include="S_OptionsVideo.h" />
     <ClInclude Include="S_QuitGame.h" />
     <ClInclude Include="S_World.h" />
   </ItemGroup>

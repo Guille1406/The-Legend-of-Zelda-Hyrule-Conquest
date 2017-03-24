@@ -133,13 +133,7 @@
     <ClCompile Include="j1Enemy.cpp">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="S_Campain.cpp">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
-    </ClCompile>
     <ClCompile Include="S_GameStart.cpp">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="S_Options.cpp">
       <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
     </ClCompile>
     <ClCompile Include="S_QuitGame.cpp">
@@ -147,6 +141,24 @@
     </ClCompile>
     <ClCompile Include="Green_Enemy.cpp">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="S_Campain.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu\Campain</Filter>
+    </ClCompile>
+    <ClCompile Include="S_Options.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="S_OptionsAudio.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="S_OptionsControls.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="S_OptionsVideo.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="S_OptionsGameplay.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -315,13 +327,7 @@
     <ClInclude Include="j1Enemy.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="S_Campain.h">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
-    </ClInclude>
     <ClInclude Include="S_GameStart.h">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="S_Options.h">
       <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
     </ClInclude>
     <ClInclude Include="S_QuitGame.h">
@@ -329,6 +335,24 @@
     </ClInclude>
     <ClInclude Include="Green_Enemy.h">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Campain.h">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu\Campain</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Options.h">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="S_OptionsAudio.h">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="S_OptionsControls.h">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="S_OptionsVideo.h">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="S_OptionsGameplay.h">
+      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +400,12 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Entity\Enemy">
       <UniqueIdentifier>{33648bbf-a353-47e1-8e95-171863323af9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\Main Menu\Campain">
+      <UniqueIdentifier>{cd3d3ce3-ae42-44eb-9adb-389a6de59247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\Main Menu\Options">
+      <UniqueIdentifier>{324adfd0-b4e4-4276-ba92-c536a7e1f597}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
