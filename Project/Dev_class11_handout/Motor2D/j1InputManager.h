@@ -62,15 +62,15 @@ public:
 	bool CleanUp();
 
 	//When detected input
-	void InputDetected(int, EVENTSTATE);
-	void JoystickDetected(int, JSTATE);
+	void InputDetected(int, EVENTSTATE,int);
+	void JoystickDetected(int, JSTATE,int);
 
 	//To Change the action button
 	void ChangeInputEvent(INPUTEVENT);
 
 
 	//For Polling
-	EVENTSTATE EventPressed(INPUTEVENT) const;
+	EVENTSTATE EventPressed(INPUTEVENT,int) const;
 
 	//For Callback system
 
@@ -80,12 +80,14 @@ private:
 
 	//Mapping is fun
 	//All the actions possible int->button, INPUTEVENT->attack, moveup...
-	std::multimap<int, INPUTEVENT> actions;
+	std::multimap<int, INPUTEVENT> actions_link;
+	std::multimap<int, INPUTEVENT> actions_zelda;
 
 	//All the actions in this frame
-	std::multimap<INPUTEVENT, EVENTSTATE> current_action;
+	std::multimap<INPUTEVENT, EVENTSTATE> current_action_link;
+	std::multimap<INPUTEVENT, EVENTSTATE> current_action_zelda;
 
-	
+
 
 	//To Change the action button
 	bool		next_input_change = false;

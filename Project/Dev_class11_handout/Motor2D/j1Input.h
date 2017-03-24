@@ -10,6 +10,7 @@
 #define NUM_CONTROLLER_BUTTONS 15
 #define NUM_CONTROLLER_AXIS 6
 #define DEAD_ZONE 20000
+#define MAX_GAMECONTROLLERS 2
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
 struct SDL_Rect;
@@ -27,7 +28,8 @@ enum j1KeyState
 	KEY_IDLE = 0,
 	KEY_DOWN,
 	KEY_REPEAT,
-	KEY_UP
+	KEY_UP,
+	KEY_NULL
 };
 
 enum j1JoystickState
@@ -35,6 +37,17 @@ enum j1JoystickState
 	JOYSTICK_POSITIVE,
 	JOYSTICK_NEGATIVE,
 	JOYSTICK_IDDLE
+};
+
+struct GamePad
+{
+	SDL_GameController*	gamepad = nullptr;
+	j1KeyState			controller_buttons[NUM_CONTROLLER_BUTTONS];
+	j1JoystickState		controller_axis[NUM_CONTROLLER_AXIS];
+	int					pad_num = -1;
+	int					id = -1;
+
+
 };
 
 class j1Input : public j1Module
@@ -83,6 +96,15 @@ public:
 	//Get mouse wheel movement
 	int GetMouseWheelMotion() const;
 
+
+	j1KeyState GetControllerButton(int pad, int id) const;
+
+	void AddController(int id);
+	void RemoveController(int id);
+
+	void ConnectGamePad(int instanceID);
+	void DisconectGamePad(int instanceID);
+
 	//get text input
 	const std::string* GetInputString() const;
 
@@ -97,9 +119,9 @@ private:
 	int			mouse_wheel_mov = 0;
 	std::string input_text;
 
-	SDL_GameController*	gamepad = nullptr;
-	j1KeyState			controller_buttons[NUM_CONTROLLER_BUTTONS];
-	j1JoystickState	controller_axis[NUM_CONTROLLER_AXIS];
+	std::vector<GamePad*> gamepads;
+	int			connected_gamepads = 0;
+	int			gamepad_connected[MAX_GAMECONTROLLERS];
 
 };
 

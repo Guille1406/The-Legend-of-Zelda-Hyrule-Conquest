@@ -30,7 +30,7 @@ bool j1InputManager::Awake(pugi::xml_node& conf)
 		new_action.first = tmp.attribute("button").as_int();
 		new_action.second = (INPUTEVENT)tmp.attribute("event").as_int();
 
-		actions.insert(new_action);
+		actions_link.insert(new_action);
 	}
 
 
@@ -46,7 +46,7 @@ bool j1InputManager::PreUpdate()
 
 bool j1InputManager::Update(float dt)
 {
-	if (EventPressed(PAUSE) == E_DOWN)
+	if (EventPressed(PAUSE, 0) == E_DOWN)
 	{
 		ChangeInputEvent(MUP);
 	}
@@ -58,8 +58,11 @@ bool j1InputManager::Update(float dt)
 // Called after all Updates
 bool j1InputManager::PostUpdate()
 {
-	if (!current_action.empty())
-		current_action.clear();
+	if (!current_action_link.empty())
+		current_action_link.clear();
+
+	if (!current_action_zelda.empty())
+		current_action_zelda.clear();
 
 	return true;
 }
@@ -74,18 +77,40 @@ bool j1InputManager::CleanUp()
 	return ret;
 }
 
-void j1InputManager::InputDetected(int button, EVENTSTATE state)
+void j1InputManager::InputDetected(int button, EVENTSTATE state, int player)
 {
+	if (state != EVENTSTATE::E_NOTHING)
+		LOG("PLAYER = %i", player);
 	if (next_input_change == false)
 	{
-		std::multimap<int, INPUTEVENT>::iterator tmp = actions.find(button);
-		//If more than one action per button we must iterate until the end
-		if (tmp != actions.end())
-		{
-			std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
-			new_current_action.first = (*tmp).second;
-			new_current_action.second = state;
-			current_action.insert(new_current_action);
+		if (player == 0) {
+
+
+			std::multimap<int, INPUTEVENT>::iterator tmp = actions_link.find(button);
+			//If more than one action per button we must iterate until the end
+			if (tmp != actions_link.end())
+			{
+				std::pair<INPUTEVENT, EVENTSTATE> new_current_action_link;
+				new_current_action_link.first = (*tmp).second;
+				new_current_action_link.second = state;
+				current_action_link.insert(new_current_action_link);
+			}
+		}
+
+		else if (player == 1) {
+			std::multimap<int, INPUTEVENT>::iterator tmp = actions_zelda.find(button);
+			//If more than one action per button we must iterate until the end
+			if (tmp != actions_zelda.end())
+			{
+				std::pair<INPUTEVENT, EVENTSTATE> new_current_action_zelda;
+				new_current_action_zelda.first = (*tmp).second;
+				new_current_action_zelda.second = state;
+				current_action_zelda.insert(new_current_action_zelda);
+
+
+
+
+			}
 		}
 	}
 	else
@@ -94,45 +119,86 @@ void j1InputManager::InputDetected(int button, EVENTSTATE state)
 	}
 }
 
-void j1InputManager::JoystickDetected(int axis, JSTATE state)
+void j1InputManager::JoystickDetected(int axis, JSTATE state, int player)
 {
 
-	std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
-
-	switch (axis)
-	{
-	case SDL_CONTROLLER_AXIS_LEFTX:
-		if (state == J_POSITIVE)
+	std::pair<INPUTEVENT, EVENTSTATE>	new_current_action_link;
+	std::pair<INPUTEVENT, EVENTSTATE>	new_current_action_zelda;
+	if (player == 0) {
+		switch (axis)
 		{
-			new_current_action.first = MRIGHT;
-			new_current_action.second = E_REPEAT;
-			current_action.insert(new_current_action);
+		case SDL_CONTROLLER_AXIS_LEFTX:
+			if (state == J_POSITIVE)
+			{
+				new_current_action_link.first = MRIGHT;
+				new_current_action_link.second = E_REPEAT;
+				current_action_link.insert(new_current_action_link);
+			}
+			else
+			{
+				new_current_action_link.first = MLEFT;
+				new_current_action_link.second = E_REPEAT;
+				current_action_link.insert(new_current_action_link);
+			}
+			break;
+
+		case SDL_CONTROLLER_AXIS_LEFTY:
+
+			if (state == J_POSITIVE)
+			{
+				new_current_action_link.first = MDOWN;
+				new_current_action_link.second = E_REPEAT;
+				current_action_link.insert(new_current_action_link);
+			}
+			else
+			{
+				new_current_action_link.first = MUP;
+				new_current_action_link.second = E_REPEAT;
+				current_action_link.insert(new_current_action_link);
+			}
+			break;
+
+
 		}
-		else
+
+
+	}
+	else if (player == 1) {
+
+		switch (axis)
 		{
-			new_current_action.first = MLEFT;
-			new_current_action.second = E_REPEAT;
-			current_action.insert(new_current_action);
+		case SDL_CONTROLLER_AXIS_LEFTX:
+			if (state == J_POSITIVE)
+			{
+				new_current_action_zelda.first = MRIGHT;
+				new_current_action_zelda.second = E_REPEAT;
+				current_action_zelda.insert(new_current_action_zelda);
+			}
+			else
+			{
+				new_current_action_zelda.first = MLEFT;
+				new_current_action_zelda.second = E_REPEAT;
+				current_action_zelda.insert(new_current_action_zelda);
+			}
+			break;
+
+		case SDL_CONTROLLER_AXIS_LEFTY:
+
+			if (state == J_POSITIVE)
+			{
+				new_current_action_zelda.first = MDOWN;
+				new_current_action_zelda.second = E_REPEAT;
+				current_action_zelda.insert(new_current_action_zelda);
+			}
+			else
+			{
+				new_current_action_zelda.first = MUP;
+				new_current_action_zelda.second = E_REPEAT;
+				current_action_zelda.insert(new_current_action_zelda);
+			}
+			break;
+
 		}
-		break;
-
-	case SDL_CONTROLLER_AXIS_LEFTY:
-
-		if (state == J_POSITIVE)
-		{
-			new_current_action.first = MDOWN;
-			new_current_action.second = E_REPEAT;
-			current_action.insert(new_current_action);
-		}
-		else
-		{
-			new_current_action.first = MUP;
-			new_current_action.second = E_REPEAT;
-			current_action.insert(new_current_action);
-		}
-		break;
-
-
 	}
 }
 
@@ -147,25 +213,25 @@ bool j1InputManager::ChangeEventButton(int new_button)
 	bool ret = false;
 
 	//Look if the new button is actually asigned
-	std::multimap<int, INPUTEVENT>::iterator tmp = actions.find(new_button);
+	std::multimap<int, INPUTEVENT>::iterator tmp = actions_link.find(new_button);
 
-	if (tmp != actions.end())
+	if (tmp != actions_link.end())
 	{
 		LOG("This button is actually in another action");
 		return ret;
 	}
 
 	//Look for the event to erase it
-	tmp = actions.begin();
+	tmp = actions_link.begin();
 	while ((*tmp).second != event_to_change)
 		tmp++;
-	actions.erase(tmp);
+	actions_link.erase(tmp);
 
 	//This is the event with the new button
 	std::pair<int, INPUTEVENT> event_changed;
 	event_changed.first = new_button;
 	event_changed.second = event_to_change;
-	actions.insert(event_changed);
+	actions_link.insert(event_changed);
 
 	//Reset the variables
 	next_input_change = false;
@@ -177,15 +243,28 @@ bool j1InputManager::ChangeEventButton(int new_button)
 	return ret;
 }
 
-EVENTSTATE j1InputManager::EventPressed(INPUTEVENT action) const
+EVENTSTATE j1InputManager::EventPressed(INPUTEVENT action, int player) const
 {
-	std::multimap<INPUTEVENT, EVENTSTATE>::const_iterator tmp = current_action.find(action);
+	if (player == false) {
 
-	if (tmp != current_action.end())
-		return tmp->second;
+		std::multimap<INPUTEVENT, EVENTSTATE>::const_iterator tmp = current_action_link.find(action);
+
+		if (tmp != current_action_link.end())
+			return tmp->second;
+
+	}
+	else if (player == true)
+	{
+		std::multimap<INPUTEVENT, EVENTSTATE>::const_iterator tmp = current_action_zelda.find(action);
+
+		if (tmp != current_action_zelda.end())
+			return tmp->second;
+	}
 
 	return E_NOTHING;
 }
+
+
 
 
 

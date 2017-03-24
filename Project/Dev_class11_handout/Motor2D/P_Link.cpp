@@ -18,11 +18,11 @@ player_event P_Link::GetEvent()
 
 	if (doing_script == false) {
 
-		 if (App->inputM->EventPressed(INPUTEVENT::MUP) == EVENTSTATE::E_REPEAT) {
-			if (App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT) {
+		if (App->inputM->EventPressed(INPUTEVENT::MUP, 1) == EVENTSTATE::E_REPEAT) {
+			if (App->inputM->EventPressed(INPUTEVENT::MRIGHT, 1) == EVENTSTATE::E_REPEAT) {
 				movement_direction = move_up_right;
 			}
-			else if (App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT) {
+			else if (App->inputM->EventPressed(INPUTEVENT::MLEFT, 1) == EVENTSTATE::E_REPEAT) {
 				movement_direction = move_up_left;
 			}
 			else {
@@ -33,11 +33,11 @@ player_event P_Link::GetEvent()
 			actual_event = move;
 		}
 
-		else if (App->inputM->EventPressed(INPUTEVENT::MDOWN) == EVENTSTATE::E_REPEAT) {
-			if (App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT) {
+		else if (App->inputM->EventPressed(INPUTEVENT::MDOWN, 1) == EVENTSTATE::E_REPEAT) {
+			if (App->inputM->EventPressed(INPUTEVENT::MLEFT, 1) == EVENTSTATE::E_REPEAT) {
 				movement_direction = move_down_left;
 			}
-			else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT) {
+			else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT, 1) == EVENTSTATE::E_REPEAT) {
 				movement_direction = move_down_right;
 			}
 			else {
@@ -48,13 +48,13 @@ player_event P_Link::GetEvent()
 			actual_event = move;
 		}
 
-		else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT) {
+		else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT, 1) == EVENTSTATE::E_REPEAT) {
 
 			movement_direction = move_right;
 			character_direction = right;
 			actual_event = move;
 		}
-		else if (App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT) {
+		else if (App->inputM->EventPressed(INPUTEVENT::MLEFT, 1) == EVENTSTATE::E_REPEAT) {
 
 			movement_direction = move_left;
 			character_direction = left;
