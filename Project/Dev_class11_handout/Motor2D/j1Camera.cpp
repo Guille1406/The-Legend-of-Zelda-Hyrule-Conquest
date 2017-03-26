@@ -168,8 +168,8 @@ bool j1Camera::Update(float dt)
 				DebugPerformanceData[i]->EditLabelStr(&std::string(Lastsecframes));
 				break;
 			case 3:
-				static char Lastdt[15];
-				sprintf_s(Lastdt, 15, "Last dt: %.3f", App->dt);
+				static char Lastdt[25];
+				sprintf_s(Lastdt, 25, "Last dt: %.3f", App->dt);
 				DebugPerformanceData[i]->EditLabelStr(&std::string(Lastdt));
 				break;
 			case 4:

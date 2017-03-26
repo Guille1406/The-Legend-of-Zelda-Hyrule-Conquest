@@ -23,6 +23,7 @@ void Green_Enemy::Action()
 
 iPoint Green_Enemy::CalculatePath()
 {
+	Path_Enemy.push_back(array_pos);
 	iPoint cell;
 	for (int i = 0; i < App->map->V_PathEnemies.size(); i++) {
 		if (this->movable == true) {
@@ -51,7 +52,7 @@ iPoint Green_Enemy::CalculatePath()
 
 		}
 	}
-	if (this->Path_Enemy.size()>0) {
+	if (this->Path_Enemy.size()>1) {
 		Path_Enemy.clear();
 	}
 	else {
