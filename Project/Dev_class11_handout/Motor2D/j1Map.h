@@ -133,6 +133,7 @@ public:
 	iPoint WorldToMap(int x, int y) const;
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 	bool CreateEnemyMap(int& width, int& height, uchar** buffer) const;
+	bool CreateEnemyPathMap(int& width, int& height, uchar** buffer) const;
 
 private:
 
@@ -151,6 +152,7 @@ public:
 	std::vector<MapLayer*> V_Colision;
 	std::vector<MapLayer*> V_Logic;
 	std::vector<MapLayer*> V_Enemies;
+	std::vector<MapLayer*> V_PathEnemies;
 	//MapLayer* Logic;
 
 private:

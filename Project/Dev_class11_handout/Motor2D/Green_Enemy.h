@@ -8,8 +8,10 @@ public:
 	Green_Enemy(const Green_Enemy&);
 	~Green_Enemy();
 	void Action();
+	iPoint CalculatePath();
+	bool FindInPath(iPoint);
 public:
-
+	std::list<iPoint> Path_Enemy;
 };
 
 

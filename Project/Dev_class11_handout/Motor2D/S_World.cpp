@@ -27,9 +27,14 @@ bool S_World::Start()
 
 		int w_two, h_two = 0;
 		uchar* data_two = NULL;
-		if (App->map->CreateEnemyMap(w_two, h_two, &data_two))
-			App->enemy->Enable();
-
+		if (App->map->CreateEnemyMap(w_two, h_two, &data_two)) {
+			int w_three = 0;
+			int h_three = 0;
+			uchar* data_three = NULL;
+			if (App->map->CreateEnemyPathMap(w_three, h_three, &data_three)) {
+				App->enemy->Enable();
+			}
+		}
 			RELEASE_ARRAY(data);
 			//App->map->CreateLogicMap();
 	}

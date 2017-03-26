@@ -26,8 +26,9 @@ public:
 
 	SDL_Rect rect;
 	enemyType type;
-	iPoint pos;
-
+	iPoint pix_world_pos;
+	iPoint array_pos;
+	bool movable = true;
 };
 
 class j1Enemy : public j1Module {
