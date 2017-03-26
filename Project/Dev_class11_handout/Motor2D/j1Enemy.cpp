@@ -89,3 +89,53 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 
 	return ret;
 }
+
+iPoint j1Enemy::CalculatePath(Enemy* enemy)
+{
+	enemy->Path_Enemy.push_back(enemy->array_pos);
+	iPoint cell;
+	for (int i = 0; i < App->map->V_PathEnemies.size(); i++) {
+		if (enemy->movable == true) {
+			cell.create(enemy->array_pos.x, enemy->array_pos.y + 1);
+			if (App->map->V_PathEnemies[i]->Get(cell.x, cell.y) != 0 && FindInPath(cell, enemy) == false) {
+				enemy->Path_Enemy.push_back(cell);
+				return cell;
+			}
+			cell.create(enemy->array_pos.x, enemy->array_pos.y - 1);
+			if (App->map->V_PathEnemies[i]->Get(cell.x, cell.y) != 0 && FindInPath(cell, enemy) == false) {
+				enemy->Path_Enemy.push_back(cell);
+				return cell;
+			}
+
+			cell.create(enemy->array_pos.x + 1, enemy->array_pos.y);
+			if (App->map->V_PathEnemies[i]->Get(cell.x, cell.y) != 0 && FindInPath(cell, enemy) == false) {
+				enemy->Path_Enemy.push_back(cell);
+				return cell;
+			}
+
+			cell.create(enemy->array_pos.x - 1, enemy->array_pos.y);
+			if (App->map->V_PathEnemies[i]->Get(cell.x, cell.y) != 0 && FindInPath(cell, enemy) == false) {
+				enemy->Path_Enemy.push_back(cell);
+				return cell;
+			}
+
+		}
+	}
+	if (enemy->Path_Enemy.size()>1) {
+		enemy->Path_Enemy.clear();
+	}
+	else {
+		enemy->movable = false;
+	}
+	return enemy->array_pos;
+}
+
+bool j1Enemy::FindInPath(iPoint pos, Enemy* enemy) {
+
+	for (std::list<iPoint>::iterator item = enemy->Path_Enemy.begin(); item != enemy->Path_Enemy.cend(); ++item) {
+		if ((*item) == pos) {
+			return true;
+		}
+	}
+	return false;
+}

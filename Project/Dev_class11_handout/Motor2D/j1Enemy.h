@@ -29,6 +29,7 @@ public:
 	iPoint pix_world_pos;
 	iPoint array_pos;
 	bool movable = true;
+	std::list<iPoint> Path_Enemy;
 };
 
 class j1Enemy : public j1Module {
@@ -46,9 +47,9 @@ public:
 	bool Update(float);
 	bool PostUpdate();
 	bool CleanUp();
-
+	iPoint CalculatePath(Enemy*);
 	Enemy* Create_Enemy(uint, iPoint Pos);
-
+	bool FindInPath(iPoint, Enemy* enemy);
 
 public:
 	std::vector<Enemy*> V_MyEnemies;
