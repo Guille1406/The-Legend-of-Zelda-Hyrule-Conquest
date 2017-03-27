@@ -30,6 +30,7 @@ class j1InputManager;
 class j1Collision;
 class j1Object;
 class j1Enemy;
+class j1HUD;
 //using namespace std;
 
 class j1App
@@ -117,6 +118,7 @@ public:
 	j1Collision*		collision = nullptr;
 	j1Object*			object = nullptr;
 	j1Enemy*			enemy = nullptr;
+	j1HUD*				hud = nullptr;
 
 private:
 	std::list<j1Module*> modules;

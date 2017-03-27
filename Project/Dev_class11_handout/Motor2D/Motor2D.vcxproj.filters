@@ -128,37 +128,40 @@
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClCompile>
     <ClCompile Include="S_MainMenu.cpp">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
     </ClCompile>
     <ClCompile Include="j1Enemy.cpp">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClCompile>
     <ClCompile Include="S_GameStart.cpp">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
     </ClCompile>
     <ClCompile Include="S_QuitGame.cpp">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
     </ClCompile>
     <ClCompile Include="Green_Enemy.cpp">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="S_Campain.cpp">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu\Campain</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Campain</Filter>
     </ClCompile>
     <ClCompile Include="S_Options.cpp">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Options</Filter>
     </ClCompile>
     <ClCompile Include="S_OptionsAudio.cpp">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Options</Filter>
     </ClCompile>
     <ClCompile Include="S_OptionsControls.cpp">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Options</Filter>
     </ClCompile>
     <ClCompile Include="S_OptionsVideo.cpp">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Options</Filter>
     </ClCompile>
     <ClCompile Include="S_OptionsGameplay.cpp">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="j1HUD.cpp">
+      <Filter>Desenvolupament  ========\Scenes\GUI\HUD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -322,37 +325,40 @@
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
     <ClInclude Include="S_MainMenu.h">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
     </ClInclude>
     <ClInclude Include="j1Enemy.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
     <ClInclude Include="S_GameStart.h">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
     </ClInclude>
     <ClInclude Include="S_QuitGame.h">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
     </ClInclude>
     <ClInclude Include="Green_Enemy.h">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="S_Campain.h">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu\Campain</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Campain</Filter>
     </ClInclude>
     <ClInclude Include="S_Options.h">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Options</Filter>
     </ClInclude>
     <ClInclude Include="S_OptionsAudio.h">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Options</Filter>
     </ClInclude>
     <ClInclude Include="S_OptionsControls.h">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Options</Filter>
     </ClInclude>
     <ClInclude Include="S_OptionsVideo.h">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Options</Filter>
     </ClInclude>
     <ClInclude Include="S_OptionsGameplay.h">
-      <Filter>Desenvolupament  ========\Scenes\Main Menu\Options</Filter>
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="j1HUD.h">
+      <Filter>Desenvolupament  ========\Scenes\GUI\HUD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -395,17 +401,23 @@
     <Filter Include="Desenvolupament  ========\Entity">
       <UniqueIdentifier>{ffc50d08-487a-4cf4-8483-bd4795b55643}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Desenvolupament  ========\Scenes\Main Menu">
-      <UniqueIdentifier>{04365003-7c1f-4107-958e-d4f404dc3f3f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Desenvolupament  ========\Entity\Enemy">
       <UniqueIdentifier>{33648bbf-a353-47e1-8e95-171863323af9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Desenvolupament  ========\Scenes\Main Menu\Campain">
+    <Filter Include="Desenvolupament  ========\Scenes\GUI">
+      <UniqueIdentifier>{e60b1aa9-8e53-44b1-bc0f-ca7d9a5a2f74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\GUI\Main Menu">
+      <UniqueIdentifier>{04365003-7c1f-4107-958e-d4f404dc3f3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\GUI\Main Menu\Campain">
       <UniqueIdentifier>{cd3d3ce3-ae42-44eb-9adb-389a6de59247}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Desenvolupament  ========\Scenes\Main Menu\Options">
+    <Filter Include="Desenvolupament  ========\Scenes\GUI\Main Menu\Options">
       <UniqueIdentifier>{324adfd0-b4e4-4276-ba92-c536a7e1f597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\GUI\HUD">
+      <UniqueIdentifier>{4a064ef6-d258-4860-8985-2f4273a7d8de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
