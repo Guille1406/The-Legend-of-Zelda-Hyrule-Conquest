@@ -35,6 +35,16 @@ public:
 
 	void OnConsoleCVar(const CVar* cvar);
 
+private:
+	SDL_Texture* atlas;
+	std::string atlas_file_name;
+
+
+	uint half_hearts_test_purpose = 0;		//Total half hearts that the player have, how many half hearts containers have
+	uint half_hearts_life_test_purpose = 0; //Current half hearts life
+	//Example
+	// half_hearts_test_purpose = 6, means that you have 3 heart containers
+	// half_hearts_life_test_purpose = 3, means that you have 1,5 hearts out of 3 full ones
 };
 
 #endif // __j1HUD_H__

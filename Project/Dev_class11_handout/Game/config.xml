@@ -17,6 +17,10 @@
   <gui>
     <atlas file="gui/ProvisionalAtlas.png"/>
   </gui>
+  
+  <hud>
+    <atlas file="gui/HUDAtlas.png"/>
+  </hud>
     
   <window>
     <resolution width="1280" height="720" scale="1"/>
