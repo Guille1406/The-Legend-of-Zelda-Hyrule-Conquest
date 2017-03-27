@@ -133,9 +133,9 @@ bool j1App::Awake()
 		}
 	}
 
-
 	player->Disable();
 	enemy->Disable();
+	hud->Disable();
 
 	if(ret == true)
 	{

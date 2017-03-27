@@ -1,9 +1,13 @@
+#include "p2Log.h"
 #include "j1HUD.h"
+#include "j1App.h"
+#include "j1Textures.h"
 #include "j1Render.h"
+#include "j1Input.h"
 
 j1HUD::j1HUD()
 {
-
+	name.create("hud");
 }
 
 j1HUD::~j1HUD()
@@ -12,14 +16,20 @@ j1HUD::~j1HUD()
 }
 
 // Called before render is available
-bool j1HUD::Awake(pugi::xml_node&)
+bool j1HUD::Awake(pugi::xml_node& conf)
 {
-	return true;
+	LOG("Loading HUD atlas");
+	bool ret = true;
+
+	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
+
+	return ret;
 }
 
 // Called before the first frame
 bool j1HUD::Start()
 {
+	atlas = App->tex->Load(atlas_file_name.c_str());
 	return true;
 }
 
@@ -32,6 +42,19 @@ bool j1HUD::PreUpdate()
 // Called each loop iteration
 bool j1HUD::Update(float dt)
 {
+	//For some test
+	if(App->input->GetKey(SDL_SCANCODE_1) == j1KeyState::KEY_DOWN)
+		half_hearts_test_purpose += 1;
+	if (App->input->GetKey(SDL_SCANCODE_2) == j1KeyState::KEY_DOWN)
+		half_hearts_test_purpose -= 1;
+	if (App->input->GetKey(SDL_SCANCODE_3) == j1KeyState::KEY_DOWN)
+		half_hearts_test_purpose += 2;
+	if (App->input->GetKey(SDL_SCANCODE_4) == j1KeyState::KEY_DOWN)
+		half_hearts_test_purpose -= 2;
+
+
+
+	
 	return true;
 }
 
