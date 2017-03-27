@@ -33,9 +33,11 @@ bool j1Enemy::PreUpdate()
 	return true;
 }
 
-bool j1Enemy::Update(float)
+bool j1Enemy::Update(float dt)
 {
 	for (int i = 0; i < V_MyEnemies.size(); i++) {
+		V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x+4;
+		V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y + 26;
 		App->render->Blit(green_soldier_tex, V_MyEnemies[i]->pix_world_pos.x, V_MyEnemies[i]->pix_world_pos.y, &V_MyEnemies[i]->rect);
 		V_MyEnemies[i]->Action();
 	}
