@@ -73,8 +73,12 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 		temp = false;
 		doing_script = false;
 		
-		if (!can_pass_wall)
+		if (!can_pass_wall) {
+			int decrease = 1;
+			if (GetLogicHeightPlayer() == 3)
+				decrease = 2;
 			ChangeLogicHeightPlayer(GetLogicHeightPlayer() - 1);
+		}
 	}
 }
 
