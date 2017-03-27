@@ -35,13 +35,23 @@ public:
 
 	void OnConsoleCVar(const CVar* cvar);
 
+	void ToggleVisibility(bool value);
+
 private:
-	SDL_Texture* atlas;
-	std::string atlas_file_name;
+	bool visible = true;
 
+	SDL_Texture*	atlas = nullptr;
+	std::string		atlas_file_name;
 
-	uint half_hearts_test_purpose = 0;		//Total half hearts that the player have, how many half hearts containers have
-	uint half_hearts_life_test_purpose = 0; //Current half hearts life
+	SDL_Rect Life_Label;
+	uint Life_Label_x_pos = 0;
+	uint Life_Label_y_pos = 0;
+	SDL_Rect Heart_Container;
+	SDL_Rect Heart_Full;
+	SDL_Rect Heart_Half;
+
+	uint half_hearts_test_purpose = 4;		//Total half hearts that the player have, how many FULL hearts containers have
+	uint half_hearts_life_test_purpose = 8; //Current half hearts life
 	//Example
 	// half_hearts_test_purpose = 6, means that you have 3 heart containers
 	// half_hearts_life_test_purpose = 3, means that you have 1,5 hearts out of 3 full ones
