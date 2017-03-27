@@ -19,14 +19,19 @@ void Green_Enemy::Action()
 	
 	
 	iPoint actual_tile = pix_world_pos;
-	iPoint temp= App->enemy->CalculatePath(this);
-
-	iPoint next_tile;
+	if (passedtile==true) {
+		array_pos = App->enemy->CalculatePath(this);
+	}
+	/*iPoint next_tile;
 	next_tile.x = array_pos.x*App->map->data.tile_width;
-	next_tile.y = array_pos.y*App->map->data.tile_height;
+	next_tile.y = array_pos.y*App->map->data.tile_height;*/
 
-	int x = temp.x - actual_tile.x/16;
-	int y = temp.y - actual_tile.y/16;
+
+	//need to fix
+	int x = ((array_pos.x*16) - actual_tile.x))/16;
+
+	
+	int y = ((array_pos.y*16) - actual_tile.y)/16;
 
 	pix_world_pos.x += x;
 	pix_world_pos.y += y;
@@ -35,9 +40,14 @@ void Green_Enemy::Action()
 	this->pix_world_pos.y = this->array_pos.y*App->map->data.tile_height;
 
 	*/
-	if ((pix_world_pos.x / 16) == temp.x && (pix_world_pos.y / 16) == temp.y) {
-		this->array_pos = temp;
+	if (pix_world_pos.x == (array_pos.x*16) && pix_world_pos.y == (array_pos.y*16)) {
+		passedtile = true;
 	}
+	else {
+		passedtile = false;
+	}
+	
+
 }
 
 

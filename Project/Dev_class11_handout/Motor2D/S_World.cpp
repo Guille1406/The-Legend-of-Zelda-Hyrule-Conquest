@@ -11,12 +11,14 @@
 #include "j1App.h"
 #include "j1Player.h"
 #include "j1Camera.h"
+#include "j1HUD.h"
 #include "j1Enemy.h"
 
 bool S_World::Start()
 {
 	App->camera->Enable();
 	App->player->Enable();
+	App->hud->Enable();
 	if (App->map->Load("TestMap.tmx") == true)
 
 	{
