@@ -3,6 +3,8 @@
 #include "j1App.h"
 #include "j1Module.h"
 #include "SDL\include\SDL.h"
+#include "p2Point.h"
+
 
 enum objectType {
 	chest,
@@ -10,7 +12,8 @@ enum objectType {
 	change_height,
 	door,
 	locked_door,
-	cliff,
+	object_jump,
+	
 	/*
 	.
 	.
@@ -43,8 +46,9 @@ public:
 	SDL_Rect rect;
 	bool active;
 	objectType type;
-
-
+	std::string name;
+	Object* connected_object= nullptr;
+	std::vector<iPoint> collider_tiles;
 	/* 
 	Contenido del cofre
 	Puntero a escena donde lleva
@@ -72,13 +76,16 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
-	Object* CreateObject(char*, pugi::xml_node);
-	Object* CreateChest(pugi::xml_node);
-	Object* CreateButton(pugi::xml_node);
-	Object* CreateText(pugi::xml_node);
-	Object* CreateDoor(pugi::xml_node);
-	Object* CreateChangeHeight(pugi::xml_node object);
-	Object* CreateJump(pugi::xml_node object);
+	Object* FindObject(std::string name);
+	void CreateColliders(Object);
+
+	Object* CreateObject(char*, pugi::xml_node, int height);
+	Object* CreateChest(pugi::xml_node, int height);
+	Object* CreateButton(pugi::xml_node, int height);
+	Object* CreateText(pugi::xml_node, int height);
+	Object* CreateChangeHeight(pugi::xml_node object, int height);
+	Object* CreateJump(pugi::xml_node object, int height);
+	Object* CreateDoor(pugi::xml_node object, int height);
 
 public: 
 	std::vector<Object*>* V_Objects;

@@ -25,6 +25,12 @@ bool S_World::Start()
 		if (App->map->CreateWalkabilityMap(w, h, &data))
 			App->pathfinding->SetMap(w, h, data);
 
+		for (int i = 0; i < App->object->V_Objects->size(); i++) {
+			if (App->object->V_Objects[0][i]->collider_tiles.size() > 0) {
+				App->object->CreateColliders(*App->object->V_Objects[0][i]);
+			}
+		}
+
 		int w_two, h_two = 0;
 		uchar* data_two = NULL;
 		if (App->map->CreateEnemyMap(w_two, h_two, &data_two)) {

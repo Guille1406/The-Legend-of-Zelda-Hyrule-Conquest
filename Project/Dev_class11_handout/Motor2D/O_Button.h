@@ -10,19 +10,19 @@ public:
 
 	}
 	Button(const Button& obj) {
-
-		this->rect = obj.rect;
-		this->type = obj.type;
-		this->active = obj.active;
+		*this = obj;
 	}
 	~Button() {
 
 	}
 	void Action() {
-		//Example
-		App->render->DrawQuad({ 100,100,200,200 }, 255, 255, 255, 255, true, true);
+		if(connected_object != NULL)
+		this->connected_object->Action();
+		
 	}
 
+public:
+	
 };
 
 

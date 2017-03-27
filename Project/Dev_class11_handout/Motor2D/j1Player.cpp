@@ -215,15 +215,11 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 	if (collider1->type == collider_button) {
 		auto temp = (Object*)collider1->parent;
-		if (App->input->GetKey(SDL_SCANCODE_T)==KEY_DOWN) {
 			temp->Action();
-		}
 	}
 	else if(collider2->type == collider_button) {
 		auto temp = (Object*)collider2->parent;
-		if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
 			temp->Action();
-		}
 	}
 
 	else if (collider1->type == collider_change_height) {

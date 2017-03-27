@@ -8,10 +8,7 @@ public:
 
 	}
 	Jump(const Jump& obj) {
-
-		this->rect = obj.rect;
-		this->type = obj.type;
-		this->active = obj.active;
+		*this = obj;
 	}
 	~Jump() {
 

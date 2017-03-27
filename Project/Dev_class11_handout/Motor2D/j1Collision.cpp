@@ -11,6 +11,8 @@ j1Collision::j1Collision()
 	matrix[collider_zelda][collider_link] = true;
 	matrix[collider_button][collider_link] = true;
 	matrix[collider_link][collider_button] = true;
+	matrix[collider_button][collider_zelda] = true;
+	matrix[collider_zelda][collider_button] = true;
 	matrix[collider_link][collider_change_height] = true;
 	matrix[collider_change_height][collider_link] = true;
 	matrix[collider_zelda][collider_change_height] = true;
@@ -149,6 +151,11 @@ void j1Collision::DebugDraw()
 		case collider_enemy:
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
+		case collider_door:
+			Object* temp = (Object*)colliders[i]->parent;
+			if (temp->active) {
+				App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, 255);
+			}
 		}
 	}
 }

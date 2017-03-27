@@ -8,11 +8,7 @@ public:
 
 	}
 	ChangeHeight(const ChangeHeight& obj) {
-
-		this->rect = obj.rect;
-		this->type = obj.type;
-		this->active = obj.active;
-		this->height = obj.height;
+		*this = obj;
 	}
 	~ChangeHeight() {
 

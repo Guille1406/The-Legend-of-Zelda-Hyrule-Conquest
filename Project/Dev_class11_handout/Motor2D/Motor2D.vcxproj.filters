@@ -360,6 +360,9 @@
     <ClInclude Include="j1HUD.h">
       <Filter>Desenvolupament  ========\Scenes\GUI\HUD</Filter>
     </ClInclude>
+    <ClInclude Include="O_Door.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">

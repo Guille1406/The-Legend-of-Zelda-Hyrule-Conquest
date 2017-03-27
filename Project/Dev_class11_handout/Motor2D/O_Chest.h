@@ -7,16 +7,15 @@ public:
 	Chest() {
 
 	}
-	Chest(const Chest& obj) {
-		
-		this->rect = obj.rect;
-		this->type = obj.type;
-		this->active = obj.active;
+	Chest(const Chest& obj) {		
+		*this = obj;
 	}
 	~Chest() {
 	
 	}
 
+public:
+	//Objeto que contiene
 };
 
 

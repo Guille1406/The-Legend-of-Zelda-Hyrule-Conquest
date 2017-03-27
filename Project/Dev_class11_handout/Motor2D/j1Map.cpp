@@ -242,15 +242,20 @@ bool j1Map::Load(const char* file_name)
 	pugi::xml_node object_layer;
 
 	//Iterates all the object layers
+	int height = 0;
 	for (object_layer = map_file.child("map").child("objectgroup"); object_layer && ret; object_layer = object_layer.next_sibling("objectgroup"))
 	{
-		int height = 0;
 		ObjectLayer* obj = new ObjectLayer();
 		ret = LoadObjectLayer(object_layer, obj,height );
 		if (ret == true)
 			data.objects.push_back(obj);
 
 		height++;
+	}
+	ObjectLayer* obj = new ObjectLayer();
+	for (object_layer = map_file.child("map").child("objectgroup"); object_layer && ret; object_layer = object_layer.next_sibling("objectgroup"))
+	{
+		LoadConnectedObjects(object_layer);
 	}
 
 	if(ret == true)
@@ -469,24 +474,73 @@ bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer, int heig
 	else
 	{		
 	//Iterates all the objects
+		int count = App->object->V_Objects->size();
 		for (pugi::xml_node node_object = layer_data; node_object; node_object = node_object.next_sibling("object"))
 		{
 			auto iterator = node_object.child("properties").child("property");
 			while (iterator.attribute("name").as_string() != "type" && iterator){
 				iterator = iterator.next_sibling();
-}
+			}
 			auto attribute = node_object.child("properties").child("property");
 			while (strcmp(attribute.attribute("name").value(), "type"))
 				attribute = attribute.next_sibling();
 			char* type_name = (char*)attribute.attribute("value").as_string();
-			Object* temp = App->object->CreateObject(type_name, node_object);
+			Object* temp = App->object->CreateObject(type_name, node_object, height);
 
 			//Change the logic height of the new object
-			temp->logic_height = height;	
+			
 		}
+		
+		/*for (pugi::xml_node node_object = layer_data; node_object; node_object = node_object.next_sibling("object"))
+		{
+
+			auto attribute = node_object.child("properties").child("property");
+			while (strcmp(attribute.attribute("name").value(), "entity") && attribute) {
+				attribute = attribute.next_sibling();
+			}
+			auto entity = App->object->FindObject(attribute.attribute("value").as_string());
+			if (entity != nullptr) {
+				App->object->V_Objects[0][count]->connected_object = entity;
+			}
+			count++;
+		}*/
+
 	}
 
 	return ret;
+}
+
+bool j1Map::LoadConnectedObjects(pugi::xml_node & node)
+{
+	bool ret = true;
+
+	
+	pugi::xml_node layer_data = node.child("object");
+
+	if (layer_data == NULL)
+	{
+		LOG("Error parsing map xml file: Cannot find 'layer/data' tag.");
+		ret = false;
+		
+	}
+	else
+	{
+		static int count = 0;
+		for (pugi::xml_node node_object = layer_data; node_object; node_object = node_object.next_sibling("object"))
+		{
+
+			auto attribute = node_object.child("properties").child("property");
+			while (strcmp(attribute.attribute("name").value(), "entity") && attribute) {
+				attribute = attribute.next_sibling();
+			}
+			auto entity = App->object->FindObject(attribute.attribute("value").as_string());
+			if (entity != nullptr) {
+				App->object->V_Objects[0][count]->connected_object = entity;
+			}
+			count++;
+		}
+	}
+	return false;
 }
 
 // Load a group of properties from a node and fill a list with it
@@ -519,7 +573,7 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 	bool ret = false;
 
 	std::list<MapLayer*>::const_iterator item = data.layers.begin();
-	for (; item != data.layers.cend(); ++item) {
+	for (int i =0;i<data.layers.size(); item++,i++) {
 		MapLayer* layer = (*item);
 
 		//App->map->Colision = layer;
