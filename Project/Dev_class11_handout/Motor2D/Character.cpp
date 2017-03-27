@@ -125,7 +125,7 @@ void Character::GetAdjacents()
 	this->adjacent.right.j = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y + 1);
 }
 
-int Character::GetLogic(bool minus_height, iPoint pos)
+int Character::GetLogic(int minus_height, iPoint pos)
 {
 	
 	//Takes the id of the two front tiles of each player, depending on the locig height of each player

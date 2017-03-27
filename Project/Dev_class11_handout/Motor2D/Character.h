@@ -95,7 +95,7 @@ public:
 	void GetAdjacents();
 
 	//Takes the id of front tiles
-	int GetLogic(bool collisions, iPoint tilepos);
+	int GetLogic(int height, iPoint tilepos);
 
 
 	uint GetLogicHeightPlayer();
