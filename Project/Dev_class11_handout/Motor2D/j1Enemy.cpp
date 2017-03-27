@@ -94,7 +94,9 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 
 iPoint j1Enemy::CalculatePath(Enemy* enemy)
 {
-	enemy->Path_Enemy.push_back(enemy->array_pos);
+	if (FindInPath(enemy->array_pos, enemy) == false) {
+		enemy->Path_Enemy.push_back(enemy->array_pos);
+	}
 	iPoint cell;
 	for (int i = 0; i < App->map->V_PathEnemies.size(); i++) {
 		if (enemy->movable == true) {

@@ -30,6 +30,7 @@ public:
 	iPoint array_pos;
 	bool movable = true;
 	std::list<iPoint> Path_Enemy;
+	bool passedtile = true;
 };
 
 class j1Enemy : public j1Module {
