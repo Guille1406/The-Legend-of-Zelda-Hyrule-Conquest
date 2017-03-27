@@ -28,7 +28,7 @@ void Green_Enemy::Action()
 
 
 	//need to fix
-	int x = ((array_pos.x*16) - actual_tile.x))/16;
+	int x = ((array_pos.x*16) - actual_tile.x)/16;
 
 	
 	int y = ((array_pos.y*16) - actual_tile.y)/16;
