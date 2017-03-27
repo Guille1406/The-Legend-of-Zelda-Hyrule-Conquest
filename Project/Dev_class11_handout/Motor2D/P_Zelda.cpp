@@ -23,7 +23,9 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 	if (!add)
 		i = -1;
 
+	bool stop_jumping = false;
 	iPoint temp_point = tilepos;
+	iPoint next_point = tilepos;
 
 	static int before_wall_pos = 0;
 
@@ -33,22 +35,30 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 
 		while ((i * temp_pos < i*final_pos)) {
 
+			next_point.x = temp_point.x + is_horitzontal * i;
+			next_point.y = temp_point.y + !is_horitzontal * i;
+
 			if (GetLogic(count, temp_point) == TILE_COL_ID && !is_on_collision) {
 				is_on_collision = true;
 				before_wall_pos = temp_pos;
+				if (GetLogic(count, next_point) == TILE_COL_ID)
+					break;
 				if (!can_pass_wall) {
 					before_wall_pos = temp_pos + i * 64;
 				}
 				can_pass_wall = !can_pass_wall;
 				count = false;
+							
 			}
 			else if (GetLogic(count, temp_point) != TILE_COL_ID) {
 				is_on_collision = false;
 			}
+			
+			
 			temp_pos = temp_pos + (i * 4);
 			temp_point.x = (temp_pos / 16) * is_horitzontal + temp_point.x * !is_horitzontal;
 			temp_point.y = (temp_pos / 16) * !is_horitzontal + temp_point.y * is_horitzontal;
-
+			
 		}
 	}
 
@@ -62,6 +72,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 	else {
 		temp = false;
 		doing_script = false;
+		
 		if (!can_pass_wall)
 			ChangeLogicHeightPlayer(GetLogicHeightPlayer() - 1);
 	}
@@ -205,6 +216,7 @@ player_event P_Zelda::GetEvent()
 			if (is_picked) {
 				static bool can_throw = false;
 				actual_event = pick;
+				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 				pos = App->player->Link->pos;
 				if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && can_throw) {
 					actual_event = throw_;
@@ -212,6 +224,7 @@ player_event P_Zelda::GetEvent()
 					is_picked = false;
 					App->player->Link->im_lifting = false;
 					can_throw = false;
+					
 				}
 				else can_throw = true;
 			}

@@ -26,6 +26,7 @@ public:
 public:
 	bool is_picked = false;
 	bool temp = false;
+	bool collide_jump = false;
 };
 
 #endif

@@ -57,11 +57,13 @@ bool j1Player::Start()
 
 bool j1Player::PreUpdate()
 {
+	
 	return true;
 }
 
 bool j1Player::Update(float dt)
 {
+	
 	//Change the tile_pos
 	Link->tilepos.x = (Link->pos.x + 8) / 16;
 	Link->tilepos.y = (Link->pos.y + 8) / 16;
@@ -102,6 +104,7 @@ bool j1Player::Update(float dt)
 
 bool j1Player::PostUpdate()
 {
+	
 	return true;
 }
 
@@ -198,7 +201,7 @@ bool j1Player::Move_Camera()
 
 void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 {
-	Link->can_pick_up = false;
+	
 	Character* character = nullptr;
 	if (collider1->type == collider_link || collider2->type == collider_link)
 		character = Link;	
@@ -226,11 +229,12 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == collider_change_height) {
 		auto temp = (ChangeHeight*)collider1->parent;
 		character->ChangeLogicHeightPlayer(temp->height);
+		
 	}
 	else if (collider2->type == collider_change_height) {
 		auto temp = (ChangeHeight*)collider2->parent;
 		character->ChangeLogicHeightPlayer(temp->height);
-
+		
 	}
 	else if (collider1->type == collider_jump) {
 		if (character->can_move == false && character->doing_script == false) {
@@ -247,6 +251,8 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == front_link) {
 		if(collider2->type == collider_zelda && !Link->im_lifting)
 		Link->can_pick_up = true;
+		
+			
 		
 	}
 	else if (collider2->type == front_link ) {

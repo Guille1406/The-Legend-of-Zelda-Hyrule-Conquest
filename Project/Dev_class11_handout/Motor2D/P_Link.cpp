@@ -114,7 +114,7 @@ player_event P_Link::GetEvent()
 			actual_event = idle;
 		}
 
-		if (can_pick_up) {
+		if (can_pick_up && !App->player->Zelda->doing_script) {
 			if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
 				App->player->Zelda->is_picked = true;
 				App->player->Zelda->ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
@@ -138,6 +138,7 @@ player_event P_Link::GetEvent()
 			doing_script = true;
 		}
 		
+		App->player->Link->can_pick_up = false;
 		return actual_event;
 	}
 }
