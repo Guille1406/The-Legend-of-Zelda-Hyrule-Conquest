@@ -13,7 +13,10 @@
 enum INPUTEVENT
 {
 	NO_EVENT = -1,
-	JUMP = 0,
+	ATTACK = 0,
+	PICK,
+	COVER,
+	JUMP,
 	MUP,
 	MDOWN,
 	MLEFT,

@@ -39,23 +39,35 @@
   </map>
   
   <inputManager>
-    <!--JUMP-->
+    
+    
+ 
+    <!--ATTACK-->
     <action  button="0" event="0" />
 
+    <!--PICK-->
+    <action  button="1" event="1" />
+    
+    <!--COVER-->
+    <action  button="3" event="2" /> 
+    
+    <!--TUMBLE-->
+    <action  button="10" event="3" />
+    
     <!--Move UP-->
-    <action  button="11" event="1" />
+    <action  button="11" event="4" />
 
     <!--Move DOWN-->
-    <action  button="12" event="2" />
+    <action  button="12" event="5" />
 
     <!--Move LEFT-->
-    <action  button="13" event="3" />
+    <action  button="13" event="6" />
 
     <!--Move RIGHT-->
-    <action  button="14" event="4" />
+    <action  button="14" event="7" />
 
     <!--PAUSE-->
-    <action  button="6"  event="5" />
+    <action  button="6"  event="8" />
 
 
   </inputManager>

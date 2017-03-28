@@ -31,6 +31,7 @@ bool j1InputManager::Awake(pugi::xml_node& conf)
 		new_action.second = (INPUTEVENT)tmp.attribute("event").as_int();
 
 		actions_link.insert(new_action);
+		actions_zelda.insert(new_action);
 	}
 
 
@@ -83,7 +84,7 @@ void j1InputManager::InputDetected(int button, EVENTSTATE state, int player)
 		LOG("PLAYER = %i", player);
 	if (next_input_change == false)
 	{
-		if (player == 0) {
+		if (player == 1) {
 
 
 			std::multimap<int, INPUTEVENT>::iterator tmp = actions_link.find(button);
@@ -97,7 +98,7 @@ void j1InputManager::InputDetected(int button, EVENTSTATE state, int player)
 			}
 		}
 
-		else if (player == 1) {
+		else if (player == 0) {
 			std::multimap<int, INPUTEVENT>::iterator tmp = actions_zelda.find(button);
 			//If more than one action per button we must iterate until the end
 			if (tmp != actions_zelda.end())
@@ -124,7 +125,7 @@ void j1InputManager::JoystickDetected(int axis, JSTATE state, int player)
 
 	std::pair<INPUTEVENT, EVENTSTATE>	new_current_action_link;
 	std::pair<INPUTEVENT, EVENTSTATE>	new_current_action_zelda;
-	if (player == 0) {
+	if (player == 1) {
 		switch (axis)
 		{
 		case SDL_CONTROLLER_AXIS_LEFTX:
@@ -163,7 +164,7 @@ void j1InputManager::JoystickDetected(int axis, JSTATE state, int player)
 
 
 	}
-	else if (player == 1) {
+	else if (player == 0) {
 
 		switch (axis)
 		{
@@ -245,7 +246,7 @@ bool j1InputManager::ChangeEventButton(int new_button)
 
 EVENTSTATE j1InputManager::EventPressed(INPUTEVENT action, int player) const
 {
-	if (player == false) {
+	if (player == 1) {
 
 		std::multimap<INPUTEVENT, EVENTSTATE>::const_iterator tmp = current_action_link.find(action);
 
@@ -253,7 +254,7 @@ EVENTSTATE j1InputManager::EventPressed(INPUTEVENT action, int player) const
 			return tmp->second;
 
 	}
-	else if (player == true)
+	else if (player == 0)
 	{
 		std::multimap<INPUTEVENT, EVENTSTATE>::const_iterator tmp = current_action_zelda.find(action);
 
