@@ -257,11 +257,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			Link->can_pick_up = true;
 		
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_enemy) {
-		App->hud->half_hearts_test_purpose--;
-	}
-	else if (collider2->type == COLLIDER_TYPE::collider_enemy) {
-		App->hud->half_hearts_test_purpose--;
+
 		/*Enemy* temp = (Enemy*)collider2->parent;
 		for (std::) {
 
@@ -271,7 +267,4 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		LOG("Link life: %i", live);
 	}
 
-
-
-}
 
