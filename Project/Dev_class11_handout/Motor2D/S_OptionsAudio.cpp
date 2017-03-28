@@ -13,9 +13,6 @@ S_OptionsAudio::~S_OptionsAudio()
 
 bool S_OptionsAudio::Start()
 {
-	SDL_Rect idle_button_rect = { 410,165,231,73 };
-	SDL_Rect hover_button_rect = { -1,109,231,73 };
-	SDL_Rect pressed_button_rect = { 641,165,231,73 };
 	AudioLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string("Audio menu"), false);
 	AudioLabel->SetFont(App->font->Sherwood28);
 	((Gui*)AudioLabel)->SetListener(this);

@@ -13,9 +13,6 @@ S_OptionsGameplay::~S_OptionsGameplay()
 
 bool S_OptionsGameplay::Start()
 {
-	SDL_Rect idle_button_rect = { 410,165,231,73 };
-	SDL_Rect hover_button_rect = { -1,109,231,73 };
-	SDL_Rect pressed_button_rect = { 641,165,231,73 };
 	GameplayLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string("Gameplay menu"), false);
 	GameplayLabel->SetFont(App->font->Sherwood28);
 	((Gui*)GameplayLabel)->SetListener(this);

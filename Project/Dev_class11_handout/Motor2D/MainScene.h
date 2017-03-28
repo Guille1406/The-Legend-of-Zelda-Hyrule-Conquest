@@ -1,4 +1,4 @@
-#ifndef _MAINSCENE_
+ #ifndef _MAINSCENE_
 #define _MAINSCENE_
 
 #include "j1App.h"
@@ -78,9 +78,9 @@ public:
 	.
 	*/
 
-	SDL_Rect idle_button_rect = { 0,317,347,105 };
-	SDL_Rect hover_button_rect = { 0,212,347,105 };
-	SDL_Rect pressed_button_rect = { 0,422,347,105 };
+	SDL_Rect idle_button_rect = { 0,320,348,106 };
+	SDL_Rect hover_button_rect = { 0,212,348,106 };
+	SDL_Rect pressed_button_rect = { 0,428,348,106 };
 
 };
 

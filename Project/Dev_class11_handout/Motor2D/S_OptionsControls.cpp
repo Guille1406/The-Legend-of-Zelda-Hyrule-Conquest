@@ -13,9 +13,6 @@ S_OptionsControls::~S_OptionsControls()
 
 bool S_OptionsControls::Start()
 {
-	SDL_Rect idle_button_rect = { 410,165,231,73 };
-	SDL_Rect hover_button_rect = { -1,109,231,73 };
-	SDL_Rect pressed_button_rect = { 641,165,231,73 };
 	ControlsLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string("Controls menu"), false);
 	ControlsLabel->SetFont(App->font->Sherwood28);
 	((Gui*)ControlsLabel)->SetListener(this);

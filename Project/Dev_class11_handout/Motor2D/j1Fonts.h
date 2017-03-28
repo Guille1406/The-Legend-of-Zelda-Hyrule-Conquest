@@ -41,6 +41,7 @@ public:
 	_TTF_Font*			Sherwood12 = nullptr;		//Menus
 	_TTF_Font*			Sherwood20 = nullptr;		//Menus
 	_TTF_Font*			Sherwood28 = nullptr;		//Menus
+	_TTF_Font*			Sherwood36 = nullptr;		//Menus
 	_TTF_Font*			ReturnofGanon12 = nullptr;	//Text
 	_TTF_Font*			ReturnofGanon20 = nullptr;	//Text
 	_TTF_Font*			ReturnofGanon28 = nullptr;	//Text
