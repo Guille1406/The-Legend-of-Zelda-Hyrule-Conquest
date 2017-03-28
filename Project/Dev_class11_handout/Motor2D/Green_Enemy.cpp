@@ -16,31 +16,27 @@ Green_Enemy::~Green_Enemy()
 
 void Green_Enemy::Action()
 {
-	
-	
+	static iPoint temp_point;
 	iPoint actual_tile = pix_world_pos;
 	if (passedtile==true) {
+		temp_point = array_pos;
 		array_pos = App->enemy->CalculatePath(this);
+		if (array_pos == temp_point) {
+			Path_Enemy.clear();
+		}
+
 	}
-	/*iPoint next_tile;
-	next_tile.x = array_pos.x*App->map->data.tile_width;
-	next_tile.y = array_pos.y*App->map->data.tile_height;*/
-
-
-	//need to fix
-	int x = ((array_pos.x*16) - actual_tile.x)/16;
+	
+	int x = ((array_pos.x) - temp_point.x);
 
 	
-	int y = ((array_pos.y*16) - actual_tile.y)/16;
+	int y = ((array_pos.y) - temp_point.y);
+
 
 	pix_world_pos.x += x;
 	pix_world_pos.y += y;
-	/*
-	this->pix_world_pos.x= this->array_pos.x*App->map->data.tile_width;
-	this->pix_world_pos.y = this->array_pos.y*App->map->data.tile_height;
 
-	*/
-	if (pix_world_pos.x == (array_pos.x*16) && pix_world_pos.y == (array_pos.y*16)) {
+	if ((actual_tile.x/16) == array_pos.x && (actual_tile.y / 16) == array_pos.y) {
 		passedtile = true;
 	}
 	else {
