@@ -37,8 +37,7 @@ public:
 
 	void ToggleVisibility(bool value);
 
-	uint hearts_containers_test_purpose = 4;	//Total half hearts that the player have, how many FULL hearts containers have
-	uint half_hearts_test_purpose = 8;
+	
 private:
 	bool visible = true;
 
@@ -60,7 +59,8 @@ private:
 	//--------------------------------------------------------------------------------------//
 	//--------------------------------This must be in player--------------------------------//
 	//--------------------------------------------------------------------------------------//
-			//Current half hearts life
+	uint hearts_containers_test_purpose = 4;	//Total half hearts that the player have, how many FULL hearts containers have
+	uint half_hearts_test_purpose = 8; //Current half hearts life
 	//Example
 	// half_hearts_test_purpose = 6, means that you have 3 heart containers
 	// half_hearts_life_test_purpose = 3, means that you have 1,5 hearts out of 3 full ones
