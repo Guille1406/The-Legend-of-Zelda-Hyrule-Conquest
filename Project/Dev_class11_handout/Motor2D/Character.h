@@ -137,6 +137,7 @@ public:
 	//Diferent colliders
 	Collider*	collision;
 	Collider*	front_collider;
+	Collider* attack_collider;
 
 	bool		doing_script = false;
 	int			last_animation = 0;

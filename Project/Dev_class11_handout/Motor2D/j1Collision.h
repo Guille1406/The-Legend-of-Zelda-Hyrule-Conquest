@@ -14,6 +14,7 @@ enum COLLIDER_TYPE
 	front_link,
 	collider_zelda,
 	front_zelda,
+	collider_arrow,
 	collider_chest,
 	collider_button,
 	collider_change_height,

@@ -88,6 +88,7 @@ bool j1Player::Update(float dt)
 		Zelda->GetEvent();
 		Link->ExecuteEvent(dt);
 		Zelda->ExecuteEvent(dt);
+		
 
 	}
 
@@ -99,7 +100,7 @@ bool j1Player::Update(float dt)
 	Zelda->collision->SetPos(Zelda->pos.x, Zelda->pos.y, Zelda->GetLogicHeightPlayer());
 	Link->UpdateColliderFront();
 	Zelda->UpdateColliderFront();
-
+	Zelda->UpdateArrows();
 	return true;
 }
 

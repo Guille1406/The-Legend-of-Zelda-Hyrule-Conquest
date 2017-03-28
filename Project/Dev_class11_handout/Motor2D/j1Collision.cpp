@@ -135,6 +135,9 @@ void j1Collision::DebugDraw()
 		case front_zelda: // pink
 			App->render->DrawQuad(colliders[i]->rect, 245, 25, 219, alpha);
 			break;
+		case collider_arrow:
+			App->render->DrawQuad(colliders[i]->rect, 245, 25, 219, 255);
+			break;
 
 		case collider_chest: 
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
@@ -156,6 +159,8 @@ void j1Collision::DebugDraw()
 			if (temp->active) {
 				App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, 255);
 			}
+			break;
+			
 		}
 	}
 }

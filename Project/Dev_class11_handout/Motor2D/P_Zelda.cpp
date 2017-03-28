@@ -5,12 +5,80 @@
 #include "j1Player.h"
 #include "Character.h"
 #include "j1InputManager.h"
+
 #define JUMP_DISTANCE 112
 
-void P_Zelda::Attack()
+
+
+void P_Zelda::Attack(float dt)
 {
 
+		switch (character_direction) {
+		case up:
+			CreateArrow({ pos.x + 4,pos.y - 16,8,16 });
+			break;
+		case down:
+			CreateArrow({ pos.x + 4,pos.y + 16,8,16 });
+			break;
+		case left:
+			CreateArrow({ pos.x - 16,pos.y + 4,16,8 });
+			break;
+		case right:
+			CreateArrow({ pos.x + 16,pos.y + 4,16,8 });
+			break;
+		}
+
+		actual_event = idle;
+		doing_script = false;
+		
+	
 }
+
+void P_Zelda::CreateArrow(SDL_Rect rect)
+{
+	Arrow* temp_arrow = new Arrow();	
+
+	temp_arrow->collider = App->collision->AddCollider(rect, collider_arrow, App->player->Zelda, App->player);
+	temp_arrow->collider->rect = rect;
+	temp_arrow->pos.x = rect.x;
+	temp_arrow->pos.y = rect.y;
+	temp_arrow->direction = character_direction;
+	temp_arrow->timer = SDL_GetTicks();
+	Vec_Arrow->push_back(temp_arrow);
+
+}
+
+void P_Zelda::UpdateArrows()
+{
+	int arrow_speed = 10;
+	for (int i = 0; i < Vec_Arrow->size(); i++) {
+		switch (Vec_Arrow[0][i]->direction) {
+		case up:
+			Vec_Arrow[0][i]->pos.y -= arrow_speed;
+			break;
+		case down:
+			Vec_Arrow[0][i]->pos.y  += arrow_speed;
+			break;
+		case left:
+			Vec_Arrow[0][i]->pos.x -= arrow_speed;
+			break;
+		case right:
+			Vec_Arrow[0][i]->pos.x += arrow_speed;
+			break;
+			
+		}
+		Vec_Arrow[0][i]->collider->SetPos(Vec_Arrow[0][i]->pos.x, Vec_Arrow[0][i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
+
+		if (SDL_GetTicks() - Vec_Arrow[0][i]->timer > 1000) {
+			Vec_Arrow[0][i]->collider->to_delete = true;
+			Vec_Arrow->erase(Vec_Arrow->begin() + i);
+			i--;
+		}
+	}
+
+}
+
+
 
 void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 {
@@ -130,7 +198,12 @@ player_event P_Zelda::GetEvent()
 	}
 	if (doing_script == false) {
 
-		if (doing_script == false) {
+		static direction aim_direction = down;
+		//FIRST THINGS FIRST
+		if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
+			aim_direction = character_direction;
+		}
+		
 
 			if (App->inputM->EventPressed(INPUTEVENT::MUP, 0) == EVENTSTATE::E_REPEAT) {
 				if (App->inputM->EventPressed(INPUTEVENT::MRIGHT, 0) == EVENTSTATE::E_REPEAT) {
@@ -277,8 +350,16 @@ player_event P_Zelda::GetEvent()
 				actual_event = roll;
 				doing_script = true;
 			}
+			 if (App->input->GetKey(SDL_SCANCODE_T) == KEY_REPEAT) {
+				 character_direction = aim_direction;
+			 }
+			 if (App->input->GetKey(SDL_SCANCODE_T) == KEY_UP ) {
+				 actual_event = attack;
+				 doing_script = true;
+				 character_direction = aim_direction;
+			 }
 
 			return actual_event;
 		}
-	}
+	
 }
