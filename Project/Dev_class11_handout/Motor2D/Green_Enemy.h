@@ -11,7 +11,7 @@ public:
 
 	
 public:
-	
+	iPoint temp_point;
 };
 
 
