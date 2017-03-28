@@ -5,9 +5,9 @@
 #include "j1Player.h"
 #include "j1InputManager.h"
 
-void P_Link::Attack()
+void P_Link::Attack(float dt)
 {
-
+	int i = 0;
 }
 
 
@@ -144,6 +144,11 @@ player_event P_Link::GetEvent()
 				can_jump = false;
 		}
 		
+		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+			actual_event = attack;
+			doing_script = true;
+			LOG("I'm Attacking :DDDD");
+		}
 		
 		if (App->inputM->EventPressed(INPUTEVENT::JUMP, 1) == EVENTSTATE::E_DOWN) {
 			actual_event = roll;

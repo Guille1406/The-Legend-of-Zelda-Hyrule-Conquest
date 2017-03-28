@@ -75,7 +75,7 @@ public:
 	~Character() {};
 	
 	
-	void Attack() {};
+	virtual void Attack(float dt);
 	void Move(float dt);
 	void Jump(float dt);
 	void Roll(float dt);

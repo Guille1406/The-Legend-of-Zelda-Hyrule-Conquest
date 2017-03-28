@@ -19,7 +19,7 @@ public:
 		delete sprites_vector;
 	}
 
-	void Attack();
+	void Attack(float dt);
 	
 
 	player_event GetEvent();

@@ -6,6 +6,10 @@
 #include "Character.h"
 
 
+void Character::Attack(float dt)
+{
+}
+
 void Character::Move(float dt)
 {
 	uint x, y;

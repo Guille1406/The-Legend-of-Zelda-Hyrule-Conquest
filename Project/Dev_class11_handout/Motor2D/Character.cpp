@@ -87,7 +87,7 @@ void Character::ExecuteEvent(float dt)
 		break;
 
 	case attack:
-
+		Attack(dt);
 		break;
 
 	case jump:
