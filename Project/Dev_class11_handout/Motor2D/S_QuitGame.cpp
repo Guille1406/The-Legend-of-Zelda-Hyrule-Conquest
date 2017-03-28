@@ -15,9 +15,6 @@ S_QuitGame::~S_QuitGame()
 bool S_QuitGame::Start()
 {
 	App->player->Disable();
-	SDL_Rect idle_button_rect = { 410,165,231,73 };
-	SDL_Rect hover_button_rect = { -1,109,231,73 };
-	SDL_Rect pressed_button_rect = { 641,165,231,73 };
 	Label = App->gui->CreateLabel(iPoint(500, 200), &std::string("Are you sure you want to quit?"), false);
 	Label->SetFont(App->font->Sherwood28);
 	((Gui*)Label)->SetListener(this);
