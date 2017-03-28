@@ -105,6 +105,30 @@ iPoint j1Enemy::CalculatePath(Enemy* enemy)
 				enemy->Path_Enemy.push_back(cell);
 				return cell;
 			}
+
+			cell.create(enemy->array_pos.x+1, enemy->array_pos.y + 1);
+			if (App->map->V_PathEnemies[i]->Get(cell.x, cell.y) != 0 && FindInPath(cell, enemy) == false) {
+				enemy->Path_Enemy.push_back(cell);
+				return cell;
+			}
+
+			cell.create(enemy->array_pos.x - 1, enemy->array_pos.y - 1);
+			if (App->map->V_PathEnemies[i]->Get(cell.x, cell.y) != 0 && FindInPath(cell, enemy) == false) {
+				enemy->Path_Enemy.push_back(cell);
+				return cell;
+			}
+
+			cell.create(enemy->array_pos.x - 1, enemy->array_pos.y + 1);
+			if (App->map->V_PathEnemies[i]->Get(cell.x, cell.y) != 0 && FindInPath(cell, enemy) == false) {
+				enemy->Path_Enemy.push_back(cell);
+				return cell;
+			}
+			cell.create(enemy->array_pos.x + 1, enemy->array_pos.y - 1);
+			if (App->map->V_PathEnemies[i]->Get(cell.x, cell.y) != 0 && FindInPath(cell, enemy) == false) {
+				enemy->Path_Enemy.push_back(cell);
+				return cell;
+			}
+
 			cell.create(enemy->array_pos.x, enemy->array_pos.y - 1);
 			if (App->map->V_PathEnemies[i]->Get(cell.x, cell.y) != 0 && FindInPath(cell, enemy) == false) {
 				enemy->Path_Enemy.push_back(cell);
