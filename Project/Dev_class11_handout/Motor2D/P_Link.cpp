@@ -74,7 +74,7 @@ player_event P_Link::GetEvent()
 		
 
 
-		else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 				movement_direction = move_up_right;
 			}

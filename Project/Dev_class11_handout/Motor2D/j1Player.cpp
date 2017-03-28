@@ -7,6 +7,7 @@
 #include"j1Collision.h"
 #include "O_ChangeHeight.h"
 #include"j1Enemy.h"
+#include "j1HUD.h"
 
 bool j1Player::Awake(pugi::xml_node& config)
 {
@@ -257,9 +258,10 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy) {
-		
+		App->hud->half_hearts_test_purpose--;
 	}
 	else if (collider2->type == COLLIDER_TYPE::collider_enemy) {
+		App->hud->half_hearts_test_purpose--;
 		/*Enemy* temp = (Enemy*)collider2->parent;
 		for (std::) {
 
