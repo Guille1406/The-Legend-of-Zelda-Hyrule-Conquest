@@ -15,7 +15,7 @@
   </font>
 
   <gui>
-    <atlas file="gui/ProvisionalAtlas.png"/>
+    <atlas file="gui/MenusAtlas.png"/>
   </gui>
   
   <hud>

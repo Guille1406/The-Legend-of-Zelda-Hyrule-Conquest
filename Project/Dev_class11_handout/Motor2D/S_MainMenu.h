@@ -16,10 +16,11 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	GuiButton* campain = nullptr;
-	GuiButton* options = nullptr;
-	GuiButton* credits = nullptr;
-	GuiButton* quit = nullptr;
+	SDL_Rect title =		{ 0,0,493,211 };
+	GuiButton* campain =	nullptr;
+	GuiButton* options =	nullptr;
+	GuiButton* credits =	nullptr;
+	GuiButton* quit =		nullptr;
 };
 
 #endif // #pragma once

@@ -1,5 +1,6 @@
 #include "S_MainMenu.h"
 #include "j1Player.h"
+#include "j1Window.h"
 #include "j1Camera.h"
 #include "Gui.h"
 #include "GuiButton.h"
@@ -16,19 +17,17 @@ bool S_MainMenu::Start()
 {
 	App->player->Disable();
 	App->camera->Disable();
-	SDL_Rect idle_button_rect = { 410,165,231,73 };
-	SDL_Rect hover_button_rect = { -1,109,231,73 };
-	SDL_Rect pressed_button_rect = { 641,165,231,73 };
-	campain = App->gui->CreateButton(iPoint(1000, 370), &std::string("Campain"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
+	campain = App->gui->CreateButton(iPoint(X_pos, 270), &std::string("Campain"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	campain->SetFont(App->font->Sherwood20);
 	((Gui*)campain)->SetListener(this);
-	options = App->gui->CreateButton(iPoint(1000, 450), &std::string("Options"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	options = App->gui->CreateButton(iPoint(X_pos, 380), &std::string("Options"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	options->SetFont(App->font->Sherwood20);
 	((Gui*)options)->SetListener(this);
-	credits = App->gui->CreateButton(iPoint(1000, 530), &std::string("Credits"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	credits = App->gui->CreateButton(iPoint(X_pos, 490), &std::string("Credits"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	credits->SetFont(App->font->Sherwood20);
 	((Gui*)credits)->SetListener(this);
-	quit = App->gui->CreateButton(iPoint(1000, 610), &std::string("Quit"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	quit = App->gui->CreateButton(iPoint(X_pos, 600), &std::string("Quit"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	quit->SetFont(App->font->Sherwood20);
 	((Gui*)quit)->SetListener(this);
 	return true;

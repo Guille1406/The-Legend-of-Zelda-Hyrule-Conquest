@@ -77,6 +77,11 @@ public:
 	.
 	.
 	*/
+
+	SDL_Rect idle_button_rect = { 0,317,347,105 };
+	SDL_Rect hover_button_rect = { 0,212,347,105 };
+	SDL_Rect pressed_button_rect = { 0,422,347,105 };
+
 };
 
 #endif // !_MAINSCENE_
