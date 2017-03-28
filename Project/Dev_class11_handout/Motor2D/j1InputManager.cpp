@@ -12,6 +12,7 @@
 j1InputManager::j1InputManager() : j1Module()
 {
 	name = "inputManager";
+	
 }
 
 // Destructor

@@ -174,8 +174,26 @@ player_event P_Zelda::GetEvent()
 				character_direction = left;
 				actual_event = move;
 			}
+			if (is_picked) {
+				static bool can_throw = false;
+				actual_event = pick;
+				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
+				pos = App->player->Link->pos;
+				if (((App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN) && can_throw) || ((App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) && can_throw)) {
+					actual_event = throw_;
+					doing_script = true;
+					is_picked = false;
+					App->player->Link->im_lifting = false;
+					can_throw = false;
 
+				}
+				else can_throw = true;
+			}
 
+			if (App->inputM->EventPressed(INPUTEVENT::JUMP, 0) == EVENTSTATE::E_DOWN  && !is_picked) {
+				actual_event = roll;
+				doing_script = true;
+			}
 
 
 
@@ -244,7 +262,7 @@ player_event P_Zelda::GetEvent()
 				actual_event = pick;
 				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 				pos = App->player->Link->pos;
-				if  (((App->inputM->EventPressed(INPUTEVENT::PICK,1) == EVENTSTATE::E_DOWN) && can_throw)|| ((App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) && can_throw)) {
+				if  (((App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) && can_throw)|| ((App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) && can_throw)) {
 					actual_event = throw_;
 					doing_script = true;
 					is_picked = false;
@@ -255,7 +273,7 @@ player_event P_Zelda::GetEvent()
 				else can_throw = true;
 			}
 
-			 if (App->inputM->EventPressed(INPUTEVENT::JUMP, 0) == EVENTSTATE::E_DOWN) {
+			 if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && !is_picked) {
 				actual_event = roll;
 				doing_script = true;
 			}

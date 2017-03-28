@@ -45,7 +45,7 @@ bool j1Player::Start()
 	
 
 	Link->LoadAnimation("sprites/Link_Sprites_trim.xml");
-	Zelda->LoadAnimation("sprites/Zelda_Sprites.xml");
+	Zelda->LoadAnimation("sprites/Zelda_Temp_Sprites.xml");
 
 	Link->actual_animation = Link->sprites_vector[0][0];
 	Zelda->actual_animation = Zelda->sprites_vector[0][0];
