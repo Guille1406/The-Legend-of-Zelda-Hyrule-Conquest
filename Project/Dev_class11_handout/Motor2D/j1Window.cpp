@@ -41,6 +41,8 @@ bool j1Window::Awake(pugi::xml_node& config)
 		width = config.child("resolution").attribute("width").as_int(640);
 		height = config.child("resolution").attribute("height").as_int(480);
 		scale = config.child("resolution").attribute("scale").as_int(1);
+		width_half = width * 0.5f;
+		height_half = height * 0.5f;
 		scale = 1.5f;
 		if(fullscreen == true)
 		{
@@ -111,4 +113,24 @@ void j1Window::GetWindowSize(uint& width, uint& height) const
 float j1Window::GetScale() const
 {
 	return scale;
+}
+
+uint j1Window::GetWindowW() const
+{
+	return width;
+}
+
+uint j1Window::GetWindowWHalf() const
+{
+	return width_half;
+}
+
+uint j1Window::GetWindowH() const
+{
+	return height;
+}
+
+uint j1Window::GetWindowHHalf() const
+{
+	return height_half;
 }

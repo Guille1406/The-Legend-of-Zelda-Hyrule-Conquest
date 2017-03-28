@@ -27,6 +27,12 @@ public:
 	// Retrive window size
 	void GetWindowSize(uint& width, uint& height) const;
 
+	uint GetWindowW() const;
+	uint GetWindowWHalf() const;
+
+	uint GetWindowH() const;
+	uint GetWindowHHalf() const;
+
 	// Retrieve window scale
 	float GetScale() const;
 
@@ -39,8 +45,10 @@ public:
 	float		scale;
 private:
 	p2SString	title;
-	uint		width;
-	uint		height;
+	uint		width = 0;
+	uint		width_half = 0;
+	uint		height = 0;
+	uint		height_half = 0;
 	
 };
 

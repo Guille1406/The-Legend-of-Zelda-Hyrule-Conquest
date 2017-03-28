@@ -27,16 +27,17 @@ bool j1HUD::Awake(pugi::xml_node& conf)
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 
 	Life_Label =		{ 672,0,244,36 };
-	uint w = 0;
-	uint h = 0;
-	App->win->GetWindowSize(w, h);
-	Life_Label_x_pos = w * 0.5f - Life_Label.w * 0.5f;
+	Life_Label_x_pos = App->win->GetWindowWHalf() - Life_Label.w * 0.5f;
 	Life_Label_y_pos = 11;
-	half_window_w = w * 0.5f;
 	Heart_Container =	{ 672,52,45,42 };
 	Heart_Full =		{ 717,52,45,42 };
 	Heart_Half =		{ 717,52,24,42 };
-	//hearts are 7 px under lifelabel and spacing each other 3 pixels
+	Link_circle =       { 135,325,136,136 };
+	Zelda_circle =		{ 0,325,136,136 };
+	Sword =				{ 916,0,60,60 };
+	Sword_centre =		{ (int)(Link_circle.w * 0.5f - Sword.w * 0.5f), (int)(Link_circle.h * 0.5f - Sword.h * 0.5f) };
+	Bow =				{ 976,0,60,60 };
+	Bow_centre =		{ (int)(Link_circle.w * 0.5f - Bow.w * 0.5f), (int)(Link_circle.h * 0.5f - Bow.h * 0.5f) };
 	return ret;
 }
 
@@ -60,7 +61,7 @@ bool j1HUD::Update(float dt)
 	App->render->Blit(atlas, -App->render->camera.x + Life_Label_x_pos, -App->render->camera.y + Life_Label_y_pos, &Life_Label, 1.0f, 0, INT_MAX, INT_MAX, false);
 	
 	//Calculate initial position
-	int hearts_pos_x = half_window_w - Heart_Container.w * hearts_containers_test_purpose * 0.5f - space_between_hearts * (hearts_containers_test_purpose * 0.5f - 0.5f);
+	int hearts_pos_x = App->win->GetWindowWHalf() - Heart_Container.w * hearts_containers_test_purpose * 0.5f - space_between_hearts * (hearts_containers_test_purpose * 0.5f - 0.5f);
 
 	//Blit heart containers
 	int heart_container_pos_x = hearts_pos_x;
@@ -82,6 +83,18 @@ bool j1HUD::Update(float dt)
 	float is_float = modf(full_hearts, &staff);
 	if(is_float != 0.0f)
 		App->render->Blit(atlas, -App->render->camera.x + life_pos_x, -App->render->camera.y + heart_container_pos_y, &Heart_Half, 1.0f, 0, INT_MAX, INT_MAX, false);
+
+	//Blit Link circle
+	App->render->Blit(atlas, -App->render->camera.x + item_circles_output, -App->render->camera.y + item_circles_output, &Link_circle, 1.0f, 0, INT_MAX, INT_MAX, false);
+
+	//Blit Zelda circle
+	App->render->Blit(atlas, -App->render->camera.x + App->win->GetWindowW() - Zelda_circle.w - item_circles_output, -App->render->camera.y + item_circles_output, &Zelda_circle, 1.0f, 0, INT_MAX, INT_MAX, false);
+
+	//Blit Sword
+	App->render->Blit(atlas, -App->render->camera.x + item_circles_output + Sword_centre.x, -App->render->camera.y + item_circles_output + Sword_centre.y, &Sword, 1.0f, 0, INT_MAX, INT_MAX, false);
+
+	//Blit Bow
+	App->render->Blit(atlas, -App->render->camera.x + App->win->GetWindowW() - Zelda_circle.w - item_circles_output + Bow_centre.x, -App->render->camera.y + item_circles_output + Bow_centre.x, &Bow, 1.0f, 0, INT_MAX, INT_MAX, false);
 
 	//For some test
 	/*
