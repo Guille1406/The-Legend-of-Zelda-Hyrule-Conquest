@@ -20,7 +20,7 @@ public:
 	}
 
 	void Attack(float dt);
-	
+	j1Timer attack_timer;
 
 	player_event GetEvent();
 

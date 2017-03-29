@@ -4,10 +4,43 @@
 #include "j1FileSystem.h"
 #include "j1Player.h"
 #include "j1InputManager.h"
-
+#include"j1Render.h"
+#include"Color.h"
 void P_Link::Attack(float dt)
 {
-	int i = 0;
+	if (attack_timer.Read()<500) {
+
+		actual_event = attack;
+		this->doing_script = true;
+		switch (this->character_direction) {
+		case direction::right:
+		{
+			SDL_Rect Attack_range = { front_collider->rect.x+10,front_collider->rect.y+10,30,30 };
+
+
+
+			attack_collider->rect = Attack_range;
+			//App->render->DrawQuad(Attack_range, Blue(0), Blue(1), Blue(2), 255, true, true);
+			break;
+		}
+		case direction::left:
+
+			break;
+		case direction::up:
+
+			break;
+		case direction::down:
+
+			break;
+
+
+
+		}
+	}
+	else {
+		attack_timer.Start();
+		doing_script = false;
+	}
 }
 
 
@@ -150,10 +183,12 @@ player_event P_Link::GetEvent()
 			}
 
 			if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+				attack_timer.Start();
 				actual_event = attack;
 				doing_script = true;
 				LOG("I'm Attacking :DDDD");
 			}
+			
 			if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN  && !im_lifting) {
 				actual_event = roll;
 				doing_script = true;
