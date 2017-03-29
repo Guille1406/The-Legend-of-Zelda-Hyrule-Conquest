@@ -12,6 +12,11 @@ class Character;
 
 struct Arrow : public Entity{
 	
+
+	Arrow() {
+		can_move = true;
+		is_attached = false;
+	}
 	iPoint pos;
 	int timer;
 	int direction;
@@ -21,6 +26,7 @@ struct Arrow : public Entity{
 	iPoint offset;
 	int max_distance;
 	bool temp = false;
+	int before_wall_pos = 0;
 
 	bool Check_Wall();
 	bool Check_Wall_Loop( int &pos, bool add, bool is_horitzontal);
@@ -48,7 +54,7 @@ public:
 	bool is_picked = false;
 	bool temp = false;
 	bool collide_jump = false;
-	bool can_move = true;
+	bool can_move =true;
 	std::vector<Arrow*>* Vec_Arrow;
 };
 

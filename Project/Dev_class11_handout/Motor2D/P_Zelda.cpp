@@ -15,16 +15,16 @@ void P_Zelda::Attack(float dt)
 	
 		switch (character_direction) {
 		case up:
-			CreateArrow({ pos.x + 4,pos.y - 16,8,16 });
+			CreateArrow({ pos.x + 4,pos.y - 8,8,16 });
 			break;
 		case down:
-			CreateArrow({ pos.x + 4,pos.y + 16,8,16 });
+			CreateArrow({ pos.x + 4,pos.y + 8,8,16 });
 			break;
 		case left:
-			CreateArrow({ pos.x - 16,pos.y + 4,16,8 });
+			CreateArrow({ pos.x - 8,pos.y + 4,16,8 });
 			break;
 		case right:
-			CreateArrow({ pos.x + 16,pos.y + 4,16,8 });
+			CreateArrow({ pos.x + 8,pos.y + 4,16,8 });
 			break;
 		}
 
@@ -45,7 +45,7 @@ void P_Zelda::CreateArrow(SDL_Rect rect)
 	temp_arrow->max_distance = 300;
 	temp_arrow->direction = character_direction;
 	temp_arrow->timer = SDL_GetTicks();
-	temp_arrow->can_move = true;
+	//temp_arrow->can_move = false;
 	Vec_Arrow->push_back(temp_arrow);
 
 }
@@ -56,30 +56,17 @@ void P_Zelda::UpdateArrows()
 	for (int i = 0; i < Vec_Arrow->size(); i++) {
 		Vec_Arrow[0][i]->Check_Wall();
 		if (Vec_Arrow[0][i]->can_move) {
-			Vec_Arrow[0][i]->Check_Wall();
-			/*switch (Vec_Arrow[0][i]->direction) {
-			case up:
-				Vec_Arrow[0][i]->pos.y -= arrow_speed;
-				break;
-			case down:
-				Vec_Arrow[0][i]->pos.y += arrow_speed;
-				break;
-			case left:
-				Vec_Arrow[0][i]->pos.x -= arrow_speed;
-				break;
-			case right:
-				Vec_Arrow[0][i]->pos.x += arrow_speed;
-				break;
-				
-			}*/
+		Vec_Arrow[0][i]->Check_Wall();
+		Vec_Arrow[0][i]->collider->SetPos(Vec_Arrow[0][i]->pos.x, Vec_Arrow[0][i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
 		}
 		else {
 			if (Vec_Arrow[0][i]->is_attached) {
 				Vec_Arrow[0][i]->pos.x = Vec_Arrow[0][i]->attached_enemy->pix_world_pos.x + Vec_Arrow[0][i]->offset.x;
 				Vec_Arrow[0][i]->pos.y = Vec_Arrow[0][i]->attached_enemy->pix_world_pos.y + Vec_Arrow[0][i]->offset.y;
+				Vec_Arrow[0][i]->collider->SetPos(Vec_Arrow[0][i]->pos.x, Vec_Arrow[0][i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
 			}
 		}
-		Vec_Arrow[0][i]->collider->SetPos(Vec_Arrow[0][i]->pos.x, Vec_Arrow[0][i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
+	
 
 		if (SDL_GetTicks() - Vec_Arrow[0][i]->timer > 1000) {
 			Vec_Arrow[0][i]->collider->to_delete = true;
@@ -418,7 +405,7 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 	bool is_second_wall = false;
 	bool is_first_wall = true;
 	bool stop = false;
-	static int before_wall_pos = 0;
+	
 
 	int i = 1;
 	if (!add)
@@ -429,7 +416,7 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 	//static int final_pos = temp_pos + i * 200;
 	if (!temp) {
 
-		max_distance = temp_pos + i*300;
+		max_distance = temp_pos + i*1000;
 		before_wall_pos = max_distance;
 		while (i * temp_pos < i * max_distance) {
 			
@@ -460,13 +447,14 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 				if (GetLogicArrow(height, temp_point) != TILE_COL_ID) {
 					is_on_collision = false;
 					is_second_wall = true;
+					
 					//is_first_wall = false;
 				}
 			}
 			temp_pos += i*1;
 		}
 		if (second_height > first_height) {
-			before_wall_pos = temp_pos + i * 300;
+			before_wall_pos = temp_pos + i * 1000;
 		}
 	}
 	
