@@ -69,7 +69,7 @@ bool j1GameStartMenuBackground::Update(float dt)
 		}
 	}
 	else
-		if (!((S_MainMenu*)App->scene->GetActiveScene())->visibility)
+		if (!((S_MainMenu*)App->scene->GetActiveScene())->visibility && !firstloop)
 		{
 			((S_MainMenu*)App->scene->GetActiveScene())->campaign->SetVisible(true);
 			((S_MainMenu*)App->scene->GetActiveScene())->campaign->SetOpacity(startmenuopacity);
@@ -80,6 +80,7 @@ bool j1GameStartMenuBackground::Update(float dt)
 			((S_MainMenu*)App->scene->GetActiveScene())->quit->SetVisible(true);
 			((S_MainMenu*)App->scene->GetActiveScene())->quit->SetOpacity(startmenuopacity);
 			((S_MainMenu*)App->scene->GetActiveScene())->visibility = true;
+			firstloop = true;
 			MainMenuOpacity_timer.Start();
 		}
 		else
@@ -112,7 +113,7 @@ bool j1GameStartMenuBackground::Update(float dt)
 		if (Background_Characters_timer.Read() > backgroundcharactersspeed)
 			for (std::list<BackgroundCharacter*>::iterator item = BackgroundCharacterList.begin(); item != BackgroundCharacterList.cend(); ++item)
 				(*item)->position.x -= 1;
-		if (BackgroundCharacterList.front()->position.x < -650)
+		if (BackgroundCharacterList.front()->position.x < -820)
 		{
 			BackgroundCharacter* toback = BackgroundCharacterList.front();
 			BackgroundCharacterList.pop_front();

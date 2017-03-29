@@ -36,15 +36,6 @@ bool S_MainMenu::Awake()
 	((Gui*)quit)->SetListener(this);
 	quit->SetVisible(false);
 
-	//For testing
-	if (visibility)
-	{
-		campaign->SetVisible(true);
-		options->SetVisible(true);
-		credits->SetVisible(true);
-		quit->SetVisible(true);
-	}
-
 	return true;
 };
 
@@ -52,6 +43,7 @@ bool S_MainMenu::Start()
 {
 	App->player->Disable();
 	App->camera->Disable();
+
 	if (visibility)
 	{
 		campaign->SetVisible(true);
@@ -59,6 +51,7 @@ bool S_MainMenu::Start()
 		credits->SetVisible(true);
 		quit->SetVisible(true);
 	}
+
 	return true;
 }
 
