@@ -53,6 +53,7 @@ void P_Zelda::UpdateArrows()
 {
 	int arrow_speed = 10;
 	for (int i = 0; i < Vec_Arrow->size(); i++) {
+		Vec_Arrow[0][i]->Check_Wall();
 		if (Vec_Arrow[0][i]->can_move) {
 			switch (Vec_Arrow[0][i]->direction) {
 			case up:
@@ -376,4 +377,80 @@ player_event P_Zelda::GetEvent()
 			return actual_event;
 		}
 	
+}
+
+bool Arrow::Check_Wall()
+{
+
+	int temp_pos = 0;
+	switch (direction) {
+	case up: 
+		Check_Wall_Loop(pos.y,false, false);
+		break;
+	case down:
+		Check_Wall_Loop( pos.y, true, false);
+		break;
+	case left:
+		Check_Wall_Loop(pos.x, false, true);
+		break;
+	case right: 
+		Check_Wall_Loop(pos.x, true,true);
+		break;
+	}
+	
+
+
+	return false;
+}
+
+bool Arrow::Check_Wall_Loop( int & pos, bool add, bool is_horitzontal)
+{
+	/*
+	int temp_pos = pos;
+	static int final_pos 
+	int i = i;
+	if (!add)
+		i = -1;
+	while (i * temp_pos < i * )
+	return false;*/
+}
+
+
+
+int Arrow::GetLogicArrow(int minus_height, iPoint pos)
+{
+	std::vector<MapLayer*> vector = App->map->V_Colision;
+
+	iPoint tile_pos;
+	tile_pos.x = pos.x / 16;
+	tile_pos.y = pos.y / 16;
+
+
+	int i, j;
+	int height = App->player->Zelda->GetLogicHeightPlayer();
+	switch (direction)
+	{
+	case up:
+		i = vector[height - minus_height]->Get(tile_pos.x, tile_pos.y - 1);
+		j = vector[height - minus_height]->Get(tile_pos.x + 1, tile_pos.y - 1);
+		break;
+	case down:
+		i = vector[height - minus_height]->Get(tile_pos.x, tile_pos.y + 2);
+		j = vector[height - minus_height]->Get(tile_pos.x + 1, tile_pos.y + 2);
+		break;
+	case left:
+		i = vector[height - minus_height]->Get(tile_pos.x - 1, tile_pos.y);
+		j = vector[height - minus_height]->Get(tile_pos.x - 1, tile_pos.y + 1);
+		break;
+	case right:
+		i = vector[height - minus_height]->Get(tile_pos.x + 2, tile_pos.y);
+		j = vector[height - minus_height]->Get(tile_pos.x + 2, tile_pos.y + 1);
+		break;
+	}
+
+	if (i != 0)return i;
+	if (j != 0)return j;
+
+
+	return 0;
 }

@@ -19,6 +19,10 @@ struct Arrow : public Entity{
 	bool is_attached;
 	Enemy* attached_enemy;
 	iPoint offset;
+
+	bool Check_Wall();
+	bool Check_Wall_Loop( int &pos, bool add, bool is_horitzontal);
+	int GetLogicArrow(int minus_height, iPoint pos);
 };
 
 class P_Zelda:public Character {
