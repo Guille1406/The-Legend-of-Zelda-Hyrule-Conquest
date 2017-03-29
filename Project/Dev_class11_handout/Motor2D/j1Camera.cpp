@@ -73,8 +73,20 @@ bool j1Camera::PreUpdate()
 	Centre.x = (int)((((float)(App->player->Link->pos.x + App->player->Zelda->pos.x)) * 0.5f));
 	Centre.y = (int)((((float)(App->player->Link->pos.y + App->player->Zelda->pos.y)) * 0.5f) );
 	//Camera position
+	
+
 	App->render->camera.x = -Centre.x * Scale + i_Half_w;
 	App->render->camera.y = -Centre.y * Scale + i_Half_h;
+
+	if (App->render->camera.x >= 0) App->render->camera.x = 0;
+	if (-App->render->camera.x >= App->map->data.width * App->map->data.tile_width - App->render->camera.w / App->win->GetScale()) {
+		App->render->camera.x = -1 * (App->map->data.width * App->map->data.tile_width - App->render->camera.w / App->win->GetScale());
+	}
+
+	if (App->render->camera.y >= 0) App->render->camera.y = 0;
+	if (-App->render->camera.y >= App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale()) {
+		App->render->camera.y = -1 * (App->map->data.height * App->map->data.tile_height - App->render->camera.h / App->win->GetScale());
+	}
 	//Ellipss centre
 	iPoint CentrePos = { 0,0 };
 	CentrePos = App->render->WorldToScreen(Centre.x, Centre.y);
