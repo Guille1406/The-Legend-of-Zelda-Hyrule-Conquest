@@ -74,8 +74,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	AddModule(collision);
 	// gui after all to print above all
-	AddModule(gui);
 	AddModule(hud);
+	AddModule(gui);
 	AddModule(fadetoblack);
 
 	//Console

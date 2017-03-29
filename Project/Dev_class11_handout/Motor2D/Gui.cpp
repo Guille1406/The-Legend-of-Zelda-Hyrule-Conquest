@@ -68,10 +68,10 @@ AddGuiTo Gui::GetPurpose() const
 
 bool Gui::InFOV()
 {
-	bool ret = (((Gui_Collider.x >= App->render->camera.x) && (Gui_Collider.x < (App->render->camera.x + App->render->camera.w)) &&
-			   (Gui_Collider.y >= App->render->camera.y) && (Gui_Collider.y < (App->render->camera.y + App->render->camera.h))) ||
-		       (((Gui_Collider.x + Gui_Collider.w) >= App->render->camera.x) && ((Gui_Collider.x + Gui_Collider.w) < (App->render->camera.x + App->render->camera.w)) &&
-		       ((Gui_Collider.y + Gui_Collider.h) >= App->render->camera.y) && ((Gui_Collider.y + Gui_Collider.h) < (App->render->camera.y + App->render->camera.h))) &&
+	bool ret = (((Gui_Collider.x >= -App->render->camera.x) && (Gui_Collider.x < (-App->render->camera.x + App->render->camera.w)) &&
+			   (Gui_Collider.y >= -App->render->camera.y) && (Gui_Collider.y < (-App->render->camera.y + App->render->camera.h))) ||
+		       (((Gui_Collider.x + Gui_Collider.w) >= -App->render->camera.x) && ((Gui_Collider.x + Gui_Collider.w) < (-App->render->camera.x + App->render->camera.w)) &&
+		       ((Gui_Collider.y + Gui_Collider.h) >= -App->render->camera.y) && ((Gui_Collider.y + Gui_Collider.h) < (-App->render->camera.y + App->render->camera.h))) &&
 			   (visible == true));
 	return ret;
 }

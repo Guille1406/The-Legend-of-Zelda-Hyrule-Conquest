@@ -31,7 +31,7 @@ bool j1Camera::Awake(pugi::xml_node&)
 
 	f_border_between_ellipses = BigEllipse.InsideEllipseValue({ 0,LitleEllipse.semiminoraxis});
 
-	DebugPerformanceData_Rect = { App->render->camera.x,App->render->camera.y,260,135 };
+	DebugPerformanceData_Rect = { 0,0,260,135 };
 
 	return true;
 }
@@ -50,7 +50,7 @@ bool j1Camera::Start()
 	i_Half_h = (int)(h * 0.5f);
 
 	//Fill up debug performance data vector
-	for (int i = 0, pos = 10; i < 8; i++, pos += 15) //7, number of debug strings
+	for (int i = 0, pos = App->win->GetWindowH() - DebugPerformanceData_Rect.h + 6; i < 8; i++, pos += 15) //7, number of debug strings
 		DebugPerformanceData.push_back(App->gui->CreateLabel({ 10,pos }, &std::string(""), false, AddGuiTo::none));
 	DebugPerformanceData[6]->EditLabelStr(&std::string("Press F9 to toggle this window visibility."));
 	DebugPerformanceData[6]->SetLabelColor(&Yellow);
@@ -82,7 +82,7 @@ bool j1Camera::PreUpdate()
 
 	//Debug Performance Data
 	DebugPerformanceData_Rect.x = -App->render->camera.x;
-	DebugPerformanceData_Rect.y = -App->render->camera.y;
+	DebugPerformanceData_Rect.y = -App->render->camera.y + App->win->GetWindowH() - DebugPerformanceData_Rect.h;
 	return true;
 }
 

@@ -108,7 +108,7 @@ bool j1Gui::Update(float dt)
 		App->render->DrawQuad(App->console->ConsoleInputTextBackground, Gray(0), Gray(1), Gray(2), CONSOLE_ALPHA, true, true, false);
 		for (std::list<Gui*>::iterator item = ConsoleElements.begin(); item != ConsoleElements.cend(); ++item)
 		{
-			//if (((*item)->type == GuiType::gui_label) && (InFOV(*item)))
+			if (((*item)->type == GuiType::gui_label) && (InFOV(*item)))
 			if ((*item)->type == GuiType::gui_label)
 			{
 				SDL_Rect ViewportRect = { 0,0,App->console->ConsoleBackground.w,App->console->ConsoleBackground.h };
