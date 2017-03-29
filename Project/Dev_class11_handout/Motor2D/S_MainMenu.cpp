@@ -6,6 +6,7 @@
 #include "j1Camera.h"
 #include "Gui.h"
 #include "GuiButton.h"
+#include "j1GameStartMenuBack.h"
 
 S_MainMenu::S_MainMenu()
 {
@@ -37,8 +38,6 @@ bool S_MainMenu::Start()
 	((Gui*)quit)->SetListener(this);
 	quit->SetVisible(false);
 
-	Background_Initial_pos = App->win->GetWindowH() - background.h;
-
 	//For testing
 	if (visibility)
 	{
@@ -47,36 +46,11 @@ bool S_MainMenu::Start()
 		credits->SetVisible(true);
 		quit->SetVisible(true);
 	}
-
-	Background_timer.Start();
-
 	return true;
 }
 
 bool S_MainMenu::Update()
 {
-	//Blit background
-	int Background_Y_Pos = -App->render->camera.y + Background_Initial_pos + Background_pos;
-	App->render->Blit(App->gui->GetAtlas(), -App->render->camera.x, Background_Y_Pos, &background, 1.0f, 0, INT_MAX, INT_MAX, false);
-	//Blit background
-	if (Background_Y_Pos < -1)
-	{
-		if (Background_timer.Read() > Background_speed)
-		{
-			Background_pos += 2;
-			Background_timer.Start();
-		}
-	}
-	else
-		if (!visibility)
-		{
-			campain->SetVisible(true);
-			options->SetVisible(true);
-			credits->SetVisible(true);
-			quit->SetVisible(true);
-			visibility = true;
-		}
-
 	//Blit title
 	if (visibility)
 	{
@@ -97,6 +71,7 @@ void S_MainMenu::OnGui(Gui* ui, GuiEvent event)
 	if ((ui == (Gui*)campain) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->scene->ChangeScene(Scene_ID::world);
+		App->startmenuback->Disable();
 	}
 
 	if ((ui == (Gui*)options) && (event == GuiEvent::mouse_lclk_down))

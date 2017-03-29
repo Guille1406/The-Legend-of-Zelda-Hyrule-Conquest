@@ -163,6 +163,9 @@
     <ClCompile Include="j1HUD.cpp">
       <Filter>Desenvolupament  ========\Scenes\GUI\HUD</Filter>
     </ClCompile>
+    <ClCompile Include="j1GameStartMenuBack.cpp">
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Background</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -363,6 +366,9 @@
     <ClInclude Include="O_Door.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="j1GameStartMenuBack.h">
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Background</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -421,6 +427,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Scenes\GUI\HUD">
       <UniqueIdentifier>{4a064ef6-d258-4860-8985-2f4273a7d8de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\GUI\Main Menu\Background">
+      <UniqueIdentifier>{8636c663-ab15-4589-80f3-1266778fab95}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
