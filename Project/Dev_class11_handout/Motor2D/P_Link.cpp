@@ -17,10 +17,11 @@ void P_Link::Attack(float dt)
 		{
 			SDL_Rect Attack_range = { front_collider->rect.x+10,front_collider->rect.y+10,30,30 };
 
+			//attack_collider = App->collision->AddCollider(Attack_range, COLLIDER_TYPE::collider_link_sword,);
 
 
 			attack_collider->rect = Attack_range;
-			//App->render->DrawQuad(Attack_range, Blue(0), Blue(1), Blue(2), 255, true, true);
+			App->render->DrawQuad(Attack_range, Blue(0), Blue(1), Blue(2), 255, true, true);
 			break;
 		}
 		case direction::left:

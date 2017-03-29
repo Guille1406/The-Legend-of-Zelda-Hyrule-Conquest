@@ -8,6 +8,15 @@
 #include <vector>
 class Character;
 
+struct Sword : public Entity {
+
+	iPoint pos;
+	bool can_move;
+	bool is_attached;
+	Collider* Sword_Attack_Collider;
+	Enemy* attached_enemy;
+};
+
 class P_Link:public Character  {
 public:
 	
@@ -21,7 +30,7 @@ public:
 
 	void Attack(float dt);
 	j1Timer attack_timer;
-
+	Sword* Link_sword;
 	player_event GetEvent();
 
 public:
