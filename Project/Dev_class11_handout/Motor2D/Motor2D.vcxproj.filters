@@ -377,6 +377,18 @@
     <ClInclude Include="O_Giant_Chest.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="O_Sign.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Heart.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Jar.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Movable_BLock.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">

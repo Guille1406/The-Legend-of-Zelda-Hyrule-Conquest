@@ -142,6 +142,8 @@
     <ClInclude Include="j1HUD.h" />
     <ClInclude Include="O_Boss_Key.h" />
     <ClInclude Include="O_Giant_Chest.h" />
+    <ClInclude Include="O_Heart.h" />
+    <ClInclude Include="O_Jar.h" />
     <ClInclude Include="O_Key.h" />
     <ClInclude Include="O_Button.h" />
     <ClInclude Include="O_ChangeHeight.h" />
@@ -164,6 +166,8 @@
     <ClInclude Include="j1Player.h" />
     <ClInclude Include="O_Door.h" />
     <ClInclude Include="O_Jump.h" />
+    <ClInclude Include="O_Movable_BLock.h" />
+    <ClInclude Include="O_Sign.h" />
     <ClInclude Include="S_Campain.h" />
     <ClInclude Include="S_GameStart.h" />
     <ClInclude Include="S_MainMenu.h" />
