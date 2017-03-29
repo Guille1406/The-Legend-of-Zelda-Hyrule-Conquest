@@ -363,6 +363,15 @@
     <ClInclude Include="O_Door.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="O_Switch.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Key.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Boss_Key.h">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">

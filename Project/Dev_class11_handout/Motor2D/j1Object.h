@@ -8,12 +8,26 @@
 
 enum objectType {
 	chest,
+	giant_chest,
 	button,
 	change_height,
 	door,
 	locked_door,
 	object_jump,
-	
+	object_switch, 
+	switch_block_blue,
+	switch_block_red,
+	green_rupee,
+	red_rupee,
+	blue_rupee,
+	movable_block,
+	static_block,
+	sign,
+	jar,
+	key,
+	bost_key,
+	heart,
+
 	/*
 	.
 	.
@@ -49,16 +63,7 @@ public:
 	std::string name;
 	Object* connected_object= nullptr;
 	std::vector<iPoint> collider_tiles;
-	/* 
-	Contenido del cofre
-	Puntero a escena donde lleva
-	Texto
-	.
-	.
-	.
 	
-	*/
-
 };
 class j1Object : public j1Module {
 
