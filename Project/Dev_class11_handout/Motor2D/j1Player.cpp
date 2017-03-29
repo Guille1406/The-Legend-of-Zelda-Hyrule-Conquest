@@ -26,6 +26,9 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Link->character_direction = direction::down;
 	Zelda->character_direction = direction::down;
 
+
+	
+
 	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
 	Link->front_collider = App->collision->AddCollider({ Link->tilepos.x*8,Link->tilepos.y*8 + 32,32,16 }, front_link, Link, this);
 	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,32,32 }, collider_zelda, Zelda, this);
@@ -278,14 +281,21 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pix_world_pos.y;
 
 	}
+	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy_shield) {
+		Link->Collision_Sword_EnemyShield();
+	}
+	else if (collider1->type == COLLIDER_TYPE::collider_enemy_shield && collider2->type == COLLIDER_TYPE::collider_link_sword) {
+		Link->Collision_Sword_EnemyShield();
+	}
 
-		/*Enemy* temp = (Enemy*)collider2->parent;
-		for (std::) {
+	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_enemy) {
+		Link->Collision_Sword_EnemyShield();
+	}
+	else if (collider1->type == COLLIDER_TYPE::collider_enemy && collider2->type == COLLIDER_TYPE::collider_link) {
+		Link->Collision_Sword_EnemyShield();
+	}
 
-		}
-		App->enemy->V_MyEnemies.erase();*/
-		live--;
-		LOG("Link life: %i", live);
+
 	}
 
 

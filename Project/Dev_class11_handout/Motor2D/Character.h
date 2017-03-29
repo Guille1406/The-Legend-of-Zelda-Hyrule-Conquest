@@ -37,6 +37,7 @@ enum player_event {
 	attack,	
 	fall,
 	throw_,
+	backwards,
 	/*
 	.
 	.

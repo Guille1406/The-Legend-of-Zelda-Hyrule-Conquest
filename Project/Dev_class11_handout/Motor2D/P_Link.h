@@ -35,6 +35,10 @@ public:
 	player_event GetEvent();
 	void link_sword_collider_update();
 	void Orientation_collider_link_sword();
+	void Collision_Sword_EnemyShield();
+
+
+
 public:
 	
 	bool can_pick_up = false;

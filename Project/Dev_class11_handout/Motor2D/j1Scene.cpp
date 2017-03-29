@@ -16,6 +16,10 @@
 #include "j1Gui.h"
 #include "j1Scene.h"
 #include "j1Gui.h"
+#include"j1Collision.h"
+#include"j1Enemy.h"
+
+
 
 #include "S_World.h"
 #include "S_Dungeon.h"
@@ -88,6 +92,14 @@ bool j1Scene::Start()
 			active_scene->Start();
 		}
 	}
+
+
+
+
+	
+
+
+
 	return true;
 }
 

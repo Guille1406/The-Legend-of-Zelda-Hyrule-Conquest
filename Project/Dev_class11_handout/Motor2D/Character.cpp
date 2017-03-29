@@ -3,7 +3,7 @@
 #include "j1App.h"
 #include "j1Collision.h"
 #include "j1FileSystem.h"
-
+#include"j1Player.h"
 static const uint JUMP_DISTANCE = 112;
 
 void Character::LoadAnimation(const char* path)
@@ -100,7 +100,9 @@ void Character::ExecuteEvent(float dt)
 	case throw_:
 		Throw(dt);
 		break;
-
+	case backwards:
+		App->player->Link->Collision_Sword_EnemyShield();
+		break;
 	}
 
 	//Dependiendo del evento actual i de la direccion cambia la animacion:

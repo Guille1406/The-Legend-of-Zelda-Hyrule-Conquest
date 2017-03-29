@@ -53,6 +53,7 @@ public:
 	bool FindInPath(iPoint, Enemy* enemy);
 
 public:
+	Collider* shield_test;
 	std::vector<Enemy*> V_MyEnemies;
 	SDL_Texture* green_soldier_tex;
 };

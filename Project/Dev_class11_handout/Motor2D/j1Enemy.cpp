@@ -25,6 +25,11 @@ bool j1Enemy::Start()
 		}
 	}
 
+
+	SDL_Rect rect_test = { 140,150,50,50 };
+	shield_test = App->collision->AddCollider(rect_test, COLLIDER_TYPE::collider_enemy_shield, App->enemy->V_MyEnemies[0], this);
+
+
 	return true;
 }
 
