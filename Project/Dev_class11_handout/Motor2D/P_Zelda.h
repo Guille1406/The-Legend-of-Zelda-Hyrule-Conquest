@@ -6,14 +6,19 @@
 #include "SDL\include\SDL.h"
 #include "Character.h"
 #include "j1Collision.h"
+#include "j1Enemy.h"
 
 class Character;
 
-struct Arrow {
-	Collider* collider;
+struct Arrow : public Entity{
+	
 	iPoint pos;
 	int timer;
 	int direction;
+	bool can_move;
+	bool is_attached;
+	Enemy* attached_enemy;
+	iPoint offset;
 };
 
 class P_Zelda:public Character {
