@@ -11,6 +11,7 @@ class S_OptionsVideo : public MainScene {
 public:
 	S_OptionsVideo();
 	~S_OptionsVideo();
+	bool Awake();
 	bool Start();
 	bool Update();
 	bool Clean();

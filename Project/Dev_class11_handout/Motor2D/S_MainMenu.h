@@ -13,6 +13,7 @@ class S_MainMenu : public MainScene
 public:
 	S_MainMenu();
 	~S_MainMenu();
+	bool Awake();
 	bool Start();
 	bool Update();
 	bool Clean();
@@ -24,7 +25,7 @@ private:
 	SDL_Rect LinkRect =		 { 1058,0,819,720 };
 	SDL_Rect ZeldaRect =	 { 493,0,565,720 };
 	SDL_Rect MessengerRect = { 1078,720,599,694 };
-	GuiButton* campain =	nullptr;
+	GuiButton* campaign =	nullptr;
 	GuiButton* options =	nullptr;
 	GuiButton* credits =	nullptr;
 	GuiButton* quit =		nullptr;

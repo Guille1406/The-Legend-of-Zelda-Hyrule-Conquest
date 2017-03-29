@@ -142,9 +142,6 @@
     <ClCompile Include="Green_Enemy.cpp">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="S_Campain.cpp">
-      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Campain</Filter>
-    </ClCompile>
     <ClCompile Include="S_Options.cpp">
       <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Options</Filter>
     </ClCompile>
@@ -164,6 +161,9 @@
       <Filter>Desenvolupament  ========\Scenes\GUI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="j1GameStartMenuBack.cpp" />
+    <ClCompile Include="S_Campaign.cpp">
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Campain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -340,9 +340,6 @@
     <ClInclude Include="Green_Enemy.h">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="S_Campain.h">
-      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Campain</Filter>
-    </ClInclude>
     <ClInclude Include="S_Options.h">
       <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Options</Filter>
     </ClInclude>
@@ -388,6 +385,9 @@
     </ClInclude>
     <ClInclude Include="O_Movable_BLock.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Campaign.h">
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Campain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

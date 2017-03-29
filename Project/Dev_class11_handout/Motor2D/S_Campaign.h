@@ -1,22 +1,23 @@
-#ifndef _S_CAMPAIN_
-#define _S_CAMPAIN_
+#ifndef _S_CAMPAIGN_
+#define _S_CAMPAIGN_
 
 #include "j1App.h"
 #include "j1Scene.h"
 #include "MainScene.h"
 #include "Gui.h"
 
-class S_Campain : public MainScene {
+class S_Campaign : public MainScene {
 
 public:
-	S_Campain();
-	~S_Campain();
+	S_Campaign();
+	~S_Campaign();
+	bool Awake();
 	bool Start();
 	bool Update();
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	GuiButton* campain = nullptr;
+	GuiButton* campaign = nullptr;
 	GuiButton* options = nullptr;
 	GuiButton* credits = nullptr;
 	GuiButton* quit = nullptr;

@@ -171,12 +171,15 @@ const Gui* j1Gui::FindMouseHover()
 
 	for (std::list<Gui*>::const_reverse_iterator item = list_to_iterate->rbegin(); item != list_to_iterate->crend(); ++item)
 	{
-		if ((list_to_iterate == &ConsoleElements) && ((*item)->type == GuiType::gui_label))
-			continue;
-		else
-			if (CanInteract(*item) == true)
-				if ((*item)->PointContained(mouse.x, mouse.y))
-					return *item;
+		if ((*item)->InFOV())
+		{
+			if ((list_to_iterate == &ConsoleElements) && ((*item)->type == GuiType::gui_label))
+				continue;
+			else
+				if (CanInteract(*item) == true)
+					if ((*item)->PointContained(mouse.x, mouse.y))
+						return *item;
+		}
 	}
 
 	return nullptr;

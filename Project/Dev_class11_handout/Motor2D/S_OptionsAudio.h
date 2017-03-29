@@ -11,6 +11,7 @@ class S_OptionsAudio : public MainScene {
 public:
 	S_OptionsAudio();
 	~S_OptionsAudio();
+	bool Awake();
 	bool Start();
 	bool Update();
 	bool Clean();

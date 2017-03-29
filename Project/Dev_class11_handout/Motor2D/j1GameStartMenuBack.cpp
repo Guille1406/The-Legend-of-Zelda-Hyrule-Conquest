@@ -67,7 +67,7 @@ bool j1GameStartMenuBackground::Update(float dt)
 	else
 		if (!((S_MainMenu*)App->scene->GetActiveScene())->visibility)
 		{
-			((S_MainMenu*)App->scene->GetActiveScene())->campain->SetVisible(true);
+			((S_MainMenu*)App->scene->GetActiveScene())->campaign->SetVisible(true);
 			((S_MainMenu*)App->scene->GetActiveScene())->options->SetVisible(true);
 			((S_MainMenu*)App->scene->GetActiveScene())->credits->SetVisible(true);
 			((S_MainMenu*)App->scene->GetActiveScene())->quit->SetVisible(true);

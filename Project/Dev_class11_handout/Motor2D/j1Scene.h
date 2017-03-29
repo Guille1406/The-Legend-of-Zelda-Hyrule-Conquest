@@ -1,6 +1,8 @@
 #ifndef __j1SCENE_H__
 #define __j1SCENE_H__
 
+#include <list>
+
 #include "j1Module.h"
 #include "j1Gui.h"
 #include "SDL\include\SDL.h"
@@ -53,7 +55,7 @@ private:
 	MainScene* active_scene = nullptr;
 	MainScene* prev_scene = nullptr;
 	MainScene* loaded_scene = nullptr;
-	p2List<MainScene*>* scene_list = nullptr;
+	std::list<MainScene*> scene_list;
 	
 
 	

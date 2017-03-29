@@ -11,6 +11,7 @@ class S_OptionsControls : public MainScene {
 public:
 	S_OptionsControls();
 	~S_OptionsControls();
+	bool Awake();
 	bool Start();
 	bool Update();
 	bool Clean();

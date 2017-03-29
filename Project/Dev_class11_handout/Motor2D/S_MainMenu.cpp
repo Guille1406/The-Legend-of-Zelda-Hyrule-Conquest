@@ -16,15 +16,13 @@ S_MainMenu::~S_MainMenu()
 {
 }
 
-bool S_MainMenu::Start()
+bool S_MainMenu::Awake()
 {
-	App->player->Disable();
-	App->camera->Disable();
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
-	campain = App->gui->CreateButton(iPoint(X_pos, 270), &std::string("Campain"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
-	campain->SetFont(App->font->Sherwood28);
-	((Gui*)campain)->SetListener(this);
-	campain->SetVisible(false);
+	campaign = App->gui->CreateButton(iPoint(X_pos, 270), &std::string("Campaign"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	campaign->SetFont(App->font->Sherwood28);
+	((Gui*)campaign)->SetListener(this);
+	campaign->SetVisible(false);
 	options = App->gui->CreateButton(iPoint(X_pos, 380), &std::string("Options"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	options->SetFont(App->font->Sherwood28);
 	((Gui*)options)->SetListener(this);
@@ -41,7 +39,22 @@ bool S_MainMenu::Start()
 	//For testing
 	if (visibility)
 	{
-		campain->SetVisible(true);
+		campaign->SetVisible(true);
+		options->SetVisible(true);
+		credits->SetVisible(true);
+		quit->SetVisible(true);
+	}
+
+	return true;
+};
+
+bool S_MainMenu::Start()
+{
+	App->player->Disable();
+	App->camera->Disable();
+	if (visibility)
+	{
+		campaign->SetVisible(true);
 		options->SetVisible(true);
 		credits->SetVisible(true);
 		quit->SetVisible(true);
@@ -63,12 +76,16 @@ bool S_MainMenu::Update()
 
 bool S_MainMenu::Clean()
 {
+	campaign->SetVisible(false);
+	options->SetVisible(false);
+	credits->SetVisible(false);
+	quit->SetVisible(false);
 	return true;
 }
 
 void S_MainMenu::OnGui(Gui* ui, GuiEvent event)
 {
-	if ((ui == (Gui*)campain) && (event == GuiEvent::mouse_lclk_down))
+	if ((ui == (Gui*)campaign) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->scene->ChangeScene(Scene_ID::world);
 		App->startmenuback->Disable();

@@ -11,6 +11,7 @@ class S_Options : public MainScene {
 public:
 	S_Options();
 	~S_Options();
+	bool Awake();
 	bool Start();
 	bool Update();
 	bool Clean();

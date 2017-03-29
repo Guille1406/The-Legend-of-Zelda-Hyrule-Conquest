@@ -412,7 +412,8 @@ bool Arrow::Check_Wall_Loop( int & pos, bool add, bool is_horitzontal)
 	if (!add)
 		i = -1;
 	while (i * temp_pos < i * )
-	return false;*/
+	*/
+	return false;
 }
 
 

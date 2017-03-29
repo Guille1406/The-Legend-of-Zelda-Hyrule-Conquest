@@ -51,44 +51,43 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	scene_list = new p2List<MainScene*>();
-	//S_Inventory* temp = new S_Inventory();
-	
 	//Main menu
-	p2List_item<MainScene*>* MainMenu= scene_list->add(new S_MainMenu);
-	MainMenu->data->scene_name = Scene_ID::mainmenu;
-	//Campain
+	scene_list.push_back(new S_MainMenu);
+	(*scene_list.back()).scene_name = Scene_ID::mainmenu;
+	//Campaign
 
 	//Options menu
-	p2List_item<MainScene*>* Options = scene_list->add(new S_Options);
-	Options->data->scene_name = Scene_ID::options;
-	p2List_item<MainScene*>* OptionsAudio = scene_list->add(new S_OptionsAudio);
-	OptionsAudio->data->scene_name = Scene_ID::optionsaudio;
-	p2List_item<MainScene*>* OptionsControls = scene_list->add(new S_OptionsControls);
-	OptionsControls->data->scene_name = Scene_ID::optionscontrols;
-	p2List_item<MainScene*>* OptionsGameplay = scene_list->add(new S_OptionsGameplay);
-	OptionsGameplay->data->scene_name = Scene_ID::optionsgameplay;
-	p2List_item<MainScene*>* OptionsVideo = scene_list->add(new S_OptionsVideo);
-	OptionsVideo->data->scene_name = Scene_ID::optionsvideo;
+	scene_list.push_back(new S_Options);
+	(*scene_list.back()).scene_name = Scene_ID::options;
+	scene_list.push_back(new S_OptionsAudio);
+	(*scene_list.back()).scene_name = Scene_ID::optionsaudio;
+	scene_list.push_back(new S_OptionsControls);
+	(*scene_list.back()).scene_name = Scene_ID::optionscontrols;
+	scene_list.push_back(new S_OptionsGameplay);
+	(*scene_list.back()).scene_name = Scene_ID::optionsgameplay;
+	scene_list.push_back(new S_OptionsVideo);
+	(*scene_list.back()).scene_name = Scene_ID::optionsvideo;
 	//Credits
 	//Quit Game
-	p2List_item<MainScene*>* QuitGame = scene_list->add(new S_QuitGame);
-	QuitGame->data->scene_name = Scene_ID::quitgame;
+	scene_list.push_back(new S_QuitGame);
+	(*scene_list.back()).scene_name = Scene_ID::quitgame;
 	
 	//World
-	p2List_item<MainScene*>* World = scene_list->add(new S_World);
-	World->data->scene_name = Scene_ID::world;
+	scene_list.push_back(new S_World);
+	(*scene_list.back()).scene_name = Scene_ID::world;
+	scene_list.push_back(new S_Dungeon);
+	(*scene_list.back()).scene_name = Scene_ID::dungeon;
 
-	p2List_item<MainScene*>* Dungeon = scene_list->add(new S_Dungeon);
-	Dungeon->data->scene_name = Scene_ID::dungeon;
-
-	active_scene = MainMenu->data;
-	prev_scene = MainMenu->data;
-	loaded_scene = MainMenu->data;
-	active_scene->Start();
-
-	//debug_tex = App->tex->Load("maps/path2.png");
-
+	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
+	{
+		(*item)->Awake();
+		if ((*item)->scene_name == Scene_ID::mainmenu) {
+			active_scene = (*item);
+			prev_scene = (*item);
+			loaded_scene = (*item);
+			active_scene->Start();
+		}
+	}
 	return true;
 }
 
@@ -135,18 +134,14 @@ bool j1Scene::CleanUp()
 
 bool j1Scene::ChangeScene(Scene_ID name)
 {
-	
-
-	p2List_item<MainScene*>* temp = scene_list->start;
-	while (temp != NULL) {
-		if (temp->data->scene_name == name) {
+	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
+	{
+		if ((*item)->scene_name == name) {
 			active_scene->Clean();
-			active_scene = temp->data;
+			active_scene = *item;
 			loaded_scene = active_scene;
 			return true;
 		}
-		temp = temp->next;
 	}
 	return false;
 }
-

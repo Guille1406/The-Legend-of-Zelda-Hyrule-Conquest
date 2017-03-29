@@ -19,7 +19,7 @@ enum Scene_ID {
 	gamestart,
 	//chooselanguage,
 	mainmenu,
-	campain,
+	campaign,
 	options,
 	optionsaudio,
 	optionscontrols,
@@ -39,6 +39,10 @@ public:
 
 	MainScene() {};
 	~MainScene() {};
+
+	virtual bool Awake() {
+		return true;
+	};
 
 	virtual bool Start() {
 		return true;

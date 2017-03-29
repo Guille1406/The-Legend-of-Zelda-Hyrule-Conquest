@@ -11,12 +11,13 @@ class S_GameStart : public MainScene {
 public:
 	S_GameStart();
 	~S_GameStart();
+	bool Awake();
 	bool Start();
 	bool Update();
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	GuiButton* campain = nullptr;
+	GuiButton* campaign = nullptr;
 	GuiButton* options = nullptr;
 	GuiButton* credits = nullptr;
 	GuiButton* quit = nullptr;
