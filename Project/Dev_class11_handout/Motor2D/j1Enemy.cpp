@@ -26,9 +26,7 @@ bool j1Enemy::Start()
 	}
 
 
-	SDL_Rect rect_test = { 140,150,50,50 };
-	shield_test = App->collision->AddCollider(rect_test, COLLIDER_TYPE::collider_enemy_shield, App->enemy->V_MyEnemies[0], this);
-
+	
 
 	return true;
 }
@@ -41,10 +39,13 @@ bool j1Enemy::PreUpdate()
 bool j1Enemy::Update(float dt)
 {
 	for (int i = 0; i < V_MyEnemies.size(); i++) {
-		V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x+4;
-		V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y + 26;
+		V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x+17;
+		V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y +10;
+		V_MyEnemies[i]->shield_test->SetPos(V_MyEnemies[i]->collider->rect.x-23, V_MyEnemies[i]->collider->rect.y + 30, V_MyEnemies[i]->logic_height);
+		
 		App->render->Blit(green_soldier_tex, V_MyEnemies[i]->pix_world_pos.x, V_MyEnemies[i]->pix_world_pos.y, &V_MyEnemies[i]->rect);
 		V_MyEnemies[i]->Action();
+		
 	}
 
 
@@ -72,9 +73,6 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 		ret->rect = { 0,0,44,60 };
 		break;
 
-
-
-
 	}
 
 		//This will not be usefull when the enemies will be readed from xml
@@ -82,12 +80,15 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 	//Position in array
 	ret->array_pos = pos_array_enemy;
 
+	SDL_Rect rect_test = { ret->array_pos.x,ret->array_pos.y,20,10 };
+	ret->shield_test = App->collision->AddCollider(rect_test, COLLIDER_TYPE::collider_enemy_sword, ret, this);
+
 
 	//Position in world pixel 
 		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
-		SDL_Rect rect = { ret->pix_world_pos.x, ret->pix_world_pos.y+32,32,32 };
+		SDL_Rect rect = { ret->pix_world_pos.x+16, ret->pix_world_pos.y+32,16,42 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
 		ret->logic_height = 1;
 		

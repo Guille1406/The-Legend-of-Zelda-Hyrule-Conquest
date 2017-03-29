@@ -30,16 +30,16 @@ void P_Link::Orientation_collider_link_sword()
 	switch (character_direction) {
 	case direction::up:
 
-		Link_sword->Attack_range = { collision->rect.x,collision->rect.y - collision->rect.h,30,30 };
+		Link_sword->Attack_range = { collision->rect.x,collision->rect.y - collision->rect.h,20,20 };
 		break;
 	case direction::down:
-		Link_sword->Attack_range = { collision->rect.x,collision->rect.y+ collision->rect.h,30,30 };
+		Link_sword->Attack_range = { collision->rect.x,collision->rect.y+ collision->rect.h,20,20 };
 		break;
 	case direction::left:
-		Link_sword->Attack_range = { collision->rect.x - collision->rect.w,collision->rect.y,30,30 };
+		Link_sword->Attack_range = { collision->rect.x - collision->rect.w,collision->rect.y,20,20 };
 		break;
 	case direction::right:
-		Link_sword->Attack_range = { collision->rect.x + collision->rect.w,collision->rect.y,30,30 };
+		Link_sword->Attack_range = { collision->rect.x + collision->rect.w,collision->rect.y,20,20 };
 		break;
 
 	}
@@ -48,7 +48,7 @@ void P_Link::Orientation_collider_link_sword()
 }
 
 
-void P_Link::Collision_Sword_EnemyShield() {
+void P_Link::Collision_Sword_EnemySword() {
 	iPoint temp=tilepos;
 	switch (character_direction) {
 

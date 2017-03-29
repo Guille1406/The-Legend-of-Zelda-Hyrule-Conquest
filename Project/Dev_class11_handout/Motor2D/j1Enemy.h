@@ -31,6 +31,7 @@ public:
 	bool movable = true;
 	std::list<iPoint> Path_Enemy;
 	bool passedtile = true;
+	Collider* shield_test;
 };
 
 class j1Enemy : public j1Module {
@@ -53,7 +54,7 @@ public:
 	bool FindInPath(iPoint, Enemy* enemy);
 
 public:
-	Collider* shield_test;
+	
 	std::vector<Enemy*> V_MyEnemies;
 	SDL_Texture* green_soldier_tex;
 };

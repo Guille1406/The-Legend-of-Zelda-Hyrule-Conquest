@@ -31,7 +31,7 @@ j1Collision::j1Collision()
 
 	//sword
 	matrix[collider_link_sword][collider_enemy] = true;
-	matrix[collider_link_sword][collider_enemy_shield] = true;
+	matrix[collider_link_sword][collider_enemy_sword] = true;
 
 
 
@@ -181,7 +181,7 @@ void j1Collision::DebugDraw()
 		case collider_link_sword:
 			App->render->DrawQuad(colliders[i]->rect, Black(1), Black(2), Black(3), alpha);
 			break;
-		case collider_enemy_shield:
+		case collider_enemy_sword:
 			App->render->DrawQuad(colliders[i]->rect, Red(1), Red(2), Red(3), alpha);
 			break;
 		case collider_door:

@@ -101,7 +101,7 @@ void Character::ExecuteEvent(float dt)
 		Throw(dt);
 		break;
 	case backwards:
-		App->player->Link->Collision_Sword_EnemyShield();
+		App->player->Link->Collision_Sword_EnemySword();
 		break;
 	}
 

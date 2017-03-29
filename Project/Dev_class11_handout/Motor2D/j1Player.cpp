@@ -281,18 +281,18 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pix_world_pos.y;
 
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy_shield) {
-		Link->Collision_Sword_EnemyShield();
+	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {
+		Link->Collision_Sword_EnemySword();
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_enemy_shield && collider2->type == COLLIDER_TYPE::collider_link_sword) {
-		Link->Collision_Sword_EnemyShield();
+	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link_sword) {
+		Link->Collision_Sword_EnemySword();
 	}
 
 	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_enemy) {
-		Link->Collision_Sword_EnemyShield();
+		//Link->Collision_Sword_EnemyShield();
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy && collider2->type == COLLIDER_TYPE::collider_link) {
-		Link->Collision_Sword_EnemyShield();
+		//Link->Collision_Sword_EnemyShield();
 	}
 
 
