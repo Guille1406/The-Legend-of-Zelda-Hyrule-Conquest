@@ -145,15 +145,7 @@ player_event P_Link::GetEvent()
 				}
 
 			}
-			if (App->inputM->EventPressed(INPUTEVENT::JUMP, 1) == EVENTSTATE::E_DOWN && !im_lifting) {
-				actual_event = roll;
-				doing_script = true;
-			}
-
-		
-
-
-			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+			else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 				if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 					movement_direction = move_up_right;
 				}
@@ -204,6 +196,15 @@ player_event P_Link::GetEvent()
 				movement_direction = move_idle;
 				actual_event = idle;
 			}
+			if (App->inputM->EventPressed(INPUTEVENT::JUMP, 1) == EVENTSTATE::E_DOWN && !im_lifting) {
+				actual_event = roll;
+				doing_script = true;
+			}
+
+		
+
+
+			
 
 			if (can_pick_up && !App->player->Zelda->doing_script) {
 				if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
