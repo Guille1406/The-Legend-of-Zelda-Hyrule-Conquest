@@ -15,16 +15,16 @@ void P_Zelda::Attack(float dt)
 	
 		switch (character_direction) {
 		case up:
-			CreateArrow({ pos.x + 4,pos.y - 8,8,16 });
+			CreateArrow({ pos.x + 4,pos.y ,8,16 });
 			break;
 		case down:
-			CreateArrow({ pos.x + 4,pos.y + 8,8,16 });
+			CreateArrow({ pos.x + 4,pos.y ,8,16 });
 			break;
 		case left:
-			CreateArrow({ pos.x - 8,pos.y + 4,16,8 });
+			CreateArrow({ pos.x,pos.y + 4,16,8 });
 			break;
 		case right:
-			CreateArrow({ pos.x + 8,pos.y + 4,16,8 });
+			CreateArrow({ pos.x,pos.y + 4,16,8 });
 			break;
 		}
 
