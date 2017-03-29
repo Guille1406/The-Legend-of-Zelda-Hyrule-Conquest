@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <list>
-
+#include "SDL\include\SDL.h"
 //  NULL just in case ----------------------
 
 #ifdef NULL
@@ -72,5 +72,24 @@ const static std::string empty_char = "";
 const static std::string password_char = "*";
 const static std::string true_str = "true";
 const static std::string false_str = "false";
+
+
+static const SDL_Rect rect_button = { 0,0,32,32 };
+static const SDL_Rect rect_movable_block = { 96,0,32,32 };
+static const SDL_Rect rect_Heart = { 128,0,32,32 };
+static const SDL_Rect rect_jar = { 160,0,32,32 };
+static const SDL_Rect rect_key = { 192,0,16,32 };
+static const SDL_Rect rect_boss_key = { 208,0,32,32 };
+static const SDL_Rect rect_sign = { 144,32,32,32 };
+static const SDL_Rect rect_lever_blue = { 176,32,32,32 };
+static const SDL_Rect rect_lever_red = { 208,32,32,32 };
+static const SDL_Rect rect_lever_block_blue_off = { 0,64,32,32 };
+static const SDL_Rect rect_lever_block_blue_on = { 32,64,32,32 };
+static const SDL_Rect rect_lever_block_red_off = { 64,64,32,32 };
+static const SDL_Rect rect_lever_block_red_on = { 96,64,32,32 };
+static const SDL_Rect rect_chest_close = { 128,64,32,32 };
+static const SDL_Rect rect_chest_open = { 160,64,32,32 };
+static const SDL_Rect rect_Giant_chest_close = { 0,96,64,48 };
+static const SDL_Rect rect_Giant_chest_open = { 64,96,64,48 };
 
 #endif

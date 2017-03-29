@@ -6,6 +6,9 @@
 #include "SDL\include\SDL.h"
 #include "Character.h"
 #include <vector>
+#include "j1Enemy.h"
+#include "j1Collision.h"
+
 class Character;
 
 struct Sword : public Entity {

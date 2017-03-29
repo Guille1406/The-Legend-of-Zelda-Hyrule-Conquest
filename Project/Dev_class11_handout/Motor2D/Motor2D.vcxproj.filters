@@ -163,6 +163,7 @@
     <ClCompile Include="j1HUD.cpp">
       <Filter>Desenvolupament  ========\Scenes\GUI\HUD</Filter>
     </ClCompile>
+    <ClCompile Include="j1GameStartMenuBack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -369,8 +370,12 @@
     <ClInclude Include="O_Key.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="j1GameStartMenuBack.h" />
     <ClInclude Include="O_Boss_Key.h">
-      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Giant_Chest.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
