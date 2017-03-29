@@ -28,7 +28,6 @@ private:
 	std::string LabelString;
 	_TTF_Font*  font;
 	Color* color = &White;
-	uint opacity = 255;
 };
 
 #endif // __GUILABEL_H__

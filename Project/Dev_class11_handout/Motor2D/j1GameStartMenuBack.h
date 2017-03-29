@@ -69,6 +69,7 @@ private:
 	j1Timer Background_Characters_timer;
 	int backgroundcharactersspeed = 10;
 	int spacebetweenbackgroundcharacters = 500;
+	bool firstloop = false;
 
 };
 

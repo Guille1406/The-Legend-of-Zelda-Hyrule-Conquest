@@ -128,6 +128,7 @@ protected:
 	bool movable = false;
 	bool mouse_inside = false;
 	SDL_Rect Gui_Collider = { 0,0,0,0 };
+	uint opacity = 255;
 
 };
 

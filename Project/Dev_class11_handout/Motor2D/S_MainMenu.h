@@ -26,7 +26,7 @@ private:
 	GuiButton* options =	 nullptr;
 	GuiButton* credits =	 nullptr;
 	GuiButton* quit =	   	 nullptr;
-	bool visibility =		 true;
+	bool visibility =		 false;
 	uint titleopacity =		 0;
 };
 

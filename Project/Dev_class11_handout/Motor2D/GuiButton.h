@@ -44,7 +44,6 @@ private:
 	SDL_Rect idle_texture_rect = { 0,0,0,0 };
 	SDL_Rect hover_texture_rect = { 0,0,0,0 };
 	SDL_Rect pressed_texture_rect = { 0,0,0,0 };
-	uint opacity = 255;
 
 };
 

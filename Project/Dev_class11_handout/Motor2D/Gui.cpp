@@ -78,6 +78,11 @@ bool Gui::InFOV()
 
 void Gui::CheckInput(const Gui* mouse_hover, const Gui* focus)
 {
+	if (mouse_hover == nullptr)
+		return;
+	
+		return;
+
 	bool inside = (mouse_hover == this);
 
 	j1Module* listener = nullptr;
