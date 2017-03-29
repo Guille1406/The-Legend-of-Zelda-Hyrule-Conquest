@@ -76,7 +76,7 @@ bool j1Player::Update(float dt)
 
 	Link->GetAdjacents();
 	Zelda->GetAdjacents();
-	int asd = Link->GetLogicHeightPlayer();
+
 	
 		
 	//2 Players

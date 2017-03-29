@@ -91,6 +91,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 	if (GetLogicHeightPlayer() == 2) {
 		count = 1;
 	}
+	bool stop = false;
 	
 	int n = 1;
 	if (!add)
@@ -99,7 +100,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 	bool stop_jumping = false;
 	iPoint temp_point = tilepos;
 	iPoint next_point = tilepos;
-
+	iPoint last_point = temp_point;
 	static int before_wall_pos = 0;
 
 	if (!temp) {
@@ -113,24 +114,25 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 			next_point.y = temp_point.y + !is_horitzontal * n;
 
 			int i = 0;
-			if (!is_on_collision) {
+			if (!is_on_collision || temp_point != last_point) {
 				for (i = 0; i <= GetLogicHeightPlayer(); i++) {
 					if (GetLogic(i, temp_point) == TILE_COL_ID) {
 						is_on_collision = true;
 						before_wall_pos = temp_pos;
-						if (GetLogic(count, next_point) == TILE_COL_ID)
+						last_point = temp_point;
+						if (GetLogic(count, next_point) == TILE_COL_ID) {
+							stop = true;
 							break;
+						}
 						if (!can_pass_wall) {
 							before_wall_pos = temp_pos + n * 64;
 						}
 						can_pass_wall = !can_pass_wall;
 						zelda_collides = true;
 						decrease = i;
+						
 						break;
-
 					}
-					
-
 				}
 			}
 	if (GetLogic(decrease, temp_point) != TILE_COL_ID) {
@@ -140,23 +142,14 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 			temp_pos = temp_pos + (n * 4);
 			temp_point.x = (temp_pos / 16) * is_horitzontal + temp_point.x * !is_horitzontal;
 			temp_point.y = (temp_pos / 16) * !is_horitzontal + temp_point.y * is_horitzontal;
-			
+			if (stop)
+				break;
 		}
-
 		
+		ChangeLogicHeightPlayer(GetLogicHeightPlayer() - decrease);
 
-		//int decrease = 1;
-		if (!can_pass_wall || !zelda_collides) {
-			can_pass_wall = true;
-
-			ChangeLogicHeightPlayer(GetLogicHeightPlayer() - decrease);
-		}
-		else {
-			if (GetLogicHeightPlayer() == 2 && zelda_collides) {
-				//decrease = 2;
-				ChangeLogicHeightPlayer(GetLogicHeightPlayer() - decrease);
-			}
-		}
+				
+	
 	}
 
 	temp = true;
