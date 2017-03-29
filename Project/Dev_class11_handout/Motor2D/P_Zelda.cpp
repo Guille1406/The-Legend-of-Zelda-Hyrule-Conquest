@@ -266,7 +266,8 @@ player_event P_Zelda::GetEvent()
 				static bool can_throw = false;
 				actual_event = pick;
 				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
-				pos = App->player->Link->pos;
+				pos.x = App->player->Link->pos.x;
+				pos.y = App->player->Link->pos.y - 7;
 				if (((App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN) && can_throw) || ((App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) && can_throw)) {
 					actual_event = throw_;
 					doing_script = true;
