@@ -8,43 +8,44 @@
 #include"Color.h"
 void P_Link::Attack(float dt)
 {
-	if (attack_timer.Read()<500) {
-
-		actual_event = attack;
-		this->doing_script = true;
-		switch (this->character_direction) {
-		case direction::right:
-		{
-			SDL_Rect Attack_range = { front_collider->rect.x+10,front_collider->rect.y+10,30,30 };
-
-			//attack_collider = App->collision->AddCollider(Attack_range, COLLIDER_TYPE::collider_link_sword,);
-
-
-			attack_collider->rect = Attack_range;
-			App->render->DrawQuad(Attack_range, Blue(0), Blue(1), Blue(2), 255, true, true);
-			break;
-		}
-		case direction::left:
-
-			break;
-		case direction::up:
-
-			break;
-		case direction::down:
-
-			break;
-
-
-
-		}
-	}
-	else {
+	//update
+	if (attack_timer.Read() > 500) {
 		attack_timer.Start();
 		doing_script = false;
+
 	}
+	
 }
 
 
+void P_Link::link_sword_collider_update() {
+	if (Link_sword->collider!=nullptr) {
+		Link_sword->collider->to_delete = true;
+	}
+}
+
+void P_Link::Orientation_collider_link_sword()
+{	
+	
+	switch (character_direction) {
+	case direction::up:
+
+		Link_sword->Attack_range = { collision->rect.x,collision->rect.y - collision->rect.h,30,30 };
+		break;
+	case direction::down:
+		Link_sword->Attack_range = { collision->rect.x,collision->rect.y+ collision->rect.h,30,30 };
+		break;
+	case direction::left:
+		Link_sword->Attack_range = { collision->rect.x - collision->rect.w,collision->rect.y,30,30 };
+		break;
+	case direction::right:
+		Link_sword->Attack_range = { collision->rect.x + collision->rect.w,collision->rect.y,30,30 };
+		break;
+
+	}
+	Link_sword->collider = App->collision->AddCollider(Link_sword->Attack_range, COLLIDER_TYPE::collider_link_sword, Link_sword, App->player);
+	
+}
 
 
 player_event P_Link::GetEvent()
@@ -182,9 +183,11 @@ player_event P_Link::GetEvent()
 				LOG("I'm Jumping :DDDD");
 				can_jump = false;
 			}
-
+			
 			if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
 				attack_timer.Start();
+				//orientation collider link sword
+				Orientation_collider_link_sword();
 				actual_event = attack;
 				doing_script = true;
 				LOG("I'm Attacking :DDDD");
@@ -202,3 +205,4 @@ player_event P_Link::GetEvent()
 		return actual_event;
 	}
 }
+

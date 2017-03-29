@@ -84,6 +84,7 @@ bool j1Player::Update(float dt)
 	}
 
 	if (cooperative == true) {
+		Link->link_sword_collider_update();
 		Link->GetEvent();
 		Zelda->GetEvent();
 		Link->ExecuteEvent(dt);

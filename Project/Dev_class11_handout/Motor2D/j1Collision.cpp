@@ -2,6 +2,7 @@
 #include"j1App.h"
 #include"j1Player.h"
 #include"j1Render.h"
+#include"Color.h"
 j1Collision::j1Collision()
 {
 	//for (uint i = 0; i < colliders.size(); ++i)
@@ -170,13 +171,16 @@ void j1Collision::DebugDraw()
 		case collider_enemy:
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
+		case collider_link_sword:
+			App->render->DrawQuad(colliders[i]->rect, Black(1), Black(2), Black(3), alpha);
+			break;
 		case collider_door:
 			Object* temp = (Object*)colliders[i]->parent;
 			if (temp->active) {
 				App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, 255);
 			}
 			break;
-			
+		
 		}
 	}
 }

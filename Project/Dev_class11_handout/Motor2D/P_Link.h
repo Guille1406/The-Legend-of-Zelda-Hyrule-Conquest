@@ -12,11 +12,8 @@
 class Character;
 
 struct Sword : public Entity {
-
 	iPoint pos;
-	bool can_move;
-	bool is_attached;
-	Collider* Sword_Attack_Collider;
+	SDL_Rect Attack_range;
 	Enemy* attached_enemy;
 };
 
@@ -25,7 +22,8 @@ public:
 	
 	P_Link() {
 		sprites_vector = new std::vector<Animation>;
-		
+		Link_sword = new Sword();
+
 	}
 	~P_Link() {
 		delete sprites_vector;
@@ -35,7 +33,8 @@ public:
 	j1Timer attack_timer;
 	Sword* Link_sword;
 	player_event GetEvent();
-
+	void link_sword_collider_update();
+	void Orientation_collider_link_sword();
 public:
 	
 	bool can_pick_up = false;
