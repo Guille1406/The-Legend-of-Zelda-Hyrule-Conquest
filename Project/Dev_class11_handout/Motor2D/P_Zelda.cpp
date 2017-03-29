@@ -6,7 +6,7 @@
 #include "Character.h"
 #include "j1InputManager.h"
 
-#define JUMP_DISTANCE 112
+#define JUMP_DISTANCE 96
 
 
 
@@ -86,16 +86,16 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 	int temp_pos = pos;
 	static bool can_pass_wall = true;
 	static bool zelda_collides = false;
-
+	int decrease = 1;
 	bool is_on_collision = false;
 	int count = 1;
 	if (GetLogicHeightPlayer() == 2) {
 		count = 1;
 	}
 	
-	int i = 1;
+	int n = 1;
 	if (!add)
-		i = -1;
+		n = -1;
 
 	bool stop_jumping = false;
 	iPoint temp_point = tilepos;
@@ -105,35 +105,40 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 
 	if (!temp) {
 		zelda_collides = false;
-		final_pos = pos + (i * JUMP_DISTANCE);
+		final_pos = pos + (n * JUMP_DISTANCE);
 		before_wall_pos = final_pos;
 
-		while ((i * temp_pos < i*final_pos)) {
+		while ((n * temp_pos < n*final_pos)) {
 
-			next_point.x = temp_point.x + is_horitzontal * i;
-			next_point.y = temp_point.y + !is_horitzontal * i;
+			next_point.x = temp_point.x + is_horitzontal * n;
+			next_point.y = temp_point.y + !is_horitzontal * n;
 
-			if (GetLogic(count, temp_point) == TILE_COL_ID && !is_on_collision) {
-				is_on_collision = true;
-				before_wall_pos = temp_pos;
-				if (GetLogic(count, next_point) == TILE_COL_ID)
-					break;
-				if (!can_pass_wall) {
-					before_wall_pos = temp_pos + i * 64;
+			int i = 0;
+			if (!is_on_collision) {
+				for (i = 0; i <= GetLogicHeightPlayer(); i++) {
+					if (GetLogic(i, temp_point) == TILE_COL_ID) {
+						is_on_collision = true;
+						before_wall_pos = temp_pos;
+						if (GetLogic(count, next_point) == TILE_COL_ID)
+							break;
+						if (!can_pass_wall) {
+							before_wall_pos = temp_pos + n * 64;
+						}
+						can_pass_wall = !can_pass_wall;
+						zelda_collides = true;
+						decrease = i;
+						break;
+
+					}
+					
+
 				}
-				can_pass_wall = !can_pass_wall;
-				count = false;
-				if (GetLogicHeightPlayer() == 2)
-					count = 2;
-				zelda_collides = true;
-							
 			}
-			else if (GetLogic(count, temp_point) != TILE_COL_ID) {
-				is_on_collision = false;
-			}
+	if (GetLogic(decrease, temp_point) != TILE_COL_ID) {
+		is_on_collision = false;
+	}
 			
-			
-			temp_pos = temp_pos + (i * 4);
+			temp_pos = temp_pos + (n * 4);
 			temp_point.x = (temp_pos / 16) * is_horitzontal + temp_point.x * !is_horitzontal;
 			temp_point.y = (temp_pos / 16) * !is_horitzontal + temp_point.y * is_horitzontal;
 			
@@ -141,7 +146,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 
 		
 
-		int decrease = 1;
+		//int decrease = 1;
 		if (!can_pass_wall || !zelda_collides) {
 			can_pass_wall = true;
 
@@ -149,7 +154,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 		}
 		else {
 			if (GetLogicHeightPlayer() == 2 && zelda_collides) {
-				decrease = 2;
+				//decrease = 2;
 				ChangeLogicHeightPlayer(GetLogicHeightPlayer() - decrease);
 			}
 		}
@@ -158,8 +163,8 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 	temp = true;
 
 
-	if ((i * pos < i*before_wall_pos)) {
-		pos = pos + (i * 4);
+	if ((n * pos < n*before_wall_pos)) {
+		pos = pos + (n * 4);
 	}
 	// if player reached the final pos, player height decreases 1
 	else {
