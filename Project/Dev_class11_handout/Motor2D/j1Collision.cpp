@@ -7,26 +7,42 @@ j1Collision::j1Collision()
 	//for (uint i = 0; i < colliders.size(); ++i)
 		//colliders[i] = nullptr;
 
+
+	//LINK
 	matrix[collider_link][collider_zelda] = true;
-	matrix[collider_zelda][collider_link] = true;
-	matrix[collider_button][collider_link] = true;
 	matrix[collider_link][collider_button] = true;
-	matrix[collider_button][collider_zelda] = true;
-	matrix[collider_zelda][collider_button] = true;
 	matrix[collider_link][collider_change_height] = true;
-	matrix[collider_change_height][collider_link] = true;
-	matrix[collider_zelda][collider_change_height] = true;
-	matrix[collider_change_height][collider_zelda] = true;
-	matrix[front_link][collider_jump] = true;
-	matrix[collider_jump][front_link] = true;
-	matrix[front_zelda][collider_jump] = true;
-	matrix[collider_jump][front_zelda] = true;
-	matrix[collider_zelda][front_link] = true;
-	matrix[front_link][collider_zelda] = true;
-	matrix[collider_enemy][collider_link] = true;
 	matrix[collider_link][collider_enemy] = true;
+	//FRONT LINK
+	matrix[front_link][collider_jump] = true;
+	matrix[front_link][collider_zelda] = true;
+	//ZELDA
+	matrix[collider_zelda][collider_link] = true;
+	matrix[collider_zelda][collider_button] = true;
+	matrix[collider_zelda][collider_change_height] = true;
+	matrix[collider_zelda][front_link] = true;
 	matrix[collider_zelda][collider_enemy] = true;
+	//FRONT ZELDA
+	matrix[front_zelda][collider_jump] = true;
+
+	//ARROW
+	matrix[collider_arrow][collider_enemy] = true;
+	//ENEMY
+	matrix[collider_enemy][collider_link] = true;
 	matrix[collider_enemy][collider_zelda] = true;
+	matrix[collider_enemy][collider_arrow] = true;
+
+	//BUTTON
+	matrix[collider_button][collider_link] = true;
+	matrix[collider_button][collider_zelda] = true;
+	//CHANGE HEIGHT
+	matrix[collider_change_height][collider_link] = true;
+	matrix[collider_change_height][collider_zelda] = true;
+	//JUMP
+	matrix[collider_jump][front_link] = true;
+	matrix[collider_jump][front_zelda] = true;
+	
+	
 }
 
 // Destructor
