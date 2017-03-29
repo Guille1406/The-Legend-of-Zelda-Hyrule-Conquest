@@ -38,6 +38,10 @@ bool j1GameStartMenuBackground::Start()
 
 	Background_Initial_pos = App->win->GetWindowH() - background.h;
 
+	BackgroundCharacterList.push_back(new BackgroundCharacter(&LinkRect, { (int)App->win->GetWindowW(),0 }));
+	BackgroundCharacterList.push_back(new BackgroundCharacter(&ZeldaRect, { BackgroundCharacterList.back()->position.x + BackgroundCharacterList.back()->rect.w + spacebetweenbackgroundcharacters,0 }));
+	BackgroundCharacterList.push_back(new BackgroundCharacter(&MessengerRect, { BackgroundCharacterList.back()->position.x + BackgroundCharacterList.back()->rect.w + spacebetweenbackgroundcharacters,26 }));
+
 	Background_timer.Start();
 
 	return true;
@@ -90,8 +94,32 @@ bool j1GameStartMenuBackground::Update(float dt)
 				((S_MainMenu*)App->scene->GetActiveScene())->credits->SetOpacity(startmenuopacity);
 				((S_MainMenu*)App->scene->GetActiveScene())->quit->SetOpacity(startmenuopacity);
 				((S_MainMenu*)App->scene->GetActiveScene())->titleopacity = startmenuopacity;
+				if (!activate_background_movement)
+				{
+					background_movement = true;
+					Background_Characters_timer.Start();
+				}
+				MainMenuOpacity_timer.Start();
 			}
 		}
+
+	//Blit characters
+	if (background_movement)
+	{
+		for (std::list<BackgroundCharacter*>::iterator item = BackgroundCharacterList.begin(); item != BackgroundCharacterList.cend(); ++item)
+			App->render->Blit(App->gui->GetAtlas(), (*item)->position.x, (*item)->position.y, &(*item)->rect, 1.0f, 0, INT_MAX, INT_MAX, false);
+
+		if (Background_Characters_timer.Read() > backgroundcharactersspeed)
+			for (std::list<BackgroundCharacter*>::iterator item = BackgroundCharacterList.begin(); item != BackgroundCharacterList.cend(); ++item)
+				(*item)->position.x -= 1;
+		if (BackgroundCharacterList.front()->position.x < -650)
+		{
+			BackgroundCharacter* toback = BackgroundCharacterList.front();
+			BackgroundCharacterList.pop_front();
+			toback->position.x = BackgroundCharacterList.back()->position.x + BackgroundCharacterList.back()->rect.w + spacebetweenbackgroundcharacters;
+			BackgroundCharacterList.push_back(toback);
+		}
+	}
 
 	return true;
 }
@@ -105,5 +133,8 @@ bool j1GameStartMenuBackground::PostUpdate()
 // Called before quitting
 bool j1GameStartMenuBackground::CleanUp()
 {
+	for (std::list<BackgroundCharacter*>::iterator item = BackgroundCharacterList.begin(); item != BackgroundCharacterList.cend(); ++item)
+		RELEASE(*item);
+	BackgroundCharacterList.clear();
 	return true;
 }

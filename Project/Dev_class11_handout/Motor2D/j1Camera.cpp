@@ -50,7 +50,7 @@ bool j1Camera::Start()
 	i_Half_h = (int)(h * 0.5f);
 
 	//Fill up debug performance data vector
-	for (int i = 0, pos = App->win->GetWindowH() - DebugPerformanceData_Rect.h + 6; i < 8; i++, pos += 15) //7, number of debug strings
+	for (int i = 0, pos = App->win->GetWindowH() - DebugPerformanceData_Rect.h + 6; i < 8; i++, pos += 15) //8, number of debug strings
 		DebugPerformanceData.push_back(App->gui->CreateLabel({ 10,pos }, &std::string(""), false, AddGuiTo::none));
 	DebugPerformanceData[6]->EditLabelStr(&std::string("Press F9 to toggle this window visibility."));
 	DebugPerformanceData[6]->SetLabelColor(&Yellow);

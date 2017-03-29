@@ -22,9 +22,6 @@ private:
 	SDL_Texture*	atlas =  nullptr;
 	std::string		atlas_file_name;
 	SDL_Rect title =		 { 0,0,493,211 };
-	SDL_Rect LinkRect =		 { 1058,0,819,720 };
-	SDL_Rect ZeldaRect =	 { 493,0,565,720 };
-	SDL_Rect MessengerRect = { 1078,720,599,694 };
 	GuiButton* campaign =	 nullptr;
 	GuiButton* options =	 nullptr;
 	GuiButton* credits =	 nullptr;
