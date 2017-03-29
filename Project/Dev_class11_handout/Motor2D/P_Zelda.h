@@ -19,6 +19,8 @@ struct Arrow : public Entity{
 	bool is_attached;
 	Enemy* attached_enemy;
 	iPoint offset;
+	int max_distance;
+	bool temp = false;
 
 	bool Check_Wall();
 	bool Check_Wall_Loop( int &pos, bool add, bool is_horitzontal);
