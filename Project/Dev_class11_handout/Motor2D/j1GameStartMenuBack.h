@@ -40,6 +40,8 @@ private:
 	int Background_pos = 0;
 	int Background_speed = 2;
 	j1Timer Background_timer;
+	j1Timer MainMenuOpacity_timer;
+	uint startmenuopacity = 0;
 
 };
 

@@ -30,6 +30,7 @@ private:
 	GuiButton* credits =	nullptr;
 	GuiButton* quit =		nullptr;
 	bool visibility =		true;
+	uint titleopacity = 0;
 };
 
 #endif // #pragma once

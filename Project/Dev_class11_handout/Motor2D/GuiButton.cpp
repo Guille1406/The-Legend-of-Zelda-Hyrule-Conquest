@@ -80,7 +80,7 @@ void GuiButton::Draw()
 	if (this->visible == true)
 	{
 		//Button
-		App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, curent_state_texture, 1.0f, 0, INT_MAX, INT_MAX, false);
+		App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, curent_state_texture, 1.0f, 0, INT_MAX, INT_MAX, false, opacity);
 		//Label
 		ButtonString->Draw();
 		//Debug
@@ -132,4 +132,15 @@ void GuiButton::CenterStr()
 	if (ButtonString != nullptr)
 		ButtonString->SetLocalPos(ButtonStringPos.x, ButtonStringPos.y);
 	OriginalPosition = position;
+}
+
+void GuiButton::SetOpacity(uint newopacity)
+{
+	if (newopacity < 0)
+		opacity = 0;
+	else if (newopacity > 255)
+		opacity = 255;
+	else
+		opacity = newopacity;
+	ButtonString->SetOpacity(opacity);
 }

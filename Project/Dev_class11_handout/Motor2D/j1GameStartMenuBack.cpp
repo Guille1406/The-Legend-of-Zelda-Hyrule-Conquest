@@ -68,10 +68,29 @@ bool j1GameStartMenuBackground::Update(float dt)
 		if (!((S_MainMenu*)App->scene->GetActiveScene())->visibility)
 		{
 			((S_MainMenu*)App->scene->GetActiveScene())->campaign->SetVisible(true);
+			((S_MainMenu*)App->scene->GetActiveScene())->campaign->SetOpacity(startmenuopacity);
 			((S_MainMenu*)App->scene->GetActiveScene())->options->SetVisible(true);
+			((S_MainMenu*)App->scene->GetActiveScene())->options->SetOpacity(startmenuopacity);
 			((S_MainMenu*)App->scene->GetActiveScene())->credits->SetVisible(true);
+			((S_MainMenu*)App->scene->GetActiveScene())->credits->SetOpacity(startmenuopacity);
 			((S_MainMenu*)App->scene->GetActiveScene())->quit->SetVisible(true);
+			((S_MainMenu*)App->scene->GetActiveScene())->quit->SetOpacity(startmenuopacity);
 			((S_MainMenu*)App->scene->GetActiveScene())->visibility = true;
+			MainMenuOpacity_timer.Start();
+		}
+		else
+		{
+			if ((MainMenuOpacity_timer.Read() > 10) && (startmenuopacity < 255))
+			{
+				startmenuopacity += 5;
+				if (startmenuopacity > 255)
+					startmenuopacity = 255;
+				((S_MainMenu*)App->scene->GetActiveScene())->campaign->SetOpacity(startmenuopacity);
+				((S_MainMenu*)App->scene->GetActiveScene())->options->SetOpacity(startmenuopacity);
+				((S_MainMenu*)App->scene->GetActiveScene())->credits->SetOpacity(startmenuopacity);
+				((S_MainMenu*)App->scene->GetActiveScene())->quit->SetOpacity(startmenuopacity);
+				((S_MainMenu*)App->scene->GetActiveScene())->titleopacity = startmenuopacity;
+			}
 		}
 
 	return true;

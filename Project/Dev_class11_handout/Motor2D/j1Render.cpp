@@ -164,7 +164,7 @@ iPoint j1Render::WorldToScreen(int x, int y) const
 }
 
 // Blit to screen
-bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y, bool use_scale) const
+bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y, bool use_scale, uint opacity) const
 {
 	bool ret = true;
 	float scale = 1.0f;
@@ -179,12 +179,9 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 	rect.y = (int)(camera.y * speed) + y * scale;
 	if (section != NULL)
 	{
-		
 		rect.w = f_rect.x = section->w;
 		rect.w = f_rect.y = section->h;
 	}
-	
-
 	else
 	{
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
@@ -197,7 +194,6 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 	rect.w = ceil(f_rect.x);
 	rect.h = ceil(f_rect.y);
 
-
 	SDL_Point* p = NULL;
 	SDL_Point pivot = { 0,0 };
 
@@ -207,7 +203,11 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 		pivot.y = pivot_y;
 		p = &pivot;
 	}
-
+	if (SDL_SetTextureAlphaMod(texture, opacity) < 0)
+	{
+		LOG("Cannot set texture opacity. SDL_SetTextureAlphaMod error: %s", SDL_GetError());
+		ret = false;
+	}
 	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());

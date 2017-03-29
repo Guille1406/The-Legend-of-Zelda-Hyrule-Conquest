@@ -24,6 +24,7 @@ public:
 	void EditButtonStr(std::string* newstr);
 	void SetFont(_TTF_Font* newfont);
 	void SetButtonColor(Color* newcolor);
+	void SetOpacity(uint newopacity);
 
 private:
 	void CreateButtonLabel(iPoint position, std::string* str, bool movable);
@@ -43,6 +44,7 @@ private:
 	SDL_Rect idle_texture_rect = { 0,0,0,0 };
 	SDL_Rect hover_texture_rect = { 0,0,0,0 };
 	SDL_Rect pressed_texture_rect = { 0,0,0,0 };
+	uint opacity = 255;
 
 };
 

@@ -160,9 +160,11 @@
     <ClCompile Include="j1HUD.cpp">
       <Filter>Desenvolupament  ========\Scenes\GUI\HUD</Filter>
     </ClCompile>
-    <ClCompile Include="j1GameStartMenuBack.cpp" />
     <ClCompile Include="S_Campaign.cpp">
       <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Campain</Filter>
+    </ClCompile>
+    <ClCompile Include="j1GameStartMenuBack.cpp">
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -367,7 +369,6 @@
     <ClInclude Include="O_Key.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="j1GameStartMenuBack.h" />
     <ClInclude Include="O_Boss_Key.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
@@ -388,6 +389,9 @@
     </ClInclude>
     <ClInclude Include="S_Campaign.h">
       <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Campain</Filter>
+    </ClInclude>
+    <ClInclude Include="j1GameStartMenuBack.h">
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

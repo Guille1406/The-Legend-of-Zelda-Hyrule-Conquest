@@ -22,7 +22,7 @@ void GuiLabel::Draw()
 		if (LabelString != empty_char)
 		{
 			SDL_Texture* texture_to_blit = App->font->Print(LabelString.c_str(), { (Uint8)(*color)(0), (Uint8)(*color)(1), (Uint8)(*color)(2), 255 }, font);
-			App->render->Blit(texture_to_blit, position.x - App->render->camera.x, position.y - App->render->camera.y, nullptr, 1.0f, 0, INT_MAX, INT_MAX, false);
+			App->render->Blit(texture_to_blit, position.x - App->render->camera.x, position.y - App->render->camera.y, nullptr, 1.0f, 0, INT_MAX, INT_MAX, false, opacity);
 			SDL_DestroyTexture(texture_to_blit);
 		}
 		if (App->gui->Gui_DebugDraw_isactive())
@@ -73,4 +73,14 @@ void GuiLabel::CalculateGui_Collider()
 	int w, h = 0;
 	App->font->CalcSize(LabelString.c_str(), w, h, font);
 	Gui_Collider = { position.x, position.y, w, h };
+}
+
+void GuiLabel::SetOpacity(uint newopacity)
+{
+	if (newopacity < 0)
+		opacity = 0;
+	else if (newopacity > 255)
+		opacity = 255;
+	else
+		opacity = newopacity;
 }
