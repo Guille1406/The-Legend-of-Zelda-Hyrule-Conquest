@@ -82,10 +82,10 @@ void P_Zelda::UpdateArrows()
 
 void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 {
-	static int final_pos = 0;
+	int final_pos = 0;
 	int temp_pos = pos;
-	static bool can_pass_wall = true;
-	static bool zelda_collides = false;
+	bool can_pass_wall = true;
+	bool zelda_collides = false;
 	int decrease = 1;
 	bool is_on_collision = false;
 	int count = 1;

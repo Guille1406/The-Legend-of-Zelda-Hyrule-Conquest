@@ -53,8 +53,8 @@ bool S_World::Start()
 	App->render->camera.y = 0;
 
 
-	App->player->Link->pos = { 50,50 };
-	App->player->Zelda->pos = { 60,60 };
+	App->player->Link->pos = { 660,1100 };
+	App->player->Zelda->pos = { 620,1100 };
 
 	
 	LOG("World Open");
