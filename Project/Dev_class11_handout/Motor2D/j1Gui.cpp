@@ -60,25 +60,30 @@ bool j1Gui::PreUpdate()
 		list_to_iterate = &GuiElements;
 
 	const Gui* mouse_hover = FindMouseHover();
+	if (mouse_hover &&
+		mouse_hover->can_focus == true &&
+		App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == j1KeyState::KEY_DOWN)
+		SetFocus(mouse_hover);
+
 	for (std::list<Gui*>::iterator item = list_to_iterate->begin(); item != list_to_iterate->cend(); ++item)
 	{
 		if ((*item)->GetModuleListener() != nullptr)
 		{
-			(*item)->CheckInput(mouse_hover, nullptr);
-			(*item)->Update(mouse_hover, nullptr);
+			(*item)->CheckInput(mouse_hover, focus);
+			(*item)->Update(mouse_hover, focus);
 		}
 		if ((*item)->GetSceneListener() != nullptr)//if is scene
 		{
 			if ((*item)->GetSceneListener() == App->scene->GetActiveScene())
 			{
-				(*item)->CheckInput(mouse_hover, nullptr);
-				(*item)->Update(mouse_hover, nullptr);
+				(*item)->CheckInput(mouse_hover, focus);
+				(*item)->Update(mouse_hover, focus);
 			}
 		}
 		if (App->console->IsActive())
 		{
-			(*item)->CheckInput(mouse_hover, nullptr);
-			(*item)->Update(mouse_hover, nullptr);
+			(*item)->CheckInput(mouse_hover, focus);
+			(*item)->Update(mouse_hover, focus);
 		}
 	}
 	return true;
@@ -185,7 +190,7 @@ const Gui* j1Gui::FindMouseHover()
 	return nullptr;
 }
 
-bool j1Gui::CanInteract(Gui* ui) const
+bool j1Gui::CanInteract(const Gui* ui) const
 {
 	//return ui->movable && ui->visible;
 	return ui->visible;
@@ -210,6 +215,54 @@ void j1Gui::push_back_gui(Gui* gui, AddGuiTo addto)
 bool j1Gui::InFOV(Gui* gui)
 {
 	return gui->InFOV();
+}
+
+void j1Gui::SetFocus(const Gui* ui)
+{
+	j1Module* listener = nullptr;
+
+	if (ui->module_listener != nullptr)
+		listener = ui->module_listener;
+	if (ui->scene_listener != nullptr)
+		listener = (j1Module*)ui->scene_listener;
+
+	if (ui != focus)
+	{
+		if (ui != nullptr)
+		{
+			if (ui->can_focus == true && CanInteract(ui) == true)
+			{
+				if (focus != nullptr)
+				{
+					if (ui->module_listener != nullptr)
+						listener->OnGui(focus, GuiEvent::lost_focus);
+					else
+						((MainScene*)listener)->OnGui(focus, GuiEvent::lost_focus);
+				}
+				focus = (Gui*)ui;
+				if (ui->module_listener != nullptr)
+					listener->OnGui(focus, GuiEvent::gain_focus);
+				else
+					((MainScene*)listener)->OnGui(focus, GuiEvent::gain_focus);
+			}
+		}
+		else
+		{
+			if (focus != nullptr)
+			{
+				if (ui->module_listener != nullptr)
+					listener->OnGui(focus, GuiEvent::lost_focus);
+				else
+					((MainScene*)listener)->OnGui(focus, GuiEvent::lost_focus);
+			}
+			focus = nullptr;
+		}
+	}
+}
+
+const Gui* j1Gui::GetFocus() const
+{
+	return focus;
 }
 
 // Gui Creators ---------------------------------------------------

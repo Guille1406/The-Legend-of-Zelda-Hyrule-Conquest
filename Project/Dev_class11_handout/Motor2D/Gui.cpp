@@ -161,17 +161,24 @@ void Gui::CheckInput(const Gui* mouse_hover, const Gui* focus)
 		}
 	}
 
-	/*
 	if (focus == this && listener != nullptr)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_DOWN)
-			listener->OnGui(this, GuiEvent::mouse_lclk_down);
+			if (module_listener != nullptr)
+				listener->OnGui(this, GuiEvent::mouse_lclk_down);
+			else
+				((MainScene*)listener)->OnGui(this, GuiEvent::mouse_lclk_down);
 
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_REPEAT)
-			listener->OnGui(this, GuiEvent::mouse_lclk_repeat);
+			if (module_listener != nullptr)
+				listener->OnGui(this, GuiEvent::mouse_lclk_repeat);
+			else
+				((MainScene*)listener)->OnGui(this, GuiEvent::mouse_lclk_repeat);
 
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_UP)
-			listener->OnGui(this, GuiEvent::mouse_lclk_up);
+			if (module_listener != nullptr)
+				listener->OnGui(this, GuiEvent::mouse_lclk_up);
+			else
+				((MainScene*)listener)->OnGui(this, GuiEvent::mouse_lclk_up);
 	}
-	*/
 }

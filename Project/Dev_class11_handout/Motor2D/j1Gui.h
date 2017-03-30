@@ -47,6 +47,10 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	void SetFocus(const Gui* ui);
+
+	const Gui* GetFocus() const;
+
 	// Gui creation functions
 	GuiImage* CreateImage(iPoint position, SDL_Rect* rect, bool movable = false, AddGuiTo addto = AddGuiTo::regular_purpose);
 	GuiLabel* CreateLabel(iPoint position, std::string* str, bool movable = false, AddGuiTo addto = AddGuiTo::regular_purpose);
@@ -78,7 +82,7 @@ public:
 
 private:
 	const Gui* FindMouseHover();
-	bool CanInteract(Gui* ui) const;
+	bool CanInteract(const Gui* ui) const;
 	void push_back_gui(Gui* gui, AddGuiTo addto);
 	bool InFOV(Gui* gui);
 
@@ -90,6 +94,8 @@ private:
 
 	std::list<Gui*> GuiElements;
 	std::list<Gui*> ConsoleElements;
+
+	Gui* focus = nullptr;
 
 };
 

@@ -45,7 +45,7 @@ void GuiButton::Update(const Gui* mouse_hover, const Gui* focus)
 {
 	bool inside = (mouse_hover == (Gui*)this);
 
-	if (inside == true)
+	if ((inside == true) || (focus == this))
 	{
 		switch (button_type)
 		{
