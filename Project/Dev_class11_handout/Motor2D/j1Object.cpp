@@ -32,21 +32,19 @@ bool j1Object::CleanUp()
 	return true;
 }
 
-Object * j1Object::FindObject(std::string name)
+std::vector<Object*> j1Object::FindObject(std::string name)
 {
-	Object* temp_object = V_Objects[0][0];
+	std::vector<Object*> ret_vec;
+	
 	for (int i = 0; i < V_Objects->size(); i++) {
-		auto temp = V_Objects[0][i];
-		const char* temp_name = temp->name.c_str();
-		const char* c_name = name.c_str();
-		//const char* c_name = name.data.c_str();
-		if (strcmp(temp_name, c_name)==0 && *c_name != (char)'\0') {
-			int x = 0;
-			return V_Objects[0][i];
+		Object* temp = V_Objects[0][i];
+		
+		if (name == temp->name && name != empty_char) {
+			ret_vec.push_back( V_Objects[0][i]);
 		}
 	}
-
-	return nullptr;
+	
+	return ret_vec;
 }
 
 void j1Object::CreateColliders(Object object)
@@ -77,8 +75,7 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int heigh
 		ret = CreateChangeHeight(object,  height);
 	else if (!strcmp(type_name, "jump"))
 		ret = CreateJump(object,  height);
-	else if (!strcmp(type_name, "door"))
-		ret = CreateDoor(object, height);
+	
 	return ret;
 }
 
@@ -140,18 +137,17 @@ Object * j1Object::CreateDoor(pugi::xml_node object, int height)
 	temp_door.type = objectType::door;
 	temp_door.active = true;
 	temp_door.logic_height = height;
-	auto attribute = object.child("properties").child("property");
+
+/*	auto attribute = object.child("properties").child("property");
 	while (strcmp(attribute.attribute("name").as_string(), "key_needed")) {
 		attribute = attribute.next_sibling();
 	}
 	temp_door.key_needed = attribute.attribute("value").as_bool();
 
 	attribute = object.child("properties").child("property");
-	while (strcmp(attribute.attribute("name").as_string(), "multi_button")) {
-		attribute = attribute.next_sibling();
-	}
-	temp_door.multi_button = attribute.attribute("value").as_bool();
 
+	temp_door.multi_button = attribute.attribute("value").as_bool();
+	*/
 	for (int i = 0; i < temp_door.rect.w / 16; i++) {
 		for (int n = 0; n < temp_door.rect.h / 16; n++) {
 			iPoint temp;

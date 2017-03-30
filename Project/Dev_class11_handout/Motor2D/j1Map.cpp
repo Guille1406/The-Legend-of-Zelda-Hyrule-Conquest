@@ -529,14 +529,15 @@ bool j1Map::LoadConnectedObjects(pugi::xml_node & node)
 		for (pugi::xml_node node_object = layer_data; node_object; node_object = node_object.next_sibling("object"))
 		{
 
-			auto attribute = node_object.child("properties").child("property");
+			pugi::xml_node attribute = node_object.child("properties").child("property");
 			while (strcmp(attribute.attribute("name").value(), "entity") && attribute) {
 				attribute = attribute.next_sibling();
 			}
-			auto entity = App->object->FindObject(attribute.attribute("value").as_string());
-			if (entity != nullptr) {
-				App->object->V_Objects[0][count]->connected_object = entity;
+			std::vector<Object*> vec_connected_objects = App->object->FindObject(attribute.attribute("value").as_string());
+			for (int i = 0; i < vec_connected_objects.size(); i++) {
+				App->object->V_Objects[0][count]->connected_object.push_back(vec_connected_objects[i]);
 			}
+			
 			count++;
 		}
 	}

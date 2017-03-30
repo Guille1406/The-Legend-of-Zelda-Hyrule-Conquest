@@ -7,7 +7,7 @@ private:
 	bool triggered;
 public:
 	Button() {
-
+		
 	}
 	Button(const Button& obj) {
 		*this = obj;
@@ -16,9 +16,11 @@ public:
 
 	}
 	void Action() {
-		if(connected_object != NULL)
-		this->connected_object->Action();
-		
+		for (int i = 0; i < connected_object.size(); i++) {
+
+			connected_object[i]->Action();
+
+		}
 	}
 
 public:

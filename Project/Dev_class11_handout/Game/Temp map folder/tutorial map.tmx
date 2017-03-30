@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="70">
  <tileset firstgid="1" name="tileset dungeon" tilewidth="16" tileheight="16" tilecount="3844" columns="62">
-  <image source="../Temporary Sprites folder/tileset dungeon advanced.png" width="1000" height="1000"/>
+  <image source="tileset dungeon advanced.png" width="1000" height="1000"/>
   <tile id="1062">
    <animation>
     <frame tileid="1062" duration="200"/>
@@ -32,7 +32,7 @@
   </tile>
  </tileset>
  <tileset firstgid="3845" name="collision tileset" tilewidth="16" tileheight="16" tilecount="1" columns="1">
-  <image source="../Temporary Sprites folder/collision tileset.png" width="16" height="16"/>
+  <image source="collision tileset.png" width="16" height="16"/>
  </tileset>
  <layer name="fondo" width="100" height="100">
   <data encoding="csv">

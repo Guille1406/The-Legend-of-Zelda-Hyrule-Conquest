@@ -48,7 +48,7 @@ public:
 class Object : public Entity {
 public:
 	Object() {
-		
+		int x = 0;
 	};
 	~Object() {};
 
@@ -60,7 +60,7 @@ public:
 	bool active;
 	objectType type;
 	std::string name;
-	Object* connected_object= nullptr;
+	std::vector<Object*> connected_object;
 	std::vector<iPoint> collider_tiles;
 	
 };
@@ -80,7 +80,7 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
-	Object* FindObject(std::string name);
+	std::vector<Object*> FindObject(std::string name);
 	void CreateColliders(Object);
 
 	Object* CreateObject(char*, pugi::xml_node, int height);
