@@ -412,7 +412,7 @@ void Character::RollFunction(float dt, int & pos, bool add)
 	temp = true;
 
 	//if player have wall in front the roll will stop
-	if ((i * pos <  i*final_pos) && GetLogic(false, tilepos) != TILE_COL_ID ) {
+	if ((i * pos <  i*final_pos) && GetLogic(false, tilepos) == 0 ) {
 		pos = pos + (i * 4);
 	}
 	else {
