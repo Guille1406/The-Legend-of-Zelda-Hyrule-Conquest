@@ -291,8 +291,12 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link_sword) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
-		if (Link->Compare_Link_Sword_Collision(n_enemy)) {
-			Link->Collision_Sword_EnemySword();
+		if (Link->collision_by_enemy_timmer.Read() > 1500) {
+			Link->collision_by_enemy_timmer.Start();
+			if (Link->Compare_Link_Sword_Collision(n_enemy)) {
+				Link->Collision_Sword_EnemySword();
+				half_hearts_test_purpose--;
+			}
 		}
 	}
 

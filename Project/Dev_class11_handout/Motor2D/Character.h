@@ -12,7 +12,7 @@
 #include "j1Object.h"
 
 
-#define TILE_COL_ID 2077
+#define TILE_COL_ID 3845
 
 struct dir_tiles {
 	uint i;
