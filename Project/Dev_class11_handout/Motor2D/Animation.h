@@ -4,6 +4,12 @@
 #include "SDL/include/SDL_rect.h"
 #define MAX_FRAMES 25
 
+struct Frame {
+	SDL_Rect rect;
+	iPoint pivot;
+};
+
+
 class Animation
 {
 public:
@@ -11,7 +17,7 @@ public:
 	float speed = 1.0f;
 	iPoint pivot = {0,0};
 	//std::vector<SDL_Rect> frames;
-	SDL_Rect frames[MAX_FRAMES];
+	Frame frames[MAX_FRAMES];
 	int last_frame = 0;
 private:
 	float current_frame = 0.0f;
@@ -29,12 +35,12 @@ public:
 		SDL_memcpy(&frames, anim.frames, sizeof(frames));
 	}
 
-	void PushBack(const SDL_Rect& rect)
+	void PushBack(const Frame& rect)
 	{
 		frames[last_frame++] = rect;
 	}
 
-	SDL_Rect& GetCurrentFrame()
+	Frame& GetCurrentFrame()
 	{
 		current_frame += speed;
 		if(current_frame >= last_frame)

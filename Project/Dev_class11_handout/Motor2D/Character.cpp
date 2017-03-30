@@ -32,12 +32,17 @@ void Character::LoadAnimation(const char* path)
 	int y = animations.attribute("y").as_int();
 	int w = animations.attribute("w").as_int();
 	int h = animations.attribute("h").as_int();
-	SDL_Rect anim = { x,y,w,h };
+	Frame anim_frame;
+	
 	int piv_x = animations.attribute("pX").as_float() *(float)w;
 	int piv_y = animations.attribute("pY").as_float() * (float)h;
 	Animation temp_animation;
 	temp_animation.pivot.x = piv_x;
 	temp_animation.pivot.y = piv_y;
+	
+	anim_frame.rect = { x,y,w,h };
+	anim_frame.pivot = { piv_x,piv_y };
+
 	char* name = (char*)animations.attribute("n").as_string();
 
 	auto temp = animations;
@@ -47,23 +52,23 @@ void Character::LoadAnimation(const char* path)
 		
 		
 		if (strcmp(name, last_name)) {
-			temp_animation.speed = 0.2;
+			temp_animation.speed = 0.05;
 					
 			sprites_vector->push_back(temp_animation);
 			
-			temp_animation.pivot.x = temp.attribute("pX").as_float() *(float)w;
-			temp_animation.pivot.y = temp.attribute("pY").as_float() *(float)h;
+			//temp_animation.pivot.x = temp.attribute("pX").as_float() *(float)w;
+			//temp_animation.pivot.y = temp.attribute("pY").as_float() *(float)h;
 			
 			temp_animation.Reset();
 
 			temp_animation.last_frame = 0;
-			temp_animation.PushBack(anim);
+			temp_animation.PushBack(anim_frame);
 			i++;
 			last_name = name;
 		}
 
 		else {
-			temp_animation.PushBack(anim);
+			temp_animation.PushBack(anim_frame);
 			
 			
 		}
@@ -75,7 +80,12 @@ void Character::LoadAnimation(const char* path)
 		y = temp.attribute("y").as_int();
 		w = temp.attribute("w").as_int();
 		h = temp.attribute("h").as_int();
-		anim = { x,y,w,h };
+
+		temp_animation.pivot.x = temp.attribute("pX").as_float() *(float)w;
+		temp_animation.pivot.y = temp.attribute("pY").as_float() *(float)h;
+
+		anim_frame.rect = { x,y,w,h };
+		anim_frame.pivot = { temp_animation.pivot.x, temp_animation.pivot.y };
 		
 	}
 	sprites_vector->push_back(temp_animation);

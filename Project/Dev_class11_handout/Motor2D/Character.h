@@ -31,7 +31,7 @@ struct  adjacent_tiles {
 
 enum player_event {
 	move,
-	idle,
+	idle,	
 	jump,
 	roll,
 	pick,
