@@ -146,7 +146,6 @@ public:
 
 	
 private:
-	uint i_logic_height_player = 0;
 
 	//For jump
 	bool temp = false;

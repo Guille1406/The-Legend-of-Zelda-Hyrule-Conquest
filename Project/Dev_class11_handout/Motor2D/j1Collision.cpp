@@ -110,7 +110,7 @@ bool j1Collision::Update(float dt)
 			{
 				if (matrix[c1->type][c2->type] && c1->callback)
 				{
-				
+				if(c1->parent->logic_height == c2->parent->logic_height)
 					c1->callback->OnCollision(c1, c2);
 						//App->render->Blit(App->player->graphics, App->player->PreviousPos.x, App->player->PreviousPos.y-1, &(App->player->current_animation->GetCurrentFrame()));
 
@@ -119,6 +119,7 @@ bool j1Collision::Update(float dt)
 
 				if (matrix[c2->type][c1->type] && c2->callback)
 				{
+					if (c1->parent->logic_height == c2->parent->logic_height)
 					c2->callback->OnCollision(c2, c1);
 				}
 				
