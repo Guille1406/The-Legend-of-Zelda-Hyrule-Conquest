@@ -19,7 +19,7 @@ bool S_World::Start()
 	App->camera->Enable();
 	App->player->Enable();
 	App->hud->Enable();
-	if (App->map->Load("TestMap.tmx") == true)
+	if (App->map->Load("tutorial map.tmx") == true)
 
 	{
 		int w, h = 0;
