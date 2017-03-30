@@ -14,6 +14,7 @@
 
 #define TILE_COL_ID 3845
 #define CANT_PASS_COL_ID 3848
+#define NOT_COLISION_ID 0
 
 struct dir_tiles {
 	uint i;

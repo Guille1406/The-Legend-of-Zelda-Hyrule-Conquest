@@ -39,7 +39,9 @@ void Character::LoadAnimation(const char* path)
 
 	auto temp = animations;
 	last_name = name;
+	int i = 0;
 	while (animations) {
+		
 		auto temp = animations;
 		name = (char*)animations.attribute("n").as_string();
 		x = temp.attribute("x").as_int();
@@ -47,19 +49,28 @@ void Character::LoadAnimation(const char* path)
 		w = temp.attribute("w").as_int();
 		h = temp.attribute("h").as_int();
 		anim = { x,y,w,h };
-
+		float temp_x = temp.attribute("pX").as_float();
+		float temp_y = temp.attribute("pY").as_float();
+		int piv_x = temp.attribute("pX").as_float() *(float) w;
+		int piv_y = temp.attribute("pY").as_float() * (float) h;
 		if (strcmp(name, last_name) ) {
 			temp_animation.speed = 0.2;
+			temp_animation.pivot.x = piv_x;
+			temp_animation.pivot.y = piv_y;
 			sprites_vector->push_back(temp_animation);
-			temp_animation.Reset();
+			//temp_animation.Reset();
+			sprites_vector[0][i].pivot = { piv_x,piv_y };
 			temp_animation.last_frame = 0;
 			temp_animation.PushBack(anim);
+			i++;
 			last_name = name;
-		}
+			}
+		
 		else {
 			temp_animation.PushBack(anim);
 		}
 		animations = animations.next_sibling();
+		
 	}
 	sprites_vector->push_back(temp_animation);
 }

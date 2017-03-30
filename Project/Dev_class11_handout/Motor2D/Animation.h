@@ -9,6 +9,7 @@ class Animation
 public:
 	bool loop = true;
 	float speed = 1.0f;
+	iPoint pivot = {0,0};
 	//std::vector<SDL_Rect> frames;
 	SDL_Rect frames[MAX_FRAMES];
 	int last_frame = 0;
@@ -24,6 +25,7 @@ public:
 
 	Animation(const Animation& anim) : loop(anim.loop), speed(anim.speed), last_frame(anim.last_frame)
 	{
+		this->pivot = anim.pivot;
 		SDL_memcpy(&frames, anim.frames, sizeof(frames));
 	}
 

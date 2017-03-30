@@ -179,11 +179,13 @@ Object * j1Object::CreateChangeHeight(pugi::xml_node object, int height)
 	int y = object.attribute("y").as_int();
 	int w = object.attribute("width").as_int();
 	int h = object.attribute("height").as_int();
+	
 	temp_height.logic_height = height;
 	temp_height.name = object.attribute("name").as_string();
 	temp_height.rect = { x,y,w,h };
 	temp_height.type = objectType::change_height;
 	temp_height.active = true;
+
 	auto attribute = object.child("properties").child("property");
 	while (strcmp(attribute.attribute("name").as_string(), "height")) {
 		attribute = attribute.next_sibling();
