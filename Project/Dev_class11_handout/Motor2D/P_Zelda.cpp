@@ -116,14 +116,25 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 
 			int i = 0;
 			if (!is_on_collision || temp_point != last_point) {
-				for (i = 0; i <= GetLogicHeightPlayer(); i++) {
-					if (GetLogic(i, temp_point) == TILE_COL_ID) {
+				for (int i = 0; i < 2; i++) {
+					if (GetLogic(i, temp_point) == CANT_PASS_COL_ID) {
+						stop = true;
+						before_wall_pos = temp_pos;
+						break;
+					}
+				}
+				if (stop)break;
+				for (i = 0; i <= GetLogicHeightPlayer() && i<2; i++) {
+					
+					
+					if (GetLogic(i, temp_point) != 0) {
 						is_on_collision = true;
 						before_wall_pos = temp_pos;
 						last_point = temp_point;
-						if (GetLogic(count, next_point) == TILE_COL_ID) {
-							stop = true;
-							break;
+						
+						if (GetLogic(i, next_point) != 0) {
+							//stop = true;
+							//break;
 						}
 						if (!can_pass_wall) {
 							before_wall_pos = temp_pos + n * 64;
@@ -136,7 +147,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 					}
 				}
 			}
-	if (GetLogic(decrease, temp_point) != TILE_COL_ID) {
+	if (GetLogic(decrease, temp_point) == 0) {
 		is_on_collision = false;
 	}
 			

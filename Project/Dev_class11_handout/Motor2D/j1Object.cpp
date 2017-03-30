@@ -55,6 +55,7 @@ void j1Object::CreateColliders(Object object)
 			temp.x = object.rect.x + i * 16;
 			temp.y = object.rect.y + n * 16;
 			//object.collider_tiles.push_back(temp);
+			if(App->map->V_Colision[object.logic_height][0].data[(temp.y / 16) * 100 + temp.x / 16] != CANT_PASS_COL_ID)
 			App->map->V_Colision[object.logic_height][0].data[(temp.y/16 )* 100 + temp.x/16] = TILE_COL_ID;
 		}
 	}

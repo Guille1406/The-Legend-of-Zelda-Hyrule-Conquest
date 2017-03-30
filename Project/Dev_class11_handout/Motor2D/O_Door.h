@@ -22,6 +22,7 @@ public:
 				temp.x =rect.x + i * 16;
 				temp.y = rect.y + n * 16;
 				active = false;
+				if(App->map->V_Colision[logic_height][0].data[(temp.y / 16) * 100 + temp.x / 16] == TILE_COL_ID)
 				App->map->V_Colision[logic_height][0].data[(temp.y / 16) * 100 + temp.x / 16] = 0;
 			}
 		}
