@@ -10,6 +10,7 @@
 
 S_MainMenu::S_MainMenu()
 {
+	//visibility = true;
 }
 
 S_MainMenu::~S_MainMenu()
@@ -62,6 +63,11 @@ bool S_MainMenu::Update()
 	{
 		int Title_X_pos = App->win->GetWindowWHalf() - (int)(title.w * 0.5f);
 		App->render->Blit(App->gui->GetAtlas(), -App->render->camera.x + Title_X_pos, -App->render->camera.y + 40, &title, 1.0f, 0, INT_MAX, INT_MAX, false, titleopacity);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
+		App->scene->ChangeScene(Scene_ID::world);
+		App->startmenuback->Disable();
 	}
 	
 	return true;
