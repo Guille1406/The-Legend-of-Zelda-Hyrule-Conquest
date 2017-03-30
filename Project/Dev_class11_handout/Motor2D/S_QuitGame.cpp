@@ -24,10 +24,16 @@ bool S_QuitGame::Awake()
 	Yes->SetFont(App->font->Sherwood20);
 	((Gui*)Yes)->SetListener(this);
 	Yes->SetVisible(false);
+	Yes->Focusable(true);
 	No = App->gui->CreateButton(iPoint(X_pos + 200, 350), &std::string("No"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	No->SetFont(App->font->Sherwood20);
 	((Gui*)No)->SetListener(this);
 	No->SetVisible(false);
+	No->Focusable(true);
+
+	buttons.push_back(Yes);
+	buttons.push_back(No);
+
 	return true;
 }
 
@@ -37,11 +43,33 @@ bool S_QuitGame::Start()
 	Label->SetVisible(true);
 	Yes->SetVisible(true);
 	No->SetVisible(true);
+
+	App->gui->SetFocus(No);
+
 	return true;
 }
 
 bool S_QuitGame::Update()
 {
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+	{
+		std::vector<GuiButton*>::iterator focused_button = std::find(buttons.begin(), buttons.end(), App->gui->GetFocus());
+		if ((*focused_button) != buttons.front())
+		{
+			focused_button--;
+			App->gui->SetFocus((*(focused_button)));
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+	{
+		std::vector<GuiButton*>::iterator focused_button = std::find(buttons.begin(), buttons.end(), App->gui->GetFocus());
+		if ((*focused_button) != buttons.back())
+		{
+			focused_button++;
+			App->gui->SetFocus((*(focused_button)));
+		}
+	}
 	return true;
 }
 

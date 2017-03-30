@@ -107,6 +107,11 @@ public:
 	AddGuiTo GetPurpose() const;
 	bool InFOV();
 
+	void Focusable(bool value)
+	{
+		can_focus = value;
+	}
+
 	const j1Module* GetModuleListener() const
 	{
 		return module_listener;

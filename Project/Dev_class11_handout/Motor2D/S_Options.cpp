@@ -23,22 +23,34 @@ bool S_Options::Awake()
 	controls->SetFont(App->font->Sherwood20);
 	((Gui*)controls)->SetListener(this);
 	controls->SetVisible(false);
+	controls->Focusable(true);
 	video = App->gui->CreateButton(iPoint(X_pos, 310), &std::string("Video Settings"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	video->SetFont(App->font->Sherwood20);
 	((Gui*)video)->SetListener(this);
 	video->SetVisible(false);
+	video->Focusable(true);
 	audio = App->gui->CreateButton(iPoint(X_pos, 420), &std::string("Audio Settings"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	audio->SetFont(App->font->Sherwood20);
 	((Gui*)audio)->SetListener(this);
 	audio->SetVisible(false);
+	audio->Focusable(true);
 	gameplay = App->gui->CreateButton(iPoint(X_pos, 530), &std::string("Gameplay Settings"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	gameplay->SetFont(App->font->Sherwood20);
 	((Gui*)gameplay)->SetListener(this);
 	gameplay->SetVisible(false);
+	gameplay->Focusable(true);
 	back = App->gui->CreateButton(iPoint(920, 600), &std::string("Back"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	back->SetFont(App->font->Sherwood20);
 	((Gui*)back)->SetListener(this);
 	back->SetVisible(false);
+	back->Focusable(true);
+
+	buttons.push_back(controls);
+	buttons.push_back(video);
+	buttons.push_back(audio);
+	buttons.push_back(gameplay);
+	buttons.push_back(back);
+
 	return true;
 };
 
@@ -50,11 +62,33 @@ bool S_Options::Start()
 	audio->SetVisible(true);
 	gameplay->SetVisible(true);
 	back->SetVisible(true);
+
+	App->gui->SetFocus(buttons.front());
+
 	return true;
 }
 
 bool S_Options::Update()
 {
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+	{
+		std::vector<GuiButton*>::iterator focused_button = std::find(buttons.begin(), buttons.end(), App->gui->GetFocus());
+		if ((*focused_button) != buttons.front())
+		{
+			focused_button--;
+			App->gui->SetFocus((*(focused_button)));
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+	{
+		std::vector<GuiButton*>::iterator focused_button = std::find(buttons.begin(), buttons.end(), App->gui->GetFocus());
+		if ((*focused_button) != buttons.back())
+		{
+			focused_button++;
+			App->gui->SetFocus((*(focused_button)));
+		}
+	}
 	return true;
 }
 

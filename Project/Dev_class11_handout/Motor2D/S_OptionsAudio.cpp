@@ -21,18 +21,28 @@ bool S_OptionsAudio::Awake()
 	MasterVolume->SetFont(App->font->Sherwood20);
 	((Gui*)MasterVolume)->SetListener(this);
 	MasterVolume->SetVisible(false);
+	//MasterVolume->Focusable(true);
 	MusicVolume = App->gui->CreateLabel(iPoint(500, 280), &std::string("Music Volume"), false);
 	MusicVolume->SetFont(App->font->Sherwood20);
 	((Gui*)MusicVolume)->SetListener(this);
 	MusicVolume->SetVisible(false);
+	//MusicVolume->Focusable(true);
 	SFXVolume = App->gui->CreateLabel(iPoint(500, 360), &std::string("SFX Volume"), false);
 	SFXVolume->SetFont(App->font->Sherwood20);
 	((Gui*)SFXVolume)->SetListener(this);
 	SFXVolume->SetVisible(false);
+	//SFXVolume->Focusable(true);
 	back = App->gui->CreateButton(iPoint(500, 610), &std::string("Back"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	back->SetFont(App->font->Sherwood20);
 	((Gui*)back)->SetListener(this);
 	back->SetVisible(false);
+	back->Focusable(true);
+
+	//buttons.push_back(MasterVolume);
+	//buttons.push_back(MusicVolume);
+	//buttons.push_back(SFXVolume);
+	buttons.push_back(back);
+
 	return true;
 };
 
@@ -43,11 +53,33 @@ bool S_OptionsAudio::Start()
 	MusicVolume->SetVisible(true);
 	SFXVolume->SetVisible(true);
 	back->SetVisible(true);
+
+	App->gui->SetFocus(buttons.front());
+
 	return true;
 }
 
 bool S_OptionsAudio::Update()
 {
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+	{
+		std::vector<GuiButton*>::iterator focused_button = std::find(buttons.begin(), buttons.end(), App->gui->GetFocus());
+		if ((*focused_button) != buttons.front())
+		{
+			focused_button--;
+			App->gui->SetFocus((*(focused_button)));
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+	{
+		std::vector<GuiButton*>::iterator focused_button = std::find(buttons.begin(), buttons.end(), App->gui->GetFocus());
+		if ((*focused_button) != buttons.back())
+		{
+			focused_button++;
+			App->gui->SetFocus((*(focused_button)));
+		}
+	}
 	return true;
 }
 

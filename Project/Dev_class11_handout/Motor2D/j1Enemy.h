@@ -15,7 +15,7 @@ enum OrientationEnemy{
 };
 
 enum enemyType {
-	green_enemy = 106,
+	green_enemy = 3847,
 
 };
 

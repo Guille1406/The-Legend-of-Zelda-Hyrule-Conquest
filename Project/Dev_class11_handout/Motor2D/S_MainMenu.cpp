@@ -24,26 +24,40 @@ bool S_MainMenu::Awake()
 	campaign->SetFont(App->font->Sherwood28);
 	((Gui*)campaign)->SetListener(this);
 	campaign->SetVisible(false);
+	campaign->Focusable(true);
 	options = App->gui->CreateButton(iPoint(X_pos, 380), &std::string("Options"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	options->SetFont(App->font->Sherwood28);
 	((Gui*)options)->SetListener(this);
 	options->SetVisible(false);
+	options->Focusable(true);
 	credits = App->gui->CreateButton(iPoint(X_pos, 490), &std::string("Credits"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	credits->SetFont(App->font->Sherwood28);
 	((Gui*)credits)->SetListener(this);
 	credits->SetVisible(false);
+	credits->Focusable(true);
 	quit = App->gui->CreateButton(iPoint(X_pos, 600), &std::string("Quit"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	quit->SetFont(App->font->Sherwood28);
 	((Gui*)quit)->SetListener(this);
 	quit->SetVisible(false);
+	quit->Focusable(true);
 	twitter = App->gui->CreateButton(iPoint(1039, 601), &std::string(""), ButtonType::idle_only, &twitterrect, false);
 	twitter->SetFont(App->font->Sherwood28);
 	((Gui*)twitter)->SetListener(this);
 	twitter->SetVisible(false);
+	twitter->Focusable(true);
 	github = App->gui->CreateButton(iPoint(1158, 601), &std::string(""), ButtonType::idle_only, &githubrect, false);
 	github->SetFont(App->font->Sherwood28);
 	((Gui*)github)->SetListener(this);
 	github->SetVisible(false);
+	github->Focusable(true);
+
+	buttons.push_back(campaign);
+	buttons.push_back(options);
+	buttons.push_back(credits);
+	buttons.push_back(quit);
+	buttons.push_back(twitter);
+	buttons.push_back(github);
+
 	return true;
 };
 
@@ -62,6 +76,8 @@ bool S_MainMenu::Start()
 		github->SetVisible(true);
 	}
 
+	App->gui->SetFocus(buttons.front());
+
 	return true;
 }
 
@@ -74,11 +90,32 @@ bool S_MainMenu::Update()
 		App->render->Blit(App->gui->GetAtlas(), -App->render->camera.x + Title_X_pos, -App->render->camera.y + 40, &title, 1.0f, 0, INT_MAX, INT_MAX, false, titleopacity);
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
 		App->scene->ChangeScene(Scene_ID::world);
 		App->startmenuback->Disable();
 	}
 	
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+	{
+		std::vector<GuiButton*>::iterator focused_button = std::find(buttons.begin(), buttons.end(), App->gui->GetFocus());
+		if ((*focused_button) != buttons.front())
+		{
+			focused_button--;
+			App->gui->SetFocus((*(focused_button)));
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+	{
+		std::vector<GuiButton*>::iterator focused_button = std::find(buttons.begin(), buttons.end(), App->gui->GetFocus());
+		if ((*focused_button) != buttons.back())
+		{
+			focused_button++;
+			App->gui->SetFocus((*(focused_button)));
+		}	
+	}
+
 	return true;
 }
 

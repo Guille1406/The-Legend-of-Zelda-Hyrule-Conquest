@@ -30,16 +30,16 @@ void P_Link::Orientation_collider_link_sword()
 	switch (character_direction) {
 	case direction::up:
 		//15,30 colliders
-		Link_sword->Attack_range = { collision->rect.x,collision->rect.y - collision->rect.h,50,50 };
+		Link_sword->Attack_range = { collision->rect.x,collision->rect.y - collision->rect.h,20,30 };
 		break;
 	case direction::down:
-		Link_sword->Attack_range = { collision->rect.x,collision->rect.y+ collision->rect.h,50,50 };
+		Link_sword->Attack_range = { collision->rect.x,collision->rect.y+ collision->rect.h,20,30 };
 		break;
 	case direction::left:
-		Link_sword->Attack_range = { collision->rect.x - collision->rect.w,collision->rect.y,50,50 };
+		Link_sword->Attack_range = { collision->rect.x - collision->rect.w,collision->rect.y,30,20 };
 		break;
 	case direction::right:
-		Link_sword->Attack_range = { collision->rect.x + collision->rect.w,collision->rect.y,50,50 };
+		Link_sword->Attack_range = { collision->rect.x + collision->rect.w,collision->rect.y,30,20 };
 		break;
 
 	}
@@ -289,3 +289,4 @@ bool P_Link::Compare_Link_Sword_Collision(Enemy* enemy)
 
 	return ret;
 }
+

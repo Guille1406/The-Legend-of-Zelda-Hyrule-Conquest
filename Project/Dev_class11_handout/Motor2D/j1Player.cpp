@@ -56,6 +56,7 @@ bool j1Player::Start()
 	other_character = Zelda;
 	change = false;
 	cooperative = true;
+	Link->collision_by_enemy_timmer.Start();
 	return true;
 }
 
@@ -118,8 +119,9 @@ void j1Player::Draw()
 {
 	SDL_Rect rect;
 	rect = { Link->tilepos.x*16, Link->tilepos.y*16, 32, 32 };
-	App->render->Blit(Link->character_texture, Link->pos.x - 3 , Link->pos.y - 12, &Link->actual_animation.GetCurrentFrame());
+	App->render->Blit(Link->character_texture, Link->pos.x - 3 , Link->pos.y - 12, &Link->actual_animation.GetCurrentFrame(),1.0f,0.0,2147483647, 2147483647,true,Link->opacity);
 	App->render->Blit(Zelda->character_texture, Zelda->pos.x - 3, Zelda->pos.y - 12 , &Zelda->actual_animation.GetCurrentFrame());
+	
 	//App->render->DrawQuad(rect, 0, 0, 255, 255, true, true);
 	
 }
@@ -295,10 +297,15 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	}
 
 	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_enemy) {
-		//Link->Collision_Sword_EnemyShield();
+		if (Link->collision_by_enemy_timmer.Read() >1500) {
+			Link->collision_by_enemy_timmer.Start();
+			Link->Collision_Sword_EnemySword();
+			half_hearts_test_purpose--;
+			Link->link_hurt = true;
+		}
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy && collider2->type == COLLIDER_TYPE::collider_link) {
-		//Link->Collision_Sword_EnemyShield();
+		Link->Collision_Sword_EnemySword();
 	}
 
 

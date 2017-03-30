@@ -23,6 +23,7 @@ public:
 	GuiLabel* brightness = nullptr;
 	GuiLabel* vsync = nullptr;
 	GuiButton* back = nullptr;
+	std::vector<GuiButton*> buttons;
 };
 
 #endif // #pragma once

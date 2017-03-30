@@ -25,6 +25,7 @@ public:
 	GuiScrollBar* MusicVolumeScrollBar = nullptr;
 	GuiScrollBar* SFXVolumeScrollBar = nullptr;
 	GuiButton* back = nullptr;
+	std::vector<GuiButton*> buttons;
 };
 
 #endif // #pragma once

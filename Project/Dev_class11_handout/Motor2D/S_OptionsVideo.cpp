@@ -21,22 +21,34 @@ bool S_OptionsVideo::Awake()
 	scale->SetFont(App->font->Sherwood20);
 	((Gui*)scale)->SetListener(this);
 	scale->SetVisible(false);
+	//scale->Focusable(true);
 	fullscreen = App->gui->CreateLabel(iPoint(500, 280), &std::string("Fullscreen"), false);
 	fullscreen->SetFont(App->font->Sherwood20);
 	((Gui*)fullscreen)->SetListener(this);
 	fullscreen->SetVisible(false);
+	//fullscreen->Focusable(true);
 	brightness = App->gui->CreateLabel(iPoint(500, 360), &std::string("Brightness"), false);
 	brightness->SetFont(App->font->Sherwood20);
 	((Gui*)brightness)->SetListener(this);
 	brightness->SetVisible(false);
+	//brightness->Focusable(true);
 	vsync = App->gui->CreateLabel(iPoint(500, 440), &std::string("VSYNC"), false);
 	vsync->SetFont(App->font->Sherwood20);
 	((Gui*)vsync)->SetListener(this);
 	vsync->SetVisible(false);
+	//vsync->Focusable(true);
 	back = App->gui->CreateButton(iPoint(500, 610), &std::string("Back"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	back->SetFont(App->font->Sherwood20);
 	((Gui*)back)->SetListener(this);
 	back->SetVisible(false);
+	back->Focusable(true);
+
+	//buttons.push_back(scale);
+	//buttons.push_back(fullscreen);
+	//buttons.push_back(brightness);
+	//buttons.push_back(vsync);
+	buttons.push_back(back);
+
 	return true;
 };
 
@@ -48,11 +60,33 @@ bool S_OptionsVideo::Start()
 	brightness->SetVisible(true);
 	vsync->SetVisible(true);
 	back->SetVisible(true);
+
+	App->gui->SetFocus(buttons.front());
+
 	return true;
 }
 
 bool S_OptionsVideo::Update()
 {
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+	{
+		std::vector<GuiButton*>::iterator focused_button = std::find(buttons.begin(), buttons.end(), App->gui->GetFocus());
+		if ((*focused_button) != buttons.front())
+		{
+			focused_button--;
+			App->gui->SetFocus((*(focused_button)));
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+	{
+		std::vector<GuiButton*>::iterator focused_button = std::find(buttons.begin(), buttons.end(), App->gui->GetFocus());
+		if ((*focused_button) != buttons.back())
+		{
+			focused_button++;
+			App->gui->SetFocus((*(focused_button)));
+		}
+	}
 	return true;
 }
 

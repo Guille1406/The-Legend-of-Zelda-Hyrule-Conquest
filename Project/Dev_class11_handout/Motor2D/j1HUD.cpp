@@ -7,7 +7,7 @@
 #include "j1Render.h"
 #include "j1Input.h"
 #include "j1Window.h"
-
+#include"j1Player.h"
 j1HUD::j1HUD()
 {
 	name.create("hud");
@@ -61,11 +61,11 @@ bool j1HUD::Update(float dt)
 	App->render->Blit(atlas, -App->render->camera.x + Life_Label_x_pos, -App->render->camera.y + Life_Label_y_pos, &Life_Label, 1.0f, 0, INT_MAX, INT_MAX, false);
 	
 	//Calculate initial position
-	int hearts_pos_x = App->win->GetWindowWHalf() - Heart_Container.w * hearts_containers_test_purpose * 0.5f - space_between_hearts * (hearts_containers_test_purpose * 0.5f - 0.5f);
+	int hearts_pos_x = App->win->GetWindowWHalf() - Heart_Container.w * App->player->hearts_containers_test_purpose * 0.5f - space_between_hearts * (App->player->hearts_containers_test_purpose * 0.5f - 0.5f);
 
 	//Blit heart containers
 	int heart_container_pos_x = hearts_pos_x;
-	for (int heart = 0; heart < hearts_containers_test_purpose; heart++)
+	for (int heart = 0; heart < App->player->hearts_containers_test_purpose; heart++)
 	{
 		App->render->Blit(atlas, -App->render->camera.x + heart_container_pos_x, -App->render->camera.y + heart_container_pos_y, &Heart_Container, 1.0f, 0, INT_MAX, INT_MAX, false);
 		heart_container_pos_x += (Heart_Container.w + space_between_hearts);
@@ -73,7 +73,7 @@ bool j1HUD::Update(float dt)
 
 	//Blit hearts (Life)
 	int life_pos_x = hearts_pos_x;
-	float full_hearts = half_hearts_test_purpose * 0.5f;
+	float full_hearts = App->player->half_hearts_test_purpose * 0.5f;
 	for (int heart = 0; heart < (int)full_hearts; heart++)
 	{
 		App->render->Blit(atlas, -App->render->camera.x + life_pos_x, -App->render->camera.y + heart_container_pos_y, &Heart_Full, 1.0f, 0, INT_MAX, INT_MAX, false);
