@@ -120,7 +120,7 @@ void j1Player::Draw()
 	SDL_Rect rect;
 	rect = { Link->tilepos.x*16, Link->tilepos.y*16, 32, 32 };
 	App->render->Blit(Link->character_texture, Link->pos.x - Link->actual_animation.pivot.x, Link->pos.y - Link->actual_animation.pivot.y, &Link->actual_animation.GetCurrentFrame(),1.0f,0.0,2147483647, 2147483647,true,Link->opacity);
-	App->render->Blit(Zelda->character_texture, Zelda->pos.x - 3, Zelda->pos.y - 12 , &Zelda->actual_animation.GetCurrentFrame());
+	App->render->Blit(Zelda->character_texture, Zelda->pos.x - Zelda->actual_animation.pivot.x, Zelda->pos.y - Zelda->actual_animation.pivot.y, &Zelda->actual_animation.GetCurrentFrame());
 	
 	//App->render->DrawQuad(rect, 0, 0, 255, 255, true, true);
 	
