@@ -19,8 +19,6 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 private:
-	SDL_Texture*	atlas =  nullptr;
-	std::string		atlas_file_name;
 	SDL_Rect title =		 { 0,0,493,211 };
 	GuiButton* campaign =	 nullptr;
 	GuiButton* options =	 nullptr;

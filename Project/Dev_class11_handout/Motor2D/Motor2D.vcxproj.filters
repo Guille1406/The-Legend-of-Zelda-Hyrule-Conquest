@@ -166,6 +166,9 @@
     <ClCompile Include="j1GameStartMenuBack.cpp">
       <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
     </ClCompile>
+    <ClCompile Include="S_InGameMenu.cpp">
+      <Filter>Desenvolupament  ========\Scenes\GUI\In-Game Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -393,6 +396,9 @@
     <ClInclude Include="j1GameStartMenuBack.h">
       <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
     </ClInclude>
+    <ClInclude Include="S_InGameMenu.h">
+      <Filter>Desenvolupament  ========\Scenes\GUI\In-Game Menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -451,6 +457,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Scenes\GUI\HUD">
       <UniqueIdentifier>{4a064ef6-d258-4860-8985-2f4273a7d8de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\GUI\In-Game Menu">
+      <UniqueIdentifier>{581fd1ba-2738-4e32-aed6-82e3c72b999d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
