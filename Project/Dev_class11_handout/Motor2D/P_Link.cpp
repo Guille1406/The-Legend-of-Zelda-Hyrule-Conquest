@@ -289,3 +289,4 @@ bool P_Link::Compare_Link_Sword_Collision(Enemy* enemy)
 
 	return ret;
 }
+

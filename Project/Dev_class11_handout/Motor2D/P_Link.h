@@ -37,13 +37,14 @@ public:
 	void Orientation_collider_link_sword();
 	void Collision_Sword_EnemySword();
 	bool Compare_Link_Sword_Collision(Enemy* enemy);
-
+	void Link_Hurt_Opacity();
 
 public:
-	
+	int opacity = 255;
+	j1Timer collision_by_enemy_timmer;
 	bool can_pick_up = false;
 	bool im_lifting = false;
-
+	bool link_hurt = false;
 	bool temp = false;
 };
 
