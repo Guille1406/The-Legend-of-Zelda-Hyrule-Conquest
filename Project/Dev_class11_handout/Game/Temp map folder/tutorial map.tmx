@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="70">
  <tileset firstgid="1" name="tileset dungeon" tilewidth="16" tileheight="16" tilecount="3844" columns="62">
-  <image source="tileset dungeon advanced.png" width="1000" height="1000"/>
+  <image source="../Temporary Sprites folder/tileset dungeon advanced.png" width="1000" height="1000"/>
   <tile id="1062">
    <animation>
     <frame tileid="1062" duration="200"/>
@@ -32,7 +32,7 @@
   </tile>
  </tileset>
  <tileset firstgid="3845" name="collision tileset" tilewidth="16" tileheight="16" tilecount="1" columns="1">
-  <image source="collision tileset.png" width="16" height="16"/>
+  <image source="../Temporary Sprites folder/collision tileset.png" width="16" height="16"/>
  </tileset>
  <layer name="fondo" width="100" height="100">
   <data encoding="csv">
@@ -869,7 +869,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collisions2" width="100" height="100">
+ <layer name="collisions2" width="100" height="100" visible="0">
   <properties>
    <property name="Navigation" type="int" value="1"/>
   </properties>
@@ -976,4 +976,189 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3845,3845,3845,3845,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup name="objects 1">
+  <object id="51" name="porta_1" x="624" y="992" width="64" height="48">
+   <properties>
+    <property name="dir" value="up"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="52" name="porta_1" x="624" y="880" width="64" height="48">
+   <properties>
+    <property name="dir" value="down"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="53" name="porta_4" x="896" y="352" width="48" height="64">
+   <properties>
+    <property name="dir" value="right"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="54" name="porta_3" x="896" y="704" width="48" height="64">
+   <properties>
+    <property name="dir" value="right"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="55" x="1184" y="288" width="64" height="16">
+   <properties>
+    <property name="height" type="int" value="0"/>
+    <property name="type" value="change_height"/>
+   </properties>
+  </object>
+  <object id="56" name="porta_3" x="784" y="704" width="48" height="64">
+   <properties>
+    <property name="dir" value="left"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="57" x="960" y="288" width="64" height="16">
+   <properties>
+    <property name="height" type="int" value="0"/>
+    <property name="type" value="change_height"/>
+   </properties>
+  </object>
+  <object id="58" name="porta_2" x="624" y="432" width="64" height="48">
+   <properties>
+    <property name="dir" value="down"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="59" x="512" y="704" width="16" height="64">
+   <properties>
+    <property name="height" type="int" value="0"/>
+    <property name="type" value="change_height"/>
+   </properties>
+  </object>
+  <object id="60" name="porta_2" x="624" y="544" width="64" height="48">
+   <properties>
+    <property name="dir" value="up"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="61" name="porta_4" x="784" y="352" width="48" height="64">
+   <properties>
+    <property name="dir" value="left"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="62" x="944" y="568" width="320" height="48">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object id="67" name="diana_1" x="800" y="656" width="32" height="32">
+   <properties>
+    <property name="entity" value="porta_3"/>
+    <property name="type" value="diana"/>
+   </properties>
+  </object>
+  <object id="68" name="diana_2" x="896" y="432" width="32" height="32">
+   <properties>
+    <property name="entity" value="porta_4"/>
+    <property name="type" value="diana"/>
+   </properties>
+  </object>
+  <object id="69" name="diana_3" x="576" y="448" width="32" height="32">
+   <properties>
+    <property name="entity" value="porta_2"/>
+    <property name="type" value="diana"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="objects 2">
+  <object id="1" x="480" y="784" width="16" height="128">
+   <properties>
+    <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="2" x="496" y="912" width="208" height="16">
+   <properties>
+    <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="4" x="480" y="544" width="16" height="144">
+   <properties>
+    <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="7" x="576" y="1328" width="160" height="16">
+   <properties>
+    <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="9" x="464" y="992" width="160" height="16">
+   <properties>
+    <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="10" x="896" y="256" width="48" height="16">
+   <properties>
+    <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="11" x="1056" y="272" width="16" height="80">
+   <properties>
+    <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="12" x="1264" y="256" width="48" height="16">
+   <properties>
+    <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="13" x="1136" y="272" width="16" height="80">
+   <properties>
+    <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="14" x="1072" y="352" width="64" height="16">
+   <properties>
+    <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="18" name="porta_5" x="1072" y="80" width="64" height="48">
+   <properties>
+    <property name="dir" value="up"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="21" name="porta_0" x="624" y="1536" width="64" height="48">
+   <properties>
+    <property name="dir" value="down"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="32" x="1184" y="240" width="64" height="16">
+   <properties>
+    <property name="height" type="int" value="1"/>
+    <property name="type" value="change_height"/>
+   </properties>
+  </object>
+  <object id="33" x="960" y="240" width="64" height="16">
+   <properties>
+    <property name="height" type="int" value="1"/>
+    <property name="type" value="change_height"/>
+   </properties>
+  </object>
+  <object id="34" x="464" y="704" width="16" height="64">
+   <properties>
+    <property name="height" type="int" value="1"/>
+    <property name="type" value="change_height"/>
+   </properties>
+  </object>
+  <object id="65" name="button_1" x="656" y="944" width="32" height="32">
+   <properties>
+    <property name="entity" value="porta_1"/>
+    <property name="type" value="buton"/>
+   </properties>
+  </object>
+  <object id="66" x="1072" y="288" width="64" height="64">
+   <properties>
+    <property name="entity" value="porta_5"/>
+    <property name="type" value="double_button"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
