@@ -164,12 +164,12 @@ int Character::GetLogic(int minus_height, iPoint pos)
 
 uint Character::GetLogicHeightPlayer()
 {
-	return i_logic_height_player;
+	return logic_height;
 }
 
 void Character::ChangeLogicHeightPlayer(int height)
 {
-	i_logic_height_player = height;
+	logic_height = height;
 }
 
 void Character::UpdateColliderFront()
@@ -179,19 +179,19 @@ void Character::UpdateColliderFront()
 	switch (character_direction) {
 	case up:
 		front_collider->rect = { 0,0,32,16 };
-		front_collider->SetPos(tilepos.x * 16, tilepos.y * 16 - 16, i_logic_height_player);
+		front_collider->SetPos(tilepos.x * 16, tilepos.y * 16 - 16, logic_height);
 		break;
 	case down:
 		front_collider->rect = { 0,0,32,16 };
-		front_collider->SetPos(tilepos.x * 16, tilepos.y * 16 + 32, i_logic_height_player);
+		front_collider->SetPos(tilepos.x * 16, tilepos.y * 16 + 32, logic_height);
 		break;
 	case left:
 		front_collider->rect = { 0,0,16,32 };
-		front_collider->SetPos(tilepos.x * 16 - 16, tilepos.y * 16, i_logic_height_player);
+		front_collider->SetPos(tilepos.x * 16 - 16, tilepos.y * 16, logic_height);
 		break;
 	case right:
 		front_collider->rect = { 0,0,16,32 };
-		front_collider->SetPos(tilepos.x * 16 + 32, tilepos.y * 16, i_logic_height_player);
+		front_collider->SetPos(tilepos.x * 16 + 32, tilepos.y * 16, logic_height);
 		break;
 	}
 
