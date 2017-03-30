@@ -93,6 +93,9 @@ player_event P_Link::GetEvent()
 	if (doing_script == false) {
 		
 
+		//EVENTS FOR GAMEPAD
+		if (App->input->NumberOfGamePads() >= 1) {
+
 			if (App->inputM->EventPressed(INPUTEVENT::MUP, 1) == EVENTSTATE::E_REPEAT) {
 				if (App->inputM->EventPressed(INPUTEVENT::MRIGHT, 1) == EVENTSTATE::E_REPEAT) {
 					movement_direction = move_up_right;
@@ -142,10 +145,17 @@ player_event P_Link::GetEvent()
 					actual_event = pick;
 					im_lifting = true;
 					can_pick_up = false;
-				}
+				}			
 
 			}
-			else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+			if (App->inputM->EventPressed(INPUTEVENT::JUMP, 1) == EVENTSTATE::E_DOWN && !im_lifting) {
+				actual_event = roll;
+				doing_script = true;
+			}
+		}
+
+		else {
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 				if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 					movement_direction = move_up_right;
 				}
@@ -196,16 +206,8 @@ player_event P_Link::GetEvent()
 				movement_direction = move_idle;
 				actual_event = idle;
 			}
-			if (App->inputM->EventPressed(INPUTEVENT::JUMP, 1) == EVENTSTATE::E_DOWN && !im_lifting) {
-				actual_event = roll;
-				doing_script = true;
-			}
-
-		
-
-
 			
-
+			
 			if (can_pick_up && !App->player->Zelda->doing_script) {
 				if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
 					App->player->Zelda->is_picked = true;
@@ -223,7 +225,7 @@ player_event P_Link::GetEvent()
 				LOG("I'm Jumping :DDDD");
 				can_jump = false;
 			}
-			
+
 			if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
 				attack_timer.Start();
 				//orientation collider link sword
@@ -232,15 +234,15 @@ player_event P_Link::GetEvent()
 				doing_script = true;
 				LOG("I'm Attacking :DDDD");
 			}
-			
-			if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN  && !im_lifting) {
+
+			if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && !im_lifting) {
 				actual_event = roll;
 				doing_script = true;
 			}
 
-		
-		
-		
+		}
+
+
 		App->player->Link->can_pick_up = false;
 		return actual_event;
 	}

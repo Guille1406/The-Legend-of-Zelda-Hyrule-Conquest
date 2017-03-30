@@ -105,6 +105,9 @@ public:
 	void ConnectGamePad(int instanceID);
 	void DisconectGamePad(int instanceID);
 
+	int NumberOfGamePads() {
+		return connected_gamepads;
+	}
 	//get text input
 	const std::string* GetInputString() const;
 

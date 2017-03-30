@@ -196,12 +196,13 @@ player_event P_Zelda::GetEvent()
 	}
 	if (doing_script == false) {
 
-		static direction aim_direction = down;
-		//FIRST THINGS FIRST
 
-		if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_DOWN) {
-			aim_direction = character_direction;
-		}		
+		static direction aim_direction = down;
+		
+
+		
+		if (App->input->NumberOfGamePads() >= 2) {
+
 
 			if (App->inputM->EventPressed(INPUTEVENT::MUP, 0) == EVENTSTATE::E_REPEAT) {
 				if (App->inputM->EventPressed(INPUTEVENT::MRIGHT, 0) == EVENTSTATE::E_REPEAT) {
@@ -250,10 +251,39 @@ player_event P_Zelda::GetEvent()
 				doing_script = true;
 			}
 
+			if (is_picked) {
+				static bool can_throw = false;
+				actual_event = pick;
+				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
+				pos.x = App->player->Link->pos.x;
+				pos.y = App->player->Link->pos.y - 7;
+				if (((App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN) && can_throw) || ((App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) && can_throw)) {
+					actual_event = throw_;
+					doing_script = true;
+					is_picked = false;
+					App->player->Link->im_lifting = false;
+					can_throw = false;
 
+				}
+				else can_throw = true;
+			}
 
+			if (can_jump) {
+				actual_event = jump;
+				doing_script = true;
+				LOG("I'm Jumping :DDDD");
+				can_jump = false;
+			}
 
-			else if (App->input->GetKey(UP) == KEY_REPEAT) {
+		}
+		else
+		{
+			//FIRST THINGS FIRST
+			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_DOWN) {
+				aim_direction = character_direction;
+			}
+
+			if (App->input->GetKey(UP) == KEY_REPEAT) {
 				if (App->input->GetKey(LEFT) == KEY_REPEAT) {
 					movement_direction = move_up_left;
 				}
@@ -303,39 +333,20 @@ player_event P_Zelda::GetEvent()
 				movement_direction = move_idle;
 				actual_event = idle;
 			}
-			if (is_picked) {
-				static bool can_throw = false;
-				actual_event = pick;
-				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
-				pos.x = App->player->Link->pos.x;
-				pos.y = App->player->Link->pos.y - 7;
-				if (((App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN) && can_throw) || ((App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) && can_throw)) {
-					actual_event = throw_;
-					doing_script = true;
-					is_picked = false;
-					App->player->Link->im_lifting = false;
-					can_throw = false;
-
-				}
-				else can_throw = true;
-			}
 
 			
-
 			if (can_jump) {
 				actual_event = jump;
 				doing_script = true;
 				LOG("I'm Jumping :DDDD");
 				can_jump = false;
 			}
-
-
 			if (is_picked) {
 				static bool can_throw = false;
 				actual_event = pick;
 				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 				pos = App->player->Link->pos;
-				if  (((App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) && can_throw)|| ((App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) && can_throw)) {
+				if ((App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) && can_throw) {
 					if (!App->player->Link->doing_script) {
 						actual_event = throw_;
 						doing_script = true;
@@ -347,23 +358,25 @@ player_event P_Zelda::GetEvent()
 				else can_throw = true;
 			}
 
-			 if (App->input->GetKey(SDL_SCANCODE_COMMA) == KEY_DOWN && !is_picked) {
+			if (App->input->GetKey(SDL_SCANCODE_COMMA) == KEY_DOWN && !is_picked) {
 				actual_event = roll;
 				doing_script = true;
 			}
-			 if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_REPEAT) {
-				 character_direction = aim_direction;
-			 }
-			 if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_UP ) {
-				 actual_event = attack;
-				 doing_script = true;
-				 character_direction = aim_direction;
-			 }
+			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_REPEAT) {
+				character_direction = aim_direction;
+			}
+			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_UP) {
+				actual_event = attack;
+				doing_script = true;
+				character_direction = aim_direction;
+			}
+		}
+	}
 
 			return actual_event;
 		}
 	
-}
+
 
 bool Arrow::Check_Wall()
 {
