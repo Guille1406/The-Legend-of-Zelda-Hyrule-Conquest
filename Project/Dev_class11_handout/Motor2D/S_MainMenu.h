@@ -20,10 +20,14 @@ public:
 	void OnGui(Gui* ui, GuiEvent event);
 private:
 	SDL_Rect title =		 { 0,0,493,211 };
+	SDL_Rect twitterrect =   { 349,211,94,94 };
+	SDL_Rect githubrect =    { 349,305,94,94 };
 	GuiButton* campaign =	 nullptr;
 	GuiButton* options =	 nullptr;
 	GuiButton* credits =	 nullptr;
 	GuiButton* quit =	   	 nullptr;
+	GuiButton* twitter =	 nullptr;
+	GuiButton* github =		 nullptr;
 	bool visibility =		 false;
 	uint titleopacity =		 0;
 };

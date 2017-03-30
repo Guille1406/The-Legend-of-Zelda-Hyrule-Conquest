@@ -36,7 +36,14 @@ bool S_MainMenu::Awake()
 	quit->SetFont(App->font->Sherwood28);
 	((Gui*)quit)->SetListener(this);
 	quit->SetVisible(false);
-
+	twitter = App->gui->CreateButton(iPoint(1039, 601), &std::string(""), ButtonType::idle_only, &twitterrect, false);
+	twitter->SetFont(App->font->Sherwood28);
+	((Gui*)twitter)->SetListener(this);
+	twitter->SetVisible(false);
+	github = App->gui->CreateButton(iPoint(1158, 601), &std::string(""), ButtonType::idle_only, &githubrect, false);
+	github->SetFont(App->font->Sherwood28);
+	((Gui*)github)->SetListener(this);
+	github->SetVisible(false);
 	return true;
 };
 
@@ -51,6 +58,8 @@ bool S_MainMenu::Start()
 		options->SetVisible(true);
 		credits->SetVisible(true);
 		quit->SetVisible(true);
+		twitter->SetVisible(true);
+		github->SetVisible(true);
 	}
 
 	return true;
@@ -79,6 +88,8 @@ bool S_MainMenu::Clean()
 	options->SetVisible(false);
 	credits->SetVisible(false);
 	quit->SetVisible(false);
+	twitter->SetVisible(false);
+	github->SetVisible(false);
 	return true;
 }
 
@@ -103,5 +114,15 @@ void S_MainMenu::OnGui(Gui* ui, GuiEvent event)
 	if ((ui == (Gui*)quit) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->scene->ChangeScene(Scene_ID::quitgame);
+	}
+
+	if ((ui == (Gui*)twitter) && (event == GuiEvent::mouse_lclk_down))
+	{
+		ShellExecute(NULL, "open", "https://twitter.com/Summit_Games?lang=en", NULL, NULL, SW_SHOWMAXIMIZED);
+	}
+
+	if ((ui == (Gui*)github) && (event == GuiEvent::mouse_lclk_down))
+	{
+		ShellExecute(NULL, "open", "https://github.com/Guille1406/The-Legend-of-Zelda-Hyrule-Conquest", NULL, NULL, SW_SHOWMAXIMIZED);
 	}
 }

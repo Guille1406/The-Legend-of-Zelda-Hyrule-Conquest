@@ -79,6 +79,10 @@ bool j1GameStartMenuBackground::Update(float dt)
 			((S_MainMenu*)App->scene->GetActiveScene())->credits->SetOpacity(startmenuopacity);
 			((S_MainMenu*)App->scene->GetActiveScene())->quit->SetVisible(true);
 			((S_MainMenu*)App->scene->GetActiveScene())->quit->SetOpacity(startmenuopacity);
+			((S_MainMenu*)App->scene->GetActiveScene())->twitter->SetVisible(true);
+			((S_MainMenu*)App->scene->GetActiveScene())->twitter->SetOpacity(startmenuopacity);
+			((S_MainMenu*)App->scene->GetActiveScene())->github->SetVisible(true);
+			((S_MainMenu*)App->scene->GetActiveScene())->github->SetOpacity(startmenuopacity);
 			((S_MainMenu*)App->scene->GetActiveScene())->visibility = true;
 			firstloop = true;
 			MainMenuOpacity_timer.Start();
@@ -94,6 +98,8 @@ bool j1GameStartMenuBackground::Update(float dt)
 				((S_MainMenu*)App->scene->GetActiveScene())->options->SetOpacity(startmenuopacity);
 				((S_MainMenu*)App->scene->GetActiveScene())->credits->SetOpacity(startmenuopacity);
 				((S_MainMenu*)App->scene->GetActiveScene())->quit->SetOpacity(startmenuopacity);
+				((S_MainMenu*)App->scene->GetActiveScene())->twitter->SetOpacity(startmenuopacity);
+				((S_MainMenu*)App->scene->GetActiveScene())->github->SetOpacity(startmenuopacity);
 				((S_MainMenu*)App->scene->GetActiveScene())->titleopacity = startmenuopacity;
 				if (!activate_background_movement)
 				{
