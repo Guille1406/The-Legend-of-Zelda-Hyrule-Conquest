@@ -38,12 +38,12 @@ bool S_MainMenu::Awake()
 	((Gui*)quit)->SetListener(this);
 	quit->SetVisible(false);
 	quit->Focusable(true);
-	twitter = App->gui->CreateButton(iPoint(1039, 601), &std::string(""), ButtonType::idle_only, &twitterrect, false);
+	twitter = App->gui->CreateButton(iPoint(1039, 601), &std::string(""), ButtonType::idle_hover_pressed, &twitterrect_idle, &twitterrect_hover, &twitterrect_pressed, false);
 	twitter->SetFont(App->font->Sherwood28);
 	((Gui*)twitter)->SetListener(this);
 	twitter->SetVisible(false);
 	twitter->Focusable(true);
-	github = App->gui->CreateButton(iPoint(1158, 601), &std::string(""), ButtonType::idle_only, &githubrect, false);
+	github = App->gui->CreateButton(iPoint(1158, 601), &std::string(""), ButtonType::idle_hover_pressed, &githubrect_idle, &githubrect_hover, &githubrect_pressed, false);
 	github->SetFont(App->font->Sherwood28);
 	((Gui*)github)->SetListener(this);
 	github->SetVisible(false);

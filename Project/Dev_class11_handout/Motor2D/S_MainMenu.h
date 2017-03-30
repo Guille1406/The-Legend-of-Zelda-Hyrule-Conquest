@@ -20,9 +20,13 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 private:
-	SDL_Rect title =		 { 0,0,493,211 };
-	SDL_Rect twitterrect =   { 349,211,94,94 };
-	SDL_Rect githubrect =    { 349,305,94,94 };
+	SDL_Rect title =				{ 0,0,493,211 };
+	SDL_Rect twitterrect_idle =		{ 1278,1508,108,108 };
+	SDL_Rect twitterrect_hover =	{ 1278,1616,108,108 };
+	SDL_Rect twitterrect_pressed =	{ 1278,1724,108,108 };
+	SDL_Rect githubrect_idle =		{ 1386,1508,108,108 };
+	SDL_Rect githubrect_hover =		{ 1386,1616,108,108 };
+	SDL_Rect githubrect_pressed =   { 1386,1724,108,108 };
 	GuiButton* campaign =	 nullptr;
 	GuiButton* options =	 nullptr;
 	GuiButton* credits =	 nullptr;
