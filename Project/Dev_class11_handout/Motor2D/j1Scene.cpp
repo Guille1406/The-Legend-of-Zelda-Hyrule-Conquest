@@ -128,10 +128,10 @@ bool j1Scene::PostUpdate()
 	active_scene->PostUpdate();
 	bool ret = true;
 
-	/*
+	
 	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
-	*/
+	
 
 	return ret;
 }
