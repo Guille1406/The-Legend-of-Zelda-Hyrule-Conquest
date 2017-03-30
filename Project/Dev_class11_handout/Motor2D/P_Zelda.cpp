@@ -5,6 +5,7 @@
 #include "j1Player.h"
 #include "Character.h"
 #include "j1InputManager.h"
+#include "j1Player.h"
 
 #define JUMP_DISTANCE 96
 
@@ -335,12 +336,13 @@ player_event P_Zelda::GetEvent()
 				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 				pos = App->player->Link->pos;
 				if  (((App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) && can_throw)|| ((App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) && can_throw)) {
-					actual_event = throw_;
-					doing_script = true;
-					is_picked = false;
-					App->player->Link->im_lifting = false;
-					can_throw = false;
-					
+					if (!App->player->Link->doing_script) {
+						actual_event = throw_;
+						doing_script = true;
+						is_picked = false;
+						App->player->Link->im_lifting = false;
+						can_throw = false;
+					}
 				}
 				else can_throw = true;
 			}
