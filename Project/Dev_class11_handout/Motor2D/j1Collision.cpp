@@ -88,8 +88,9 @@ bool j1Collision::Update(float dt)
 	Collider* c1;
 	Collider* c2;
 
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	for (uint i = 0; i < colliders.size(); ++i)
 	{
+		
 		// skip empty colliders
 		if (colliders[i] == nullptr)
 			continue;

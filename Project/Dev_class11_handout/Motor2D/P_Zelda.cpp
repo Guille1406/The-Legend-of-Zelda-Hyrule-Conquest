@@ -483,6 +483,7 @@ int Arrow::GetLogicArrow(int minus_height, iPoint pos)
 	int height = App->player->Zelda->GetLogicHeightPlayer();
 
 	if (height - minus_height < 0) return 0;
+	if (height - minus_height >=3) return 0;
 	switch (direction)
 	{
 	case up:
