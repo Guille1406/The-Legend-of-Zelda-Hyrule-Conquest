@@ -41,8 +41,8 @@ bool j1Enemy::Update(float dt)
 	for (int i = 0; i < V_MyEnemies.size(); i++) {
 		V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x+17;
 		V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y +10;
-		V_MyEnemies[i]->shield_test->SetPos(V_MyEnemies[i]->collider->rect.x-23, V_MyEnemies[i]->collider->rect.y + 30, V_MyEnemies[i]->logic_height);
-		
+		//V_MyEnemies[i]->shield_test->SetPos(V_MyEnemies[i]->collider->rect.x-23, V_MyEnemies[i]->collider->rect.y + 30, V_MyEnemies[i]->logic_height);
+		Update_Sword_Collision(V_MyEnemies[i]);
 		App->render->Blit(green_soldier_tex, V_MyEnemies[i]->pix_world_pos.x, V_MyEnemies[i]->pix_world_pos.y, &V_MyEnemies[i]->rect);
 		V_MyEnemies[i]->Action();
 		
@@ -150,3 +150,38 @@ bool j1Enemy::FindInPath(iPoint pos, Enemy* enemy) {
 	}
 	return false;
 }
+
+void j1Enemy::Update_Sword_Collision(Enemy* enemy)
+{
+
+	switch (enemy->Enemy_Orientation) {
+		//	V_MyEnemies[i]->shield_test->SetPos(V_MyEnemies[i]->collider->rect.x - 23, V_MyEnemies[i]->collider->rect.y + 30, V_MyEnemies[i]->logic_height);
+
+	case OrientationEnemy::up_enemy:
+		//enemy->shield_test->SetPos(enemy->collider->rect.x + 30, enemy->collider->rect.y - 23, enemy->logic_height);
+		enemy->shield_test->rect = { enemy->collider->rect.x, enemy->collider->rect.y - enemy->collider->rect.h+10 , 10,20 };
+		break;
+
+	case OrientationEnemy::down_enemy:
+		
+		enemy->shield_test->rect = { enemy->collider->rect.x, enemy->collider->rect.y + enemy->collider->rect.h , 10,20};
+		//enemy->shield_test->SetPos(enemy->collider->rect.x+30, enemy->collider->rect.y - 23, enemy->logic_height);
+		break;
+
+	case OrientationEnemy::right_enemy:
+		enemy->shield_test->rect = { enemy->collider->rect.x + 30, enemy->collider->rect.y + 23 , 20,10 };
+		//enemy->shield_test->SetPos(enemy->collider->rect.x + 23, enemy->collider->rect.y + 30, enemy->logic_height);
+		break;
+
+	case OrientationEnemy::left_enemy:
+		
+		//20,10
+		enemy->shield_test->rect = { enemy->collider->rect.x - 23, enemy->collider->rect.y + 30 , 20,10 };
+		//enemy->shield_test->SetPos(enemy->collider->rect.x - 23, enemy->collider->rect.y + 30, enemy->logic_height);
+		break;
+
+
+
+	}
+}
+

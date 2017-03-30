@@ -29,17 +29,17 @@ void P_Link::Orientation_collider_link_sword()
 	
 	switch (character_direction) {
 	case direction::up:
-
-		Link_sword->Attack_range = { collision->rect.x,collision->rect.y - collision->rect.h,20,20 };
+		//15,30 colliders
+		Link_sword->Attack_range = { collision->rect.x,collision->rect.y - collision->rect.h,50,50 };
 		break;
 	case direction::down:
-		Link_sword->Attack_range = { collision->rect.x,collision->rect.y+ collision->rect.h,20,20 };
+		Link_sword->Attack_range = { collision->rect.x,collision->rect.y+ collision->rect.h,50,50 };
 		break;
 	case direction::left:
-		Link_sword->Attack_range = { collision->rect.x - collision->rect.w,collision->rect.y,20,20 };
+		Link_sword->Attack_range = { collision->rect.x - collision->rect.w,collision->rect.y,50,50 };
 		break;
 	case direction::right:
-		Link_sword->Attack_range = { collision->rect.x + collision->rect.w,collision->rect.y,20,20 };
+		Link_sword->Attack_range = { collision->rect.x + collision->rect.w,collision->rect.y,50,50 };
 		break;
 
 	}
@@ -84,7 +84,6 @@ void P_Link::Collision_Sword_EnemySword() {
 	}
 
 }
-
 
 
 player_event P_Link::GetEvent()
@@ -248,3 +247,45 @@ player_event P_Link::GetEvent()
 	}
 }
 
+
+bool P_Link::Compare_Link_Sword_Collision(Enemy* enemy)
+{
+	bool ret = false;
+	
+	switch (enemy->Enemy_Orientation) {
+
+	case OrientationEnemy::up_enemy:
+
+		if (character_direction == direction::down)
+			ret = true;
+
+		break;
+	case OrientationEnemy::down_enemy:
+		
+		if (character_direction == direction::up)
+			ret = true;
+
+		break;
+	case OrientationEnemy::right_enemy:
+
+		if (character_direction == direction::left)
+			ret = true;
+
+		break;
+	case OrientationEnemy::left_enemy:
+
+		if (character_direction == direction::right)
+			ret = true;
+
+		break;
+		
+
+	}
+
+
+
+
+
+
+	return ret;
+}

@@ -7,6 +7,13 @@
 #include"p2Point.h"
 class Green_Enemy;
 
+enum OrientationEnemy{
+	up_enemy,
+	right_enemy,
+	left_enemy,
+	down_enemy,
+};
+
 enum enemyType {
 	green_enemy = 106,
 
@@ -32,6 +39,7 @@ public:
 	std::list<iPoint> Path_Enemy;
 	bool passedtile = true;
 	Collider* shield_test;
+	OrientationEnemy Enemy_Orientation;
 };
 
 class j1Enemy : public j1Module {
@@ -52,6 +60,8 @@ public:
 	iPoint CalculatePath(Enemy*);
 	Enemy* Create_Enemy(uint, iPoint Pos);
 	bool FindInPath(iPoint, Enemy* enemy);
+	void Update_Sword_Collision(Enemy* enemy);
+
 
 public:
 	

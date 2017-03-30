@@ -37,6 +37,20 @@ void Green_Enemy::Action()
 	pix_world_pos.x += x;
 	pix_world_pos.y += y;
 
+	if (x == 1) {
+		Enemy_Orientation = OrientationEnemy::right_enemy;
+	}
+	else if (x == -1) {
+		Enemy_Orientation = OrientationEnemy::left_enemy;
+	}
+	else if (y == 1) {
+		Enemy_Orientation = OrientationEnemy::down_enemy;
+	}
+	else if (y == -1) {
+		Enemy_Orientation = OrientationEnemy::up_enemy;
+	}
+
+
 	if ((actual_tile.x / 16) == array_pos.x && (actual_tile.y / 16) == array_pos.y) {
 		passedtile = true;
 	}

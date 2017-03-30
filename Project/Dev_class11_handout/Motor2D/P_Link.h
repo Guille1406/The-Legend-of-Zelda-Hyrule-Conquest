@@ -36,7 +36,7 @@ public:
 	void link_sword_collider_update();
 	void Orientation_collider_link_sword();
 	void Collision_Sword_EnemySword();
-
+	bool Compare_Link_Sword_Collision(Enemy* enemy);
 
 
 public:

@@ -568,6 +568,10 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 	return ret;
 }
 
+
+//need to make a common function that recives int& width, int& height, uchar** buffer and string and vector
+
+
 bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 {
 	bool ret = false;
