@@ -1,6 +1,8 @@
 #ifndef _S_MAIN_MENU_
 #define _S_MAIN_MENU_
 
+#include <vector>
+
 #include "j1App.h"
 #include "j1Scene.h"
 #include "MainScene.h"
@@ -28,6 +30,7 @@ private:
 	GuiButton* quit =	   	 nullptr;
 	GuiButton* twitter =	 nullptr;
 	GuiButton* github =		 nullptr;
+	std::vector<GuiButton*> buttons;
 	bool visibility =		 false;
 	uint titleopacity =		 0;
 };

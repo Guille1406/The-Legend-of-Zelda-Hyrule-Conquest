@@ -78,11 +78,12 @@ bool Gui::InFOV()
 
 void Gui::CheckInput(const Gui* mouse_hover, const Gui* focus)
 {
-	if (mouse_hover == nullptr)
-		return;
-	
-	if (mouse_hover->opacity != 255)
-		return;
+	if (mouse_hover != nullptr)
+		if (mouse_hover->opacity != 255)
+			return;
+	if (focus != nullptr)
+		if (focus->opacity != 255)
+			return;
 
 	bool inside = (mouse_hover == this);
 

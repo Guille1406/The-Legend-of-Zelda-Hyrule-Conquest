@@ -230,7 +230,8 @@ void j1Gui::SetFocus(const Gui* ui)
 	{
 		if (ui != nullptr)
 		{
-			if (ui->can_focus == true && CanInteract(ui) == true)
+			//if (ui->can_focus == true && CanInteract(ui) == true)
+			if (ui->can_focus == true)
 			{
 				if (focus != nullptr)
 				{

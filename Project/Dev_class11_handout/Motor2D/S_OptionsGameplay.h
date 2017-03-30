@@ -21,6 +21,7 @@ public:
 	GuiLabel* ShowhideHUD = nullptr;
 	GuiButton* Language = nullptr;
 	GuiButton* back = nullptr;
+	std::vector<GuiButton*> buttons;
 };
 
 #endif // #pragma once
