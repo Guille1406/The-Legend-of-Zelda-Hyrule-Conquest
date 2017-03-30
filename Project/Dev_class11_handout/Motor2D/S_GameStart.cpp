@@ -1,6 +1,5 @@
 #include "S_GameStart.h"
 #include "j1Player.h"
-#include "Gui.h"
 
 S_GameStart::S_GameStart()
 {

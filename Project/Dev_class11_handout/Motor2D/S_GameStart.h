@@ -4,7 +4,6 @@
 #include "j1App.h"
 #include "j1Scene.h"
 #include "MainScene.h"
-#include "Gui.h"
 
 class S_GameStart : public MainScene {
 

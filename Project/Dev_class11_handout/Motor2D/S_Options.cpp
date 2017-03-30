@@ -1,7 +1,4 @@
 #include "S_Options.h"
-#include "Gui.h"
-#include "GuiLabel.h"
-#include "GuiButton.h"
 #include "j1Window.h"
 
 S_Options::S_Options()
@@ -70,25 +67,7 @@ bool S_Options::Start()
 
 bool S_Options::Update()
 {
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
-	{
-		std::vector<GuiButton*>::iterator focused_button = std::find(buttons.begin(), buttons.end(), App->gui->GetFocus());
-		if ((*focused_button) != buttons.front())
-		{
-			focused_button--;
-			App->gui->SetFocus((*(focused_button)));
-		}
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
-	{
-		std::vector<GuiButton*>::iterator focused_button = std::find(buttons.begin(), buttons.end(), App->gui->GetFocus());
-		if ((*focused_button) != buttons.back())
-		{
-			focused_button++;
-			App->gui->SetFocus((*(focused_button)));
-		}
-	}
+	MenuInput(&buttons);
 	return true;
 }
 

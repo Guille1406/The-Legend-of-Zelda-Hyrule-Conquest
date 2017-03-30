@@ -6,7 +6,6 @@
 #include "j1App.h"
 #include "j1Scene.h"
 #include "MainScene.h"
-#include "Gui.h"
 #include "j1Timer.h"
 
 class S_MainMenu : public MainScene

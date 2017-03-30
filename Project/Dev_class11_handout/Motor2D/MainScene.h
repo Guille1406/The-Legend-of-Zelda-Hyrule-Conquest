@@ -1,13 +1,16 @@
- #ifndef _MAINSCENE_
+#ifndef _MAINSCENE_
 #define _MAINSCENE_
 
-#include "j1App.h"
+#include <vector>
 
+#include "j1App.h"
 #include "j1Input.h"
 #include "SDL\include\SDL.h"
 #include "p2Log.h"
 
-#include <vector>
+#include "j1Gui.h"
+#include "GuiLabel.h"
+#include "GuiButton.h"
 
 enum Scene_ID {
 	inventory,
@@ -33,6 +36,7 @@ enum GuiEvent;
 class Gui;
 struct Command;
 struct CVar;
+class GuiButton;
 
 class MainScene {
 public:
@@ -69,6 +73,32 @@ public:
 	virtual void OnConsoleCVar(const CVar* cvar)
 	{
 	}
+
+protected:
+
+	void MenuInput(std::vector<GuiButton*>* buttons)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			std::vector<GuiButton*>::iterator focused_button = std::find(buttons->begin(), buttons->end(), App->gui->GetFocus());
+			if ((*focused_button) != buttons->front())
+			{
+				focused_button--;
+				App->gui->SetFocus((*(focused_button)));
+			}
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		{
+			std::vector<GuiButton*>::iterator focused_button = std::find(buttons->begin(), buttons->end(), App->gui->GetFocus());
+			if ((*focused_button) != buttons->back())
+			{
+				focused_button++;
+				App->gui->SetFocus((*(focused_button)));
+			}
+		}
+	}
+
 public:
 	Scene_ID scene_name;
 	SDL_Texture* atlas;

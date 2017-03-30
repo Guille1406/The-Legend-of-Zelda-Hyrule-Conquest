@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "j1Input.h"
 #include "j1Render.h"
+#include "MainScene.h"
 
 Gui::Gui(iPoint position, GuiType type, bool movable, AddGuiTo purpose) : position(position), movable(movable), type(type), purpose(purpose)
 {

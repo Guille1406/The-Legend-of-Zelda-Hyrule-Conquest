@@ -3,7 +3,6 @@
 
 #include "p2Log.h"
 #include "j1Module.h"
-#include "MainScene.h"
 #include "p2Point.h"
 #include "SDL\include\SDL.h"
 #include "Color.h"
