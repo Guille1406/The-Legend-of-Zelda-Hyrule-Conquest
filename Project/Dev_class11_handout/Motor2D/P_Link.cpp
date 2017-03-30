@@ -95,6 +95,7 @@ player_event P_Link::GetEvent()
 		//EVENTS FOR GAMEPAD
 		if (App->input->NumberOfGamePads() >= 1) {
 
+			//MOVEMENT UP//
 			if (App->inputM->EventPressed(INPUTEVENT::MUP, 1) == EVENTSTATE::E_REPEAT) {
 				if (App->inputM->EventPressed(INPUTEVENT::MRIGHT, 1) == EVENTSTATE::E_REPEAT) {
 					movement_direction = move_up_right;
@@ -109,7 +110,7 @@ player_event P_Link::GetEvent()
 				character_direction = up;
 				actual_event = move;
 			}
-
+			//MOVEMENT DOWM//
 			else if (App->inputM->EventPressed(INPUTEVENT::MDOWN, 1) == EVENTSTATE::E_REPEAT) {
 				if (App->inputM->EventPressed(INPUTEVENT::MLEFT, 1) == EVENTSTATE::E_REPEAT) {
 					movement_direction = move_down_left;
@@ -124,21 +125,36 @@ player_event P_Link::GetEvent()
 				character_direction = down;
 				actual_event = move;
 			}
-
+			//MOVEMENT RIGHT//
 			else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT, 1) == EVENTSTATE::E_REPEAT) {
 
 				movement_direction = move_right;
 				character_direction = right;
 				actual_event = move;
 			}
+			//MOVEMENT LEFT//
 			else if (App->inputM->EventPressed(INPUTEVENT::MLEFT, 1) == EVENTSTATE::E_REPEAT) {
 
 				movement_direction = move_left;
 				character_direction = left;
 				actual_event = move;
 			}
-			else if (can_pick_up && !App->player->Zelda->doing_script) {
-				if (App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_REPEAT) {
+			//IDDLE//
+			else {
+				movement_direction = move_idle;
+				actual_event = idle;
+			}
+			//JUMP//
+			if (can_jump) {
+				actual_event = jump;
+				doing_script = true;
+				LOG("I'm Jumping :DDDD");
+				can_jump = false;
+			}
+
+			//PICK ZELDA//
+			 if (can_pick_up && !App->player->Zelda->doing_script) {
+				if (App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN) {
 					App->player->Zelda->is_picked = true;
 					App->player->Zelda->ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 					actual_event = pick;
@@ -147,10 +163,25 @@ player_event P_Link::GetEvent()
 				}			
 
 			}
+			 //TUMBLE//
 			if (App->inputM->EventPressed(INPUTEVENT::JUMP, 1) == EVENTSTATE::E_DOWN && !im_lifting) {
 				actual_event = roll;
 				doing_script = true;
 			}
+
+			//ATTACK//
+			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 1) == EVENTSTATE::E_DOWN && !im_lifting) {
+				attack_timer.Start();
+				//orientation collider link sword
+				Orientation_collider_link_sword();
+				actual_event = attack;
+				doing_script = true;
+				LOG("I'm Attacking :DDDD");
+			}
+
+			
+
+
 		}
 
 		else {

@@ -37,6 +37,8 @@ bool j1Input::Awake(pugi::xml_node& config)
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
+	for (uint i = 0; i < NUM_CONTROLLER_BUTTONS; i++)
+		prev_state[i] = j1KeyState::KEY_IDLE;
 
 	return ret;
 }
@@ -56,35 +58,49 @@ bool j1Input::PreUpdate()
 	static SDL_Event event;
 
 	//				Gamepad				//
+
 	
+
 	for (std::vector<GamePad*>::iterator it = gamepads.begin(); it != gamepads.end(); it++) {
-		for (int i = 0; i < NUM_CONTROLLER_BUTTONS; ++i)
-		{
-			if ((*it)->controller_buttons[i] == KEY_DOWN || (*it)->controller_buttons[i] == KEY_REPEAT)
-			{
-				(*it)->controller_buttons[i] = KEY_REPEAT;
-				App->inputM->InputDetected(i, EVENTSTATE::E_REPEAT, (*it)->id);
+
+		for (int i = 0; i < NUM_CONTROLLER_BUTTONS; ++i) {
+
+			if (prev_state[i] == j1KeyState::KEY_IDLE) {
+				if ((*it)->controller_buttons[i] == j1KeyState::KEY_DOWN)
+					App->inputM->InputDetected(i, EVENTSTATE::E_DOWN, (*it)->id);
+					prev_state[i] = j1KeyState::KEY_DOWN;
 			}
 
-			if ((*it)->controller_buttons[i] == KEY_UP)
-				(*it)->controller_buttons[i] = KEY_IDLE;
+			if (prev_state[i] == j1KeyState::KEY_DOWN || prev_state[i] == j1KeyState::KEY_REPEAT) {
+				if ((*it)->controller_buttons[i] == j1KeyState::KEY_DOWN) {
+					(*it)->controller_buttons[i] = j1KeyState::KEY_REPEAT;
+					App->inputM->InputDetected(i, EVENTSTATE::E_REPEAT, (*it)->id);
+				}
+				if ((*it)->controller_buttons[i] == j1KeyState::KEY_IDLE) {
+					(*it)->controller_buttons[i] = j1KeyState::KEY_UP;
+					prev_state[i] = j1KeyState::KEY_UP;
+					App->inputM->InputDetected(i, EVENTSTATE::E_UP, (*it)->id);
+				}
+
+
+
+			}
+
+
+			for (int i = 0; i < NUM_CONTROLLER_AXIS; ++i)
+			{
+
+				if ((*it)->controller_axis[i] == j1JoystickState::JOYSTICK_NEGATIVE)
+					App->inputM->JoystickDetected(i, JSTATE::J_NEGATIVE, (*it)->id);
+
+
+				if ((*it)->controller_axis[i] == j1JoystickState::JOYSTICK_POSITIVE)
+					App->inputM->JoystickDetected(i, JSTATE::J_POSITIVE, (*it)->id);
+
+			}
 		}
-
-
-		for (int i = 0; i < NUM_CONTROLLER_AXIS; ++i)
-		{
-
-			if ((*it)->controller_axis[i] == j1JoystickState::JOYSTICK_NEGATIVE)
-				App->inputM->JoystickDetected(i, JSTATE::J_NEGATIVE, (*it)->id);
-
-
-			if ((*it)->controller_axis[i] == j1JoystickState::JOYSTICK_POSITIVE)
-				App->inputM->JoystickDetected(i, JSTATE::J_POSITIVE, (*it)->id);
-
-		}
-
 	}
-
+	
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 
 	mouse_motion_x = 0;
@@ -163,11 +179,14 @@ bool j1Input::PreUpdate()
 				if ((*it)->id == event.cbutton.which)
 				{
 					LOG("BOTON: %i", event.cbutton.button);
-					(*it)->controller_buttons[event.cbutton.button] = KEY_DOWN;
-					App->inputM->InputDetected(event.cbutton.button, EVENTSTATE::E_DOWN, (*it)->id);
+					if ((*it)->controller_buttons[event.cbutton.button] = KEY_DOWN) {
+						App->inputM->InputDetected(event.cbutton.button, EVENTSTATE::E_DOWN, (*it)->id);
+					}
+					if ((*it)->controller_buttons[event.cbutton.button] = KEY_REPEAT) {
+						App->inputM->InputDetected(event.cbutton.button, EVENTSTATE::E_REPEAT, (*it)->id);
+					}
 				}
-			}
-		}
+			}}
 		break;
 
 		// el problema esta aqui//
@@ -177,7 +196,7 @@ bool j1Input::PreUpdate()
 			{
 				if ((*it)->id == event.cbutton.which)
 				{
-					(*it)->controller_buttons[event.cbutton.button] = KEY_UP;
+					(*it)->controller_buttons[event.cbutton.button] == KEY_UP;
 					App->inputM->InputDetected(event.cbutton.button, EVENTSTATE::E_UP, (*it)->id);
 				}
 			}

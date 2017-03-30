@@ -200,10 +200,14 @@ player_event P_Zelda::GetEvent()
 		static direction aim_direction = down;
 		
 
-		
+		//EVENTS FOR GAMEPAD
 		if (App->input->NumberOfGamePads() >= 2) {
 
-
+			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_DOWN) {
+				aim_direction = character_direction;
+			}
+			
+			//MOVEMENT UP//
 			if (App->inputM->EventPressed(INPUTEVENT::MUP, 0) == EVENTSTATE::E_REPEAT) {
 				if (App->inputM->EventPressed(INPUTEVENT::MRIGHT, 0) == EVENTSTATE::E_REPEAT) {
 					movement_direction = move_up_right;
@@ -218,7 +222,7 @@ player_event P_Zelda::GetEvent()
 				character_direction = up;
 				actual_event = move;
 			}
-
+			//MOVEMENT DOWN//
 			else if (App->inputM->EventPressed(INPUTEVENT::MDOWN, 0) == EVENTSTATE::E_REPEAT) {
 				if (App->inputM->EventPressed(INPUTEVENT::MLEFT, 0) == EVENTSTATE::E_REPEAT) {
 					movement_direction = move_down_left;
@@ -233,30 +237,47 @@ player_event P_Zelda::GetEvent()
 				character_direction = down;
 				actual_event = move;
 			}
-
+			//MOVEMENT RIGHT//
 			else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT, 0) == EVENTSTATE::E_REPEAT) {
 
 				movement_direction = move_right;
 				character_direction = right;
 				actual_event = move;
 			}
+			//MOVEMENT LEFT//
 			else if (App->inputM->EventPressed(INPUTEVENT::MLEFT, 0) == EVENTSTATE::E_REPEAT) {
 
 				movement_direction = move_left;
 				character_direction = left;
 				actual_event = move;
 			}
-			else if (App->inputM->EventPressed(INPUTEVENT::JUMP, 0) == EVENTSTATE::E_DOWN && !is_picked) {
+
+			//IDDLE//
+			else {
+				movement_direction = move_idle;
+				actual_event = idle;
+			}
+
+
+			//JUMP//
+			if (can_jump) {
+				actual_event = jump;
+				doing_script = true;
+				LOG("I'm Jumping :DDDD");
+				can_jump = false;
+			}
+			//TUMBLE//
+			 if (App->inputM->EventPressed(INPUTEVENT::JUMP, 0) == EVENTSTATE::E_DOWN && !is_picked) {
 				actual_event = roll;
 				doing_script = true;
 			}
-
+			 //PICKED UP//
 			if (is_picked) {
 				static bool can_throw = false;
 				actual_event = pick;
 				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 				pos.x = App->player->Link->pos.x;
-				pos.y = App->player->Link->pos.y - 7;
+				pos.y = App->player->Link->pos.y;
 				if (((App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN) && can_throw) || ((App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) && can_throw)) {
 					actual_event = throw_;
 					doing_script = true;
@@ -267,13 +288,17 @@ player_event P_Zelda::GetEvent()
 				}
 				else can_throw = true;
 			}
-
-			if (can_jump) {
-				actual_event = jump;
-				doing_script = true;
-				LOG("I'm Jumping :DDDD");
-				can_jump = false;
+			//ATTACK//
+			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_REPEAT) {
+				character_direction = aim_direction;
 			}
+			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_UP) {
+				actual_event = attack;
+				doing_script = true;
+				character_direction = aim_direction;
+			}
+
+			
 
 		}
 		else
