@@ -61,9 +61,15 @@ bool j1Gui::PreUpdate()
 
 	const Gui* mouse_hover = FindMouseHover();
 	if (mouse_hover &&
+		mouse_hover->can_focus == true)
+		SetFocus(mouse_hover);
+
+	/*
+	if (mouse_hover &&
 		mouse_hover->can_focus == true &&
 		App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == j1KeyState::KEY_DOWN)
 		SetFocus(mouse_hover);
+	*/
 
 	for (std::list<Gui*>::iterator item = list_to_iterate->begin(); item != list_to_iterate->cend(); ++item)
 	{
