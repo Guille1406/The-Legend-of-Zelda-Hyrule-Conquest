@@ -31,7 +31,7 @@ bool j1Camera::Awake(pugi::xml_node&)
 
 	f_border_between_ellipses = BigEllipse.InsideEllipseValue({ 0,LitleEllipse.semiminoraxis});
 
-	DebugPerformanceData_Rect = { 0,0,260,135 };
+	DebugPerformanceData_Rect = { 0,0,260,150 };
 
 	return true;
 }
@@ -50,12 +50,14 @@ bool j1Camera::Start()
 	i_Half_h = (int)(h * 0.5f);
 
 	//Fill up debug performance data vector
-	for (int i = 0, pos = App->win->GetWindowH() - DebugPerformanceData_Rect.h + 6; i < 8; i++, pos += 15) //8, number of debug strings
+	for (int i = 0, pos = App->win->GetWindowH() - DebugPerformanceData_Rect.h + 6; i < 9; i++, pos += 15) //9, number of debug strings
 		DebugPerformanceData.push_back(App->gui->CreateLabel({ 10,pos }, &std::string(""), false, AddGuiTo::none));
 	DebugPerformanceData[6]->EditLabelStr(&std::string("Press F9 to toggle this window visibility."));
 	DebugPerformanceData[6]->SetLabelColor(&Yellow);
 	DebugPerformanceData[7]->EditLabelStr(&std::string("Press F10 to report a bug."));
 	DebugPerformanceData[7]->SetLabelColor(&Yellow);
+	DebugPerformanceData[8]->EditLabelStr(&std::string("Press F11 to take a screenshot."));
+	DebugPerformanceData[8]->SetLabelColor(&Yellow);
 
 	return true;
 }
