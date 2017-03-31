@@ -83,7 +83,7 @@ void P_Zelda::UpdateArrows()
 void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 {
 	int final_pos = 0;
-	int temp_pos = pos;
+	int temp_pos = pos + 16;
 	bool can_pass_wall = true;
 	bool zelda_collides = false;
 	int decrease = 1;
@@ -116,28 +116,23 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 
 			int i = 0;
 			if (!is_on_collision || temp_point != last_point) {
-				for (int i = 0; i < 2; i++) {
+				
+				if (stop)break;
+				for (i = 0; i <= GetLogicHeightPlayer() && i<3; i++) {
 					if (GetLogic(i, temp_point) == CANT_PASS_COL_ID) {
 						stop = true;
 						before_wall_pos = temp_pos;
 						break;
 					}
-				}
-				if (stop)break;
-				for (i = 0; i <= GetLogicHeightPlayer() && i<2; i++) {
-					
 					
 					if (GetLogic(i, temp_point) != 0) {
 						is_on_collision = true;
 						before_wall_pos = temp_pos;
 						last_point = temp_point;
 						
-						if (GetLogic(i, next_point) != 0) {
-							//stop = true;
-							//break;
-						}
+						
 						if (!can_pass_wall) {
-							before_wall_pos = temp_pos + n * 64;
+							before_wall_pos = temp_pos + n*64;
 						}
 						can_pass_wall = !can_pass_wall;
 						zelda_collides = true;
@@ -152,8 +147,8 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 	}
 			
 			temp_pos = temp_pos + (n * 4);
-			temp_point.x = (temp_pos / 16) * is_horitzontal + temp_point.x * !is_horitzontal;
-			temp_point.y = (temp_pos / 16) * !is_horitzontal + temp_point.y * is_horitzontal;
+			temp_point.x = ((temp_pos) / 16) * is_horitzontal + temp_point.x * !is_horitzontal;
+			temp_point.y = ((temp_pos) / 16) * !is_horitzontal + temp_point.y * is_horitzontal;
 			if (stop)
 				break;
 		}

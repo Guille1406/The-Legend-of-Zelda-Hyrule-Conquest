@@ -143,15 +143,21 @@ void Character::ExecuteEvent(float dt)
 void Character::GetAdjacents()
 {
 	//Take the tile_id of the adjacents. This depends on the logic height of each character.
+	int height = this->GetLogicHeightPlayer();
 
-	this->adjacent.down.i = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y + 2);
-	this->adjacent.down.j =  App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 1, tilepos.y + 2);
-	this->adjacent.up.i = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x, tilepos.y - 1);
-	this->adjacent.up.j = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 1, tilepos.y - 1);
-	this->adjacent.left.i = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y);
-	this->adjacent.left.j =  App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x - 1, tilepos.y + 1);
-	this->adjacent.right.i = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y);
-	this->adjacent.right.j = App->map->V_Colision[GetLogicHeightPlayer()]->Get(tilepos.x + 2, tilepos.y + 1);
+	if (height < 0) {
+		this->ChangeLogicHeightPlayer(0);
+		height = 0;
+	}
+
+	this->adjacent.down.i = App->map->V_Colision[height]->Get(tilepos.x, tilepos.y + 2);
+	this->adjacent.down.j =  App->map->V_Colision[height]->Get(tilepos.x + 1, tilepos.y + 2);
+	this->adjacent.up.i = App->map->V_Colision[height]->Get(tilepos.x, tilepos.y - 1);
+	this->adjacent.up.j = App->map->V_Colision[height]->Get(tilepos.x + 1, tilepos.y - 1);
+	this->adjacent.left.i = App->map->V_Colision[height]->Get(tilepos.x - 1, tilepos.y);
+	this->adjacent.left.j =  App->map->V_Colision[height]->Get(tilepos.x - 1, tilepos.y + 1);
+	this->adjacent.right.i = App->map->V_Colision[height]->Get(tilepos.x + 2, tilepos.y);
+	this->adjacent.right.j = App->map->V_Colision[height]->Get(tilepos.x + 2, tilepos.y + 1);
 }
 
 int Character::GetLogic(int minus_height, iPoint pos)
