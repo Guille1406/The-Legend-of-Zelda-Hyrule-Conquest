@@ -3,6 +3,7 @@
 #include"j1Collision.h"
 #include"j1Map.h"
 #include"j1Textures.h"
+
 bool j1Enemy::Awake(pugi::xml_node &)
 {
 
@@ -55,6 +56,7 @@ bool j1Enemy::PreUpdate()
 bool j1Enemy::Update(float dt)
 {
 	for (int i = 0; i < V_MyEnemies.size(); i++) {
+		V_MyEnemies[i]->Rang_Player();
 		V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x+17;
 		V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y +10;
 		Update_Sword_Collision(V_MyEnemies[i]);

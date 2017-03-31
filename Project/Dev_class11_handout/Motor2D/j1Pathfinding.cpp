@@ -4,6 +4,7 @@
 #include "p2Log.h"
 #include"Character.h"
 #include"j1Map.h"
+#include"j1Enemy.h"
 ///class Pathfinding ------------------
 // Constructors =======================
 j1Pathfinding::j1Pathfinding()
@@ -32,7 +33,7 @@ bool j1Pathfinding::Start()
 
 bool j1Pathfinding::CleanUp()
 {
-	delete cluster_abstraction;
+	
 	RELEASE_ARRAY(path_nodes);
 	return true;
 }
@@ -66,7 +67,7 @@ bool j1Pathfinding::IsWalkable(const iPoint & destination) const
 {
 	bool ret = false;
 	uchar t = GetTileAt(destination);
-	return (t == NOT_COLISION_ID && t > 0);
+	return (t == NOT_COLISION_ID );
 }
 
 bool j1Pathfinding::CheckBoundaries(const iPoint & pos) const
@@ -104,8 +105,8 @@ std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoi
 	iPoint dest_point(destination.x, destination.y);
 	int ret = -1;
 	//iPoint mouse_position = App->map->FixPointMap(destination.x, destination.y);
-	iPoint map_origin = App->map->WorldToMap(origin.x, origin.y);
-	iPoint map_goal = App->map->WorldToMap(dest_point.x, dest_point.y);
+	/*iPoint map_origin = App->map->WorldToMap(origin.x, origin.y);
+	iPoint map_goal = App->map->WorldToMap(dest_point.x, dest_point.y);*/
 /*	if (map_origin == map_goal)
 	{
 		std::vector<iPoint>* path = new std::vector<iPoint>;
@@ -113,14 +114,14 @@ std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoi
 		return path;
 	}*/
 
-	if (IsWalkable(map_origin) && IsWalkable(map_goal))
+	if (IsWalkable(origin) && IsWalkable(dest_point))
 	{
 		ret = 1;
 		OpenList open;
-		PathNode* firstNode = GetPathNode(map_origin.x, map_origin.y);
-		firstNode->SetPosition(map_origin);
+		PathNode* firstNode = GetPathNode(origin.x, origin.y);
+		firstNode->SetPosition(origin);
 		firstNode->g = 0;
-		firstNode->h = map_origin.DistanceManhattan(map_goal);
+		firstNode->h = origin.DistanceManhattan(dest_point);
 
 		open.queue.push(firstNode);
 		PathNode* current = nullptr;
@@ -129,7 +130,7 @@ std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoi
 			current = open.queue.top();
 			open.queue.top()->on_close = true;
 			open.queue.pop();
-			if (current->pos == map_goal)
+			if (current->pos == dest_point)
 			{
 
 				std::vector<iPoint>* path = new std::vector<iPoint>;
@@ -164,7 +165,7 @@ std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoi
 					else if (temp->on_open == true)
 					{
 						int last_g_value = temp->g;
-						temp->CalculateF(map_goal);
+						temp->CalculateF(dest_point);
 						if (last_g_value <temp->g)
 						{
 							temp->parent = GetPathNode(current->pos.x, current->pos.y);
@@ -176,7 +177,7 @@ std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoi
 					else
 					{
 						temp->on_open = true;
-						temp->CalculateF(map_goal);
+						temp->CalculateF(dest_point);
 						open.queue.push(temp);
 
 					}
@@ -389,3 +390,46 @@ ret = &item.base()._Ptr->_Prev->_Myval;
 return ret;
 }*/
 
+
+void j1Pathfinding::Move(Enemy * enemy, Character* player)
+{
+	if (last_path.size()>0) {
+
+		static int i = 0;
+
+		int temp = last_path[i].x;
+		int temp2 = last_path[i].y;
+
+		int x = 0;
+		int y = 0;
+		x = x + (last_path[i].x - enemy->array_pos.x);
+		y = y + (last_path[i].y - enemy->array_pos.y);
+
+		if (last_path.size() > 1) {
+			x = x + (last_path[i + 1].x - enemy->array_pos.x);
+			y = y + (last_path[i + 1].y - enemy->array_pos.y);
+		}
+		//enemy->actual_event = move;
+
+		//Change this
+		if (x > 1) { x = 1; enemy->Enemy_Orientation = OrientationEnemy::right_enemy; }
+		if (x < -1) { x = -1;  enemy->Enemy_Orientation = OrientationEnemy::left_enemy; }
+		if (y > 1) { y = 1; enemy->Enemy_Orientation = OrientationEnemy::down_enemy; }
+		if (y < -1) { y = -1; enemy->Enemy_Orientation = OrientationEnemy::up_enemy; }
+
+
+		enemy->pix_world_pos.x += x;
+		enemy->pix_world_pos.y += y;
+
+		if (enemy->array_pos == last_path[i]) {
+			i++;
+		}
+		if (i == last_path.size() || enemy->array_pos == player->tilepos) {
+			i = 0;
+			last_path.clear();
+		}
+
+
+	}
+
+}

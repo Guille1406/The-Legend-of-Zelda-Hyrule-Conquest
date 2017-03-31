@@ -5,7 +5,9 @@
 #include "SDL\include\SDL.h"
 #include"j1Object.h"
 #include"p2Point.h"
+#include"Character.h"
 class Green_Enemy;
+#define RANG 100
 
 enum OrientationEnemy{
 	up_enemy,
@@ -32,7 +34,7 @@ public:
 	~Enemy() {};
 
 	virtual void Action() {};
-
+	virtual void Rang_Player() {};
 public:
 
 	SDL_Rect rect;
@@ -46,6 +48,7 @@ public:
 	OrientationEnemy Enemy_Orientation;
 	int live = 0;
 	bool tokill = false;
+	Character* player_in_range = nullptr;
 };
 
 class j1Enemy : public j1Module {

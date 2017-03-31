@@ -4,9 +4,9 @@
 #include "j1Module.h"
 #include "p2Point.h"
 #include <queue>
+#include"j1Enemy.h"
 struct PathList;
 struct Node;
-struct ClusterAbstraction;
 struct SDL_Texture;
 struct PathNode;
 ///class Pathfinding ------------------
@@ -26,6 +26,7 @@ public:
 	void SetMapLimits(int position_x, int position_y, int width, int height);
 	uchar GetValueMap(int x, int y) const;
 	PathNode* GetPathNode(int x, int y);
+	std::vector<iPoint> last_path;
 private:
 	PathNode* path_nodes = nullptr;
 	int width = 0;
@@ -35,9 +36,8 @@ private:
 	int map_max_x = 0;
 	int map_max_y = 0;
 	//A pointer to the last path generated
-	std::vector<iPoint> last_path;
+
 	//Map cluster abstraction
-	ClusterAbstraction* cluster_abstraction = nullptr;
 
 public:
 
@@ -55,7 +55,7 @@ public:
 	bool	CheckBoundaries(const iPoint& pos) const;
 	// Get tile from x coordinate
 	uchar	GetTileAt(const iPoint& pos) const;
-
+	void Move(Enemy * enemy, Character* player);
 	// Create a path with two nodes
 	std::vector<iPoint>* SimpleAstar(const iPoint& origin, const iPoint& goal);
 	
