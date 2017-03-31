@@ -6,12 +6,13 @@
 bool j1Enemy::Awake(pugi::xml_node &)
 {
 
-	enemy_perf = new Green_Enemy();
-	enemy_perf->LoadAnimation("sprites/Link_Sprites_trim.xml");
+	
 	return true;
 }
 bool j1Enemy::Start()
 {
+	enemy_perf = new Enemy();
+	enemy_perf->LoadAnimation("sprites/Link_Sprites_trim.xml");
 	green_soldier_tex = App->tex->Load("sprites/green_soldier.png.png");
 	
 
@@ -57,7 +58,7 @@ bool j1Enemy::Update(float dt)
 		V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x+17;
 		V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y +10;
 		Update_Sword_Collision(V_MyEnemies[i]);
-		App->render->Blit(green_soldier_tex, V_MyEnemies[i]->pix_world_pos.x, V_MyEnemies[i]->pix_world_pos.y, &V_MyEnemies[i]->rect);
+		App->render->Blit(V_MyEnemies[i]->character_texture, V_MyEnemies[i]->pix_world_pos.x, V_MyEnemies[i]->pix_world_pos.y, &V_MyEnemies[i]->actual_animation.GetCurrentFrame().rect);
 		V_MyEnemies[i]->Action();
 		
 	}

@@ -9,9 +9,10 @@ class Green_Enemy;
 
 enum OrientationEnemy{
 	up_enemy,
-	right_enemy,
-	left_enemy,
 	down_enemy,
+	left_enemy,
+	right_enemy,
+	
 };
 
 enum enemyType {
@@ -22,6 +23,9 @@ enum enemyType {
 
 class Enemy : public Entity {
 public:
+	Enemy() {
+
+	};
 	Enemy(enemyType type): type(type) {
 
 	};
@@ -67,7 +71,7 @@ public:
 
 public:
 	std::vector<Animation*> Green_Enemy_Animation;
-	Green_Enemy* enemy_perf;
+	Enemy* enemy_perf;
 	std::vector<Enemy*> V_MyEnemies;
 	SDL_Texture* green_soldier_tex;
 };
