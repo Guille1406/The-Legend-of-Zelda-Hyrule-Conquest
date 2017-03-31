@@ -85,13 +85,13 @@ void Green_Enemy::Rang_Player()
 			green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
 			App->pathfinding->Move(this, player_in_range);
 		}
-	
+	/*
 		else {
 			player_in_range = nullptr;
 			//App->pathfinding->last_path.clear();
 			green_enemy_path.clear();
 		}
-		
+		*/
 		/*
 		dist.x = App->player->Zelda->pos.x - pix_world_pos.x;
 		dist.y = App->player->Zelda->pos.y - pix_world_pos.y;
