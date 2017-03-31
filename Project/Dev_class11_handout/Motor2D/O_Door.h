@@ -14,6 +14,7 @@ public:
 		open = false;
 		name = obj.name;
 		logic_height = obj.logic_height;
+		collider_tiles = obj.collider_tiles;
 	}
 	~Door() {
 
