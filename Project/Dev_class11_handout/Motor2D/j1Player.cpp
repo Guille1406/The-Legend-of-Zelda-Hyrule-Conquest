@@ -49,7 +49,7 @@ bool j1Player::Start()
 	Zelda->entity_texture = Link->entity_texture;
 	
 
-	Link->LoadAnimation("sprites/Link_Sprites_trim.xml");
+	Link->LoadAnimation("sprites/Link_Spritesheet_Definitive.xml");
 	Zelda->LoadAnimation("sprites/Zelda_Temp_Sprites.xml");
 
 	Link->actual_animation = Link->sprites_vector[0];

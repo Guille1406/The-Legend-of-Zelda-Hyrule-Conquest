@@ -20,7 +20,9 @@ void Character::ExecuteEvent(float dt)
 	case move:
 		Move(dt);
 		break;
-
+	case lifting:
+		Move(dt);
+		break;
 	case attack:
 		Attack(dt);
 		break;

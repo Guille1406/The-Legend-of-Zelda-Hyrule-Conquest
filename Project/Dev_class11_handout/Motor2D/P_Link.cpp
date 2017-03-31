@@ -111,6 +111,7 @@ player_event P_Link::GetEvent()
 				}
 				character_direction = up;
 				actual_event = move;
+
 			}
 			//MOVEMENT DOWM//
 			else if (App->inputM->EventPressed(INPUTEVENT::MDOWN, 1) == EVENTSTATE::E_REPEAT) {
@@ -229,16 +230,15 @@ player_event P_Link::GetEvent()
 				character_direction = left;
 				actual_event = move;
 			}
-			else if (im_lifting) {
-				actual_event = lifting;
-				can_pick_up = false;
-			}
-
+		
 			else {
 				movement_direction = move_idle;
 				actual_event = idle;
 			}
-			
+			 if (im_lifting) {
+					actual_event = lifting;
+					can_pick_up = false;
+				}
 			
 			if (can_pick_up && !App->player->Zelda->doing_script) {
 				if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
