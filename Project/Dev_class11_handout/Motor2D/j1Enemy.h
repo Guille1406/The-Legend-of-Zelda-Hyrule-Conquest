@@ -40,6 +40,8 @@ public:
 	bool passedtile = true;
 	Collider* shield_test;
 	OrientationEnemy Enemy_Orientation;
+	int live = 0;
+	bool tokill = false;
 };
 
 class j1Enemy : public j1Module {

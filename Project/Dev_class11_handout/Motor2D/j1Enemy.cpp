@@ -33,6 +33,14 @@ bool j1Enemy::Start()
 
 bool j1Enemy::PreUpdate()
 {
+	for (int i = 0; i < V_MyEnemies.size(); i++) {
+		if (V_MyEnemies[i]->tokill == true) {
+			std::vector<Enemy*>::iterator it = std::find(App->enemy->V_MyEnemies.begin(), App->enemy->V_MyEnemies.end(), V_MyEnemies[i]);
+			App->enemy->V_MyEnemies.erase(it);
+
+		}
+	}
+
 	return true;
 }
 
@@ -78,22 +86,24 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 		//This will not be usefull when the enemies will be readed from xml
 
 	//Position in array
-	ret->array_pos = pos_array_enemy;
+	if (ret != nullptr) {
+		ret->array_pos = pos_array_enemy;
+		ret->live = 2;
 
-	SDL_Rect rect_test = { ret->array_pos.x,ret->array_pos.y,20,10 };
-	ret->shield_test = App->collision->AddCollider(rect_test, COLLIDER_TYPE::collider_enemy_sword, ret, this);
+		SDL_Rect rect_test = { ret->array_pos.x,ret->array_pos.y,20,10 };
+		ret->shield_test = App->collision->AddCollider(rect_test, COLLIDER_TYPE::collider_enemy_sword, ret, this);
 
 
-	//Position in world pixel 
+		//Position in world pixel 
 		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
-		SDL_Rect rect = { ret->pix_world_pos.x+16, ret->pix_world_pos.y+32,16,42 };
+		SDL_Rect rect = { ret->pix_world_pos.x + 16, ret->pix_world_pos.y + 32,16,42 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
-		ret->logic_height = 1;
-		
-		V_MyEnemies.push_back(ret);
+		ret->logic_height = 0;
 
+		V_MyEnemies.push_back(ret);
+	}
 
 	return ret;
 }
