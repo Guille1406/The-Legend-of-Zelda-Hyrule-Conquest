@@ -41,6 +41,7 @@ public:
 	enemyType type;
 	iPoint pix_world_pos;
 	iPoint array_pos;
+	iPoint tile_pos;
 	bool movable = true;
 	std::list<iPoint> Path_Enemy;
 	bool passedtile = true;
@@ -49,6 +50,7 @@ public:
 	int live = 0;
 	bool tokill = false;
 	Character* player_in_range = nullptr;
+	std::vector<iPoint> green_enemy_path;
 };
 
 class j1Enemy : public j1Module {
@@ -77,6 +79,7 @@ public:
 	Enemy* enemy_perf;
 	std::vector<Enemy*> V_MyEnemies;
 	SDL_Texture* green_soldier_tex;
+
 };
 
 

@@ -24,7 +24,8 @@ Green_Enemy::~Green_Enemy()
 
 void Green_Enemy::Action()
 {
-		
+	tile_pos.x = pix_world_pos.x / 16;
+	tile_pos.y = pix_world_pos.y / 16;
 	if (player_in_range == nullptr) {
 		iPoint actual_tile = pix_world_pos;
 		if (passedtile == true) {
@@ -67,7 +68,7 @@ void Green_Enemy::Action()
 		}
 	}
 	else {
-		App->pathfinding->SimpleAstar(array_pos, player_in_range->tilepos);
+		
 
 	}
 }
@@ -76,16 +77,21 @@ void Green_Enemy::Rang_Player()
 {
 
 	iPoint dist;
-	dist.x = App->player->Link->pos.x - pix_world_pos.x;
-	dist.y = App->player->Link->pos.y - pix_world_pos.y;
+	dist.x = App->player->Link->pos.x - this->pix_world_pos.x;
+	dist.y = App->player->Link->pos.y - this->pix_world_pos.y;
 		if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG) {
 			player_in_range = App->player->Link;
+			green_enemy_path.clear();
+			green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
 			App->pathfinding->Move(this, player_in_range);
 		}
+	
 		else {
 			player_in_range = nullptr;
-
+			//App->pathfinding->last_path.clear();
+			green_enemy_path.clear();
 		}
+		
 		/*
 		dist.x = App->player->Zelda->pos.x - pix_world_pos.x;
 		dist.y = App->player->Zelda->pos.y - pix_world_pos.y;

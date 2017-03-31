@@ -139,12 +139,12 @@ std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoi
 				path->push_back(dest_point);
 				iPoint mouse_cell = App->map->WorldToMap(dest_point.x, dest_point.y);
 				if (mouse_cell == current->pos)
-					current = GetPathNode(current->parent->pos.x/16, current->parent->pos.y/16);
+					current = GetPathNode(current->parent->pos.x, current->parent->pos.y);
 
-				for (; current->parent != nullptr; current = GetPathNode(current->parent->pos.x/16, current->parent->pos.y/16))
+				for (; current->parent != nullptr; current = GetPathNode(current->parent->pos.x, current->parent->pos.y))
 				{
 					last_path.push_back(current->pos);
-					path->push_back(App->map->MapToWorld(current->pos.x/16, current->pos.y/16));
+					path->push_back({ current->pos.x, current->pos.y });
 
 				}
 				last_path.push_back(current->pos);
@@ -397,36 +397,38 @@ void j1Pathfinding::Move(Enemy * enemy, Character* player)
 
 		static int i = 0;
 
-		int temp = last_path[i].x;
-		int temp2 = last_path[i].y;
+		
+		int temp = enemy->green_enemy_path[i].x;
+		int temp2 = enemy->green_enemy_path[i].y;
 
 		int x = 0;
 		int y = 0;
-		x = x + (last_path[i].x - enemy->array_pos.x);
-		y = y + (last_path[i].y - enemy->array_pos.y);
+		x = x + (enemy->green_enemy_path[i].x - enemy->tile_pos.x);
+		y = y + (enemy->green_enemy_path[i].y - enemy->tile_pos.y);
 
+		/*
 		if (last_path.size() > 1) {
 			x = x + (last_path[i + 1].x - enemy->array_pos.x);
 			y = y + (last_path[i + 1].y - enemy->array_pos.y);
-		}
+		}*/
 		//enemy->actual_event = move;
 
 		//Change this
-		if (x > 1) { x = 1; enemy->Enemy_Orientation = OrientationEnemy::right_enemy; }
-		if (x < -1) { x = -1;  enemy->Enemy_Orientation = OrientationEnemy::left_enemy; }
-		if (y > 1) { y = 1; enemy->Enemy_Orientation = OrientationEnemy::down_enemy; }
-		if (y < -1) { y = -1; enemy->Enemy_Orientation = OrientationEnemy::up_enemy; }
+		if (x >= 1) { x = 1; enemy->Enemy_Orientation = OrientationEnemy::right_enemy; }
+		if (x <= -1) { x = -1;  enemy->Enemy_Orientation = OrientationEnemy::left_enemy; }
+		if (y >= 1) { y = 1; enemy->Enemy_Orientation = OrientationEnemy::down_enemy; }
+		if (y <= -1) { y = -1; enemy->Enemy_Orientation = OrientationEnemy::up_enemy; }
 
 
 		enemy->pix_world_pos.x += x;
 		enemy->pix_world_pos.y += y;
 
-		if (enemy->array_pos == last_path[i]) {
+		if (enemy->tile_pos == enemy->green_enemy_path[i]) {
 			i++;
 		}
-		if (i == last_path.size() || enemy->array_pos == player->tilepos) {
+		if (i == enemy->green_enemy_path.size() || enemy->tile_pos == player->tilepos) {
 			i = 0;
-			last_path.clear();
+			enemy->green_enemy_path.clear();
 		}
 
 
