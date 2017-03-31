@@ -18,6 +18,7 @@ public:
 public:
 	GuiLabel* GameplayLabel = nullptr;
 	GuiButton* ShowhideHUD = nullptr;
+	GuiCheck* ShowhideHUD_check = nullptr;
 	GuiButton* Language = nullptr;
 	GuiButton* back = nullptr;
 	std::vector<GuiButton*> buttons;
