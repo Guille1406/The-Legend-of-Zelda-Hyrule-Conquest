@@ -47,18 +47,25 @@ std::vector<Object*> j1Object::FindObject(std::string name)
 	return ret_vec;
 }
 
-void j1Object::CreateColliders(Object object)
+void j1Object::CreateColliders(Object& object)
 {
+	std::vector<iPoint> temp_vector;
 	for (int i = 0; i < object.rect.w / 16; i++) {
 		for (int n = 0; n < object.rect.h / 16; n++) {
 			iPoint temp;
 			temp.x = object.rect.x + i * 16;
 			temp.y = object.rect.y + n * 16;
 			//object.collider_tiles.push_back(temp);
-			if(App->map->V_Colision[object.logic_height][0].data[(temp.y / 16) * 100 + temp.x / 16] != CANT_PASS_COL_ID)
-			App->map->V_Colision[object.logic_height][0].data[(temp.y/16 )* 100 + temp.x/16] = TILE_COL_ID;
+			//if(App->map->V_Colision[0][object.logic_height].data[temp.y*App->map->data.width + temp.x] != CANT_PASS_COL_ID)	{	
+			if (App->map->V_Colision[object.logic_height][0].data[(temp.y / 16) * 100 + temp.x / 16] != CANT_PASS_COL_ID) {
+					App->map->V_Colision[object.logic_height][0].data[(temp.y / 16) * 100 + temp.x / 16] = CANT_PASS_COL_ID;
+					//object.collider_tiles.push_back(temp);
+					temp_vector.push_back(temp);
+				}
+			
 		}
 	}
+	object.collider_tiles = temp_vector;
 }
 
 Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int height)
@@ -154,6 +161,7 @@ Object * j1Object::CreateDoor(pugi::xml_node object, int height)
 			iPoint temp;
 			temp.x = temp_door.rect.x + i * 16;
 			temp.y = temp_door.rect.y + n * 16;
+			//if(App->map->V_Colision[0][temp_door.logic_height].data[temp.y*App->map->data.width + temp.x] != CANT_PASS_COL_ID)
 			temp_door.collider_tiles.push_back(temp);
 			//App->map->V_Colision[0][temp_door.logic_height].data[temp.y*App->map->data.width + temp.x] = TILE_COL_ID;
 		}
