@@ -81,7 +81,7 @@ public:
 	bool CleanUp();
 
 	std::vector<Object*> FindObject(std::string name);
-	void CreateColliders(Object);
+	void CreateColliders(Object&);
 
 	Object* CreateObject(char*, pugi::xml_node, int height);
 	Object* CreateChest(pugi::xml_node, int height);
