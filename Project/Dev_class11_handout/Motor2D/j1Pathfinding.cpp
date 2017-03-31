@@ -67,7 +67,7 @@ bool j1Pathfinding::IsWalkable(const iPoint & destination) const
 {
 	bool ret = false;
 	uchar t = GetTileAt(destination);
-	return (t == NOT_COLISION_ID );
+	return (t != TILE_COL_ID);
 }
 
 bool j1Pathfinding::CheckBoundaries(const iPoint & pos) const
@@ -146,6 +146,8 @@ std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoi
 					last_path.push_back(current->pos);
 					path->push_back({ current->pos.x, current->pos.y });
 
+
+
 				}
 				last_path.push_back(current->pos);
 
@@ -187,6 +189,7 @@ std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoi
 			}
 		}
 	}
+
 	return nullptr;
 }
 
@@ -406,11 +409,13 @@ void j1Pathfinding::Move(Enemy * enemy, Character* player)
 		x = x + (enemy->green_enemy_path[i].x - enemy->tile_pos.x);
 		y = y + (enemy->green_enemy_path[i].y - enemy->tile_pos.y);
 
+
 		/*
 		if (last_path.size() > 1) {
 			x = x + (last_path[i + 1].x - enemy->array_pos.x);
 			y = y + (last_path[i + 1].y - enemy->array_pos.y);
 		}*/
+
 		//enemy->actual_event = move;
 
 		//Change this
