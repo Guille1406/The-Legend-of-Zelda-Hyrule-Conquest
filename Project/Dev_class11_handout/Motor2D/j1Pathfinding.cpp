@@ -67,7 +67,7 @@ bool j1Pathfinding::IsWalkable(const iPoint & destination) const
 {
 	bool ret = false;
 	uchar t = GetTileAt(destination);
-	return (t == NOT_COLISION_ID );
+	return (t != TILE_COL_ID);
 }
 
 bool j1Pathfinding::CheckBoundaries(const iPoint & pos) const
@@ -139,12 +139,12 @@ std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoi
 				path->push_back(dest_point);
 				iPoint mouse_cell = App->map->WorldToMap(dest_point.x, dest_point.y);
 				if (mouse_cell == current->pos)
-					current = GetPathNode(current->parent->pos.x/16, current->parent->pos.y/16);
+					current = GetPathNode(current->parent->pos.x, current->parent->pos.y);
 
-				for (; current->parent != nullptr; current = GetPathNode(current->parent->pos.x/16, current->parent->pos.y/16))
+				for (; current->parent != nullptr; current = GetPathNode(current->parent->pos.x, current->parent->pos.y))
 				{
 					last_path.push_back(current->pos);
-					path->push_back(App->map->MapToWorld(current->pos.x/16, current->pos.y/16));
+					path->push_back(App->map->MapToWorld(current->pos.x, current->pos.y));
 
 				}
 				last_path.push_back(current->pos);
@@ -187,6 +187,7 @@ std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoi
 			}
 		}
 	}
+
 	return nullptr;
 }
 
@@ -405,10 +406,6 @@ void j1Pathfinding::Move(Enemy * enemy, Character* player)
 		x = x + (last_path[i].x - enemy->array_pos.x);
 		y = y + (last_path[i].y - enemy->array_pos.y);
 
-		if (last_path.size() > 1) {
-			x = x + (last_path[i + 1].x - enemy->array_pos.x);
-			y = y + (last_path[i + 1].y - enemy->array_pos.y);
-		}
 		//enemy->actual_event = move;
 
 		//Change this
