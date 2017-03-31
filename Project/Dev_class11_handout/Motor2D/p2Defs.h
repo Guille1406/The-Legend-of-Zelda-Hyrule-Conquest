@@ -75,6 +75,7 @@ const static std::string false_str = "false";
 
 
 static const SDL_Rect rect_button = { 0,0,32,32 };
+static const SDL_Rect rect_pressed_button = { 192,64,32,32 };
 static const SDL_Rect rect_movable_block = { 96,0,32,32 };
 static const SDL_Rect rect_Heart = { 128,0,32,32 };
 static const SDL_Rect rect_jar = { 160,0,32,32 };
@@ -91,5 +92,5 @@ static const SDL_Rect rect_chest_close = { 128,64,32,32 };
 static const SDL_Rect rect_chest_open = { 160,64,32,32 };
 static const SDL_Rect rect_Giant_chest_close = { 0,96,64,48 };
 static const SDL_Rect rect_Giant_chest_open = { 64,96,64,48 };
-
+static const SDL_Rect rect_door_down = { 240,-1,64,64 };
 #endif

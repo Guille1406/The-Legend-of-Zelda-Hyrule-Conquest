@@ -55,7 +55,7 @@ bool j1Enemy::Update(float dt)
 		V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x;
 		V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y;
 		Update_Sword_Collision(V_MyEnemies[i]);
-		App->render->Blit(V_MyEnemies[i]->character_texture, V_MyEnemies[i]->pix_world_pos.x - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.x, V_MyEnemies[i]->pix_world_pos.y - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.y, &V_MyEnemies[i]->actual_animation.GetCurrentFrame().rect);
+		App->render->Blit(V_MyEnemies[i]->entity_texture, V_MyEnemies[i]->pix_world_pos.x - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.x, V_MyEnemies[i]->pix_world_pos.y - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.y, &V_MyEnemies[i]->actual_animation.GetCurrentFrame().rect);
 		V_MyEnemies[i]->Action();
 		
 	}

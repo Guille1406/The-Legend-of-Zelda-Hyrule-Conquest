@@ -57,7 +57,7 @@ void j1Map::Draw()
 							SDL_Rect r = tileset->GetTileRect(tile_id);
 							iPoint pos = MapToWorld(x, y);
 
-							//if (layer->properties.Get("Navigation") == false && layer->properties.Get("Enemies") == false)
+							if (layer->properties.Get("Navigation") == false && layer->properties.Get("Enemies") == false)
 							App->render->Blit(tileset->texture, pos.x, pos.y, &r);
 						}
 					}

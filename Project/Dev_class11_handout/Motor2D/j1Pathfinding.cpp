@@ -139,12 +139,12 @@ std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoi
 				path->push_back(dest_point);
 				iPoint mouse_cell = App->map->WorldToMap(dest_point.x, dest_point.y);
 				if (mouse_cell == current->pos)
-					current = GetPathNode(current->parent->pos.x, current->parent->pos.y);
+					current = GetPathNode(current->parent->pos.x/16, current->parent->pos.y/16);
 
-				for (; current->parent != nullptr; current = GetPathNode(current->parent->pos.x, current->parent->pos.y))
+				for (; current->parent != nullptr; current = GetPathNode(current->parent->pos.x/16, current->parent->pos.y/16))
 				{
 					last_path.push_back(current->pos);
-					path->push_back(App->map->MapToWorld(current->pos.x, current->pos.y));
+					path->push_back(App->map->MapToWorld(current->pos.x/16, current->pos.y/16));
 
 				}
 				last_path.push_back(current->pos);

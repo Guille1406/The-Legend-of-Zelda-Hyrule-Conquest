@@ -12,6 +12,7 @@
 
 bool j1Object::Start()
 {
+	objects_texture = App->tex->Load("textures/items v2.png");
 	return true;
 }
 
@@ -22,6 +23,15 @@ bool j1Object::PreUpdate()
 
 bool j1Object::Update(float)
 {
+
+	//Blit all the objects
+
+	for (int i = 0; i < V_Objects.size(); i++) {
+		Object* object = V_Objects[i];
+		if(object->active)
+		App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
+		
+	}
 	return true;
 }
 
@@ -269,7 +279,7 @@ void Entity::LoadAnimation(const char* path)
 	pugi::xml_node info = sprites_file.child("TextureAtlas");
 	char* imagepath = (char*)info.attribute("imagePath").as_string();
 
-	character_texture = App->tex->Load(imagepath);
+	entity_texture = App->tex->Load(imagepath);
 
 	pugi::xml_node animations = info.first_child();
 

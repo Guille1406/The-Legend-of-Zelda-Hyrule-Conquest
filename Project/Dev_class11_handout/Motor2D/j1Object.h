@@ -37,6 +37,9 @@ enum objectType {
 
 };
 
+
+class Object;
+
 class Entity {
 public:
 	Entity() {};
@@ -51,38 +54,15 @@ public:
 	pugi::xml_document			sprites_file;
 	std::vector<Animation>		sprites_vector;
 	Animation					actual_animation;
-	SDL_Texture*				character_texture;
+	SDL_Texture*				entity_texture;
 
 };
 
-class Object : public Entity {
-public:
-	Object() {
-		int x = 0;
-	};
-	~Object() {};
-
-	virtual void Action() {};
-
-public:
-	//Needed for animation
-	
-
-public:
-
-	SDL_Rect rect;
-	bool active;
-	objectType type;
-	std::string name;
-	std::vector<Object*> connected_object;
-	std::vector<iPoint> collider_tiles;
-	
-};
 class j1Object : public j1Module {
 
 public:
 	j1Object() {
-		//V_Objects = new std::vector<Object*>;
+		
 
 	
 	};
@@ -108,6 +88,34 @@ public:
 
 public: 
 	std::vector<Object*> V_Objects;
+	SDL_Texture* objects_texture;
+
+};
+
+
+class Object : public Entity {
+public:
+	Object() {
+		this->entity_texture = App->object->objects_texture;
+	};
+	~Object() {};
+
+	virtual void Action() {};
+
+public:
+	//Needed for animation
+
+
+public:
+
+	SDL_Rect rect;
+	bool active;
+	objectType type;
+	std::string name;
+	std::vector<Object*> connected_object;
+	std::vector<iPoint> collider_tiles;
+
+	SDL_Rect texture_rect;
 
 };
 

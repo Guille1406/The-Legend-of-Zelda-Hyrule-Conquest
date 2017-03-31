@@ -6,6 +6,7 @@
 #include <algorithm>
 #include"j1Collision.h"
 #include "O_ChangeHeight.h"
+#include "O_Button.h"
 #include"j1Enemy.h"
 #include "j1HUD.h"
 
@@ -42,10 +43,10 @@ bool j1Player::Start()
 
 
 	//Change this for link spritesheet
-	Link->character_texture = App->tex->Load("textures/map.png");
+	Link->entity_texture = App->tex->Load("textures/map.png");
 
 	//Change this for the zelda spritesheet
-	Zelda->character_texture = Link->character_texture;
+	Zelda->entity_texture = Link->entity_texture;
 	
 
 	Link->LoadAnimation("sprites/Link_Sprites_trim.xml");
@@ -121,8 +122,8 @@ void j1Player::Draw()
 	SDL_Rect rect;
 	rect = { Link->tilepos.x*16, Link->tilepos.y*16, 32, 32 };
 	
-	App->render->Blit(Link->character_texture, Link->pos.x - Link->actual_animation.GetCurrentFrame().pivot.x, Link->pos.y - Link->actual_animation.GetCurrentFrame().pivot.y, &Link->actual_animation.GetCurrentFrame().rect,1.0f,0.0,2147483647, 2147483647,true,Link->opacity);
-	App->render->Blit(Zelda->character_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y, &Zelda->actual_animation.GetCurrentFrame().rect);
+	App->render->Blit(Link->entity_texture, Link->pos.x - Link->actual_animation.GetCurrentFrame().pivot.x, Link->pos.y - Link->actual_animation.GetCurrentFrame().pivot.y, &Link->actual_animation.GetCurrentFrame().rect,1.0f,0.0,2147483647, 2147483647,true,Link->opacity);
+	App->render->Blit(Zelda->entity_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y, &Zelda->actual_animation.GetCurrentFrame().rect);
 	
 	//App->render->DrawQuad(rect, 0, 0, 255, 255, true, true);
 	
@@ -224,12 +225,14 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 
 	if (collider1->type == collider_button) {
-		Object* temp = (Object*)collider1->parent;
+		Button* temp = (Button*)collider1->parent;
 			temp->Action();
+			temp->texture_rect = temp->pressed_button;
 	}
 	else if(collider2->type == collider_button) {
-		Object* temp = (Object*)collider2->parent;
+		Button* temp = (Button*)collider2->parent;
 			temp->Action();
+			temp->texture_rect = temp->pressed_button;
 	}
 
 	else if (collider1->type == collider_change_height) {

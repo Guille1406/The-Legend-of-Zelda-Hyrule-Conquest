@@ -7,7 +7,7 @@
 Green_Enemy::Green_Enemy():Enemy(enemyType::green_enemy)
 {
 	this->sprites_vector = App->enemy->enemy_perf->sprites_vector;
-	this->character_texture = App->enemy->enemy_perf->character_texture;
+	this->entity_texture = App->enemy->enemy_perf->entity_texture;
 	this->ChangeAnimation(1);
 }
 Green_Enemy::Green_Enemy(const Green_Enemy& g_enemy) :Enemy(enemyType::green_enemy)
