@@ -125,7 +125,7 @@ private:
 	std::vector<GamePad*> gamepads;
 	int			connected_gamepads = 0;
 	int			gamepad_connected[MAX_GAMECONTROLLERS];
-	j1KeyState  prev_state[NUM_CONTROLLER_BUTTONS];
+	
 	
 
 };
