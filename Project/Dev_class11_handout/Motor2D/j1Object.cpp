@@ -36,11 +36,11 @@ std::vector<Object*> j1Object::FindObject(std::string name)
 {
 	std::vector<Object*> ret_vec;
 	
-	for (int i = 0; i < V_Objects->size(); i++) {
-		Object* temp = V_Objects[0][i];
+	for (int i = 0; i < V_Objects.size(); i++) {
+		Object* temp = V_Objects[i];
 		
 		if (name == temp->name && name != empty_char) {
-			ret_vec.push_back( V_Objects[0][i]);
+			ret_vec.push_back( V_Objects[i]);
 		}
 	}
 	
@@ -102,7 +102,7 @@ Object * j1Object::CreateChest(pugi::xml_node object, int height)
 
 	Object* ret = new Chest(temp_chest);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_chest, (Entity*)ret, this);
-	V_Objects->push_back(ret);
+	V_Objects.push_back(ret);
 
 	return ret;
 }
@@ -122,7 +122,7 @@ Object * j1Object::CreateButton(pugi::xml_node object, int height)
 
 	Object* ret = new Button(temp_button);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_button, (Entity*)ret, this);
-	V_Objects->push_back(ret);
+	V_Objects.push_back(ret);
 
 	//FindObject("door_1");
 	return ret;
@@ -175,7 +175,7 @@ Object * j1Object::CreateDoor(pugi::xml_node object, int height)
 	//std::vector<iPoint> ret->collider_tiles;
 	
 
-	V_Objects->push_back(ret);
+	V_Objects.push_back(ret);
 	return ret;
 }
 
@@ -194,7 +194,7 @@ Object * j1Object::CreateChangeHeight(pugi::xml_node object, int height)
 	temp_height.type = objectType::change_height;
 	temp_height.active = true;
 
-	auto attribute = object.child("properties").child("property");
+	pugi::xml_node attribute = object.child("properties").child("property");
 	while (strcmp(attribute.attribute("name").as_string(), "height")) {
 		attribute = attribute.next_sibling();
 	}
@@ -202,7 +202,7 @@ Object * j1Object::CreateChangeHeight(pugi::xml_node object, int height)
 	temp_height.height = attribute.attribute("value").as_int();
 	Object* ret = new ChangeHeight(temp_height);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_change_height, (Entity*)ret, this);
-	V_Objects->push_back(ret);
+	V_Objects.push_back(ret);
 	return ret;
 }
 
@@ -218,11 +218,11 @@ Object * j1Object::CreateJump(pugi::xml_node object, int height)
 	temp_jump.rect = { x,y,w,h };
 	temp_jump.type = objectType::object_jump;
 	temp_jump.active = true;
-	auto attribute = object.child("properties").child("property");
+	pugi::xml_node attribute = object.child("properties").child("property");
 	
 	Object* ret = new Jump(temp_jump);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_jump, (Entity*)ret, this);
-	V_Objects->push_back(ret);
+	V_Objects.push_back(ret);
 	return ret;
 }
 

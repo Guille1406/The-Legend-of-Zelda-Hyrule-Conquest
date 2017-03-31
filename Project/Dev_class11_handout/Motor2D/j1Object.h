@@ -68,7 +68,7 @@ class j1Object : public j1Module {
 
 public:
 	j1Object() {
-		V_Objects = new std::vector<Object*>;
+		//V_Objects = new std::vector<Object*>;
 
 	
 	};
@@ -92,7 +92,7 @@ public:
 	Object* CreateDoor(pugi::xml_node object, int height);
 
 public: 
-	std::vector<Object*>* V_Objects;
+	std::vector<Object*> V_Objects;
 
 };
 

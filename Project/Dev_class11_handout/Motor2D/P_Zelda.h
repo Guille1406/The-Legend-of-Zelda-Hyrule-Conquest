@@ -36,12 +36,12 @@ struct Arrow : public Entity{
 class P_Zelda:public Character {
 public:
 	P_Zelda() {
-		sprites_vector = new std::vector<Animation>;
-		Vec_Arrow = new std::vector<Arrow*>;
+		//sprites_vector = new std::vector<Animation>;
+		//Vec_Arrow = new std::vector<Arrow*>;
 	
 	};
 	~P_Zelda() {
-		delete sprites_vector;
+		//delete sprites_vector;
 	};
 
 	void Attack(float dt);
@@ -55,7 +55,7 @@ public:
 	bool temp = false;
 	bool collide_jump = false;
 	bool can_move =true;
-	std::vector<Arrow*>* Vec_Arrow;
+	std::vector<Arrow*> Vec_Arrow;
 };
 
 #endif

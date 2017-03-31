@@ -45,7 +45,7 @@ void Character::LoadAnimation(const char* path)
 
 	char* name = (char*)animations.attribute("n").as_string();
 
-	auto temp = animations;
+	pugi::xml_node temp = animations;
 	last_name = name;
 	int i = 0;
 	while (animations) {
@@ -54,7 +54,7 @@ void Character::LoadAnimation(const char* path)
 		if (strcmp(name, last_name)) {
 			temp_animation.speed = 0.05;
 					
-			sprites_vector->push_back(temp_animation);
+			sprites_vector.push_back(temp_animation);
 			
 			//temp_animation.pivot.x = temp.attribute("pX").as_float() *(float)w;
 			//temp_animation.pivot.y = temp.attribute("pY").as_float() *(float)h;
@@ -88,14 +88,14 @@ void Character::LoadAnimation(const char* path)
 		anim_frame.pivot = { temp_animation.pivot.x, temp_animation.pivot.y };
 		
 	}
-	sprites_vector->push_back(temp_animation);
+	sprites_vector.push_back(temp_animation);
 }
 
 void Character::ChangeAnimation(int animation)
 {
 		//If the animation is diferent than the actual, change it
 		if (last_animation != animation) {
-		this->actual_animation = this->sprites_vector[0][animation];
+		this->actual_animation = this->sprites_vector[animation];
 		last_animation = animation;
 	}
 }

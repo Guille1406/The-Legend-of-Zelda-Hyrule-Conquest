@@ -399,6 +399,9 @@
     <ClInclude Include="S_InGameMenu.h">
       <Filter>Desenvolupament  ========\Scenes\GUI\In-Game Menu</Filter>
     </ClInclude>
+    <ClInclude Include="O_Diana.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">

@@ -47,31 +47,31 @@ void P_Zelda::CreateArrow(SDL_Rect rect)
 	temp_arrow->direction = character_direction;
 	temp_arrow->timer = SDL_GetTicks();
 	//temp_arrow->can_move = false;
-	Vec_Arrow->push_back(temp_arrow);
+	Vec_Arrow.push_back(temp_arrow);
 
 }
 
 void P_Zelda::UpdateArrows()
 {
 	int arrow_speed = 10;
-	for (int i = 0; i < Vec_Arrow->size(); i++) {
-		Vec_Arrow[0][i]->Check_Wall();
-		if (Vec_Arrow[0][i]->can_move) {
-		Vec_Arrow[0][i]->Check_Wall();
-		Vec_Arrow[0][i]->collider->SetPos(Vec_Arrow[0][i]->pos.x, Vec_Arrow[0][i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
+	for (int i = 0; i < Vec_Arrow.size(); i++) {
+		Vec_Arrow[i]->Check_Wall();
+		if (Vec_Arrow[i]->can_move) {
+		Vec_Arrow[i]->Check_Wall();
+		Vec_Arrow[i]->collider->SetPos(Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
 		}
 		else {
-			if (Vec_Arrow[0][i]->is_attached) {
-				Vec_Arrow[0][i]->pos.x = Vec_Arrow[0][i]->attached_enemy->pix_world_pos.x + Vec_Arrow[0][i]->offset.x;
-				Vec_Arrow[0][i]->pos.y = Vec_Arrow[0][i]->attached_enemy->pix_world_pos.y + Vec_Arrow[0][i]->offset.y;
-				Vec_Arrow[0][i]->collider->SetPos(Vec_Arrow[0][i]->pos.x, Vec_Arrow[0][i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
+			if (Vec_Arrow[i]->is_attached) {
+				Vec_Arrow[i]->pos.x = Vec_Arrow[i]->attached_enemy->pix_world_pos.x + Vec_Arrow[i]->offset.x;
+				Vec_Arrow[i]->pos.y = Vec_Arrow[i]->attached_enemy->pix_world_pos.y + Vec_Arrow[i]->offset.y;
+				Vec_Arrow[i]->collider->SetPos(Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
 			}
 		}
 	
 
-		if (SDL_GetTicks() - Vec_Arrow[0][i]->timer > 1000) {
-			Vec_Arrow[0][i]->collider->to_delete = true;
-			Vec_Arrow->erase(Vec_Arrow->begin() + i);
+		if (SDL_GetTicks() - Vec_Arrow[i]->timer > 1000) {
+			Vec_Arrow[i]->collider->to_delete = true;
+			Vec_Arrow.erase(Vec_Arrow.begin() + i);
 			i--;
 		}
 	}

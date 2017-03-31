@@ -20,6 +20,7 @@ public:
 		for (int i = 0; i < this->collider_tiles.size(); i++) {
 			App->map->V_Colision[logic_height][0].data[(collider_tiles[i].y / 16) * App->map->data.width + (collider_tiles[i].x / 16)] = 0;
 		}
+		active = false;
 		/*for (int i = 0; i < rect.w / 16; i++) {
 			for (int n = 0; n < rect.h / 16; n++) {
 				iPoint temp;

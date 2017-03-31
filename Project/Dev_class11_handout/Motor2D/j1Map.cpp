@@ -40,7 +40,7 @@ void j1Map::Draw()
 	for (; item != data.layers.cend(); ++item) {
 		MapLayer* layer = (*item);
 
-		if (auto temp = layer->properties.Get("Nodraw") != 0)
+		if (bool temp = layer->properties.Get("Nodraw") != 0)
 			continue;
 
 		for (int y = 0; y < data.height; ++y)
@@ -389,7 +389,7 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	}
 	else
 	{
-	auto asd = image.attribute("source").as_string();
+	
 	set->texture = App->tex->Load(PATH(folder.GetString(), image.attribute("source").as_string()));
 
 	int w, h;
@@ -474,14 +474,14 @@ bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer, int heig
 	else
 	{		
 	//Iterates all the objects
-		int count = App->object->V_Objects->size();
+		int count = App->object->V_Objects.size();
 		for (pugi::xml_node node_object = layer_data; node_object; node_object = node_object.next_sibling("object"))
 		{
-			auto iterator = node_object.child("properties").child("property");
+			pugi::xml_node iterator = node_object.child("properties").child("property");
 			while (iterator.attribute("name").as_string() != "type" && iterator){
 				iterator = iterator.next_sibling();
 			}
-			auto attribute = node_object.child("properties").child("property");
+			pugi::xml_node attribute = node_object.child("properties").child("property");
 			while (strcmp(attribute.attribute("name").value(), "type"))
 				attribute = attribute.next_sibling();
 			char* type_name = (char*)attribute.attribute("value").as_string();
@@ -491,19 +491,7 @@ bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer, int heig
 			
 		}
 		
-		/*for (pugi::xml_node node_object = layer_data; node_object; node_object = node_object.next_sibling("object"))
-		{
-
-			auto attribute = node_object.child("properties").child("property");
-			while (strcmp(attribute.attribute("name").value(), "entity") && attribute) {
-				attribute = attribute.next_sibling();
-			}
-			auto entity = App->object->FindObject(attribute.attribute("value").as_string());
-			if (entity != nullptr) {
-				App->object->V_Objects[0][count]->connected_object = entity;
-			}
-			count++;
-		}*/
+		
 
 	}
 
@@ -535,7 +523,7 @@ bool j1Map::LoadConnectedObjects(pugi::xml_node & node)
 			}
 			std::vector<Object*> vec_connected_objects = App->object->FindObject(attribute.attribute("value").as_string());
 			for (int i = 0; i < vec_connected_objects.size(); i++) {
-				App->object->V_Objects[0][count]->connected_object.push_back(vec_connected_objects[i]);
+				App->object->V_Objects[count]->connected_object.push_back(vec_connected_objects[i]);
 			}
 			
 			count++;

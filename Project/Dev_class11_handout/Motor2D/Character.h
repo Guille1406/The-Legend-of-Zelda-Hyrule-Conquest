@@ -127,7 +127,7 @@ public:
 	//Needed for animation
 	p2SString					sprites_folder;
 	pugi::xml_document			sprites_file;
-	std::vector<Animation>*		sprites_vector;
+	std::vector<Animation>		sprites_vector;
 	Animation					actual_animation; 
 
 	//Needed for player movement and events

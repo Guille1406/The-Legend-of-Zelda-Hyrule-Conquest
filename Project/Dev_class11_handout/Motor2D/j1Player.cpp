@@ -17,8 +17,8 @@ bool j1Player::Awake(pugi::xml_node& config)
 	cooperative = true;
 	Link->movement_direction = move_idle;
 	Zelda->movement_direction = move_idle;
-	Link->sprites_vector = new std::vector<Animation>;
-	Zelda->sprites_vector = new std::vector<Animation>;
+	//Link->sprites_vector = new std::vector<Animation>;
+	//Zelda->sprites_vector = new std::vector<Animation>;
 	Link->sprites_folder.create(config.child("folder").child_value());
 	Zelda->sprites_folder.create(config.child("folder").child_value());
 	Link->actual_event = player_event::idle;
@@ -50,8 +50,8 @@ bool j1Player::Start()
 	Link->LoadAnimation("sprites/Link_Sprites_trim.xml");
 	Zelda->LoadAnimation("sprites/Zelda_Temp_Sprites.xml");
 
-	Link->actual_animation = Link->sprites_vector[0][0];
-	Zelda->actual_animation = Zelda->sprites_vector[0][0];
+	Link->actual_animation = Link->sprites_vector[0];
+	Zelda->actual_animation = Zelda->sprites_vector[0];
 	selected_character = Link;
 	other_character = Zelda;
 	change = false;
@@ -119,8 +119,7 @@ void j1Player::Draw()
 {
 	SDL_Rect rect;
 	rect = { Link->tilepos.x*16, Link->tilepos.y*16, 32, 32 };
-	auto temp = Link->actual_animation.GetCurrentFrame().pivot.x;
-	auto temp_rect = Link->actual_animation.GetCurrentFrame().rect;
+	
 	App->render->Blit(Link->character_texture, Link->pos.x - Link->actual_animation.GetCurrentFrame().pivot.x, Link->pos.y - Link->actual_animation.GetCurrentFrame().pivot.y, &Link->actual_animation.GetCurrentFrame().rect,1.0f,0.0,2147483647, 2147483647,true,Link->opacity);
 	App->render->Blit(Zelda->character_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y, &Zelda->actual_animation.GetCurrentFrame().rect);
 	
@@ -224,21 +223,21 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 
 	if (collider1->type == collider_button) {
-		auto temp = (Object*)collider1->parent;
+		Object* temp = (Object*)collider1->parent;
 			temp->Action();
 	}
 	else if(collider2->type == collider_button) {
-		auto temp = (Object*)collider2->parent;
+		Object* temp = (Object*)collider2->parent;
 			temp->Action();
 	}
 
 	else if (collider1->type == collider_change_height) {
-		auto temp = (ChangeHeight*)collider1->parent;
+		ChangeHeight* temp = (ChangeHeight*)collider1->parent;
 		character->ChangeLogicHeightPlayer(temp->height);
 		
 	}
 	else if (collider2->type == collider_change_height) {
-		auto temp = (ChangeHeight*)collider2->parent;
+		ChangeHeight* temp = (ChangeHeight*)collider2->parent;
 		character->ChangeLogicHeightPlayer(temp->height);
 		
 	}

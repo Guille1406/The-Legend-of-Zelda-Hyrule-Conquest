@@ -21,12 +21,12 @@ class P_Link:public Character  {
 public:
 	
 	P_Link() {
-		sprites_vector = new std::vector<Animation>;
+		//sprites_vector = new std::vector<Animation>;
 		Link_sword = new Sword();
 
 	}
 	~P_Link() {
-		delete sprites_vector;
+		//delete sprites_vector;
 	}
 
 	void Attack(float dt);
