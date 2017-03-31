@@ -1,110 +1,135 @@
-#ifndef __j1PATHFINDING_H__
-#define __j1PATHFINDING_H__
+#ifndef _PATHFINDING_H_
+#define _PATHFINDING_H_
 
 #include "j1Module.h"
 #include "p2Point.h"
-#include "p2DynArray.h"
-#include "Character.h"
-
-#define DEFAULT_PATH_LENGTH 50
-#define INVALID_WALK_CODE 237
-
-// --------------------------------------------------
-// Recommended reading:
-// Intro: http://www.raywenderlich.com/4946/introduction-to-a-pathfinding
-// Details: http://theory.stanford.edu/~amitp/GameProgramming/
-// --------------------------------------------------
-
-class j1PathFinding : public j1Module
+#include <queue>
+struct PathList;
+struct Node;
+struct ClusterAbstraction;
+struct SDL_Texture;
+struct PathNode;
+///class Pathfinding ------------------
+class j1Pathfinding : public j1Module
 {
 public:
 
-	j1PathFinding();
+	j1Pathfinding();
+	~j1Pathfinding();
 
-	// Destructor
-	~j1PathFinding();
+	// Called before the first frame
+	bool Start();
 
 	// Called before quitting
 	bool CleanUp();
-
-	// Sets up the walkability map
-	void SetMap(uint width, uint height, uchar* data);
-
-	// Main function to request a path from A to B
-	int CreatePath(const iPoint& origin, const iPoint& destination);
-
-	// To request all tiles involved in the last generated path
-	const p2DynArray<iPoint>* GetLastPath() const;
-
-	// Utility: return true if pos is inside the map boundaries
-	bool CheckBoundaries(const iPoint& pos) const;
-
-	// Utility: returns true is the tile is walkable
-	bool IsWalkable(const iPoint& pos) const;
-
-	// Utility: return the walkability value of a tile
-	uchar GetTileAt(const iPoint& pos) const;
-
-	void Move(Character* ,Character*);
-
-	void DeletePath() {
-		last_path.Clear();
-	}
-
+	void SetMap(uint width, uint height);
+	void SetMapLimits(int position_x, int position_y, int width, int height);
+	uchar GetValueMap(int x, int y) const;
+	PathNode* GetPathNode(int x, int y);
 private:
+	PathNode* path_nodes = nullptr;
+	int width = 0;
+	int height = 0;
+	int map_min_x = 0;
+	int map_min_y = 0;
+	int map_max_x = 0;
+	int map_max_y = 0;
+	//A pointer to the last path generated
+	std::vector<iPoint> last_path;
+	//Map cluster abstraction
+	ClusterAbstraction* cluster_abstraction = nullptr;
 
-	// size of the map
-	uint width;
-	uint height;
-	// all map walkability values [0..255]
-	uchar* map;
-	// we store the created path here
-	p2DynArray<iPoint> last_path;
+public:
+
+	//Path tile debug texture
+	SDL_Texture* path_texture = nullptr;
+
+public:
+
+	//Functionality ---------
+	//Methods used during the paths creation to work with map data
+	// Check if the cell coordinate is walkable
+
+	bool	IsWalkable(const iPoint& destination)const;
+	// Check if the boundaries of x coordinate are walkable
+	bool	CheckBoundaries(const iPoint& pos) const;
+	// Get tile from x coordinate
+	uchar	GetTileAt(const iPoint& pos) const;
+
+	// Create a path with two nodes
+	std::vector<iPoint>* SimpleAstar(const iPoint& origin, const iPoint& goal);
+	
+	// Create a path with two coordinates
+
 };
+/// -----------------------------------
 
-// forward declaration
-struct PathList;
-
-// ---------------------------------------------------------------------
-// Pathnode: Helper struct to represent a node in the path creation
-// ---------------------------------------------------------------------
+/// Struct PathNode -------------------
+//Helper struct to represent a node in the path creation
 struct PathNode
 {
-	// Convenient constructors
+	//Constructors ----------
 	PathNode();
 	PathNode(int g, int h, const iPoint& pos, const PathNode* parent);
 	PathNode(const PathNode& node);
 
-	// Fills a list (PathList) of all valid adjacent pathnodes
-	uint FindWalkableAdjacents(PathList& list_to_fill) const;
+	//Methods----------------
+	// Fills a list (PathList) of all valid adjacent path nodes
+	uint FindWalkableAdjacents(PathList* list_to_fill) const;
 	// Calculates this tile score
-	int Score() const;
+	float Score() const;
 	// Calculate the F for a specific destination tile
 	int CalculateF(const iPoint& destination);
+	void SetPosition(const iPoint& value);
+	//Operators -------------
+	bool operator ==(const PathNode& node)const;
+	bool operator !=(const PathNode& node)const;
 
-	// -----------
-	int g;
-	int h;
-	iPoint pos;
-	const PathNode* parent; // needed to reconstruct the path in the end
+	// PathNode data --------
+	float			g = -1;
+	int				h = -1;
+	iPoint			pos = { -1,-1 };
+	bool			on_close = false;
+	bool			on_open = false;
+	const PathNode* parent = nullptr; // needed to reconstruct the path in the end
+
 };
+/// -----------------------------------
 
-// ---------------------------------------------------------------------
-// Helper struct to include a list of path nodes
-// ---------------------------------------------------------------------
+///Struct PathList --------------------
+//Helper struct to include a list of path nodes
 struct PathList
 {
+
+	//Methods ---------------
 	// Looks for a node in this list and returns it's list node or NULL
-	p2List_item<PathNode>* Find(const iPoint& point) const;
+	//	std::list<PathNode>::iterator Find(const iPoint& point);
+	// Returns the path node with lowest score in this list or NULL if empty
+	//PathNode* GetNodeLowestScore() const;
 
-	// Returns the Pathnode with lowest score in this list or NULL if empty
-	p2List_item<PathNode>* GetNodeLowestScore() const;
+	// PathList data --------
+	std::list<PathNode*> list;
 
-	// -----------
-	// The list itself, note they are not pointers!
-	p2List<PathNode> list;
+};
+struct compare
+{
+	bool operator()(const PathNode* l, const PathNode* r)
+	{
+		return l->Score() >= r->Score();
+	}
+};
+struct OpenList
+{
+public:
+	//Methods ---------------
+	// Looks for a node in this list and returns it's list node or NULL
+	//std::list<PathNode>::iterator Find(const iPoint& point);
+	// Returns the path node with lowest score in this list or NULL if empty
+	//PathNode* GetNodeLowestScore() const;
+
+	// PathList data --------
+	std::priority_queue<PathNode*, std::vector<PathNode*>, compare > queue;
 };
 
-
-
-#endif // __j1PATHFINDING_H__
+/// -----------------------------------
+#endif // _PATHFINDING_H_
