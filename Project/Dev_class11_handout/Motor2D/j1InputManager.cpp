@@ -117,7 +117,7 @@ void j1InputManager::InputDetected(int button, EVENTSTATE state, int player)
 	}
 	else
 	{
-		ChangeEventButton(button);
+		ChangeEventButton(button,player);
 	}
 }
 
@@ -210,37 +210,67 @@ void j1InputManager::ChangeInputEvent(INPUTEVENT change_ev)
 	event_to_change = change_ev;
 }
 
-bool j1InputManager::ChangeEventButton(int new_button)
+bool j1InputManager::ChangeEventButton(int new_button,int id)
 {
 	bool ret = false;
 
 	//Look if the new button is actually asigned
 	std::multimap<int, INPUTEVENT>::iterator tmp = actions_link.find(new_button);
+	std::multimap<int, INPUTEVENT>::iterator tmp_1 = actions_zelda.find(new_button);
+	if (id == 1) {
+		if (tmp != actions_link.end())
+		{
+			LOG("This button is actually in another action");
+			return ret;
+		}
 
-	if (tmp != actions_link.end())
-	{
-		LOG("This button is actually in another action");
-		return ret;
+		//Look for the event to erase it
+		tmp = actions_link.begin();
+		while ((*tmp).second != event_to_change)
+			tmp++;
+		actions_link.erase(tmp);
+
+		//This is the event with the new button
+		std::pair<int, INPUTEVENT> event_changed;
+		event_changed.first = new_button;
+		event_changed.second = event_to_change;
+		actions_link.insert(event_changed);
+
+		//Reset the variables
+		next_input_change = false;
+		event_to_change = NO_EVENT;
+
+		ret = true;
 	}
 
-	//Look for the event to erase it
-	tmp = actions_link.begin();
-	while ((*tmp).second != event_to_change)
-		tmp++;
-	actions_link.erase(tmp);
+	if (id == 0) {
+		if (tmp_1 != actions_zelda.end())
+		{
+			LOG("This button is actually in another action");
+			return ret;
+		}
 
-	//This is the event with the new button
-	std::pair<int, INPUTEVENT> event_changed;
-	event_changed.first = new_button;
-	event_changed.second = event_to_change;
-	actions_link.insert(event_changed);
+		//Look for the event to erase it
+		tmp_1 = actions_zelda.begin();
+		while ((*tmp_1).second != event_to_change)
+			tmp_1++;
+		actions_zelda.erase(tmp_1);
 
-	//Reset the variables
-	next_input_change = false;
-	event_to_change = NO_EVENT;
+		//This is the event with the new button
+		std::pair<int, INPUTEVENT> event_changed;
+		event_changed.first = new_button;
+		event_changed.second = event_to_change;
+		actions_zelda.insert(event_changed);
 
-	ret = true;
+		//Reset the variables
+		next_input_change = false;
+		event_to_change = NO_EVENT;
 
+		ret = true;
+
+
+
+	}
 
 	return ret;
 }

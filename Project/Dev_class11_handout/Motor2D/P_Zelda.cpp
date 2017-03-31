@@ -298,11 +298,13 @@ player_event P_Zelda::GetEvent()
 			//ATTACK//
 			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_REPEAT) {
 				character_direction = aim_direction;
+				bow++;
 			}
-			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_UP) {
+			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_NOTHING&&bow>=20) {
 				actual_event = attack;
 				doing_script = true;
 				character_direction = aim_direction;
+				bow = 0;
 			}
 
 			

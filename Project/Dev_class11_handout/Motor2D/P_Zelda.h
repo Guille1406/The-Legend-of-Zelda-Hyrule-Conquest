@@ -55,6 +55,7 @@ public:
 	bool temp = false;
 	bool collide_jump = false;
 	bool can_move =true;
+	int bow = 0;
 	std::vector<Arrow*> Vec_Arrow;
 };
 

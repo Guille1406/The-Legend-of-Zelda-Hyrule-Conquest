@@ -95,7 +95,7 @@ private:
 
 	//To Change the action button
 	bool		next_input_change = false;
-	bool		ChangeEventButton(int);
+	bool		ChangeEventButton(int,int);
 	INPUTEVENT	event_to_change = NO_EVENT;
 
 

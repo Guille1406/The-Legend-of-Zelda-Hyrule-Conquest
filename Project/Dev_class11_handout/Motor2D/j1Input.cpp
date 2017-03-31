@@ -70,9 +70,8 @@ bool j1Input::PreUpdate()
 				App->inputM->InputDetected(i, EVENTSTATE::E_REPEAT, (*it)->id);
 			}
 
-			if ((*it)->controller_buttons[i] == KEY_UP)
-				(*it)->controller_buttons[i] = KEY_IDLE;
 		}
+		
 
 
 			for (int i = 0; i < NUM_CONTROLLER_AXIS; ++i)
@@ -163,19 +162,23 @@ bool j1Input::PreUpdate()
 		case SDL_CONTROLLERBUTTONDOWN:
 			for (std::vector<GamePad*>::iterator it = gamepads.begin(); it != gamepads.end(); it++)
 			{
-				LOG("BOTON: %i", event.cbutton.button);
-				(*it)->controller_buttons[event.cbutton.button] = KEY_DOWN;
-				App->inputM->InputDetected(event.cbutton.button, EVENTSTATE::E_DOWN, (*it)->id);
+				if ((*it)->id == event.cbutton.which) {
+					//LOG("BOTON: %i", event.cbutton.button);
+					(*it)->controller_buttons[event.cbutton.button] = KEY_DOWN;
+					App->inputM->InputDetected(event.cbutton.button, EVENTSTATE::E_DOWN, (*it)->id);
+				}
 			}
-				
 			break;	
 
 		// el problema esta aqui//
 		case SDL_CONTROLLERBUTTONUP:
 			for (std::vector<GamePad*>::iterator it = gamepads.begin(); it != gamepads.end(); it++)
 			{
-				(*it)->controller_buttons[event.cbutton.button] = KEY_UP;
-				App->inputM->InputDetected(event.cbutton.button, EVENTSTATE::E_UP, (*it)->id);
+				if ((*it)->id == event.cbutton.which) {
+					LOG("BOTON: %c", event.cbutton.button);
+					(*it)->controller_buttons[event.cbutton.button] = KEY_UP;
+					App->inputM->InputDetected(event.cbutton.button, EVENTSTATE::E_UP, (*it)->id);
+				}
 			}
 		break;
 
