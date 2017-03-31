@@ -35,8 +35,11 @@ bool j1Enemy::PreUpdate()
 {
 	for (int i = 0; i < V_MyEnemies.size(); i++) {
 		if (V_MyEnemies[i]->tokill == true) {
+			V_MyEnemies[i]->collider->to_delete = true;
+			V_MyEnemies[i]->shield_test->to_delete = true;
 			std::vector<Enemy*>::iterator it = std::find(App->enemy->V_MyEnemies.begin(), App->enemy->V_MyEnemies.end(), V_MyEnemies[i]);
-			App->enemy->V_MyEnemies.erase(it);
+			V_MyEnemies.erase(it);
+			
 
 		}
 	}
@@ -49,7 +52,6 @@ bool j1Enemy::Update(float dt)
 	for (int i = 0; i < V_MyEnemies.size(); i++) {
 		V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x+17;
 		V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y +10;
-		//V_MyEnemies[i]->shield_test->SetPos(V_MyEnemies[i]->collider->rect.x-23, V_MyEnemies[i]->collider->rect.y + 30, V_MyEnemies[i]->logic_height);
 		Update_Sword_Collision(V_MyEnemies[i]);
 		App->render->Blit(green_soldier_tex, V_MyEnemies[i]->pix_world_pos.x, V_MyEnemies[i]->pix_world_pos.y, &V_MyEnemies[i]->rect);
 		V_MyEnemies[i]->Action();
@@ -79,17 +81,9 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 	case enemyType::green_enemy:
 		ret = new Green_Enemy();
 		ret->rect = { 0,0,44,60 };
-		break;
-
-	}
-
-		//This will not be usefull when the enemies will be readed from xml
-
-	//Position in array
-	if (ret != nullptr) {
 		ret->array_pos = pos_array_enemy;
 		ret->live = 2;
-
+		//This will not be usefull when the enemies will be readed from xml
 		SDL_Rect rect_test = { ret->array_pos.x,ret->array_pos.y,20,10 };
 		ret->shield_test = App->collision->AddCollider(rect_test, COLLIDER_TYPE::collider_enemy_sword, ret, this);
 
@@ -101,7 +95,11 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 		SDL_Rect rect = { ret->pix_world_pos.x + 16, ret->pix_world_pos.y + 32,16,42 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
 		ret->logic_height = 0;
+		break;
 
+	}
+	//Position in array
+	if (ret != nullptr) {
 		V_MyEnemies.push_back(ret);
 	}
 
