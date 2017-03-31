@@ -267,21 +267,32 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	}
 
 	else if (collider1->type == collider_arrow) {
-		Arrow* arrow_temp = (Arrow*)collider1->parent;
-		arrow_temp->can_move = false;
-		arrow_temp->is_attached = true;
-		arrow_temp->attached_enemy = (Enemy*)collider2->parent;
-		arrow_temp->offset.x = arrow_temp->pos.x - arrow_temp->attached_enemy->pix_world_pos.x;
-		arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pix_world_pos.y;
-
+		if (collider2->type == collider_diana) {
+			Object* temp = (Object*)collider2->parent;
+			temp->Action();
+		}
+		else {
+			Arrow* arrow_temp = (Arrow*)collider1->parent;
+			arrow_temp->can_move = false;
+			arrow_temp->is_attached = true;
+			arrow_temp->attached_enemy = (Enemy*)collider2->parent;
+			arrow_temp->offset.x = arrow_temp->pos.x - arrow_temp->attached_enemy->pix_world_pos.x;
+			arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pix_world_pos.y;
+		}
 	}
 	else if (collider2->type == collider_arrow) {
-		Arrow* arrow_temp = (Arrow*)collider2->parent;
-		arrow_temp->can_move = false;
-		arrow_temp->is_attached = true;
-		arrow_temp->attached_enemy = (Enemy*)collider1->parent;
-		arrow_temp->offset.x = arrow_temp->pos.x - arrow_temp->attached_enemy->pix_world_pos.x;
-		arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pix_world_pos.y;
+		if (collider1->type == collider_diana) {
+			Object* temp = (Object*)collider1->parent;
+			temp->Action();
+		}
+		else {
+			Arrow* arrow_temp = (Arrow*)collider2->parent;
+			arrow_temp->can_move = false;
+			arrow_temp->is_attached = true;
+			arrow_temp->attached_enemy = (Enemy*)collider1->parent;
+			arrow_temp->offset.x = arrow_temp->pos.x - arrow_temp->attached_enemy->pix_world_pos.x;
+			arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pix_world_pos.y;
+		}
 
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {

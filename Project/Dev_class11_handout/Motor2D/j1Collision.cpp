@@ -28,6 +28,7 @@ j1Collision::j1Collision()
 
 	//ARROW
 	matrix[collider_arrow][collider_enemy] = true;
+	matrix[collider_arrow][collider_diana] = true;
 
 	//sword
 	matrix[collider_link_sword][collider_enemy] = true;
@@ -43,6 +44,10 @@ j1Collision::j1Collision()
 	//BUTTON
 	matrix[collider_button][collider_link] = true;
 	matrix[collider_button][collider_zelda] = true;
+
+	//DIANA
+	matrix[collider_diana][collider_arrow] = true;
+
 	//CHANGE HEIGHT
 	matrix[collider_change_height][collider_link] = true;
 	matrix[collider_change_height][collider_zelda] = true;
@@ -170,6 +175,9 @@ void j1Collision::DebugDraw()
 			break;
 		case collider_button:
 			App->render->DrawQuad(colliders[i]->rect, 150, 65, 255, 255);
+			break;
+		case collider_diana:
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, 255);
 			break;
 		case collider_change_height:
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);

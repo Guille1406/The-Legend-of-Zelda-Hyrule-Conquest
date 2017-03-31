@@ -19,6 +19,7 @@ enum COLLIDER_TYPE
 	collider_enemy_sword,
 	collider_chest,
 	collider_button,
+	collider_diana,
 	collider_change_height,
 	collider_jump,
 	collider_enemy,

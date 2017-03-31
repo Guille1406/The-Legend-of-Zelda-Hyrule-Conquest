@@ -10,6 +10,7 @@ enum objectType {
 	chest,
 	giant_chest,
 	button,
+	diana,
 	change_height,
 	door,
 	locked_door,
@@ -86,6 +87,7 @@ public:
 	Object* CreateObject(char*, pugi::xml_node, int height);
 	Object* CreateChest(pugi::xml_node, int height);
 	Object* CreateButton(pugi::xml_node, int height);
+	Object* CreateDiana(pugi::xml_node, int height);
 	Object* CreateText(pugi::xml_node, int height);
 	Object* CreateChangeHeight(pugi::xml_node object, int height);
 	Object* CreateJump(pugi::xml_node object, int height);

@@ -5,6 +5,7 @@
 #include "O_ChangeHeight.h"
 #include "O_Jump.h"
 #include "O_Door.h"
+#include "O_Diana.h"
 #include "j1Collision.h"
 #include "Character.h"
 bool j1Object::Start()
@@ -74,16 +75,17 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int heigh
 	if (!strcmp(type_name, "chest"))
 		ret = CreateChest(object, height);
 	else if (!strcmp(type_name, "text"))
-		ret = CreateText(object,  height);
+		ret = CreateText(object, height);
 	else if (!strcmp(type_name, "door"))
 		ret = CreateDoor(object, height);
 	else if (!strcmp(type_name, "button"))
-		ret = CreateButton(object,  height);
+		ret = CreateButton(object, height);
 	else if (!strcmp(type_name, "change_height"))
-		ret = CreateChangeHeight(object,  height);
+		ret = CreateChangeHeight(object, height);
 	else if (!strcmp(type_name, "jump"))
-		ret = CreateJump(object,  height);
-	
+		ret = CreateJump(object, height);
+	else if (!strcmp(type_name, "diana"))
+		ret = CreateDiana(object, height);
 	return ret;
 }
 
@@ -125,6 +127,27 @@ Object * j1Object::CreateButton(pugi::xml_node object, int height)
 	V_Objects.push_back(ret);
 
 	//FindObject("door_1");
+	return ret;
+}
+
+Object * j1Object::CreateDiana(pugi::xml_node object, int height)
+{
+	Diana temp_diana;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+	temp_diana.logic_height = height;
+	temp_diana.name = object.attribute("name").as_string();
+	temp_diana.rect = { x,y,w,h };
+	temp_diana.type = objectType::diana;
+	temp_diana.active = true;
+
+	Object* ret = new Diana(temp_diana);
+	ret->collider = App->collision->AddCollider({ ret->rect }, collider_diana, (Entity*)ret, this);
+	V_Objects.push_back(ret);
+
+	
 	return ret;
 }
 
