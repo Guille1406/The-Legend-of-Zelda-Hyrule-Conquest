@@ -6,6 +6,7 @@
 #include "Character.h"
 #include "j1InputManager.h"
 #include "j1Player.h"
+#include "j1Render.h"
 
 #define JUMP_DISTANCE 96
 
@@ -68,7 +69,7 @@ void P_Zelda::UpdateArrows()
 				Vec_Arrow[i]->collider->SetPos(Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
 			}
 		}
-	
+		//App->render->Blit(App->player->Link->character_texture, Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, &App->player->Link->actual_animation.GetCurrentFrame().rect);
 
 		if (SDL_GetTicks() - Vec_Arrow[i]->timer > 1000) {
 			Vec_Arrow[i]->collider->to_delete = true;

@@ -15,11 +15,6 @@ bool j1Enemy::Start()
 	enemy_perf = new Enemy();
 	enemy_perf->LoadAnimation("sprites/green_enemy.xml");
 	
-	
-
-
-
-
 	for (int i = 0; i < App->map->V_Enemies.size(); i++) {
 		for (int y = 0; y < App->map->data.height; ++y) {
 			for (int x = 0; x < App->map->data.width; ++x) {
