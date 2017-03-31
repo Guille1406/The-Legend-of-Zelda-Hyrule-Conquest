@@ -11,6 +11,7 @@
 #include "j1Gui.h"
 #include "GuiLabel.h"
 #include "GuiButton.h"
+#include "GuiCheck.h"
 
 enum Scene_ID {
 	inventory,
@@ -115,6 +116,9 @@ public:
 	SDL_Rect idle_button_rect = { 0,320,348,106 };
 	SDL_Rect hover_button_rect = { 0,212,348,106 };
 	SDL_Rect pressed_button_rect = { 0,428,348,106 };
+
+	SDL_Rect idle_check_rect = { 349,211,48,48 };
+	SDL_Rect pressed_check_rect = { 349,259,48,48 };
 
 };
 

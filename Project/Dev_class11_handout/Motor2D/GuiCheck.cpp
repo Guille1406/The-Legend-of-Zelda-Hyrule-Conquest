@@ -25,6 +25,7 @@ GuiCheck::~GuiCheck()
 
 void GuiCheck::Update(const Gui* mouse_hover, const Gui* focus)
 {
+	/*
 	bool inside = (mouse_hover == (Gui*)this);
 
 	if ((inside == true) && (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == j1KeyState::KEY_DOWN))
@@ -35,6 +36,7 @@ void GuiCheck::Update(const Gui* mouse_hover, const Gui* focus)
 		else
 			curent_state_texture = &idle_texture_rect;
 	}
+	*/
 }
 
 void GuiCheck::Draw()
@@ -58,4 +60,13 @@ void GuiCheck::DebugDraw() const
 bool GuiCheck::Checked() const
 {
 	return checked;
+}
+
+void GuiCheck::ChangeState()
+{
+	checked = !checked;
+	if (checked)
+		curent_state_texture = &pressed_texture_rect;
+	else
+		curent_state_texture = &idle_texture_rect;
 }

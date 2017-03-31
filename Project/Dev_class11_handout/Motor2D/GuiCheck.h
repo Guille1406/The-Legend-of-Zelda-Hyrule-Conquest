@@ -14,6 +14,8 @@ public:
 	void Draw();
 	bool Checked() const;
 
+	void ChangeState();
+
 private:
 	void DebugDraw() const;
 

@@ -17,10 +17,12 @@ public:
 	void OnGui(Gui* ui, GuiEvent event);
 public:
 	GuiLabel* VideoLabel = nullptr;
-	GuiLabel* scale = nullptr;
-	GuiLabel* fullscreen = nullptr;
-	GuiLabel* brightness = nullptr;
-	GuiLabel* vsync = nullptr;
+	GuiButton* scale = nullptr;
+	GuiButton* fullscreen = nullptr;
+	GuiCheck* fullscreen_check = nullptr;
+	GuiButton* brightness = nullptr;
+	GuiButton* vsync = nullptr;
+	GuiCheck* vsync_check = nullptr;
 	GuiButton* back = nullptr;
 	std::vector<GuiButton*> buttons;
 };

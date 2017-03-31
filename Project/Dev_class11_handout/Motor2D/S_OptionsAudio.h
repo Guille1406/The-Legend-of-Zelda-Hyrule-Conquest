@@ -17,12 +17,9 @@ public:
 	void OnGui(Gui* ui, GuiEvent event);
 public:
 	GuiLabel* AudioLabel = nullptr;
-	GuiLabel* MasterVolume = nullptr;
-	GuiLabel* MusicVolume = nullptr;
-	GuiLabel* SFXVolume = nullptr;
-	GuiScrollBar* MasterVolumeScrollBar = nullptr;
-	GuiScrollBar* MusicVolumeScrollBar = nullptr;
-	GuiScrollBar* SFXVolumeScrollBar = nullptr;
+	GuiButton* MasterVolume = nullptr;
+	GuiButton* MusicVolume = nullptr;
+	GuiButton* SFXVolume = nullptr;
 	GuiButton* back = nullptr;
 	std::vector<GuiButton*> buttons;
 };

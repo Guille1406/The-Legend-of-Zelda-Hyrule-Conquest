@@ -17,7 +17,7 @@ public:
 	void OnGui(Gui* ui, GuiEvent event);
 public:
 	GuiLabel* GameplayLabel = nullptr;
-	GuiLabel* ShowhideHUD = nullptr;
+	GuiButton* ShowhideHUD = nullptr;
 	GuiButton* Language = nullptr;
 	GuiButton* back = nullptr;
 	std::vector<GuiButton*> buttons;
