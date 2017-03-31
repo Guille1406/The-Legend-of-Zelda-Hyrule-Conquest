@@ -46,6 +46,7 @@ void P_Zelda::CreateArrow(SDL_Rect rect)
 	temp_arrow->max_distance = 300;
 	temp_arrow->direction = character_direction;
 	temp_arrow->timer = SDL_GetTicks();
+	temp_arrow->logic_height = App->player->Zelda->GetLogicHeightPlayer();
 	//temp_arrow->can_move = false;
 	Vec_Arrow.push_back(temp_arrow);
 
@@ -441,6 +442,7 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 	iPoint final_point = temp_point;
 
 	int temp_pos = pos;
+	int first_wall_pos;
 	bool is_on_collision = false;
 	bool is_second_wall = false;
 	bool is_first_wall = true;
@@ -458,14 +460,15 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 
 		max_distance = temp_pos + i*1000;
 		before_wall_pos = max_distance;
+		first_wall_pos = max_distance;
 		while (i * temp_pos < i * max_distance) {
 			
 			temp_point.x = (temp_pos / 16)* is_horitzontal + (this->pos.x / 16) * !is_horitzontal;
 			temp_point.y = (temp_pos / 16) * !is_horitzontal + (this->pos.y / 16) * is_horitzontal;
 			if (!is_on_collision) {
 				for (int n = -1; n < 2; n++) {
-					if (GetLogicArrow(n, temp_point) == TILE_COL_ID ) {
-						before_wall_pos = temp_pos + i * 8;
+					if (GetLogicArrow(n, temp_point) != NOT_COLISION_ID ) {
+						before_wall_pos = temp_pos + i * 32;
 						
 						height = n;
 						is_on_collision = true;
@@ -476,6 +479,7 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 						if (is_first_wall) {
 							first_height = n;
 							is_first_wall = false;
+							first_wall_pos = temp_pos + i * 32;
 
 						}
 					}
@@ -484,7 +488,7 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 			if (stop == true)
 				break;
 			else {
-				if (GetLogicArrow(height, temp_point) != TILE_COL_ID) {
+				if (GetLogicArrow(height, temp_point) == NOT_COLISION_ID) {
 					is_on_collision = false;
 					is_second_wall = true;
 					
@@ -495,6 +499,9 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 		}
 		if (second_height > first_height) {
 			before_wall_pos = temp_pos + i * 1000;
+		}
+		else {
+			before_wall_pos = first_wall_pos;
 		}
 	}
 	

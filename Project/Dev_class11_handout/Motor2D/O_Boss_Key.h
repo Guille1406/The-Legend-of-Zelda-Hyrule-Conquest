@@ -11,7 +11,11 @@ public:
 
 	}
 	Boss_Key(const Boss_Key& obj) {
-		*this = obj;
+		type = obj.type;
+		rect = obj.rect;
+		active = obj.active;	
+		name = obj.name;
+		logic_height = obj.logic_height;
 	}
 	~Boss_Key() {
 
@@ -21,8 +25,9 @@ public:
 	}
 
 	void Action() {
+		/*
 		if (connected_object != NULL)
-			this->connected_object->Action();
+			this->connected_object->Action();*/
 
 	}
 

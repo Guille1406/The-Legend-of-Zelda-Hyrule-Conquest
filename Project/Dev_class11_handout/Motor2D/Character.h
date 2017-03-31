@@ -85,7 +85,7 @@ public:
 	void Throw(float dt);
 
 	//Load the character animations in .xml. Recieves the path of the file
-	virtual void LoadAnimation(const char* path);
+	//virtual void LoadAnimation(const char* path);
 
 	virtual void ChangeAnimation(int);
 
@@ -119,16 +119,10 @@ private:
 	
 public:
 	
-	SDL_Texture*				character_texture;
+	
 	iPoint						pos;
 	iPoint						tilepos;
 	adjacent_tiles				adjacent;
-	
-	//Needed for animation
-	p2SString					sprites_folder;
-	pugi::xml_document			sprites_file;
-	std::vector<Animation>		sprites_vector;
-	Animation					actual_animation; 
 
 	//Needed for player movement and events
 	player_event				actual_event;

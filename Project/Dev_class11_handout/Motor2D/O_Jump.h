@@ -8,7 +8,11 @@ public:
 
 	}
 	Jump(const Jump& obj) {
-		*this = obj;
+		type = obj.type;
+		rect = obj.rect;
+		active = obj.active;
+		name = obj.name;
+		logic_height = obj.logic_height;
 	}
 	~Jump() {
 

@@ -18,7 +18,8 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Link->movement_direction = move_idle;
 	Zelda->movement_direction = move_idle;
 	//Link->sprites_vector = new std::vector<Animation>;
-	//Zelda->sprites_vector = new std::vector<Animation>;
+	//Zelda->sprites_vector = new std::vector<Animation>;	
+	
 	Link->sprites_folder.create(config.child("folder").child_value());
 	Zelda->sprites_folder.create(config.child("folder").child_value());
 	Link->actual_event = player_event::idle;

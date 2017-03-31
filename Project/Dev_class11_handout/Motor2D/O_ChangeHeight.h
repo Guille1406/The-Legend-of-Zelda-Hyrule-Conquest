@@ -8,7 +8,12 @@ public:
 
 	}
 	ChangeHeight(const ChangeHeight& obj) {
-		*this = obj;
+		type = obj.type;
+		rect = obj.rect;
+		active = obj.active;
+		height = obj.height;
+		name = obj.name;
+		logic_height = obj.logic_height;
 	}
 	~ChangeHeight() {
 

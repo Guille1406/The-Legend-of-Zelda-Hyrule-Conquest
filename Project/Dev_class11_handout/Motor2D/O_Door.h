@@ -8,8 +8,12 @@ public:
 
 	}
 	Door(const Door& obj) {
-		*this = obj;
-		
+		type = obj.type;
+		rect = obj.rect;
+		active = obj.active;
+		open = false;
+		name = obj.name;
+		logic_height = obj.logic_height;
 	}
 	~Door() {
 

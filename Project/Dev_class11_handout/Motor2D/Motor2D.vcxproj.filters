@@ -169,6 +169,7 @@
     <ClCompile Include="S_InGameMenu.cpp">
       <Filter>Desenvolupament  ========\Scenes\GUI\In-Game Menu</Filter>
     </ClCompile>
+    <ClCompile Include="O_Door.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">

@@ -110,6 +110,7 @@
     <ClCompile Include="j1Scene.cpp" />
     <ClCompile Include="j1Timer.cpp" />
     <ClCompile Include="j1Object.cpp" />
+    <ClCompile Include="O_Door.cpp" />
     <ClCompile Include="S_Campaign.cpp" />
     <ClCompile Include="S_GameStart.cpp" />
     <ClCompile Include="S_InGameMenu.cpp" />

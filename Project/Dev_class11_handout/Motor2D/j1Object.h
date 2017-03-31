@@ -4,7 +4,8 @@
 #include "j1Module.h"
 #include "SDL\include\SDL.h"
 #include "p2Point.h"
-
+#include <vector>
+#include "Animation.h"
 
 enum objectType {
 	chest,
@@ -41,9 +42,17 @@ public:
 	Entity() {};
 	~Entity() {};
 
+	virtual void LoadAnimation(const char*);
 public:
 	int logic_height;
 	Collider* collider;
+
+	p2SString					sprites_folder;
+	pugi::xml_document			sprites_file;
+	std::vector<Animation>		sprites_vector;
+	Animation					actual_animation;
+	SDL_Texture*				character_texture;
+
 };
 
 class Object : public Entity {
@@ -54,6 +63,10 @@ public:
 	~Object() {};
 
 	virtual void Action() {};
+
+public:
+	//Needed for animation
+	
 
 public:
 
