@@ -336,3 +336,12 @@ void Entity::LoadAnimation(const char* path)
 	}
 	sprites_vector.push_back(temp_animation);
 }
+
+void Entity::ChangeAnimation(int animation)
+{
+	//If the animation is diferent than the actual, change it
+	if (last_animation != animation) {
+		this->actual_animation = this->sprites_vector[animation];
+		last_animation = animation;
+	}
+}

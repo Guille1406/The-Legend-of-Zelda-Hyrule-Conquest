@@ -87,8 +87,6 @@ public:
 	//Load the character animations in .xml. Recieves the path of the file
 	//virtual void LoadAnimation(const char* path);
 
-	virtual void ChangeAnimation(int);
-
 	//Get the actual player event
 	virtual player_event GetEvent();
 
@@ -137,7 +135,6 @@ public:
 	Collider* attack_collider;
 
 	bool		doing_script = false;
-	int			last_animation = 0;
 
 	
 private:

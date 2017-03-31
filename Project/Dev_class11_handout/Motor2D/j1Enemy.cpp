@@ -6,13 +6,17 @@
 bool j1Enemy::Awake(pugi::xml_node &)
 {
 
-	
-
+	enemy_perf = new Green_Enemy();
+	enemy_perf->LoadAnimation("sprites/Link_Sprites_trim.xml");
 	return true;
 }
 bool j1Enemy::Start()
 {
 	green_soldier_tex = App->tex->Load("sprites/green_soldier.png.png");
+	
+
+
+
 
 	for (int i = 0; i < App->map->V_Enemies.size(); i++) {
 		for (int y = 0; y < App->map->data.height; ++y) {
@@ -161,6 +165,9 @@ bool j1Enemy::FindInPath(iPoint pos, Enemy* enemy) {
 
 void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 {
+
+	int animation = (int)enemy->Enemy_Orientation;
+	enemy->ChangeAnimation(animation);
 
 	switch (enemy->Enemy_Orientation) {
 

@@ -66,7 +66,8 @@ public:
 
 
 public:
-	
+	std::vector<Animation*> Green_Enemy_Animation;
+	Green_Enemy* enemy_perf;
 	std::vector<Enemy*> V_MyEnemies;
 	SDL_Texture* green_soldier_tex;
 };

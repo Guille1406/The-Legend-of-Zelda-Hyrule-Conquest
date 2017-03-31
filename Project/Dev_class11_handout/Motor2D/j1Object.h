@@ -41,12 +41,12 @@ class Entity {
 public:
 	Entity() {};
 	~Entity() {};
-
+	virtual void ChangeAnimation(int);
 	virtual void LoadAnimation(const char*);
 public:
 	int logic_height;
 	Collider* collider;
-
+	int			last_animation = 0;
 	p2SString					sprites_folder;
 	pugi::xml_document			sprites_file;
 	std::vector<Animation>		sprites_vector;

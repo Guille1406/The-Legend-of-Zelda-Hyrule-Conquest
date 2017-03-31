@@ -25,7 +25,7 @@ bool S_World::Start()
 		int w, h = 0;
 		uchar* data = NULL;
 		if (App->map->CreateWalkabilityMap(w, h, &data))
-			//App->pathfinding->SetMap(w, h, data);
+			App->pathfinding->SetMap(w, h);
 
 		for (int i = 0; i < App->object->V_Objects.size(); i++) {
 			if (App->object->V_Objects[i]->collider_tiles.size() > 0) {

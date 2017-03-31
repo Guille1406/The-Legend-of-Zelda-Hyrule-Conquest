@@ -335,7 +335,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		}
 
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link_sword) {
+	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->collision_by_enemy_timmer.Read() >1500) {
 			Link->collision_by_enemy_timmer.Start();
@@ -344,7 +344,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			Link->link_hurt = true;
 		}
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {
+	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->collision_by_enemy_timmer.Read() >1500) {
 			Link->collision_by_enemy_timmer.Start();

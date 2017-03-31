@@ -6,14 +6,7 @@
 #include"j1Player.h"
 static const uint JUMP_DISTANCE = 112;
 
-void Character::ChangeAnimation(int animation)
-{
-		//If the animation is diferent than the actual, change it
-		if (last_animation != animation) {
-		this->actual_animation = this->sprites_vector[animation];
-		last_animation = animation;
-	}
-}
+
 
 player_event Character::GetEvent()
 {

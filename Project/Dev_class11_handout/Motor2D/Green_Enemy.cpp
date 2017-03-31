@@ -8,6 +8,8 @@ Green_Enemy::Green_Enemy(const Green_Enemy& g_enemy) :Enemy(enemyType::green_ene
 {
 	this->collider = g_enemy.collider;
 	this->logic_height = g_enemy.logic_height;
+	this->sprites_vector = App->enemy->enemy_perf->sprites_vector;
+
 }
 
 Green_Enemy::~Green_Enemy()
