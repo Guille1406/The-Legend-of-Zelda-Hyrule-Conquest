@@ -12,8 +12,8 @@ bool j1Enemy::Awake(pugi::xml_node &)
 bool j1Enemy::Start()
 {
 	enemy_perf = new Enemy();
-	enemy_perf->LoadAnimation("sprites/Link_Sprites_trim.xml");
-	green_soldier_tex = App->tex->Load("sprites/green_soldier.png.png");
+	enemy_perf->LoadAnimation("sprites/green_enemy.xml");
+	
 	
 
 
