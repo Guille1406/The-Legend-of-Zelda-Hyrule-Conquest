@@ -229,22 +229,25 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 
 	if (collider1->type == collider_button) {
-		if (Audio_Fx_Timer.Read() > 1500) {
-			Audio_Fx_Timer.Start();
+		static bool audio = false;
+		if (!audio) {
 			App->audio->PlayFx(App->audio->button_sound);
+			audio = true;
 		}
 		Button* temp = (Button*)collider1->parent;
 			temp->Action();
 			temp->texture_rect = temp->pressed_button;
 	}
 	else if(collider2->type == collider_button) {
-		if (Audio_Fx_Timer.Read() > 1800) {
-			Audio_Fx_Timer.Start();
-			App->audio->PlayFx(App->audio->button_sound);
-		}
+		static bool audio = false;
+		
 		Button* temp = (Button*)collider2->parent;
 			temp->Action();
 			temp->texture_rect = temp->pressed_button;
+			if(!audio){
+				App->audio->PlayFx(App->audio->button_sound);
+				audio = true;
+			}
 	}
 	else if (collider1->type == collider_double_button) {
 		DoubleButton* temp = (DoubleButton*)collider2->parent;
