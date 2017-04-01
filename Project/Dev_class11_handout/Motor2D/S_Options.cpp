@@ -62,7 +62,9 @@ bool S_Options::Start()
 
 	App->gui->SetFocus(buttons.front());
 
-	PreviousScene = App->scene->GetPreviousScene();
+	const MainScene* Prev = App->scene->GetPreviousScene();
+	if((Prev->scene_name == Scene_ID::mainmenu) || (Prev->scene_name == Scene_ID::ingamemenu))
+		PreviousScene = Prev;
 
 	return true;
 }
@@ -104,7 +106,6 @@ void S_Options::OnGui(Gui* ui, GuiEvent event)
 	}
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::mainmenu);
-		//App->scene->ChangeScene(PreviousScene->scene_name);
+		App->scene->ChangeScene(PreviousScene->scene_name);
 	}
 }

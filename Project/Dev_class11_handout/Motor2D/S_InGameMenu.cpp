@@ -105,7 +105,7 @@ void S_InGameMenu::OnGui(Gui* ui, GuiEvent event)
 	}
 	if ((ui == (Gui*)loadcheckpoint) && (event == GuiEvent::mouse_lclk_down))
 	{
-
+		//By now this do nothing
 	}
 	if ((ui == (Gui*)options) && (event == GuiEvent::mouse_lclk_down))
 	{

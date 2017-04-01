@@ -68,68 +68,57 @@ bool j1GameStartMenuBackground::PreUpdate()
 // Called each loop iteration
 bool j1GameStartMenuBackground::Update(float dt)
 {
-	if (freeze)
-		return true;
-
-	//Blit background
-	int Background_Y_Pos = -App->render->camera.y + Background_Initial_pos + Background_pos;
-	App->render->Blit(App->gui->GetAtlas(), -App->render->camera.x + 1, Background_Y_Pos, &background, 1.0f, 0, INT_MAX, INT_MAX, false);
-	//Blit background
-	if (Background_Y_Pos < -1)
+	if (!freeze)
 	{
-		if (Background_timer.Read() > Background_speed)
+		//Blit background
+		int Background_Y_Pos = -App->render->camera.y + Background_Initial_pos + Background_pos;
+		App->render->Blit(App->gui->GetAtlas(), -App->render->camera.x + 1, Background_Y_Pos, &background, 1.0f, 0, INT_MAX, INT_MAX, false);
+		//Blit background
+		if (Background_Y_Pos < -1)
 		{
-			Background_pos += 2;
-			Background_timer.Start();
-		}
-	}
-	else
-		if (!((S_MainMenu*)App->scene->GetActiveScene())->visibility && !firstloop)
-		{
-			((S_MainMenu*)App->scene->GetActiveScene())->campaign->SetVisible(true);
-			((S_MainMenu*)App->scene->GetActiveScene())->campaign->SetOpacity(startmenuopacity);
-			((S_MainMenu*)App->scene->GetActiveScene())->options->SetVisible(true);
-			((S_MainMenu*)App->scene->GetActiveScene())->options->SetOpacity(startmenuopacity);
-			((S_MainMenu*)App->scene->GetActiveScene())->credits->SetVisible(true);
-			((S_MainMenu*)App->scene->GetActiveScene())->credits->SetOpacity(startmenuopacity);
-			((S_MainMenu*)App->scene->GetActiveScene())->quit->SetVisible(true);
-			((S_MainMenu*)App->scene->GetActiveScene())->quit->SetOpacity(startmenuopacity);
-			((S_MainMenu*)App->scene->GetActiveScene())->twitter->SetVisible(true);
-			((S_MainMenu*)App->scene->GetActiveScene())->twitter->SetOpacity(startmenuopacity);
-			((S_MainMenu*)App->scene->GetActiveScene())->github->SetVisible(true);
-			((S_MainMenu*)App->scene->GetActiveScene())->github->SetOpacity(startmenuopacity);
-			((S_MainMenu*)App->scene->GetActiveScene())->visibility = true;
-			firstloop = true;
-			MainMenuOpacity_timer.Start();
-		}
-		else
-		{
-			if ((MainMenuOpacity_timer.Read() > 10) && (startmenuopacity < 255))
+			if (Background_timer.Read() > Background_speed)
 			{
-				startmenuopacity += 5;
-				if (startmenuopacity > 255)
-					startmenuopacity = 255;
-				((S_MainMenu*)App->scene->GetActiveScene())->campaign->SetOpacity(startmenuopacity);
-				((S_MainMenu*)App->scene->GetActiveScene())->options->SetOpacity(startmenuopacity);
-				((S_MainMenu*)App->scene->GetActiveScene())->credits->SetOpacity(startmenuopacity);
-				((S_MainMenu*)App->scene->GetActiveScene())->quit->SetOpacity(startmenuopacity);
-				((S_MainMenu*)App->scene->GetActiveScene())->twitter->SetOpacity(startmenuopacity);
-				((S_MainMenu*)App->scene->GetActiveScene())->github->SetOpacity(startmenuopacity);
-				((S_MainMenu*)App->scene->GetActiveScene())->titleopacity = startmenuopacity;
-				if (!activate_background_movement)
-				{
-					background_movement = true;
-					Background_Characters_timer.Start();
-				}
-				MainMenuOpacity_timer.Start();
+				Background_pos += 2;
+				Background_timer.Start();
 			}
 		}
-
+		else
+			if (!((S_MainMenu*)App->scene->GetActiveScene())->visibility && !firstloop)
+			{
+				for (std::vector<GuiButton*>::iterator item = ((S_MainMenu*)App->scene->GetActiveScene())->buttons.begin(); item != ((S_MainMenu*)App->scene->GetActiveScene())->buttons.cend(); ++item)
+				{
+					(*item)->SetVisible(true);
+					(*item)->SetOpacity(startmenuopacity);
+				}
+				((S_MainMenu*)App->scene->GetActiveScene())->visibility = true;
+				firstloop = true;
+				MainMenuOpacity_timer.Start();
+			}
+			else
+			{
+				if ((MainMenuOpacity_timer.Read() > 10) && (startmenuopacity < 255))
+				{
+					startmenuopacity += 5;
+					if (startmenuopacity > 255)
+						startmenuopacity = 255;
+					for (std::vector<GuiButton*>::iterator item = ((S_MainMenu*)App->scene->GetActiveScene())->buttons.begin(); item != ((S_MainMenu*)App->scene->GetActiveScene())->buttons.cend(); ++item)
+						(*item)->SetOpacity(startmenuopacity);
+					((S_MainMenu*)App->scene->GetActiveScene())->titleopacity = startmenuopacity;
+					if (!activate_background_movement)
+					{
+						background_movement = true;
+						Background_Characters_timer.Start();
+					}
+					MainMenuOpacity_timer.Start();
+				}
+			}
+	}
 	//Blit characters
 	if (background_movement)
 	{
-		for (std::list<BackgroundCharacter*>::iterator item = BackgroundCharacterList.begin(); item != BackgroundCharacterList.cend(); ++item)
-			App->render->Blit(App->gui->GetAtlas(), (*item)->position.x, (*item)->position.y, &(*item)->rect, 1.0f, 0, INT_MAX, INT_MAX, false);
+		if (!freeze)
+			for (std::list<BackgroundCharacter*>::iterator item = BackgroundCharacterList.begin(); item != BackgroundCharacterList.cend(); ++item)
+				App->render->Blit(App->gui->GetAtlas(), -App->render->camera.x + (*item)->position.x, -App->render->camera.y + (*item)->position.y, &(*item)->rect, 1.0f, 0, INT_MAX, INT_MAX, false);
 
 		if (Background_Characters_timer.Read() > backgroundcharactersspeed)
 			for (std::list<BackgroundCharacter*>::iterator item = BackgroundCharacterList.begin(); item != BackgroundCharacterList.cend(); ++item)
