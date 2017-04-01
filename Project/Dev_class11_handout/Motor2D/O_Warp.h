@@ -24,7 +24,7 @@ public:
 
 	}
 	void Action() {
-		//App->scene->ChangeScene(scene);
+		App->scene->ChangeScene(scene);
 	}
 
 public:
