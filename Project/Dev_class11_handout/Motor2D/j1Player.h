@@ -37,7 +37,6 @@ public:
 	Character* other_character;
 
 	j1Timer Audio_Fx_Timer;
-	uint button_sound;
 
 	P_Link* Link;
 	P_Zelda* Zelda;

@@ -28,8 +28,6 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Zelda->actual_event = player_event::idle;
 	Link->character_direction = direction::down;
 	Zelda->character_direction = direction::down;
-
-	button_sound=App->audio->LoadFx("audio/fx/button.wav");
 	
 
 	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
@@ -230,7 +228,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	if (collider1->type == collider_button) {
 		if (Audio_Fx_Timer.Read() > 1500) {
 			Audio_Fx_Timer.Start();
-			App->audio->PlayFx(button_sound);
+			App->audio->PlayFx(App->audio->button_sound);
 		}
 		Button* temp = (Button*)collider1->parent;
 			temp->Action();
@@ -239,7 +237,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	else if(collider2->type == collider_button) {
 		if (Audio_Fx_Timer.Read() > 1800) {
 			Audio_Fx_Timer.Start();
-			App->audio->PlayFx(button_sound);
+			App->audio->PlayFx(App->audio->button_sound);
 		}
 		Button* temp = (Button*)collider2->parent;
 			temp->Action();

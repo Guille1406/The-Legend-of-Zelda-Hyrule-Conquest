@@ -51,6 +51,12 @@ bool j1Audio::Awake(pugi::xml_node& config)
 		ret = true;
 	}
 
+
+
+	button_sound = App->audio->LoadFx("audio/fx/button.wav");
+
+
+
 	return ret;
 }
 
