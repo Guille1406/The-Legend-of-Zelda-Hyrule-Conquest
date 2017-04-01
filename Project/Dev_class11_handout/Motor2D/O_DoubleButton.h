@@ -15,18 +15,25 @@ public:
 		active = obj.active;
 		name = obj.name;
 		logic_height = obj.logic_height;
-		texture_rect = idle_button;
+		texture_rect = rect_double_button_idle;
 	}
 	~DoubleButton() {
 
 	}
 	void Action() {
-		
+		if (characters_on == 1) {
+			texture_rect = rect_double_button_one;
+			return;
+		}
+
 		if (characters_on>=2) {
+			texture_rect = rect_double_button_two;
 			for (int i = 0; i < connected_object.size(); i++) {
 				connected_object[i]->Action();
 			}
+			return;
 		}
+		
 	}
 		
 	

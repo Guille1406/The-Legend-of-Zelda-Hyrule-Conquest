@@ -49,8 +49,27 @@ void P_Zelda::CreateArrow(SDL_Rect rect)
 	temp_arrow->timer = SDL_GetTicks();
 	temp_arrow->logic_height = App->player->Zelda->GetLogicHeightPlayer();
 	//temp_arrow->can_move = false;
-	Vec_Arrow.push_back(temp_arrow);
+	
 
+	switch (temp_arrow->direction) {
+	case up:
+		temp_arrow->arrow_rect = rect_arrow_up;
+		break;
+
+	case down:
+		temp_arrow->arrow_rect = rect_arrow_down;
+		break;
+
+	case left:
+		temp_arrow->arrow_rect = rect_arrow_left;
+		break;
+
+	case right:
+		temp_arrow->arrow_rect = rect_arrow_right;
+		break;
+	}
+
+	Vec_Arrow.push_back(temp_arrow);
 }
 
 void P_Zelda::UpdateArrows()
@@ -69,7 +88,7 @@ void P_Zelda::UpdateArrows()
 				Vec_Arrow[i]->collider->SetPos(Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
 			}
 		}
-		//App->render->Blit(App->player->Link->character_texture, Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, &App->player->Link->actual_animation.GetCurrentFrame().rect);
+		App->render->Blit(Vec_Arrow[i]->entity_texture, Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, &Vec_Arrow[i]->arrow_rect);
 
 		if (SDL_GetTicks() - Vec_Arrow[i]->timer > 1000) {
 			Vec_Arrow[i]->collider->to_delete = true;
