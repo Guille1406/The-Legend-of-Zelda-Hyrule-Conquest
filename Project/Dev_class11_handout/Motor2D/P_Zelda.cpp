@@ -403,6 +403,7 @@ player_event P_Zelda::GetEvent()
 				character_direction = aim_direction;
 			}
 			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_UP) {
+				App->audio->PlayFx(Arrow_Audio);
 				actual_event = attack;
 				doing_script = true;
 				character_direction = aim_direction;
@@ -517,6 +518,8 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 		pos += 10 * i;
 	}
 	else {
+		//arrow sound
+		//App->audio->PlayFx(App->player->Zelda->Arrow_Hit_Wall_Audio);
 		can_move = false;
 		
 	}

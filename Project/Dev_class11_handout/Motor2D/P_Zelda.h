@@ -57,6 +57,8 @@ public:
 	bool can_move =true;
 	int bow = 0;
 	uint Throw_Audio;
+	uint Arrow_Audio;
+	uint Arrow_Hit_Wall_Audio;
 	std::vector<Arrow*> Vec_Arrow;
 };
 
