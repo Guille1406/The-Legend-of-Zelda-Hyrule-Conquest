@@ -64,6 +64,7 @@ bool S_MainMenu::Start()
 	App->player->Disable();
 	App->camera->Disable();
 	App->enemy->Disable();
+	App->object->Disable();
 
 	if (visibility)
 	{

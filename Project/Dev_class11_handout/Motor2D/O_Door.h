@@ -15,7 +15,7 @@ public:
 		name = obj.name;
 		logic_height = obj.logic_height;
 		collider_tiles = obj.collider_tiles;
-		texture_rect = closed_door;
+		texture_rect = obj.texture_rect;
 	}
 	~Door() {
 
@@ -47,10 +47,13 @@ public:
 	bool multi_button = false;
 	bool key_needed = false;
 	bool open = false;
-
+	int dir = 0;
 	//Change this
 	SDL_Rect closed_door = rect_door_down;
-
+	/*SDL_Rect closed_door_up = rect_door_up;
+	SDL_Rect closed_door_left = rect_door_left;
+	SDL_Rect closed_door_right = rect_door_right;
+	*/
 };
 
 

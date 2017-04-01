@@ -14,19 +14,24 @@
 
 bool j1Object::Start()
 {
+	
+
 	objects_texture = App->tex->Load("textures/items v2.png");
 	return true;
+
+
 }
 
 bool j1Object::PreUpdate()
 {
+	
 	return true;
 }
 
 bool j1Object::Update(float)
 {
 	for (int i = 0; i < V_Objects.size(); i++) {
-		if (V_Objects[i]->type = double_button) {
+		if (V_Objects[i]->type == double_button) {
 			DoubleButton* temp_button = (DoubleButton*)V_Objects[i];
 			temp_button->characters_on = 0;
 		}
@@ -215,16 +220,14 @@ Object * j1Object::CreateDoor(pugi::xml_node object, int height)
 	temp_door.active = true;
 	temp_door.logic_height = height;
 
-/*	auto attribute = object.child("properties").child("property");
-	while (strcmp(attribute.attribute("name").as_string(), "key_needed")) {
+auto attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "dir")) {
 		attribute = attribute.next_sibling();
 	}
-	temp_door.key_needed = attribute.attribute("value").as_bool();
+	temp_door.dir = attribute.attribute("value").as_int();
 
-	attribute = object.child("properties").child("property");
 
-	temp_door.multi_button = attribute.attribute("value").as_bool();
-	*/
+	
 	for (int i = 0; i < temp_door.rect.w / 16; i++) {
 		for (int n = 0; n < temp_door.rect.h / 16; n++) {
 			iPoint temp;
@@ -237,14 +240,39 @@ Object * j1Object::CreateDoor(pugi::xml_node object, int height)
 	}
 	
 
+	switch (temp_door.dir) {
+
+		//UP
+	case 0:
+		temp_door.texture_rect = rect_door_up;
+		break;
+
+		//DOWN
+	case 1:
+		temp_door.texture_rect = rect_door_down;
+		break;
+
+		//LEFT
+	case 2:
+		temp_door.texture_rect = rect_door_left;
+		break;
+
+		//RIGHT
+	case 3:
+		temp_door.texture_rect = rect_door_right;
+		break;
+	}
+
+
 	Object* ret = new Door(temp_door);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_door, (Entity*)ret, this);
 	
+	V_Objects.push_back(ret);
 
-	//std::vector<iPoint> ret->collider_tiles;
+
 	
 
-	V_Objects.push_back(ret);
+
 	return ret;
 }
 
