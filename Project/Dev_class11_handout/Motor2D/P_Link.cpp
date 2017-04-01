@@ -49,45 +49,6 @@ void P_Link::Orientation_collider_link_sword()
 }
 
 
-void P_Link::Collision_Sword_EnemySword() {
-	iPoint temp=tilepos;
-
-	switch (character_direction) {
-
-		
-	case direction::up:
-		temp.y = tilepos.y + 3;
-		if (GetLogic(GetLogicHeightPlayer(), temp) != TILE_COL_ID) {
-			pos.y += 14;
-		}
-		break;
-
-	case direction::down:
-		temp.y = tilepos.y - 3;
-		if (GetLogic(GetLogicHeightPlayer(), temp) != TILE_COL_ID) {
-			pos.y -= 14;
-		}
-		break;
-
-	case direction::right:
-		temp.x = tilepos.x - 3;
-		if (GetLogic(GetLogicHeightPlayer(), temp) != TILE_COL_ID) {
-			pos.x -= 14;
-		}
-		break;
-
-	case direction::left:
-		temp.x = tilepos.x + 3;
-		if (GetLogic(GetLogicHeightPlayer(), temp)!=TILE_COL_ID) {
-			pos.x += 14;
-		}
-		break;
-
-
-	}
-	
-}
-
 
 player_event P_Link::GetEvent()
 {

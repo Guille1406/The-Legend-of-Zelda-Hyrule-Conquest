@@ -104,7 +104,7 @@ public:
 
 	//Updates the front collider
 	void UpdateColliderFront();
-
+	virtual void Collision_Sword_EnemySword();
 	virtual void ThrowFunction(float dt, int& pos, bool add, bool is_horitzontal);
 
 private:
