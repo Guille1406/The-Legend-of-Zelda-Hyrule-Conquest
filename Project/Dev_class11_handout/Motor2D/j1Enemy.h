@@ -72,7 +72,7 @@ public:
 	Enemy* Create_Enemy(uint, iPoint Pos);
 	bool FindInPath(iPoint, Enemy* enemy);
 	void Update_Sword_Collision(Enemy* enemy);
-
+	void Enemy_Hurt_Displacement(int & pos, bool add);
 
 public:
 	std::vector<Animation*> Green_Enemy_Animation;

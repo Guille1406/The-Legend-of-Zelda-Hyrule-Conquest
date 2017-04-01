@@ -13,6 +13,7 @@
 #include "j1Camera.h"
 #include "j1HUD.h"
 #include "j1Enemy.h"
+#include"j1Audio.h"
 
 bool S_World::Start()
 {
@@ -47,7 +48,7 @@ bool S_World::Start()
 			//App->map->CreateLogicMap();
 	}
 	
-
+	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 1);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;

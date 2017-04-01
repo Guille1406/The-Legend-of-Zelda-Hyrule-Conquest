@@ -9,7 +9,7 @@
 #include "j1Window.h"
 #include "j1Gui.h"
 #include "GuiButton.h"
-
+#include"j1Audio.h"
 j1GameStartMenuBackground::j1GameStartMenuBackground()
 {
 	name.create("gamestartmenubackground");
@@ -34,6 +34,7 @@ bool j1GameStartMenuBackground::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1GameStartMenuBackground::Start()
 {
+	App->audio->PlayMusic("audio/music/Intro_Song.ogg", 1);
 	atlas = App->tex->Load(atlas_file_name.c_str());
 
 	Background_Initial_pos = App->win->GetWindowH() - background.h;

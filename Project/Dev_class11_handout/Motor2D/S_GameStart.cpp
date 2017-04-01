@@ -1,6 +1,7 @@
 #include "S_GameStart.h"
 #include "j1Player.h"
-
+#include"j1App.h"
+#include"j1Audio.h"
 S_GameStart::S_GameStart()
 {
 }
@@ -30,6 +31,7 @@ bool S_GameStart::Awake()
 
 bool S_GameStart::Start()
 {
+	
 	return true;
 }
 

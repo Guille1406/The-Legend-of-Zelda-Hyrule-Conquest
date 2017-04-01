@@ -13,7 +13,7 @@ public:
 
 public: 
 	char* test;
-
+	uint World_Audio;
 };
 
 #endif // 

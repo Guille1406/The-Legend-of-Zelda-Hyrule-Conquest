@@ -197,3 +197,9 @@ void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 	}
 }
 
+void j1Enemy::Enemy_Hurt_Displacement(int & pos, bool add)
+{
+
+
+}
+
