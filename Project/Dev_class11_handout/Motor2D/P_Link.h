@@ -39,6 +39,8 @@ public:
 	bool Compare_Link_Sword_Collision(Enemy* enemy);
 	void Link_Hurt_Opacity();
 
+	uint Link_Hurt_Audio;
+
 public:
 	int opacity = 255;
 	j1Timer collision_by_enemy_timmer;

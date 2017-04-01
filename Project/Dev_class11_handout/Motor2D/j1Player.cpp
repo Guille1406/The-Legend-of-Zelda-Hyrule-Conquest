@@ -29,6 +29,9 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Link->character_direction = direction::down;
 	Zelda->character_direction = direction::down;
 	
+	Link->Link_Hurt_Audio= App->audio->LoadFx("audio/fx/link hurt.wav");
+
+
 
 	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
 	Link->front_collider = App->collision->AddCollider({ Link->tilepos.x*8,Link->tilepos.y*8 + 32,32,16 }, front_link, Link, this);
@@ -364,6 +367,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_enemy) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->collision_by_enemy_timmer.Read() >1500) {
+			App->audio->PlayFx(Link->Link_Hurt_Audio);
 				Link->collision_by_enemy_timmer.Start();
 				Link->Collision_Sword_EnemySword();
 				half_hearts_test_purpose--;
