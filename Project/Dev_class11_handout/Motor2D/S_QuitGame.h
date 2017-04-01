@@ -21,6 +21,7 @@ public:
 	GuiButton* Yes =		nullptr;
 	GuiButton* No =			nullptr;
 	std::vector<GuiButton*> buttons;
+	const MainScene* PreviousScene = nullptr;
 };
 
 #endif // #pragma once

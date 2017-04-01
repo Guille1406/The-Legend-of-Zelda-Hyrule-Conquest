@@ -49,6 +49,11 @@ public:
 		return active_scene;
 	}
 
+	const MainScene* GetPreviousScene() const
+	{
+		return prev_scene;
+	}
+
 private:
 	MainScene* active_scene = nullptr;
 	MainScene* prev_scene = nullptr;

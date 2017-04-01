@@ -36,12 +36,13 @@ bool S_QuitGame::Awake()
 
 bool S_QuitGame::Start()
 {
-	App->player->Disable();
 	Label->SetVisible(true);
 	Yes->SetVisible(true);
 	No->SetVisible(true);
 
 	App->gui->SetFocus(No);
+
+	PreviousScene = App->scene->GetPreviousScene();
 
 	return true;
 }
@@ -69,6 +70,6 @@ void S_QuitGame::OnGui(Gui* ui, GuiEvent event)
 
 	if ((ui == (Gui*)No) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::mainmenu);
+		App->scene->ChangeScene(PreviousScene->scene_name);
 	}
 }

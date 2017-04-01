@@ -18,12 +18,12 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 private:
+	GuiLabel* IngamemenuLabel = nullptr;
 	GuiButton* resume =			nullptr;
 	GuiButton* loadcheckpoint =	nullptr;
 	GuiButton* options =		nullptr;
 	GuiButton* mainmenu =		nullptr;
 	GuiButton* quit =	   		nullptr;
-	GuiButton* back =			nullptr;
 	std::vector<GuiButton*> buttons;
 };
 

@@ -18,6 +18,10 @@ S_InGameMenu::~S_InGameMenu()
 
 bool S_InGameMenu::Awake()
 {
+	IngamemenuLabel = App->gui->CreateLabel(iPoint(200, 100), &std::string("In-Game menu"), false);
+	IngamemenuLabel->SetFont(App->font->Sherwood28);
+	((Gui*)IngamemenuLabel)->SetListener(this);
+	IngamemenuLabel->SetVisible(false);
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
 	resume = App->gui->CreateButton(iPoint(X_pos, 160), &std::string("Resume"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	resume->SetFont(App->font->Sherwood20);
@@ -44,29 +48,23 @@ bool S_InGameMenu::Awake()
 	((Gui*)quit)->SetListener(this);
 	quit->SetVisible(false);
 	quit->Focusable(true);
-	back = App->gui->CreateButton(iPoint(920, 600), &std::string("Back"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
-	back->SetFont(App->font->Sherwood20);
-	((Gui*)back)->SetListener(this);
-	back->SetVisible(false);
-	back->Focusable(true);
 
 	buttons.push_back(resume);
 	buttons.push_back(loadcheckpoint);
 	buttons.push_back(options);
 	buttons.push_back(mainmenu);
 	buttons.push_back(quit);
-	buttons.push_back(back);
 	return true;
 };
 
 bool S_InGameMenu::Start()
 {
+	IngamemenuLabel->SetVisible(true);
 	resume->SetVisible(true);
 	loadcheckpoint->SetVisible(true);
 	options->SetVisible(true);
 	mainmenu->SetVisible(true);
 	quit->SetVisible(true);
-	back->SetVisible(true);
 
 	App->gui->SetFocus(buttons.front());
 
@@ -89,37 +87,36 @@ bool S_InGameMenu::Update()
 
 bool S_InGameMenu::Clean()
 {
+	IngamemenuLabel->SetVisible(false);
 	resume->SetVisible(false);
 	loadcheckpoint->SetVisible(false);
 	options->SetVisible(false);
 	mainmenu->SetVisible(false);
 	quit->SetVisible(false);
-	back->SetVisible(false);
 	return true;
 }
 
 void S_InGameMenu::OnGui(Gui* ui, GuiEvent event)
 {
-	/*
-	if ((ui == (Gui*)campaign) && (event == GuiEvent::mouse_lclk_down))
+	if ((ui == (Gui*)resume) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::world);
-		App->startmenuback->Disable();
+		App->scene->Hide();
+		App->startmenuback->Freeze(true);
 	}
+	if ((ui == (Gui*)loadcheckpoint) && (event == GuiEvent::mouse_lclk_down))
+	{
 
+	}
 	if ((ui == (Gui*)options) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->scene->ChangeScene(Scene_ID::options);
 	}
-
-	if ((ui == (Gui*)credits) && (event == GuiEvent::mouse_lclk_down))
+	if ((ui == (Gui*)mainmenu) && (event == GuiEvent::mouse_lclk_down))
 	{
-		//App->scene->ChangeScene(Scene_ID::world);
+		App->scene->ChangeScene(Scene_ID::mainmenu);
 	}
-
 	if ((ui == (Gui*)quit) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->scene->ChangeScene(Scene_ID::quitgame);
 	}
-	*/
 }
