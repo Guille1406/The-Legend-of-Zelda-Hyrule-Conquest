@@ -19,8 +19,6 @@
 #include"j1Collision.h"
 #include"j1Enemy.h"
 
-
-
 #include "S_World.h"
 #include "S_Dungeon.h"
 #include "S_MainMenu.h"

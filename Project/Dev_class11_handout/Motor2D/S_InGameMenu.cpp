@@ -83,6 +83,7 @@ bool S_InGameMenu::Update()
 		App->render->Blit(App->gui->GetAtlas(), -App->render->camera.x + Title_X_pos, -App->render->camera.y + 40, &title, 1.0f, 0, INT_MAX, INT_MAX, false, titleopacity);
 	}
 	*/
+	MenuInput(&buttons);
 	return true;
 }
 
