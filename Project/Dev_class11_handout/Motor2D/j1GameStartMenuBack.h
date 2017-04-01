@@ -49,7 +49,11 @@ public:
 	// Called before quitting
 	bool CleanUp();
 	
+	void Freeze(bool freeze);
+
 private:
+	bool ingamenushow = false;
+
 	SDL_Texture* atlas =		nullptr;
 	std::string	atlas_file_name;
 
@@ -70,7 +74,7 @@ private:
 	int backgroundcharactersspeed = 10;
 	int spacebetweenbackgroundcharacters = 500;
 	bool firstloop = false;
-
+	bool freeze = false;
 };
 
 #endif // __j1GAMESTARTBACKGROUND_H__

@@ -30,11 +30,11 @@
 #include "S_OptionsGameplay.h"
 #include "S_OptionsVideo.h"
 #include "S_QuitGame.h"
+#include "S_InGameMenu.h"
 
 j1Scene::j1Scene() : j1Module()
 {
 	name.create("scene");
-	
 }
 
 // Destructor
@@ -45,11 +45,7 @@ j1Scene::~j1Scene()
 bool j1Scene::Awake()
 {
 	LOG("Loading Scene");
-	
-	
-	bool ret = true;
-	
-	return ret;
+	return true;
 }
 
 // Called before the first frame
@@ -75,6 +71,10 @@ bool j1Scene::Start()
 	//Quit Game
 	scene_list.push_back(new S_QuitGame);
 	(*scene_list.back()).scene_name = Scene_ID::quitgame;
+
+	//Ingamemenu
+	scene_list.push_back(new S_InGameMenu);
+	(*scene_list.back()).scene_name = Scene_ID::ingamemenu;
 	
 	//World
 	scene_list.push_back(new S_World);
@@ -84,7 +84,7 @@ bool j1Scene::Start()
 
 	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
 	{
-		(*item)->Awake();
+		(*item)->Awake();//send here xml for gui text
 		if ((*item)->scene_name == Scene_ID::mainmenu) {
 			active_scene = (*item);
 			prev_scene = (*item);
@@ -92,14 +92,6 @@ bool j1Scene::Start()
 			active_scene->Start();
 		}
 	}
-
-
-
-
-	
-
-
-
 	return true;
 }
 
@@ -126,23 +118,13 @@ bool j1Scene::Update(float dt)
 bool j1Scene::PostUpdate()
 {
 	active_scene->PostUpdate();
-	bool ret = true;
-
-	
-	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
-	
-
-	return ret;
+	return true;
 }
 
 // Called before quitting
 bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
-
-	
-	
 	return true;
 }
 
@@ -158,4 +140,24 @@ bool j1Scene::ChangeScene(Scene_ID name)
 		}
 	}
 	return false;
+}
+
+bool j1Scene::Show(Scene_ID name)
+{
+	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
+	{
+		if ((*item)->scene_name == name) {
+			active_scene = (*item);
+			return true;
+		}
+	}
+	return false;
+}
+
+bool j1Scene::Hide()
+{
+	active_scene->Clean();
+	active_scene = loaded_scene;
+	prev_scene = active_scene;
+	return true;
 }

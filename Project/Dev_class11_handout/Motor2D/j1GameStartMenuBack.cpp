@@ -50,12 +50,27 @@ bool j1GameStartMenuBackground::Start()
 // Called each loop iteration
 bool j1GameStartMenuBackground::PreUpdate()
 {
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		ingamenushow = !ingamenushow;
+	if ((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) && (ingamenushow))
+	{
+		App->scene->Show(Scene_ID::ingamemenu);
+		Freeze(false);
+	}
+	if ((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) && (!ingamenushow))
+	{
+		App->scene->Hide();
+		Freeze(true);
+	}
 	return true;
 }
 
 // Called each loop iteration
 bool j1GameStartMenuBackground::Update(float dt)
 {
+	if (freeze)
+		return true;
+
 	//Blit background
 	int Background_Y_Pos = -App->render->camera.y + Background_Initial_pos + Background_pos;
 	App->render->Blit(App->gui->GetAtlas(), -App->render->camera.x + 1, Background_Y_Pos, &background, 1.0f, 0, INT_MAX, INT_MAX, false);
@@ -144,4 +159,9 @@ bool j1GameStartMenuBackground::CleanUp()
 		RELEASE(*item);
 	BackgroundCharacterList.clear();
 	return true;
+}
+
+void j1GameStartMenuBackground::Freeze(bool freeze)
+{
+	this->freeze = freeze;
 }

@@ -30,7 +30,9 @@ enum Scene_ID {
 	optionsvideo,
 	optionsgameplay,
 	credits,
-	quitgame
+	quitgame,
+	//ingame menu
+	ingamemenu
 };
 
 enum GuiEvent;

@@ -91,7 +91,7 @@ bool S_MainMenu::Update()
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		App->scene->ChangeScene(Scene_ID::world);
-		App->startmenuback->Disable();
+		App->startmenuback->Freeze(true);
 	}
 	
 	MenuInput(&buttons);
@@ -115,7 +115,7 @@ void S_MainMenu::OnGui(Gui* ui, GuiEvent event)
 	if ((ui == (Gui*)campaign) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->scene->ChangeScene(Scene_ID::world);
-		App->startmenuback->Disable();
+		App->startmenuback->Freeze(true);
 	}
 
 	if ((ui == (Gui*)options) && (event == GuiEvent::mouse_lclk_down))
