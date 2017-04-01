@@ -30,8 +30,9 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Zelda->character_direction = direction::down;
 	
 	Link->Link_Hurt_Audio= App->audio->LoadFx("audio/fx/link hurt.wav");
-
-
+	Link->Link_Sword_Audio = App->audio->LoadFx("audio/fx/fighter sword 1.wav");
+	Zelda->Throw_Audio = App->audio->LoadFx("audio/fx/throw.wav");
+	Fall_Players_Audio = App->audio->LoadFx("audio/fx/fall.wav");
 
 	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
 	Link->front_collider = App->collision->AddCollider({ Link->tilepos.x*8,Link->tilepos.y*8 + 32,32,16 }, front_link, Link, this);
@@ -283,12 +284,14 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	}
 	else if (collider1->type == collider_jump) {
 		if (character->can_move == false && character->doing_script == false) {
+			App->audio->PlayFx(Fall_Players_Audio);
 			character->can_jump = true;
 
 		}
 	}
 	else if (collider2->type == collider_jump) {
 		if (character->can_move == false && character->doing_script == false) {
+			App->audio->PlayFx(Fall_Players_Audio);
 			character->can_jump = true;
 
 		}

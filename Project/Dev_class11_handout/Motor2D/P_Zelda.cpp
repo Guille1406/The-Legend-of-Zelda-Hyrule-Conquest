@@ -7,7 +7,7 @@
 #include "j1InputManager.h"
 #include "j1Player.h"
 #include "j1Render.h"
-
+#include"j1Audio.h"
 #define JUMP_DISTANCE 96
 
 
@@ -287,6 +287,7 @@ player_event P_Zelda::GetEvent()
 				pos.x = App->player->Link->pos.x;
 				pos.y = App->player->Link->pos.y;
 				if (((App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN) && can_throw) || ((App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) && can_throw)) {
+					App->audio->PlayFx(Throw_Audio);
 					actual_event = throw_;
 					doing_script = true;
 					is_picked = false;
@@ -383,6 +384,7 @@ player_event P_Zelda::GetEvent()
 				pos = App->player->Link->pos;
 				if ((App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) && can_throw) {
 					if (!App->player->Link->doing_script) {
+						App->audio->PlayFx(Throw_Audio);
 						actual_event = throw_;
 						doing_script = true;
 						is_picked = false;

@@ -37,7 +37,7 @@ public:
 	Character* other_character;
 
 	j1Timer Audio_Fx_Timer;
-
+	uint Fall_Players_Audio;
 	P_Link* Link;
 	P_Zelda* Zelda;
 

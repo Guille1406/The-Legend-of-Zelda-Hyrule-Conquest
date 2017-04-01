@@ -56,6 +56,7 @@ public:
 	bool collide_jump = false;
 	bool can_move =true;
 	int bow = 0;
+	uint Throw_Audio;
 	std::vector<Arrow*> Vec_Arrow;
 };
 

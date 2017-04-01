@@ -4,6 +4,7 @@
 #include "j1FileSystem.h"
 #include "j1Player.h"
 #include "j1InputManager.h"
+#include"j1Audio.h"
 #include"j1Render.h"
 #include"Color.h"
 void P_Link::Attack(float dt)
@@ -175,6 +176,7 @@ player_event P_Link::GetEvent()
 			//ATTACK//
 			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 1) == EVENTSTATE::E_DOWN && !im_lifting) {
 				attack_timer.Start();
+				App->audio->PlayFx(Link_Sword_Audio);
 				//orientation collider link sword
 				Orientation_collider_link_sword();
 				actual_event = attack;
@@ -260,6 +262,7 @@ player_event P_Link::GetEvent()
 
 			if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
 				attack_timer.Start();
+				App->audio->PlayFx(Link_Sword_Audio);
 				//orientation collider link sword
 				Orientation_collider_link_sword();
 				actual_event = attack;

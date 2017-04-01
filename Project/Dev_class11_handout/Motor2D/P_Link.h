@@ -40,6 +40,7 @@ public:
 	void Link_Hurt_Opacity();
 
 	uint Link_Hurt_Audio;
+	uint Link_Sword_Audio;
 
 public:
 	int opacity = 255;
