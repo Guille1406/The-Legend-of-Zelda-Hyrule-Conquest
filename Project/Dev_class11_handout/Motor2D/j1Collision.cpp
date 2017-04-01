@@ -208,7 +208,7 @@ void j1Collision::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, Black(1), Black(2), Black(3), alpha);
 			break;
 		case collider_enemy_sword:
-			App->render->DrawQuad(colliders[i]->rect, Red(1), Red(2), Red(3), alpha);
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
 		case collider_door:
 			Object* temp = (Object*)colliders[i]->parent;

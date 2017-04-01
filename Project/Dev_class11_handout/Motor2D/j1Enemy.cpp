@@ -171,24 +171,24 @@ void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 
 	case OrientationEnemy::up_enemy:
 
-		enemy->shield_test->rect = { enemy->collider->rect.x, enemy->collider->rect.y - enemy->collider->rect.h+10 , 10,20 };
+		enemy->shield_test->rect = { enemy->collider->rect.x-10, enemy->collider->rect.y + 10 , 10,20 };
 		break;
 
 	case OrientationEnemy::down_enemy:
 		
-		enemy->shield_test->rect = { enemy->collider->rect.x, enemy->collider->rect.y + enemy->collider->rect.h , 10,20};
+		enemy->shield_test->rect = { enemy->collider->rect.x+12, enemy->collider->rect.y + enemy->collider->rect.h -10 , 10,20};
 
 		break;
 
 	case OrientationEnemy::right_enemy:
-		enemy->shield_test->rect = { enemy->collider->rect.x + 30, enemy->collider->rect.y + 23 , 20,10 };
+		enemy->shield_test->rect = { enemy->collider->rect.x + 10, enemy->collider->rect.y + 30 , 20,10 };
 
 		break;
 
 	case OrientationEnemy::left_enemy:
 		
 		//20,10
-		enemy->shield_test->rect = { enemy->collider->rect.x - 23, enemy->collider->rect.y + 30 , 20,10 };
+		enemy->shield_test->rect = { enemy->collider->rect.x - 18, enemy->collider->rect.y + 30 , 20,10 };
 
 		break;
 
