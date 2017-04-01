@@ -7,6 +7,7 @@
 #include"j1Collision.h"
 #include "O_ChangeHeight.h"
 #include "O_Button.h"
+#include "O_DoubleButton.h"
 #include"j1Enemy.h"
 #include "j1HUD.h"
 
@@ -234,7 +235,28 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			temp->Action();
 			temp->texture_rect = temp->pressed_button;
 	}
+	else if (collider1->type == collider_double_button) {
+		DoubleButton* temp = (DoubleButton*)collider2->parent;
+		temp->characters_on++;
+		temp->Action();
+		temp->texture_rect = temp->pressed_button;
+	}
+	else if (collider2->type == collider_double_button) {
+		DoubleButton* temp = (DoubleButton*)collider2->parent;
+		temp->characters_on++;
+		temp->Action();
+		temp->texture_rect = temp->pressed_button;
+	}
+	else if (collider1->type == collider_warp) {
+		Object* temp = (Object*)collider1->parent;
+		temp->Action();
+		
+	}
+	else if (collider2->type == collider_warp) {
+		Object* temp = (Object*)collider2->parent;
+		temp->Action();
 
+	}
 	else if (collider1->type == collider_change_height) {
 		ChangeHeight* temp = (ChangeHeight*)collider1->parent;
 		character->ChangeLogicHeightPlayer(temp->height);

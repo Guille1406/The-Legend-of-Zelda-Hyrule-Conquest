@@ -11,9 +11,11 @@ enum objectType {
 	chest,
 	giant_chest,
 	button,
+	double_button,
 	diana,
 	change_height,
 	door,
+	warp,
 	locked_door,
 	object_jump,
 	object_lever, 
@@ -80,11 +82,13 @@ public:
 	Object* CreateObject(char*, pugi::xml_node, int height);
 	Object* CreateChest(pugi::xml_node, int height);
 	Object* CreateButton(pugi::xml_node, int height);
+	Object* CreateDoubleButton(pugi::xml_node, int height);
 	Object* CreateDiana(pugi::xml_node, int height);
 	Object* CreateText(pugi::xml_node, int height);
 	Object* CreateChangeHeight(pugi::xml_node object, int height);
 	Object* CreateJump(pugi::xml_node object, int height);
 	Object* CreateDoor(pugi::xml_node object, int height);
+	Object* CreateWarp(pugi::xml_node, int height);
 
 public: 
 	std::vector<Object*> V_Objects;

@@ -1,10 +1,12 @@
 #include "j1Object.h"
 #include "j1Map.h"
 #include"O_Button.h"
+#include "O_DoubleButton.h"
 #include "O_Chest.h"
 #include "O_ChangeHeight.h"
 #include "O_Jump.h"
 #include "O_Door.h"
+#include "O_Warp.h"
 #include "O_Diana.h"
 #include "j1Collision.h"
 #include "Character.h"
@@ -23,6 +25,13 @@ bool j1Object::PreUpdate()
 
 bool j1Object::Update(float)
 {
+	for (int i = 0; i < V_Objects.size(); i++) {
+		if (V_Objects[i]->type = double_button) {
+			DoubleButton* temp_button = (DoubleButton*)V_Objects[i];
+			temp_button->characters_on = 0;
+		}
+	}
+
 
 	//Blit all the objects
 
@@ -90,8 +99,12 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int heigh
 		ret = CreateText(object, height);
 	else if (!strcmp(type_name, "door"))
 		ret = CreateDoor(object, height);
+	else if (!strcmp(type_name, "warp"))
+		ret = CreateWarp(object, height);
 	else if (!strcmp(type_name, "button"))
 		ret = CreateButton(object, height);
+	else if (!strcmp(type_name, "double_button"))
+		ret = CreateDoubleButton(object, height);
 	else if (!strcmp(type_name, "change_height"))
 		ret = CreateChangeHeight(object, height);
 	else if (!strcmp(type_name, "jump"))
@@ -136,6 +149,27 @@ Object * j1Object::CreateButton(pugi::xml_node object, int height)
 
 	Object* ret = new Button(temp_button);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_button, (Entity*)ret, this);
+	V_Objects.push_back(ret);
+
+	//FindObject("door_1");
+	return ret;
+}
+
+Object * j1Object::CreateDoubleButton(pugi::xml_node object, int height)
+{
+	DoubleButton temp_button;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+	temp_button.logic_height = height;
+	temp_button.name = object.attribute("name").as_string();
+	temp_button.rect = { x,y,w,h };
+	temp_button.type = objectType::double_button;
+	temp_button.active = true;
+
+	Object* ret = new DoubleButton(temp_button);
+	ret->collider = App->collision->AddCollider({ ret->rect }, collider_double_button, (Entity*)ret, this);
 	V_Objects.push_back(ret);
 
 	//FindObject("door_1");
@@ -212,6 +246,34 @@ Object * j1Object::CreateDoor(pugi::xml_node object, int height)
 
 	V_Objects.push_back(ret);
 	return ret;
+}
+
+Object * j1Object::CreateWarp(pugi::xml_node object, int height)
+{
+	//we should change this
+	Warp temp_warp;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+	temp_warp.logic_height = height;
+	temp_warp.name = object.attribute("name").as_string();
+	temp_warp.rect = { x,y,w,h };
+	temp_warp.type = objectType::warp;
+	temp_warp.active = true;
+	pugi::xml_node attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "scene") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	temp_warp.scene = (Scene_ID)attribute.attribute("value").as_int();
+	
+	Object* ret = new Warp(temp_warp);
+	ret->collider = App->collision->AddCollider({ ret->rect }, collider_warp, (Entity*)ret, this);
+	V_Objects.push_back(ret);
+
+	//FindObject("door_1");
+	return ret;
+	return nullptr;
 }
 
 

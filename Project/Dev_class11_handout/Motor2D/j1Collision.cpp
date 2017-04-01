@@ -14,6 +14,8 @@ j1Collision::j1Collision()
 	matrix[collider_link][collider_button] = true;
 	matrix[collider_link][collider_change_height] = true;
 	matrix[collider_link][collider_enemy] = true;
+	matrix[collider_link][collider_double_button] = true;
+	matrix[collider_link][collider_warp] = true;
 	//FRONT LINK
 	matrix[front_link][collider_jump] = true;
 	matrix[front_link][collider_zelda] = true;
@@ -23,6 +25,8 @@ j1Collision::j1Collision()
 	matrix[collider_zelda][collider_change_height] = true;
 	matrix[collider_zelda][front_link] = true;
 	matrix[collider_zelda][collider_enemy] = true;
+	matrix[collider_zelda][collider_warp] = true;
+	matrix[collider_zelda][collider_double_button] = true;
 	//FRONT ZELDA
 	matrix[front_zelda][collider_jump] = true;
 
@@ -55,7 +59,12 @@ j1Collision::j1Collision()
 	matrix[collider_jump][front_link] = true;
 	matrix[collider_jump][front_zelda] = true;
 	
-	
+	//DOUBLE BUTTON
+	matrix[collider_double_button][collider_link] = true;
+	matrix[collider_double_button][collider_zelda] = true;
+	//WARP
+	matrix[collider_warp][collider_link] = true;
+	matrix[collider_warp][collider_zelda] = true;
 }
 
 // Destructor
@@ -174,6 +183,9 @@ void j1Collision::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
 			break;
 		case collider_button:
+			App->render->DrawQuad(colliders[i]->rect, 150, 65, 255, 255);
+			break;
+		case collider_double_button:
 			App->render->DrawQuad(colliders[i]->rect, 150, 65, 255, 255);
 			break;
 		case collider_diana:
