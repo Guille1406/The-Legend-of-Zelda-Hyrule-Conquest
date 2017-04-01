@@ -16,6 +16,7 @@ struct Arrow : public Entity{
 	Arrow() {
 		can_move = true;
 		is_attached = false;
+		entity_texture = App->object->objects_texture;
 	}
 	iPoint pos;
 	int timer;
@@ -27,6 +28,8 @@ struct Arrow : public Entity{
 	int max_distance;
 	bool temp = false;
 	int before_wall_pos = 0;
+	SDL_Rect arrow_rect = rect_arrow_down;
+
 
 	bool Check_Wall();
 	bool Check_Wall_Loop( int &pos, bool add, bool is_horitzontal);
@@ -38,6 +41,7 @@ public:
 	P_Zelda() {
 		//sprites_vector = new std::vector<Animation>;
 		//Vec_Arrow = new std::vector<Arrow*>;
+		
 	
 	};
 	~P_Zelda() {
