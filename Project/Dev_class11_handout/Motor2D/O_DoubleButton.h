@@ -2,6 +2,7 @@
 #define _DOUBLEBUTTON_
 #include "j1Object.h"
 #include"j1Render.h"
+#include "j1Audio.h"
 class DoubleButton : public Object {
 private:
 	bool triggered;
@@ -31,6 +32,7 @@ public:
 			for (int i = 0; i < connected_object.size(); i++) {
 				connected_object[i]->Action();
 			}
+			App->audio->PlayFx(App->audio->secret_sound);
 			return;
 		}
 		

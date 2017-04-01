@@ -54,6 +54,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 
 
 	button_sound = App->audio->LoadFx("audio/fx/button.wav");
+	secret_sound = App->audio->LoadFx("audio/fx/secret.wav");
 
 
 
