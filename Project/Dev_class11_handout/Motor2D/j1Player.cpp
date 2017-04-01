@@ -10,7 +10,7 @@
 #include "O_DoubleButton.h"
 #include"j1Enemy.h"
 #include "j1HUD.h"
-
+#include"j1Audio.h"
 bool j1Player::Awake(pugi::xml_node& config)
 {
 	
@@ -29,7 +29,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Link->character_direction = direction::down;
 	Zelda->character_direction = direction::down;
 
-
+	button_sound=App->audio->LoadFx("audio/fx/button.wav");
 	
 
 	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
@@ -60,6 +60,8 @@ bool j1Player::Start()
 	change = false;
 	cooperative = true;
 	Link->collision_by_enemy_timmer.Start();
+	Audio_Fx_Timer.Start();
+
 	return true;
 }
 
@@ -226,11 +228,19 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 
 	if (collider1->type == collider_button) {
+		if (Audio_Fx_Timer.Read() > 1500) {
+			Audio_Fx_Timer.Start();
+			App->audio->PlayFx(button_sound);
+		}
 		Button* temp = (Button*)collider1->parent;
 			temp->Action();
 			temp->texture_rect = temp->pressed_button;
 	}
 	else if(collider2->type == collider_button) {
+		if (Audio_Fx_Timer.Read() > 1800) {
+			Audio_Fx_Timer.Start();
+			App->audio->PlayFx(button_sound);
+		}
 		Button* temp = (Button*)collider2->parent;
 			temp->Action();
 			temp->texture_rect = temp->pressed_button;
