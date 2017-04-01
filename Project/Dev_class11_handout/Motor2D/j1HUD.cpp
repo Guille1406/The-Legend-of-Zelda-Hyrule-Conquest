@@ -7,7 +7,8 @@
 #include "j1Render.h"
 #include "j1Input.h"
 #include "j1Window.h"
-#include"j1Player.h"
+#include "j1Player.h"
+#include "j1GameStartMenuBack.h"
 j1HUD::j1HUD()
 {
 	name.create("hud");
@@ -57,6 +58,9 @@ bool j1HUD::PreUpdate()
 // Called each loop iteration
 bool j1HUD::Update(float dt)
 {
+	if (App->startmenuback->InGameMenuVisible())
+		return true;
+
 	//Blit Life Label
 	App->render->Blit(atlas, -App->render->camera.x + Life_Label_x_pos, -App->render->camera.y + Life_Label_y_pos, &Life_Label, 1.0f, 0, INT_MAX, INT_MAX, false);
 	

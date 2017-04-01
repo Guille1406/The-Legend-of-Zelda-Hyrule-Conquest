@@ -23,6 +23,8 @@ private:
 	GuiButton* options =		nullptr;
 	GuiButton* mainmenu =		nullptr;
 	GuiButton* quit =	   		nullptr;
+	GuiButton* back =			nullptr;
+	std::vector<GuiButton*> buttons;
 };
 
 #endif // #pragma once

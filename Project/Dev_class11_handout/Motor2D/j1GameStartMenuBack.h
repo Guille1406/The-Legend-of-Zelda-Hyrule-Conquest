@@ -51,6 +51,11 @@ public:
 	
 	void Freeze(bool freeze);
 
+	bool InGameMenuVisible() const
+	{
+		return ingamenushow;
+	}
+
 private:
 	bool ingamenushow = false;
 
