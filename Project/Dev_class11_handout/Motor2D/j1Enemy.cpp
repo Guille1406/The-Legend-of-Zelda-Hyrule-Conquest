@@ -3,7 +3,7 @@
 #include"j1Collision.h"
 #include"j1Map.h"
 #include"j1Textures.h"
-
+#include"j1Player.h"
 bool j1Enemy::Awake(pugi::xml_node &)
 {
 
@@ -51,6 +51,7 @@ bool j1Enemy::PreUpdate()
 bool j1Enemy::Update(float dt)
 {
 	for (int i = 0; i < V_MyEnemies.size(); i++) {
+		V_MyEnemies[i]->UpdateState();
 		V_MyEnemies[i]->Rang_Player();
 		V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x;
 		V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y;
@@ -197,27 +198,101 @@ void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 	}
 }
 
-void j1Enemy::Enemy_Hurt_Displacement(int & pos, bool add)
+
+void Enemy::Direction_Push_Election()
+{
+	//Calls the jump function depending on the player direction
+	switch (Enemy_Orientation) {
+	case OrientationEnemy::up_enemy:
+		Enemy_Hurt_Displacement(pix_world_pos.y, true);
+		break;
+	case OrientationEnemy::down_enemy:
+		Enemy_Hurt_Displacement(pix_world_pos.y, false);
+		break;
+	case OrientationEnemy::left_enemy:
+		Enemy_Hurt_Displacement(pix_world_pos.x, true);
+		break;
+	case OrientationEnemy::right_enemy:
+		Enemy_Hurt_Displacement(pix_world_pos.x, false);
+		break;
+	}
+}
+
+
+void Enemy::Enemy_Hurt_Displacement(int & pos, bool add)
 {
 
-	/*static int final_pos = 0;
+	static int final_pos = 0;
 	//same as jump function
 	int i = 1;
 	if (!add)
 		i = -1;
 
 	if (!temp)
-		final_pos = pos + (i * JUMP_DISTANCE);
+		final_pos = pos + (i * PUSH_DISTANCE);
 	temp = true;
 
 	//if player have wall in front the roll will stop
-	if ((i * pos <  i*final_pos) && GetLogic(false, tilepos) == 0) {
+	if ((i * pos <  i*final_pos) && GetLogicEnemy(false, tile_pos) == 0) {
 		pos = pos + (i * 4);
 	}
 	else {
+		enemy_doing_script = false;
 		temp = false;
-		doing_script = false;
-	}*/
+	}
 
 }
+
+int Enemy::GetLogicEnemy(int minus_height, iPoint pos)
+{
+	//Takes the id of the two front tiles of each player, depending on the locig height of each player
+	std::vector<MapLayer*> vector = App->map->V_Colision;
+
+	iPoint tile_pos = pos;
+
+
+	int i, j;
+	switch (Enemy_Orientation)
+	{
+	case OrientationEnemy::up_enemy:
+		i = vector[logic_height - minus_height]->Get(tile_pos.x, tile_pos.y + 1);
+		j = vector[logic_height - minus_height]->Get(tile_pos.x + 1, tile_pos.y + 1);
+		break;
+	case OrientationEnemy::down_enemy:
+		i = vector[logic_height - minus_height]->Get(tile_pos.x, tile_pos.y - 2);
+		j = vector[logic_height - minus_height]->Get(tile_pos.x - 1, tile_pos.y - 2);
+		break;
+	case OrientationEnemy::left_enemy:
+		i = vector[logic_height - minus_height]->Get(tile_pos.x + 1, tile_pos.y);
+		j = vector[logic_height - minus_height]->Get(tile_pos.x + 1, tile_pos.y - 1);
+		break;
+	case OrientationEnemy::right_enemy:
+		i = vector[logic_height - minus_height]->Get(tile_pos.x - 2, tile_pos.y);
+		j = vector[logic_height - minus_height]->Get(tile_pos.x - 2, tile_pos.y - 1);
+		break;
+	}
+
+	if (i != 0)return i;
+	if (j != 0)return j;
+	return 0;
+}
+
+void Enemy::UpdateState()
+{
+	if (enemy_doing_script == false) {
+		if (player_in_range == nullptr) {
+			state = EnemyState::doing_path;
+		}
+		else {
+			state = EnemyState::following_player;
+		}
+	}
+	else {
+		Direction_Push_Election();
+	}
+}
+
+
+
+
 

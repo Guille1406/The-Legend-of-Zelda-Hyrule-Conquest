@@ -79,7 +79,7 @@ void Green_Enemy::Rang_Player()
 	iPoint dist;
 	dist.x = App->player->Link->pos.x - this->pix_world_pos.x;
 	dist.y = App->player->Link->pos.y - this->pix_world_pos.y;
-		if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG) {
+		if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG && enemy_doing_script==false) {
 			player_in_range = App->player->Link;
 			green_enemy_path.clear();
 			green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
@@ -89,7 +89,7 @@ void Green_Enemy::Rang_Player()
 
 		dist.x = App->player->Zelda->pos.x - pix_world_pos.x;
 		dist.y = App->player->Zelda->pos.y - pix_world_pos.y;
-		if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG) {
+		if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG  && enemy_doing_script == false) {
 			player_in_range = App->player->Zelda;
 			green_enemy_path.clear();
 			green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);

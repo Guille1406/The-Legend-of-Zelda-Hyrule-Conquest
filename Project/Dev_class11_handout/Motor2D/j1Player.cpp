@@ -401,6 +401,8 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			if (Link->enemy_col_sword_sword_timer.Read() > 3000) {
 				if (Link->link_sword_impact_sword == false) {
 					Link->enemy_col_sword_sword_timer.Start();
+					n_enemy->state = EnemyState::push_back_enemy;
+					n_enemy->enemy_doing_script = true;
 					n_enemy->live--;
 				}
 				else {

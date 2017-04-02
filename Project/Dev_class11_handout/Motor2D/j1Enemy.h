@@ -7,7 +7,15 @@
 #include"p2Point.h"
 #include"Character.h"
 class Green_Enemy;
-#define RANG 100
+#define RANG 150
+#define PUSH_DISTANCE 50
+
+enum EnemyState {
+	doing_path,
+	following_player,
+	push_back_enemy,
+};
+
 
 enum OrientationEnemy{
 	up_enemy,
@@ -32,7 +40,10 @@ public:
 
 	};
 	~Enemy() {};
-
+	void Direction_Push_Election();
+	void Enemy_Hurt_Displacement(int & pos, bool add);
+	int GetLogicEnemy(int minus_height, iPoint pos);
+	void UpdateState();
 	virtual void Action() {};
 	virtual void Rang_Player() {};
 public:
@@ -51,6 +62,9 @@ public:
 	bool tokill = false;
 	Character* player_in_range = nullptr;
 	std::vector<iPoint> green_enemy_path;
+	bool temp = false;
+	EnemyState state;
+	bool enemy_doing_script=false;
 };
 
 class j1Enemy : public j1Module {
@@ -72,7 +86,8 @@ public:
 	Enemy* Create_Enemy(uint, iPoint Pos);
 	bool FindInPath(iPoint, Enemy* enemy);
 	void Update_Sword_Collision(Enemy* enemy);
-	void Enemy_Hurt_Displacement(int & pos, bool add);
+	
+	
 
 public:
 	std::vector<Animation*> Green_Enemy_Animation;
