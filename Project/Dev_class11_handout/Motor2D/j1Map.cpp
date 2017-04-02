@@ -37,20 +37,24 @@ void j1Map::Draw()
 		return;
 
 	//TEMP FOR VERTICAL SLICE
+	
 	int i = 0;
 	Character* Link = App->player->Link;
 	Character* Zelda = App->player->Zelda;
+	bool blit_link = true;
+	bool blit_zelda = true;
 
+	
 	std::list<MapLayer*>::iterator item = data.layers.begin();
 	for (; item != data.layers.cend(); ++item) {
 		MapLayer* layer = (*item);
 
-		if (bool temp = layer->properties.Get("Nodraw") != 0)
+		if (layer->properties.Get("Navigation") != 0 || layer->properties.Get("Enemies") != 0 || layer->properties.Get("Path") != 0)
 			continue;
 
 		for (int y = 0; y < data.height; ++y)
 		{
-			if (y * data.tile_height+ I_CAMERAMARGINTILE >= -App->render->camera.y / scale && y *data.tile_height < -App->render->camera.y / scale + App->render->camera.h / scale) {
+			if (y * data.tile_height + I_CAMERAMARGINTILE >= -App->render->camera.y / scale && y *data.tile_height < -App->render->camera.y / scale + App->render->camera.h / scale) {
 				for (int x = 0; x < data.width; ++x)
 				{
 					if (x*data.tile_width + I_CAMERAMARGINTILE >= -App->render->camera.x / scale && x*data.tile_width < -App->render->camera.x / scale + App->render->camera.w / scale) {
@@ -62,22 +66,28 @@ void j1Map::Draw()
 							SDL_Rect r = tileset->GetTileRect(tile_id);
 							iPoint pos = MapToWorld(x, y);
 
-							if (layer->properties.Get("Navigation") == false && layer->properties.Get("Enemies") == false && layer->properties.Get("Path") == false)
-							App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+							//if (layer->properties.Get("Navigation") == false && layer->properties.Get("Enemies") == false && layer->properties.Get("Path") == false)
+								App->render->Blit(tileset->texture, pos.x, pos.y, &r);
 						}
 					}
 				}
 			}
 		}
-	/*
-		if(i > Link->logic_height + 9)
+		
+		auto next_item = item;
+		next_item++;
+		if (layer->print_height == Link->logic_height && blit_link && (*next_item)->print_height !=Link->logic_height)
+		{
+			blit_link = false;
 			App->render->Blit(Link->entity_texture, Link->pos.x - Link->actual_animation.GetCurrentFrame().pivot.x, Link->pos.y - Link->actual_animation.GetCurrentFrame().pivot.y, &Link->actual_animation.GetCurrentFrame().rect);
-		if (i < Zelda->logic_height + 9)
-		App->render->Blit(Zelda->entity_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y, &Zelda->actual_animation.GetCurrentFrame().rect);
-
+		}
+		if (layer->print_height == Zelda->logic_height  && blit_zelda && (*next_item++)->print_height != Zelda->logic_height) {
+			blit_zelda = false;
+			App->render->Blit(Zelda->entity_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y, &Zelda->actual_animation.GetCurrentFrame().rect);
+		}
+		
 		//App->player->Draw();
-		i++;
-		*/
+		
 	}
 }
 
@@ -435,6 +445,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->name = node.attribute("name").as_string();
 	layer->width = node.attribute("width").as_int();
 	layer->height = node.attribute("height").as_int();
+	layer->print_height = node.first_child().first_child().attribute("value").as_int();
 	LoadProperties(node, layer->properties);
 	pugi::xml_node layer_data = node.child("data");
 

@@ -38,6 +38,7 @@ struct MapLayer
 	int			height;
 	uint*		data;
 	Properties	properties;
+	int			print_height;
 
 	MapLayer() : data(NULL)
 	{}

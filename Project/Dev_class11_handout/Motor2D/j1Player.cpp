@@ -121,7 +121,7 @@ bool j1Player::Update(float dt)
 	}
 
 	//Draw the two characters
-	Draw();
+	//Draw();
 
 	//Change the positions of player colliders
 	Link->collision->SetPos(Link->pos.x, Link->pos.y, Link->GetLogicHeightPlayer());
