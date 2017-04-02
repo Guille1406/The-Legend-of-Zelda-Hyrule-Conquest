@@ -341,15 +341,15 @@ player_event P_Zelda::GetEvent()
 		else
 		{
 			//FIRST THINGS FIRST
-			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_DOWN) {
+			if (App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
 				aim_direction = character_direction;
 			}
 
-			if (App->input->GetKey(UP) == KEY_REPEAT) {
-				if (App->input->GetKey(LEFT) == KEY_REPEAT) {
+			if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT) {
+				if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT) {
 					movement_direction = move_up_left;
 				}
-				else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
+				else if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
 					movement_direction = move_up_right;
 				}
 				else {
@@ -361,11 +361,11 @@ player_event P_Zelda::GetEvent()
 			}
 
 
-			else if (App->input->GetKey(DOWN) == KEY_REPEAT) {
-				if (App->input->GetKey(LEFT) == KEY_REPEAT) {
+			else if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT) {
+				if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT) {
 					movement_direction = move_down_left;
 				}
-				else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
+				else if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
 					movement_direction = move_down_right;
 				}
 				else {
@@ -377,13 +377,13 @@ player_event P_Zelda::GetEvent()
 			}
 
 
-			else if (App->input->GetKey(RIGHT) == KEY_REPEAT) {
+			else if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
 				movement_direction = move_right;
 				character_direction = right;
 				actual_event = move;
 			}
 
-			else if (App->input->GetKey(LEFT) == KEY_REPEAT) {
+			else if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT) {
 				movement_direction = move_left;
 				character_direction = left;
 				actual_event = move;
@@ -421,14 +421,14 @@ player_event P_Zelda::GetEvent()
 				else can_throw = true;
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_COMMA) == KEY_DOWN && !is_picked) {
+			if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && !is_picked) {
 				actual_event = roll;
 				doing_script = true;
 			}
-			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_REPEAT) {
+			if (App->input->GetKey(SDL_SCANCODE_O) == KEY_REPEAT) {
 				character_direction = aim_direction;
 			}
-			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_UP) {
+			if (App->input->GetKey(SDL_SCANCODE_O) == KEY_UP) {
 				attack_timer.Start();
 				App->audio->PlayFx(Arrow_Audio);
 				actual_event = attack;
