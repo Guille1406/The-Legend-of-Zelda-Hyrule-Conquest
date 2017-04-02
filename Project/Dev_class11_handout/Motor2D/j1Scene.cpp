@@ -83,11 +83,12 @@ bool j1Scene::Start()
 	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
 	{
 		(*item)->Awake();//send here xml for gui text
-		if ((*item)->scene_name == Scene_ID::mainmenu) {
-			active_scene = (*item);
+		if ((*item)->scene_name == Scene_ID::mainmenu)
+		{
+			main_active_scene = (*item);
 			prev_scene = (*item);
 			loaded_scene = (*item);
-			active_scene->Start();
+			main_active_scene->Start();
 		}
 	}
 	return true;
@@ -96,26 +97,26 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
-	if (active_scene != prev_scene) {
-		active_scene->Start();
-		prev_scene = active_scene;
+	if (main_active_scene != prev_scene)
+	{
+		main_active_scene->Start();
+		prev_scene = main_active_scene;
 	}
-	active_scene->PreUpdate();
+	main_active_scene->PreUpdate();
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene::Update(float dt)
-{	
-	
-	active_scene->Update();
+{
+	main_active_scene->Update();
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene::PostUpdate()
 {
-	active_scene->PostUpdate();
+	main_active_scene->PostUpdate();
 	return true;
 }
 
@@ -129,33 +130,31 @@ bool j1Scene::CleanUp()
 bool j1Scene::ChangeScene(Scene_ID name)
 {
 	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
-	{
-		if ((*item)->scene_name == name) {
-			active_scene->Clean();
-			active_scene = *item;
-			loaded_scene = active_scene;
+		if ((*item)->scene_name == name)
+		{
+			main_active_scene->Clean();
+			main_active_scene = *item;
+			loaded_scene = main_active_scene;
 			return true;
 		}
-	}
 	return false;
 }
 
 bool j1Scene::Show(Scene_ID name)
 {
 	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
-	{
-		if ((*item)->scene_name == name) {
-			active_scene = (*item);
+		if ((*item)->scene_name == name)
+		{
+			main_active_scene = (*item);
 			return true;
 		}
-	}
 	return false;
 }
 
 bool j1Scene::Hide()
 {
-	active_scene->Clean();
-	active_scene = loaded_scene;
-	prev_scene = active_scene;
+	main_active_scene->Clean();
+	main_active_scene = loaded_scene;
+	prev_scene = main_active_scene;
 	return true;
 }

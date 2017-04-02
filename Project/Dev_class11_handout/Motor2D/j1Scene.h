@@ -44,9 +44,9 @@ public:
 	bool Show(Scene_ID);
 	bool Hide();
 
-	const MainScene* GetActiveScene() const
+	const MainScene* GetMainActiveScene() const
 	{
-		return active_scene;
+		return main_active_scene;
 	}
 
 	const MainScene* GetPreviousScene() const
@@ -55,7 +55,7 @@ public:
 	}
 
 private:
-	MainScene* active_scene = nullptr;
+	MainScene* main_active_scene = nullptr;
 	MainScene* prev_scene = nullptr;
 	MainScene* loaded_scene = nullptr;
 	std::list<MainScene*> scene_list;
