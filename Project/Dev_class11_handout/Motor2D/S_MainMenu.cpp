@@ -17,7 +17,11 @@ S_MainMenu::~S_MainMenu()
 
 bool S_MainMenu::Awake()
 {
-	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
+	int X_pos = App->win->GetWindowWHalf() - (int)(title_rec.w * 0.5f);
+	title = App->gui->CreateImage(iPoint(X_pos, 40), &title_rec, false);
+	((Gui*)title)->SetListener(this);
+	title->SetVisible(false);
+	X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
 	campaign = App->gui->CreateButton(iPoint(X_pos, 270), &std::string("Campaign"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	campaign->SetFont(App->font->Sherwood28);
 	((Gui*)campaign)->SetListener(this);
@@ -68,6 +72,7 @@ bool S_MainMenu::Start()
 
 	if (visibility)
 	{
+		title->SetVisible(true);
 		campaign->SetVisible(true);
 		options->SetVisible(true);
 		credits->SetVisible(true);
@@ -83,13 +88,6 @@ bool S_MainMenu::Start()
 
 bool S_MainMenu::Update()
 {
-	//Blit title
-	if (visibility)
-	{
-		int Title_X_pos = App->win->GetWindowWHalf() - (int)(title.w * 0.5f);
-		App->render->Blit(App->gui->GetAtlas(), -App->render->camera.x + Title_X_pos, -App->render->camera.y + 40, &title, 1.0f, 0, INT_MAX, INT_MAX, false, titleopacity);
-	}
-
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		App->scene->ChangeScene(Scene_ID::world);
@@ -103,6 +101,7 @@ bool S_MainMenu::Update()
 
 bool S_MainMenu::Clean()
 {
+	title->SetVisible(false);
 	campaign->SetVisible(false);
 	options->SetVisible(false);
 	credits->SetVisible(false);
@@ -122,17 +121,17 @@ void S_MainMenu::OnGui(Gui* ui, GuiEvent event)
 
 	if ((ui == (Gui*)options) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::options);
+		App->scene->Show(Scene_ID::options);
 	}
 
 	if ((ui == (Gui*)credits) && (event == GuiEvent::mouse_lclk_down))
 	{
-		//App->scene->ChangeScene(Scene_ID::world);
+		//App->scene->Show(Scene_ID::world);
 	}
 
 	if ((ui == (Gui*)quit) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::quitgame);
+		App->scene->Show(Scene_ID::quitgame);
 	}
 
 	if ((ui == (Gui*)twitter) && (event == GuiEvent::mouse_lclk_down))

@@ -44,9 +44,13 @@ public:
 	bool Show(Scene_ID);
 	bool Hide();
 
-	const MainScene* GetMainActiveScene() const
+	const MainScene* GetActiveScene() const
 	{
-		return main_active_scene;
+		if (main_active_scene == sub_active_scene)
+			return main_active_scene;
+		else
+			return sub_active_scene;
+		return nullptr;
 	}
 
 	const MainScene* GetPreviousScene() const

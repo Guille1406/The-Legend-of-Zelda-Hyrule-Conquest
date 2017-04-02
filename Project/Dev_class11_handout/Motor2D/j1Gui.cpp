@@ -80,7 +80,7 @@ bool j1Gui::PreUpdate()
 		}
 		if ((*item)->GetSceneListener() != nullptr)//if is scene
 		{
-			if ((*item)->GetSceneListener() == App->scene->GetMainActiveScene())
+			if ((*item)->GetSceneListener() == App->scene->GetActiveScene())
 			{
 				(*item)->CheckInput(mouse_hover, focus);
 				(*item)->Update(mouse_hover, focus);
@@ -108,7 +108,7 @@ bool j1Gui::Update(float dt)
 			}
 			if ((*item)->GetSceneListener() != nullptr)//if is scene
 			{
-				if((*item)->GetSceneListener() == App->scene->GetMainActiveScene())
+				if((*item)->GetSceneListener() == App->scene->GetActiveScene())
 					(*item)->Draw();
 			}
 		}

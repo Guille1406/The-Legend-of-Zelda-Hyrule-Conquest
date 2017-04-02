@@ -10,6 +10,7 @@ public:
 	~GuiImage();
 
 	void Draw();
+	void SetOpacity(uint newopacity);
 
 private:
 	void DebugDraw() const;

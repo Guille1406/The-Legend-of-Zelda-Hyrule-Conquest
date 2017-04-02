@@ -90,22 +90,22 @@ void S_Options::OnGui(Gui* ui, GuiEvent event)
 {
 	if ((ui == (Gui*)controls) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::optionscontrols);
+		App->scene->Show(Scene_ID::optionscontrols);
 	}
 	if ((ui == (Gui*)video) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::optionsvideo);
+		App->scene->Show(Scene_ID::optionsvideo);
 	}
 	if ((ui == (Gui*)audio) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::optionsaudio);
+		App->scene->Show(Scene_ID::optionsaudio);
 	}
 	if ((ui == (Gui*)gameplay) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::optionsgameplay);
+		App->scene->Show(Scene_ID::optionsgameplay);
 	}
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(PreviousScene->scene_name);
+		App->scene->Show(Scene_ID::mainmenu);
 	}
 }

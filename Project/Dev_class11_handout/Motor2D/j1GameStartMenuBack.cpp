@@ -8,8 +8,10 @@
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Gui.h"
+#include "GuiImage.h"
 #include "GuiButton.h"
-#include"j1Audio.h"
+#include "j1Audio.h"
+
 j1GameStartMenuBackground::j1GameStartMenuBackground()
 {
 	name.create("gamestartmenubackground");
@@ -55,7 +57,7 @@ bool j1GameStartMenuBackground::PreUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		App->WantToQuit();
 	*/
-	/**/
+	/*
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ingamenushow = !ingamenushow;
 	if ((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) && (ingamenushow))
@@ -68,7 +70,7 @@ bool j1GameStartMenuBackground::PreUpdate()
 		App->scene->Hide();
 		Freeze(true);
 	}
-	/**/
+	*/
 	return true;
 }
 
@@ -90,14 +92,16 @@ bool j1GameStartMenuBackground::Update(float dt)
 			}
 		}
 		else
-			if (!((S_MainMenu*)App->scene->GetMainActiveScene())->visibility && !firstloop)
+			if (!((S_MainMenu*)App->scene->GetActiveScene())->visibility && !firstloop)
 			{
-				for (std::vector<GuiButton*>::iterator item = ((S_MainMenu*)App->scene->GetMainActiveScene())->buttons.begin(); item != ((S_MainMenu*)App->scene->GetMainActiveScene())->buttons.cend(); ++item)
+				((GuiImage*)((S_MainMenu*)App->scene->GetActiveScene())->title)->SetVisible(true);
+				((GuiImage*)((S_MainMenu*)App->scene->GetActiveScene())->title)->SetOpacity(startmenuopacity);
+				for (std::vector<GuiButton*>::iterator item = ((S_MainMenu*)App->scene->GetActiveScene())->buttons.begin(); item != ((S_MainMenu*)App->scene->GetActiveScene())->buttons.cend(); ++item)
 				{
 					(*item)->SetVisible(true);
 					(*item)->SetOpacity(startmenuopacity);
 				}
-				((S_MainMenu*)App->scene->GetMainActiveScene())->visibility = true;
+				((S_MainMenu*)App->scene->GetActiveScene())->visibility = true;
 				firstloop = true;
 				MainMenuOpacity_timer.Start();
 			}
@@ -108,9 +112,9 @@ bool j1GameStartMenuBackground::Update(float dt)
 					startmenuopacity += 5;
 					if (startmenuopacity > 255)
 						startmenuopacity = 255;
-					for (std::vector<GuiButton*>::iterator item = ((S_MainMenu*)App->scene->GetMainActiveScene())->buttons.begin(); item != ((S_MainMenu*)App->scene->GetMainActiveScene())->buttons.cend(); ++item)
+					for (std::vector<GuiButton*>::iterator item = ((S_MainMenu*)App->scene->GetActiveScene())->buttons.begin(); item != ((S_MainMenu*)App->scene->GetActiveScene())->buttons.cend(); ++item)
 						(*item)->SetOpacity(startmenuopacity);
-					((S_MainMenu*)App->scene->GetMainActiveScene())->titleopacity = startmenuopacity;
+					((GuiImage*)((S_MainMenu*)App->scene->GetActiveScene())->title)->SetOpacity(startmenuopacity);
 					if (!activate_background_movement)
 					{
 						background_movement = true;

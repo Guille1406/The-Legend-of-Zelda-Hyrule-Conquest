@@ -78,6 +78,6 @@ void S_OptionsAudio::OnGui(Gui* ui, GuiEvent event)
 {
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::options);
+		App->scene->Show(Scene_ID::options);
 	}
 }

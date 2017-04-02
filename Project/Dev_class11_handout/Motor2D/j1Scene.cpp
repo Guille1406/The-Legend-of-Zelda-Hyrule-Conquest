@@ -99,12 +99,11 @@ bool j1Scene::PreUpdate()
 	{
 		main_active_scene->Start();
 		prev_scene = main_active_scene;
-		main_active_scene = main_active_scene;
+		sub_active_scene = main_active_scene;
 	}
 
-	if(main_active_scene == sub_active_scene)
-		main_active_scene->PreUpdate();
-	else
+	main_active_scene->PreUpdate();
+	if(main_active_scene != sub_active_scene)
 		sub_active_scene->PreUpdate();
 
 	return true;
@@ -113,10 +112,9 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	if (main_active_scene == sub_active_scene)
-		main_active_scene->Update();
-	else
-		main_active_scene->Update();
+	main_active_scene->Update();
+	if (main_active_scene != sub_active_scene)
+		sub_active_scene->Update();
 
 	return true;
 }
@@ -124,9 +122,8 @@ bool j1Scene::Update(float dt)
 // Called each loop iteration
 bool j1Scene::PostUpdate()
 {
-	if (main_active_scene == sub_active_scene)
-		main_active_scene->PostUpdate();
-	else
+	main_active_scene->PostUpdate();
+	if (main_active_scene != sub_active_scene)
 		sub_active_scene->PostUpdate();
 
 	return true;
@@ -153,10 +150,12 @@ bool j1Scene::ChangeScene(Scene_ID name)
 
 bool j1Scene::Show(Scene_ID name)
 {
+	sub_active_scene->Clean();
 	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
 		if ((*item)->scene_name == name)
 		{
-			main_active_scene = (*item);
+			sub_active_scene = (*item);
+			sub_active_scene->Start();
 			return true;
 		}
 	return false;
@@ -164,7 +163,6 @@ bool j1Scene::Show(Scene_ID name)
 
 bool j1Scene::Hide()
 {
-	main_active_scene->Clean();
-	prev_scene = main_active_scene;
+	//sub_active_scene->Clean();
 	return true;
 }

@@ -70,6 +70,6 @@ void S_QuitGame::OnGui(Gui* ui, GuiEvent event)
 
 	if ((ui == (Gui*)No) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(PreviousScene->scene_name);
+		App->scene->Show(Scene_ID::mainmenu);
 	}
 }

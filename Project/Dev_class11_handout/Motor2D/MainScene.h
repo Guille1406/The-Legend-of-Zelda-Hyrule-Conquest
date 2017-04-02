@@ -9,6 +9,7 @@
 #include "p2Log.h"
 
 #include "j1Gui.h"
+#include "GuiImage.h"
 #include "GuiLabel.h"
 #include "GuiButton.h"
 #include "GuiCheck.h"
