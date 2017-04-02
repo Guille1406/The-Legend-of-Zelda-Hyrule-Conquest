@@ -160,7 +160,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 						
 						
 						if (!can_pass_wall) {
-							before_wall_pos = temp_pos + n*64;
+							before_wall_pos = temp_pos + n * 64;
 						}
 						can_pass_wall = !can_pass_wall;
 						zelda_collides = true;
@@ -501,7 +501,7 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 			if (!is_on_collision) {
 				for (int n = -1; n < 2; n++) {
 					if (GetLogicArrow(n, temp_point) != NOT_COLISION_ID ) {
-						before_wall_pos = temp_pos + i * 32;
+						before_wall_pos = temp_pos + i * 40;
 						
 						height = n;
 						is_on_collision = true;
@@ -512,7 +512,7 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 						if (is_first_wall) {
 							first_height = n;
 							is_first_wall = false;
-							first_wall_pos = temp_pos + i * 32;
+							first_wall_pos = temp_pos + i * 40;
 
 						}
 					}
