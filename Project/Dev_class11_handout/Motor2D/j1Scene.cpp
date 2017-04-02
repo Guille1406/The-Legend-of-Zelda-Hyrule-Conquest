@@ -86,9 +86,7 @@ bool j1Scene::Start()
 		if ((*item)->scene_name == Scene_ID::mainmenu)
 		{
 			main_active_scene = (*item);
-			prev_scene = (*item);
-			loaded_scene = (*item);
-			main_active_scene->Start();
+			sub_active_scene = (*item);
 		}
 	}
 	return true;
@@ -101,22 +99,36 @@ bool j1Scene::PreUpdate()
 	{
 		main_active_scene->Start();
 		prev_scene = main_active_scene;
+		main_active_scene = main_active_scene;
 	}
-	main_active_scene->PreUpdate();
+
+	if(main_active_scene == sub_active_scene)
+		main_active_scene->PreUpdate();
+	else
+		sub_active_scene->PreUpdate();
+
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	main_active_scene->Update();
+	if (main_active_scene == sub_active_scene)
+		main_active_scene->Update();
+	else
+		main_active_scene->Update();
+
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene::PostUpdate()
 {
-	main_active_scene->PostUpdate();
+	if (main_active_scene == sub_active_scene)
+		main_active_scene->PostUpdate();
+	else
+		sub_active_scene->PostUpdate();
+
 	return true;
 }
 
@@ -134,7 +146,6 @@ bool j1Scene::ChangeScene(Scene_ID name)
 		{
 			main_active_scene->Clean();
 			main_active_scene = *item;
-			loaded_scene = main_active_scene;
 			return true;
 		}
 	return false;
@@ -154,7 +165,6 @@ bool j1Scene::Show(Scene_ID name)
 bool j1Scene::Hide()
 {
 	main_active_scene->Clean();
-	main_active_scene = loaded_scene;
 	prev_scene = main_active_scene;
 	return true;
 }

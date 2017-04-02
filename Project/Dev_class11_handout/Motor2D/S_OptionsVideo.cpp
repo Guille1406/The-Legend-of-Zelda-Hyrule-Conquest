@@ -107,7 +107,7 @@ void S_OptionsVideo::OnGui(Gui* ui, GuiEvent event)
 	if ((ui == (Gui*)vsync) && (event == GuiEvent::mouse_lclk_down))
 	{
 		vsync_check->ChangeState();
-		if (fullscreen_check->Checked())
+		if (vsync_check->Checked())
 			SDL_GL_SetSwapInterval(true);
 		else
 			SDL_GL_SetSwapInterval(false);

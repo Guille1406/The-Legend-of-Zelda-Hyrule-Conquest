@@ -51,6 +51,11 @@ bool j1GameStartMenuBackground::Start()
 // Called each loop iteration
 bool j1GameStartMenuBackground::PreUpdate()
 {
+	/*
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		App->WantToQuit();
+	*/
+	/**/
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ingamenushow = !ingamenushow;
 	if ((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) && (ingamenushow))
@@ -63,6 +68,7 @@ bool j1GameStartMenuBackground::PreUpdate()
 		App->scene->Hide();
 		Freeze(true);
 	}
+	/**/
 	return true;
 }
 
