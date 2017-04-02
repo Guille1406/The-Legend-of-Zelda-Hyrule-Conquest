@@ -81,7 +81,7 @@ protected:
 
 	void MenuInput(std::vector<GuiButton*>* buttons)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) || (App->input->GetControllerButton(0, 11) == KEY_DOWN))
 		{
 			std::vector<GuiButton*>::iterator focused_button = std::find(buttons->begin(), buttons->end(), App->gui->GetFocus());
 			if ((*focused_button) != buttons->front())
@@ -91,7 +91,7 @@ protected:
 			}
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		if ((App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) || (App->input->GetControllerButton(0, 12) == KEY_DOWN))
 		{
 			std::vector<GuiButton*>::iterator focused_button = std::find(buttons->begin(), buttons->end(), App->gui->GetFocus());
 			if ((*focused_button) != buttons->back())
