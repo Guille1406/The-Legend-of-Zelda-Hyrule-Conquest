@@ -69,7 +69,7 @@ void j1Map::Draw()
 				}
 			}
 		}
-	
+	/*
 		if(i > Link->logic_height + 9)
 			App->render->Blit(Link->entity_texture, Link->pos.x - Link->actual_animation.GetCurrentFrame().pivot.x, Link->pos.y - Link->actual_animation.GetCurrentFrame().pivot.y, &Link->actual_animation.GetCurrentFrame().rect);
 		if (i < Zelda->logic_height + 9)
@@ -77,7 +77,7 @@ void j1Map::Draw()
 
 		//App->player->Draw();
 		i++;
-		
+		*/
 	}
 }
 
