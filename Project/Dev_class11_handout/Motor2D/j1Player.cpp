@@ -31,10 +31,13 @@ bool j1Player::Awake(pugi::xml_node& config)
 	
 	Link->Link_Hurt_Audio= App->audio->LoadFx("audio/fx/link hurt.wav");
 	Link->Link_Sword_Audio = App->audio->LoadFx("audio/fx/fighter sword 1.wav");
+	Link->Link_Sword_Collides_Sword_Audio= App->audio->LoadFx("audio/fx/sword shine 1.wav");
 	Zelda->Throw_Audio = App->audio->LoadFx("audio/fx/throw.wav");
 	Fall_Players_Audio = App->audio->LoadFx("audio/fx/fall.wav");
 	Zelda->Arrow_Audio = App->audio->LoadFx("audio/fx/arrow 2.wav");
 	Zelda->Arrow_Hit_Wall_Audio = App->audio->LoadFx("audio/fx/arrow hit wall.wav");
+
+
 
 	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
 	Link->front_collider = App->collision->AddCollider({ Link->tilepos.x*8,Link->tilepos.y*8 + 32,32,16 }, front_link, Link, this);
@@ -65,7 +68,7 @@ bool j1Player::Start()
 	cooperative = true;
 	Link->collision_by_enemy_timmer.Start();
 	Audio_Fx_Timer.Start();
-
+	Link->enemy_col_sword_sword_timer.Start();
 	return true;
 }
 
@@ -358,16 +361,23 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
-		if(Link->Compare_Link_Sword_Collision(n_enemy)) {
-			Link->Collision_Sword_EnemySword();
+		if (Link->collision_by_enemy_timmer.Read() > 1500) {
+			App->audio->PlayFx(Link->Link_Sword_Collides_Sword_Audio);
+			Link->collision_by_enemy_timmer.Start();
+			if (Link->Compare_Link_Sword_Collision(n_enemy)) {
+				Link->Collision_Sword_EnemySword();
+				Link->link_sword_impact_sword = true;
+			}
 		}
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link_sword) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->collision_by_enemy_timmer.Read() > 1500) {
+			App->audio->PlayFx(Link->Link_Sword_Collides_Sword_Audio);
 			Link->collision_by_enemy_timmer.Start();
 			if (Link->Compare_Link_Sword_Collision(n_enemy)) {
 				Link->Collision_Sword_EnemySword();
+				Link->link_sword_impact_sword = true;
 			}
 		}
 	}
@@ -379,7 +389,6 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 				Link->collision_by_enemy_timmer.Start();
 				Link->Collision_Sword_EnemySword();
 				half_hearts_test_purpose--;
-				Link->link_hurt = true;		
 		}
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy && collider2->type == COLLIDER_TYPE::collider_link) {
@@ -389,7 +398,16 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (n_enemy->live > 0) {
-			n_enemy->live--;
+			if (Link->enemy_col_sword_sword_timer.Read() > 3000) {
+				if (Link->link_sword_impact_sword == false) {
+					Link->enemy_col_sword_sword_timer.Start();
+					n_enemy->live--;
+				}
+				else {
+					Link->link_sword_impact_sword = false;
+				}
+			}
+			
 		}
 		else {
 			n_enemy->tokill = true;
@@ -402,7 +420,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			Link->collision_by_enemy_timmer.Start();
 			Link->Collision_Sword_EnemySword();
 			half_hearts_test_purpose--;
-			Link->link_hurt = true;
+
 		}
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {
@@ -411,7 +429,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			Link->collision_by_enemy_timmer.Start();
 			Link->Collision_Sword_EnemySword();
 			half_hearts_test_purpose--;
-			Link->link_hurt = true;
+
 		}
 	}
 

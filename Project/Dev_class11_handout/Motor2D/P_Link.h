@@ -41,14 +41,16 @@ public:
 
 	uint Link_Hurt_Audio;
 	uint Link_Sword_Audio;
-
+	uint Link_Sword_Collides_Sword_Audio;
 public:
 	int opacity = 255;
 	j1Timer collision_by_enemy_timmer;
+	j1Timer enemy_col_sword_sword_timer;
 	bool can_pick_up = false;
 	bool im_lifting = false;
-	bool link_hurt = false;
+	bool link_sword_impact_sword = false;
 	bool temp = false;
+
 };
 
 #endif

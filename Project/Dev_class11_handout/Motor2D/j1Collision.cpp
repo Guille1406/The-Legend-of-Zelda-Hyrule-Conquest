@@ -37,7 +37,7 @@ j1Collision::j1Collision()
 	//sword
 	matrix[collider_link_sword][collider_enemy] = true;
 	matrix[collider_link_sword][collider_enemy_sword] = true;
-
+	matrix[collider_enemy_sword][collider_link_sword] = true;
 
 	matrix[collider_enemy_sword][collider_zelda] = true;
 	//in vertical slice all modules will have on collision and this will be not needeed two times 

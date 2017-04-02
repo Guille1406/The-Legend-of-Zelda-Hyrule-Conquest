@@ -200,6 +200,24 @@ void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 void j1Enemy::Enemy_Hurt_Displacement(int & pos, bool add)
 {
 
+	/*static int final_pos = 0;
+	//same as jump function
+	int i = 1;
+	if (!add)
+		i = -1;
+
+	if (!temp)
+		final_pos = pos + (i * JUMP_DISTANCE);
+	temp = true;
+
+	//if player have wall in front the roll will stop
+	if ((i * pos <  i*final_pos) && GetLogic(false, tilepos) == 0) {
+		pos = pos + (i * 4);
+	}
+	else {
+		temp = false;
+		doing_script = false;
+	}*/
 
 }
 
