@@ -171,8 +171,8 @@ bool j1Enemy::FindInPath(iPoint pos, Enemy* enemy) {
 void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 {
 
-	int animation = (int)enemy->Enemy_Orientation;
-	enemy->ChangeAnimation(animation);
+		int animation = (int)enemy->Enemy_Orientation;
+		enemy->ChangeAnimation(animation);
 
 	switch (enemy->Enemy_Orientation) {
 

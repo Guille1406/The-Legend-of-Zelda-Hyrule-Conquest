@@ -324,16 +324,20 @@ player_event P_Zelda::GetEvent()
 				else can_throw = true;
 			}
 			//ATTACK//
-			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_REPEAT) {
-				character_direction = aim_direction;
-				bow++;
-			}
-			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_NOTHING&&bow>=20) {
+			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_DOWN) {
+				attack_timer.Start();
+				App->audio->PlayFx(Arrow_Audio);
 				actual_event = attack;
 				doing_script = true;
 				character_direction = aim_direction;
 				bow = 0;
 			}
+			/*if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_NOTHING&&bow>=20) {
+				actual_event = attack;
+				doing_script = true;
+				character_direction = aim_direction;
+				bow = 0;
+			}*/
 
 			
 
