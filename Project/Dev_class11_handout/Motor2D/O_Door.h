@@ -2,6 +2,7 @@
 #define _DOOR_
 #include "j1Object.h"
 #include "Character.h"
+#include"j1Player.h"
 class Door : public Object {
 public:
 	Door() {
@@ -24,7 +25,9 @@ public:
 	void Open() {
 
 		for (int i = 0; i < this->collider_tiles.size(); i++) {
-			App->map->V_Colision[logic_height][0].data[(collider_tiles[i].y / 16) * App->map->data.width + (collider_tiles[i].x / 16)] = 0;
+			if (App->player->loop_game_menu==false) {
+				App->map->V_Colision[logic_height][0].data[(collider_tiles[i].y / 16) * App->map->data.width + (collider_tiles[i].x / 16)] = 0;
+			}
 		}
 		active = false;
 		/*for (int i = 0; i < rect.w / 16; i++) {

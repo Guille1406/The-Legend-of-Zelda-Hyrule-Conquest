@@ -11,6 +11,7 @@
 #include "j1Collision.h"
 #include "Character.h"
 #include "j1FileSystem.h"
+#include"j1Player.h"
 
 bool j1Object::Start()
 {
@@ -24,6 +25,18 @@ bool j1Object::Start()
 
 bool j1Object::PreUpdate()
 {
+
+	for (int i = 0; i < V_Objects.size(); i++) {
+		if (V_Objects[i]->type == objectType::warp) {
+			if (App->player->loop_game_menu == true) {
+				App->player->Disable();
+				App->enemy->Disable();
+				App->object->Disable();
+				V_Objects[i]->Action();
+
+			}
+		}
+	}
 	
 	return true;
 }
@@ -51,6 +64,7 @@ bool j1Object::Update(float)
 
 bool j1Object::PostUpdate()
 {
+	
 	return true;
 }
 

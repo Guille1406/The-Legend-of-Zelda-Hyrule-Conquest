@@ -279,13 +279,11 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	}
 	else if (collider1->type == collider_warp) {
 		Object* temp = (Object*)collider1->parent;
-		temp->Action();
-		
+		loop_game_menu = true;
 	}
 	else if (collider2->type == collider_warp) {
 		Object* temp = (Object*)collider2->parent;
-		temp->Action();
-
+		loop_game_menu = true;
 	}
 	else if (collider1->type == collider_change_height) {
 		ChangeHeight* temp = (ChangeHeight*)collider1->parent;

@@ -41,6 +41,8 @@ public:
 	P_Link* Link;
 	P_Zelda* Zelda;
 
+	bool loop_game_menu = false;
+
 	//Colisions
 	MapLayer* Colision;
 	
