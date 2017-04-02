@@ -8,7 +8,7 @@ public:
 
 	}
 	Giant_Chest(const Giant_Chest& obj) {
-		*this = obj;
+		//*this = obj;
 	}
 	~Giant_Chest() {
 

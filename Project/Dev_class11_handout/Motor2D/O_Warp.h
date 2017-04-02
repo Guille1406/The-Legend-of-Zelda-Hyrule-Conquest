@@ -18,6 +18,7 @@ public:
 		name = obj.name;
 		logic_height = obj.logic_height;
 		scene = obj.scene;
+		texture_rect = { 0,0,0,0 };
 		//texture_rect = idle_button;
 	}
 	~Warp() {

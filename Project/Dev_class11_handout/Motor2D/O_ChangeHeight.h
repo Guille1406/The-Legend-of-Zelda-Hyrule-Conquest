@@ -14,6 +14,7 @@ public:
 		height = obj.height;
 		name = obj.name;
 		logic_height = obj.logic_height;
+		texture_rect = { 0,0,0,0 };
 	}
 	~ChangeHeight() {
 

@@ -11,7 +11,7 @@ public:
 
 	}
 	Heart(const Heart& obj) {
-		*this = obj;
+		//*this = obj;
 	}
 	~Heart() {
 

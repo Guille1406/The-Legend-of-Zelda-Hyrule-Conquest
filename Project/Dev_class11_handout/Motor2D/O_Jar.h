@@ -10,16 +10,14 @@ public:
 
 	}
 	Jar(const Jar& obj) {
-		*this = obj;
+		//*this = obj;
 	}
 	~Jar() {
 
 	}
 
 	void Action() {
-		if (connected_object != NULL)
-			this->connected_object->Action();
-
+		
 	}
 
 public:
