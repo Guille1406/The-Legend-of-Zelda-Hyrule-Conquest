@@ -15,6 +15,8 @@ public:
 		active = obj.active;
 		name = obj.name;
 		logic_height = obj.logic_height;
+		texture_rect = obj.texture_rect;
+		dir = obj.dir;
 	}
 	~Diana() {
 
@@ -25,9 +27,33 @@ public:
 			connected_object[i]->Action();
 
 		}
+		switch (dir) {
+
+			//UP
+		case 0:
+			texture_rect = rect_diana_up_active;
+			break;
+
+			//DOWN
+		case 1:
+			texture_rect = rect_diana_down_active;
+			break;
+
+			//LEFT
+		case 2:
+			texture_rect = rect_diana_left_active;
+			break;
+
+			//RIGHT
+		case 3:
+			texture_rect = rect_diana_right_active;
+			break;
+		}
+
 	}
 
 public:
+	int dir = 0;
 
 };
 

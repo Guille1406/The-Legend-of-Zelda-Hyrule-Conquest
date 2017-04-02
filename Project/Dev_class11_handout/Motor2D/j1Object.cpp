@@ -194,8 +194,38 @@ Object * j1Object::CreateDiana(pugi::xml_node object, int height)
 	temp_diana.type = objectType::diana;
 	temp_diana.active = true;
 
+	pugi::xml_node attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "dir") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	temp_diana.dir = attribute.attribute("value").as_int();
+
+	switch (temp_diana.dir) {
+
+		//UP
+	case 0:
+		temp_diana.texture_rect = rect_diana_up_idle;
+		break;
+
+		//DOWN
+	case 1:
+		temp_diana.texture_rect = rect_diana_down_idle;
+		break;
+
+		//LEFT
+	case 2:
+		temp_diana.texture_rect = rect_diana_left_idle;
+		break;
+
+		//RIGHT
+	case 3:
+		temp_diana.texture_rect = rect_diana_right_idle;
+		break;
+	}
+
 	Object* ret = new Diana(temp_diana);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_diana, (Entity*)ret, this);
+
 	V_Objects.push_back(ret);
 
 	
@@ -220,7 +250,7 @@ Object * j1Object::CreateDoor(pugi::xml_node object, int height)
 	temp_door.active = true;
 	temp_door.logic_height = height;
 
-auto attribute = object.child("properties").child("property");
+	pugi::xml_node attribute = object.child("properties").child("property");
 	while (strcmp(attribute.attribute("name").as_string(), "dir")) {
 		attribute = attribute.next_sibling();
 	}
