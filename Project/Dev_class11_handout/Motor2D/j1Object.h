@@ -30,6 +30,7 @@ enum objectType {
 	key,
 	bost_key,
 	heart,
+	nothing,
 
 	/*
 	.
@@ -49,14 +50,14 @@ public:
 	virtual void ChangeAnimation(int);
 	virtual void LoadAnimation(const char*);
 public:
-	int logic_height;
-	Collider* collider;
+	int logic_height=0;
+	Collider* collider= nullptr;
 	int			last_animation = 0;
 	p2SString					sprites_folder;
 	pugi::xml_document			sprites_file;
 	std::vector<Animation>		sprites_vector;
 	Animation					actual_animation;
-	SDL_Texture*				entity_texture;
+	SDL_Texture*				entity_texture=nullptr;
 
 };
 
@@ -92,7 +93,7 @@ public:
 
 public: 
 	std::vector<Object*> V_Objects;
-	SDL_Texture* objects_texture;
+	SDL_Texture* objects_texture=nullptr;
 
 };
 
@@ -112,14 +113,14 @@ public:
 
 public:
 
-	SDL_Rect rect;
-	bool active;
-	objectType type;
+	SDL_Rect rect = {0,0,0,0};
+	bool active=false;
+	objectType type= objectType::nothing;
 	std::string name;
 	std::vector<Object*> connected_object;
 	std::vector<iPoint> collider_tiles;
 
-	SDL_Rect texture_rect;
+	SDL_Rect texture_rect = { 0,0,0,0 };
 
 };
 

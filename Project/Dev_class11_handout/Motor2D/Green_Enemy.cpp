@@ -86,20 +86,24 @@ void Green_Enemy::Rang_Player()
 		if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG && enemy_doing_script==false) {
 			player_in_range = App->player->Link;
 			//green_enemy_path.clear();
-			if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr) {
-				green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
-			}
-			if (green_enemy_path.size()) {
-				App->pathfinding->Move(this, player_in_range);
+			if (tile_pos != iPoint(0, 0)) {
+				if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr) {
+					green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
+				}
+				if (green_enemy_path.size()) {
+					App->pathfinding->Move(this, player_in_range);
+				}
 			}
 		}
 		
 		else if (sqrt((dist2.x*dist2.x) + (dist2.y*dist2.y)) < RANG  && enemy_doing_script == false) {
 			player_in_range = App->player->Zelda;
 			//green_enemy_path.clear();
-			green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
-			if (green_enemy_path.size()) {
-				App->pathfinding->Move(this, player_in_range);
+			if (tile_pos != iPoint(0, 0)) {
+				green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
+				if (green_enemy_path.size()) {
+					App->pathfinding->Move(this, player_in_range);
+				}
 			}
 		}
 		

@@ -27,6 +27,7 @@ enum OrientationEnemy{
 
 enum enemyType {
 	green_enemy = 3847,
+	no_enemy,
 
 };
 
@@ -48,22 +49,22 @@ public:
 	virtual void Rang_Player() {};
 public:
 
-	SDL_Rect rect;
-	enemyType type;
-	iPoint pix_world_pos;
-	iPoint array_pos;
-	iPoint tile_pos;
+	SDL_Rect rect = { 0,0,0,0 };
+	enemyType type= no_enemy;
+	iPoint pix_world_pos = {0, 0};
+	iPoint array_pos = { 0, 0 };
+	iPoint tile_pos = { 0, 0 };
+	int live = 0;
 	bool movable = true;
 	std::list<iPoint> Path_Enemy;
 	bool passedtile = true;
-	Collider* shield_test;
+	Collider* shield_test=nullptr;
 	OrientationEnemy Enemy_Orientation = up_enemy;
-	int live = 0;
 	bool tokill = false;
 	Character* player_in_range = nullptr;
 	std::vector<iPoint> green_enemy_path;
 	bool temp = false;
-	EnemyState state;
+	EnemyState state= doing_path;
 	bool enemy_doing_script=false;
 };
 
@@ -91,9 +92,9 @@ public:
 
 public:
 	std::vector<Animation*> Green_Enemy_Animation;
-	Enemy* enemy_perf;
+	Enemy* enemy_perf=nullptr;
 	std::vector<Enemy*> V_MyEnemies;
-	SDL_Texture* green_soldier_tex;
+	SDL_Texture* green_soldier_tex=nullptr;
 	bool appear_enemies = false;
 	uint one_time_appear = 0;
 };

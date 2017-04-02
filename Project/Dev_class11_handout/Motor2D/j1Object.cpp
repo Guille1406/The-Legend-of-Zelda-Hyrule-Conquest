@@ -12,6 +12,7 @@
 #include "Character.h"
 #include "j1FileSystem.h"
 #include"j1Player.h"
+#include"j1HUD.h"
 
 bool j1Object::Start()
 {
@@ -26,18 +27,7 @@ bool j1Object::Start()
 bool j1Object::PreUpdate()
 {
 
-	for (int i = 0; i < V_Objects.size(); i++) {
-		if (V_Objects[i]->type == objectType::warp) {
-			if (App->player->loop_game_menu == true) {
-				//App->player->loop_game_menu = false;
-				App->player->Disable();
-				App->enemy->Disable();
-				App->object->Disable();
-				V_Objects[i]->Action();
 
-			}
-		}
-	}
 	
 	return true;
 }
@@ -65,6 +55,25 @@ bool j1Object::Update(float)
 
 bool j1Object::PostUpdate()
 {
+
+	/*for (int i = 0; i < V_Objects.size(); i++) {
+		if (V_Objects[i]->type == objectType::warp) {
+			if (App->player->loop_game_menu == true) {
+				//App->player->loop_game_menu = false;
+				App->player->Disable();
+				App->enemy->Disable();
+				App->object->Disable();
+				App->map->Disable();
+				App->hud->Disable();
+				V_Objects[i]->Action();
+
+			}
+		}
+	}*/
+
+	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose<=0) {
+		App->WantToQuit();
+	}
 	
 	return true;
 }
