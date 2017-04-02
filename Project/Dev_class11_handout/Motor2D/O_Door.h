@@ -26,7 +26,7 @@ public:
 
 		for (int i = 0; i < this->collider_tiles.size(); i++) {
 			if (App->player->loop_game_menu==false) {
-				App->map->V_Colision[logic_height][0].data[(collider_tiles[i].y / 16) * App->map->data.width + (collider_tiles[i].x / 16)] = 0;
+				App->map->V_Colision[logic_height]->data[(collider_tiles[i].y / 16) * App->map->data.width + (collider_tiles[i].x / 16)] = 0;
 			}
 		}
 		active = false;
