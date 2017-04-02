@@ -67,7 +67,9 @@ bool j1Pathfinding::IsWalkable(const iPoint & destination) const
 {
 	bool ret = false;
 	uchar t = GetTileAt(destination);
-	return (t != CANT_PASS_COL_ID && t != TILE_COL_ID);
+	if (t)
+		int x = 0;
+	return (t == NOT_COLISION_ID);
 }
 
 bool j1Pathfinding::CheckBoundaries(const iPoint & pos) const
@@ -205,12 +207,12 @@ PathNode::PathNode()
 
 PathNode::PathNode(int g, int h, const iPoint & pos, const PathNode * parent) : g(g), h(h), pos(pos), parent(parent), on_close(false), on_open(false)
 {
-
+	int x = 0;
 }
 
 PathNode::PathNode(const PathNode & node) : g(node.g), h(node.h), pos(node.pos), parent(node.parent)
 {
-
+	int x = 0;
 }
 
 //Functionality =============
@@ -220,7 +222,7 @@ uint PathNode::FindWalkableAdjacents(PathList* list_to_fill) const
 	uint before = list_to_fill->list.size();
 	bool northClose = false, southClose = false, eastClose = false, westClose = false;
 	// south
-	cell.create(pos.x, pos.y + 1);
+	cell.create(pos.x, pos.y + 2);
 	if (App->pathfinding->IsWalkable(cell))
 	{
 		PathNode* node = App->pathfinding->GetPathNode(cell.x, cell.y);
@@ -250,7 +252,7 @@ uint PathNode::FindWalkableAdjacents(PathList* list_to_fill) const
 		northClose = true;
 	}
 	// east
-	cell.create(pos.x + 1, pos.y);
+	cell.create(pos.x + 3, pos.y);
 	if (App->pathfinding->IsWalkable(cell))
 	{
 		PathNode* node = App->pathfinding->GetPathNode(cell.x, cell.y);
@@ -279,51 +281,6 @@ uint PathNode::FindWalkableAdjacents(PathList* list_to_fill) const
 	{
 		westClose = true;
 	}
-	// south-east
-	cell.create(pos.x + 1, pos.y + 1);
-	if (App->pathfinding->IsWalkable(cell) && southClose == false && eastClose == false)
-	{
-		PathNode* node = App->pathfinding->GetPathNode(cell.x, cell.y);
-		if (node->pos != cell) {
-			node->parent = this;
-			node->pos = cell;
-		}
-		list_to_fill->list.push_back(node);
-	}
-	// south-west
-	cell.create(pos.x - 1, pos.y + 1);
-	if (App->pathfinding->IsWalkable(cell) && southClose == false && westClose == false)
-	{
-		PathNode* node = App->pathfinding->GetPathNode(cell.x, cell.y);
-		if (node->pos != cell) {
-			node->parent = this;
-			node->pos = cell;
-		}
-		list_to_fill->list.push_back(node);
-	}
-	// north-east
-	cell.create(pos.x + 1, pos.y - 1);
-	if (App->pathfinding->IsWalkable(cell) && northClose == false && eastClose == false)
-	{
-		PathNode* node = App->pathfinding->GetPathNode(cell.x, cell.y);
-		if (node->pos != cell) {
-			node->parent = this;
-			node->pos = cell;
-		}
-		list_to_fill->list.push_back(node);
-	}
-	// north-west
-	cell.create(pos.x - 1, pos.y - 1);
-	if (App->pathfinding->IsWalkable(cell) && northClose == false && westClose == false)
-	{
-		PathNode* node = App->pathfinding->GetPathNode(cell.x, cell.y);
-		if (node->pos != cell) {
-			node->parent = this;
-			node->pos = cell;
-		}
-		list_to_fill->list.push_back(node);
-	}
-
 
 	return list_to_fill->list.size();
 }
