@@ -29,6 +29,7 @@ bool j1Object::PreUpdate()
 	for (int i = 0; i < V_Objects.size(); i++) {
 		if (V_Objects[i]->type == objectType::warp) {
 			if (App->player->loop_game_menu == true) {
+				//App->player->loop_game_menu = false;
 				App->player->Disable();
 				App->enemy->Disable();
 				App->object->Disable();
