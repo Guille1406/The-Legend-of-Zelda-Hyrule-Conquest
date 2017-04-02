@@ -22,6 +22,7 @@ enum OrientationEnemy{
 	down_enemy,
 	left_enemy,
 	right_enemy,
+	static_enemy,
 	
 };
 
@@ -57,7 +58,7 @@ public:
 	std::list<iPoint> Path_Enemy;
 	bool passedtile = true;
 	Collider* shield_test;
-	OrientationEnemy Enemy_Orientation;
+	OrientationEnemy Enemy_Orientation= static_enemy;
 	int live = 0;
 	bool tokill = false;
 	Character* player_in_range = nullptr;
@@ -94,7 +95,8 @@ public:
 	Enemy* enemy_perf;
 	std::vector<Enemy*> V_MyEnemies;
 	SDL_Texture* green_soldier_tex;
-
+	bool appear_enemies = false;
+	uint one_time_appear = 0;
 };
 
 

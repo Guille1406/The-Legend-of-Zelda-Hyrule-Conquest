@@ -328,6 +328,9 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == collider_arrow) {
 		if (collider2->type == collider_diana) {
 			Object* temp = (Object*)collider2->parent;
+			if (temp->name == "diana_2") {
+				App->enemy->appear_enemies = true;
+			}
 			temp->Action();
 		}
 		else {

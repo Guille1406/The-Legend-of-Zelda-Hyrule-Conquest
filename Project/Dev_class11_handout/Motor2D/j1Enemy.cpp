@@ -34,6 +34,7 @@ bool j1Enemy::Start()
 
 bool j1Enemy::PreUpdate()
 {
+
 	for (int i = 0; i < V_MyEnemies.size(); i++) {
 		if (V_MyEnemies[i]->tokill == true) {
 			V_MyEnemies[i]->collider->to_delete = true;
@@ -44,7 +45,12 @@ bool j1Enemy::PreUpdate()
 
 		}
 	}
-
+	if (appear_enemies && one_time_appear<1 && one_time_appear<2) {
+		Create_Enemy(enemyType::green_enemy, iPoint(75, 41));
+		Create_Enemy(enemyType::green_enemy, iPoint(63, 56));
+		one_time_appear++;
+		appear_enemies = false;
+	}
 	return true;
 }
 
