@@ -105,4 +105,13 @@ static const SDL_Rect rect_arrow_down = { 168,96,10,30 };
 static const SDL_Rect rect_arrow_left = { 128,106,30,10 };
 static const SDL_Rect rect_arrow_right =  {128, 96, 30, 10};
 
+
+static const SDL_Rect rect_diana_right_idle = { 192,176,32,32 };
+static const SDL_Rect rect_diana_right_active = { 192,208,32,32 };
+static const SDL_Rect rect_diana_left_idle = { 224,176,32,32 };
+static const SDL_Rect rect_diana_left_active = { 224,208,32,32 };
+static const SDL_Rect rect_diana_up_idle = { 192,240,32,32 };
+static const SDL_Rect rect_diana_up_active = { 224,240,32,32 };
+static const SDL_Rect rect_diana_down_idle = { 256,240,32,32 };
+static const SDL_Rect rect_diana_down_active = {288,240,32,32 };
 #endif
