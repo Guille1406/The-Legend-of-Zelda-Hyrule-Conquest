@@ -365,6 +365,8 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			App->audio->PlayFx(Link->Link_Sword_Collides_Sword_Audio);
 			Link->collision_by_enemy_timmer.Start();
 			if (Link->Compare_Link_Sword_Collision(n_enemy)) {
+				n_enemy->state = EnemyState::push_back_enemy;
+				n_enemy->enemy_doing_script = true;
 				Link->Collision_Sword_EnemySword();
 				Link->link_sword_impact_sword = true;
 			}
@@ -376,6 +378,8 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			App->audio->PlayFx(Link->Link_Sword_Collides_Sword_Audio);
 			Link->collision_by_enemy_timmer.Start();
 			if (Link->Compare_Link_Sword_Collision(n_enemy)) {
+				n_enemy->state = EnemyState::push_back_enemy;
+				n_enemy->enemy_doing_script = true;
 				Link->Collision_Sword_EnemySword();
 				Link->link_sword_impact_sword = true;
 			}
