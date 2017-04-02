@@ -67,7 +67,7 @@ bool j1Pathfinding::IsWalkable(const iPoint & destination) const
 {
 	bool ret = false;
 	uchar t = GetTileAt(destination);
-	return (t != TILE_COL_ID);
+	return (t != CANT_PASS_COL_ID && t != TILE_COL_ID);
 }
 
 bool j1Pathfinding::CheckBoundaries(const iPoint & pos) const

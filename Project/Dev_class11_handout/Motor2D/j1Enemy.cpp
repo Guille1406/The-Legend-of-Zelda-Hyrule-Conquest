@@ -45,7 +45,7 @@ bool j1Enemy::PreUpdate()
 
 		}
 	}
-	if (appear_enemies && one_time_appear<1 && one_time_appear<2) {
+	if (appear_enemies && one_time_appear<1) {
 		Create_Enemy(enemyType::green_enemy, iPoint(75, 41));
 		Create_Enemy(enemyType::green_enemy, iPoint(63, 56));
 		one_time_appear++;

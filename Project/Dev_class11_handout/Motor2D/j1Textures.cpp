@@ -70,8 +70,8 @@ SDL_Texture* const j1Textures::Load(const char* path)
 	}
 	else
 	{
+		SDL_SetColorKey(surface, 1, SDL_MapRGB(surface->format, 255, 0, 255));
 		texture = LoadSurface(surface);
-
 		SDL_FreeSurface(surface);
 	}
 
