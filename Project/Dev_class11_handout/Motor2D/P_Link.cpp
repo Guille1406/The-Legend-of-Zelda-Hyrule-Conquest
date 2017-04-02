@@ -10,7 +10,7 @@
 void P_Link::Attack(float dt)
 {
 	//update
-	if (attack_timer.Read() > 500) {
+	if (attack_timer.Read() > 300) {
 		attack_timer.Start();
 		doing_script = false;
 

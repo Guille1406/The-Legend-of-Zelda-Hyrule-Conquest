@@ -43,6 +43,11 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Link->front_collider = App->collision->AddCollider({ Link->tilepos.x*8,Link->tilepos.y*8 + 32,32,16 }, front_link, Link, this);
 	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,32,32 }, collider_zelda, Zelda, this);
 	Zelda->front_collider = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y + 32,32,16}, front_zelda, Zelda, this);
+	
+	//TEMP SPEED ANIMATION
+	
+
+
 	return true;
 }
 
@@ -69,6 +74,12 @@ bool j1Player::Start()
 	Link->collision_by_enemy_timmer.Start();
 	Audio_Fx_Timer.Start();
 	Link->enemy_col_sword_sword_timer.Start();
+
+	Link->sprites_vector[attack * 4 + up].speed = 0.12;
+	Link->sprites_vector[attack * 4 + down].speed = 0.12;
+	Link->sprites_vector[attack * 4 + left].speed = 0.12; 
+	Link->sprites_vector[attack * 4 + right].speed = 0.12;
+
 	return true;
 }
 

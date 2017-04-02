@@ -23,6 +23,7 @@ public:
 	P_Link() {
 		//sprites_vector = new std::vector<Animation>;
 		Link_sword = new Sword();
+		
 
 	}
 	~P_Link() {
