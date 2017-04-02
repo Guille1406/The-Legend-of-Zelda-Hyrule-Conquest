@@ -402,7 +402,6 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (n_enemy->live > 0) {
-			if (Link->enemy_col_sword_sword_timer.Read() > 3000) {
 				if (Link->link_sword_impact_sword == false) {
 					Link->enemy_col_sword_sword_timer.Start();
 					n_enemy->state = EnemyState::push_back_enemy;
@@ -412,7 +411,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 				else {
 					Link->link_sword_impact_sword = false;
 				}
-			}
+			
 			
 		}
 		else {
