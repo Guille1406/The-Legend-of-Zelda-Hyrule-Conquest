@@ -14,7 +14,8 @@
 
 void P_Zelda::Attack(float dt)
 {
-	
+	if (!temp) {
+		temp = true;
 		switch (character_direction) {
 		case up:
 			CreateArrow({ pos.x + 4,pos.y ,8,16 });
@@ -29,11 +30,17 @@ void P_Zelda::Attack(float dt)
 			CreateArrow({ pos.x,pos.y + 4,16,8 });
 			break;
 		}
-
-		actual_event = idle;
-		doing_script = false;
-		
+	}
 	
+		//actual_event = idle;
+		//doing_script = false;
+		
+		//update
+		if (attack_timer.Read() > 600) {
+			attack_timer.Start();
+			doing_script = false;
+			temp = false;
+		}
 }
 
 void P_Zelda::CreateArrow(SDL_Rect rect)
@@ -422,6 +429,7 @@ player_event P_Zelda::GetEvent()
 				character_direction = aim_direction;
 			}
 			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_UP) {
+				attack_timer.Start();
 				App->audio->PlayFx(Arrow_Audio);
 				actual_event = attack;
 				doing_script = true;

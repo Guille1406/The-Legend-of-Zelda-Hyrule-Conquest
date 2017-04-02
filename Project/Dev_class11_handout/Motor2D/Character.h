@@ -117,7 +117,7 @@ private:
 	
 public:
 	
-	
+	j1Timer attack_timer;
 	iPoint						pos;
 	iPoint						tilepos;
 	adjacent_tiles				adjacent;

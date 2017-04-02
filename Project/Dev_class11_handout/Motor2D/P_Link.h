@@ -30,7 +30,7 @@ public:
 	}
 
 	void Attack(float dt);
-	j1Timer attack_timer;
+	
 	Sword* Link_sword;
 	player_event GetEvent();
 	void link_sword_collider_update();
