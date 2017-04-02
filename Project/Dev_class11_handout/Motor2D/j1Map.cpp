@@ -36,6 +36,11 @@ void j1Map::Draw()
 	if(map_loaded == false)
 		return;
 
+	//TEMP FOR VERTICAL SLICE
+	int i = 0;
+	Character* Link = App->player->Link;
+	Character* Zelda = App->player->Zelda;
+
 	std::list<MapLayer*>::iterator item = data.layers.begin();
 	for (; item != data.layers.cend(); ++item) {
 		MapLayer* layer = (*item);
@@ -64,6 +69,14 @@ void j1Map::Draw()
 				}
 			}
 		}
+	
+		if(i > Link->logic_height + 9)
+			App->render->Blit(Link->entity_texture, Link->pos.x - Link->actual_animation.GetCurrentFrame().pivot.x, Link->pos.y - Link->actual_animation.GetCurrentFrame().pivot.y, &Link->actual_animation.GetCurrentFrame().rect);
+		if (i < Zelda->logic_height + 9)
+		App->render->Blit(Zelda->entity_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y, &Zelda->actual_animation.GetCurrentFrame().rect);
+
+		//App->player->Draw();
+		i++;
 		
 	}
 }

@@ -222,7 +222,7 @@ uint PathNode::FindWalkableAdjacents(PathList* list_to_fill) const
 	uint before = list_to_fill->list.size();
 	bool northClose = false, southClose = false, eastClose = false, westClose = false;
 	// south
-	cell.create(pos.x, pos.y + 2);
+	cell.create(pos.x, pos.y + 1);
 	if (App->pathfinding->IsWalkable(cell))
 	{
 		PathNode* node = App->pathfinding->GetPathNode(cell.x, cell.y);
@@ -252,7 +252,7 @@ uint PathNode::FindWalkableAdjacents(PathList* list_to_fill) const
 		northClose = true;
 	}
 	// east
-	cell.create(pos.x + 3, pos.y);
+	cell.create(pos.x + 1, pos.y);
 	if (App->pathfinding->IsWalkable(cell))
 	{
 		PathNode* node = App->pathfinding->GetPathNode(cell.x, cell.y);
@@ -353,18 +353,18 @@ return ret;
 
 void j1Pathfinding::Move(Enemy * enemy, Character* player)
 {
-	if (last_path.size()>0) {
+	if (enemy->green_enemy_path.size()) {
 
-		static int i = 0;
+		static int i = 1;
 
 		
-		int temp = enemy->green_enemy_path[i].x;
-		int temp2 = enemy->green_enemy_path[i].y;
+		int temp = enemy->green_enemy_path[enemy->green_enemy_path.size() - i].x;
+		int temp2 = enemy->green_enemy_path[enemy->green_enemy_path.size() - i].y;
 
 		int x = 0;
 		int y = 0;
-		x = x + (enemy->green_enemy_path[i].x - enemy->tile_pos.x);
-		y = y + (enemy->green_enemy_path[i].y - enemy->tile_pos.y);
+		x = x + (enemy->green_enemy_path[enemy->green_enemy_path.size()-i].x - enemy->tile_pos.x);
+		y = y + (enemy->green_enemy_path[enemy->green_enemy_path.size()- i].y - enemy->tile_pos.y);
 
 
 		/*
@@ -385,7 +385,7 @@ void j1Pathfinding::Move(Enemy * enemy, Character* player)
 		enemy->pix_world_pos.x += x;
 		enemy->pix_world_pos.y += y;
 
-		if (enemy->tile_pos == enemy->green_enemy_path[i]) {
+		if (enemy->tile_pos == enemy->green_enemy_path[enemy->green_enemy_path.size()-i]) {
 			i++;
 		}
 		if (i == enemy->green_enemy_path.size() || enemy->tile_pos == player->tilepos) {
