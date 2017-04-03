@@ -84,7 +84,7 @@ bool S_World::PostUpdate()
 		App->player->Disable();
 		App->enemy->Disable();
 		
-		App->scene->ChangeScene(mainmenu);
+		App->scene->ChangeScene(Send);
 	}
 	return true;
 
