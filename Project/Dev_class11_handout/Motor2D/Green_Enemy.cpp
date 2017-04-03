@@ -87,7 +87,7 @@ void Green_Enemy::Rang_Player()
 			player_in_range = App->player->Link;
 			//green_enemy_path.clear();
 			if (tile_pos != iPoint(0, 0)) {
-				if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr) {
+				if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr && player_in_range->GetLogicHeightPlayer()==0) {
 					green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
 				}
 				if (green_enemy_path.size()) {
@@ -100,7 +100,7 @@ void Green_Enemy::Rang_Player()
 			player_in_range = App->player->Zelda;
 			//green_enemy_path.clear();
 			if (tile_pos != iPoint(0, 0)) {
-				if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr) {
+				if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr && player_in_range->GetLogicHeightPlayer() == 0) {
 					green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
 				}
 				if (green_enemy_path.size()) {
