@@ -48,9 +48,9 @@ public:
 
 public:
 
-	SDL_Renderer*	renderer;
-	SDL_Rect		camera;
-	SDL_Rect		viewport;
+	SDL_Renderer*	renderer = nullptr;
+	SDL_Rect		camera =  {0,0,0,0 };
+	SDL_Rect		viewport= {0,0,0,0 };
 	SDL_Color		background;
 };
 

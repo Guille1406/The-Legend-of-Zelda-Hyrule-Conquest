@@ -10,7 +10,7 @@ public:
 	bool Update();
 	bool Clean();
 public:
-	char* test;
+	char* test = nullptr;
 };
 
 #endif // 

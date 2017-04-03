@@ -5,8 +5,8 @@
 #define MAX_FRAMES 25
 
 struct Frame {
-	SDL_Rect rect;
-	iPoint pivot;
+	SDL_Rect rect = { 0,0,0,0 };
+	iPoint pivot = { 0,0 };
 };
 
 

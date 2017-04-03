@@ -11,7 +11,7 @@
 #include"j1Window.h"
 j1Map::j1Map() : j1Module(), map_loaded(false)
 {
-	name ="map";
+	name = "map";
 }
 
 // Destructor
@@ -291,7 +291,7 @@ bool j1Map::Load(const char* file_name)
 		for (std::list<TileSet*>::iterator item = data.tilesets.begin(); item != data.tilesets.cend(); ++item) {
 			TileSet* s = (*item);
 			LOG("Tileset ----");
-			LOG("name: %s firstgid: %d", s->name.GetString(), s->firstgid);
+			LOG("name: %s firstgid: %d", s->name.c_str(), s->firstgid);
 			LOG("tile width: %d tile height: %d", s->tile_width, s->tile_height);
 			LOG("spacing: %d margin: %d", s->spacing, s->margin);
 		}
@@ -300,7 +300,7 @@ bool j1Map::Load(const char* file_name)
 		for (; item_layer != data.layers.cend(); ++item_layer) {
 			MapLayer* l = (*item_layer);
 			LOG("Layer ----");
-			LOG("name: %s", l->name.GetString());
+			LOG("name: %s", l->name.c_str());
 			LOG("tile width: %d tile height: %d", l->width, l->height);
 		}
 
@@ -327,33 +327,33 @@ bool j1Map::LoadMap()
 		data.height = map.attribute("height").as_int();
 		data.tile_width = map.attribute("tilewidth").as_int();
 		data.tile_height = map.attribute("tileheight").as_int();
-		p2SString bg_color(map.attribute("backgroundcolor").as_string());
+		std::string bg_color(map.attribute("backgroundcolor").as_string());
 
 		data.background_color.r = 255;
 		data.background_color.g = 0;
 		data.background_color.b = 0;
 		data.background_color.a = 255;
 
-		if(bg_color.Length() > 0)
+		if(bg_color.length() > 0)
 		{
-			p2SString red, green, blue;
-			bg_color.SubString(1, 2, red);
-			bg_color.SubString(3, 4, green);
-			bg_color.SubString(5, 6, blue);
+			std::string red, green, blue;
+			bg_color.replace(1, 2, red);
+			bg_color.replace(3, 4, green);
+			bg_color.replace(5, 6, blue);
 
 			int v = 0;
 
-			sscanf_s(red.GetString(), "%x", &v);
+			sscanf_s(red.c_str(), "%x", &v);
 			if(v >= 0 && v <= 255) data.background_color.r = v;
 
-			sscanf_s(green.GetString(), "%x", &v);
+			sscanf_s(green.c_str(), "%x", &v);
 			if(v >= 0 && v <= 255) data.background_color.g = v;
 
-			sscanf_s(blue.GetString(), "%x", &v);
+			sscanf_s(blue.c_str(), "%x", &v);
 			if(v >= 0 && v <= 255) data.background_color.b = v;
 		}
 
-		p2SString orientation(map.attribute("orientation").as_string());
+		std::string orientation(map.attribute("orientation").as_string());
 
 		if(orientation == "orthogonal")
 		{
@@ -379,7 +379,7 @@ bool j1Map::LoadMap()
 bool j1Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 {
 	bool ret = true;
-	set->name.create(tileset_node.attribute("name").as_string());
+	set->name = tileset_node.attribute("name").as_string();
 	set->firstgid = tileset_node.attribute("firstgid").as_int();
 	set->tile_width = tileset_node.attribute("tilewidth").as_int();
 	set->tile_height = tileset_node.attribute("tileheight").as_int();

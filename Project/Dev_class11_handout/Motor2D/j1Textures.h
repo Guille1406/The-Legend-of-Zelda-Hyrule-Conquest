@@ -34,7 +34,7 @@ public:
 public:
 
 	std::list<SDL_Texture*> textures;
-	SDL_Texture* unload_texture;
+	SDL_Texture* unload_texture = nullptr;
 };
 
 

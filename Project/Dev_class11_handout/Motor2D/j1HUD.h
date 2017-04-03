@@ -43,17 +43,17 @@ private:
 	bool visible = true;
 
 	SDL_Texture*	atlas = nullptr;
-	std::string		atlas_file_name;
+	std::string		atlas_file_name = empty_char;
 
-	SDL_Rect Life_Label;
-	SDL_Rect Heart_Container;
-	SDL_Rect Heart_Full;
-	SDL_Rect Heart_Half;
-	SDL_Rect Link_circle;
-	SDL_Rect Zelda_circle;
+	SDL_Rect Life_Label = { 0,0,0,0 };
+	SDL_Rect Heart_Container = { 0,0,0,0 };
+	SDL_Rect Heart_Full = { 0,0,0,0 };
+	SDL_Rect Heart_Half = { 0,0,0,0 };
+	SDL_Rect Link_circle = { 0,0,0,0 };
+	SDL_Rect Zelda_circle = { 0,0,0,0 };
 	//Items
-	SDL_Rect Sword;
-	SDL_Rect Bow;
+	SDL_Rect Sword = { 0,0,0,0 };
+	SDL_Rect Bow = { 0,0,0,0 };
 
 	//Drawing variables
 	uint Life_Label_x_pos = 0;

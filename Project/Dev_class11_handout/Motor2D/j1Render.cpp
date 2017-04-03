@@ -143,7 +143,7 @@ void j1Render::ResetViewPort()
 
 iPoint j1Render::ScreenToWorld(int x, int y) const
 {
-	iPoint ret;
+	iPoint ret(0,0);
 	float scale = App->win->GetScale();
 
 	ret.x = (int)((float)(x - camera.x) / scale);
@@ -154,7 +154,7 @@ iPoint j1Render::ScreenToWorld(int x, int y) const
 
 iPoint j1Render::WorldToScreen(int x, int y) const
 {
-	iPoint ret;
+	iPoint ret(0,0);
 	float scale = App->win->GetScale();
 
 	ret.x = (int)((float)(x * scale) + camera.x);

@@ -38,13 +38,13 @@ public:
 
 public:
 	//The window we'll be rendering to
-	SDL_Window* window;
+	SDL_Window* window = nullptr;
 
 	//The surface contained by the window
-	SDL_Surface* screen_surface;
-	float		scale;
+	SDL_Surface* screen_surface =nullptr;
+	float		scale = 0.0f;
 private:
-	p2SString	title;
+	std::string	title = empty_char;
 	uint		width = 0;
 	uint		width_half = 0;
 	uint		height = 0;

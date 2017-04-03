@@ -121,8 +121,8 @@ public:
 
 public:
 
-	std::string	name;
-	bool		active;
+	std::string	name = empty_char;
+	bool		active = false;
 
 };
 

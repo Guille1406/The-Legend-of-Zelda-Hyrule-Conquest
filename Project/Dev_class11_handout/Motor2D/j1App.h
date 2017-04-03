@@ -124,16 +124,16 @@ public:
 
 private:
 	std::list<j1Module*> modules;
-	int					argc;
-	char**				args;
+	int					argc = 0;
+	char**				args = nullptr;
 
-	std::string		title;
+	std::string		title = empty_char;
 	std::string		organization;
 
 	mutable bool		want_to_save = false;
 	bool				want_to_load = false;
-	std::string			load_game;
-	mutable std::string	save_game;
+	std::string			load_game = empty_char;
+	mutable std::string	save_game = empty_char;
 
 	j1PerfTimer			ptimer;
 	uint64				frame_count = 0;

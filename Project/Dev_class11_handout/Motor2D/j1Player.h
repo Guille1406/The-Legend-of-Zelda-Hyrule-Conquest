@@ -30,21 +30,21 @@ public:
 public:
 	
 	bool change = false;
-	MainScene* actual_scene;
+	MainScene* actual_scene = nullptr;
 	bool chase = false;
 	bool cooperative = true;
-	Character* selected_character;
-	Character* other_character;
+	Character* selected_character = nullptr;
+	Character* other_character = nullptr;
 
 	j1Timer Audio_Fx_Timer;
-	uint Fall_Players_Audio;
-	P_Link* Link;
-	P_Zelda* Zelda;
+	uint Fall_Players_Audio = 0;
+	P_Link* Link = nullptr;
+	P_Zelda* Zelda = nullptr;
 
 	bool loop_game_menu = false;
 
 	//Colisions
-	MapLayer* Colision;
+	MapLayer* Colision = nullptr;
 	
 	//--------------------------------------------------------------------------------------//
 	//--------------------------------This must be in player--------------------------------//

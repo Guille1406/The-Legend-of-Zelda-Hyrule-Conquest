@@ -13,7 +13,7 @@ public:
 	bool Clean();
 
 public: 
-	char* test;
+	char* test = nullptr;
 	uint World_Audio;
 };
 
