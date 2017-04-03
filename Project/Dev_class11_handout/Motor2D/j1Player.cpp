@@ -70,8 +70,8 @@ bool j1Player::Start()
 	Link->LoadAnimation("sprites/Link_Spritesheet_Finale.xml");
 	Zelda->LoadAnimation("sprites/Zelda_Spritesheet_Finale.xml");
 
-	Link->actual_animation = Link->sprites_vector[0];
-	Zelda->actual_animation = Zelda->sprites_vector[0];
+	//Link->actual_animation = Link->sprites_vector[0];
+	//Zelda->actual_animation = Zelda->sprites_vector[0];
 	selected_character = Link;
 	other_character = Zelda;
 	change = false;
@@ -152,14 +152,15 @@ bool j1Player::PostUpdate()
 	return true;
 }
 
-void j1Player::Draw()
+void j1Player::Draw(int height, int y_pos)
 {
 
-	
+	if(height ==Link->logic_height && y_pos == Link->tilepos.y)
 	App->render->Blit(Link->entity_texture, Link->pos.x - Link->actual_animation.GetCurrentFrame().pivot.x, Link->pos.y - Link->actual_animation.GetCurrentFrame().pivot.y, &Link->actual_animation.GetCurrentFrame().rect);
+	if(height ==Zelda->logic_height && y_pos == Zelda->tilepos.y)
 	App->render->Blit(Zelda->entity_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y, &Zelda->actual_animation.GetCurrentFrame().rect);
 	
-	//App->render->DrawQuad(rect, 0, 0, 255, 255, true, true);
+	
 	
 }
 

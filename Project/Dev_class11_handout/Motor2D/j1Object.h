@@ -77,6 +77,8 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
+	void Draw(int height);
+
 	std::vector<Object*> FindObject(std::string name);
 	void CreateColliders(Object&);
 

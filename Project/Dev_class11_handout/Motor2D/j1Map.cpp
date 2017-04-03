@@ -29,7 +29,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 	return ret;
 }
 
-void j1Map::Draw()
+void j1Map::Draw(int height)
 {
 	float scale = App->win->GetScale();
 
@@ -51,29 +51,30 @@ void j1Map::Draw()
 
 		if (layer->properties.Get("Navigation") != 0 || layer->properties.Get("Enemies") != 0 || layer->properties.Get("Path") != 0)
 			continue;
+		if (layer->print_height == height) {
+			for (int y = 0; y < data.height; ++y)
+			{
+				if (y * data.tile_height + I_CAMERAMARGINTILE >= -App->render->camera.y / scale && y *data.tile_height < -App->render->camera.y / scale + App->render->camera.h / scale) {
+					for (int x = 0; x < data.width; ++x)
+					{
+						if (x*data.tile_width + I_CAMERAMARGINTILE >= -App->render->camera.x / scale && x*data.tile_width < -App->render->camera.x / scale + App->render->camera.w / scale) {
+							int tile_id = layer->Get(x, y);
+							if (tile_id > 0)
+							{
+								TileSet* tileset = GetTilesetFromTileId(tile_id);
 
-		for (int y = 0; y < data.height; ++y)
-		{
-			if (y * data.tile_height + I_CAMERAMARGINTILE >= -App->render->camera.y / scale && y *data.tile_height < -App->render->camera.y / scale + App->render->camera.h / scale) {
-				for (int x = 0; x < data.width; ++x)
-				{
-					if (x*data.tile_width + I_CAMERAMARGINTILE >= -App->render->camera.x / scale && x*data.tile_width < -App->render->camera.x / scale + App->render->camera.w / scale) {
-						int tile_id = layer->Get(x, y);
-						if (tile_id > 0)
-						{
-							TileSet* tileset = GetTilesetFromTileId(tile_id);
+								SDL_Rect r = tileset->GetTileRect(tile_id);
+								iPoint pos = MapToWorld(x, y);
 
-							SDL_Rect r = tileset->GetTileRect(tile_id);
-							iPoint pos = MapToWorld(x, y);
-
-							//if (layer->properties.Get("Navigation") == false && layer->properties.Get("Enemies") == false && layer->properties.Get("Path") == false)
+								//if (layer->properties.Get("Navigation") == false && layer->properties.Get("Enemies") == false && layer->properties.Get("Path") == false)
 								App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+							}
 						}
 					}
 				}
 			}
 		}
-		
+		/*
 		auto next_item = item;
 		next_item++;
 		if (layer->print_height == Link->logic_height && blit_link && (*next_item)->print_height !=Link->logic_height)
@@ -85,7 +86,7 @@ void j1Map::Draw()
 			blit_zelda = false;
 			App->render->Blit(Zelda->entity_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y, &Zelda->actual_animation.GetCurrentFrame().rect);
 		}
-		
+		*/
 		//App->player->Draw();
 		
 	}

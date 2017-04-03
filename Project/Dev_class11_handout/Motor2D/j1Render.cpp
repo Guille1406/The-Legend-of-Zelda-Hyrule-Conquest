@@ -1,12 +1,12 @@
 #include <ctime>
-
+#include "j1Map.h"
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Window.h"
 #include "j1Render.h"
 #include "j1Input.h"
-
+#include "j1Player.h"
 #include <cmath>
 #define VSYNC true
 
@@ -59,15 +59,21 @@ bool j1Render::Awake(pugi::xml_node& config)
 bool j1Render::Start()
 {
 	LOG("render start");
+	
 	// back background
 	SDL_RenderGetViewport(renderer, &viewport);
 	return true;
 }
-
+bool j1Render::Update(float dt) {
+	
+	return true;
+}
 // Called each loop iteration
 bool j1Render::PreUpdate()
 {
+	
 	SDL_RenderClear(renderer);
+	Draw();
 	return true;
 }
 
@@ -161,6 +167,33 @@ iPoint j1Render::WorldToScreen(int x, int y) const
 	ret.y = (int)((float)(y * scale) + camera.y);
 
 	return ret;
+}
+
+
+//This function calls all the Draw of other modules
+//So we can control better which one Blits first
+//GUI IS PRINTED IN ANOTHER FUNCTION
+void j1Render::Draw()
+{
+	for (int i = 0; i < 5; i++) {
+
+		if(App->map->active)
+		App->map->Draw(i);
+
+		if(App->object->active)
+		App->object->Draw(i);
+
+		for (int n = 0; n < 100; n++) {
+			if (App->enemy->active)
+				App->enemy->Draw(i,n);
+
+			if (App->player->active)
+				App->player->Draw(i,n);
+		}
+		
+	}
+	
+
 }
 
 // Blit to screen

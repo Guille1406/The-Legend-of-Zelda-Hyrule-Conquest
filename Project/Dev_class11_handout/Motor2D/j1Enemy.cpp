@@ -59,8 +59,7 @@ bool j1Enemy::Update(float dt)
 {
 
 		for (int i = 0; i < V_MyEnemies.size(); i++) {
-			
-			App->render->Blit(V_MyEnemies[i]->entity_texture, V_MyEnemies[i]->pix_world_pos.x - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.x, V_MyEnemies[i]->pix_world_pos.y - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.y, &V_MyEnemies[i]->actual_animation.GetCurrentFrame().rect);
+						
 			if (!paused) {
 				
 				V_MyEnemies[i]->UpdateState();
@@ -87,6 +86,16 @@ bool j1Enemy::CleanUp()
 	V_MyEnemies.clear();
 	return true;
 }
+
+
+void j1Enemy::Draw(int height, int y_pos)
+{
+	for (int i = 0; i < V_MyEnemies.size(); i++) {
+		if(V_MyEnemies[i]->logic_height == height && V_MyEnemies[i]->tile_pos.y == y_pos)
+		App->render->Blit(V_MyEnemies[i]->entity_texture, V_MyEnemies[i]->pix_world_pos.x - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.x, V_MyEnemies[i]->pix_world_pos.y - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.y, &V_MyEnemies[i]->actual_animation.GetCurrentFrame().rect);
+	}
+}
+
 
 Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 {

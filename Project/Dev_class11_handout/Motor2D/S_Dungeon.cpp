@@ -21,7 +21,7 @@ bool S_Dungeon::Update() {
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		App->scene->ChangeScene(world);
 	}
-	App->map->Draw();
+	//App->map->Draw();
 
 	return true;
 }

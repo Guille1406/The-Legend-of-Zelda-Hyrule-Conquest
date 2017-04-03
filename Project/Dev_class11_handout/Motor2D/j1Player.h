@@ -21,7 +21,7 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
-	void Draw();
+	void Draw(int height, int y_pos);
 
 	void ActivatePathfinding();
 	bool Move_Camera();

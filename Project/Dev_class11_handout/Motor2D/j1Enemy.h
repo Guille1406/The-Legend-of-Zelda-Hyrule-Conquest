@@ -45,6 +45,7 @@ public:
 	void Enemy_Hurt_Displacement(int & pos, bool add);
 	int GetLogicEnemy(int minus_height, iPoint pos);
 	void UpdateState();
+	
 	virtual void Action() {};
 	virtual void Rang_Player() {};
 public:
@@ -83,6 +84,7 @@ public:
 	bool Update(float);
 	bool PostUpdate();
 	bool CleanUp();
+	void Draw(int height, int y);
 	iPoint CalculatePath(Enemy*);
 	Enemy* Create_Enemy(uint, iPoint Pos);
 	bool FindInPath(iPoint, Enemy* enemy);

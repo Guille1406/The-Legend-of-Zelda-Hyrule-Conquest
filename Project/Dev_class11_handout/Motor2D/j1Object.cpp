@@ -44,12 +44,7 @@ bool j1Object::Update(float)
 
 	//Blit all the objects
 
-	for (int i = 0; i < V_Objects.size(); i++) {
-		Object* object = V_Objects[i];
-		if(object->active)
-		App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
-		
-	}
+	
 	return true;
 }
 
@@ -78,6 +73,17 @@ bool j1Object::PostUpdate()
 bool j1Object::CleanUp()
 {
 	return true;
+}
+
+void j1Object::Draw(int height)
+{
+	for (int i = 0; i < V_Objects.size(); i++) {
+		Object* object = V_Objects[i];
+		if (object->active && object->logic_height == height)
+			App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
+
+	}
+
 }
 
 std::vector<Object*> j1Object::FindObject(std::string name)
