@@ -30,6 +30,7 @@ public:
 	void Init()
 	{
 		active = true;
+		paused = false;
 	}
 
 	// Called before render is available
@@ -123,6 +124,7 @@ public:
 
 	std::string	name = empty_char;
 	bool		active = false;
+	bool		paused = false;
 
 };
 
