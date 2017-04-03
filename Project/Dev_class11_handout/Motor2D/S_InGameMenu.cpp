@@ -10,6 +10,7 @@
 
 S_InGameMenu::S_InGameMenu()
 {
+	scene_str = "InGameMenu";
 }
 
 S_InGameMenu::~S_InGameMenu()
@@ -18,32 +19,32 @@ S_InGameMenu::~S_InGameMenu()
 
 bool S_InGameMenu::Awake(pugi::xml_node& conf)
 {
-	IngamemenuLabel = App->gui->CreateLabel(iPoint(200, 100), &std::string("In-Game menu"), false);
+	IngamemenuLabel = App->gui->CreateLabel(iPoint(200, 100), &std::string(conf.child("IngamemenuLabel").attribute("value").as_string("In-Game menu")), false);
 	IngamemenuLabel->SetFont(App->font->Sherwood28);
 	((Gui*)IngamemenuLabel)->SetListener(this);
 	IngamemenuLabel->SetVisible(false);
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
-	resume = App->gui->CreateButton(iPoint(X_pos, 160), &std::string("Resume"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	resume = App->gui->CreateButton(iPoint(X_pos, 160), &std::string(conf.child("resume").attribute("value").as_string("Resume")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	resume->SetFont(App->font->Sherwood20);
 	((Gui*)resume)->SetListener(this);
 	resume->SetVisible(false);
 	resume->Focusable(true);
-	loadcheckpoint = App->gui->CreateButton(iPoint(X_pos, 270), &std::string("Load Last Checkpoint"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	loadcheckpoint = App->gui->CreateButton(iPoint(X_pos, 270), &std::string(conf.child("loadcheckpoint").attribute("value").as_string("Load Last Checkpoint")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	loadcheckpoint->SetFont(App->font->Sherwood20);
 	((Gui*)loadcheckpoint)->SetListener(this);
 	loadcheckpoint->SetVisible(false);
 	loadcheckpoint->Focusable(true);
-	options = App->gui->CreateButton(iPoint(X_pos, 380), &std::string("Options"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	options = App->gui->CreateButton(iPoint(X_pos, 380), &std::string(conf.child("options").attribute("value").as_string("Options")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	options->SetFont(App->font->Sherwood20);
 	((Gui*)options)->SetListener(this);
 	options->SetVisible(false);
 	options->Focusable(true);
-	mainmenu = App->gui->CreateButton(iPoint(X_pos, 490), &std::string("Main Menu"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	mainmenu = App->gui->CreateButton(iPoint(X_pos, 490), &std::string(conf.child("mainmenu").attribute("value").as_string("Main Menu")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	mainmenu->SetFont(App->font->Sherwood20);
 	((Gui*)mainmenu)->SetListener(this);
 	mainmenu->SetVisible(false);
 	mainmenu->Focusable(true);
-	quit = App->gui->CreateButton(iPoint(X_pos, 600), &std::string("Quit"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	quit = App->gui->CreateButton(iPoint(X_pos, 600), &std::string(conf.child("quit").attribute("value").as_string("Quit")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	quit->SetFont(App->font->Sherwood20);
 	((Gui*)quit)->SetListener(this);
 	quit->SetVisible(false);

@@ -8,7 +8,7 @@
 
 S_MainMenu::S_MainMenu()
 {
-	//visibility = true;
+	scene_str = "MainMenu";
 }
 
 S_MainMenu::~S_MainMenu()
@@ -23,25 +23,25 @@ bool S_MainMenu::Awake(pugi::xml_node& conf)
 	title->SetVisible(false);
 	title->SetOpacity(0);
 	X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
-	campaign = App->gui->CreateButton(iPoint(X_pos, 270), &std::string("Campaign"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	campaign = App->gui->CreateButton(iPoint(X_pos, 270), &std::string(conf.child("campaign").attribute("value").as_string("Campaign")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	campaign->SetFont(App->font->Sherwood28);
 	((Gui*)campaign)->SetListener(this);
 	campaign->SetVisible(false);
 	campaign->Focusable(true);
 	campaign->SetOpacity(0);
-	options = App->gui->CreateButton(iPoint(X_pos, 380), &std::string("Options"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	options = App->gui->CreateButton(iPoint(X_pos, 380), &std::string(conf.child("options").attribute("value").as_string("Options")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	options->SetFont(App->font->Sherwood28);
 	((Gui*)options)->SetListener(this);
 	options->SetVisible(false);
 	options->Focusable(true);
 	options->SetOpacity(0);
-	credits = App->gui->CreateButton(iPoint(X_pos, 490), &std::string("Credits"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	credits = App->gui->CreateButton(iPoint(X_pos, 490), &std::string(conf.child("credits").attribute("value").as_string("Credits")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	credits->SetFont(App->font->Sherwood28);
 	((Gui*)credits)->SetListener(this);
 	credits->SetVisible(false);
 	credits->Focusable(true);
 	credits->SetOpacity(0);
-	quit = App->gui->CreateButton(iPoint(X_pos, 600), &std::string("Quit"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	quit = App->gui->CreateButton(iPoint(X_pos, 600), &std::string(conf.child("quit").attribute("value").as_string("Quit")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	quit->SetFont(App->font->Sherwood28);
 	((Gui*)quit)->SetListener(this);
 	quit->SetVisible(false);

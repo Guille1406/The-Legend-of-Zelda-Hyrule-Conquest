@@ -133,9 +133,6 @@
     <ClCompile Include="j1Enemy.cpp">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="S_GameStart.cpp">
-      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
-    </ClCompile>
     <ClCompile Include="S_QuitGame.cpp">
       <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
     </ClCompile>
@@ -338,9 +335,6 @@
     </ClInclude>
     <ClInclude Include="j1Enemy.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="S_GameStart.h">
-      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>
     </ClInclude>
     <ClInclude Include="S_QuitGame.h">
       <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu</Filter>

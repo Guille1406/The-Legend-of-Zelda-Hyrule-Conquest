@@ -9,7 +9,7 @@
 
 j1Camera::j1Camera()
 {
-	name.create("camera");
+	name = "camera";
 }
 
 j1Camera::~j1Camera()
@@ -44,7 +44,7 @@ bool j1Camera::Start()
 	f_Min_scale = f_Max_scale - 0.3f;
 	if (f_Min_scale < 0.8f)
 		f_Min_scale = 0.8f;
-	int w, h = 0;
+	int w = 0, h = 0;
 	SDL_GetRendererOutputSize(App->render->renderer, &w, &h);
 	i_Half_w = (int)(w * 0.5f);
 	i_Half_h = (int)(h * 0.5f);

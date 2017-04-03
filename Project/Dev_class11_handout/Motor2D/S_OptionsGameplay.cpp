@@ -3,6 +3,7 @@
 
 S_OptionsGameplay::S_OptionsGameplay()
 {
+	scene_str = "OptionsGameplay";
 }
 
 S_OptionsGameplay::~S_OptionsGameplay()
@@ -11,13 +12,13 @@ S_OptionsGameplay::~S_OptionsGameplay()
 
 bool S_OptionsGameplay::Awake(pugi::xml_node& conf)
 {
-	GameplayLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string("Gameplay menu"), false);
+	GameplayLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string(conf.child("GameplayLabel").attribute("value").as_string("Gameplay menu")), false);
 	GameplayLabel->SetFont(App->font->Sherwood28);
 	((Gui*)GameplayLabel)->SetListener(this);
 	GameplayLabel->SetVisible(false);
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
 	int offset = -100;
-	ShowhideHUD = App->gui->CreateButton(iPoint(X_pos + offset, 200), &std::string("Toggle HUD visibility"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	ShowhideHUD = App->gui->CreateButton(iPoint(X_pos + offset, 200), &std::string(conf.child("ShowhideHUD").attribute("value").as_string("Toggle HUD visibility")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	ShowhideHUD->SetFont(App->font->Sherwood20);
 	((Gui*)ShowhideHUD)->SetListener(this);
 	ShowhideHUD->SetVisible(false);
@@ -26,12 +27,12 @@ bool S_OptionsGameplay::Awake(pugi::xml_node& conf)
 	((Gui*)ShowhideHUD_check)->SetListener(this);
 	ShowhideHUD_check->SetVisible(false);
 	ShowhideHUD_check->ChangeState();
-	Language = App->gui->CreateButton(iPoint(X_pos + offset, 310), &std::string("Language"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	Language = App->gui->CreateButton(iPoint(X_pos + offset, 310), &std::string(conf.child("Language").attribute("value").as_string("Language")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	Language->SetFont(App->font->Sherwood20);
 	((Gui*)Language)->SetListener(this);
 	Language->SetVisible(false);
 	Language->Focusable(true);
-	back = App->gui->CreateButton(iPoint(920, 600), &std::string("Back"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	back = App->gui->CreateButton(iPoint(920, 600), &std::string(conf.child("back").attribute("value").as_string("Back")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	back->SetFont(App->font->Sherwood20);
 	((Gui*)back)->SetListener(this);
 	back->SetVisible(false);

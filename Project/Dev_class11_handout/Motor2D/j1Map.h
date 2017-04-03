@@ -163,7 +163,7 @@ private:
 
 	
 	pugi::xml_document	map_file;
-	p2SString			folder;
+	std::string			folder;
 	bool				map_loaded;
 };
 static int I_CAMERAMARGINTILE = 16;

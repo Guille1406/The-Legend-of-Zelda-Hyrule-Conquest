@@ -20,7 +20,7 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 private:
-	SDL_Rect title_rec =				{ 0,0,493,211 };
+	SDL_Rect title_rec =			{ 0,0,493,211 };
 	SDL_Rect twitterrect_idle =		{ 1278,1508,108,108 };
 	SDL_Rect twitterrect_hover =	{ 1278,1616,108,108 };
 	SDL_Rect twitterrect_pressed =	{ 1278,1724,108,108 };

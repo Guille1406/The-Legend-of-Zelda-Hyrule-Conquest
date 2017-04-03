@@ -10,7 +10,7 @@
 
 j1Console::j1Console()
 {
-	name.create("console");
+	name = "console";
 }
 
 // Destructor

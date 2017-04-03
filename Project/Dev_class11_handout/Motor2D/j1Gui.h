@@ -89,8 +89,8 @@ private:
 private:
 	bool Gui_DebugDraw = false;
 
-	SDL_Texture* atlas;
-	std::string atlas_file_name;
+	SDL_Texture* atlas = nullptr;
+	std::string atlas_file_name = empty_char;
 
 	std::list<Gui*> GuiElements;
 	std::list<Gui*> ConsoleElements;

@@ -20,12 +20,14 @@
 
 j1Gui::j1Gui() : j1Module()
 {
-	name.create("gui");
+	name = "gui";
 }
 
 // Destructor
 j1Gui::~j1Gui()
-{}
+{
+	
+}
 
 // Called before render is available
 bool j1Gui::Awake(pugi::xml_node& conf)
@@ -236,6 +238,7 @@ void j1Gui::SetFocus(const Gui* ui)
 	j1Module* listener = nullptr;
 
 	if (ui->module_listener != nullptr)
+	
 		listener = ui->module_listener;
 	if (ui->scene_listener != nullptr)
 		listener = (j1Module*)ui->scene_listener;
