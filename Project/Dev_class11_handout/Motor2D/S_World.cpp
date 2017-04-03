@@ -20,7 +20,7 @@ bool S_World::Start()
 	App->camera->Enable();
 	App->player->Enable();
 	App->object->Enable();
-	App->enemy->Enable();
+	
 	App->hud->Enable();
 	LOG("IM FUCKING STARTING!!");
 	if (App->map->Load("tutorial map test.tmx") == true)
