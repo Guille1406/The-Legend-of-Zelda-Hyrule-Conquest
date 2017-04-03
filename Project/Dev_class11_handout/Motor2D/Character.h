@@ -136,7 +136,7 @@ public:
 
 	bool		doing_script = false;
 
-	
+
 private:
 
 	//For jump

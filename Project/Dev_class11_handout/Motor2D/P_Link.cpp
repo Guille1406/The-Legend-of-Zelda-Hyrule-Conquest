@@ -234,6 +234,7 @@ player_event P_Link::GetEvent()
 			if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && !im_lifting) {
 				actual_event = roll;
 				doing_script = true;
+				is_rolling = true;
 			}
 
 		}

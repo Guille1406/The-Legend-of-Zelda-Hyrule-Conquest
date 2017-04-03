@@ -435,6 +435,7 @@ player_event P_Zelda::GetEvent()
 			if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && !is_picked) {
 				actual_event = roll;
 				doing_script = true;
+				is_rolling = true;
 			}
 			if (App->input->GetKey(SDL_SCANCODE_O) == KEY_REPEAT) {
 				character_direction = aim_direction;
