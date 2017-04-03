@@ -101,6 +101,8 @@ int Character::GetLogic(int minus_height, iPoint pos)
 		break;
 	}
 	
+	if (i == CANT_PASS_COL_ID || j == CANT_PASS_COL_ID) return CANT_PASS_COL_ID;
+
 	if (i != 0)return i;
 	if (j != 0)return j;
 	return 0;
