@@ -10,17 +10,13 @@ public:
 
 	}
 	Sign(const Sign& obj) {
-		*this = obj;
+		//*this = obj;
 	}
 	~Sign() {
 
 	}
 	
-	void Action() {
-		if (connected_object != NULL)
-			this->connected_object->Action();
-
-	}
+	
 
 public:
 

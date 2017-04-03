@@ -12,7 +12,7 @@ void Character::Attack(float dt)
 
 void Character::Move(float dt)
 {
-	uint x, y;
+	uint x = 0, y = 0;
 	App->win->GetWindowSize(x, y);
 
 	// SHORT VARIABLES

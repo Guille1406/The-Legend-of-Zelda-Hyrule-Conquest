@@ -10,16 +10,12 @@ public:
 
 	}
 	Lever(const Lever& obj) {
-		*this = obj;
+		//*this = obj;
 	}
 	~Lever() {
 
 	}
-	void Action() {
-		if (connected_object != NULL)
-			this->connected_object->Action();
-
-	}
+	
 
 public:
 

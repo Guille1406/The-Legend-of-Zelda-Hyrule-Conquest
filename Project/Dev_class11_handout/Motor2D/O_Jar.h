@@ -4,7 +4,7 @@
 #include"j1Render.h"
 class Jar : public Object {
 private:
-	bool picked;
+	bool picked = false;
 public:
 	Jar() {
 

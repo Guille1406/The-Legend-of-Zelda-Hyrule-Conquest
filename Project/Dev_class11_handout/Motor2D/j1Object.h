@@ -50,10 +50,10 @@ public:
 	virtual void ChangeAnimation(int);
 	virtual void LoadAnimation(const char*);
 public:
-	int logic_height=0;
+	int logic_height=	0;
 	Collider* collider= nullptr;
-	int			last_animation = 0;
-	p2SString					sprites_folder;
+	int	last_animation =		 0;
+	std::string					sprites_folder = empty_char;
 	pugi::xml_document			sprites_file;
 	std::vector<Animation>		sprites_vector;
 	Animation					actual_animation;
@@ -93,12 +93,13 @@ public:
 
 public: 
 	std::vector<Object*> V_Objects;
-	SDL_Texture* objects_texture=nullptr;
+	SDL_Texture* objects_texture=	nullptr;
 
 };
 
 
 class Object : public Entity {
+
 public:
 	Object() {
 		this->entity_texture = App->object->objects_texture;
@@ -116,7 +117,7 @@ public:
 	SDL_Rect rect = {0,0,0,0};
 	bool active=false;
 	objectType type= objectType::nothing;
-	std::string name;
+	std::string name = empty_char;
 	std::vector<Object*> connected_object;
 	std::vector<iPoint> collider_tiles;
 

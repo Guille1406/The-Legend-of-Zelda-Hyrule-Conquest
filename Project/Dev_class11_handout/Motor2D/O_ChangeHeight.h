@@ -21,7 +21,7 @@ public:
 	}
 
 public: 
-	int height;
+	int height=	0;
 };
 
 

@@ -5,7 +5,7 @@
 #include "Character.h"
 class Heart : public Object {
 private:
-	bool triggered;
+	bool triggered = false;
 public:
 	Heart() {
 
@@ -20,11 +20,7 @@ public:
 	
 	}
 
-	void Action() {
-		if (connected_object != NULL)
-			this->connected_object->Action();
 
-	}
 
 public:
 

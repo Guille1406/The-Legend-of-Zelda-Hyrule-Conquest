@@ -5,7 +5,7 @@
 #include "Character.h"
 class Boss_Key : public Object {
 private:
-	bool triggered;
+	bool triggered= false;
 public:
 	Boss_Key() {
 

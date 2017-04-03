@@ -405,10 +405,11 @@ Object * j1Object::CreateJump(pugi::xml_node object, int height)
 
 void Entity::LoadAnimation(const char* path)
 {
-	p2SString tmp("%s%s", sprites_folder.GetString(), path);
+	static char tmp_string[4096];
+	sprintf_s(tmp_string, 4096, "%s%s", sprites_folder.c_str(), path);
 
 	char* buf = nullptr;
-	int size = App->fs->Load(tmp.GetString(), &buf);
+	int size = App->fs->Load(tmp_string, &buf);
 	pugi::xml_parse_result result = sprites_file.load_buffer(buf, size);
 
 	if (result == NULL)

@@ -17,8 +17,8 @@
 #define NOT_COLISION_ID 0
 
 struct dir_tiles {
-	uint i;
-	uint j;
+	uint i = 0;
+	uint j = 0;
 };
 
 struct  adjacent_tiles {
@@ -117,9 +117,9 @@ private:
 	
 public:
 	
-	j1Timer attack_timer;
-	iPoint						pos;
-	iPoint						tilepos;
+	j1Timer						attack_timer;
+	iPoint						pos = { 0,0 };
+	iPoint						tilepos = { 0,0 };
 	adjacent_tiles				adjacent;
 
 	//Needed for player movement and events
@@ -131,11 +131,10 @@ public:
 	bool						is_rolling = false;
 
 	//Diferent colliders
-	Collider*	collision;
-	Collider*	front_collider;
-	Collider* attack_collider;
-
-	bool		doing_script = false;
+	Collider*					collision = nullptr;
+	Collider*					front_collider = nullptr;
+	Collider*					attack_collider = nullptr;
+	bool						doing_script = false;
 
 
 private:

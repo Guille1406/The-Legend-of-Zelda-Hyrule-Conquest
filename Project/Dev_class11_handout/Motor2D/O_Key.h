@@ -11,7 +11,7 @@ public:
 
 	}
 	Key(const Key& obj) {
-		*this = obj;
+		//*this = obj;
 	}
 	~Key() {
 
@@ -21,9 +21,7 @@ public:
 	}
 
 	void Action() {
-		if (connected_object != NULL)
-			this->connected_object->Action();
-
+	
 	}
 
 public:

@@ -8,7 +8,7 @@ public:
 
 	}
 	Movable_Block(const Movable_Block& obj) {
-		*this = obj;
+		//*this = obj;
 	}
 	~Movable_Block() {
 

@@ -30,7 +30,7 @@ public:
 
 public:
 
-	Scene_ID scene;
+	Scene_ID scene = mainmenu;
 
 };
 

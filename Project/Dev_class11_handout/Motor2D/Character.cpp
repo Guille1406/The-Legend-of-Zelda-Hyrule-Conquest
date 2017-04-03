@@ -4,6 +4,7 @@
 #include "j1Collision.h"
 #include "j1FileSystem.h"
 #include"j1Player.h"
+#include "j1Map.h"
 static const uint JUMP_DISTANCE = 112;
 
 
@@ -79,7 +80,7 @@ int Character::GetLogic(int minus_height, iPoint pos)
 	iPoint tile_pos = pos;
 	
 
-	int i, j;
+	int i = 0, j = 0;
 	switch (character_direction)
 	{
 	case up:
@@ -122,19 +123,19 @@ void Character::UpdateColliderFront()
 	switch (character_direction) {
 	case up:
 		front_collider->rect = { 0,0,32,16 };
-		front_collider->SetPos(tilepos.x * 16, tilepos.y * 16 - 16, logic_height);
+		front_collider->SetPos(tilepos.x * App->map->data.tile_width, tilepos.y * App->map->data.tile_height - App->map->data.tile_height, logic_height);
 		break;
 	case down:
 		front_collider->rect = { 0,0,32,16 };
-		front_collider->SetPos(tilepos.x * 16, tilepos.y * 16 + 32, logic_height);
+		front_collider->SetPos(tilepos.x *  App->map->data.tile_width, tilepos.y *  App->map->data.tile_height + 32, logic_height);
 		break;
 	case left:
 		front_collider->rect = { 0,0,16,32 };
-		front_collider->SetPos(tilepos.x * 16 - 16, tilepos.y * 16, logic_height);
+		front_collider->SetPos(tilepos.x *  App->map->data.tile_width - App->map->data.tile_width, tilepos.y *  App->map->data.tile_height, logic_height);
 		break;
 	case right:
 		front_collider->rect = { 0,0,16,32 };
-		front_collider->SetPos(tilepos.x * 16 + 32, tilepos.y * 16, logic_height);
+		front_collider->SetPos(tilepos.x *  App->map->data.tile_width + 32, tilepos.y *  App->map->data.tile_height, logic_height);
 		break;
 	}
 
@@ -202,8 +203,8 @@ bool Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 
 	
 	bool ret = true;
-	int tile_pos = (pos + 8) / 16;
-	int other_tile_pos = (other_pos + 8) / 16;
+	int tile_pos = (pos + (App->map->data.tile_width / 2)) / App->map->data.tile_width;
+	int other_tile_pos = (other_pos + (App->map->data.tile_width / 2)) / App->map->data.tile_width;
 	float speed = 2 / dt;
 	int i = 1;
 	if (!add)
@@ -213,15 +214,15 @@ bool Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 		n = -1;
 	if (tiles.i == 0 && tiles.j == 0) {
 		pos = pos +  i *  speed*dt;
-		if (side_tile_one != 0 && other_pos < other_tile_pos * 16)
+		if (side_tile_one != 0 && other_pos < other_tile_pos * App->map->data.tile_width)
 			other_pos +=  speed*dt;
-		if (side_tile_two != 0 && other_pos > other_tile_pos * 16)
+		if (side_tile_two != 0 && other_pos > other_tile_pos * App->map->data.tile_width)
 			other_pos -= speed*dt;
 	}
 	else if (tiles.i != 0 && tiles.j == 0) {
-		if (n* ((!add* 14) + i* (other_pos +(!add * 16) - other_tile_pos * 16)) > n*(pos - tile_pos * 16))
+		if (n* ((!add* 14) + i* (other_pos +(!add * App->map->data.tile_width) - other_tile_pos * App->map->data.tile_width)) > n*(pos - tile_pos * App->map->data.tile_width))
 			other_pos +=  speed*dt;
-		else if (n* ((!add * 14) + i* (other_pos + (!add * 16) - other_tile_pos * 16)) < n*(pos - tile_pos * 16))
+		else if (n* ((!add * 14) + i* (other_pos + (!add * App->map->data.tile_width) - other_tile_pos * App->map->data.tile_width)) < n*(pos - tile_pos * App->map->data.tile_width))
 			pos += i * speed*dt;
 		else {
 			pos += i * speed*dt;
@@ -229,9 +230,9 @@ bool Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 		}
 	}
 	else if (tiles.i == 0 && tiles.j != 0) {
-		if (n*((add*14) -i*(other_pos + add*16 - other_tile_pos * 16)) > n*(pos - tile_pos * 16))
+		if (n*((add*14) -i*(other_pos + add*App->map->data.tile_width - other_tile_pos * App->map->data.tile_width)) > n*(pos - tile_pos * App->map->data.tile_width))
 			other_pos -= speed*dt;
-		else if (n*((add * 14) -i* (other_pos + add * 16 - other_tile_pos * 16)) <  n*(pos - tile_pos * 16))
+		else if (n*((add * 14) -i* (other_pos + add * 16 - other_tile_pos * App->map->data.tile_width)) <  n*(pos - tile_pos * App->map->data.tile_width))
 			pos += i *  (speed*dt);
 		else {
 			pos += i* speed*dt;
@@ -239,7 +240,7 @@ bool Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 		}
 	}
 	else if (tiles.i != 0 && tiles.j != 0) {
-		if ((pos -1*!add + 16*add ) / 16 == tile_pos)
+		if ((pos -1*!add + App->map->data.tile_width*add ) / App->map->data.tile_width == tile_pos)
 			pos +=  i * speed*dt;
 		else {
 			ret = false;
@@ -273,11 +274,11 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 	}
 
 	float speed = 2 / dt;
-	int tile_pos_one = (pos_one + 8) / 16;
-	int tile_pos_side = (pos_two + 8) / 16;
+	int tile_pos_one = (pos_one + (App->map->data.tile_width / 2)) / App->map->data.tile_width;
+	int tile_pos_side = (pos_two + (App->map->data.tile_width / 2)) / App->map->data.tile_width;
 	
 	if (front_tile != 0 && side_tile != 0) {
-		if ((pos_one + add_one*16 ) / 16 == tile_pos_one && (pos_two + add_two*16) / 16 == tile_pos_side) {
+		if ((pos_one + add_one* App->map->data.tile_width) / App->map->data.tile_width == tile_pos_one && (pos_two + add_two* App->map->data.tile_width) / App->map->data.tile_width == tile_pos_side) {
 			pos_one += i*speed*dt;
 			pos_two += n*speed*dt;
 		}
@@ -288,9 +289,9 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 	else if (front_tile == 0 && side_tile != 0)
 		pos_one += i*speed*dt;
 	else if (front_tile == 0 && side_tile == 0 && diagonal_tile == 0) {
-		if (change * (add*14 +i*n*  (pos_two + add*16 - tile_pos_side * 16)) > change * (pos_one - tile_pos_one * 16))
+		if (change * (add*14 +i*n*  (pos_two + add*App->map->data.tile_width - tile_pos_side * App->map->data.tile_width)) > change * (pos_one - tile_pos_one * App->map->data.tile_width))
 			pos_two += n*speed*dt;
-		else if (change * (add*14 + i*n* (pos_two + add*16 - tile_pos_side * 16)) < change * (pos_one - tile_pos_one * 16))
+		else if (change * (add*14 + i*n* (pos_two + add*App->map->data.tile_width - tile_pos_side * App->map->data.tile_width)) < change * (pos_one - tile_pos_one * App->map->data.tile_width))
 			pos_one += i*speed*dt;
 		else {
 			pos_one += i*speed*dt;
@@ -298,7 +299,7 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 		}
 	}
 	else if ( diagonal_tile != 0) {
-		if ((pos_one + add_one * 16) / 16 == tile_pos_one && (pos_two + (add_two*16)) / 16 == tile_pos_side) {
+		if ((pos_one + add_one * App->map->data.tile_width) / App->map->data.tile_width == tile_pos_one && (pos_two + (add_two*App->map->data.tile_width)) / App->map->data.tile_width == tile_pos_side) {
 			pos_one += i*speed*dt;
 			pos_two += n*speed*dt;
 		}
@@ -307,10 +308,10 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 	}
 	
 	if (side_tile != 0 )
-		if ((pos_two + add_two*16 - !add_two) / 16 == tile_pos_side)
+		if ((pos_two + add_two*App->map->data.tile_width - !add_two) / App->map->data.tile_width == tile_pos_side)
 			pos_two += n*speed*dt;
 	if (front_tile != 0)
-		if ((pos_one + add_one*16 - !add_one) / 16 == tile_pos_one)
+		if ((pos_one + add_one*App->map->data.tile_width - !add_one) / App->map->data.tile_width == tile_pos_one)
 			pos_one += i*speed*dt;
 
 

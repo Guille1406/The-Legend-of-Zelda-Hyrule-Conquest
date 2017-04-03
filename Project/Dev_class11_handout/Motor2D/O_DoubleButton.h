@@ -5,7 +5,7 @@
 #include "j1Audio.h"
 class DoubleButton : public Object {
 private:
-	bool triggered;
+	bool triggered = false;
 public:
 	DoubleButton() {
 
@@ -43,9 +43,9 @@ public:
 
 public:
 
-	bool first_character_pressing;
-	bool second_character_pressing;
-	int characters_on =0;
+	bool first_character_pressing = false;
+	bool second_character_pressing = false;
+	int characters_on = 0;
 	SDL_Rect idle_button = rect_button;
 	SDL_Rect pressed_button = rect_pressed_button;
 	SDL_Rect double_pressed_button = rect_pressed_button;

@@ -4,7 +4,7 @@
 #include"j1Render.h"
 class Diana : public Object {
 private:
-	bool triggered;
+	bool triggered = false;
 public:
 	Diana() {
 
