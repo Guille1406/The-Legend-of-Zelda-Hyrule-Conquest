@@ -17,8 +17,10 @@ struct Arrow : public Entity{
 		can_move = true;
 		is_attached = false;
 		entity_texture = App->object->objects_texture;
+		Enemy* attached_enemy = nullptr;
+		direction = App->player->Zelda->character_direction;
 	}
-	iPoint pos;
+	iPoint pos = {0,0};
 	int timer;
 	int direction;
 	bool can_move;
