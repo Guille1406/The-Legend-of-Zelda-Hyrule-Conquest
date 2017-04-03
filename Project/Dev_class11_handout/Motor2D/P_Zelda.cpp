@@ -353,7 +353,7 @@ player_event P_Zelda::GetEvent()
 		else
 		{
 			//FIRST THINGS FIRST
-			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_DOWN) {
+			if (App->input->GetKey(SDL_SCANCODE_COMMA) == KEY_DOWN) {
 				aim_direction = character_direction;
 			}
 
@@ -433,15 +433,15 @@ player_event P_Zelda::GetEvent()
 				else can_throw = true;
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_MINUS) == KEY_DOWN && !is_picked) {
+			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_DOWN && !is_picked) {
 				actual_event = roll;
 				doing_script = true;
 				is_rolling = true;
 			}
-			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_REPEAT) {
+			if (App->input->GetKey(SDL_SCANCODE_COMMA) == KEY_REPEAT) {
 				character_direction = aim_direction;
 			}
-			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_UP) {
+			if (App->input->GetKey(SDL_SCANCODE_COMMA) == KEY_UP) {
 				attack_timer.Start();
 				App->audio->PlayFx(Arrow_Audio);
 				actual_event = attack;
