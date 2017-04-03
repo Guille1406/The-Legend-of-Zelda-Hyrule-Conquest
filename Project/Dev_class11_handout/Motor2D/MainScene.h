@@ -15,14 +15,7 @@
 #include "GuiCheck.h"
 
 enum Scene_ID {
-	inventory,
-	map,
-	world,
-	dungeon,
-
 	//Main menu
-	gamestart,
-	//chooselanguage,
 	mainmenu,
 	campaign,
 	options,
@@ -33,7 +26,13 @@ enum Scene_ID {
 	credits,
 	quitgame,
 	//ingame menu
-	ingamemenu
+	ingamemenu,
+
+	//Maps
+	map,
+	world,
+	dungeon
+
 };
 
 enum GuiEvent;
