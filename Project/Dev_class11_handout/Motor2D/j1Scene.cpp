@@ -85,7 +85,6 @@ bool j1Scene::Start()
 	scene_list.push_back(new S_End);
 	(*scene_list.back()).scene_name = Scene_ID::Send;
 
-	/*
 	//XML congig read
 	pugi::xml_document	config_file;
 	pugi::xml_node		config;
@@ -112,7 +111,7 @@ bool j1Scene::Start()
 	{
 		for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend() && ret == true; ++item)
 		{
-			ret = (*item)->Awake();//send here xml for gui text
+			ret = (*item)->Awake(config);//send here xml for gui text
 			if ((*item)->scene_name == Scene_ID::mainmenu)
 			{
 				main_active_scene = (*item);
@@ -120,20 +119,7 @@ bool j1Scene::Start()
 			}
 		}
 	}
-	*/
-	/**/
-	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
-	{
-		(*item)->Awake();//send here xml for gui text
-		if ((*item)->scene_name == Scene_ID::mainmenu)
-		{
-			main_active_scene = (*item);
-			sub_active_scene = (*item);
-		}
-	}
-	/**/
-	//return ret;
-	return true;
+	return ret;
 }
 
 // Called each loop iteration

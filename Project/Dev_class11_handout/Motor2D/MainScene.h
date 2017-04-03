@@ -48,7 +48,7 @@ public:
 	MainScene() {};
 	~MainScene() {};
 
-	virtual bool Awake() {
+	virtual bool Awake(pugi::xml_node& conf) {
 		return true;
 	};
 

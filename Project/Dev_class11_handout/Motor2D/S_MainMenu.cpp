@@ -15,7 +15,7 @@ S_MainMenu::~S_MainMenu()
 {
 }
 
-bool S_MainMenu::Awake()
+bool S_MainMenu::Awake(pugi::xml_node& conf)
 {
 	int X_pos = App->win->GetWindowWHalf() - (int)(title_rec.w * 0.5f);
 	title = App->gui->CreateImage(iPoint(X_pos, 40), &title_rec, false);
