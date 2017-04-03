@@ -54,7 +54,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 bool j1Player::Start()
 {
 
-
+	
 	//Change this for link spritesheet
 	Link->entity_texture = App->tex->Load("textures/map.png");
 
@@ -91,44 +91,53 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
-	
-	//Change the tile_pos
-	Link->tilepos.x = (Link->pos.x + 8) / 16;
-	Link->tilepos.y = (Link->pos.y + 8) / 16;
-	Zelda->tilepos.x = (Zelda->pos.x + 8) / 16;
-	Zelda->tilepos.y = (Zelda->pos.y + 8) / 16;
-
-	Link->GetAdjacents();
-	Zelda->GetAdjacents();
-
-	
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
+		paused = !paused;
+		App->enemy->paused = !App->enemy->paused;
+		App->collision->paused = !App->collision->paused;
+		App->pathfinding->paused = !App->pathfinding->paused;
 		
-	//2 Players
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-	//	cooperative = !cooperative;
-		selected_character = Link;
-		other_character = Zelda;
 	}
+	
+	if (!paused) {
+		//Change the tile_pos
+		Link->tilepos.x = (Link->pos.x + 8) / 16;
+		Link->tilepos.y = (Link->pos.y + 8) / 16;
+		Zelda->tilepos.x = (Zelda->pos.x + 8) / 16;
+		Zelda->tilepos.y = (Zelda->pos.y + 8) / 16;
 
-	if (cooperative == true) {
-		Link->link_sword_collider_update();
-		Link->GetEvent();
-		Zelda->GetEvent();
-		Link->ExecuteEvent(dt);
-		Zelda->ExecuteEvent(dt);
-		
+		Link->GetAdjacents();
+		Zelda->GetAdjacents();
 
+
+
+		//2 Players
+		if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+			//	cooperative = !cooperative;
+			selected_character = Link;
+			other_character = Zelda;
+		}
+
+		if (cooperative == true) {
+			Link->link_sword_collider_update();
+			Link->GetEvent();
+			Zelda->GetEvent();
+			Link->ExecuteEvent(dt);
+			Zelda->ExecuteEvent(dt);
+
+
+		}
+
+		//Draw the two characters
+		//Draw();
+
+		//Change the positions of player colliders
+		Link->collision->SetPos(Link->pos.x, Link->pos.y, Link->GetLogicHeightPlayer());
+		Zelda->collision->SetPos(Zelda->pos.x, Zelda->pos.y, Zelda->GetLogicHeightPlayer());
+		Link->UpdateColliderFront();
+		Zelda->UpdateColliderFront();
+		Zelda->UpdateArrows();
 	}
-
-	//Draw the two characters
-	//Draw();
-
-	//Change the positions of player colliders
-	Link->collision->SetPos(Link->pos.x, Link->pos.y, Link->GetLogicHeightPlayer());
-	Zelda->collision->SetPos(Zelda->pos.x, Zelda->pos.y, Zelda->GetLogicHeightPlayer());
-	Link->UpdateColliderFront();
-	Zelda->UpdateColliderFront();
-	Zelda->UpdateArrows();
 	return true;
 }
 

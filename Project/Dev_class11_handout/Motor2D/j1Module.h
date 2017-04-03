@@ -30,6 +30,7 @@ public:
 	void Init()
 	{
 		active = true;
+		paused = false;
 	}
 
 	// Called before render is available
@@ -123,7 +124,7 @@ public:
 
 	p2SString	name;
 	bool		active;
-
+	bool		paused;
 };
 
 #endif // __j1MODULE_H__
