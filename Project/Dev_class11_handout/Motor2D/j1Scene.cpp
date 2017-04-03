@@ -111,7 +111,7 @@ bool j1Scene::Start()
 	{
 		for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend() && ret == true; ++item)
 		{
-			ret = (*item)->Awake(config);//send here xml for gui text
+			ret = (*item)->Awake(config.child((*item)->scene_str.c_str()));//send here xml for gui text
 			if ((*item)->scene_name == Scene_ID::mainmenu)
 			{
 				main_active_scene = (*item);

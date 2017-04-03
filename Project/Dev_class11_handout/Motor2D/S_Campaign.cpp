@@ -4,6 +4,7 @@
 
 S_Campaign::S_Campaign()
 {
+	scene_str = "Campaign";
 }
 
 S_Campaign::~S_Campaign()

@@ -3,6 +3,7 @@
 
 S_OptionsAudio::S_OptionsAudio()
 {
+	scene_str = "OptionsAudio";
 }
 
 S_OptionsAudio::~S_OptionsAudio()
@@ -11,27 +12,27 @@ S_OptionsAudio::~S_OptionsAudio()
 
 bool S_OptionsAudio::Awake(pugi::xml_node& conf)
 {
-	AudioLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string("Audio menu"), false);
+	AudioLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string(conf.child("AudioLabel").attribute("value").as_string("Audio menu")), false);
 	AudioLabel->SetFont(App->font->Sherwood28);
 	((Gui*)AudioLabel)->SetListener(this);
 	AudioLabel->SetVisible(false);
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
-	MasterVolume = App->gui->CreateButton(iPoint(X_pos, 200), &std::string("Master Volume"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	MasterVolume = App->gui->CreateButton(iPoint(X_pos, 200), &std::string(conf.child("MasterVolume").attribute("value").as_string("Master Volume")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	MasterVolume->SetFont(App->font->Sherwood20);
 	((Gui*)MasterVolume)->SetListener(this);
 	MasterVolume->SetVisible(false);
 	MasterVolume->Focusable(true);
-	MusicVolume = App->gui->CreateButton(iPoint(X_pos, 310), &std::string("Music Volume"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	MusicVolume = App->gui->CreateButton(iPoint(X_pos, 310), &std::string(conf.child("MusicVolume").attribute("value").as_string("Music Volume")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	MusicVolume->SetFont(App->font->Sherwood20);
 	((Gui*)MusicVolume)->SetListener(this);
 	MusicVolume->SetVisible(false);
 	MusicVolume->Focusable(true);
-	SFXVolume = App->gui->CreateButton(iPoint(X_pos, 420), &std::string("SFX Volume"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	SFXVolume = App->gui->CreateButton(iPoint(X_pos, 420), &std::string(conf.child("SFXVolume").attribute("value").as_string("SFX Volume")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	SFXVolume->SetFont(App->font->Sherwood20);
 	((Gui*)SFXVolume)->SetListener(this);
 	SFXVolume->SetVisible(false);
 	SFXVolume->Focusable(true);
-	back = App->gui->CreateButton(iPoint(920, 600), &std::string("Back"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	back = App->gui->CreateButton(iPoint(920, 600), &std::string(conf.child("back").attribute("value").as_string("Back")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	back->SetFont(App->font->Sherwood20);
 	((Gui*)back)->SetListener(this);
 	back->SetVisible(false);
