@@ -128,6 +128,7 @@ public:
 	move_direction				movement_direction;
 	bool						can_move=false;
 	bool						can_jump=false;
+	bool						is_rolling = false;
 
 	//Diferent colliders
 	Collider*	collision;
