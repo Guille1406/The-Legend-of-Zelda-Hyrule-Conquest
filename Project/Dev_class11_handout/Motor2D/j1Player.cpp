@@ -17,17 +17,13 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Link = new P_Link();
 	Zelda = new P_Zelda();
 	cooperative = true;
-	Link->movement_direction = move_idle;
-	Zelda->movement_direction = move_idle;
+	
 	//Link->sprites_vector = new std::vector<Animation>;
 	//Zelda->sprites_vector = new std::vector<Animation>;	
 	
 	Link->sprites_folder = config.child("folder").child_value();
 	Zelda->sprites_folder = config.child("folder").child_value();
-	Link->actual_event = player_event::idle;
-	Zelda->actual_event = player_event::idle;
-	Link->character_direction = direction::down;
-	Zelda->character_direction = direction::down;
+	
 	
 	Link->Link_Hurt_Audio= App->audio->LoadFx("audio/fx/link hurt.wav");
 	Link->Link_Sword_Audio = App->audio->LoadFx("audio/fx/fighter sword 1.wav");
@@ -55,6 +51,14 @@ bool j1Player::Start()
 	Link->front_collider = App->collision->AddCollider({ Link->tilepos.x * 8,Link->tilepos.y * 8 + 32,32,16 }, front_link, Link, this);
 	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,32,32 }, collider_zelda, Zelda, this);
 	Zelda->front_collider = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y + 32,32,16 }, front_zelda, Zelda, this);
+
+	Link->movement_direction = move_idle;
+	Zelda->movement_direction = move_idle;
+	Link->actual_event = player_event::idle;
+	Zelda->actual_event = player_event::idle;
+	Link->character_direction = direction::down;
+	Zelda->character_direction = direction::down;
+
 
 	//Change this for link spritesheet
 	Link->entity_texture = App->tex->Load("textures/map.png");
