@@ -361,6 +361,7 @@ void Character::RollFunction(float dt, int & pos, bool add)
 	else {
 		temp = false;
 		doing_script = false;
+		is_rolling = false;
 	}
 
 }

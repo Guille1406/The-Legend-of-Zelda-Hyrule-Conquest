@@ -136,11 +136,12 @@ public:
 
 	bool		doing_script = false;
 
-	
+
 private:
 
 	//For jump
 	bool temp = false;
+
 	 //Needed to save position only one time
 };
 
