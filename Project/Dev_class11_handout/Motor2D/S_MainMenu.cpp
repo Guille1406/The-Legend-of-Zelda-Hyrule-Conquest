@@ -108,6 +108,7 @@ bool S_MainMenu::Clean()
 	quit->SetVisible(false);
 	twitter->SetVisible(false);
 	github->SetVisible(false);
+	visibility = true;
 	return true;
 }
 

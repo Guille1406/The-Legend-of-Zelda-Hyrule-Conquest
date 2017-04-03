@@ -111,6 +111,7 @@
     <ClCompile Include="j1Timer.cpp" />
     <ClCompile Include="j1Object.cpp" />
     <ClCompile Include="S_Campaign.cpp" />
+    <ClCompile Include="S_End.cpp" />
     <ClCompile Include="S_GameStart.cpp" />
     <ClCompile Include="S_InGameMenu.cpp" />
     <ClCompile Include="S_MainMenu.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="O_Sign.h" />
     <ClInclude Include="O_Warp.h" />
     <ClInclude Include="S_Campaign.h" />
+    <ClInclude Include="S_End.h" />
     <ClInclude Include="S_GameStart.h" />
     <ClInclude Include="S_InGameMenu.h" />
     <ClInclude Include="S_MainMenu.h" />

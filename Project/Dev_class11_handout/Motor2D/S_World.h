@@ -9,6 +9,7 @@ class S_World: public MainScene {
 public:
 	bool Start();
 	bool Update();
+	bool PostUpdate();
 	bool Clean();
 
 public: 

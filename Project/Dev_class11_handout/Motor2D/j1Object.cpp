@@ -71,9 +71,6 @@ bool j1Object::PostUpdate()
 		}
 	}*/
 
-	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose<=0) {
-		App->WantToQuit();
-	}
 	
 	return true;
 }
