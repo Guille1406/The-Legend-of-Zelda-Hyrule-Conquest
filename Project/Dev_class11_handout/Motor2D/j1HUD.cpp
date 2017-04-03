@@ -11,7 +11,7 @@
 #include "j1GameStartMenuBack.h"
 j1HUD::j1HUD()
 {
-	name.create("hud");
+	name ="hud";
 }
 
 j1HUD::~j1HUD()

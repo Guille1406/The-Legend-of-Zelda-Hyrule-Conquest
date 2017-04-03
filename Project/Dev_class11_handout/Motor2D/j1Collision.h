@@ -30,11 +30,11 @@ enum COLLIDER_TYPE
 
 struct Collider
 {
-	SDL_Rect rect;
+	SDL_Rect rect = {0,0,0,0};
 	bool to_delete = false;
 	COLLIDER_TYPE type;
 	j1Module* callback = nullptr;
-	uint logic_height;
+	uint logic_height = 0;
 	Entity* parent = nullptr;
 
 	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, Entity* parent, j1Module* callback = nullptr) :

@@ -113,14 +113,14 @@ public:
 
 private:
 	bool		windowEvents[WE_COUNT];
-	j1KeyState*	keyboard;
+	j1KeyState*	keyboard = nullptr;
 	j1KeyState	mouse_buttons[NUM_MOUSE_BUTTONS];
 	int			mouse_motion_x = 0;
 	int			mouse_motion_y = 0;
 	int			mouse_x = 0;
 	int			mouse_y = 0;
 	int			mouse_wheel_mov = 0;
-	std::string input_text;
+	std::string input_text = empty_char;
 
 	std::vector<GamePad*> gamepads;
 	int			connected_gamepads = 0;

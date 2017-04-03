@@ -103,8 +103,8 @@ bool j1Collision::PreUpdate()
 // Called before render is available
 bool j1Collision::Update(float dt)
 {
-	Collider* c1;
-	Collider* c2;
+	Collider* c1 = nullptr;
+	Collider* c2 = nullptr;
 
 	for (uint i = 0; i < colliders.size(); ++i)
 	{

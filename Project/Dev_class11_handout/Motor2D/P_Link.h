@@ -1,7 +1,5 @@
 #ifndef _PLINK_
 #define _PLINK_
-
-
 #include "p2Point.h"
 #include "SDL\include\SDL.h"
 #include "Character.h"
@@ -12,8 +10,8 @@
 class Character;
 
 struct Sword : public Entity {
-	iPoint pos;
-	SDL_Rect Attack_range;
+	iPoint pos = { 0,0 };
+	SDL_Rect Attack_range = {0,0,0,0 };
 	Enemy* attached_enemy;
 };
 
@@ -32,7 +30,7 @@ public:
 
 	void Attack(float dt);
 	
-	Sword* Link_sword;
+	Sword* Link_sword = nullptr;
 	player_event GetEvent();
 	void link_sword_collider_update();
 	void Orientation_collider_link_sword();
@@ -40,9 +38,9 @@ public:
 	bool Compare_Link_Sword_Collision(Enemy* enemy);
 	void Link_Hurt_Opacity();
 
-	uint Link_Hurt_Audio;
-	uint Link_Sword_Audio;
-	uint Link_Sword_Collides_Sword_Audio;
+	uint Link_Hurt_Audio = 0;
+	uint Link_Sword_Audio = 0;
+	uint Link_Sword_Collides_Sword_Audio = 0;
 public:
 	int opacity = 255;
 	j1Timer collision_by_enemy_timmer;

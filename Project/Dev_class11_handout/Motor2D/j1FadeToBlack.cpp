@@ -8,7 +8,7 @@
 #include"j1Window.h"
 j1FadeToBlack::j1FadeToBlack():j1Module()
 {
-	name.create("fadetoblack");
+	name = "fadetoblack";
 }
 
 j1FadeToBlack::~j1FadeToBlack()

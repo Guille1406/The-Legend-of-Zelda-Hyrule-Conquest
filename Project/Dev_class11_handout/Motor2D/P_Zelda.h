@@ -21,13 +21,13 @@ struct Arrow : public Entity{
 		
 	}
 	iPoint pos = {0,0};
-	int timer;
-	int direction;
-	bool can_move;
-	bool is_attached;
-	Enemy* attached_enemy;
-	iPoint offset;
-	int max_distance;
+	int timer = 0;
+	int direction = 0;
+	bool can_move = false;
+	bool is_attached = false;
+	Enemy* attached_enemy = nullptr;
+	iPoint offset = { 0,0 };
+	int max_distance = 0;
 	bool temp = false;
 	int before_wall_pos = 0;
 	SDL_Rect arrow_rect = rect_arrow_down;
@@ -62,9 +62,9 @@ public:
 	bool collide_jump = false;
 	bool can_move =true;
 	int bow = 0;
-	uint Throw_Audio;
-	uint Arrow_Audio;
-	uint Arrow_Hit_Wall_Audio;
+	uint Throw_Audio = 0;
+	uint Arrow_Audio = 0;
+	uint Arrow_Hit_Wall_Audio = 0;
 	std::vector<Arrow*> Vec_Arrow;
 };
 

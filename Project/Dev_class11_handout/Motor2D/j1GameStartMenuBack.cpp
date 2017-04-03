@@ -14,7 +14,7 @@
 
 j1GameStartMenuBackground::j1GameStartMenuBackground()
 {
-	name.create("gamestartmenubackground");
+	name = "gamestartmenubackground";
 }
 
 j1GameStartMenuBackground::~j1GameStartMenuBackground()
