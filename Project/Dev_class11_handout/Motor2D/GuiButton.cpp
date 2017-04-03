@@ -141,6 +141,6 @@ void GuiButton::SetOpacity(uint newopacity)
 	else if (newopacity > 255)
 		opacity = 255;
 	else
-		opacity = newopacity;
+	opacity = newopacity;
 	ButtonString->SetOpacity(opacity);
 }

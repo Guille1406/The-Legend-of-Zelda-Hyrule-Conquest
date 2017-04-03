@@ -347,6 +347,7 @@ void Character::JumpFunction(float dt, int& pos, bool add)
 
 void Character::RollFunction(float dt, int & pos, bool add)
 {
+	
 	static int final_pos = 0;
 	//same as jump function
 	int i = 1;
@@ -365,6 +366,7 @@ void Character::RollFunction(float dt, int & pos, bool add)
 		temp = false;
 		doing_script = false;
 		is_rolling = false;
+		//roll_timer.Start();
 	}
 
 }

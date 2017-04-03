@@ -11,7 +11,7 @@
 #include"j1Window.h"
 j1Map::j1Map() : j1Module(), map_loaded(false)
 {
-	name.create("map");
+	name ="map";
 }
 
 // Destructor
@@ -24,7 +24,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 	LOG("Loading Map Parser");
 	bool ret = true;
 
-	folder.create(config.child("folder").child_value());
+	folder = config.child("folder").child_value();
 
 	return ret;
 }
@@ -119,7 +119,7 @@ TileSet* j1Map::GetTilesetFromTileId(int id) const
 
 iPoint j1Map::MapToWorld(int x, int y) const
 {
-	iPoint ret;
+	iPoint ret(0,0);
 
 	if(data.type == MAPTYPE_ORTHOGONAL)
 	{
@@ -169,7 +169,7 @@ iPoint j1Map::WorldToMap(int x, int y) const
 SDL_Rect TileSet::GetTileRect(int id) const
 {
 	int relative_id = id - firstgid;
-	SDL_Rect rect;
+	SDL_Rect rect = {0,0,0,0};
 	rect.w = tile_width;
 	rect.h = tile_height;
 	rect.x = margin + ((rect.w + spacing) * (relative_id % num_tiles_width));
@@ -208,11 +208,12 @@ bool j1Map::CleanUp()
 // Load new map
 bool j1Map::Load(const char* file_name)
 {
+	static char tmp_string[4096];
+	sprintf_s(tmp_string, 4096, "%s%s",folder.c_str(),file_name);
 	bool ret = true;
-	p2SString tmp("%s%s", folder.GetString(), file_name);
-
+	
 	char* buf;
-	int size = App->fs->Load(tmp.GetString(), &buf);
+	int size = App->fs->Load(tmp_string, &buf);
 	pugi::xml_parse_result result = map_file.load_buffer(buf, size);
 
 	RELEASE(buf);
@@ -413,7 +414,7 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	else
 	{
 	
-	set->texture = App->tex->Load(PATH(folder.GetString(), image.attribute("source").as_string()));
+	set->texture = App->tex->Load(PATH(folder.c_str(), image.attribute("source").as_string()));
 
 	int w, h;
 	SDL_QueryTexture(set->texture, NULL, NULL, &w, &h);

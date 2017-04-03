@@ -104,13 +104,14 @@ void j1Object::CreateColliders(Object& object)
 			temp.x = object.rect.x + i * 16;
 			temp.y = object.rect.y + n * 16;
 			//object.collider_tiles.push_back(temp);
-			//if(App->map->V_Colision[0][object.logic_height].data[temp.y*App->map->data.width + temp.x] != CANT_PASS_COL_ID)	{	
-			if (App->map->V_Colision[object.logic_height]->data[(temp.y / 16) * 100 + temp.x / 16] != CANT_PASS_COL_ID) {
+			//if(App->map->V_Colision[0][object.logic_height].data[temp.y*App->map->data.width + temp.x] != CANT_PASS_COL_ID)	{
+			if (App->map->V_Colision[object.logic_height]->data != nullptr)
+				if (App->map->V_Colision[object.logic_height]->data[(temp.y / 16) * 100 + temp.x / 16] != CANT_PASS_COL_ID)
+				{
 					App->map->V_Colision[object.logic_height]->data[(temp.y / 16) * 100 + temp.x / 16] = CANT_PASS_COL_ID;
 					//object.collider_tiles.push_back(temp);
 					temp_vector.push_back(temp);
 				}
-			
 		}
 	}
 	object.collider_tiles = temp_vector;

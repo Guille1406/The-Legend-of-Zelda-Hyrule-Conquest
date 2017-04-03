@@ -143,7 +143,7 @@ bool j1App::Awake()
 	if(ret == true)
 	{
 		for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.cend() && ret == true; ++item)
-			ret = (*item)->Awake(config.child((*item)->name.GetString()));
+			ret = (*item)->Awake(config.child((*item)->name.c_str()));
 	}
 
 	PERF_PEEK(ptimer);
@@ -412,7 +412,7 @@ bool j1App::LoadGameNow()
 			ret = true;
 			std::list<j1Module*>::iterator item = modules.begin();
 			for (; item != modules.cend() && ret == true; ++item) {
-				ret = (*item)->Load(root.child((*item)->name.GetString()));
+				ret = (*item)->Load(root.child((*item)->name.c_str()));
 
 			}
 
@@ -420,7 +420,7 @@ bool j1App::LoadGameNow()
 			if(ret == true)
 				LOG("...finished loading");
 			else
-				LOG("...loading process interrupted with error on module %s", ((*item) != NULL) ? (*item)->name.GetString() : "unknown");
+				LOG("...loading process interrupted with error on module %s", ((*item) != NULL) ? (*item)->name.c_str() : "unknown");
 		}
 		else
 			LOG("Could not parse game state xml file %s. pugi error: %s", load_game.c_str(), result.description());
@@ -446,7 +446,7 @@ bool j1App::SavegameNow() const
 	std::list<j1Module*>::const_iterator item = modules.cbegin();
 	for (; item != modules.cend() && ret == true; ++item) {
 
-		ret = (*item)->Save(root.append_child((*item)->name.GetString()));
+		ret = (*item)->Save(root.append_child((*item)->name.c_str()));
 	}
 
 	if(ret == true)
@@ -459,7 +459,7 @@ bool j1App::SavegameNow() const
 		LOG("... finished saving", save_game.c_str());
 	}
 	else
-		LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->name.GetString() : "unknown");
+		LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->name.c_str() : "unknown");
 
 	data.reset();
 	want_to_save = false;

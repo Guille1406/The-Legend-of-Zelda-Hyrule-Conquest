@@ -104,8 +104,9 @@ protected:
 	}
 
 public:
+	std::string scene_str = empty_char;
 	Scene_ID scene_name;
-	SDL_Texture* atlas;
+	
 	
 	/*
 	Map

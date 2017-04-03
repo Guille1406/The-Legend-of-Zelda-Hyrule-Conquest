@@ -31,8 +31,8 @@ public:
 
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int repeat = 0);
-	uint button_sound;
-	uint secret_sound;
+	uint button_sound = 0;
+	uint secret_sound = 0;
 	
 private:
 
