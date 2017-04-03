@@ -123,7 +123,6 @@ void S_MainMenu::OnGui(Gui* ui, GuiEvent event)
 {
 	if ((ui == (Gui*)campaign) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->enemy->Enable();
 		App->scene->ChangeScene(Scene_ID::world);
 		App->startmenuback->Freeze(true);
 	}

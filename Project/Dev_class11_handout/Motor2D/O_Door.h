@@ -26,6 +26,7 @@ public:
 
 		for (int i = 0; i < this->collider_tiles.size(); i++) {
 			if (App->player->loop_game_menu==false) {
+				if(App->map->V_Colision[logic_height]->data != nullptr)
 				App->map->V_Colision[logic_height]->data[(collider_tiles[i].y / 16) * App->map->data.width + (collider_tiles[i].x / 16)] = 0;
 			}
 		}
