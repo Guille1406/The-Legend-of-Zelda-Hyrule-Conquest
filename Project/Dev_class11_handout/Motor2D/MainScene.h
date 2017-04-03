@@ -31,7 +31,8 @@ enum Scene_ID {
 	//Maps
 	map,
 	world,
-	dungeon
+	dungeon,
+	Send, 
 
 };
 

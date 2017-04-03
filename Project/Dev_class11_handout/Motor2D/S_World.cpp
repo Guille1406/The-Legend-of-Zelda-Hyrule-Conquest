@@ -20,7 +20,9 @@ bool S_World::Start()
 	App->camera->Enable();
 	App->player->Enable();
 	App->object->Enable();
+	App->enemy->Enable();
 	App->hud->Enable();
+	LOG("IM FUCKING STARTING!!");
 	if (App->map->Load("tutorial map test.tmx") == true)
 
 	{
@@ -67,11 +69,26 @@ bool S_World::Start()
 bool S_World::Update()
 {
 	App->map->Draw();
-
+	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
+		App->player->loop_game_menu = true;
+	}
+	
+	
 
 	return false;
 }
+bool S_World::PostUpdate()
+{
 
+	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
+		App->player->Disable();
+		App->enemy->Disable();
+		
+		App->scene->ChangeScene(mainmenu);
+	}
+	return true;
+
+}
 bool S_World::Clean()
 {
 	

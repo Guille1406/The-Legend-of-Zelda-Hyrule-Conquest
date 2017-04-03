@@ -53,6 +53,14 @@ void P_Link::Orientation_collider_link_sword()
 player_event P_Link::GetEvent()
 {
 
+	//JUMP//
+	if (can_jump) {
+		actual_event = jump;
+		doing_script = true;
+		LOG("I'm Jumping :DDDD");
+		can_jump = false;
+	}
+
 	if (doing_script == false) {
 		
 
@@ -109,13 +117,7 @@ player_event P_Link::GetEvent()
 				movement_direction = move_idle;
 				actual_event = idle;
 			}
-			//JUMP//
-			if (can_jump) {
-				actual_event = jump;
-				doing_script = true;
-				LOG("I'm Jumping :DDDD");
-				can_jump = false;
-			}
+		
 
 			//PICK ZELDA//
 			 if (can_pick_up && !App->player->Zelda->doing_script) {
@@ -204,7 +206,7 @@ player_event P_Link::GetEvent()
 				}
 			
 			if (can_pick_up && !App->player->Zelda->doing_script) {
-				if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
+				if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
 					App->player->Zelda->is_picked = true;
 					App->player->Zelda->ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 					actual_event = pick;
@@ -214,6 +216,9 @@ player_event P_Link::GetEvent()
 
 			}
 
+<<<<<<< HEAD
+		if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN) {
+=======
 			if (can_jump) {
 				actual_event = jump;
 				doing_script = true;
@@ -222,6 +227,7 @@ player_event P_Link::GetEvent()
 			}
 
 			if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && !im_lifting) {
+>>>>>>> origin/master
 				attack_timer.Start();
 				App->audio->PlayFx(Link_Sword_Audio);
 				//orientation collider link sword
@@ -231,7 +237,7 @@ player_event P_Link::GetEvent()
 				LOG("I'm Attacking :DDDD");
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && !im_lifting) {
+			if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN && !im_lifting) {
 				actual_event = roll;
 				doing_script = true;
 				is_rolling = true;

@@ -30,6 +30,7 @@
 #include "S_OptionsVideo.h"
 #include "S_QuitGame.h"
 #include "S_InGameMenu.h"
+#include "S_End.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -81,6 +82,8 @@ bool j1Scene::Start()
 	(*scene_list.back()).scene_name = Scene_ID::world;
 	scene_list.push_back(new S_Dungeon);
 	(*scene_list.back()).scene_name = Scene_ID::dungeon;
+	scene_list.push_back(new S_End);
+	(*scene_list.back()).scene_name = Scene_ID::Send;
 
 	/*
 	//XML congig read
