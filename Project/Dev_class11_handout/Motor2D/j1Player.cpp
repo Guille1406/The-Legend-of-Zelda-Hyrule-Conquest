@@ -39,11 +39,6 @@ bool j1Player::Awake(pugi::xml_node& config)
 
 
 
-	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
-	Link->front_collider = App->collision->AddCollider({ Link->tilepos.x*8,Link->tilepos.y*8 + 32,32,16 }, front_link, Link, this);
-	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,32,32 }, collider_zelda, Zelda, this);
-	Zelda->front_collider = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y + 32,32,16}, front_zelda, Zelda, this);
-	
 	//TEMP SPEED ANIMATION
 	
 
@@ -55,6 +50,12 @@ bool j1Player::Start()
 {
 
 	
+
+	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
+	Link->front_collider = App->collision->AddCollider({ Link->tilepos.x * 8,Link->tilepos.y * 8 + 32,32,16 }, front_link, Link, this);
+	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,32,32 }, collider_zelda, Zelda, this);
+	Zelda->front_collider = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y + 32,32,16 }, front_zelda, Zelda, this);
+
 	//Change this for link spritesheet
 	Link->entity_texture = App->tex->Load("textures/map.png");
 

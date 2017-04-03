@@ -4,6 +4,7 @@
 #include "j1Player.h"
 #include "j1Window.h"
 #include "j1Camera.h"
+#include "j1HUD.h"
 #include "Gui.h"
 #include "GuiButton.h"
 #include "j1GameStartMenuBack.h"
@@ -118,6 +119,10 @@ void S_InGameMenu::OnGui(Gui* ui, GuiEvent event)
 	{
 		App->player->Disable();
 		App->enemy->Disable();
+		App->map->Disable();
+		App->collision->Disable();
+		App->hud->Disable();
+		App->object->Disable();
 		App->scene->ChangeScene(Scene_ID::mainmenu);
 		App->scene->Hide();
 		active = false;

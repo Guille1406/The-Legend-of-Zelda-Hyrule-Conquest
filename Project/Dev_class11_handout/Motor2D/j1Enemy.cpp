@@ -84,6 +84,7 @@ bool j1Enemy::PostUpdate()
 
 bool j1Enemy::CleanUp()
 {
+	V_MyEnemies.clear();
 	return true;
 }
 

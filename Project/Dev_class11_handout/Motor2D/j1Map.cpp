@@ -198,7 +198,10 @@ bool j1Map::CleanUp()
 	}
 
 	data.layers.clear();
-
+	V_Colision.clear();
+	V_Logic.clear();
+	V_Enemies.clear();
+	V_PathEnemies.clear();
 	// Clean up the pugui tree
 	map_file.reset();
 

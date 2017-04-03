@@ -17,11 +17,14 @@
 
 bool S_World::Start()
 {
+	
 	App->camera->Enable();
-	App->player->Enable();
-	App->object->Enable();
 	
 	App->hud->Enable();
+	App->collision->Enable();
+	App->map->Enable();
+	App->player->Enable();
+		App->object->Enable();
 	LOG("IM FUCKING STARTING!!");
 	if (App->map->Load("tutorial map test.tmx") == true)
 
@@ -51,6 +54,8 @@ bool S_World::Start()
 			//App->map->CreateLogicMap();
 	}
 	
+	
+
 	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 1);
 
 	App->render->camera.x = 0;
