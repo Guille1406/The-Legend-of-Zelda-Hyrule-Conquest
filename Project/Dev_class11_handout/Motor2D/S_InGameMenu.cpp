@@ -116,11 +116,11 @@ void S_InGameMenu::OnGui(Gui* ui, GuiEvent event)
 	}
 	if ((ui == (Gui*)mainmenu) && (event == GuiEvent::mouse_lclk_down))
 	{
-		/*
-		App->scene->ChangeScene(Scene_ID::mainmenu);
 		App->player->Disable();
+		App->enemy->Disable();
+		App->scene->ChangeScene(Scene_ID::mainmenu);
+		App->scene->Hide();
 		active = false;
-		*/
 	}
 	if ((ui == (Gui*)quit) && (event == GuiEvent::mouse_lclk_down))
 	{

@@ -88,9 +88,6 @@ void Gui::CheckInput(const Gui* mouse_hover, const Gui* focus)
 
 	bool inside = (mouse_hover == this);
 
-	if (inside)
-		int i = 0;
-
 	j1Module* listener = nullptr;
 
 	if (module_listener != nullptr)
