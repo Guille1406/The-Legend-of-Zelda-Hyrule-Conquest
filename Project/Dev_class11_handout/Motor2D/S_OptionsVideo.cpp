@@ -9,7 +9,7 @@ S_OptionsVideo::~S_OptionsVideo()
 {
 }
 
-bool S_OptionsVideo::Awake()
+bool S_OptionsVideo::Awake(pugi::xml_node& conf)
 {
 	VideoLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string("Video menu"), false);
 	VideoLabel->SetFont(App->font->Sherwood28);

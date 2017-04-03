@@ -10,7 +10,7 @@ S_Campaign::~S_Campaign()
 {
 }
 
-bool S_Campaign::Awake()
+bool S_Campaign::Awake(pugi::xml_node& conf)
 {
 	/*
 	App->player->Disable();

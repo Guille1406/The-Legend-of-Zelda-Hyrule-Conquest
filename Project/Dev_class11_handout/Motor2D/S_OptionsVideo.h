@@ -10,7 +10,7 @@ class S_OptionsVideo : public MainScene {
 public:
 	S_OptionsVideo();
 	~S_OptionsVideo();
-	bool Awake();
+	bool Awake(pugi::xml_node& conf);
 	bool Start();
 	bool Update();
 	bool Clean();

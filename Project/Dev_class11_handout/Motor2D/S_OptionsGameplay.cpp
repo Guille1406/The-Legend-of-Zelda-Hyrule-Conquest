@@ -9,7 +9,7 @@ S_OptionsGameplay::~S_OptionsGameplay()
 {
 }
 
-bool S_OptionsGameplay::Awake()
+bool S_OptionsGameplay::Awake(pugi::xml_node& conf)
 {
 	GameplayLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string("Gameplay menu"), false);
 	GameplayLabel->SetFont(App->font->Sherwood28);

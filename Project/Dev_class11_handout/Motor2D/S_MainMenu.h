@@ -14,7 +14,7 @@ class S_MainMenu : public MainScene
 public:
 	S_MainMenu();
 	~S_MainMenu();
-	bool Awake();
+	bool Awake(pugi::xml_node& conf);
 	bool Start();
 	bool Update();
 	bool Clean();

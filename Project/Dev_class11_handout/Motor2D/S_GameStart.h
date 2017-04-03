@@ -10,7 +10,7 @@ class S_GameStart : public MainScene {
 public:
 	S_GameStart();
 	~S_GameStart();
-	bool Awake();
+	bool Awake(pugi::xml_node& conf);
 	bool Start();
 	bool Update();
 	bool Clean();

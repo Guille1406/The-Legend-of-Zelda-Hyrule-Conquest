@@ -4,7 +4,7 @@
 
 <gui_config>
 
-  <scene scene_ID = 0>
+  <scene scene_ID = "0">
     <campaign value="Campaign"/>
 	<options value="Options"/>
 	<credits value="Credits"/>

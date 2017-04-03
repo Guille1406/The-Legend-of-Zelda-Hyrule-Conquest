@@ -9,7 +9,7 @@ S_OptionsControls::~S_OptionsControls()
 {
 }
 
-bool S_OptionsControls::Awake()
+bool S_OptionsControls::Awake(pugi::xml_node& conf)
 {
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
 	ControlsLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string("Controls menu"), false);
