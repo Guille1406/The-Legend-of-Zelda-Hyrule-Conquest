@@ -246,10 +246,10 @@ bool j1Player::Move_Camera()
 
 void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 {
-	
+
 	Character* character = nullptr;
 	if (collider1->type == collider_link || collider2->type == collider_link)
-		character = Link;	
+		character = Link;
 	else if (collider1->type == collider_zelda || collider2->type == collider_zelda)
 		character = Zelda;
 	else if (collider1->type == front_zelda || collider2->type == front_zelda)
@@ -265,31 +265,31 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			audio = true;
 		}
 		Button* temp = (Button*)collider1->parent;
-			temp->Action();
-			temp->texture_rect = temp->pressed_button;
+		temp->Action();
+		temp->texture_rect = temp->pressed_button;
 	}
-	else if(collider2->type == collider_button) {
+	else if (collider2->type == collider_button) {
 		static bool audio = false;
-		
+
 		Button* temp = (Button*)collider2->parent;
-			temp->Action();
-			temp->texture_rect = temp->pressed_button;
-			if(!audio){
-				App->audio->PlayFx(App->audio->button_sound);
-				audio = true;
-			}
+		temp->Action();
+		temp->texture_rect = temp->pressed_button;
+		if (!audio) {
+			App->audio->PlayFx(App->audio->button_sound);
+			audio = true;
+		}
 	}
 	else if (collider1->type == collider_double_button) {
 		DoubleButton* temp = (DoubleButton*)collider2->parent;
 		temp->characters_on++;
 		temp->Action();
-	
+
 	}
 	else if (collider2->type == collider_double_button) {
 		DoubleButton* temp = (DoubleButton*)collider2->parent;
 		temp->characters_on++;
 		temp->Action();
-		
+
 	}
 	else if (collider1->type == collider_warp) {
 		Object* temp = (Object*)collider1->parent;
@@ -302,12 +302,12 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == collider_change_height) {
 		ChangeHeight* temp = (ChangeHeight*)collider1->parent;
 		character->ChangeLogicHeightPlayer(temp->height);
-		
+
 	}
 	else if (collider2->type == collider_change_height) {
 		ChangeHeight* temp = (ChangeHeight*)collider2->parent;
 		character->ChangeLogicHeightPlayer(temp->height);
-		
+
 	}
 	else if (collider1->type == collider_jump) {
 		if (character->can_move == false && character->doing_script == false) {
@@ -324,16 +324,16 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		}
 	}
 	else if (collider1->type == front_link) {
-		if(collider2->type == collider_zelda && !Link->im_lifting)
-		Link->can_pick_up = true;
-		
-			
-		
+		if (collider2->type == collider_zelda && !Link->im_lifting)
+			Link->can_pick_up = true;
+
+
+
 	}
-	else if (collider2->type == front_link ) {
+	else if (collider2->type == front_link) {
 		if (collider1->type == collider_zelda && !Link->im_lifting)
 			Link->can_pick_up = true;
-		
+
 	}
 
 	else if (collider1->type == collider_arrow) {
@@ -416,13 +416,13 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		if (Link->is_rolling == false) {
 			//roll_timer
 			//if (Link->roll_timer.Read() > 1500) {
-				if (Link->collision_by_enemy_timmer.Read() > 1500) {
-					App->audio->PlayFx(Link->Link_Hurt_Audio);
-					Link->roll_timer.Start();
-					Link->collision_by_enemy_timmer.Start();
-					Link->Collision_Sword_EnemySword();
-					half_hearts_test_purpose--;
-				}
+			if (Link->collision_by_enemy_timmer.Read() > 1500) {
+				App->audio->PlayFx(Link->Link_Hurt_Audio);
+				Link->roll_timer.Start();
+				Link->collision_by_enemy_timmer.Start();
+				Link->Collision_Sword_EnemySword();
+				half_hearts_test_purpose--;
+			}
 			//}
 		}
 	}
@@ -433,17 +433,17 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (n_enemy->live > 0) {
-				if (Link->link_sword_impact_sword == false) {
-					Link->enemy_col_sword_sword_timer.Start();
-					n_enemy->state = EnemyState::push_back_enemy;
-					n_enemy->enemy_doing_script = true;
-					n_enemy->live--;
-				}
-				else {
-					Link->link_sword_impact_sword = false;
-				}
-			
-			
+			if (Link->link_sword_impact_sword == false) {
+				Link->enemy_col_sword_sword_timer.Start();
+				n_enemy->state = EnemyState::push_back_enemy;
+				n_enemy->enemy_doing_script = true;
+				n_enemy->live--;
+			}
+			else {
+				Link->link_sword_impact_sword = false;
+			}
+
+
 		}
 		else {
 			n_enemy->tokill = true;
@@ -454,12 +454,12 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->is_rolling == false) {
 			//if (Link->roll_timer.Read() > 1500) {
-				if (Link->collision_by_enemy_timmer.Read() > 1500) {
-					Link->collision_by_enemy_timmer.Start();
-					Link->Collision_Sword_EnemySword();
-					half_hearts_test_purpose--;
+			if (Link->collision_by_enemy_timmer.Read() > 1500) {
+				Link->collision_by_enemy_timmer.Start();
+				Link->Collision_Sword_EnemySword();
+				half_hearts_test_purpose--;
 
-				}
+			}
 			//}
 		}
 	}
@@ -485,7 +485,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 				Zelda->Collision_Sword_EnemySword();
 				half_hearts_test_purpose--;
 			}
-		
+
 		}
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {
@@ -498,8 +498,35 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			}
 		}
 	}
-
-	
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_enemy) {
+		Enemy* n_enemy = (Enemy*)collider2->parent;
+		if (Zelda->is_rolling == false) {
+			//roll_timer
+			//if (Link->roll_timer.Read() > 1500) {
+			if (Link->collision_by_enemy_timmer.Read() > 1500) {
+				App->audio->PlayFx(Link->Link_Hurt_Audio);
+				Zelda->roll_timer.Start();
+				Link->collision_by_enemy_timmer.Start();
+				half_hearts_test_purpose--;
+			}
+			//}
+		}
 	}
+	else if (collider1->type == COLLIDER_TYPE::collider_enemy && collider2->type == COLLIDER_TYPE::collider_zelda) {
+		Enemy* n_enemy = (Enemy*)collider2->parent;
+		if (Zelda->is_rolling == false) {
+			//roll_timer
+			//if (Link->roll_timer.Read() > 1500) {
+			if (Link->collision_by_enemy_timmer.Read() > 1500) {
+				App->audio->PlayFx(Link->Link_Hurt_Audio);
+				Zelda->roll_timer.Start();
+				Link->collision_by_enemy_timmer.Start();
+				half_hearts_test_purpose--;
+			}
+			//}
+		}
+
+	}
+}
 
 
