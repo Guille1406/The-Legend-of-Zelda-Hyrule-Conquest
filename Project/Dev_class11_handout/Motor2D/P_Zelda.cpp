@@ -229,6 +229,7 @@ player_event P_Zelda::GetEvent()
 
 	}
 
+
 	if (can_jump) {
 		actual_event = jump;
 		doing_script = true;
@@ -236,6 +237,13 @@ player_event P_Zelda::GetEvent()
 		can_jump = false;
 
 	}
+
+	if (actual_event == attack && is_picked==true) {
+		pos = App->player->Link->pos;
+				
+	}
+
+
 	if (doing_script == false) {
 
 
