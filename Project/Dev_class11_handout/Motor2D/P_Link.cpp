@@ -221,7 +221,7 @@ player_event P_Link::GetEvent()
 				can_jump = false;
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+			if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && !im_lifting) {
 				attack_timer.Start();
 				App->audio->PlayFx(Link_Sword_Audio);
 				//orientation collider link sword

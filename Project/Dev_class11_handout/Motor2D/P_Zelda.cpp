@@ -228,6 +228,13 @@ player_event P_Zelda::GetEvent()
 		RIGHT = SDL_SCANCODE_RIGHT;
 
 	}
+
+	if (actual_event == attack && is_picked==true) {
+		pos = App->player->Link->pos;
+
+		
+	}
+
 	if (doing_script == false) {
 
 
