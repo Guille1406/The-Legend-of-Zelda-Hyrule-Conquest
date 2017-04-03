@@ -39,11 +39,6 @@ bool j1Player::Awake(pugi::xml_node& config)
 
 
 
-	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
-	Link->front_collider = App->collision->AddCollider({ Link->tilepos.x*8,Link->tilepos.y*8 + 32,32,16 }, front_link, Link, this);
-	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,32,32 }, collider_zelda, Zelda, this);
-	Zelda->front_collider = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y + 32,32,16}, front_zelda, Zelda, this);
-	
 	//TEMP SPEED ANIMATION
 	
 
@@ -54,6 +49,12 @@ bool j1Player::Awake(pugi::xml_node& config)
 bool j1Player::Start()
 {
 
+	
+
+	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
+	Link->front_collider = App->collision->AddCollider({ Link->tilepos.x * 8,Link->tilepos.y * 8 + 32,32,16 }, front_link, Link, this);
+	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,32,32 }, collider_zelda, Zelda, this);
+	Zelda->front_collider = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y + 32,32,16 }, front_zelda, Zelda, this);
 
 	//Change this for link spritesheet
 	Link->entity_texture = App->tex->Load("textures/map.png");
@@ -91,44 +92,53 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
-	
-	//Change the tile_pos
-	Link->tilepos.x = (Link->pos.x + 8) / 16;
-	Link->tilepos.y = (Link->pos.y + 8) / 16;
-	Zelda->tilepos.x = (Zelda->pos.x + 8) / 16;
-	Zelda->tilepos.y = (Zelda->pos.y + 8) / 16;
-
-	Link->GetAdjacents();
-	Zelda->GetAdjacents();
-
-	
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
+		paused = !paused;
+		App->enemy->paused = !App->enemy->paused;
+		App->collision->paused = !App->collision->paused;
+		App->pathfinding->paused = !App->pathfinding->paused;
 		
-	//2 Players
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-	//	cooperative = !cooperative;
-		selected_character = Link;
-		other_character = Zelda;
 	}
+	
+	if (!paused) {
+		//Change the tile_pos
+		Link->tilepos.x = (Link->pos.x + 8) / 16;
+		Link->tilepos.y = (Link->pos.y + 8) / 16;
+		Zelda->tilepos.x = (Zelda->pos.x + 8) / 16;
+		Zelda->tilepos.y = (Zelda->pos.y + 8) / 16;
 
-	if (cooperative == true) {
-		Link->link_sword_collider_update();
-		Link->GetEvent();
-		Zelda->GetEvent();
-		Link->ExecuteEvent(dt);
-		Zelda->ExecuteEvent(dt);
-		
+		Link->GetAdjacents();
+		Zelda->GetAdjacents();
 
+
+
+		//2 Players
+		if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+			//	cooperative = !cooperative;
+			selected_character = Link;
+			other_character = Zelda;
+		}
+
+		if (cooperative == true) {
+			Link->link_sword_collider_update();
+			Link->GetEvent();
+			Zelda->GetEvent();
+			Link->ExecuteEvent(dt);
+			Zelda->ExecuteEvent(dt);
+
+
+		}
+
+		//Draw the two characters
+		//Draw();
+
+		//Change the positions of player colliders
+		Link->collision->SetPos(Link->pos.x, Link->pos.y, Link->GetLogicHeightPlayer());
+		Zelda->collision->SetPos(Zelda->pos.x, Zelda->pos.y, Zelda->GetLogicHeightPlayer());
+		Link->UpdateColliderFront();
+		Zelda->UpdateColliderFront();
+		Zelda->UpdateArrows();
 	}
-
-	//Draw the two characters
-	//Draw();
-
-	//Change the positions of player colliders
-	Link->collision->SetPos(Link->pos.x, Link->pos.y, Link->GetLogicHeightPlayer());
-	Zelda->collision->SetPos(Zelda->pos.x, Zelda->pos.y, Zelda->GetLogicHeightPlayer());
-	Link->UpdateColliderFront();
-	Zelda->UpdateColliderFront();
-	Zelda->UpdateArrows();
 	return true;
 }
 
@@ -400,12 +410,16 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_enemy) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->is_rolling == false) {
-			if (Link->collision_by_enemy_timmer.Read() > 1500) {
-				App->audio->PlayFx(Link->Link_Hurt_Audio);
-				Link->collision_by_enemy_timmer.Start();
-				Link->Collision_Sword_EnemySword();
-				half_hearts_test_purpose--;
-			}
+			//roll_timer
+			//if (Link->roll_timer.Read() > 1500) {
+				if (Link->collision_by_enemy_timmer.Read() > 1500) {
+					App->audio->PlayFx(Link->Link_Hurt_Audio);
+					Link->roll_timer.Start();
+					Link->collision_by_enemy_timmer.Start();
+					Link->Collision_Sword_EnemySword();
+					half_hearts_test_purpose--;
+				}
+			//}
 		}
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy && collider2->type == COLLIDER_TYPE::collider_link) {
@@ -435,22 +449,26 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->is_rolling == false) {
-			if (Link->collision_by_enemy_timmer.Read() > 1500) {
-				Link->collision_by_enemy_timmer.Start();
-				Link->Collision_Sword_EnemySword();
-				half_hearts_test_purpose--;
+			//if (Link->roll_timer.Read() > 1500) {
+				if (Link->collision_by_enemy_timmer.Read() > 1500) {
+					Link->collision_by_enemy_timmer.Start();
+					Link->Collision_Sword_EnemySword();
+					half_hearts_test_purpose--;
 
-			}
+				}
+			//}
 		}
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->is_rolling == false) {
-			if (Link->collision_by_enemy_timmer.Read() > 1500) {
-				Link->collision_by_enemy_timmer.Start();
-				Link->Collision_Sword_EnemySword();
-				half_hearts_test_purpose--;
+			if (Link->roll_timer.Read() > 1500) {
+				if (Link->collision_by_enemy_timmer.Read() > 1500) {
+					Link->collision_by_enemy_timmer.Start();
+					Link->Collision_Sword_EnemySword();
+					half_hearts_test_purpose--;
 
+				}
 			}
 		}
 	}

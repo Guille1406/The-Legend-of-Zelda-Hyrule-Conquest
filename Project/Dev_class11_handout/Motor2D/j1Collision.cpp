@@ -84,16 +84,18 @@ bool j1Collision::Start()
 
 bool j1Collision::PreUpdate()
 {
-	// Remove all colliders scheduled for deletion
-	for (uint i = 0; i < colliders.size(); ++i)
-	{
-		if (colliders[i] != nullptr && colliders[i]->to_delete == true)
+	if (!paused) {
+		// Remove all colliders scheduled for deletion
+		for (uint i = 0; i < colliders.size(); ++i)
 		{
-			delete colliders[i];
-			colliders[i] = nullptr;
+			if (colliders[i] != nullptr && colliders[i]->to_delete == true)
+			{
+				delete colliders[i];
+				colliders[i] = nullptr;
+			}
 		}
+
 	}
-	
 	return true;
 	}
 
@@ -103,50 +105,52 @@ bool j1Collision::PreUpdate()
 // Called before render is available
 bool j1Collision::Update(float dt)
 {
-	Collider* c1 = nullptr;
-	Collider* c2 = nullptr;
 
-	for (uint i = 0; i < colliders.size(); ++i)
-	{
-		
-		// skip empty colliders
-		if (colliders[i] == nullptr)
-			continue;
+	if (!paused) {
+		Collider* c1;
+		Collider* c2;
 
-		c1 = colliders[i];
-
-		// avoid checking collisions already checked
-		for (uint k = i + 1; k < colliders.size(); ++k)
+		for (uint i = 0; i < colliders.size(); ++i)
 		{
+
 			// skip empty colliders
-			if (colliders[k] == nullptr)
+			if (colliders[i] == nullptr)
 				continue;
 
-			c2 = colliders[k];
+			c1 = colliders[i];
 
-			if (c1->CheckCollision(c2->rect) == true)
+			// avoid checking collisions already checked
+			for (uint k = i + 1; k < colliders.size(); ++k)
 			{
-				if (matrix[c1->type][c2->type] && c1->callback)
+				// skip empty colliders
+				if (colliders[k] == nullptr)
+					continue;
+
+				c2 = colliders[k];
+
+				if (c1->CheckCollision(c2->rect) == true)
 				{
-				if(c1->parent->logic_height == c2->parent->logic_height)
-					c1->callback->OnCollision(c1, c2);
+					if (matrix[c1->type][c2->type] && c1->callback)
+					{
+						if (c1->parent->logic_height == c2->parent->logic_height)
+							c1->callback->OnCollision(c1, c2);
 						//App->render->Blit(App->player->graphics, App->player->PreviousPos.x, App->player->PreviousPos.y-1, &(App->player->current_animation->GetCurrentFrame()));
 
-				}
+					}
 
 
-				if (matrix[c2->type][c1->type] && c2->callback)
-				{
-					if (c1->parent->logic_height == c2->parent->logic_height)
-					c2->callback->OnCollision(c2, c1);
+					if (matrix[c2->type][c1->type] && c2->callback)
+					{
+						if (c1->parent->logic_height == c2->parent->logic_height)
+							c2->callback->OnCollision(c2, c1);
+					}
+
 				}
-				
 			}
 		}
+
+		DebugDraw();
 	}
-
-	DebugDraw();
-
 	return true;
 }
 

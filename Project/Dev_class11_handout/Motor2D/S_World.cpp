@@ -17,11 +17,14 @@
 
 bool S_World::Start()
 {
+	
 	App->camera->Enable();
-	App->player->Enable();
-	App->object->Enable();
 	
 	App->hud->Enable();
+	App->collision->Enable();
+	App->map->Enable();
+	App->player->Enable();
+		App->object->Enable();
 	LOG("IM FUCKING STARTING!!");
 	if (App->map->Load("tutorial map test.tmx") == true)
 
@@ -51,6 +54,8 @@ bool S_World::Start()
 			//App->map->CreateLogicMap();
 	}
 	
+	
+
 	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 1);
 
 	App->render->camera.x = 0;
@@ -83,8 +88,15 @@ bool S_World::PostUpdate()
 	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
 		App->player->Disable();
 		App->enemy->Disable();
+
 		
+		App->scene->ChangeScene(Send);
+
+		App->map->Disable();
+		App->collision->Disable();
+		App->hud->Disable();
 		App->scene->ChangeScene(mainmenu);
+
 	}
 	return true;
 

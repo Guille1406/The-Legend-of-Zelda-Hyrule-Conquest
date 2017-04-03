@@ -34,38 +34,43 @@ bool j1Enemy::Start()
 
 bool j1Enemy::PreUpdate()
 {
+	if (!paused) {
+		for (int i = 0; i < V_MyEnemies.size(); i++) {
+			if (V_MyEnemies[i]->tokill == true) {
+				V_MyEnemies[i]->collider->to_delete = true;
+				V_MyEnemies[i]->shield_test->to_delete = true;
+				std::vector<Enemy*>::iterator it = std::find(App->enemy->V_MyEnemies.begin(), App->enemy->V_MyEnemies.end(), V_MyEnemies[i]);
+				V_MyEnemies.erase(it);
 
-	for (int i = 0; i < V_MyEnemies.size(); i++) {
-		if (V_MyEnemies[i]->tokill == true) {
-			V_MyEnemies[i]->collider->to_delete = true;
-			V_MyEnemies[i]->shield_test->to_delete = true;
-			std::vector<Enemy*>::iterator it = std::find(App->enemy->V_MyEnemies.begin(), App->enemy->V_MyEnemies.end(), V_MyEnemies[i]);
-			V_MyEnemies.erase(it);
-			
 
+			}
 		}
-	}
-	if (appear_enemies && one_time_appear<1) {
-		Create_Enemy(enemyType::green_enemy, iPoint(75, 41));
-		Create_Enemy(enemyType::green_enemy, iPoint(63, 56));
-		one_time_appear++;
-		appear_enemies = false;
+		if (appear_enemies && one_time_appear < 1) {
+			Create_Enemy(enemyType::green_enemy, iPoint(75, 41));
+			Create_Enemy(enemyType::green_enemy, iPoint(63, 56));
+			one_time_appear++;
+			appear_enemies = false;
+		}
 	}
 	return true;
 }
 
 bool j1Enemy::Update(float dt)
 {
-	for (int i = 0; i < V_MyEnemies.size(); i++) {
-		V_MyEnemies[i]->UpdateState();
-		V_MyEnemies[i]->Rang_Player();
-		V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x;
-		V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y;
-		Update_Sword_Collision(V_MyEnemies[i]);
-		App->render->Blit(V_MyEnemies[i]->entity_texture, V_MyEnemies[i]->pix_world_pos.x - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.x, V_MyEnemies[i]->pix_world_pos.y - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.y, &V_MyEnemies[i]->actual_animation.GetCurrentFrame().rect);
-		V_MyEnemies[i]->Action();
-		
-	}
+
+		for (int i = 0; i < V_MyEnemies.size(); i++) {
+			
+			App->render->Blit(V_MyEnemies[i]->entity_texture, V_MyEnemies[i]->pix_world_pos.x - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.x, V_MyEnemies[i]->pix_world_pos.y - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.y, &V_MyEnemies[i]->actual_animation.GetCurrentFrame().rect);
+			if (!paused) {
+				
+				V_MyEnemies[i]->UpdateState();
+				V_MyEnemies[i]->Rang_Player();
+				V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x;
+				V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y;
+				Update_Sword_Collision(V_MyEnemies[i]);
+				V_MyEnemies[i]->Action();
+			}
+		}
 
 
 	return true;
@@ -79,6 +84,7 @@ bool j1Enemy::PostUpdate()
 
 bool j1Enemy::CleanUp()
 {
+	V_MyEnemies.clear();
 	return true;
 }
 

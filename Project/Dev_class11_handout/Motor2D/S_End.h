@@ -9,8 +9,10 @@ public:
 	bool Start();
 	bool Update();
 	bool Clean();
+	bool PostUpdate();
 public:
 	char* test;
+	SDL_Texture* finale_texture = nullptr;
 };
 
 #endif // 
