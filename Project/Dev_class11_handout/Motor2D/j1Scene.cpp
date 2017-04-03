@@ -71,7 +71,8 @@ bool j1Scene::Start()
 	(*scene_list.back()).scene_name = Scene_ID::quitgame;
 
 	//Ingamemenu
-	scene_list.push_back(new S_InGameMenu);
+	ingame_menu_scene = new S_InGameMenu;
+	scene_list.push_back(ingame_menu_scene);
 	(*scene_list.back()).scene_name = Scene_ID::ingamemenu;
 	
 	//World
@@ -150,7 +151,8 @@ bool j1Scene::ChangeScene(Scene_ID name)
 
 bool j1Scene::Show(Scene_ID name)
 {
-	sub_active_scene->Clean();
+	if (main_active_scene != sub_active_scene)
+		sub_active_scene->Clean();
 	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
 		if ((*item)->scene_name == name)
 		{
@@ -163,6 +165,6 @@ bool j1Scene::Show(Scene_ID name)
 
 bool j1Scene::Hide()
 {
-	//sub_active_scene->Clean();
+	sub_active_scene->Clean();
 	return true;
 }

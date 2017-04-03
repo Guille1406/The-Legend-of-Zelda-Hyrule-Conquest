@@ -1,5 +1,6 @@
 #include "S_Options.h"
 #include "j1Window.h"
+#include "S_InGameMenu.h"
 
 S_Options::S_Options()
 {
@@ -106,6 +107,9 @@ void S_Options::OnGui(Gui* ui, GuiEvent event)
 	}
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->Show(Scene_ID::mainmenu);
+		if (((S_InGameMenu*)App->scene->InGameMenuScene())->Active())
+			App->scene->Show(Scene_ID::ingamemenu);
+		else
+			App->scene->Show(Scene_ID::mainmenu);
 	}
 }

@@ -1,6 +1,7 @@
 #include "S_QuitGame.h"
 #include "j1Player.h"
 #include "j1Window.h"
+#include "S_InGameMenu.h"
 
 S_QuitGame::S_QuitGame()
 {
@@ -70,6 +71,9 @@ void S_QuitGame::OnGui(Gui* ui, GuiEvent event)
 
 	if ((ui == (Gui*)No) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->Show(Scene_ID::mainmenu);
+		if(((S_InGameMenu*)App->scene->InGameMenuScene())->Active())
+			App->scene->Show(Scene_ID::ingamemenu);
+		else
+			App->scene->Show(Scene_ID::mainmenu);
 	}
 }

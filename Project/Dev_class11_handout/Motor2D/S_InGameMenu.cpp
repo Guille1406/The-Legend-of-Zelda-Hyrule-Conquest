@@ -68,6 +68,8 @@ bool S_InGameMenu::Start()
 
 	App->gui->SetFocus(buttons.front());
 
+	active = true;
+
 	return true;
 }
 
@@ -109,14 +111,18 @@ void S_InGameMenu::OnGui(Gui* ui, GuiEvent event)
 	}
 	if ((ui == (Gui*)options) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::options);
+		App->scene->Show(Scene_ID::options);
 	}
 	if ((ui == (Gui*)mainmenu) && (event == GuiEvent::mouse_lclk_down))
 	{
+		/*
 		App->scene->ChangeScene(Scene_ID::mainmenu);
+		App->player->Disable();
+		active = false;
+		*/
 	}
 	if ((ui == (Gui*)quit) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::quitgame);
+		App->scene->Show(Scene_ID::quitgame);
 	}
 }

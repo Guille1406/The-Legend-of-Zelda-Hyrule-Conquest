@@ -58,11 +58,18 @@ public:
 		return prev_scene;
 	}
 
+	const MainScene* InGameMenuScene() const
+	{
+		return ingame_menu_scene;
+	}
+
 private:
 	MainScene* main_active_scene = nullptr;
 	MainScene* sub_active_scene = nullptr;
 	MainScene* prev_scene = nullptr;
 	std::list<MainScene*> scene_list;
+
+	MainScene* ingame_menu_scene = nullptr;
 };
 
 #endif // __j1SCENE_H__

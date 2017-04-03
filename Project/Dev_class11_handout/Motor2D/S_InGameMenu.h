@@ -17,6 +17,12 @@ public:
 	bool Update();
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
+
+	bool Active() const
+	{
+		return active;
+	}
+
 private:
 	GuiLabel* IngamemenuLabel = nullptr;
 	GuiButton* resume =			nullptr;
@@ -25,6 +31,7 @@ private:
 	GuiButton* mainmenu =		nullptr;
 	GuiButton* quit =	   		nullptr;
 	std::vector<GuiButton*> buttons;
+	bool active = false;
 };
 
 #endif // #pragma once
