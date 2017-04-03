@@ -10,7 +10,7 @@ class S_QuitGame : public MainScene {
 public:
 	S_QuitGame();
 	~S_QuitGame();
-	bool Awake();
+	bool Awake(pugi::xml_node& conf);
 	bool Start();
 	bool Update();
 	bool Clean();

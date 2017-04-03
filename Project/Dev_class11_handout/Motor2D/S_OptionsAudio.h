@@ -10,7 +10,7 @@ class S_OptionsAudio : public MainScene {
 public:
 	S_OptionsAudio();
 	~S_OptionsAudio();
-	bool Awake();
+	bool Awake(pugi::xml_node& conf);
 	bool Start();
 	bool Update();
 	bool Clean();

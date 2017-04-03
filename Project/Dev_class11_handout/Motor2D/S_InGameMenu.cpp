@@ -16,7 +16,7 @@ S_InGameMenu::~S_InGameMenu()
 {
 }
 
-bool S_InGameMenu::Awake()
+bool S_InGameMenu::Awake(pugi::xml_node& conf)
 {
 	IngamemenuLabel = App->gui->CreateLabel(iPoint(200, 100), &std::string("In-Game menu"), false);
 	IngamemenuLabel->SetFont(App->font->Sherwood28);

@@ -10,7 +10,7 @@ S_Options::~S_Options()
 {
 }
 
-bool S_Options::Awake()
+bool S_Options::Awake(pugi::xml_node& conf)
 {
 	OptionsLabel = App->gui->CreateLabel(iPoint(200, 100), &std::string("Options menu"), false);
 	OptionsLabel->SetFont(App->font->Sherwood28);

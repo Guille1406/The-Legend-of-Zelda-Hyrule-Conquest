@@ -12,7 +12,7 @@ class S_InGameMenu : public MainScene
 public:
 	S_InGameMenu();
 	~S_InGameMenu();
-	bool Awake();
+	bool Awake(pugi::xml_node& conf);
 	bool Start();
 	bool Update();
 	bool Clean();

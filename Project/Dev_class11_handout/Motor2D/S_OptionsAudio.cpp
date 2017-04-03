@@ -9,7 +9,7 @@ S_OptionsAudio::~S_OptionsAudio()
 {
 }
 
-bool S_OptionsAudio::Awake()
+bool S_OptionsAudio::Awake(pugi::xml_node& conf)
 {
 	AudioLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string("Audio menu"), false);
 	AudioLabel->SetFont(App->font->Sherwood28);

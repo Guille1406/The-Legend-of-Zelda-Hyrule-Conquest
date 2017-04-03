@@ -10,7 +10,7 @@ S_GameStart::~S_GameStart()
 {
 }
 
-bool S_GameStart::Awake()
+bool S_GameStart::Awake(pugi::xml_node& conf)
 {
 	/*
 	App->player->Disable();

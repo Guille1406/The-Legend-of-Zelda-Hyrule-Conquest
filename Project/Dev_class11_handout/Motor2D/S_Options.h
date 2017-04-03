@@ -10,7 +10,7 @@ class S_Options : public MainScene {
 public:
 	S_Options();
 	~S_Options();
-	bool Awake();
+	bool Awake(pugi::xml_node& conf);
 	bool Start();
 	bool Update();
 	bool Clean();
