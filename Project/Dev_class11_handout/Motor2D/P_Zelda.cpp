@@ -36,7 +36,7 @@ void P_Zelda::Attack(float dt)
 		//doing_script = false;
 		
 		//update
-		if (attack_timer.Read() > 600) {
+		if (attack_timer.Read() > 0) {
 			attack_timer.Start();
 			doing_script = false;
 			temp = false;
@@ -228,6 +228,14 @@ player_event P_Zelda::GetEvent()
 		RIGHT = SDL_SCANCODE_RIGHT;
 
 	}
+
+	if (can_jump) {
+		actual_event = jump;
+		doing_script = true;
+		LOG("I'm Jumping :DDDD");
+		can_jump = false;
+
+	}
 	if (doing_script == false) {
 
 
@@ -240,6 +248,8 @@ player_event P_Zelda::GetEvent()
 			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_DOWN) {
 				aim_direction = character_direction;
 			}
+
+		
 			
 			//MOVEMENT UP//
 			if (App->inputM->EventPressed(INPUTEVENT::MUP, 0) == EVENTSTATE::E_REPEAT) {
@@ -294,12 +304,7 @@ player_event P_Zelda::GetEvent()
 
 
 			//JUMP//
-			if (can_jump) {
-				actual_event = jump;
-				doing_script = true;
-				LOG("I'm Jumping :DDDD");
-				can_jump = false;
-			}
+			
 			//TUMBLE//
 			 if (App->inputM->EventPressed(INPUTEVENT::JUMP, 0) == EVENTSTATE::E_DOWN && !is_picked) {
 				actual_event = roll;
@@ -332,12 +337,7 @@ player_event P_Zelda::GetEvent()
 				character_direction = aim_direction;
 				bow = 0;
 			}
-			/*if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_NOTHING&&bow>=20) {
-				actual_event = attack;
-				doing_script = true;
-				character_direction = aim_direction;
-				bow = 0;
-			}*/
+			
 
 			
 
@@ -345,15 +345,15 @@ player_event P_Zelda::GetEvent()
 		else
 		{
 			//FIRST THINGS FIRST
-			if (App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
+			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_DOWN) {
 				aim_direction = character_direction;
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT) {
-				if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT) {
+			if (App->input->GetKey(SDL_SCANCODE_U) == KEY_REPEAT) {
+				if (App->input->GetKey(SDL_SCANCODE_H) == KEY_REPEAT) {
 					movement_direction = move_up_left;
 				}
-				else if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
+				else if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT) {
 					movement_direction = move_up_right;
 				}
 				else {
@@ -365,11 +365,11 @@ player_event P_Zelda::GetEvent()
 			}
 
 
-			else if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT) {
-				if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT) {
+			else if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT) {
+				if (App->input->GetKey(SDL_SCANCODE_H) == KEY_REPEAT) {
 					movement_direction = move_down_left;
 				}
-				else if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
+				else if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT) {
 					movement_direction = move_down_right;
 				}
 				else {
@@ -381,13 +381,13 @@ player_event P_Zelda::GetEvent()
 			}
 
 
-			else if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
+			else if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT) {
 				movement_direction = move_right;
 				character_direction = right;
 				actual_event = move;
 			}
 
-			else if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT) {
+			else if (App->input->GetKey(SDL_SCANCODE_H) == KEY_REPEAT) {
 				movement_direction = move_left;
 				character_direction = left;
 				actual_event = move;
@@ -401,18 +401,18 @@ player_event P_Zelda::GetEvent()
 			}
 
 			
-			if (can_jump) {
+			/*if (can_jump) {
 				actual_event = jump;
 				doing_script = true;
 				LOG("I'm Jumping :DDDD");
 				can_jump = false;
-			}
+			}*/
 			if (is_picked) {
 				static bool can_throw = false;
 				actual_event = pick;
 				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 				pos = App->player->Link->pos;
-				if ((App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) && can_throw) {
+				if ((App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) && can_throw) {
 					if (!App->player->Link->doing_script) {
 						App->audio->PlayFx(Throw_Audio);
 						actual_event = throw_;
@@ -425,14 +425,14 @@ player_event P_Zelda::GetEvent()
 				else can_throw = true;
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && !is_picked) {
+			if (App->input->GetKey(SDL_SCANCODE_MINUS) == KEY_DOWN && !is_picked) {
 				actual_event = roll;
 				doing_script = true;
 			}
-			if (App->input->GetKey(SDL_SCANCODE_O) == KEY_REPEAT) {
+			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_REPEAT) {
 				character_direction = aim_direction;
 			}
-			if (App->input->GetKey(SDL_SCANCODE_O) == KEY_UP) {
+			if (App->input->GetKey(SDL_SCANCODE_PERIOD) == KEY_UP) {
 				attack_timer.Start();
 				App->audio->PlayFx(Arrow_Audio);
 				actual_event = attack;

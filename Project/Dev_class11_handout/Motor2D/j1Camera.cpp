@@ -66,10 +66,7 @@ bool j1Camera::Start()
 bool j1Camera::PreUpdate()
 {
 	//Calculate camera centre
-	/**/
-	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) App->win->scale += 0.005;
-	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT) App->win->scale -= 0.005;
-	/**/
+	
 	float Scale = App->win->GetScale();
 	iPoint Centre = { 0,0 };
 	Centre.x = (int)((((float)(App->player->Link->pos.x + App->player->Zelda->pos.x)) * 0.5f));
