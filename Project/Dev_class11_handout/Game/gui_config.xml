@@ -1,0 +1,14 @@
+<!-- GUI Config file for the game -->
+
+<!-- scene_ID -> MainScene.h Scene_ID enum -->
+
+<gui_config>
+
+  <scene scene_ID = 0>
+    <campaign value="Campaign"/>
+	<options value="Options"/>
+	<credits value="Credits"/>
+	<quit value="Quit"/>
+  </scene>
+
+</gui_config>

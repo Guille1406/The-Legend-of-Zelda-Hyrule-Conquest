@@ -16,8 +16,9 @@
 #include "j1Gui.h"
 #include "j1Scene.h"
 #include "j1Gui.h"
-#include"j1Collision.h"
-#include"j1Enemy.h"
+#include "j1Collision.h"
+#include "j1Enemy.h"
+#include "j1FileSystem.h"
 
 #include "S_World.h"
 #include "S_Dungeon.h"
@@ -81,6 +82,43 @@ bool j1Scene::Start()
 	scene_list.push_back(new S_Dungeon);
 	(*scene_list.back()).scene_name = Scene_ID::dungeon;
 
+	/*
+	//XML congig read
+	pugi::xml_document	config_file;
+	pugi::xml_node		config;
+	pugi::xml_node		app_config;
+
+	bool ret = false;
+
+	//Load XML
+	char* buf;
+	int size = App->fs->Load("gui/gui_config.xml", &buf);
+	pugi::xml_parse_result result = config_file.load_buffer(buf, size);
+	RELEASE(buf);
+
+	if (result == NULL)
+		LOG("Could not load map xml file gui_config.xml. pugi error: %s", result.description());
+	else
+		config = config_file.child("gui_config");
+
+	//Set config
+	if (config.empty() == false)
+		ret = true;
+
+	if (ret == true)
+	{
+		for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend() && ret == true; ++item)
+		{
+			ret = (*item)->Awake();//send here xml for gui text
+			if ((*item)->scene_name == Scene_ID::mainmenu)
+			{
+				main_active_scene = (*item);
+				sub_active_scene = (*item);
+			}
+		}
+	}
+	*/
+	/**/
 	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
 	{
 		(*item)->Awake();//send here xml for gui text
@@ -90,6 +128,8 @@ bool j1Scene::Start()
 			sub_active_scene = (*item);
 		}
 	}
+	/**/
+	//return ret;
 	return true;
 }
 
