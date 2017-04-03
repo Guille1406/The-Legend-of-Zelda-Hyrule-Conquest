@@ -90,7 +90,7 @@ bool S_World::PostUpdate()
 		App->map->Disable();
 		App->collision->Disable();
 		App->hud->Disable();
-		App->scene->ChangeScene(mainmenu);
+		//App->scene->ChangeScene(mainmenu);
 
 	}
 	return true;
