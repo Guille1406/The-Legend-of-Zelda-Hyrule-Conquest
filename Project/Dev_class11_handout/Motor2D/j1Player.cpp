@@ -64,8 +64,7 @@ bool j1Player::Start()
 	Link->LoadAnimation("sprites/Link_Spritesheet_Finale.xml");
 	Zelda->LoadAnimation("sprites/Zelda_Spritesheet_Finale.xml");
 
-	//Link->actual_animation = Link->sprites_vector[0];
-	//Zelda->actual_animation = Zelda->sprites_vector[0];
+	
 	selected_character = Link;
 	other_character = Zelda;
 	change = false;
@@ -77,6 +76,7 @@ bool j1Player::Start()
 	Link->doing_script = false;
 	Zelda->doing_script = false;
 
+	//TEMP
 	Link->sprites_vector[attack * 4 + up].speed = 0.12;
 	Link->sprites_vector[attack * 4 + down].speed = 0.12;
 	Link->sprites_vector[attack * 4 + left].speed = 0.12; 
