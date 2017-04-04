@@ -163,6 +163,11 @@ bool j1Scene::PostUpdate()
 	if (main_active_scene != sub_active_scene)
 		sub_active_scene->PostUpdate();
 
+	if (sub_scene_to_load)
+	{
+		ShowNewScene(new_sub_scene_to_load);
+		sub_scene_to_load = false;
+	}
 	return true;
 }
 
@@ -186,6 +191,13 @@ bool j1Scene::ChangeScene(Scene_ID name)
 }
 
 bool j1Scene::Show(Scene_ID name)
+{
+	new_sub_scene_to_load = name;
+	sub_scene_to_load = true;
+	return true;
+}
+
+bool j1Scene::ShowNewScene(Scene_ID name)
 {
 	if (main_active_scene != sub_active_scene)
 		sub_active_scene->Clean();

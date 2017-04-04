@@ -66,6 +66,9 @@ public:
 	bool AnyWorldActive() const;
 
 private:
+	bool ShowNewScene(Scene_ID);
+
+private:
 	MainScene* main_active_scene = nullptr;
 	MainScene* sub_active_scene = nullptr;
 	MainScene* prev_scene = nullptr;
@@ -73,6 +76,9 @@ private:
 	std::vector<MainScene*> world_scenes_vector;
 
 	MainScene* ingame_menu_scene = nullptr;
+
+	Scene_ID new_sub_scene_to_load = Scene_ID::campaign;
+	bool sub_scene_to_load = false;
 };
 
 #endif // __j1SCENE_H__
