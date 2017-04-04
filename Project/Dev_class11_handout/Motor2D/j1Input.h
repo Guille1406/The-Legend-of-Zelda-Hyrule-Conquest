@@ -98,6 +98,7 @@ public:
 
 
 	j1KeyState GetControllerButton(int pad, int id) const;
+	
 
 	void AddController(int id);
 	void RemoveController(int id);

@@ -1,5 +1,8 @@
 #include <math.h>
-
+#include "j1Player.h"
+#include "j1Enemy.h"
+#include "j1Collision.h"
+#include "j1Pathfinding.h"
 #include "p2Log.h"
 #include "j1GameStartMenuBack.h"
 #include "S_MainMenu.h"
@@ -11,6 +14,7 @@
 #include "GuiImage.h"
 #include "GuiButton.h"
 #include "j1Audio.h"
+#include "j1InputManager.h"
 
 j1GameStartMenuBackground::j1GameStartMenuBackground()
 {
@@ -58,15 +62,23 @@ bool j1GameStartMenuBackground::PreUpdate()
 		App->WantToQuit();
 	*/
 	/**/
-	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || (App->inputM->EventPressed(INPUTEVENT::PAUSE, 1) == EVENTSTATE::E_DOWN)) {
 		ingamenushow = !ingamenushow;
-	if ((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) && (ingamenushow))
+		App->player->paused = !App->player->paused;
+		App->enemy->paused = !App->enemy->paused;
+		App->collision->paused = !App->collision->paused;
+		App->pathfinding->paused = !App->pathfinding->paused;
+	}
+	if (((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)|| (App->inputM->EventPressed(INPUTEVENT::PAUSE, 1) == EVENTSTATE::E_DOWN)) && (ingamenushow))
 	{
+		
+
 		App->scene->Show(Scene_ID::ingamemenu);
 		Freeze(false);
 	}
-	if ((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) && (!ingamenushow))
+	if (((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) || (App->inputM->EventPressed(INPUTEVENT::PAUSE, 1) == EVENTSTATE::E_DOWN)) && (!ingamenushow))
 	{
+		
 		App->scene->Hide();
 		Freeze(true);
 	}

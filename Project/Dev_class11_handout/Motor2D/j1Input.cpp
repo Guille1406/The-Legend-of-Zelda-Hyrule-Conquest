@@ -242,7 +242,7 @@ bool j1Input::PreUpdate()
 			//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
 			break;
 
-	//			gamepad			//
+
 		
 
 

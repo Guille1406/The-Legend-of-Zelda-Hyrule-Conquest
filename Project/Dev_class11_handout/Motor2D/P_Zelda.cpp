@@ -313,7 +313,7 @@ player_event P_Zelda::GetEvent()
 			//JUMP//
 			
 			//TUMBLE//
-			 if (App->inputM->EventPressed(INPUTEVENT::JUMP, 0) == EVENTSTATE::E_DOWN && !is_picked) {
+			 if (App->inputM->EventPressed(INPUTEVENT::TUMBLE, 0) == EVENTSTATE::E_DOWN && !is_picked) {
 				actual_event = roll;
 				doing_script = true;
 			}

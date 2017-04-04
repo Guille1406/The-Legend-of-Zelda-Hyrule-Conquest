@@ -49,25 +49,28 @@
     <action  button="1" event="1" />
     
     <!--COVER-->
-    <action  button="3" event="2" /> 
+    <action  button="9" event="2" /> 
     
     <!--TUMBLE-->
-    <action  button="10" event="3" />
+    <action  button="2" event="3" />
+
+    <!--INTERACT-->
+    <action  button="3" event="4" />
     
     <!--Move UP-->
-    <action  button="11" event="4" />
+    <action  button="11" event="5" />
 
     <!--Move DOWN-->
-    <action  button="12" event="5" />
+    <action  button="12" event="6" />
 
     <!--Move LEFT-->
-    <action  button="13" event="6" />
+    <action  button="13" event="7" />
 
     <!--Move RIGHT-->
-    <action  button="14" event="7" />
+    <action  button="14" event="8" />
 
     <!--PAUSE-->
-    <action  button="6"  event="8" />
+    <action  button="6"  event="9" />
 
 
   </inputManager>

@@ -5,6 +5,7 @@
 #include "j1Window.h"
 #include "j1Camera.h"
 #include "j1HUD.h"
+#include "j1Pathfinding.h"
 #include "Gui.h"
 #include "GuiButton.h"
 #include "j1GameStartMenuBack.h"
@@ -104,6 +105,10 @@ void S_InGameMenu::OnGui(Gui* ui, GuiEvent event)
 {
 	if ((ui == (Gui*)resume) && (event == GuiEvent::mouse_lclk_down))
 	{
+		App->player->paused = !App->player->paused;
+		App->enemy->paused = !App->enemy->paused;
+		App->collision->paused = !App->collision->paused;
+		App->pathfinding->paused = !App->pathfinding->paused;
 		App->scene->Hide();
 		App->startmenuback->Freeze(true);
 	}
