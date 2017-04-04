@@ -12,7 +12,7 @@ S_OptionsAudio::~S_OptionsAudio()
 
 bool S_OptionsAudio::Awake(pugi::xml_node& conf)
 {
-	AudioLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string(conf.child("AudioLabel").attribute("value").as_string("Audio menu")), false);
+	AudioLabel = App->gui->CreateButton(iPoint(40, 40), &std::string(conf.child("AudioLabel").attribute("value").as_string("Audio menu")), ButtonType::idle_only, &label_title_rec, false);
 	AudioLabel->SetFont(App->font->Sherwood28);
 	((Gui*)AudioLabel)->SetListener(this);
 	AudioLabel->SetVisible(false);

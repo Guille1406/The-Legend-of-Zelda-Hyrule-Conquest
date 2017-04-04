@@ -16,7 +16,7 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	GuiLabel* ControlsLabel = nullptr;
+	GuiButton* ControlsLabel = nullptr;
 	GuiButton* ControllerSensibility = nullptr;
 	GuiButton* MouseSensibility = nullptr;
 	GuiButton* ControllerLayout = nullptr;

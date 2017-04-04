@@ -16,7 +16,7 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	GuiLabel* VideoLabel = nullptr;
+	GuiButton* VideoLabel = nullptr;
 	GuiButton* scale = nullptr;
 	GuiButton* fullscreen = nullptr;
 	GuiCheck* fullscreen_check = nullptr;

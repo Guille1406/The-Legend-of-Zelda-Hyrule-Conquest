@@ -16,7 +16,7 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	GuiLabel* OptionsLabel = nullptr;
+	GuiButton* OptionsLabel = nullptr;
 	GuiButton* controls = nullptr;
 	GuiButton* video = nullptr;
 	GuiButton* audio = nullptr;

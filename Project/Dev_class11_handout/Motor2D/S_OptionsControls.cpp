@@ -13,7 +13,7 @@ S_OptionsControls::~S_OptionsControls()
 bool S_OptionsControls::Awake(pugi::xml_node& conf)
 {
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
-	ControlsLabel = App->gui->CreateLabel(iPoint(300, 100), &std::string(conf.child("ControlsLabel").attribute("value").as_string("Controls menu")), false);
+	ControlsLabel = App->gui->CreateButton(iPoint(40, 40), &std::string(conf.child("ControlsLabel").attribute("value").as_string("Controls menu")), ButtonType::idle_only, &label_title_rec, false);
 	ControlsLabel->SetFont(App->font->Sherwood28);
 	((Gui*)ControlsLabel)->SetListener(this);
 	ControlsLabel->SetVisible(false);

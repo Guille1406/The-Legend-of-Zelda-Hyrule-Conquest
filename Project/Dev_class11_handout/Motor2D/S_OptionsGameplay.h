@@ -16,7 +16,7 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	GuiLabel* GameplayLabel = nullptr;
+	GuiButton* GameplayLabel = nullptr;
 	GuiButton* ShowhideHUD = nullptr;
 	GuiCheck* ShowhideHUD_check = nullptr;
 	GuiButton* Language = nullptr;
