@@ -13,6 +13,7 @@ public:
 public:
 	char* test;
 	SDL_Texture* finale_texture = nullptr;
+	j1Timer loop_timer;
 };
 
 #endif // 

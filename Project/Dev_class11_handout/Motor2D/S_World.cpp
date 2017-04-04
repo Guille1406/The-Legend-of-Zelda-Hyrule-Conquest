@@ -88,15 +88,12 @@ bool S_World::PostUpdate()
 	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
 		App->player->Disable();
 		App->enemy->Disable();
-
-		
-		App->scene->ChangeScene(Send);
-
 		App->map->Disable();
 		App->collision->Disable();
 		App->hud->Disable();
-		App->scene->ChangeScene(mainmenu);
-
+		App->object->Disable();
+		App->scene->ChangeScene(Scene_ID::Send);	
+		App->player->loop_game_menu = false;
 	}
 	return true;
 

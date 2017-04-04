@@ -8,12 +8,14 @@
 #include "j1Textures.h"
 #include "j1Window.h"
 
+
 bool S_End::Start()
 {
 	LOG("End Open");
 	
 	finale_texture = App->tex->Load("textures/End.png");
 	
+	loop_timer.Start();
 	return false;
 }
 
@@ -28,6 +30,10 @@ bool S_End::PostUpdate()
 	App->win->scale = 1;
 	SDL_Rect temp = { 0,0,1000,1000 };
 	App->render->Blit(finale_texture, -App->render->camera.x / App->win->scale, -App->render->camera.y / App->win->scale);
+	if (loop_timer.Read() > 5000) {
+		App->scene->ChangeScene(Scene_ID::mainmenu);
+		App->win->scale = 1.5;
+	}
 	return true;
 }
 bool S_End::Clean()
