@@ -14,7 +14,7 @@
 #include "j1HUD.h"
 #include "j1Enemy.h"
 #include"j1Audio.h"
-
+#include"j1GameStartMenuBack.h"
 bool S_World::Start()
 {
 	
@@ -93,6 +93,7 @@ bool S_World::PostUpdate()
 		App->hud->Disable();
 		App->object->Disable();
 		App->scene->ChangeScene(Scene_ID::Send);	
+		App->startmenuback->Freeze(false);
 		App->player->loop_game_menu = false;
 		App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
 	}
