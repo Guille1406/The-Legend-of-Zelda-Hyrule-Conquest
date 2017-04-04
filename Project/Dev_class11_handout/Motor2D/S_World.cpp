@@ -37,7 +37,7 @@ bool S_World::Start()
 
 	{
 		int w, h = 0;
-		uchar* data = NULL;
+		uchar* data = nullptr;
 		if (App->map->CreateWalkabilityMap(w, h, &data))
 			App->pathfinding->SetMap(w, h);
 
@@ -48,11 +48,11 @@ bool S_World::Start()
 		}
 
 		int w_two, h_two = 0;
-		uchar* data_two = NULL;
+		uchar* data_two = nullptr;
 		if (App->map->CreateEnemyMap(w_two, h_two, &data_two)) {
 			int w_three = 0;
 			int h_three = 0;
-			uchar* data_three = NULL;
+			uchar* data_three = nullptr;
 			if (App->map->CreateEnemyPathMap(w_three, h_three, &data_three)) {
 				App->enemy->Enable();
 			}
@@ -61,13 +61,11 @@ bool S_World::Start()
 			//App->map->CreateLogicMap();
 	}
 	
-	
-
 	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 1);
+	App->audio->VolumeMusic(100);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
-
 
 	App->player->Link->pos = { 660,1400 };
 	App->player->Zelda->pos = { 620,1400 };

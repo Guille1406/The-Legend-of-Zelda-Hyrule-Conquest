@@ -94,7 +94,7 @@ bool j1Audio::PlayMusic(const char* path, float fade_time)
 	if(!active)
 		return false;
 
-	if(music != NULL)
+	if(music != nullptr)
 	{
 		if(fade_time > 0.0f)
 		{
@@ -111,7 +111,7 @@ bool j1Audio::PlayMusic(const char* path, float fade_time)
 
 	music = Mix_LoadMUS_RW(App->fs->Load(path), 1);
 
-	if(music == NULL)
+	if(music == nullptr)
 	{
 		LOG("Cannot load music %s. Mix_GetError(): %s\n", path, Mix_GetError());
 		ret = false;
@@ -150,7 +150,7 @@ unsigned int j1Audio::LoadFx(const char* path)
 
 	Mix_Chunk* chunk = Mix_LoadWAV_RW(App->fs->Load(path), 1);
 
-	if(chunk == NULL)
+	if(chunk == nullptr)
 	{
 		LOG("Cannot load wav %s. Mix_GetError(): %s", path, Mix_GetError());
 	}
@@ -185,21 +185,21 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 	return ret;
 }
 
-bool j1Audio::StopMusic()
+bool j1Audio::StopMusic(float fade_time)
 {
 	bool ret = true;
-	if (music != NULL)
+	if (music != nullptr)
 	{
-		Mix_PauseMusic();
-		if (Mix_PausedMusic == 0)
+		if (fade_time > 0.0f)
 		{
-			LOG("Music wasn't paused. Mix_GetError(): %s", Mix_GetError());
-			ret = false;
+			Mix_FadeOutMusic(int(fade_time * 1000.0f));
 		}
 		else
 		{
-			LOG("Music Paused");
+			Mix_HaltMusic();
 		}
+		// this call blocks until fade out is done
+		Mix_FreeMusic(music);
 	}
 	return ret;
 }
@@ -207,7 +207,7 @@ bool j1Audio::StopMusic()
 bool j1Audio::ResumeMusic()
 {
 	bool ret = true;
-	if (music != NULL)
+	if (music != nullptr)
 	{
 		Mix_ResumeMusic();
 		if (Mix_Playing(-1) == 0)
@@ -225,7 +225,7 @@ bool j1Audio::ResumeMusic()
 
 void j1Audio::VolumeMusic(int volume)
 {
-	if (music != NULL)
+	if (music != nullptr)
 	{
 		LOG("volume was    : %d\n", Mix_VolumeMusic(MIX_MAX_VOLUME / 2));
 		Mix_VolumeMusic(volume);

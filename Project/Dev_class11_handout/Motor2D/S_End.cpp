@@ -12,7 +12,8 @@
 bool S_End::Start()
 {
 	LOG("End Open");
-	App->audio->StopMusic();
+	//App->audio->StopMusic(1000.0f);
+	App->audio->VolumeMusic(0);
 	finale_texture = App->tex->Load("textures/End.png");
 	
 	loop_timer.Start();

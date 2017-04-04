@@ -34,13 +34,13 @@ public:
 	uint button_sound = 0;
 	uint secret_sound = 0;
 
-	bool StopMusic();
+	bool StopMusic(float fade_time);
 	bool ResumeMusic();
 	void VolumeMusic(int volume);
 	
 private:
 
-	_Mix_Music*			music = NULL;
+	_Mix_Music*			music = nullptr;
 	std::list<Mix_Chunk*> fx;
 };
 
