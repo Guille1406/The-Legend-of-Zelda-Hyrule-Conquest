@@ -57,32 +57,26 @@ bool j1GameStartMenuBackground::Start()
 // Called each loop iteration
 bool j1GameStartMenuBackground::PreUpdate()
 {
-	/*
-	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		App->WantToQuit();
-	*/
-	/**/
-	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || (App->input->GetControllerButton(0, 6) == KEY_DOWN)) {
-		ingamenushow = !ingamenushow;
-		App->player->paused = !App->player->paused;
-		App->enemy->paused = !App->enemy->paused;
-		App->collision->paused = !App->collision->paused;
-		App->pathfinding->paused = !App->pathfinding->paused;
-	}
-	if (((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)|| (App->input->GetControllerButton(0, 6) == KEY_DOWN)) && (ingamenushow))
+	if (App->scene->AnyWorldActive())
 	{
-		
-
-		App->scene->Show(Scene_ID::ingamemenu);
-		Freeze(false);
+		if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || (App->input->GetControllerButton(0, 6) == KEY_DOWN)) {
+			ingamenushow = !ingamenushow;
+			App->player->paused = !App->player->paused;
+			App->enemy->paused = !App->enemy->paused;
+			App->collision->paused = !App->collision->paused;
+			App->pathfinding->paused = !App->pathfinding->paused;
+		}
+		if (((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) || (App->input->GetControllerButton(0, 6) == KEY_DOWN)) && (ingamenushow))
+		{
+			App->scene->Show(Scene_ID::ingamemenu);
+			Freeze(false);
+		}
+		if (((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) || (App->input->GetControllerButton(0, 6) == KEY_DOWN)) && (!ingamenushow))
+		{
+			App->scene->Hide();
+			Freeze(true);
+		}
 	}
-	if (((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) || (App->input->GetControllerButton(0, 6) == KEY_DOWN)) && (!ingamenushow))
-	{
-		
-		App->scene->Hide();
-		Freeze(true);
-	}
-	/**/
 	return true;
 }
 
