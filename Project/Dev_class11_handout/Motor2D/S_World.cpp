@@ -18,13 +18,20 @@
 bool S_World::Start()
 {
 	
-	App->camera->Enable();
-	
+	App->camera->Enable();	
 	App->hud->Enable();
 	App->collision->Enable();
 	App->map->Enable();
 	App->player->Enable();
 	App->object->Enable();
+
+
+	//PAUSE FALSE
+	App->player->paused = false;
+	App->enemy->paused = false;
+	App->collision->paused = false;
+	App->pathfinding->paused = false;
+
 	LOG("IM FUCKING STARTING!!");
 	if (App->map->Load("tutorial map test.tmx") == true)
 
