@@ -86,7 +86,7 @@ void Green_Enemy::Rang_Player()
 
 		if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG && enemy_doing_script==false) {
 			player_in_range = App->player->Link;
-	
+			App->audio->PlayFx(App->enemy->enemy_pathfinding_audio);
 			//green_enemy_path.clear();
 			if (tile_pos != iPoint(0, 0)) {
 				if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr && player_in_range->GetLogicHeightPlayer()==0) {
@@ -100,7 +100,7 @@ void Green_Enemy::Rang_Player()
 		
 		else if (sqrt((dist2.x*dist2.x) + (dist2.y*dist2.y)) < RANG  && enemy_doing_script == false) {
 			player_in_range = App->player->Zelda;
-
+				App->audio->PlayFx(App->enemy->enemy_pathfinding_audio);
 			//green_enemy_path.clear();
 			if (tile_pos != iPoint(0, 0)) {
 				if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr && player_in_range->GetLogicHeightPlayer() == 0) {
