@@ -62,9 +62,9 @@ bool j1Gui::PreUpdate()
 		list_to_iterate = &GuiElements;
 
 	const Gui* mouse_hover = FindMouseHover();
-	if (mouse_hover &&
-		mouse_hover->can_focus == true)
-		SetFocus(mouse_hover);
+	if (mouse_hover && mouse_hover->can_focus == true)
+		if(mouse_hover->GetSceneListener() == App->scene->GetActiveScene())
+			SetFocus(mouse_hover);
 
 	/*
 	if (mouse_hover &&

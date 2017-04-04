@@ -104,18 +104,21 @@ bool j1GameStartMenuBackground::Update(float dt)
 			}
 		}
 		else
-			if (!((S_MainMenu*)App->scene->GetActiveScene())->visibility && !firstloop)
+			if (!firstloop)
 			{
-				((GuiImage*)((S_MainMenu*)App->scene->GetActiveScene())->title)->SetVisible(true);
-				((GuiImage*)((S_MainMenu*)App->scene->GetActiveScene())->title)->SetOpacity(startmenuopacity);
-				for (std::vector<GuiButton*>::iterator item = ((S_MainMenu*)App->scene->GetActiveScene())->buttons.begin(); item != ((S_MainMenu*)App->scene->GetActiveScene())->buttons.cend(); ++item)
+				if (!((S_MainMenu*)App->scene->GetActiveScene())->visibility)
 				{
-					(*item)->SetVisible(true);
-					(*item)->SetOpacity(startmenuopacity);
+					((GuiImage*)((S_MainMenu*)App->scene->GetActiveScene())->title)->SetVisible(true);
+					((GuiImage*)((S_MainMenu*)App->scene->GetActiveScene())->title)->SetOpacity(startmenuopacity);
+					for (std::vector<GuiButton*>::iterator item = ((S_MainMenu*)App->scene->GetActiveScene())->buttons.begin(); item != ((S_MainMenu*)App->scene->GetActiveScene())->buttons.cend(); ++item)
+					{
+						(*item)->SetVisible(true);
+						(*item)->SetOpacity(startmenuopacity);
+					}
+					((S_MainMenu*)App->scene->GetActiveScene())->visibility = true;
+					firstloop = true;
+					MainMenuOpacity_timer.Start();
 				}
-				((S_MainMenu*)App->scene->GetActiveScene())->visibility = true;
-				firstloop = true;
-				MainMenuOpacity_timer.Start();
 			}
 			else
 			{
