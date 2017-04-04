@@ -19,6 +19,18 @@ bool S_QuitGame::Awake(pugi::xml_node& conf)
 	((Gui*)Label)->SetListener(this);
 	Label->SetVisible(false);
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
+	Yes = App->gui->CreateButton(iPoint(X_pos, 320), &std::string(conf.child("Yes").attribute("value").as_string("Yes")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	Yes->SetFont(App->font->Sherwood20);
+	((Gui*)Yes)->SetListener(this);
+	Yes->SetVisible(false);
+	Yes->Focusable(true);
+	No = App->gui->CreateButton(iPoint(X_pos, 430), &std::string(conf.child("No").attribute("value").as_string("No")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	No->SetFont(App->font->Sherwood20);
+	((Gui*)No)->SetListener(this);
+	No->SetVisible(false);
+	No->Focusable(true);
+
+	/*
 	Yes = App->gui->CreateButton(iPoint(X_pos - 200, 350), &std::string(conf.child("Yes").attribute("value").as_string("Yes")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	Yes->SetFont(App->font->Sherwood20);
 	((Gui*)Yes)->SetListener(this);
@@ -29,6 +41,7 @@ bool S_QuitGame::Awake(pugi::xml_node& conf)
 	((Gui*)No)->SetListener(this);
 	No->SetVisible(false);
 	No->Focusable(true);
+	*/
 
 	buttons.push_back(Yes);
 	buttons.push_back(No);
