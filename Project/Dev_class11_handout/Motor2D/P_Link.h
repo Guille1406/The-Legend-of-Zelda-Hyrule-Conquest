@@ -43,7 +43,7 @@ public:
 	uint Link_Sword_Collides_Sword_Audio = 0;
 public:
 	int opacity = 255;
-	j1Timer collision_by_enemy_timmer;
+	
 	j1Timer enemy_col_sword_sword_timer;
 	bool can_pick_up = false;
 	bool im_lifting = false;

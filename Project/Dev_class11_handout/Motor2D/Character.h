@@ -139,6 +139,7 @@ public:
 	Collider*					attack_collider = nullptr;
 	bool						doing_script = false;
 	j1Timer roll_timer;
+	j1Timer collision_by_enemy_timmer;
 private:
 
 	//For jump

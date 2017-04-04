@@ -500,8 +500,9 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Zelda->is_rolling == false) {
-			if (Link->collision_by_enemy_timmer.Read() > 1500) {
-				Link->collision_by_enemy_timmer.Start();
+			if (Zelda->collision_by_enemy_timmer.Read() > 1500) {
+				Zelda->collision_by_enemy_timmer.Start();
+				
 				Zelda->actual_event = player_event::push_backwards;
 				Zelda->doing_script = true;
 				Zelda->Direction_Push_Election();
@@ -514,9 +515,10 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		if (Zelda->is_rolling == false) {
 			//roll_timer
 			//if (Link->roll_timer.Read() > 1500) {
-			if (Link->collision_by_enemy_timmer.Read() > 1500) {
+			if (Zelda->collision_by_enemy_timmer.Read() > 1500) {
 				App->audio->PlayFx(Link->Link_Hurt_Audio);
 				Zelda->roll_timer.Start();
+				Zelda->collision_by_enemy_timmer.Start();
 				Zelda->actual_event = player_event::push_backwards;
 				Zelda->doing_script = true;
 				Zelda->Direction_Push_Election();
