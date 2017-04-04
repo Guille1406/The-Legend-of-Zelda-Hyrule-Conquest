@@ -184,3 +184,51 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 
 	return ret;
 }
+
+bool j1Audio::StopMusic()
+{
+	bool ret = true;
+	if (music != NULL)
+	{
+		Mix_PauseMusic();
+		if (Mix_PausedMusic == 0)
+		{
+			LOG("Music wasn't paused. Mix_GetError(): %s", Mix_GetError());
+			ret = false;
+		}
+		else
+		{
+			LOG("Music Paused");
+		}
+	}
+	return ret;
+}
+
+bool j1Audio::ResumeMusic()
+{
+	bool ret = true;
+	if (music != NULL)
+	{
+		Mix_ResumeMusic();
+		if (Mix_Playing(-1) == 0)
+		{
+			LOG("Music is now playing.");
+			ret = false;
+		}
+		else
+		{
+			LOG("Music dosent play. Mix_GetError(): %s", Mix_GetError());
+		}
+	}
+	return ret;
+}
+
+void j1Audio::VolumeMusic(int volume)
+{
+	if (music != NULL)
+	{
+		LOG("volume was    : %d\n", Mix_VolumeMusic(MIX_MAX_VOLUME / 2));
+		Mix_VolumeMusic(volume);
+		LOG("volume is now : %d\n", Mix_VolumeMusic(-1));
+	}
+}

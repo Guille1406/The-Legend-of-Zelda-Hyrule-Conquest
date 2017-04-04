@@ -33,6 +33,10 @@ public:
 	bool PlayFx(unsigned int fx, int repeat = 0);
 	uint button_sound = 0;
 	uint secret_sound = 0;
+
+	bool StopMusic();
+	bool ResumeMusic();
+	void VolumeMusic(int volume);
 	
 private:
 

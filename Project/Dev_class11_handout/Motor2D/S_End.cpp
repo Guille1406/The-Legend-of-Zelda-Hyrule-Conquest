@@ -7,12 +7,12 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Window.h"
-
+#include"j1Audio.h"
 
 bool S_End::Start()
 {
 	LOG("End Open");
-	
+	App->audio->StopMusic();
 	finale_texture = App->tex->Load("textures/End.png");
 	
 	loop_timer.Start();
