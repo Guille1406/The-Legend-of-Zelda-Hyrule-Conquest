@@ -445,6 +445,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 				Link->enemy_col_sword_sword_timer.Start();
 				n_enemy->state = EnemyState::push_back_enemy;
 				n_enemy->enemy_doing_script = true;
+				App->audio->PlayFx(App->enemy->enemy_dies_audio);
 				n_enemy->live--;
 			}
 			else {
