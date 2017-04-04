@@ -2,6 +2,7 @@
 #include "j1Player.h"
 #include "Gui.h"
 #include "j1GameStartMenuBack.h"
+#include "j1Render.h"
 
 S_Campaign::S_Campaign()
 {
@@ -14,9 +15,7 @@ S_Campaign::~S_Campaign()
 
 bool S_Campaign::Awake(pugi::xml_node& conf)
 {
-	controllerlayout = App->gui->CreateImage(iPoint(1, 0), &controllerlayout_rec, false);
-	((Gui*)controllerlayout)->SetListener(this);
-	controllerlayout->SetVisible(false);
+	controllerlayout_pos = { 1,0 };
 	newcampaign = App->gui->CreateButton(iPoint(920, 490), &std::string("New Campaign"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	newcampaign->SetFont(App->font->Sherwood20);
 	((Gui*)newcampaign)->SetListener(this);
@@ -36,7 +35,6 @@ bool S_Campaign::Awake(pugi::xml_node& conf)
 
 bool S_Campaign::Start()
 {
-	controllerlayout->SetVisible(true);
 	newcampaign->SetVisible(true);
 	back->SetVisible(true);
 
@@ -47,13 +45,13 @@ bool S_Campaign::Start()
 
 bool S_Campaign::Update()
 {
+	App->render->Blit(App->gui->GetAtlas(), controllerlayout_pos.x - App->render->camera.x, controllerlayout_pos.y - App->render->camera.y, &controllerlayout_rec, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
 	MenuInput(&buttons);
 	return true;
 }
 
 bool S_Campaign::Clean()
 {
-	controllerlayout->SetVisible(false);
 	newcampaign->SetVisible(false);
 	back->SetVisible(false);
 	return true;
@@ -64,7 +62,6 @@ void S_Campaign::OnGui(Gui* ui, GuiEvent event)
 	if ((ui == (Gui*)newcampaign) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->scene->ChangeScene(Scene_ID::world);
-		App->scene->Hide();
 		App->startmenuback->Freeze(true);
 	}
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
