@@ -88,34 +88,24 @@ bool j1HUD::Update(float dt)
 	if(is_float != 0.0f)
 		App->render->Blit(atlas, -App->render->camera.x + life_pos_x, -App->render->camera.y + heart_container_pos_y, &Heart_Half, 1.0f, 0, INT_MAX, INT_MAX, false);
 
+	uint Window_W = App->win->GetWindowW();
 	//Blit Link circle
 	App->render->Blit(atlas, -App->render->camera.x + item_circles_output, -App->render->camera.y + item_circles_output, &Link_circle, 1.0f, 0, INT_MAX, INT_MAX, false);
 
 	//Blit Zelda circle
-	App->render->Blit(atlas, -App->render->camera.x + App->win->GetWindowW() - Zelda_circle.w - item_circles_output, -App->render->camera.y + item_circles_output, &Zelda_circle, 1.0f, 0, INT_MAX, INT_MAX, false);
-
+	App->render->Blit(atlas, -App->render->camera.x + Window_W - Zelda_circle.w - item_circles_output, -App->render->camera.y + item_circles_output, &Zelda_circle, 1.0f, 0, INT_MAX, INT_MAX, false);
+	
 	//Blit Sword
 	App->render->Blit(atlas, -App->render->camera.x + item_circles_output + Sword_centre.x, -App->render->camera.y + item_circles_output + Sword_centre.y, &Sword, 1.0f, 0, INT_MAX, INT_MAX, false);
 
 	//Blit Bow
-	App->render->Blit(atlas, -App->render->camera.x + App->win->GetWindowW() - Zelda_circle.w - item_circles_output + Bow_centre.x, -App->render->camera.y + item_circles_output + Bow_centre.x, &Bow, 1.0f, 0, INT_MAX, INT_MAX, false);
+	App->render->Blit(atlas, -App->render->camera.x + Window_W - Zelda_circle.w - item_circles_output + Bow_centre.x, -App->render->camera.y + item_circles_output + Bow_centre.x, &Bow, 1.0f, 0, INT_MAX, INT_MAX, false);
+	
+	//Blit Link circle L
+	App->render->Blit(atlas, -App->render->camera.x + item_circles_output - LRbuttonsoffset, -App->render->camera.y + item_circles_output - LRbuttonsoffset, &Link_circle_L, 1.0f, 0, INT_MAX, INT_MAX, false);
 
-	//For some test
-	/*
-	if(App->input->GetKey(SDL_SCANCODE_1) == j1KeyState::KEY_DOWN)
-	half_hearts_test_purpose += 1;
-	if (App->input->GetKey(SDL_SCANCODE_2) == j1KeyState::KEY_DOWN)
-	half_hearts_test_purpose -= 1;
-	if (App->input->GetKey(SDL_SCANCODE_3) == j1KeyState::KEY_DOWN)
-	half_hearts_test_purpose += 2;
-	if (App->input->GetKey(SDL_SCANCODE_4) == j1KeyState::KEY_DOWN)
-	half_hearts_test_purpose -= 2;
-	if (App->input->GetKey(SDL_SCANCODE_5) == j1KeyState::KEY_DOWN)
-	hearts_containers_test_purpose += 1;
-	if (App->input->GetKey(SDL_SCANCODE_6) == j1KeyState::KEY_DOWN)
-	hearts_containers_test_purpose -= 1;
-	*/
-
+	//Blit Zelda circle R
+	App->render->Blit(atlas, -App->render->camera.x + Window_W - Zelda_circle.w - item_circles_output + Zelda_circle.w - Zelda_circle_R.w + LRbuttonsoffset, -App->render->camera.y + item_circles_output - LRbuttonsoffset, &Zelda_circle_R, 1.0f, 0, INT_MAX, INT_MAX, false);
 	return true;
 }
 

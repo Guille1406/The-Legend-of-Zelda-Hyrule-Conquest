@@ -45,15 +45,17 @@ private:
 	SDL_Texture*	atlas = nullptr;
 	std::string		atlas_file_name = empty_char;
 
-	SDL_Rect Life_Label = { 0,0,0,0 };
-	SDL_Rect Heart_Container = { 0,0,0,0 };
-	SDL_Rect Heart_Full = { 0,0,0,0 };
-	SDL_Rect Heart_Half = { 0,0,0,0 };
-	SDL_Rect Link_circle = { 0,0,0,0 };
-	SDL_Rect Zelda_circle = { 0,0,0,0 };
+	SDL_Rect Life_Label = { 672,0,244,36 };
+	SDL_Rect Heart_Container = { 672,52,45,42 };
+	SDL_Rect Heart_Full = { 717,52,45,42 };
+	SDL_Rect Heart_Half = { 717,52,24,42 };
+	SDL_Rect Link_circle = { 135,325,136,136 };
+	SDL_Rect Zelda_circle = { 0,325,136,136 };
+	SDL_Rect Link_circle_L = { 342,325,70,55 };
+	SDL_Rect Zelda_circle_R = { 272,325,70,55 };
 	//Items
-	SDL_Rect Sword = { 0,0,0,0 };
-	SDL_Rect Bow = { 0,0,0,0 };
+	SDL_Rect Sword = { 916,0,60,60 };
+	SDL_Rect Bow = { 976,0,60,60 };
 
 	//Drawing variables
 	uint Life_Label_x_pos = 0;
@@ -64,7 +66,7 @@ private:
 	//Items centre from upper left corner of circle
 	iPoint Sword_centre = { 0,0 };
 	iPoint Bow_centre = { 0,0 };
-
+	uint LRbuttonsoffset = 10;
 	
 
 };
