@@ -317,6 +317,7 @@ player_event P_Zelda::GetEvent()
 			 if (App->inputM->EventPressed(INPUTEVENT::TUMBLE, 0) == EVENTSTATE::E_DOWN && !is_picked) {
 				actual_event = roll;
 				doing_script = true;
+				is_rolling = true;
 			}
 			 //PICKED UP//
 			if (is_picked) {

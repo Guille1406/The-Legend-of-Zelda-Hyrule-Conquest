@@ -12,6 +12,8 @@ bool j1Enemy::Awake(pugi::xml_node &)
 }
 bool j1Enemy::Start()
 {
+	one_time_appear = 0;
+	appear_enemies = false;
 	enemy_perf = new Enemy();
 	enemy_perf->LoadAnimation("sprites/green_enemy.xml");
 	
@@ -89,6 +91,8 @@ bool j1Enemy::CleanUp()
 	Green_Enemy_Animation.clear();
 	App->tex->UnLoad(green_soldier_tex);
 	V_MyEnemies.clear();
+	appear_enemies = false;
+	one_time_appear = 0;
 	return true;
 }
 

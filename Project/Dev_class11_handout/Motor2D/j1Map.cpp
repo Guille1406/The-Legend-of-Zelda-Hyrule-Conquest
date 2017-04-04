@@ -184,8 +184,11 @@ bool j1Map::CleanUp()
 	LOG("Unloading map");
 
 	// Remove all tilesets
+	
 	for (std::list <TileSet*>::iterator temp = App->map->data.tilesets.begin(); temp != App->map->data.tilesets.cend(); ++temp) {
-		App->tex->UnLoad((*temp)->texture);
+		if (*temp != nullptr) {
+			App->tex->UnLoad((*temp)->texture);
+		}
 	}
 
 	for (std::list<TileSet*>::iterator item = data.tilesets.begin(); item != data.tilesets.cend(); ++item) {

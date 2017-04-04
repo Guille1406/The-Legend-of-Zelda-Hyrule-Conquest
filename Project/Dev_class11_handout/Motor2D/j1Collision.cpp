@@ -90,14 +90,24 @@ bool j1Collision::PreUpdate()
 {
 	if (!paused) {
 		// Remove all colliders scheduled for deletion
-		for (uint i = 0; i < colliders.size(); ++i)
+		/*for (uint i = 0; i < colliders.size(); ++i)
 		{
 			if (colliders[i] != nullptr && colliders[i]->to_delete == true)
 			{
 				delete colliders[i];
 				colliders[i] = nullptr;
 			}
+		}*/
+
+
+		for (std::vector<Collider*>::const_iterator it = colliders.cbegin(); it != colliders.cend(); ++it) {
+			if ((*it) != nullptr && (*it)->to_delete == true)
+			{
+				colliders.erase(it);
+				--it;
+			}
 		}
+
 
 	}
 	return true;
