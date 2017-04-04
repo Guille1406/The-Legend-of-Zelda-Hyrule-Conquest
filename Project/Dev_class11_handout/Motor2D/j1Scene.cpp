@@ -78,11 +78,18 @@ bool j1Scene::Start()
 	(*scene_list.back()).scene_name = Scene_ID::ingamemenu;
 	
 	//World
-	scene_list.push_back(new S_World);
+	MainScene* scene_pointer = nullptr;
+	scene_pointer = new S_World;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::world;
-	scene_list.push_back(new S_Dungeon);
+	scene_pointer = new S_Dungeon;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::dungeon;
-	scene_list.push_back(new S_End);
+	scene_pointer = new S_End;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::Send;
 
 	//XML congig read
@@ -196,4 +203,12 @@ bool j1Scene::Hide()
 {
 	sub_active_scene->Clean();
 	return true;
+}
+
+bool j1Scene::AnyWorldActive() const
+{
+	for (std::vector<MainScene*>::const_iterator item = world_scenes_vector.begin(); item != world_scenes_vector.cend(); ++item)
+		if ((*item) == main_active_scene)
+			return true;
+	return false;
 }

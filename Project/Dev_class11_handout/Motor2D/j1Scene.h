@@ -63,11 +63,14 @@ public:
 		return ingame_menu_scene;
 	}
 
+	bool AnyWorldActive() const;
+
 private:
 	MainScene* main_active_scene = nullptr;
 	MainScene* sub_active_scene = nullptr;
 	MainScene* prev_scene = nullptr;
 	std::list<MainScene*> scene_list;
+	std::vector<MainScene*> world_scenes_vector;
 
 	MainScene* ingame_menu_scene = nullptr;
 };
