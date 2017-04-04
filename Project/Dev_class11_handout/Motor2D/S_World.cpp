@@ -24,7 +24,7 @@ bool S_World::Start()
 	App->collision->Enable();
 	App->map->Enable();
 	App->player->Enable();
-		App->object->Enable();
+	App->object->Enable();
 	LOG("IM FUCKING STARTING!!");
 	if (App->map->Load("tutorial map test.tmx") == true)
 
@@ -106,17 +106,14 @@ bool S_World::Clean()
 	LOG("World Test Deleted");
 
 	//std::list <TileSet*>::iterator temp = App->map->data.tilesets.begin();
-	for (std::list <TileSet*>::iterator temp = App->map->data.tilesets.begin(); temp != App->map->data.tilesets.cend(); ++temp) {
-		App->tex->UnLoad((*temp)->texture);
-	}
-
+	
 	/*p2List_item<TileSet*>* temp = App->map->data.tilesets.start;
 	while (temp != NULL) {
 		App->tex->UnLoad(temp->data->texture);
 		temp = temp->next;
 	}*/
 
-	App->map->CleanUp();
+	
 	
 	return false;
 }

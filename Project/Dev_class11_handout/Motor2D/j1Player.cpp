@@ -13,9 +13,9 @@
 #include"j1Audio.h"
 bool j1Player::Awake(pugi::xml_node& config)
 {
-	
 	Link = new P_Link();
 	Zelda = new P_Zelda();
+	
 	cooperative = true;
 	
 	//Link->sprites_vector = new std::vector<Animation>;
@@ -60,12 +60,6 @@ bool j1Player::Start()
 	Zelda->character_direction = direction::down;
 
 
-	//Change this for link spritesheet
-	Link->entity_texture = App->tex->Load("textures/map.png");
-
-	//Change this for the zelda spritesheet
-	Zelda->entity_texture = Link->entity_texture;
-	
 
 	Link->LoadAnimation("sprites/Link_Spritesheet_Finale.xml");
 	Zelda->LoadAnimation("sprites/Zelda_Spritesheet_Finale.xml");
@@ -143,6 +137,14 @@ bool j1Player::Update(float dt)
 bool j1Player::PostUpdate()
 {
 	
+	return true;
+}
+
+bool j1Player::CleanUp() {
+	App->tex->UnLoad(Link->entity_texture);
+	App->tex->UnLoad(Zelda->entity_texture);
+	Link->sprites_vector.clear();
+	Zelda->sprites_vector.clear();
 	return true;
 }
 

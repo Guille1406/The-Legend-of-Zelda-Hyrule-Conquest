@@ -184,6 +184,9 @@ bool j1Map::CleanUp()
 	LOG("Unloading map");
 
 	// Remove all tilesets
+	for (std::list <TileSet*>::iterator temp = App->map->data.tilesets.begin(); temp != App->map->data.tilesets.cend(); ++temp) {
+		App->tex->UnLoad((*temp)->texture);
+	}
 
 	for (std::list<TileSet*>::iterator item = data.tilesets.begin(); item != data.tilesets.cend(); ++item) {
 		RELEASE((*item));
@@ -542,7 +545,7 @@ bool j1Map::LoadConnectedObjects(pugi::xml_node & node)
 	}
 	else
 	{
-		static int count = 0;
+		int count = -1;
 		for (pugi::xml_node node_object = layer_data; node_object; node_object = node_object.next_sibling("object"))
 		{
 

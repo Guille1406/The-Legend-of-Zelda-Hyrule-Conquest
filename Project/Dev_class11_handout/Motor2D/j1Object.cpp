@@ -72,6 +72,8 @@ bool j1Object::PostUpdate()
 
 bool j1Object::CleanUp()
 {
+	App->tex->UnLoad(objects_texture);
+	V_Objects.clear();
 	return true;
 }
 

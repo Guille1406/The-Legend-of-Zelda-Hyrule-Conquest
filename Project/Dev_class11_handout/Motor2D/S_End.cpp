@@ -38,7 +38,7 @@ bool S_End::PostUpdate()
 }
 bool S_End::Clean()
 {
-	
+	App->tex->UnLoad(finale_texture);
 
 	return false;
 }

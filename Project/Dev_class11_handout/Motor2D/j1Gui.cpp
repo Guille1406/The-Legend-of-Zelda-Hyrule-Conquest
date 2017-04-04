@@ -147,6 +147,7 @@ bool j1Gui::CleanUp()
 {
 	LOG("Freeing GUI");
 
+	App->tex->UnLoad(atlas);
 	for (std::list<Gui*>::iterator item = GuiElements.begin(); item != GuiElements.cend(); ++item)
 		RELEASE(*item);
 	GuiElements.clear();

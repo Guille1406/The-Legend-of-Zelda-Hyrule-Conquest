@@ -45,7 +45,7 @@ bool j1HUD::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1HUD::Start()
 {
-	atlas = App->tex->Load(atlas_file_name.c_str());
+	//atlas = App->tex->Load(atlas_file_name.c_str());
 	return true;
 }
 

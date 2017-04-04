@@ -72,10 +72,7 @@ bool S_MainMenu::Awake(pugi::xml_node& conf)
 
 bool S_MainMenu::Start()
 {
-	App->player->Disable();
-	App->camera->Disable();
-	App->enemy->Disable();
-	App->object->Disable();
+	
 
 	if (visibility)
 	{

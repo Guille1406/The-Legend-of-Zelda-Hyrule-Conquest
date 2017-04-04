@@ -83,6 +83,11 @@ bool j1Enemy::PostUpdate()
 
 bool j1Enemy::CleanUp()
 {
+	for (int i = 0; i < V_MyEnemies.size(); i++) {
+		App->tex->UnLoad(V_MyEnemies[i]->entity_texture);
+	}
+	Green_Enemy_Animation.clear();
+	App->tex->UnLoad(green_soldier_tex);
 	V_MyEnemies.clear();
 	return true;
 }

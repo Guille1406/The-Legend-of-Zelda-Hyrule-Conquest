@@ -167,6 +167,7 @@ bool j1GameStartMenuBackground::PostUpdate()
 // Called before quitting
 bool j1GameStartMenuBackground::CleanUp()
 {
+	App->tex->UnLoad(atlas);
 	for (std::list<BackgroundCharacter*>::iterator item = BackgroundCharacterList.begin(); item != BackgroundCharacterList.cend(); ++item)
 		RELEASE(*item);
 	BackgroundCharacterList.clear();

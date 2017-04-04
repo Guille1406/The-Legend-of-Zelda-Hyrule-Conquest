@@ -26,7 +26,7 @@ bool j1Pathfinding::Start()
 	LOG("Cluster abstraction generated in %.3f", timer.ReadSec());
 
 	//Load debug tiles trexture
-	path_texture = App->tex->Load("maps/path_tex.png");
+	//path_texture = App->tex->Load("maps/path_tex.png");
 
 	return true;
 }
