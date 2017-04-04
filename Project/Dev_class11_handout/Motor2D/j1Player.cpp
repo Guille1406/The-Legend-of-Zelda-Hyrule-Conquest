@@ -417,7 +417,10 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 				App->audio->PlayFx(Link->Link_Hurt_Audio);
 				Link->roll_timer.Start();
 				Link->collision_by_enemy_timmer.Start();
-				Link->Collision_Sword_EnemySword();
+				//Link->Collision_Sword_EnemySword();
+				Link->actual_event = player_event::push_backwards;
+				Link->doing_script = true;
+				Link->Direction_Push_Election();
 				half_hearts_test_purpose--;
 			}
 			//}
@@ -453,7 +456,9 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			//if (Link->roll_timer.Read() > 1500) {
 			if (Link->collision_by_enemy_timmer.Read() > 1500) {
 				Link->collision_by_enemy_timmer.Start();
-				Link->Collision_Sword_EnemySword();
+				Link->actual_event = player_event::push_backwards;
+				Link->doing_script = true;
+				Link->Direction_Push_Election();
 				half_hearts_test_purpose--;
 
 			}
@@ -466,7 +471,9 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			if (Link->roll_timer.Read() > 1500) {
 				if (Link->collision_by_enemy_timmer.Read() > 1500) {
 					Link->collision_by_enemy_timmer.Start();
-					Link->Collision_Sword_EnemySword();
+					Link->actual_event = player_event::push_backwards;
+					Link->doing_script = true;
+					Link->Direction_Push_Election();
 					half_hearts_test_purpose--;
 
 				}
@@ -479,7 +486,9 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		if (Zelda->is_rolling == false) {
 			if (Link->collision_by_enemy_timmer.Read() > 1500) {
 				Link->collision_by_enemy_timmer.Start();
-				Zelda->Collision_Sword_EnemySword();
+				Zelda->actual_event = player_event::push_backwards;
+				Zelda->doing_script = true;
+				Zelda->Direction_Push_Election();
 				half_hearts_test_purpose--;
 			}
 
@@ -490,7 +499,9 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		if (Zelda->is_rolling == false) {
 			if (Link->collision_by_enemy_timmer.Read() > 1500) {
 				Link->collision_by_enemy_timmer.Start();
-				Zelda->Collision_Sword_EnemySword();
+				Zelda->actual_event = player_event::push_backwards;
+				Zelda->doing_script = true;
+				Zelda->Direction_Push_Election();
 				half_hearts_test_purpose--;
 			}
 		}
@@ -503,7 +514,9 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			if (Link->collision_by_enemy_timmer.Read() > 1500) {
 				App->audio->PlayFx(Link->Link_Hurt_Audio);
 				Zelda->roll_timer.Start();
-				Link->collision_by_enemy_timmer.Start();
+				Zelda->actual_event = player_event::push_backwards;
+				Zelda->doing_script = true;
+				Zelda->Direction_Push_Election();
 				half_hearts_test_purpose--;
 			}
 			//}
@@ -518,6 +531,9 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 				App->audio->PlayFx(Link->Link_Hurt_Audio);
 				Zelda->roll_timer.Start();
 				Link->collision_by_enemy_timmer.Start();
+				Zelda->actual_event = player_event::push_backwards;
+				Zelda->doing_script = true;
+				Zelda->Direction_Push_Election();
 				half_hearts_test_purpose--;
 			}
 			//}

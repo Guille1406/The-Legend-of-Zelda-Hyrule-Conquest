@@ -41,14 +41,19 @@ void Character::ExecuteEvent(float dt)
 	case backwards:
 		App->player->Link->Collision_Sword_EnemySword();
 		break;
+	case push_backwards:
+		Direction_Push_Election();
+		break;
 	}
 
 	//Dependiendo del evento actual i de la direccion cambia la animacion:
 	//
 	//Ejemplo: el evento Idle (1) - left (2) cogera la animación 1*4 + 2 = 6
 	//El orden de estas animaciones se establece en el xml.
+	if (actual_event != push_backwards) {
 		int animation = (int)actual_event * 4 + (int)character_direction;
-	this->ChangeAnimation(animation);
+		this->ChangeAnimation(animation);
+	}
 }
 
 void Character::GetAdjacents()
@@ -410,6 +415,51 @@ void Character::Collision_Sword_EnemySword() {
 		break;
 
 
+	}
+
+}
+
+
+void Character::Direction_Push_Election()
+{
+	//Calls the jump function depending on the player direction
+	switch (character_direction) {
+	case direction::up:
+		Player_Hurt_Displacement(pos.y, true);
+		break;
+	case direction::down:
+		Player_Hurt_Displacement(pos.y, false);
+		break;
+	case direction::left:
+		Player_Hurt_Displacement(pos.x, true);
+		break;
+	case direction::right:
+		Player_Hurt_Displacement(pos.x, false);
+		break;
+	}
+}
+
+
+void Character::Player_Hurt_Displacement(int & pos, bool add)
+{
+
+	static int final_pos = 0;
+	//same as jump function
+	int i = 1;
+	if (!add)
+		i = -1;
+
+	if (!temp)
+		final_pos = pos + (i * PUSH_DISTANCE);
+	temp = true;
+
+	//if player have wall in front the roll will stop
+	if ((i * pos <  i*final_pos) && GetLogic(false, tilepos) == 0) {
+		pos = pos + (i * 4);
+	}
+	else {
+		doing_script = false;
+		temp = false;
 	}
 
 }

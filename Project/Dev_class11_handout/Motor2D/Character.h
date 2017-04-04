@@ -40,6 +40,7 @@ enum player_event {
 	fall,
 	throw_,
 	backwards,
+	push_backwards,
 	/*
 	.
 	.
@@ -98,7 +99,8 @@ public:
 	//Takes the id of front tiles
 	int GetLogic(int height, iPoint tilepos);
 
-
+	void Player_Hurt_Displacement(int & pos, bool add);
+	void Direction_Push_Election();
 	uint GetLogicHeightPlayer();
 	void ChangeLogicHeightPlayer(int);
 
