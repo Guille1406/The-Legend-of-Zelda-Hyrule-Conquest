@@ -72,13 +72,13 @@ public:
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type,Entity* parent, j1Module* callback = nullptr);
 	bool EraseCollider(Collider* collider);
 	void DebugDraw();
-
+	bool debug = false;
 private:
 
 	std::vector<Collider*> colliders;
 	bool matrix[MAX_COLLIDERS][MAX_COLLIDERS];
 	//std::vector<std::vector<bool>> matrix_colliders;
-	bool debug = false;
+
 };
 
 #endif // __ModuleCollision_H__#pragma once

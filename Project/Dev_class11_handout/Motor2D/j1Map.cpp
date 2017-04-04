@@ -49,8 +49,10 @@ void j1Map::Draw(int height)
 	for (; item != data.layers.cend(); ++item) {
 		MapLayer* layer = (*item);
 
-		if (layer->properties.Get("Navigation") != 0 || layer->properties.Get("Enemies") != 0 || layer->properties.Get("Path") != 0)
-			continue;
+		if (!App->collision->debug) {
+			if (layer->properties.Get("Navigation") != 0 || layer->properties.Get("Enemies") != 0 || layer->properties.Get("Path") != 0)
+				continue;
+		}
 		if (layer->print_height == height) {
 			for (int y = 0; y < data.height; ++y)
 			{
