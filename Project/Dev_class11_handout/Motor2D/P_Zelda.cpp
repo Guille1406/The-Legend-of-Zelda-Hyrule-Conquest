@@ -111,7 +111,7 @@ void P_Zelda::UpdateArrows()
 void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 {
 	int final_pos = 0;
-	int temp_pos = pos + 16;
+	int temp_pos = pos ;
 	bool can_pass_wall = true;
 	bool zelda_collides = false;
 	int decrease = 1;
@@ -174,7 +174,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 		is_on_collision = false;
 	}
 			
-			temp_pos = temp_pos + (n * 4);
+			temp_pos = temp_pos + (n * 1);
 			temp_point.x = ((temp_pos) / 16) * is_horitzontal + temp_point.x * !is_horitzontal;
 			temp_point.y = ((temp_pos) / 16) * !is_horitzontal + temp_point.y * is_horitzontal;
 			if (stop)
