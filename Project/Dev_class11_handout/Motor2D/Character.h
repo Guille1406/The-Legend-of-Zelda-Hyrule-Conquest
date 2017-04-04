@@ -143,7 +143,10 @@ public:
 private:
 
 	//For jump
+	bool jump_temp = false;
+
 	bool temp = false;
+
 
 	 //Needed to save position only one time
 };

@@ -372,16 +372,16 @@ void Character::JumpFunction(float dt, int& pos, bool add)
 	if (!add)
 		i = -1;
 
-	if (!temp)
+	if (!jump_temp)
 		final_pos = pos + (i * JUMP_DISTANCE);
-	temp = true;
+	jump_temp = true;
 
 	if (( i * pos <  i*final_pos)) {
 		pos = pos + (i * 4);
 	}
 	// if player reached the final pos, player height decreases 1
 	else {
-		temp = false;
+		jump_temp = false;
 		doing_script = false;
 		ChangeLogicHeightPlayer(GetLogicHeightPlayer() - 1);
 	}
