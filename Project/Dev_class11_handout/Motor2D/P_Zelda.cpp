@@ -98,6 +98,7 @@ void P_Zelda::UpdateArrows()
 		App->render->Blit(Vec_Arrow[i]->entity_texture, Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, &Vec_Arrow[i]->arrow_rect);
 
 		if (SDL_GetTicks() - Vec_Arrow[i]->timer > 1000) {
+			if(Vec_Arrow[i]->collider != nullptr && Vec_Arrow[i]->collider->type == collider_arrow)
 			Vec_Arrow[i]->collider->to_delete = true;
 			Vec_Arrow.erase(Vec_Arrow.begin() + i);
 			i--;

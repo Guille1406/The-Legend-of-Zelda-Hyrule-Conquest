@@ -21,6 +21,7 @@ void P_Link::Attack(float dt)
 
 void P_Link::link_sword_collider_update() {
 	if (Link_sword->collider!=nullptr) {
+		
 		Link_sword->collider->to_delete = true;
 	}
 }

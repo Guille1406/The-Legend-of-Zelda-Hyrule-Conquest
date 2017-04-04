@@ -351,6 +351,8 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			arrow_temp->attached_enemy = (Enemy*)collider2->parent;
 			arrow_temp->offset.x = arrow_temp->pos.x - arrow_temp->attached_enemy->pix_world_pos.x;
 			arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pix_world_pos.y;
+
+			if(collider1->type == collider_arrow)
 			collider1->to_delete = true;
 			Enemy* n_enemy = (Enemy*)collider2->parent;
 			if (n_enemy->live > 0) {
@@ -373,6 +375,8 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			arrow_temp->attached_enemy = (Enemy*)collider1->parent;
 			arrow_temp->offset.x = arrow_temp->pos.x - arrow_temp->attached_enemy->pix_world_pos.x;
 			arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pix_world_pos.y;
+
+			if(collider2->type == collider_arrow)
 			collider2->to_delete = true;
 			Enemy* n_enemy = (Enemy*)collider2->parent;
 			if (n_enemy->live > 0) {

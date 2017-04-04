@@ -39,7 +39,9 @@ bool j1Enemy::PreUpdate()
 	if (!paused) {
 		for (int i = 0; i < V_MyEnemies.size(); i++) {
 			if (V_MyEnemies[i]->tokill == true) {
+				if(V_MyEnemies[i]->collider->type ==collider_enemy)
 				V_MyEnemies[i]->collider->to_delete = true;
+				if(V_MyEnemies[i]->shield_test->type == collider_enemy_sword)
 				V_MyEnemies[i]->shield_test->to_delete = true;
 				std::vector<Enemy*>::iterator it = std::find(App->enemy->V_MyEnemies.begin(), App->enemy->V_MyEnemies.end(), V_MyEnemies[i]);
 				V_MyEnemies.erase(it);
