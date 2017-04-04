@@ -99,6 +99,8 @@ public:
 	SDL_Texture* green_soldier_tex=nullptr;
 	bool appear_enemies = false;
 	uint one_time_appear = 0;
+	uint enemy_dies_audio=0;
+	uint enemy_pathfinding_audio = 0;
 };
 
 

@@ -32,9 +32,9 @@ bool j1Player::Awake(pugi::xml_node& config)
 	Fall_Players_Audio = App->audio->LoadFx("audio/fx/fall.wav");
 	Zelda->Arrow_Audio = App->audio->LoadFx("audio/fx/arrow 2.wav");
 	Zelda->Arrow_Hit_Wall_Audio = App->audio->LoadFx("audio/fx/arrow hit wall.wav");
-
-
-
+	App->enemy->enemy_dies_audio = App->audio->LoadFx("audio/fx/enemy dies.wav");
+	App->enemy->enemy_pathfinding_audio = App->audio->LoadFx("audio/fx/soldier.wav");
+	
 	//TEMP SPEED ANIMATION
 	
 
@@ -453,6 +453,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 		}
 		else {
+			App->audio->PlayFx(App->enemy->enemy_dies_audio);
 			n_enemy->tokill = true;
 		}
 

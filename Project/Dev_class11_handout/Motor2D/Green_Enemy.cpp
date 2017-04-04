@@ -4,6 +4,7 @@
 #include"j1Map.h"
 #include"j1Pathfinding.h"
 #include"j1Player.h"
+#include"j1Audio.h"
 Green_Enemy::Green_Enemy():Enemy(enemyType::green_enemy)
 {
 	this->sprites_vector = App->enemy->enemy_perf->sprites_vector;
@@ -85,6 +86,7 @@ void Green_Enemy::Rang_Player()
 
 		if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG && enemy_doing_script==false) {
 			player_in_range = App->player->Link;
+	
 			//green_enemy_path.clear();
 			if (tile_pos != iPoint(0, 0)) {
 				if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr && player_in_range->GetLogicHeightPlayer()==0) {
@@ -98,6 +100,7 @@ void Green_Enemy::Rang_Player()
 		
 		else if (sqrt((dist2.x*dist2.x) + (dist2.y*dist2.y)) < RANG  && enemy_doing_script == false) {
 			player_in_range = App->player->Zelda;
+
 			//green_enemy_path.clear();
 			if (tile_pos != iPoint(0, 0)) {
 				if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr && player_in_range->GetLogicHeightPlayer() == 0) {
