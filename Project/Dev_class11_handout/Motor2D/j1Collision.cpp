@@ -7,8 +7,12 @@ j1Collision::j1Collision()
 {
 	//for (uint i = 0; i < colliders.size(); ++i)
 		//colliders[i] = nullptr;
-
-
+	for (int i = 0; i < MAX_COLLIDERS; i++) {
+		for (int n = 0; n < MAX_COLLIDERS; n++) {
+			matrix[i][n] = false;
+		}
+	}
+	
 	//LINK
 	matrix[collider_link][collider_zelda] = true;
 	matrix[collider_link][collider_button] = true;

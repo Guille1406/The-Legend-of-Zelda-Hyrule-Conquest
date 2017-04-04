@@ -16,21 +16,22 @@ void P_Zelda::Attack(float dt)
 {
 	if (!temp) {
 		temp = true;
-		switch (character_direction) {
-		case up:
-			CreateArrow({ pos.x + 4,pos.y ,8,16 });
-			break;
-		case down:
-			CreateArrow({ pos.x + 4,pos.y ,8,16 });
-			break;
-		case left:
-			CreateArrow({ pos.x,pos.y + 4,16,8 });
-			break;
-		case right:
-			CreateArrow({ pos.x,pos.y + 4,16,8 });
-			break;
+	
+			switch (character_direction) {
+			case up:
+				CreateArrow({ pos.x + 4,pos.y ,8,16 });
+				break;
+			case down:
+				CreateArrow({ pos.x + 4,pos.y ,8,16 });
+				break;
+			case left:
+				CreateArrow({ pos.x,pos.y + 4,16,8 });
+				break;
+			case right:
+				CreateArrow({ pos.x,pos.y + 4,16,8 });
+				break;
+			}
 		}
-	}
 	
 		//actual_event = idle;
 		//doing_script = false;
