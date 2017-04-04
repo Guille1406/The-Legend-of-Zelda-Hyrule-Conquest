@@ -202,7 +202,7 @@ bool j1Scene::Show(Scene_ID name)
 bool j1Scene::ShowNewScene(Scene_ID name)
 {
 	if (main_active_scene != sub_active_scene)
-		sub_active_scene->Clean();
+		Hide();
 	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
 		if ((*item)->scene_name == name)
 		{
@@ -216,6 +216,7 @@ bool j1Scene::ShowNewScene(Scene_ID name)
 bool j1Scene::Hide()
 {
 	sub_active_scene->Clean();
+	sub_active_scene = main_active_scene;
 	return true;
 }
 
