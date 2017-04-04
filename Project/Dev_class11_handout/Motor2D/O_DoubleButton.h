@@ -17,6 +17,7 @@ public:
 		name = obj.name;
 		logic_height = obj.logic_height;
 		texture_rect = rect_double_button_idle;
+		sound = false;
 	}
 	~DoubleButton() {
 
@@ -33,7 +34,10 @@ public:
 			for (int i = 0; i < connected_object.size(); i++) {
 				connected_object[i]->Action();
 			}
-			App->audio->PlayFx(App->audio->secret_sound);
+			if (!sound) {
+				App->audio->PlayFx(App->audio->secret_sound);
+				sound = true;
+			}
 			return;
 		}
 		
@@ -49,6 +53,7 @@ public:
 	SDL_Rect idle_button = rect_button;
 	SDL_Rect pressed_button = rect_pressed_button;
 	SDL_Rect double_pressed_button = rect_pressed_button;
+	bool sound = false;
 
 };
 
