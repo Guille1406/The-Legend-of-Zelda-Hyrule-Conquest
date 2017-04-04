@@ -117,6 +117,9 @@ public:
 	.
 	*/
 
+	SDL_Rect background = { 1278,1414,593,94 };
+	SDL_Rect label_title_rec = { 1278,1832,593,94 };
+
 	SDL_Rect idle_button_rect = { 0,320,348,106 };
 	SDL_Rect hover_button_rect = { 0,212,348,106 };
 	SDL_Rect pressed_button_rect = { 0,428,348,106 };

@@ -24,7 +24,7 @@ public:
 	}
 
 private:
-	GuiLabel* IngamemenuLabel = nullptr;
+	GuiButton* IngamemenuLabel = nullptr;
 	GuiButton* resume =			nullptr;
 	GuiButton* loadcheckpoint =	nullptr;
 	GuiButton* options =		nullptr;

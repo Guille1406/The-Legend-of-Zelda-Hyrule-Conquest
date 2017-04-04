@@ -16,7 +16,6 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	SDL_Rect background =	{ 1278,1414,593,94 };
 	GuiButton* Label =		nullptr;
 	GuiButton* Yes =		nullptr;
 	GuiButton* No =			nullptr;
