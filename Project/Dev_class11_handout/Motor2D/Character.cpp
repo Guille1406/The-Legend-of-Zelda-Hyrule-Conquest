@@ -424,28 +424,28 @@ void Character::Collision_Sword_EnemySword() {
 
 
 	case direction::up:
-		temp.y = tilepos.y + 3;
+		temp.y = tilepos.y + 2;
 		if (GetLogic(GetLogicHeightPlayer(), temp) != TILE_COL_ID) {
 			pos.y += 14;
 		}
 		break;
 
 	case direction::down:
-		temp.y = tilepos.y - 3;
+		temp.y = tilepos.y - 1;
 		if (GetLogic(GetLogicHeightPlayer(), temp) != TILE_COL_ID) {
 			pos.y -= 14;
 		}
 		break;
 
 	case direction::right:
-		temp.x = tilepos.x - 3;
+		temp.x = tilepos.x - 1;
 		if (GetLogic(GetLogicHeightPlayer(), temp) != TILE_COL_ID) {
 			pos.x -= 14;
 		}
 		break;
 
 	case direction::left:
-		temp.x = tilepos.x + 3;
+		temp.x = tilepos.x + 2;
 		if (GetLogic(GetLogicHeightPlayer(), temp) != TILE_COL_ID) {
 			pos.x += 14;
 		}
