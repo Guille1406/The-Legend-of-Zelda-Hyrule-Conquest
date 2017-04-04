@@ -150,7 +150,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 				for (i = 0; i <= GetLogicHeightPlayer() && i<3; i++) {
 					if (GetLogic(i, temp_point) == CANT_PASS_COL_ID) {
 						stop = true;
-						before_wall_pos = temp_pos - i*16;
+						before_wall_pos = temp_pos ;
 						break;
 					}
 					
