@@ -17,10 +17,12 @@ public:
 	bool Clean();
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	GuiButton* campaign = nullptr;
-	GuiButton* options = nullptr;
-	GuiButton* credits = nullptr;
-	GuiButton* quit = nullptr;
+	GuiImage* controllerlayout = nullptr;
+	GuiButton* newcampaign = nullptr;
+	GuiButton* back = nullptr;
+	std::vector<GuiButton*> buttons;
+
+	SDL_Rect controllerlayout_rec = { 0,2604,1278,720 };
 };
 
 #endif // #pragma once

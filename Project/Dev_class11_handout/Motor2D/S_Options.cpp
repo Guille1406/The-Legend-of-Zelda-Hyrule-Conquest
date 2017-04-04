@@ -64,10 +64,6 @@ bool S_Options::Start()
 
 	App->gui->SetFocus(buttons.front());
 
-	const MainScene* Prev = App->scene->GetPreviousScene();
-	if((Prev->scene_name == Scene_ID::mainmenu) || (Prev->scene_name == Scene_ID::ingamemenu))
-		PreviousScene = Prev;
-
 	return true;
 }
 

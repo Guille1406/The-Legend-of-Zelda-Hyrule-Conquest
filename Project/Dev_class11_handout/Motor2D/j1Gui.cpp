@@ -238,16 +238,14 @@ void j1Gui::SetFocus(const Gui* ui)
 {
 	j1Module* listener = nullptr;
 
-	if (ui->module_listener != nullptr)
-	
-		listener = ui->module_listener;
-	if (ui->scene_listener != nullptr)
-		listener = (j1Module*)ui->scene_listener;
-
 	if (ui != focus)
 	{
 		if (ui != nullptr)
 		{
+			if (ui->module_listener != nullptr)
+				listener = ui->module_listener;
+			if (ui->scene_listener != nullptr)
+				listener = (j1Module*)ui->scene_listener;
 			//if (ui->can_focus == true && CanInteract(ui) == true)
 			if (ui->can_focus == true)
 			{
@@ -269,10 +267,13 @@ void j1Gui::SetFocus(const Gui* ui)
 		{
 			if (focus != nullptr)
 			{
-				if (ui->module_listener != nullptr)
-					listener->OnGui(focus, GuiEvent::lost_focus);
-				else
-					((MainScene*)listener)->OnGui(focus, GuiEvent::lost_focus);
+				if (ui != nullptr)
+				{
+					if (ui->module_listener != nullptr)
+						ui->module_listener->OnGui(focus, GuiEvent::lost_focus);
+					else
+						((MainScene*)ui->scene_listener)->OnGui(focus, GuiEvent::lost_focus);
+				}
 			}
 			focus = nullptr;
 		}

@@ -4,7 +4,6 @@
 #include "j1Player.h"
 #include "j1Window.h"
 #include "j1Camera.h"
-#include "j1GameStartMenuBack.h"
 
 S_MainMenu::S_MainMenu()
 {
@@ -92,14 +91,7 @@ bool S_MainMenu::Start()
 
 bool S_MainMenu::Update()
 {
-	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-	{
-		App->scene->ChangeScene(Scene_ID::world);
-		App->startmenuback->Freeze(true);
-	}
-	
 	MenuInput(&buttons);
-
 	return true;
 }
 
@@ -120,8 +112,7 @@ void S_MainMenu::OnGui(Gui* ui, GuiEvent event)
 {
 	if ((ui == (Gui*)campaign) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::world);
-		App->startmenuback->Freeze(true);
+		App->scene->Show(Scene_ID::campaign);
 	}
 
 	if ((ui == (Gui*)options) && (event == GuiEvent::mouse_lclk_down))

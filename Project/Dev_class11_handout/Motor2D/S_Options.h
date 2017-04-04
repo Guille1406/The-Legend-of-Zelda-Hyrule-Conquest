@@ -23,7 +23,6 @@ public:
 	GuiButton* gameplay = nullptr;
 	GuiButton* back = nullptr;
 	std::vector<GuiButton*> buttons;
-	const MainScene* PreviousScene = nullptr;
 };
 
 #endif // #pragma once

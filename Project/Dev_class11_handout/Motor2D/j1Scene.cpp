@@ -23,6 +23,7 @@
 #include "S_World.h"
 #include "S_Dungeon.h"
 #include "S_MainMenu.h"
+#include "S_Campaign.h"
 #include "S_Options.h"
 #include "S_OptionsAudio.h"
 #include "S_OptionsControls.h"
@@ -55,7 +56,8 @@ bool j1Scene::Start()
 	scene_list.push_back(new S_MainMenu);
 	(*scene_list.back()).scene_name = Scene_ID::mainmenu;
 	//Campaign
-
+	scene_list.push_back(new S_Campaign);
+	(*scene_list.back()).scene_name = Scene_ID::campaign;
 	//Options menu
 	scene_list.push_back(new S_Options);
 	(*scene_list.back()).scene_name = Scene_ID::options;
