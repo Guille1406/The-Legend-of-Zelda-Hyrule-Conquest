@@ -98,6 +98,7 @@ public:
 
 	//Takes the id of front tiles
 	int GetLogic(int height, iPoint tilepos);
+	int GetBehindLogic(int height, iPoint tilepos);
 
 	void Player_Hurt_Displacement(int & pos, bool add);
 	void Direction_Push_Election();

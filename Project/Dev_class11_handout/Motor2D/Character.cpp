@@ -76,13 +76,13 @@ void Character::GetAdjacents()
 	this->adjacent.right.j = App->map->V_Colision[height]->Get(tilepos.x + 2, tilepos.y + 1);
 }
 
-int Character::GetLogic(int minus_height, iPoint pos)
+int Character::GetLogic(int minus_height, iPoint _pos)
 {
 	
 	//Takes the id of the two front tiles of each player, depending on the locig height of each player
 	std::vector<MapLayer*> vector = App->map->V_Colision;
 	
-	iPoint tile_pos = pos;
+	iPoint tile_pos = _pos;
 	
 
 	int i = 0, j = 0;
@@ -106,6 +106,43 @@ int Character::GetLogic(int minus_height, iPoint pos)
 		break;
 	}
 	
+	if (i == CANT_PASS_COL_ID || j == CANT_PASS_COL_ID) return CANT_PASS_COL_ID;
+
+	if (i != 0)return i;
+	if (j != 0)return j;
+	return 0;
+}
+
+int Character::GetBehindLogic(int minus_height, iPoint _pos)
+{
+
+	//Takes the id of the two front tiles of each player, depending on the locig height of each player
+	std::vector<MapLayer*> vector = App->map->V_Colision;
+
+	iPoint tile_pos = _pos;
+
+
+	int i = 0, j = 0;
+	switch (character_direction)
+	{
+	case up:
+		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x, tile_pos.y + 2);
+		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x + 1, tile_pos.y + 2);
+		break;
+	case down:
+		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x, tile_pos.y -1);
+		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x + 1, tile_pos.y -1);
+		break;
+	case left:
+		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x +2, tile_pos.y);
+		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x +2, tile_pos.y + 1);
+		break;
+	case right:
+		i = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x - 1, tile_pos.y);
+		j = vector[GetLogicHeightPlayer() - minus_height]->Get(tile_pos.x - 1, tile_pos.y + 1);
+		break;
+	}
+
 	if (i == CANT_PASS_COL_ID || j == CANT_PASS_COL_ID) return CANT_PASS_COL_ID;
 
 	if (i != 0)return i;
@@ -454,7 +491,7 @@ void Character::Player_Hurt_Displacement(int & pos, bool add)
 	temp = true;
 
 	//if player have wall in front the roll will stop
-	if ((i * pos <  i*final_pos) && GetLogic(false, tilepos) == 0) {
+	if ((i * pos <  i*final_pos) && GetBehindLogic(false, tilepos) == 0) {
 		pos = pos + (i * 4);
 	}
 	else {
