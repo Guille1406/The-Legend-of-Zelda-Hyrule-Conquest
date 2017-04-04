@@ -32,7 +32,7 @@ struct Collider
 {
 	SDL_Rect rect = {0,0,0,0};
 	bool to_delete = false;
-	COLLIDER_TYPE type;
+	COLLIDER_TYPE type = COLLIDER_NONE;
 	j1Module* callback = nullptr;
 	uint logic_height = 0;
 	Entity* parent = nullptr;
