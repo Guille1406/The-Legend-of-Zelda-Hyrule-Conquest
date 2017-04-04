@@ -74,6 +74,9 @@ bool j1Player::Start()
 	Audio_Fx_Timer.Start();
 	Link->enemy_col_sword_sword_timer.Start();
 
+	Link->doing_script = false;
+	Zelda->doing_script = false;
+
 	Link->sprites_vector[attack * 4 + up].speed = 0.12;
 	Link->sprites_vector[attack * 4 + down].speed = 0.12;
 	Link->sprites_vector[attack * 4 + left].speed = 0.12; 
