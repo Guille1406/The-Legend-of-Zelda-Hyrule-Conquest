@@ -283,6 +283,7 @@ bool j1Map::Load(const char* file_name)
 
 		height++;
 	}
+	count = 0;
 	ObjectLayer* obj = new ObjectLayer();
 	for (object_layer = map_file.child("map").child("objectgroup"); object_layer && ret; object_layer = object_layer.next_sibling("objectgroup"))
 	{
@@ -545,7 +546,7 @@ bool j1Map::LoadConnectedObjects(pugi::xml_node & node)
 	}
 	else
 	{
-		int count = -1;
+		
 		for (pugi::xml_node node_object = layer_data; node_object; node_object = node_object.next_sibling("object"))
 		{
 

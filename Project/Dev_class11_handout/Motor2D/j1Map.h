@@ -161,6 +161,7 @@ public:
 
 private:
 
+	int count = 0;
 	
 	pugi::xml_document	map_file;
 	std::string			folder=empty_char;

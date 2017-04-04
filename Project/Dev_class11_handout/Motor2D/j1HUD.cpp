@@ -45,7 +45,7 @@ bool j1HUD::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1HUD::Start()
 {
-	//atlas = App->tex->Load(atlas_file_name.c_str());
+	atlas = App->tex->Load(atlas_file_name.c_str());
 	return true;
 }
 
@@ -128,6 +128,7 @@ bool j1HUD::PostUpdate()
 // Called before quitting
 bool j1HUD::CleanUp()
 {
+	App->tex->UnLoad(atlas);
 	return true;
 }
 
