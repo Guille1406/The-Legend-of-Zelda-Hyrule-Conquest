@@ -232,16 +232,9 @@ void j1Collision::DebugDraw()
 // Called before quitting
 bool j1Collision::CleanUp()
 {
-	LOG("Freeing all colliders");
+	//LOG("Freeing all colliders");
 
-	for (uint i = 0; i < colliders.size(); ++i)
-	{
-		if (colliders[i] != nullptr)
-		{
-			delete colliders[i];
-			colliders[i] = nullptr;
-		}
-	}
+	colliders.clear();
 
 	return true;
 }

@@ -93,12 +93,7 @@ bool S_World::PostUpdate()
 {
 
 	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
-		App->player->Disable();
-		App->enemy->Disable();
-		App->map->Disable();
-		App->collision->Disable();
-		App->hud->Disable();
-		App->object->Disable();
+		
 		App->scene->ChangeScene(Scene_ID::Send);	
 		App->startmenuback->Freeze(false);
 		App->player->loop_game_menu = false;
@@ -111,6 +106,13 @@ bool S_World::Clean()
 {
 	
 	LOG("World Test Deleted");
+
+	App->player->Disable();
+	App->enemy->Disable();
+	App->map->Disable();
+	App->collision->Disable();
+	App->hud->Disable();
+	App->object->Disable();
 
 	//std::list <TileSet*>::iterator temp = App->map->data.tilesets.begin();
 	
