@@ -22,7 +22,7 @@ S_InGameMenu::~S_InGameMenu()
 bool S_InGameMenu::Awake(pugi::xml_node& conf)
 {
 	IngamemenuLabel = App->gui->CreateButton(iPoint(40,40), &std::string(conf.child("IngamemenuLabel").attribute("value").as_string("In-Game menu")), ButtonType::idle_only, &label_title_rec, false);
-	IngamemenuLabel->SetFont(App->font->Sherwood28);
+	IngamemenuLabel->SetFont(App->font->Triforce48);
 	((Gui*)IngamemenuLabel)->SetListener(this);
 	IngamemenuLabel->SetVisible(false);
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);

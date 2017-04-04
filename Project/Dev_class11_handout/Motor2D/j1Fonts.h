@@ -45,6 +45,12 @@ public:
 	_TTF_Font*			ReturnofGanon12 = nullptr;	//Text
 	_TTF_Font*			ReturnofGanon20 = nullptr;	//Text
 	_TTF_Font*			ReturnofGanon28 = nullptr;	//Text
+	_TTF_Font*			ReturnofGanon36 = nullptr;	//Text
+	_TTF_Font*			Triforce12 = nullptr;		//Title
+	_TTF_Font*			Triforce20 = nullptr;		//Title
+	_TTF_Font*			Triforce28 = nullptr;		//Title
+	_TTF_Font*			Triforce36 = nullptr;		//Title
+	_TTF_Font*			Triforce48 = nullptr;		//Title
 };
 
 

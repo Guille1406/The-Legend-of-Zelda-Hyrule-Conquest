@@ -14,7 +14,7 @@ S_Options::~S_Options()
 bool S_Options::Awake(pugi::xml_node& conf)
 {
 	OptionsLabel = App->gui->CreateButton(iPoint(40, 40), &std::string(conf.child("OptionsLabel").attribute("value").as_string("Options menu")), ButtonType::idle_only, &label_title_rec, false);
-	OptionsLabel->SetFont(App->font->Sherwood28);
+	OptionsLabel->SetFont(App->font->Triforce48);
 	((Gui*)OptionsLabel)->SetListener(this);
 	OptionsLabel->SetVisible(false);
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);

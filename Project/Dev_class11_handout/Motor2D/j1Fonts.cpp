@@ -45,7 +45,14 @@ bool j1Fonts::Awake(pugi::xml_node& conf)
 		ReturnofGanon12 = Load(path, 12);
 		ReturnofGanon20 = Load(path, 20);
 		ReturnofGanon28 = Load(path, 28);
-		
+		ReturnofGanon36 = Load(path, 36);
+
+		path = "fonts/The Legend of Zelda Fonts/Triforce.ttf";
+		Triforce12 = Load(path, 12);
+		Triforce20 = Load(path, 20);
+		Triforce28 = Load(path, 28);
+		Triforce36 = Load(path, 36);
+		Triforce48 = Load(path, 48);
 	}
 
 	return ret;

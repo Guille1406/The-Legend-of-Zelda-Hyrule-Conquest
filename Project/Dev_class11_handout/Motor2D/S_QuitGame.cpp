@@ -15,7 +15,7 @@ S_QuitGame::~S_QuitGame()
 bool S_QuitGame::Awake(pugi::xml_node& conf)
 {
 	Label = App->gui->CreateButton(iPoint(App->win->GetWindowWHalf() - (int)(background.w * 0.5f), 200), &std::string(conf.child("Label").attribute("value").as_string("Are you sure you want to quit?")), ButtonType::idle_only, &background, false);
-	Label->SetFont(App->font->Sherwood28);
+	Label->SetFont(App->font->Triforce48);
 	((Gui*)Label)->SetListener(this);
 	Label->SetVisible(false);
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);

@@ -13,7 +13,7 @@ S_OptionsGameplay::~S_OptionsGameplay()
 bool S_OptionsGameplay::Awake(pugi::xml_node& conf)
 {
 	GameplayLabel = App->gui->CreateButton(iPoint(40, 40), &std::string(conf.child("GameplayLabel").attribute("value").as_string("Gameplay menu")), ButtonType::idle_only, &label_title_rec, false);
-	GameplayLabel->SetFont(App->font->Sherwood28);
+	GameplayLabel->SetFont(App->font->Triforce48);
 	((Gui*)GameplayLabel)->SetListener(this);
 	GameplayLabel->SetVisible(false);
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);

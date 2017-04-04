@@ -13,7 +13,7 @@ S_OptionsVideo::~S_OptionsVideo()
 bool S_OptionsVideo::Awake(pugi::xml_node& conf)
 {
 	VideoLabel = App->gui->CreateButton(iPoint(40, 40), &std::string(conf.child("VideoLabel").attribute("value").as_string("Video menu")), ButtonType::idle_only, &label_title_rec, false);
-	VideoLabel->SetFont(App->font->Sherwood28);
+	VideoLabel->SetFont(App->font->Triforce48);
 	((Gui*)VideoLabel)->SetListener(this);
 	VideoLabel->SetVisible(false);
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
