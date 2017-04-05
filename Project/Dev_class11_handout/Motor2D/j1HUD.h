@@ -57,6 +57,8 @@ private:
 	SDL_Rect Sword = { 916,0,60,60 };
 	SDL_Rect Bow = { 976,0,60,60 };
 
+	SDL_Rect PlaceLabelBack = { 564,325,498,137 };
+
 	//Drawing variables
 	uint Life_Label_x_pos = 0;
 	uint Life_Label_y_pos = 0;

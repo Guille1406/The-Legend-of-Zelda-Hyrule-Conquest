@@ -86,16 +86,6 @@ public:
 	std::string scene_str = empty_char;
 	Scene_ID scene_name;
 	
-	
-	/*
-	Map
-	Textures
-	Enemies
-	.
-	.
-	.
-	*/
-
 	SDL_Rect background = { 1278,1414,593,94 };
 	SDL_Rect label_title_rec = { 1278,1832,593,94 };
 

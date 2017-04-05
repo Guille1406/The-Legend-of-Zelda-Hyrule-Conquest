@@ -9,6 +9,7 @@
 
 bool S_Dungeon::Start()
 {
+	scene_str = "Dungeon";
 	LOG("Dungeon Open");
 	test = new char[20];
 

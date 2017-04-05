@@ -106,6 +106,10 @@ bool j1HUD::Update(float dt)
 
 	//Blit Zelda circle R
 	App->render->Blit(atlas, -App->render->camera.x + Window_W - Zelda_circle.w - item_circles_output + Zelda_circle.w - Zelda_circle_R.w + LRbuttonsoffset, -App->render->camera.y + item_circles_output - LRbuttonsoffset, &Zelda_circle_R, 1.0f, 0, INT_MAX, INT_MAX, false);
+	
+	//Blit PlaceLabelBack
+	//App->render->Blit(atlas, -App->render->camera.x, (-App->render->camera.y + App->win->GetWindowH() - PlaceLabelBack.h ) + 1, &PlaceLabelBack, 1.0f, 0, INT_MAX, INT_MAX, false);
+
 	return true;
 }
 

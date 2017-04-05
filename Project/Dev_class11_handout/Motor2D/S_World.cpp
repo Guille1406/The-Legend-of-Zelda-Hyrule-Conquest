@@ -17,6 +17,7 @@
 #include"j1GameStartMenuBack.h"
 bool S_World::Start()
 {
+	scene_str = "Overworld";
 	
 	App->camera->Enable();	
 	App->hud->Enable();
@@ -24,7 +25,6 @@ bool S_World::Start()
 	App->map->Enable();
 	App->player->Enable();
 	App->object->Enable();
-
 
 	//PAUSE FALSE
 	App->player->paused = false;

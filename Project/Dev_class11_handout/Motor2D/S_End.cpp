@@ -11,6 +11,7 @@
 
 bool S_End::Start()
 {
+	scene_str = "End";
 	LOG("End Open");
 	//App->audio->StopMusic(1000.0f);
 	App->audio->VolumeMusic(0);
