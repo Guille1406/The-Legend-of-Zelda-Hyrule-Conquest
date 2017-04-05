@@ -34,7 +34,7 @@ bool S_World::Start()
 	App->collision->paused = false;
 	App->pathfinding->paused = false;
 
-	LOG("IM FUCKING STARTING!!");
+	
 	if (App->map->Load("tutorial map test.tmx") == true)
 
 	{

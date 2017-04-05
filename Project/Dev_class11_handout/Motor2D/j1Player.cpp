@@ -77,6 +77,7 @@ bool j1Player::Start()
 	Link->doing_script = false;
 	Zelda->doing_script = false;
 	Link->is_rolling = false;
+	Link->im_lifting = false;
 	Link->can_jump = false;
 	Link->can_move = true;
 	Link->can_pick_up = false;
@@ -84,6 +85,7 @@ bool j1Player::Start()
 	Zelda->is_rolling = false;
 	Zelda->can_jump = false;
 	Zelda->can_move = true;
+	
 	
 
 	//TEMP

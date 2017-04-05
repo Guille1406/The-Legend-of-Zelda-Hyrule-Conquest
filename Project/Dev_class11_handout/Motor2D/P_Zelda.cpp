@@ -234,7 +234,7 @@ player_event P_Zelda::GetEvent()
 	if (can_jump) {
 		actual_event = jump;
 		doing_script = true;
-		LOG("I'm Jumping :DDDD");
+		
 		can_jump = false;
 
 	}

@@ -58,7 +58,6 @@ player_event P_Link::GetEvent()
 	if (can_jump) {
 		actual_event = jump;
 		doing_script = true;
-		LOG("I'm Jumping :DDDD");
 		can_jump = false;
 	}
 
@@ -152,7 +151,7 @@ player_event P_Link::GetEvent()
 				Orientation_collider_link_sword();
 				actual_event = attack;
 				doing_script = true;
-				LOG("I'm Attacking :DDDD");
+				
 			}
 
 
@@ -232,7 +231,7 @@ player_event P_Link::GetEvent()
 					Orientation_collider_link_sword();
 					actual_event = attack;
 					doing_script = true;
-					LOG("I'm Attacking :DDDD");
+				
 				}
 
 				if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN && !im_lifting) {
