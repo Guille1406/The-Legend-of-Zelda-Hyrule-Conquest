@@ -17,7 +17,7 @@
 #include"j1GameStartMenuBack.h"
 bool S_World::Start()
 {
-	scene_str = "Overworld";
+	scene_str = "Castle Sewers";
 	
 	App->camera->Enable();	
 	App->hud->Enable();
