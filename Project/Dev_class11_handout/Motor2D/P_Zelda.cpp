@@ -327,14 +327,15 @@ player_event P_Zelda::GetEvent()
 				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 				pos.x = App->player->Link->pos.x;
 				pos.y = App->player->Link->pos.y;
-				if (((App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN) && can_throw) || ((App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) && can_throw)) {
-					App->audio->PlayFx(Throw_Audio);
-					actual_event = throw_;
-					doing_script = true;
-					is_picked = false;
-					App->player->Link->im_lifting = false;
-					can_throw = false;
-
+				if (((App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN) || (App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN)) && can_throw ) {
+					if (!App->player->Link->doing_script) {
+						App->audio->PlayFx(Throw_Audio);
+						actual_event = throw_;
+						doing_script = true;
+						is_picked = false;
+						App->player->Link->im_lifting = false;
+						can_throw = false;
+					}
 				}
 				else can_throw = true;
 			}
@@ -424,7 +425,7 @@ player_event P_Zelda::GetEvent()
 				actual_event = pick;
 				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 				pos = App->player->Link->pos;
-				if ((((App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN) || App->input->GetKey(SDL_SCANCODE_KP_3) == KEY_DOWN)) && can_throw) {
+				if (((App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN) || App->input->GetKey(SDL_SCANCODE_KP_3) == KEY_DOWN) && can_throw && !App->player->Link->doing_script) {
 					if (!App->player->Link->doing_script) {
 						App->audio->PlayFx(Throw_Audio);
 						actual_event = throw_;
