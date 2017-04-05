@@ -110,6 +110,8 @@ bool j1HUD::Update(float dt)
 	//Blit PlaceLabelBack
 	//App->render->Blit(atlas, -App->render->camera.x, (-App->render->camera.y + App->win->GetWindowH() - PlaceLabelBack.h ) + 1, &PlaceLabelBack, 1.0f, 0, INT_MAX, INT_MAX, false);
 
+	//App->scene->GetActiveScene()->scene_str.c_str();
+
 	return true;
 }
 

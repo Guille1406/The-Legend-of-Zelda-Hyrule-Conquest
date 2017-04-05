@@ -4,7 +4,6 @@
 #include "j1Player.h"
 #include "j1Window.h"
 #include "j1Camera.h"
-#include "j1Audio.h"
 
 S_MainMenu::S_MainMenu()
 {
@@ -72,8 +71,6 @@ bool S_MainMenu::Awake(pugi::xml_node& conf)
 
 bool S_MainMenu::Start()
 {
-	App->audio->VolumeMusic(0);
-
 	if (visibility)
 	{
 		title->SetVisible(true);

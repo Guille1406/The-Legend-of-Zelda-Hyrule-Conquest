@@ -9,6 +9,7 @@
 #include "Gui.h"
 #include "GuiButton.h"
 #include "j1GameStartMenuBack.h"
+#include "j1Audio.h"
 
 S_InGameMenu::S_InGameMenu()
 {
@@ -123,6 +124,7 @@ void S_InGameMenu::OnGui(Gui* ui, GuiEvent event)
 	}
 	if ((ui == (Gui*)mainmenu) && (event == GuiEvent::mouse_lclk_down))
 	{
+		App->audio->VolumeMusic(0);
 		App->player->Disable();
 		App->enemy->Disable();
 		App->map->Disable();
