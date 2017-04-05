@@ -24,7 +24,6 @@ public:
 	GuiButton* vsync = nullptr;
 	GuiCheck* vsync_check = nullptr;
 	GuiButton* back = nullptr;
-	std::vector<GuiButton*> buttons;
 };
 
 #endif // #pragma once

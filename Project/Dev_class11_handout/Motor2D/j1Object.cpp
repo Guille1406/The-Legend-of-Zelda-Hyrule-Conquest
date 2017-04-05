@@ -61,7 +61,6 @@ bool j1Object::PostUpdate()
 bool j1Object::CleanUp()
 {
 	App->tex->UnLoad(objects_texture);
-
 	for (std::vector<Object*>::iterator item = V_Objects.begin(); item != V_Objects.cend(); ++item)
 		RELEASE(*item);
 	V_Objects.clear();

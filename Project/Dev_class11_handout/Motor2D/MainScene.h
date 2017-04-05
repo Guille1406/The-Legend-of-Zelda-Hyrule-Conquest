@@ -96,6 +96,8 @@ public:
 	SDL_Rect idle_check_rect = { 349,211,48,48 };
 	SDL_Rect pressed_check_rect = { 349,259,48,48 };
 
+	std::vector<GuiButton*> buttons;
+
 };
 
 #endif // !_MAINSCENE_

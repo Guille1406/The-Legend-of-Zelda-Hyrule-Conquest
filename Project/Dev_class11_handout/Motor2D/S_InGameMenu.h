@@ -30,7 +30,6 @@ private:
 	GuiButton* options =		nullptr;
 	GuiButton* mainmenu =		nullptr;
 	GuiButton* quit =	   		nullptr;
-	std::vector<GuiButton*> buttons;
 	bool active = false;
 };
 

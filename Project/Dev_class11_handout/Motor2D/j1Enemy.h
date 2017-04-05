@@ -16,7 +16,6 @@ enum EnemyState {
 	push_back_enemy,
 };
 
-
 enum OrientationEnemy{
 	up_enemy,
 	down_enemy,
@@ -30,7 +29,6 @@ enum enemyType {
 	no_enemy,
 
 };
-
 
 class Enemy : public Entity {
 public:
@@ -72,10 +70,9 @@ public:
 class j1Enemy : public j1Module {
 
 public:
-	j1Enemy() {
+	j1Enemy()
+	{
 		//V_MyEnemies = new std::vector<Enemy*>;
-
-
 	};
 	~j1Enemy() {};
 	bool Awake(pugi::xml_node&);
@@ -90,8 +87,6 @@ public:
 	bool FindInPath(iPoint, Enemy* enemy);
 	void Update_Sword_Collision(Enemy* enemy);
 	
-	
-
 public:
 	std::vector<Animation*> Green_Enemy_Animation;
 	Enemy* enemy_perf=nullptr;
@@ -102,6 +97,5 @@ public:
 	uint enemy_dies_audio=0;
 	uint enemy_pathfinding_audio = 0;
 };
-
 
 #endif

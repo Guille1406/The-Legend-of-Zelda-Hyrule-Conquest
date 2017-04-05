@@ -22,7 +22,6 @@ public:
 	GuiButton* audio = nullptr;
 	GuiButton* gameplay = nullptr;
 	GuiButton* back = nullptr;
-	std::vector<GuiButton*> buttons;
 };
 
 #endif // #pragma once

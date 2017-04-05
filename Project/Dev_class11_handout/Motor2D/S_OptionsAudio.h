@@ -21,7 +21,6 @@ public:
 	GuiButton* MusicVolume = nullptr;
 	GuiButton* SFXVolume = nullptr;
 	GuiButton* back = nullptr;
-	std::vector<GuiButton*> buttons;
 };
 
 #endif // #pragma once

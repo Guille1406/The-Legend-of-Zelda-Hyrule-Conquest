@@ -19,7 +19,6 @@ public:
 public:
 	GuiButton* newcampaign = nullptr;
 	GuiButton* back = nullptr;
-	std::vector<GuiButton*> buttons;
 
 	SDL_Rect controllerlayout_rec = { 0,2604,1278,720 };
 	iPoint controllerlayout_pos = { 0,0 };

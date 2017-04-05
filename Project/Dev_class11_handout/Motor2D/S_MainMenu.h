@@ -34,7 +34,6 @@ private:
 	GuiButton* quit =	   			nullptr;
 	GuiButton* twitter =			nullptr;
 	GuiButton* github =				nullptr;
-	std::vector<GuiButton*> buttons;
 	bool visibility =				false;
 };
 

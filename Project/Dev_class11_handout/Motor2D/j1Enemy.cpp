@@ -89,12 +89,17 @@ bool j1Enemy::PostUpdate()
 
 bool j1Enemy::CleanUp()
 {
-	for (int i = 0; i < V_MyEnemies.size(); i++) {
+	for (int i = 0; i < V_MyEnemies.size(); i++)
+	{
 		App->tex->UnLoad(V_MyEnemies[i]->entity_texture);
 	}
+	for (std::vector<Animation*>::iterator item = Green_Enemy_Animation.begin(); item != Green_Enemy_Animation.cend(); ++item)
+		delete *item;
 	Green_Enemy_Animation.clear();
-	App->tex->UnLoad(green_soldier_tex);
+	for (std::vector<Enemy*>::iterator item = V_MyEnemies.begin(); item != V_MyEnemies.cend(); ++item)
+		delete *item;
 	V_MyEnemies.clear();
+	App->tex->UnLoad(green_soldier_tex);
 	appear_enemies = false;
 	one_time_appear = 0;
 	return true;
@@ -177,10 +182,12 @@ iPoint j1Enemy::CalculatePath(Enemy* enemy)
 
 		}
 	}
-	if (enemy->Path_Enemy.size()>1) {
+	if (enemy->Path_Enemy.size() > 1)
+	{
 		enemy->Path_Enemy.clear();
 	}
-	else {
+	else
+	{
 		enemy->movable = false;
 	}
 	return enemy->array_pos;
@@ -198,40 +205,29 @@ bool j1Enemy::FindInPath(iPoint pos, Enemy* enemy) {
 
 void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 {
-
-		int animation = (int)enemy->Enemy_Orientation;
-		enemy->ChangeAnimation(animation);
+	int animation = (int)enemy->Enemy_Orientation;
+	enemy->ChangeAnimation(animation);
 
 	switch (enemy->Enemy_Orientation) {
 
 	case OrientationEnemy::up_enemy:
-
 		enemy->shield_test->rect = { enemy->collider->rect.x-10, enemy->collider->rect.y + 10 , 10,20 };
 		break;
 
 	case OrientationEnemy::down_enemy:
-		
 		enemy->shield_test->rect = { enemy->collider->rect.x+12, enemy->collider->rect.y + enemy->collider->rect.h -10 , 10,20};
-
 		break;
 
 	case OrientationEnemy::right_enemy:
 		enemy->shield_test->rect = { enemy->collider->rect.x + 10, enemy->collider->rect.y + 30 , 20,10 };
-
 		break;
 
 	case OrientationEnemy::left_enemy:
-		
 		//20,10
 		enemy->shield_test->rect = { enemy->collider->rect.x - 18, enemy->collider->rect.y + 30 , 20,10 };
-
 		break;
-
-
-
 	}
 }
-
 
 void Enemy::Direction_Push_Election()
 {
@@ -252,10 +248,8 @@ void Enemy::Direction_Push_Election()
 	}
 }
 
-
 void Enemy::Enemy_Hurt_Displacement(int & pos, bool add)
 {
-
 	static int final_pos = 0;
 	//same as jump function
 	int i = 1;
@@ -283,7 +277,6 @@ int Enemy::GetLogicEnemy(int minus_height, iPoint pos)
 	std::vector<MapLayer*> vector = App->map->V_Colision;
 
 	iPoint tile_pos = pos;
-
 
 	int i, j;
 	switch (Enemy_Orientation)
@@ -325,8 +318,3 @@ void Enemy::UpdateState()
 		Direction_Push_Election();
 	}
 }
-
-
-
-
-

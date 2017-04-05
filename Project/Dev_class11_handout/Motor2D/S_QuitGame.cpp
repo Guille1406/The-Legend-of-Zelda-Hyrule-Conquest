@@ -57,8 +57,6 @@ bool S_QuitGame::Start()
 
 	App->gui->SetFocus(No);
 
-	PreviousScene = App->scene->GetPreviousScene();
-
 	return true;
 }
 

@@ -178,7 +178,11 @@ bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
 	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
+	{
+		(*item)->buttons.clear();
 		delete *item;
+	}
+		
 	return true;
 }
 

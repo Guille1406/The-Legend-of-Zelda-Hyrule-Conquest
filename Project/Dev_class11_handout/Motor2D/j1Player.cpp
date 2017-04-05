@@ -157,14 +157,12 @@ bool j1Player::CleanUp() {
 	App->tex->UnLoad(Zelda->entity_texture);
 	Link->sprites_vector.clear();
 	Zelda->sprites_vector.clear();
-	
 	if (Link != nullptr)
 	{
 		if ((Link->collision != nullptr) && (Link->front_collider != nullptr))
 		{
 			Link->collision->to_delete = true;
 			Link->front_collider->to_delete = true;
-			delete Link;
 		}
 	}
 	if (Zelda != nullptr)
@@ -173,10 +171,8 @@ bool j1Player::CleanUp() {
 		{
 			Zelda->collision->to_delete = true;
 			Zelda->front_collider->to_delete = true;
-			delete Zelda;
 		}
 	}
-	
 	return true;
 }
 
