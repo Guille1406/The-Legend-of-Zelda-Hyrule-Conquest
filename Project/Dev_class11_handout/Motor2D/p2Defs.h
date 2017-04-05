@@ -96,9 +96,9 @@ static const SDL_Rect rect_door_down = { 240,-1,64,62 };
 static const SDL_Rect rect_door_up = { 304 ,144,64,61 };
 static const SDL_Rect rect_door_right = {367 ,0,48,64 };
 static const SDL_Rect rect_door_left = { 415 ,0,48,64};
-static const SDL_Rect rect_double_button_idle = { 0,208,64,64 };
+static const SDL_Rect rect_double_button_idle = { 128,208,64,64 };
 static const SDL_Rect rect_double_button_one = { 64,208,64,64 };
-static const SDL_Rect rect_double_button_two = { 128,208,64,64 };
+static const SDL_Rect rect_double_button_two = { 0,208,64,64 };
 
 static const SDL_Rect rect_arrow_up = {158,96,10,30};
 static const SDL_Rect rect_arrow_down = { 168,96,10,30 };

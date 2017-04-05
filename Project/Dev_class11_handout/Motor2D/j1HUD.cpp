@@ -109,7 +109,6 @@ bool j1HUD::Update(float dt)
 	App->render->Blit(atlas, -App->render->camera.x + Window_W - Zelda_circle.w - item_circles_output + Zelda_circle.w - Zelda_circle_R.w + LRbuttonsoffset, -App->render->camera.y + item_circles_output - LRbuttonsoffset, &Zelda_circle_R, 1.0f, 0, INT_MAX, INT_MAX, false);
 	
 	//Blit PlaceLabelBack
-	/*
 	App->render->Blit(atlas, -App->render->camera.x, (-App->render->camera.y + Window_H - PlaceLabelBack.h ) + 1, &PlaceLabelBack, 1.0f, 0, INT_MAX, INT_MAX, false);
 
 	const char* scene_text = App->scene->GetActiveScene()->scene_str.c_str();
@@ -118,9 +117,6 @@ bool j1HUD::Update(float dt)
 	App->font->CalcSize(scene_text, texture_to_blit_w, texture_to_blit_h, App->font->Triforce48);
 	App->render->Blit(texture_to_blit, - App->render->camera.x + PlaceLabelBack.w * 0.5f - texture_to_blit_w * 0.5f, - App->render->camera.y + Window_H - PlaceLabelBack.h * 0.5f, nullptr, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
 	SDL_DestroyTexture(texture_to_blit);
-	*/
-
-	
 
 	return true;
 }
