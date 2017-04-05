@@ -371,6 +371,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			}
 			else {
 				n_enemy->tokill = true;
+				App->audio->PlayFx(App->enemy->enemy_dies_audio);
 			}
 		}
 	}
