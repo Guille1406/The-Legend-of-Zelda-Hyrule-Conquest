@@ -129,7 +129,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
-		SDL_Rect rect = { ret->pix_world_pos.x + 16, ret->pix_world_pos.y + 32,16,42 };
+		SDL_Rect rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
 		ret->logic_height = 0;
 		break;
