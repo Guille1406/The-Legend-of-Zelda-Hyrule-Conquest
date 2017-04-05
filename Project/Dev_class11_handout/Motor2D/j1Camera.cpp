@@ -212,6 +212,10 @@ bool j1Camera::PostUpdate()
 bool j1Camera::CleanUp()
 {
 	LOG("Freeing camera");
+
+	for (std::vector<GuiLabel*>::iterator item = DebugPerformanceData.begin(); item != DebugPerformanceData.cend(); ++item)
+		RELEASE(*item);
+
 	return true;
 }
 

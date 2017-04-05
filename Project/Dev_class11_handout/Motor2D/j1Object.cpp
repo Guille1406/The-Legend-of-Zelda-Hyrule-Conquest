@@ -16,41 +16,30 @@
 
 bool j1Object::Start()
 {
-	
-
 	objects_texture = App->tex->Load("textures/items v2.png");
 	return true;
-
-
 }
 
 bool j1Object::PreUpdate()
 {
-
-
-	
 	return true;
 }
 
 bool j1Object::Update(float)
 {
-	for (int i = 0; i < V_Objects.size(); i++) {
+	for (int i = 0; i < V_Objects.size(); i++)
 		if (V_Objects[i]->type == double_button) {
 			DoubleButton* temp_button = (DoubleButton*)V_Objects[i];
 			temp_button->characters_on = 0;
 		}
-	}
-
 
 	//Blit all the objects
 
-	
 	return true;
 }
 
 bool j1Object::PostUpdate()
 {
-
 	/*for (int i = 0; i < V_Objects.size(); i++) {
 		if (V_Objects[i]->type == objectType::warp) {
 			if (App->player->loop_game_menu == true) {
@@ -66,14 +55,17 @@ bool j1Object::PostUpdate()
 		}
 	}*/
 
-	
 	return true;
 }
 
 bool j1Object::CleanUp()
 {
 	App->tex->UnLoad(objects_texture);
+
+	for (std::vector<Object*>::iterator item = V_Objects.begin(); item != V_Objects.cend(); ++item)
+		RELEASE(*item);
 	V_Objects.clear();
+
 	return true;
 }
 
@@ -83,9 +75,7 @@ void j1Object::Draw(int height)
 		Object* object = V_Objects[i];
 		if (object->active && object->logic_height == height)
 			App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
-
 	}
-
 }
 
 std::vector<Object*> j1Object::FindObject(std::string name)
@@ -286,8 +276,6 @@ Object * j1Object::CreateDoor(pugi::xml_node object, int height)
 	}
 	temp_door.dir = attribute.attribute("value").as_int();
 
-
-	
 	for (int i = 0; i < temp_door.rect.w / 16; i++) {
 		for (int n = 0; n < temp_door.rect.h / 16; n++) {
 			iPoint temp;
@@ -299,7 +287,6 @@ Object * j1Object::CreateDoor(pugi::xml_node object, int height)
 		}
 	}
 	
-
 	switch (temp_door.dir) {
 
 		//UP
@@ -323,15 +310,10 @@ Object * j1Object::CreateDoor(pugi::xml_node object, int height)
 		break;
 	}
 
-
 	Object* ret = new Door(temp_door);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_door, (Entity*)ret, this);
 	
 	V_Objects.push_back(ret);
-
-
-	
-
 
 	return ret;
 }

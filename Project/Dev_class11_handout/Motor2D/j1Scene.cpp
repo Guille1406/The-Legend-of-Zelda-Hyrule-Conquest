@@ -177,6 +177,8 @@ bool j1Scene::PostUpdate()
 bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
+	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
+		delete *item;
 	return true;
 }
 

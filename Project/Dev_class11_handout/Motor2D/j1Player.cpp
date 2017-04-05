@@ -75,7 +75,6 @@ bool j1Player::Start()
 
 	Link->doing_script = false;
 	Zelda->doing_script = false;
-	Link->im_lifting = false;
 	Link->is_rolling = false;
 	Link->can_jump = false;
 	Link->can_move = true;
@@ -158,6 +157,26 @@ bool j1Player::CleanUp() {
 	App->tex->UnLoad(Zelda->entity_texture);
 	Link->sprites_vector.clear();
 	Zelda->sprites_vector.clear();
+	
+	if (Link != nullptr)
+	{
+		if ((Link->collision != nullptr) && (Link->front_collider != nullptr))
+		{
+			Link->collision->to_delete = true;
+			Link->front_collider->to_delete = true;
+			delete Link;
+		}
+	}
+	if (Zelda != nullptr)
+	{
+		if ((Zelda->collision != nullptr) && (Zelda->front_collider != nullptr))
+		{
+			Zelda->collision->to_delete = true;
+			Zelda->front_collider->to_delete = true;
+			delete Zelda;
+		}
+	}
+	
 	return true;
 }
 
@@ -367,11 +386,9 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			Enemy* n_enemy = (Enemy*)collider2->parent;
 			if (n_enemy->live > 0) {
 				n_enemy->live--;
-				App->audio->PlayFx(App->enemy->enemy_dies_audio);
 			}
 			else {
 				n_enemy->tokill = true;
-				App->audio->PlayFx(App->enemy->enemy_dies_audio);
 			}
 		}
 	}
