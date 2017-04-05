@@ -71,7 +71,7 @@ bool S_World::Start()
 	App->player->Zelda->pos = { 620,1400 };
 	App->player->Link->logic_height = 1;
 	App->player->Zelda->logic_height = 1;
-	
+	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
 	LOG("World Open");
 	return false;
 }
