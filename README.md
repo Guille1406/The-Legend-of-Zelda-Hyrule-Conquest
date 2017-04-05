@@ -69,7 +69,7 @@ Finally they will have to infiltrate in the castle to be able to release it of t
  ## CHANGELOG
  
  
- ## 0.3.1
+ # 0.3.1
  
  -Bugs fixed & improve game
 
