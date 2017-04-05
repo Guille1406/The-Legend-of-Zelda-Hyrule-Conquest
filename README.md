@@ -29,51 +29,85 @@ The first act focuses on the culverts of the Castle of Hyrule, where they must g
 In the dungeon, you will find even more complicated enemies and a very powerful enemy that will make things difficult for our heroes.
 
 Finally they will have to infiltrate in the castle to be able to release it of the forces of the evil, to finally measure its forces with a very powerful final boss.
+
  ##GAMEPAD CONTROLS
+ 
  Player 1: Link
+ 
  Player 2: Zelda
+ 
  A-Attack with sword/bow
+ 
  B-Pick Zelda (in case of Link)
+ 
  R1- Roll
+ 
  Left Joystic  - Move Around
  
  ##KEYBOARD CONTROLS
  
  ###Link
+ 
  w/a/s/d: movement
+ 
  c: attack
+ 
  v: roll
+ 
  b: pick Zelda
  
  ###Zelda
+ 
  i/j/k/l: movement
+ 
  1: attack
+ 
  2: roll
+ 
  3: get throwed
  
  ##CHANGELOG
  
  #0.1 Link is moving with collisions
+ 
  #0.2 In this release you can:
+ 
 -play multiplayer
+
 -zoom in/out
+
 -roll with the two players
+
 -jump slopes
+
 -play with controllers
+
 -Zoom with k & l
 
 #0.3
+
 -Tutorial Map
+
 -Link and Zelda are playable
+
 -Gamepad adapted
--Enemy's that follow you with paths
+
+-Enemy's that follow you with paths and can hurt you
+
 -Multilevel maps
+
 -Puzzles
+
 -Sounds
+
 -Music
+
 -Menus
+
 -Attack
+
 -Objects like buttons and dianas
+
 -Life implemented
 
  
