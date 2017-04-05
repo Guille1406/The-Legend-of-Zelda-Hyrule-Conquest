@@ -367,6 +367,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			Enemy* n_enemy = (Enemy*)collider2->parent;
 			if (n_enemy->live > 0) {
 				n_enemy->live--;
+				App->audio->PlayFx(App->enemy->enemy_dies_audio);
 			}
 			else {
 				n_enemy->tokill = true;

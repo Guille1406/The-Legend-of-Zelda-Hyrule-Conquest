@@ -79,7 +79,7 @@ bool S_World::Start()
 bool S_World::Update()
 {
 	//App->map->Draw();
-	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
 		App->player->loop_game_menu = true;
 	}
 	
