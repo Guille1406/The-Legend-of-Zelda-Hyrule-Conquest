@@ -130,7 +130,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 	bool stop_jumping = false;
 	iPoint temp_point = tilepos;
 	iPoint next_point = tilepos;
-	iPoint last_point = temp_point;
+	iPoint last_point = { 0,0};
 	static int before_wall_pos = 0;
 
 	if (!temp) {
@@ -144,7 +144,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 			next_point.y = temp_point.y + !is_horitzontal * n;
 
 			int i = 0;
-			if (!is_on_collision || temp_point != last_point) {
+			if (!is_on_collision && temp_point != last_point) {
 				
 				if (stop)break;
 				for (i = 0; i <= GetLogicHeightPlayer() && i<3; i++) {
