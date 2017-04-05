@@ -66,6 +66,18 @@ Finally they will have to infiltrate in the castle to be able to release it of t
  
  NUMPAD 3: get throwed
  
+ ### Debug Shortcuts
+ F1: Toggle visibility of colliders
+  
+ F2: Restart Game
+ 
+ F9: Togle visibility performance window
+ 
+ F10: Report a bug
+ 
+ F11: Screenshot
+ 
+ 
  ## CHANGELOG
  
  
