@@ -1,17 +1,32 @@
-  ______         _       _         
- |___  /        | |     | |        
-    / /    ___  | |   __| |   __ _ 
+  ______         _       _   
+  
+ |___  /        | |     | |      
+ 
+    / /    ___  | |   __| |   
+    __ _ 
+    
    / /    / _ \ | |  / _` |  / _` |
+   
   / /__  |  __/ | | | (_| | | (_| |
+  
  /_____|  \___| |_|  \__,_|  \__,_|
+ 
    _    _                  _         _____                                  _   
+   
  | |  | |                | |       / ____|                                | |  
+ 
  | |__| |_   _ _ __ _   _| | ___  | |     ___  _ __   __ _ _   _  ___  ___| |_ 
+ 
  |  __  | | | | '__| | | | |/ _ \ | |    / _ \| '_ \ / _` | | | |/ _ \/ __| __|
+ 
  | |  | | |_| | |  | |_| | |  __/ | |___| (_) | | | | (_| | |_| |  __/\__ \ |_ 
+ 
  |_|  |_|\__, |_|   \__,_|_|\___|  \_____\___/|_| |_|\__, |\__,_|\___||___/\__|
-          __/ |                                         | |                    
-         |___/                                          |_|                    
+ 
+          __/ |                                         | |                 
+          
+         |___/                                          |_|  
+         
         
         
  
@@ -27,13 +42,17 @@ The first act focuses on the culverts of the Castle of Hyrule, where they must g
 In the dungeon, you will find even more complicated enemies and a very powerful enemy that will make things difficult for our heroes.
 
 Finally they will have to infiltrate in the castle to be able to release it of the forces of the evil, to finally measure its forces with a very powerful final boss.
- ##CONTROLS
+ ##CONTROLLERS CONTROLS
  Player 1: Link
  Player 2: Zelda
  A-Attack with sword/bow
  B-Pick Zelda (in case of Link)
  R1- Roll
  Left Joystic  - Move Around
+ 
+ ##KEYBOARD CONTROLS
+ 
+ ###Link
  
  
  ##CHANGELOG
