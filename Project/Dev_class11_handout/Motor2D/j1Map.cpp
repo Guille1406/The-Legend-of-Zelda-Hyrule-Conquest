@@ -273,8 +273,6 @@ bool j1Map::Load(const char* file_name)
 			data.layers.push_back(lay);
 	}
 
-
-
 	pugi::xml_node object_layer;
 
 	//Iterates all the object layers
@@ -289,7 +287,6 @@ bool j1Map::Load(const char* file_name)
 		height++;
 	}
 	count = 0;
-	ObjectLayer* obj = new ObjectLayer();
 	for (object_layer = map_file.child("map").child("objectgroup"); object_layer && ret; object_layer = object_layer.next_sibling("objectgroup"))
 	{
 		LoadConnectedObjects(object_layer);
@@ -648,7 +645,6 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 bool j1Map::CreateEnemyMap(int& width, int& height, uchar** buffer) const
 {
 	bool ret = false;
-
 
 	std::list<MapLayer*>::const_iterator item = data.layers.begin();
 	for (; item != data.layers.cend(); ++item) {

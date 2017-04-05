@@ -13,6 +13,7 @@
 #include"j1Audio.h"
 bool j1Player::Awake(pugi::xml_node& config)
 {
+	//This need to be cleaned
 	Link = new P_Link();
 	Zelda = new P_Zelda();
 	
