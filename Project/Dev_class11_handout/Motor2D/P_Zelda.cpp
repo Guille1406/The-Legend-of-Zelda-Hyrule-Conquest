@@ -340,7 +340,7 @@ player_event P_Zelda::GetEvent()
 				else can_throw = true;
 			}
 			//ATTACK//
-			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_DOWN) {
+			if (App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_DOWN && !doing_script) {
 				attack_timer.Start();
 				App->audio->PlayFx(Arrow_Audio);
 				actual_event = attack;
