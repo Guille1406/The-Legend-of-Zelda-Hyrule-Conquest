@@ -17,7 +17,7 @@
         
         
  
- ##DESCRIPTION
+ ## DESCRIPTION
  In The Legend Of Zelda: Hyrule Conquest, you must join your partner in a unique adventure in which your synergy when fighting and solving puzzles will make you emerge victorious from each room full of enemies and enigmas.
 
 Link and Zelda will join forces in this multiplayer adventure, completing puzzles for two players and fighting against different enemies. To overcome it you will have available unique weapons for each player being Link a melee character and Zelda a ranged character.
@@ -30,7 +30,7 @@ In the dungeon, you will find even more complicated enemies and a very powerful 
 
 Finally they will have to infiltrate in the castle to be able to release it of the forces of the evil, to finally measure its forces with a very powerful final boss.
 
- ##GAMEPAD CONTROLS (XBOX)
+ ## GAMEPAD CONTROLS (XBOX)
  
  Player 1: Link
  
@@ -44,9 +44,9 @@ Finally they will have to infiltrate in the castle to be able to release it of t
  
  Left Joystic  - Move Around
  
- ##KEYBOARD CONTROLS
+ ## KEYBOARD CONTROLS
  
- ###Link
+ ### Link
  
  W/A/S/D: movement
  
@@ -56,7 +56,7 @@ Finally they will have to infiltrate in the castle to be able to release it of t
  
  B: pick Zelda
  
- ###Zelda
+ ### Zelda
  
  I/J/K/L: movement
  
@@ -66,25 +66,15 @@ Finally they will have to infiltrate in the castle to be able to release it of t
  
  NUMPAD 3: get throwed
  
- ##CHANGELOG
+ ## CHANGELOG
  
- #0.1 Link is moving with collisions
  
- #0.2 In this release you can:
+ ## 0.3.1
  
--play multiplayer
+ -Bugs fixed & improve game
 
--zoom in/out
-
--roll with the two players
-
--jump slopes
-
--play with controllers
-
--Zoom with K & L
-
-#0.3
+ 
+# 0.3
 
 -Tutorial Map
 
@@ -111,6 +101,21 @@ Finally they will have to infiltrate in the castle to be able to release it of t
 -Life implemented
 
 
- ##0.3.1
+ # 0.2 In this release you can:
  
- -Bugs fixed & improve game
+-play multiplayer
+
+-zoom in/out
+
+-roll with the two players
+
+-jump slopes
+
+-play with controllers
+
+-Zoom with K & L
+
+ 
+ # 0.1
+ Link is moving with collisions
+ 
