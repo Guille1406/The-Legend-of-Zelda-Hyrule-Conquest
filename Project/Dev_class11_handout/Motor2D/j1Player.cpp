@@ -75,6 +75,15 @@ bool j1Player::Start()
 
 	Link->doing_script = false;
 	Zelda->doing_script = false;
+	Link->is_rolling = false;
+	Link->can_jump = false;
+	Link->can_move = true;
+	Link->can_pick_up = false;
+	Zelda->is_picked = false;
+	Zelda->is_rolling = false;
+	Zelda->can_jump = false;
+	Zelda->can_move = true;
+	
 
 	//TEMP
 	Link->sprites_vector[attack * 4 + up].speed = 0.12;
