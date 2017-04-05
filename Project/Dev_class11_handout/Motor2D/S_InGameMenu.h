@@ -22,6 +22,8 @@ public:
 	{
 		return active;
 	}
+	//This must be revised, must be private
+	bool active = false;
 
 private:
 	GuiButton* IngamemenuLabel = nullptr;
@@ -30,7 +32,7 @@ private:
 	GuiButton* options =		nullptr;
 	GuiButton* mainmenu =		nullptr;
 	GuiButton* quit =	   		nullptr;
-	bool active = false;
+	
 };
 
 #endif // #pragma once

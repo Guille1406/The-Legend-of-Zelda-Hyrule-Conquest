@@ -58,7 +58,7 @@ public:
 		return prev_scene;
 	}
 
-	const MainScene* InGameMenuScene() const
+	MainScene* InGameMenuScene() const
 	{
 		return ingame_menu_scene;
 	}

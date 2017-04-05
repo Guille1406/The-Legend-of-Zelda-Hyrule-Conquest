@@ -15,6 +15,8 @@
 #include "j1Enemy.h"
 #include"j1Audio.h"
 #include"j1GameStartMenuBack.h"
+#include "S_InGameMenu.h"
+
 bool S_World::Start()
 {
 	scene_str = "Castle Sewers";
@@ -78,13 +80,9 @@ bool S_World::Start()
 
 bool S_World::Update()
 {
-	//App->map->Draw();
-	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
-		App->player->loop_game_menu = true;
-	}
-	
-	
-
+	if (!App->player->paused)
+		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+			App->player->loop_game_menu = true;
 	return false;
 }
 bool S_World::PostUpdate()
@@ -120,7 +118,8 @@ bool S_World::Clean()
 		temp = temp->next;
 	}*/
 
-	
-	
+	//This must be revised
+	((S_InGameMenu*)App->scene->InGameMenuScene())->active = false;
+
 	return false;
 }

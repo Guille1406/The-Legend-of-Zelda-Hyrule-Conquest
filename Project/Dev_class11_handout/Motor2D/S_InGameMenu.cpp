@@ -100,6 +100,9 @@ bool S_InGameMenu::Clean()
 	mainmenu->SetVisible(false);
 	quit->SetVisible(false);
 	App->gui->SetFocus(nullptr);
+
+	active = false;
+
 	return true;
 }
 
