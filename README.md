@@ -30,17 +30,17 @@ In the dungeon, you will find even more complicated enemies and a very powerful 
 
 Finally they will have to infiltrate in the castle to be able to release it of the forces of the evil, to finally measure its forces with a very powerful final boss.
 
- ##GAMEPAD CONTROLS
+ ##GAMEPAD CONTROLS (XBOX)
  
  Player 1: Link
  
  Player 2: Zelda
  
- A-Attack with sword/bow
+ A- Attack with sword/bow
  
- B-Pick Zelda (in case of Link)
+ B- Pick/Throw Zelda
  
- R1- Roll
+ X- Roll
  
  Left Joystic  - Move Around
  
@@ -48,23 +48,23 @@ Finally they will have to infiltrate in the castle to be able to release it of t
  
  ###Link
  
- w/a/s/d: movement
+ W/A/S/D: movement
  
- c: attack
+ C: attack
  
- v: roll
+ V: roll
  
- b: pick Zelda
+ B: pick Zelda
  
  ###Zelda
  
- i/j/k/l: movement
+ I/J/K/L: movement
  
- 1: attack
+ NUMPAD 1: attack
  
- 2: roll
+ NUMPAD 2: roll
  
- 3: get throwed
+ NUMPAD 3: get throwed
  
  ##CHANGELOG
  
@@ -82,7 +82,7 @@ Finally they will have to infiltrate in the castle to be able to release it of t
 
 -play with controllers
 
--Zoom with k & l
+-Zoom with K & L
 
 #0.3
 
@@ -111,4 +111,6 @@ Finally they will have to infiltrate in the castle to be able to release it of t
 -Life implemented
 
 
+ ##0.3.1
  
+ -Bugs fixed & improve game
