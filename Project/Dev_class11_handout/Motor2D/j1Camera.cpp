@@ -22,12 +22,12 @@ bool j1Camera::Awake(pugi::xml_node&)
 {
 	//Create the ellipses
 	LitleEllipse.ellipsecentre = { 0,0 };
-	LitleEllipse.semimajoraxis = 320;
-	LitleEllipse.semiminoraxis = 180;
+	LitleEllipse.semimajoraxis = 160;
+	LitleEllipse.semiminoraxis = 90;
 
 	BigEllipse.ellipsecentre = { 0,0 };
-	BigEllipse.semimajoraxis = 640;
-	BigEllipse.semiminoraxis = 360;
+	BigEllipse.semimajoraxis = 320;
+	BigEllipse.semiminoraxis = 180;
 
 	f_border_between_ellipses = BigEllipse.InsideEllipseValue({ 0,LitleEllipse.semiminoraxis});
 

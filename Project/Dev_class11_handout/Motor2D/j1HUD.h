@@ -55,7 +55,7 @@ private:
 	SDL_Rect Zelda_circle_R = { 272,325,70,55 };
 	//Items
 	SDL_Rect Sword = { 916,0,60,60 };
-	SDL_Rect Bow = { 976,0,60,60 };
+	SDL_Rect Bow = { 976,4,56,56 };
 
 	SDL_Rect PlaceLabelBack = { 564,325,498,137 };
 
