@@ -7,11 +7,25 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Window.h"
-#include"j1Audio.h"
+#include "j1Audio.h"
+
+S_End::S_End()
+{
+	scene_str = "End";
+}
+
+S_End::~S_End()
+{
+
+}
+
+bool S_End::Awake(pugi::xml_node& conf)
+{
+	return true;
+}
 
 bool S_End::Start()
 {
-	scene_str = "End";
 	LOG("End Open");
 	//App->audio->StopMusic(1000.0f);
 	App->audio->VolumeMusic(0);
@@ -21,26 +35,17 @@ bool S_End::Start()
 	return false;
 }
 
-bool S_End::Update() {
-
-	
-	
-	return true;
-}
-bool S_End::PostUpdate()
+bool S_End::Update()
 {
-	App->win->scale = 1;
 	SDL_Rect temp = { 0,0,1000,1000 };
-	App->render->Blit(finale_texture, -App->render->camera.x / App->win->scale, -App->render->camera.y / App->win->scale);
-	if (loop_timer.Read() > 5000) {
+	App->render->Blit(finale_texture, -App->render->camera.x, -App->render->camera.y, NULL, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
+	if (loop_timer.Read() > 5000)
 		App->scene->ChangeScene(Scene_ID::mainmenu);
-		App->win->scale = 1.5;
-	}
 	return true;
 }
+
 bool S_End::Clean()
 {
 	App->tex->UnLoad(finale_texture);
-
 	return false;
 }

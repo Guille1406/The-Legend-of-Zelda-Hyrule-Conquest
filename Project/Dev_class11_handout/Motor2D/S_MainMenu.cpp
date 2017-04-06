@@ -4,6 +4,7 @@
 #include "j1Player.h"
 #include "j1Window.h"
 #include "j1Camera.h"
+#include "S_InGameMenu.h"
 
 S_MainMenu::S_MainMenu()
 {
@@ -83,6 +84,9 @@ bool S_MainMenu::Start()
 	}
 
 	App->gui->SetFocus(buttons.front());
+
+	//This must be revised
+	((S_InGameMenu*)App->scene->InGameMenuScene())->active = false;
 
 	return true;
 }

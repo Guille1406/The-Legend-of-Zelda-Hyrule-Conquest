@@ -6,10 +6,12 @@
 class S_End : public MainScene {
 
 public:
+	S_End();
+	~S_End();
+	bool Awake(pugi::xml_node& conf);
 	bool Start();
 	bool Update();
 	bool Clean();
-	bool PostUpdate();
 public:
 	char* test;
 	SDL_Texture* finale_texture = nullptr;
