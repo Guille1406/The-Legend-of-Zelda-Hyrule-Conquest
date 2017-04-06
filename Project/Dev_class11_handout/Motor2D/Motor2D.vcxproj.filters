@@ -417,6 +417,15 @@
     <ClInclude Include="j1DialogueManager.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Actions.h">
+      <Filter>Desenvolupament  ========\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="A_Move.h">
+      <Filter>Desenvolupament  ========\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Actions.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -478,6 +487,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Scenes\GUI\In-Game Menu">
       <UniqueIdentifier>{581fd1ba-2738-4e32-aed6-82e3c72b999d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Actions">
+      <UniqueIdentifier>{6ae459b6-6fb4-440b-8eb3-9dc70e3048a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
