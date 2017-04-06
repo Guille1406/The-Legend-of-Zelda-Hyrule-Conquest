@@ -62,6 +62,7 @@ void S_Campaign::OnGui(Gui* ui, GuiEvent event)
 	if ((ui == (Gui*)newcampaign) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->scene->ChangeScene(Scene_ID::world);
+		App->scene->Hide();
 		App->startmenuback->Freeze(true);
 	}
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
