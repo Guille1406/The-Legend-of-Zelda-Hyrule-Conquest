@@ -58,7 +58,7 @@ bool j1HUD::PreUpdate()
 // Called each loop iteration
 bool j1HUD::Update(float dt)
 {
-	if (App->startmenuback->InGameMenuVisible())
+	if (App->startmenuback->InGameMenuVisible() || !visible)
 		return true;
 
 	//Blit Life Label

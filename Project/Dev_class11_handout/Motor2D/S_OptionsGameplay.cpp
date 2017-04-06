@@ -1,5 +1,6 @@
 #include "S_OptionsGameplay.h"
 #include "j1Window.h"
+#include "j1HUD.h"
 
 S_OptionsGameplay::S_OptionsGameplay()
 {
@@ -79,12 +80,10 @@ void S_OptionsGameplay::OnGui(Gui* ui, GuiEvent event)
 	if ((ui == (Gui*)ShowhideHUD) && (event == GuiEvent::mouse_lclk_down))
 	{
 		ShowhideHUD_check->ChangeState();
-		/*
 		if (ShowhideHUD_check->Checked())
-			//Show HUD
+			App->hud->ToggleVisibility(true);
 		else
-			//Hide HUD
-		*/
+			App->hud->ToggleVisibility(false);
 	}
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
 	{

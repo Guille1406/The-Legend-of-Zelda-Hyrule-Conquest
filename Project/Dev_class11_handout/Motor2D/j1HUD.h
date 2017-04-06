@@ -38,7 +38,6 @@ public:
 
 	void ToggleVisibility(bool value);
 
-	
 private:
 	bool visible = true;
 

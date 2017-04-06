@@ -45,9 +45,6 @@ bool j1Player::Awake(pugi::xml_node& config)
 
 bool j1Player::Start()
 {
-
-	
-
 	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
 	Link->front_collider = App->collision->AddCollider({ Link->tilepos.x * 8,Link->tilepos.y * 8 + 32,32,16 }, front_link, Link, this);
 	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,32,32 }, collider_zelda, Zelda, this);
@@ -60,12 +57,9 @@ bool j1Player::Start()
 	Link->character_direction = direction::down;
 	Zelda->character_direction = direction::down;
 
-
-
 	Link->LoadAnimation("sprites/Link_Spritesheet_Finale.xml");
 	Zelda->LoadAnimation("sprites/Zelda_Spritesheet_Finale.xml");
 
-	
 	selected_character = Link;
 	other_character = Zelda;
 	change = false;
@@ -86,8 +80,6 @@ bool j1Player::Start()
 	Zelda->can_jump = false;
 	Zelda->can_move = true;
 	
-	
-
 	//TEMP
 	Link->sprites_vector[attack * 4 + up].speed = 0.12;
 	Link->sprites_vector[attack * 4 + down].speed = 0.12;
@@ -116,8 +108,6 @@ bool j1Player::Update(float dt)
 
 		Link->GetAdjacents();
 		Zelda->GetAdjacents();
-
-
 
 		//2 Players
 		if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
@@ -151,7 +141,6 @@ bool j1Player::Update(float dt)
 
 bool j1Player::PostUpdate()
 {
-	
 	return true;
 }
 
@@ -173,7 +162,7 @@ bool j1Player::CleanUp() {
 		if ((Zelda->collision != nullptr) && (Zelda->front_collider != nullptr))
 		{
 			Zelda->collision->to_delete = true;
-			Zelda->front_collider->to_delete = true;
+			Zelda->front_collider->to_delete = true; // This may crash, can't read memory
 		}
 	}
 	return true;
