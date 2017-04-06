@@ -17,8 +17,6 @@ public:
 	void OnGui(Gui* ui, GuiEvent event);
 public:
 	GuiButton* ControlsLabel = nullptr;
-	GuiButton* ControllerSensibility = nullptr;
-	GuiButton* MouseSensibility = nullptr;
 	GuiButton* ControllerLayout = nullptr;
 	GuiButton* MouseLayout = nullptr;
 	GuiButton* back = nullptr;
