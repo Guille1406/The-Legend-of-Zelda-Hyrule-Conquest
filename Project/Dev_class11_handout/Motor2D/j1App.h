@@ -32,6 +32,7 @@ class j1Object;
 class j1Enemy;
 class j1HUD;
 class j1GameStartMenuBackground;
+class j1DialogueManager;
 //using namespace std;
 
 class j1App
@@ -121,6 +122,7 @@ public:
 	j1Enemy*			enemy = nullptr;
 	j1HUD*				hud = nullptr;
 	j1GameStartMenuBackground* startmenuback = nullptr;
+	j1DialogueManager*	dialoguemanager = nullptr;
 
 private:
 	std::list<j1Module*> modules;

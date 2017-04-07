@@ -26,6 +26,7 @@
 #include "j1Enemy.h"
 #include "j1HUD.h"
 #include "j1GameStartMenuBack.h"
+#include "j1DialogueManager.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -53,6 +54,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	enemy = new j1Enemy();
 	hud = new j1HUD();
 	startmenuback = new j1GameStartMenuBackground();
+	dialoguemanager = new j1DialogueManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -66,6 +68,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfinding);
 	AddModule(font);
 	AddModule(startmenuback);
+	AddModule(dialoguemanager);
 
 	// scene lastAddModule(scene);
 	AddModule(scene);

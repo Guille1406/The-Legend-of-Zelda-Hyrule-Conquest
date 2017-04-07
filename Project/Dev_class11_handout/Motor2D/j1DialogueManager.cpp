@@ -35,7 +35,7 @@ j1DialogueManager::~j1DialogueManager()
 bool j1DialogueManager::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
-
+	/*
 	LOG("Loading DialogManager data");
 	folder = config.child("dialogues").attribute("folder").as_string();
 	path = config.child("dialogues").first_child().attribute("file").as_string();
@@ -53,13 +53,14 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 		LOG("Could not load gui xml file %s. pugi error: %s", dialogueDataFile, result.description());
 		ret = false;
 	}
-
+	*/
 	return ret;
 }
 
 bool j1DialogueManager::Start()
 {
 	bool ret = true;
+	/*
 	dialogueNode = dialogueDataFile.child("npcs");
 	// Allocate memory
 	int i = 0;
@@ -79,7 +80,7 @@ bool j1DialogueManager::Start()
 			}
 		}
 	}
-
+	*/
 	//Prepare UI to print
 	
 	return ret;
