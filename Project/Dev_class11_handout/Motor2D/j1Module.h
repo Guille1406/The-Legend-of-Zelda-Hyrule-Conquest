@@ -7,8 +7,7 @@
 #define __j1MODULE_H__
 
 #include <vector>
-
-#include "p2SString.h"
+#include "p2Defs.h"
 #include "PugiXml\src\pugixml.hpp"
 
 class j1App;
@@ -16,7 +15,7 @@ enum GuiEvent;
 class Gui;
 struct Command;
 struct CVar;
-class Collider;
+struct Collider;
 class j1Module
 {
 public:

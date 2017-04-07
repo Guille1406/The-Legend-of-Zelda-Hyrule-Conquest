@@ -1,15 +1,21 @@
 #ifndef _BUTTON_
 #define _BUTTON_
+
 #include "j1Object.h"
 #include"j1Render.h"
+
 class Button : public Object {
 private:
 	bool triggered= false;
+
 public:
-	Button() {
+	Button()
+	{
 		
 	}
-	Button(const Button& obj) {
+
+	Button(const Button& obj)
+	{
 		type = obj.type;
 		rect = obj.rect;
 		active = obj.active;
@@ -17,14 +23,17 @@ public:
 		logic_height = obj.logic_height;
 		texture_rect = idle_button;
 	}
-	~Button() {
+
+	~Button()
+	{
 
 	}
-	void Action() {
-		for (int i = 0; i < connected_object.size(); i++) {
 
+	void Action()
+	{
+		for (uint i = 0; i < connected_object.size(); i++)
+		{
 			connected_object[i]->Action();
-
 		}
 	}
 
@@ -35,6 +44,4 @@ public:
 	
 };
 
-
 #endif
-

@@ -4,7 +4,6 @@
 #include "PugiXml/src/pugixml.hpp"
 #include "p2Point.h"
 #include "SDL\include\SDL.h"
-#include  "p2SString.h"
 #include "Animation.h"
 #include "j1Textures.h"
 #include <vector>

@@ -31,7 +31,7 @@ public:
 		if (characters_on>=2) {
 			
 			texture_rect = rect_double_button_two;
-			for (int i = 0; i < connected_object.size(); i++) {
+			for (uint i = 0; i < connected_object.size(); i++) {
 				connected_object[i]->Action();
 			}
 			if (!sound) {

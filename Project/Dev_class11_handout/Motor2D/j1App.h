@@ -7,8 +7,8 @@
 #include "j1Timer.h"
 #include "PugiXml\src\pugixml.hpp"
 
-#include<list>;
-#include<string>;
+#include<list>
+#include<string>
 
 // Modules
 class j1Window;
@@ -138,7 +138,7 @@ private:
 	mutable std::string	save_game = empty_char;
 
 	j1PerfTimer			ptimer;
-	uint64				frame_count = 0;
+	unsigned int long	frame_count = 0;
 	j1Timer				startup_time;
 	j1Timer				frame_time;
 	j1Timer				last_sec_frame_time;

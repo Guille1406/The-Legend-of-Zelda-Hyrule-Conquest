@@ -272,7 +272,7 @@ void j1Console::ParseInput(std::string* strtoparse)
 			{
 				//0 arguments, print it
 				static char tmp_string[4096];
-				sprintf_s(tmp_string, 4096, "%s: %s", var->name, ((CVar*)var)->PrintCVar()->c_str());
+				sprintf_s(tmp_string, 4096, "%s: %s", var->name.c_str(), ((CVar*)var)->PrintCVar()->c_str());
 				Print_Console_Label(&std::string(tmp_string));
 				break;
 			}
