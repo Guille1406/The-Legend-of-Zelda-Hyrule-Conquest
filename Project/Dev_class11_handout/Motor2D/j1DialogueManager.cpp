@@ -165,11 +165,11 @@ void j1DialogueManager::OnConsoleCVar(const CVar* cvar)
 bool j1DialogueManager::BlitDialog(uint id, uint state)
 {
 	//Find the correct ID
-	for (int i = 0; i < dialog.size(); i++)
+	for (uint i = 0; i < dialog.size(); i++)
 	{
 		if (dialog[i]->id == id)
 		{
-			for (int j = 0; (j + dialogueStep) < dialog[i]->texts.size(); j++) //Search correct text inside Dialogue 
+			for (uint j = 0; (j + dialogueStep) < dialog[i]->texts.size(); j++) //Search correct text inside Dialogue 
 			{
 				if (dialog[i]->texts[dialogueStep + j]->state == state)
 				{

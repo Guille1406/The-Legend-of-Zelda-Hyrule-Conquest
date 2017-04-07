@@ -40,9 +40,9 @@ bool j1Window::Awake(pugi::xml_node& config)
 
 		width = config.child("resolution").attribute("width").as_int(640);
 		height = config.child("resolution").attribute("height").as_int(480);
-		scale = config.child("resolution").attribute("scale").as_int(1);
-		width_half = width * 0.5f;
-		height_half = height * 0.5f;
+		scale = config.child("resolution").attribute("scale").as_float(1);
+		width_half = (int)(width * 0.5f);
+		height_half = (int)(height * 0.5f);
 		scale = 1.5f;
 		if(fullscreen == true)
 		{

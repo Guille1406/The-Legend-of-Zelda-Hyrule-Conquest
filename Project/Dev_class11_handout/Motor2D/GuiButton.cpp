@@ -127,8 +127,8 @@ void GuiButton::CalculateStrWH(const std::string* str)
 
 void GuiButton::CenterStr()
 {
-	ButtonStringPos.x = position.x + ((Gui_Collider.w - ButtonString_w) * 0.5f);
-	ButtonStringPos.y = position.y + ((Gui_Collider.h - ButtonString_h) * 0.5f);
+	ButtonStringPos.x = (int)(position.x + ((Gui_Collider.w - ButtonString_w) * 0.5f));
+	ButtonStringPos.y = (int)(position.y + ((Gui_Collider.h - ButtonString_h) * 0.5f));
 	if (ButtonString != nullptr)
 		ButtonString->SetLocalPos(ButtonStringPos.x, ButtonStringPos.y);
 	OriginalPosition = position;

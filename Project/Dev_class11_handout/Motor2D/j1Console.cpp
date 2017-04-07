@@ -110,7 +110,7 @@ void j1Console::Print_Console_Label(std::string* newlabelstr, uint tab)
 		int XPos = 5;
 		if (tab != 0)
 		{
-			for (int i = 0; i < tab; i++)
+			for (uint i = 0; i < tab; i++)
 				XPos += 10;
 		}
 		if(LabelNum > 0)

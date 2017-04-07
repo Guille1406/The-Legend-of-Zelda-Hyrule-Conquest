@@ -28,8 +28,8 @@ bool j1HUD::Awake(pugi::xml_node& conf)
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 
 	Life_Label =		{ 672,0,244,36 };
-	Life_Label_x_pos = App->win->GetWindowWHalf() - Life_Label.w * 0.5f;
-	Life_Label_y_pos = 11;
+	Life_Label_x_pos =	App->win->GetWindowWHalf() - (int)(Life_Label.w * 0.5f);
+	Life_Label_y_pos =	11;
 	Heart_Container =	{ 672,52,45,42 };
 	Heart_Full =		{ 717,52,45,42 };
 	Heart_Half =		{ 717,52,24,42 };
@@ -69,7 +69,7 @@ bool j1HUD::Update(float dt)
 
 	//Blit heart containers
 	int heart_container_pos_x = hearts_pos_x;
-	for (int heart = 0; heart < App->player->hearts_containers_test_purpose; heart++)
+	for (uint heart = 0; heart < App->player->hearts_containers_test_purpose; heart++)
 	{
 		App->render->Blit(atlas, -App->render->camera.x + heart_container_pos_x, -App->render->camera.y + heart_container_pos_y, &Heart_Container, 1.0f, 0, INT_MAX, INT_MAX, false);
 		heart_container_pos_x += (Heart_Container.w + space_between_hearts);
@@ -115,7 +115,7 @@ bool j1HUD::Update(float dt)
 	SDL_Texture* texture_to_blit = App->font->Print(scene_text, { 255,255,255,255 }, App->font->Triforce48);
 	int texture_to_blit_w, texture_to_blit_h = 0;
 	App->font->CalcSize(scene_text, texture_to_blit_w, texture_to_blit_h, App->font->Triforce48);
-	App->render->Blit(texture_to_blit, (int)(- App->render->camera.x + PlaceLabelBack.w * 0.5f - texture_to_blit_w * 0.5f), - App->render->camera.y + Window_H - PlaceLabelBack.h * 0.5f, nullptr, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
+	App->render->Blit(texture_to_blit, (int)(- App->render->camera.x + PlaceLabelBack.w * 0.5f - texture_to_blit_w * 0.5f), (int)(- App->render->camera.y + Window_H - PlaceLabelBack.h * 0.5f), nullptr, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
 	SDL_DestroyTexture(texture_to_blit);
 
 	return true;

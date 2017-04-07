@@ -70,16 +70,16 @@ bool j1Camera::PreUpdate()
 	float Scale = App->win->GetScale();
 	iPoint Centre = { 0,0 };
 	Centre.x = (int)((((float)(App->player->Link->pos.x + App->player->Zelda->pos.x)) * 0.5f));
-	Centre.y = (int)((((float)(App->player->Link->pos.y + App->player->Zelda->pos.y)) * 0.5f) );
+	Centre.y = (int)((((float)(App->player->Link->pos.y + App->player->Zelda->pos.y)) * 0.5f));
 	//Camera position
 	
 
-	App->render->camera.x = -Centre.x * Scale + i_Half_w;
-	App->render->camera.y = -Centre.y * Scale + i_Half_h;
+	App->render->camera.x = (int)(-Centre.x * Scale + i_Half_w);
+	App->render->camera.y = (int)(-Centre.y * Scale + i_Half_h);
 
 	if (App->render->camera.x >= 0) App->render->camera.x = 0;
 	if (-App->render->camera.x >= App->map->data.width * App->map->data.tile_width - App->render->camera.w /Scale) {
-		App->render->camera.x = -1 * (App->map->data.width * App->map->data.tile_width - App->render->camera.w / Scale);
+		App->render->camera.x = (int)(-1 * (App->map->data.width * App->map->data.tile_width - App->render->camera.w / Scale));
 	}
 	
 	
@@ -160,7 +160,7 @@ bool j1Camera::Update(float dt)
 	{
 		App->render->DrawQuad(DebugPerformanceData_Rect, Blue(0), Blue(1), Blue(2), 150, true, true, false);
 
-		for (int i = 0; i < DebugPerformanceData.size(); i++)
+		for (uint i = 0; i < DebugPerformanceData.size(); i++)
 		{
 			switch (i)
 			{

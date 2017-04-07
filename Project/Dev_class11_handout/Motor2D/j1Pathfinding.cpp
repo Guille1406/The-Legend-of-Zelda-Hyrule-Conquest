@@ -168,14 +168,14 @@ std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoi
 					}
 					else if (temp->on_open == true)
 					{
-						int last_g_value = temp->g;
+						int last_g_value = (int)temp->g;
 						temp->CalculateF(dest_point);
 						if (last_g_value <temp->g)
 						{
 							temp->parent = GetPathNode(current->pos.x, current->pos.y);
 						}
 						else {
-							temp->g = last_g_value;
+							temp->g = (float)last_g_value;
 						}
 					}
 					else
@@ -205,7 +205,7 @@ PathNode::PathNode()
 
 }
 
-PathNode::PathNode(int g, int h, const iPoint & pos, const PathNode * parent) : g(g), h(h), pos(pos), parent(parent), on_close(false), on_open(false)
+PathNode::PathNode(int g, int h, const iPoint & pos, const PathNode * parent) : g((float)g), h(h), pos(pos), parent(parent), on_close(false), on_open(false)
 {
 	int x = 0;
 }
@@ -295,7 +295,7 @@ int PathNode::CalculateF(const iPoint & destination)
 
 	g = parent->g + parent->pos.DistanceManhattan(pos);
 	h = pos.DistanceManhattan(destination) * 10;
-	return  g + h;
+	return  (int)g + h;
 }
 
 void PathNode::SetPosition(const iPoint & value)

@@ -37,7 +37,7 @@ bool CVar::SetValueFromString(const std::string* new_value)
 	}
 	case CVar::CVar_float:
 	{
-		float v = atof(new_value->c_str());
+		float v = (float)(atof(new_value->c_str()));
 		if (ret = (v != value.f))
 			value.f = v;
 		break;

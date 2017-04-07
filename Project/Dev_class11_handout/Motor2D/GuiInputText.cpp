@@ -16,7 +16,7 @@ GuiInputText::GuiInputText(iPoint position, SDL_Rect* rect, std::string* string,
 	CalculateStrWH();
 	password_string.clear();
 	new_str_len = string->length();
-	for (int i = 0; i < new_str_len; i++)
+	for (uint i = 0; i < new_str_len; i++)
 		password_string += password_char;
 	previous_str_len = new_str_len;
 	edit_timer.Start();
@@ -113,7 +113,7 @@ void GuiInputText::CalculateStrWH()
 void GuiInputText::MoveStr()
 {
 	InputTextStringPos.x = position.x + 10;
-	InputTextStringPos.y = position.y + ((Gui_Collider.h - InputTextString_h) * 0.5f);
+	InputTextStringPos.y = (int)(position.y + ((Gui_Collider.h - InputTextString_h) * 0.5f));
 	OriginalPosition = position;
 	InputTextString->SetLocalPos(InputTextStringPos.x, InputTextStringPos.y);
 }

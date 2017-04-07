@@ -208,24 +208,26 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 
 	SDL_Rect rect = {0,0,0,0};
 	
-	rect.x = (int)(camera.x * speed) + x * scale;
-	rect.y = (int)(camera.y * speed) + y * scale;
+	rect.x = (int)(camera.x * speed) + (int)(x * scale);
+	rect.y = (int)(camera.y * speed) + (int)(y * scale);
 	if (section != NULL)
 	{
-		rect.w = f_rect.x = section->w;
-		rect.w = f_rect.y = section->h;
+		rect.w = section->w;
+		f_rect.x = (float)section->w;
+		rect.w = section->h;
+		f_rect.y = (float)section->h;
 	}
 	else
 	{
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
-		f_rect.x = rect.w;
-		f_rect.y = rect.h;
+		f_rect.x = (float)rect.w;
+		f_rect.y = (float)rect.h;
 	}
 
 	f_rect.x *= scale;
 	f_rect.y *= scale;
-	rect.w = ceil(f_rect.x);
-	rect.h = ceil(f_rect.y);
+	rect.w = (int)(ceil(f_rect.x));
+	rect.h = (int)(ceil(f_rect.y));
 
 	SDL_Point* p = NULL;
 	SDL_Point pivot = { 0,0 };
@@ -265,8 +267,8 @@ bool j1Render::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a
 	{
 		rec.x = (int)(camera.x + rect.x * scale);
 		rec.y = (int)(camera.y + rect.y * scale);
-		rec.w *= scale;
-		rec.h *= scale;
+		rec.w = (int)(rec.w * scale);
+		rec.h = (int)(rec.h * scale);
 	}
 
 	int result = (filled) ? SDL_RenderFillRect(renderer, &rec) : SDL_RenderDrawRect(renderer, &rec);
@@ -293,9 +295,9 @@ bool j1Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 
 	int result = -1;
 
 	if (use_camera)
-		result = SDL_RenderDrawLine(renderer, camera.x + x1 * scale, camera.y + y1 * scale, camera.x + x2 * scale, camera.y + y2 * scale);
+		result = SDL_RenderDrawLine(renderer, (int)(camera.x + x1 * scale), (int)(camera.y + y1 * scale), (int)(camera.x + x2 * scale), (int)(camera.y + y2 * scale));
 	else
-		result = SDL_RenderDrawLine(renderer, x1 * scale, y1 * scale, x2 * scale, y2 * scale);
+		result = SDL_RenderDrawLine(renderer, (int)(x1 * scale), (int)(y1 * scale), (int)(x2 * scale), (int)(y2 * scale));
 
 	if (result != 0)
 	{

@@ -248,7 +248,7 @@ void j1App::FinishUpdate()
 
 	App->win->SetTitle("The Legend of Zelda Hyrule Conquest, Summit Games");
 
-	if(capped_ms > 0 && last_frame_ms < capped_ms)
+	if(capped_ms > 0 && (int)last_frame_ms < capped_ms)
 	{
 		j1PerfTimer t;
 		SDL_Delay(capped_ms - last_frame_ms);

@@ -69,14 +69,14 @@ private:
 	SDL_Rect MessengerRect =	{ 1278,720,599,694 };
 	int Background_Initial_pos = 0;
 	int Background_pos =		0; 
-	int Background_speed =		2;
+	uint Background_speed =		2;
 	j1Timer Background_timer;
 	j1Timer MainMenuOpacity_timer;
 	uint startmenuopacity =		0;
 	bool activate_background_movement = false;
 	bool background_movement =  false;
 	j1Timer Background_Characters_timer;
-	int backgroundcharactersspeed = 10;
+	uint backgroundcharactersspeed = 10;
 	int spacebetweenbackgroundcharacters = 500;
 	bool firstloop = false;
 	bool freeze = false;
