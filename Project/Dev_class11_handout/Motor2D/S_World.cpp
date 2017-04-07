@@ -43,7 +43,7 @@ bool S_World::Start()
 		if (App->map->CreateWalkabilityMap(w, h, &data))
 			App->pathfinding->SetMap(w, h);
 
-		for (int i = 0; i < App->object->V_Objects.size(); i++) {
+		for (uint i = 0; i < App->object->V_Objects.size(); i++) {
 			if (App->object->V_Objects[i]->collider_tiles.size() > 0) {
 				App->object->CreateColliders(*App->object->V_Objects[i]);
 			}

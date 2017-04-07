@@ -49,8 +49,6 @@ void P_Link::Orientation_collider_link_sword()
 	
 }
 
-
-
 player_event P_Link::GetEvent()
 {
 
@@ -62,7 +60,6 @@ player_event P_Link::GetEvent()
 	}
 
 	if (doing_script == false) {
-
 
 		//EVENTS FOR GAMEPAD
 		if (App->input->NumberOfGamePads() >= 1) {
@@ -77,11 +74,9 @@ player_event P_Link::GetEvent()
 				}
 				else {
 					movement_direction = move_up;
-
 				}
 				character_direction = up;
 				actual_event = move;
-
 			}
 			//MOVEMENT DOWM//
 			else if (App->inputM->EventPressed(INPUTEVENT::MDOWN, 1) == EVENTSTATE::E_REPEAT) {
@@ -100,14 +95,12 @@ player_event P_Link::GetEvent()
 			}
 			//MOVEMENT RIGHT//
 			else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT, 1) == EVENTSTATE::E_REPEAT) {
-
 				movement_direction = move_right;
 				character_direction = right;
 				actual_event = move;
 			}
 			//MOVEMENT LEFT//
 			else if (App->inputM->EventPressed(INPUTEVENT::MLEFT, 1) == EVENTSTATE::E_REPEAT) {
-
 				movement_direction = move_left;
 				character_direction = left;
 				actual_event = move;
@@ -124,17 +117,15 @@ player_event P_Link::GetEvent()
 				can_pick_up = false;
 			}
 
-
 			//PICK ZELDA//
 			if (can_pick_up && !App->player->Zelda->doing_script) {
-				if (App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN|| App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) {
+				if (App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN || App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN) {
 					App->player->Zelda->is_picked = true;
 					App->player->Zelda->ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 					actual_event = pick;
 					im_lifting = true;
 					can_pick_up = false;
 				}
-
 			}
 			//TUMBLE//
 			if (App->inputM->EventPressed(INPUTEVENT::TUMBLE, 1) == EVENTSTATE::E_DOWN && !im_lifting) {
@@ -151,12 +142,7 @@ player_event P_Link::GetEvent()
 				Orientation_collider_link_sword();
 				actual_event = attack;
 				doing_script = true;
-				
 			}
-
-
-
-
 		}
 
 		else {
@@ -169,7 +155,6 @@ player_event P_Link::GetEvent()
 				}
 				else {
 					movement_direction = move_up;
-
 				}
 				character_direction = up;
 				actual_event = move;
@@ -184,20 +169,17 @@ player_event P_Link::GetEvent()
 				}
 				else {
 					movement_direction = move_down;
-
 				}
 				character_direction = down;
 				actual_event = move;
 			}
 
 			else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-
 				movement_direction = move_right;
 				character_direction = right;
 				actual_event = move;
 			}
 			else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-
 				movement_direction = move_left;
 				character_direction = left;
 				actual_event = move;
@@ -224,30 +206,26 @@ player_event P_Link::GetEvent()
 			}
 
 			if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
-				
-					attack_timer.Start();
-					App->audio->PlayFx(Link_Sword_Audio);
-					//orientation collider link sword
-					Orientation_collider_link_sword();
-					actual_event = attack;
-					doing_script = true;
-				
-				}
-
-				if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN && !im_lifting) {
-					actual_event = roll;
-					doing_script = true;
-					is_rolling = true;
-				}
-
+				attack_timer.Start();
+				App->audio->PlayFx(Link_Sword_Audio);
+				//orientation collider link sword
+				Orientation_collider_link_sword();
+				actual_event = attack;
+				doing_script = true;
 			}
 
+			if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN && !im_lifting) {
+				actual_event = roll;
+				doing_script = true;
+				is_rolling = true;
+			}
 
-			App->player->Link->can_pick_up = false;
-			return actual_event;
 		}
-	}
 
+		App->player->Link->can_pick_up = false;
+		return actual_event;
+	}
+}
 
 bool P_Link::Compare_Link_Sword_Collision(Enemy* enemy)
 {
@@ -279,15 +257,7 @@ bool P_Link::Compare_Link_Sword_Collision(Enemy* enemy)
 			ret = true;
 
 		break;
-		
-
 	}
-
-
-
-
-
 
 	return ret;
 }
-

@@ -1,7 +1,6 @@
 #ifndef __DIALOGUE_MANAGER_H__
 #define __DIALOGUE_MANAGER_H__
 
-
 #include <vector>
 
 #include "j1Module.h"

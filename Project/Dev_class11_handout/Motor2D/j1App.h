@@ -1,7 +1,6 @@
 #ifndef __j1APP_H__
 #define __j1APP_H__
 
-#include "p2List.h"
 #include "j1Module.h"
 #include "j1PerfTimer.h"
 #include "j1Timer.h"
@@ -70,7 +69,7 @@ public:
 
 	void LoadGame(const char* file);
 	void SaveGame(const char* file) const;
-	void GetSaveGames(p2List<std::string>& list_to_fill) const;
+	void GetSaveGames(std::list<std::string>& list_to_fill) const;
 
 	void WantToQuit();
 

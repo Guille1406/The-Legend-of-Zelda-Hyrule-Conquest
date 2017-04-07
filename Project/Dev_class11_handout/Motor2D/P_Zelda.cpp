@@ -8,9 +8,8 @@
 #include "j1Player.h"
 #include "j1Render.h"
 #include"j1Audio.h"
+
 #define JUMP_DISTANCE 96
-
-
 
 void P_Zelda::Attack(float dt)
 {
@@ -57,7 +56,6 @@ void P_Zelda::CreateArrow(SDL_Rect rect)
 	temp_arrow->logic_height = App->player->Zelda->GetLogicHeightPlayer();
 	//temp_arrow->can_move = false;
 	
-
 	switch (temp_arrow->direction) {
 	case up:
 		temp_arrow->arrow_rect = rect_arrow_up;
@@ -82,7 +80,7 @@ void P_Zelda::CreateArrow(SDL_Rect rect)
 void P_Zelda::UpdateArrows()
 {
 	int arrow_speed = 10;
-	for (int i = 0; i < Vec_Arrow.size(); i++) {
+	for (uint i = 0; i < Vec_Arrow.size(); i++) {
 		Vec_Arrow[i]->Check_Wall();
 		if (Vec_Arrow[i]->can_move) {
 		Vec_Arrow[i]->Check_Wall();
@@ -104,15 +102,12 @@ void P_Zelda::UpdateArrows()
 			i--;
 		}
 	}
-
 }
-
-
 
 void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 {
 	int final_pos = 0;
-	int temp_pos = pos ;
+	int temp_pos = pos;
 	bool can_pass_wall = true;
 	bool zelda_collides = false;
 	int decrease = 1;
@@ -122,7 +117,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 		count = 1;
 	}
 	bool stop = false;
-	
+
 	int n = 1;
 	if (!add)
 		n = -1;
@@ -130,7 +125,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 	bool stop_jumping = false;
 	iPoint temp_point = tilepos;
 	iPoint next_point = tilepos;
-	iPoint last_point = { 0,0};
+	iPoint last_point = { 0,0 };
 	static int before_wall_pos = 0;
 
 	if (!temp) {
@@ -143,53 +138,46 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 			next_point.x = temp_point.x + is_horitzontal * n;
 			next_point.y = temp_point.y + !is_horitzontal * n;
 
-			int i = 0;
+			uint i = 0;
 			if (!is_on_collision && temp_point != last_point) {
-				
+
 				if (stop)break;
 				for (i = 0; i <= GetLogicHeightPlayer() && i<3; i++) {
 					if (GetLogic(i, temp_point) == CANT_PASS_COL_ID) {
 						stop = true;
-						before_wall_pos = temp_pos ;
+						before_wall_pos = temp_pos;
 						break;
 					}
-					
+
 					if (GetLogic(i, temp_point) != 0) {
 						is_on_collision = true;
 						before_wall_pos = temp_pos;
 						last_point = temp_point;
-						
-						
+
 						if (!can_pass_wall) {
 							before_wall_pos = temp_pos + n * 64;
 						}
 						can_pass_wall = !can_pass_wall;
 						zelda_collides = true;
 						decrease = i;
-						
+
 						break;
 					}
 				}
 			}
-	if (GetLogic(decrease, temp_point) == 0) {
-		is_on_collision = false;
-	}
-			
+			if (GetLogic(decrease, temp_point) == 0) {
+				is_on_collision = false;
+			}
 			temp_pos = temp_pos + (n * 1);
 			temp_point.x = ((temp_pos) / 16) * is_horitzontal + temp_point.x * !is_horitzontal;
 			temp_point.y = ((temp_pos) / 16) * !is_horitzontal + temp_point.y * is_horitzontal;
 			if (stop)
 				break;
 		}
-		
 		ChangeLogicHeightPlayer(GetLogicHeightPlayer() - decrease);
-
-				
-	
 	}
 
 	temp = true;
-
 
 	if ((n * pos < n*before_wall_pos)) {
 		pos = pos + (n * 4);
@@ -200,11 +188,6 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 		doing_script = false;
 	}
 }
-
-
-
-
-
 
 player_event P_Zelda::GetEvent()
 {
@@ -227,29 +210,22 @@ player_event P_Zelda::GetEvent()
 		DOWN = SDL_SCANCODE_DOWN;
 		LEFT = SDL_SCANCODE_LEFT;
 		RIGHT = SDL_SCANCODE_RIGHT;
-
 	}
-
 
 	if (can_jump) {
 		actual_event = jump;
 		doing_script = true;
-		
+
 		can_jump = false;
-
 	}
 
-	if (actual_event == attack && is_picked==true) {
+	if (actual_event == attack && is_picked == true) {
 		pos = App->player->Link->pos;
-				
 	}
-
 
 	if (doing_script == false) {
 
-
 		static direction aim_direction = down;
-		
 
 		//EVENTS FOR GAMEPAD
 		if (App->input->NumberOfGamePads() >= 2) {
@@ -258,8 +234,6 @@ player_event P_Zelda::GetEvent()
 				aim_direction = character_direction;
 			}
 
-		
-			
 			//MOVEMENT UP//
 			if (App->inputM->EventPressed(INPUTEVENT::MUP, 0) == EVENTSTATE::E_REPEAT) {
 				if (App->inputM->EventPressed(INPUTEVENT::MRIGHT, 0) == EVENTSTATE::E_REPEAT) {
@@ -270,7 +244,6 @@ player_event P_Zelda::GetEvent()
 				}
 				else {
 					movement_direction = move_up;
-
 				}
 				character_direction = up;
 				actual_event = move;
@@ -285,7 +258,6 @@ player_event P_Zelda::GetEvent()
 				}
 				else {
 					movement_direction = move_down;
-
 				}
 				character_direction = down;
 				actual_event = move;
@@ -311,23 +283,22 @@ player_event P_Zelda::GetEvent()
 				actual_event = idle;
 			}
 
-
 			//JUMP//
-			
+
 			//TUMBLE//
-			 if (App->inputM->EventPressed(INPUTEVENT::TUMBLE, 0) == EVENTSTATE::E_DOWN && !is_picked) {
+			if (App->inputM->EventPressed(INPUTEVENT::TUMBLE, 0) == EVENTSTATE::E_DOWN && !is_picked) {
 				actual_event = roll;
 				doing_script = true;
 				is_rolling = true;
 			}
-			 //PICKED UP//
+			//PICKED UP//
 			if (is_picked) {
 				static bool can_throw = false;
 				actual_event = pick;
 				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 				pos.x = App->player->Link->pos.x;
 				pos.y = App->player->Link->pos.y;
-				if (((App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN) || (App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN)) && can_throw ) {
+				if (((App->inputM->EventPressed(INPUTEVENT::PICK, 1) == EVENTSTATE::E_DOWN) || (App->inputM->EventPressed(INPUTEVENT::PICK, 0) == EVENTSTATE::E_DOWN)) && can_throw) {
 					if (!App->player->Link->doing_script) {
 						App->audio->PlayFx(Throw_Audio);
 						actual_event = throw_;
@@ -348,10 +319,6 @@ player_event P_Zelda::GetEvent()
 				character_direction = aim_direction;
 				bow = 0;
 			}
-			
-
-			
-
 		}
 		else
 		{
@@ -377,7 +344,6 @@ player_event P_Zelda::GetEvent()
 				actual_event = move;
 			}
 
-
 			else if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT) {
 				if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT) {
 					movement_direction = move_down_left;
@@ -387,12 +353,10 @@ player_event P_Zelda::GetEvent()
 				}
 				else {
 					movement_direction = move_down;
-
 				}
 				character_direction = down;
 				actual_event = move;
 			}
-
 
 			else if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
 				movement_direction = move_right;
@@ -406,20 +370,20 @@ player_event P_Zelda::GetEvent()
 				actual_event = move;
 			}
 
-
-
 			else {
 				movement_direction = move_idle;
 				actual_event = idle;
 			}
 
-			
-			/*if (can_jump) {
-				actual_event = jump;
-				doing_script = true;
-				LOG("I'm Jumping :DDDD");
-				can_jump = false;
-			}*/
+			/*
+			if (can_jump) {
+			actual_event = jump;
+			doing_script = true;
+			LOG("I'm Jumping :DDDD");
+			can_jump = false;
+			}
+			*/
+
 			if (is_picked) {
 				static bool can_throw = false;
 				actual_event = pick;
@@ -437,7 +401,6 @@ player_event P_Zelda::GetEvent()
 				}
 				else can_throw = true;
 			}
-
 
 			if (App->input->GetKey(SDL_SCANCODE_KP_2) == KEY_DOWN && !is_picked) {
 
@@ -459,15 +422,11 @@ player_event P_Zelda::GetEvent()
 			}
 		}
 	}
-
-			return actual_event;
-		}
-	
-
+	return actual_event;
+}
 
 bool Arrow::Check_Wall()
 {
-
 	int temp_pos = 0;
 	switch (direction) {
 	case up: 
@@ -484,8 +443,6 @@ bool Arrow::Check_Wall()
 		break;
 	}
 	
-
-
 	return false;
 }
 
@@ -503,7 +460,6 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 	bool is_first_wall = true;
 	bool stop = false;
 	
-
 	int i = 1;
 	if (!add)
 		i = -1;
@@ -535,7 +491,6 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 							first_height = n;
 							is_first_wall = false;
 							first_wall_pos = temp_pos + i * 40;
-
 						}
 					}
 				}
@@ -560,8 +515,6 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 		}
 	}
 	
-	
-
 	temp = true;
 	if (i*pos < i*before_wall_pos) {
 		pos += 10 * i;
@@ -575,8 +528,6 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 	return false;
 }
 
-
-
 int Arrow::GetLogicArrow(int minus_height, iPoint pos)
 {
 	std::vector<MapLayer*> vector = App->map->V_Colision;
@@ -584,8 +535,6 @@ int Arrow::GetLogicArrow(int minus_height, iPoint pos)
 	iPoint tile_pos;
 	tile_pos.x = pos.x;
 	tile_pos.y = pos.y;
-
-	
 
 	int i, j;
 	int height = App->player->Zelda->GetLogicHeightPlayer();
@@ -616,7 +565,6 @@ int Arrow::GetLogicArrow(int minus_height, iPoint pos)
 		return i;
 	if (j != 0)
 		return j;
-
 
 	return 0;
 }
