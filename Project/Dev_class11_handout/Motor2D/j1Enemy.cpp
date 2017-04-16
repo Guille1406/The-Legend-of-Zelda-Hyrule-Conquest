@@ -1,4 +1,5 @@
 #include "j1Enemy.h"
+#include"ChampionSoldier_Enemy.h"
 #include"Green_Enemy.h"
 #include"j1Collision.h"
 #include"j1Map.h"
@@ -118,7 +119,8 @@ void j1Enemy::Draw(int height, int y_pos)
 Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 {
 	Enemy* ret = nullptr;
-	
+	SDL_Rect rect_test = { 0,0,0,0 };
+	SDL_Rect rect = { 0,0,0,0 };
 	switch (id_enemy) {
 	case enemyType::green_enemy:
 		ret = new Green_Enemy();
@@ -126,18 +128,41 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 		ret->array_pos = pos_array_enemy;
 		ret->live = 2;
 		//This will not be usefull when the enemies will be readed from xml
-		SDL_Rect rect_test = { ret->array_pos.x,ret->array_pos.y,20,10 };
+		rect_test = { ret->array_pos.x,ret->array_pos.y,20,10 };
 		ret->shield_test = App->collision->AddCollider(rect_test, COLLIDER_TYPE::collider_enemy_sword, ret, this);
-
-
 		//Position in world pixel 
 		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
-		SDL_Rect rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
+		ret->Shield_dimensions = { 20,10 };
+
+		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
+		//how to know if a enemy is in level one or two
 		ret->logic_height = 0;
 		break;
+
+	case enemyType::championsoldier_enemy:
+		ret = new Championsoldier_Enemy();
+		//i don't have the sprite of enemy
+		ret->rect = { 0,0,44,60 };
+		ret->array_pos = pos_array_enemy;
+		ret->live = 5;
+		//This will not be usefull when the enemies will be readed from xml
+		rect_test = { ret->array_pos.x,ret->array_pos.y,20,60 };
+		ret->shield_test = App->collision->AddCollider(rect_test, COLLIDER_TYPE::collider_enemy_sword, ret, this);
+		//Position in world pixel 
+		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+
+		ret->Shield_dimensions = { 20,30 };
+
+		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
+		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
+		//how to know if a enemy is in level one or two
+		ret->logic_height = 0;
+		break;
+
 
 	}
 	//Position in array
@@ -211,20 +236,20 @@ void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 	switch (enemy->Enemy_Orientation) {
 
 	case OrientationEnemy::up_enemy:
-		enemy->shield_test->rect = { enemy->collider->rect.x-10, enemy->collider->rect.y + 10 , 10,20 };
+		enemy->shield_test->rect = { enemy->collider->rect.x-10, enemy->collider->rect.y + 10 , enemy->Shield_dimensions.y, enemy->Shield_dimensions.x };
 		break;
 
 	case OrientationEnemy::down_enemy:
-		enemy->shield_test->rect = { enemy->collider->rect.x+12, enemy->collider->rect.y + enemy->collider->rect.h -10 , 10,20};
+		enemy->shield_test->rect = { enemy->collider->rect.x+12, enemy->collider->rect.y + enemy->collider->rect.h -10 , enemy->Shield_dimensions.y, enemy->Shield_dimensions.x };
 		break;
 
 	case OrientationEnemy::right_enemy:
-		enemy->shield_test->rect = { enemy->collider->rect.x + 10, enemy->collider->rect.y + 30 , 20,10 };
+		enemy->shield_test->rect = { enemy->collider->rect.x + 10, enemy->collider->rect.y + 30 , enemy->Shield_dimensions.x, enemy->Shield_dimensions.y };
 		break;
 
 	case OrientationEnemy::left_enemy:
 		//20,10
-		enemy->shield_test->rect = { enemy->collider->rect.x - 18, enemy->collider->rect.y + 30 , 20,10 };
+		enemy->shield_test->rect = { enemy->collider->rect.x - 18, enemy->collider->rect.y + 30 ,enemy->Shield_dimensions.x, enemy->Shield_dimensions.y };
 		break;
 	}
 }

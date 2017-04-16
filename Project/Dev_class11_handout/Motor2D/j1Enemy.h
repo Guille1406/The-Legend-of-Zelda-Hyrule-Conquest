@@ -26,6 +26,7 @@ enum OrientationEnemy{
 
 enum enemyType {
 	green_enemy = 3847,
+	championsoldier_enemy= 1498,
 	no_enemy,
 
 };
@@ -58,6 +59,7 @@ public:
 	std::list<iPoint> Path_Enemy;
 	bool passedtile = true;
 	Collider* shield_test=nullptr;
+	iPoint Shield_dimensions = { 0,0 };
 	OrientationEnemy Enemy_Orientation = up_enemy;
 	bool tokill = false;
 	Character* player_in_range = nullptr;

@@ -175,6 +175,9 @@
     <ClCompile Include="j1DialogueManager.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ChampionSoldier_Enemy.cpp">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -416,6 +419,9 @@
     </ClInclude>
     <ClInclude Include="j1Actions.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ChampionSoldier_Enemy.h">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -75,6 +75,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChampionSoldier_Enemy.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="ConsoleCommandCVar.cpp" />
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="A_Move.h" />
+    <ClInclude Include="ChampionSoldier_Enemy.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ConsoleCommandCVar.h" />
