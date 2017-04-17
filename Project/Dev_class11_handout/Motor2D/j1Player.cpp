@@ -372,12 +372,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			if(collider1->type == collider_arrow)
 			collider1->to_delete = true;
 			Enemy* n_enemy = (Enemy*)collider2->parent;
-			if (n_enemy->live > 0) {
-				n_enemy->live--;
-			}
-			else {
-				n_enemy->tokill = true;
-			}
+			n_enemy->Enemy_Hit_Comprobation(collider1->type);
 		}
 	}
 	else if (collider2->type == collider_arrow) {
@@ -457,24 +452,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
-		if (n_enemy->live > 0) {
-			if (Link->link_sword_impact_sword == false) {
-				Link->enemy_col_sword_sword_timer.Start();
-				n_enemy->state = EnemyState::push_back_enemy;
-				n_enemy->enemy_doing_script = true;
-				App->audio->PlayFx(App->enemy->enemy_dies_audio);
-				n_enemy->live--;
-			}
-			else {
-				Link->link_sword_impact_sword = false;
-			}
-
-
-		}
-		else {
-			App->audio->PlayFx(App->enemy->enemy_dies_audio);
-			n_enemy->tokill = true;
-		}
+		n_enemy->Enemy_Hit_Comprobation(collider1->type);
 
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link) {
@@ -521,19 +499,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 		}
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {
-		Enemy* n_enemy = (Enemy*)collider2->parent;
-		if (Zelda->is_rolling == false) {
-			if (Zelda->collision_by_enemy_timmer.Read() > 1500) {
-				Zelda->collision_by_enemy_timmer.Start();
-				
-				Zelda->actual_event = player_event::push_backwards;
-				Zelda->doing_script = true;
-				Zelda->Direction_Push_Election();
-				half_hearts_test_purpose--;
-			}
-		}
-	}
+
 	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_enemy) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Zelda->is_rolling == false) {
@@ -551,24 +517,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			//}
 		}
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_enemy && collider2->type == COLLIDER_TYPE::collider_zelda) {
-		Enemy* n_enemy = (Enemy*)collider2->parent;
-		if (Zelda->is_rolling == false) {
-			//roll_timer
-			//if (Link->roll_timer.Read() > 1500) {
-			if (Link->collision_by_enemy_timmer.Read() > 1500) {
-				App->audio->PlayFx(Link->Link_Hurt_Audio);
-				Zelda->roll_timer.Start();
-				Link->collision_by_enemy_timmer.Start();
-				Zelda->actual_event = player_event::push_backwards;
-				Zelda->doing_script = true;
-				Zelda->Direction_Push_Election();
-				half_hearts_test_purpose--;
-			}
-			//}
-		}
-
-	}
+	
 }
 
 

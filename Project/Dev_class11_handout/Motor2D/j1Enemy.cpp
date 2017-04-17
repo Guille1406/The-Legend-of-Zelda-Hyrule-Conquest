@@ -134,10 +134,18 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
-		ret->Shield_dimensions = { 20,10 };
 
 		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
+		
+
+		ret->item.up_ofset_item_enemy = { -10, 10 };
+		ret->item.down_ofset_item_enemy = { 12, ret->collider->rect.h - 10 };
+		ret->item.right_ofset_item_enemy = { 10, 30 };
+		ret->item.left_ofset_item_enemy = { -18, 30 };
+		ret->item.Shield_dimensions = { 20,10 };
+		
+		
 		//how to know if a enemy is in level one or two
 		ret->logic_height = 0;
 		break;
@@ -155,10 +163,9 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
-		ret->Shield_dimensions = { 20,30 };
-
 		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
+
 		//how to know if a enemy is in level one or two
 		ret->logic_height = 0;
 		break;
@@ -236,20 +243,20 @@ void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 	switch (enemy->Enemy_Orientation) {
 
 	case OrientationEnemy::up_enemy:
-		enemy->shield_test->rect = { enemy->collider->rect.x-10, enemy->collider->rect.y + 10 , enemy->Shield_dimensions.y, enemy->Shield_dimensions.x };
+		enemy->shield_test->rect = { enemy->collider->rect.x+enemy->item.up_ofset_item_enemy.x, enemy->collider->rect.y + enemy->item.up_ofset_item_enemy.y , enemy->item.Shield_dimensions.y, enemy->item.Shield_dimensions.x };
 		break;
 
 	case OrientationEnemy::down_enemy:
-		enemy->shield_test->rect = { enemy->collider->rect.x+12, enemy->collider->rect.y + enemy->collider->rect.h -10 , enemy->Shield_dimensions.y, enemy->Shield_dimensions.x };
+		enemy->shield_test->rect = { enemy->collider->rect.x + enemy->item.down_ofset_item_enemy.x, enemy->collider->rect.y + enemy->item.down_ofset_item_enemy.y, enemy->item.Shield_dimensions.y, enemy->item.Shield_dimensions.x };
 		break;
 
 	case OrientationEnemy::right_enemy:
-		enemy->shield_test->rect = { enemy->collider->rect.x + 10, enemy->collider->rect.y + 30 , enemy->Shield_dimensions.x, enemy->Shield_dimensions.y };
+		enemy->shield_test->rect = { enemy->collider->rect.x + enemy->item.right_ofset_item_enemy.x, enemy->collider->rect.y + enemy->item.right_ofset_item_enemy.y, enemy->item.Shield_dimensions.x, enemy->item.Shield_dimensions.y };
 		break;
 
 	case OrientationEnemy::left_enemy:
 		//20,10
-		enemy->shield_test->rect = { enemy->collider->rect.x - 18, enemy->collider->rect.y + 30 ,enemy->Shield_dimensions.x, enemy->Shield_dimensions.y };
+		enemy->shield_test->rect = { enemy->collider->rect.x + enemy->item.left_ofset_item_enemy.x, enemy->collider->rect.y + enemy->item.left_ofset_item_enemy.y,enemy->item.Shield_dimensions.x, enemy->item.Shield_dimensions.y };
 		break;
 	}
 }
@@ -343,3 +350,71 @@ void Enemy::UpdateState()
 		Direction_Push_Election();
 	}
 }
+
+void Enemy::Enemy_Hit_Comprobation(COLLIDER_TYPE collision_type)
+{
+
+	switch (type)
+	{
+	case enemyType::green_enemy:
+		if (collision_type == COLLIDER_TYPE::collider_link_sword) {
+			if (live > 0) {
+				if (App->player->Link->link_sword_impact_sword == false) {
+					App->player->Link->enemy_col_sword_sword_timer.Start();
+					state = EnemyState::push_back_enemy;
+					enemy_doing_script = true;
+					App->audio->PlayFx(App->enemy->enemy_dies_audio);
+					live--;
+				}
+				else {
+					App->player->Link->link_sword_impact_sword = false;
+				}
+			}
+			else {
+				App->audio->PlayFx(App->enemy->enemy_dies_audio);
+				tokill = true;
+			}
+		}
+		else if (collision_type == COLLIDER_TYPE::collider_arrow) {
+			if (live > 0) {
+				live--;
+			}
+			else {
+				tokill = true;
+			}
+		}
+		break;
+
+	case enemyType::championsoldier_enemy:
+		if (collision_type == COLLIDER_TYPE::collider_link_sword) {
+			if (live > 0) {
+				if (App->player->Link->link_sword_impact_sword == false && App->player->Link->Compare_Link_Sword_Collision(this) == false) {
+					//App->player->Link->enemy_col_sword_sword_timer.Start();
+					state = EnemyState::push_back_enemy;
+					enemy_doing_script = true;
+					App->audio->PlayFx(App->enemy->enemy_dies_audio);
+					live--;
+				}
+				else {
+					App->player->Link->actual_event = player_event::push_backwards;
+					App->player->Link->doing_script = true;
+					App->player->Link->Direction_Push_Election();
+					App->player->Link->link_sword_impact_sword = false;
+				}
+			}
+			else {
+				App->audio->PlayFx(App->enemy->enemy_dies_audio);
+				tokill = true;
+			}
+		}
+		
+
+
+
+		break;
+
+	}
+}
+
+
+

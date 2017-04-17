@@ -6,6 +6,7 @@
 #include"j1Object.h"
 #include"p2Point.h"
 #include"Character.h"
+enum COLLIDER_TYPE;
 class Green_Enemy;
 #define RANG 150
 #define PUSH_DISTANCE 50
@@ -26,9 +27,17 @@ enum OrientationEnemy{
 
 enum enemyType {
 	green_enemy = 3847,
-	championsoldier_enemy= 1498,
+	championsoldier_enemy= 3849,
 	no_enemy,
 
+};
+
+struct Item_Ofset_Enemy {
+	iPoint Shield_dimensions = { 0,0 };
+	iPoint up_ofset_item_enemy = {0,0};
+	iPoint down_ofset_item_enemy = { 0,0 };
+	iPoint right_ofset_item_enemy = { 0,0 };
+	iPoint left_ofset_item_enemy = { 0,0 };
 };
 
 class Enemy : public Entity {
@@ -44,9 +53,10 @@ public:
 	void Enemy_Hurt_Displacement(int & pos, bool add);
 	int GetLogicEnemy(int minus_height, iPoint pos);
 	void UpdateState();
-	
+	void Enemy_Hit_Comprobation(COLLIDER_TYPE);
 	virtual void Action() {};
 	virtual void Rang_Player() {};
+	
 public:
 
 	SDL_Rect rect = { 0,0,0,0 };
@@ -59,7 +69,7 @@ public:
 	std::list<iPoint> Path_Enemy;
 	bool passedtile = true;
 	Collider* shield_test=nullptr;
-	iPoint Shield_dimensions = { 0,0 };
+	Item_Ofset_Enemy item;
 	OrientationEnemy Enemy_Orientation = up_enemy;
 	bool tokill = false;
 	Character* player_in_range = nullptr;
