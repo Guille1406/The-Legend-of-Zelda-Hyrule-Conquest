@@ -60,7 +60,7 @@ private:
 
 	std::vector<GuiLabel*> Labels;
 
-	uint id = 1;
+	uint id = 0;
 	uint NPCstate = 0;
 };
 

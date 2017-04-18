@@ -2,6 +2,8 @@
 #include "j1App.h"
 #include "j1FileSystem.h"
 
+#include "j1Input.h"
+
 Dialogue::Dialogue(int id) : id(id)
 {
 
@@ -34,9 +36,8 @@ j1DialogueManager::~j1DialogueManager()
 
 bool j1DialogueManager::Awake(pugi::xml_node& config)
 {
-	bool ret = true;
+	LOG("Loading DialogManager");
 	/*
-	LOG("Loading DialogManager data");
 	folder = config.child("dialogues").attribute("folder").as_string();
 	path = config.child("dialogues").first_child().attribute("file").as_string();
 
@@ -51,15 +52,14 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 	if (result == NULL)
 	{
 		LOG("Could not load gui xml file %s. pugi error: %s", dialogueDataFile, result.description());
-		ret = false;
+		return false;
 	}
 	*/
-	return ret;
+	return true;
 }
 
 bool j1DialogueManager::Start()
 {
-	bool ret = true;
 	/*
 	dialogueNode = dialogueDataFile.child("npcs");
 	// Allocate memory
@@ -72,18 +72,16 @@ bool j1DialogueManager::Start()
 
 		//Allocate text
 		for (pugi::xml_node dialogue = npc.child("dialogue"); dialogue != NULL; dialogue = dialogue.next_sibling())
-		{
 			for (pugi::xml_node text = dialogue.child("text"); text != NULL; text = text.next_sibling("text"))
 			{
 				TextLine* tmp = new TextLine(dialogue.attribute("state").as_int(), text.attribute("value").as_string());
 				dialog[i]->texts.push_back(tmp);
 			}
-		}
 	}
 	*/
 	//Prepare UI to print
 	
-	return ret;
+	return true;
 }
 
 bool j1DialogueManager::PreUpdate()
@@ -98,40 +96,28 @@ bool j1DialogueManager::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 	{
 		dialogueStep = 0;
-		if (id == 1)
-		{
-			id = 2;
-		}
-		else
-		{
+		if (id == 0)
 			id = 1;
-		}
+		else
+			id = 0;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
 	{
 		dialogueStep = 0;
 		if (NPCstate == 0)
-		{
 			NPCstate = 1;
-		}
 		else
-		{
 			NPCstate = 0;
-		}
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
-	{
 		dialogueStep = 0;
-	}
 	*/
 	/*--- END ---*/
 	/*
 	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
-	{
 		dialogueStep++;
-	}
 	*/
 	BlitDialog(id, NPCstate); //Calls Blit function
 	return true;
@@ -166,19 +152,12 @@ bool j1DialogueManager::BlitDialog(uint id, uint state)
 {
 	//Find the correct ID
 	for (uint i = 0; i < dialog.size(); i++)
-	{
 		if (dialog[i]->id == id)
-		{
-			for (uint j = 0; (j + dialogueStep) < dialog[i]->texts.size(); j++) //Search correct text inside Dialogue 
-			{
+			for (uint j = 0; (j + dialogueStep) < dialog[i]->texts.size(); j++) //Search correct text inside Dialogue
 				if (dialog[i]->texts[dialogueStep + j]->state == state)
 				{
 					//text_on_screen->Set_String((char*)dialog[i]->texts[dialogueStep+j]->line->c_str());
 					return true;
 				}
-			}
-		}
-	}
-
 	return false;
 }
