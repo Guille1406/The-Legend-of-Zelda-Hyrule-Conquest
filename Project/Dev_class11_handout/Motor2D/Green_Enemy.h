@@ -9,7 +9,6 @@ public:
 	~Green_Enemy();
 	void Action();
 	void Rang_Player();
-	
 public:
 	iPoint temp_point = { 0,0 };
 	

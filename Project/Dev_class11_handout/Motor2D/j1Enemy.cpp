@@ -280,6 +280,25 @@ void Enemy::Direction_Push_Election()
 	}
 }
 
+void Enemy::Direction_Push_Election_ChSoldier()
+{
+	//Calls the jump function depending on the player direction
+	switch (App->player->Link->character_direction) {
+	case direction::up:
+		Enemy_Hurt_Displacement(pix_world_pos.y, false);
+		break;
+	case direction::down:
+		Enemy_Hurt_Displacement(pix_world_pos.y, true);
+		break;
+	case direction::left:
+		Enemy_Hurt_Displacement(pix_world_pos.x, false);
+		break;
+	case direction::right:
+		Enemy_Hurt_Displacement(pix_world_pos.x, true);
+		break;
+	}
+}
+
 void Enemy::Enemy_Hurt_Displacement(int & pos, bool add)
 {
 	static int final_pos = 0;
@@ -347,7 +366,12 @@ void Enemy::UpdateState()
 		}
 	}
 	else {
-		Direction_Push_Election();
+		if (type == enemyType::championsoldier_enemy) {
+			Direction_Push_Election_ChSoldier();
+		}
+		else {
+			Direction_Push_Election();
+		}
 	}
 }
 

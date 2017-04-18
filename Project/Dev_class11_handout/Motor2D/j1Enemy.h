@@ -56,7 +56,7 @@ public:
 	void Enemy_Hit_Comprobation(COLLIDER_TYPE);
 	virtual void Action() {};
 	virtual void Rang_Player() {};
-	
+	void Direction_Push_Election_ChSoldier();
 public:
 
 	SDL_Rect rect = { 0,0,0,0 };
