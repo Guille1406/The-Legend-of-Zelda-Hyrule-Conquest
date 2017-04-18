@@ -7,15 +7,15 @@
 #include "p2Point.h"
 #include "j1Gui.h"
 
-class TextLine
+class DialogueStep
 {
 public:
 
-	TextLine(int state, std::string text);
-	~TextLine();
+	DialogueStep(int state, std::string text);
+	~DialogueStep();
 
-	int state;
-	std::string* line = nullptr;
+	uint state = 0;
+	std::vector<std::string*> lines;
 };
 
 class Dialogue
@@ -25,8 +25,8 @@ public:
 	Dialogue(int id);
 	~Dialogue();
 
-	uint id;
-	std::vector<TextLine*> texts;
+	uint id = 0;
+	std::vector<DialogueStep*> texts;
 };
 
 class j1DialogueManager : public j1Module
@@ -53,21 +53,15 @@ private:
 
 	std::vector<Dialogue*> dialog;
 
-	/*-- Data to load XML --*/
-	std::string folder;
-	std::string path;
+	std::string folder = empty_char;
+	std::string path = empty_char;
 	pugi::xml_document dialogueDataFile;
 	pugi::xml_node dialogueNode;
-	/*-- END --*/
 
-	/*--- UI elements to print dialogues on screen ---*/
+	std::vector<GuiLabel*> Labels;
 
-	/*-- END --*/
-
-	/*---CODE TO TEST IN-GAME RESULTS ---*/
 	uint id = 1;
 	uint NPCstate = 0;
-	/*--- END ---*/
 };
 
 #endif

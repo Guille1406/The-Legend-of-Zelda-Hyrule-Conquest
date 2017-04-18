@@ -12,12 +12,12 @@ Dialogue::~Dialogue()
 	texts.clear();
 }
 
-TextLine::TextLine(int NPCstate, std::string text) : state(NPCstate)
+DialogueStep::DialogueStep(int NPCstate, std::string text) : state(NPCstate)
 {
-	line = new std::string(text);
+
 }
 
-TextLine::~TextLine()
+DialogueStep::~DialogueStep()
 {
 
 }
