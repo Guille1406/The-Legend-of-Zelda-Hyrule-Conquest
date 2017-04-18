@@ -10,6 +10,13 @@
 
 class Character;
 
+enum arrow_direction {
+	arrow_up,
+	arrow_down,
+	arrow_left,
+	arrow_right
+};
+
 struct Arrow : public Entity{
 	
 
@@ -22,7 +29,7 @@ struct Arrow : public Entity{
 	}
 	iPoint pos = {0,0};
 	int timer = 0;
-	int direction = 0;
+	arrow_direction direction = arrow_up;
 	bool can_move = false;
 	bool is_attached = false;
 	Enemy* attached_enemy = nullptr;

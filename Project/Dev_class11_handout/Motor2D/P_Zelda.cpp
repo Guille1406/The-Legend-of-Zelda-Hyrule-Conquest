@@ -51,25 +51,25 @@ void P_Zelda::CreateArrow(SDL_Rect rect)
 	temp_arrow->pos.x = rect.x;
 	temp_arrow->pos.y = rect.y;
 	temp_arrow->max_distance = 300;
-	temp_arrow->direction = character_direction;
+	temp_arrow->direction = (arrow_direction)character_direction;
 	temp_arrow->timer = SDL_GetTicks();
 	temp_arrow->logic_height = App->player->Zelda->GetLogicHeightPlayer();
 	//temp_arrow->can_move = false;
 	
 	switch (temp_arrow->direction) {
-	case up:
+	case arrow_up:
 		temp_arrow->arrow_rect = rect_arrow_up;
 		break;
 
-	case down:
+	case arrow_down:
 		temp_arrow->arrow_rect = rect_arrow_down;
 		break;
 
-	case left:
+	case arrow_left:
 		temp_arrow->arrow_rect = rect_arrow_left;
 		break;
 
-	case right:
+	case arrow_right:
 		temp_arrow->arrow_rect = rect_arrow_right;
 		break;
 	}
