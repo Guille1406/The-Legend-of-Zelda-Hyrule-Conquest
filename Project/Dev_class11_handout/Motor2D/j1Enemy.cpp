@@ -431,6 +431,15 @@ void Enemy::Enemy_Hit_Comprobation(COLLIDER_TYPE collision_type)
 				tokill = true;
 			}
 		}
+		else if (collision_type == COLLIDER_TYPE::collider_arrow) {
+			if (live > 0) {
+				//need to know how work direction of arrows
+				live--;
+			}
+			else {
+				tokill = true;
+			}
+		}
 		
 
 
