@@ -74,7 +74,7 @@ bool j1DialogueManager::Start()
 		for (pugi::xml_node dialogue = npc.child("dialogue"); dialogue != NULL; dialogue = dialogue.next_sibling())
 			for (pugi::xml_node text = dialogue.child("text"); text != NULL; text = text.next_sibling("text"))
 			{
-				TextLine* tmp = new TextLine(dialogue.attribute("state").as_int(), text.attribute("value").as_string());
+				DialogueStep* tmp = new DialogueStep(dialogue.attribute("state").as_int(), text.attribute("value").as_string());
 				dialog[i]->texts.push_back(tmp);
 			}
 	}
@@ -91,6 +91,8 @@ bool j1DialogueManager::PreUpdate()
 
 bool j1DialogueManager::Update(float dt)
 {
+	if (hidden)
+		return true;
 	/*--- CODE TO TEST RESULTS IN-GAME ---*/
 	/*
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
@@ -156,8 +158,14 @@ bool j1DialogueManager::BlitDialog(uint id, uint state)
 			for (uint j = 0; (j + dialogueStep) < dialog[i]->texts.size(); j++) //Search correct text inside Dialogue
 				if (dialog[i]->texts[dialogueStep + j]->state == state)
 				{
+					//for (uint k = 0; k < dialog[i]->texts[dialogueStep + j]->lines.size(); k++)
 					//text_on_screen->Set_String((char*)dialog[i]->texts[dialogueStep+j]->line->c_str());
 					return true;
 				}
 	return false;
+}
+
+void j1DialogueManager::DialogueShown(bool visible)
+{
+	hidden = visible;
 }

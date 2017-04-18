@@ -47,6 +47,8 @@ public:
 	void OnConsoleCVar(const CVar* cvar);
 	bool BlitDialog(uint id, uint state);
 
+	void DialogueShown(bool visible);
+
 private:
 
 	int dialogueStep = 0; //Allows to order the conversarion correctly
@@ -62,6 +64,8 @@ private:
 
 	uint id = 0;
 	uint NPCstate = 0;
+
+	bool hidden = true;
 };
 
 #endif
