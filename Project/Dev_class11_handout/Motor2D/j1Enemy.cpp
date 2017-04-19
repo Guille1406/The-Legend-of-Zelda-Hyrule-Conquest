@@ -375,13 +375,13 @@ void Enemy::UpdateState()
 	}
 }
 
-void Enemy::Enemy_Hit_Comprobation(COLLIDER_TYPE collision_type)
+void Enemy::Enemy_Hit_Comprobation(Collider* collision_type)
 {
 
 	switch (type)
 	{
 	case enemyType::green_enemy:
-		if (collision_type == COLLIDER_TYPE::collider_link_sword) {
+		if (collision_type->type == COLLIDER_TYPE::collider_link_sword) {
 			if (live > 0) {
 				if (App->player->Link->link_sword_impact_sword == false) {
 					App->player->Link->enemy_col_sword_sword_timer.Start();
@@ -399,7 +399,7 @@ void Enemy::Enemy_Hit_Comprobation(COLLIDER_TYPE collision_type)
 				tokill = true;
 			}
 		}
-		else if (collision_type == COLLIDER_TYPE::collider_arrow) {
+		else if (collision_type->type == COLLIDER_TYPE::collider_arrow) {
 			if (live > 0) {
 				live--;
 			}
@@ -410,7 +410,7 @@ void Enemy::Enemy_Hit_Comprobation(COLLIDER_TYPE collision_type)
 		break;
 
 	case enemyType::championsoldier_enemy:
-		if (collision_type == COLLIDER_TYPE::collider_link_sword) {
+		if (collision_type->type == COLLIDER_TYPE::collider_link_sword) {
 			if (live > 0) {
 				if (App->player->Link->link_sword_impact_sword == false && App->player->Link->Compare_Link_Sword_Collision(this) == false) {
 					//App->player->Link->enemy_col_sword_sword_timer.Start();
@@ -431,10 +431,33 @@ void Enemy::Enemy_Hit_Comprobation(COLLIDER_TYPE collision_type)
 				tokill = true;
 			}
 		}
-		else if (collision_type == COLLIDER_TYPE::collider_arrow) {
-			if (live > 0) {
+		else if (collision_type->type == COLLIDER_TYPE::collider_arrow) {
+			bool hit = false;
+			Arrow *temp;
+			temp = (Arrow*)collision_type->parent;
+				switch (temp->direction) {
+				case arrow_direction::arrow_up:
+					if (Enemy_Orientation==OrientationEnemy::up_enemy)
+						hit = true;
+					break;
+				case arrow_direction::arrow_down:
+					if (Enemy_Orientation == OrientationEnemy::down_enemy)
+						hit = true;
+					break;
+				case arrow_direction::arrow_right:
+					if (Enemy_Orientation == OrientationEnemy::right_enemy)
+						hit = true;
+					break;
+				case arrow_direction::arrow_left:
+					if (Enemy_Orientation == OrientationEnemy::left_enemy)
+						hit = true;
+					break;
+
+				}
+			if (live > 0 && hit==true) {
 				//need to know how work direction of arrows
 				live--;
+				hit = false;
 			}
 			else {
 				tokill = true;

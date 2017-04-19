@@ -372,7 +372,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			if(collider1->type == collider_arrow)
 			collider1->to_delete = true;
 			Enemy* n_enemy = (Enemy*)collider2->parent;
-			n_enemy->Enemy_Hit_Comprobation(collider1->type);
+			n_enemy->Enemy_Hit_Comprobation(collider1);
 		}
 	}
 	else if (collider2->type == collider_arrow) {
@@ -452,7 +452,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
-		n_enemy->Enemy_Hit_Comprobation(collider1->type);
+		n_enemy->Enemy_Hit_Comprobation(collider1);
 
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link) {

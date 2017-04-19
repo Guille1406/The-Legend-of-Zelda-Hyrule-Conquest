@@ -53,7 +53,7 @@ public:
 	void Enemy_Hurt_Displacement(int & pos, bool add);
 	int GetLogicEnemy(int minus_height, iPoint pos);
 	void UpdateState();
-	void Enemy_Hit_Comprobation(COLLIDER_TYPE);
+	void Enemy_Hit_Comprobation(Collider*);
 	virtual void Action() {};
 	virtual void Rang_Player() {};
 	void Direction_Push_Election_ChSoldier();
