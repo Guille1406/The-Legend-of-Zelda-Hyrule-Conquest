@@ -9,6 +9,7 @@ public:
 	~HyruleBombSoldier_Enemy();
 	void Action();
 
+
 public:
 	iPoint temp_point = { 0,0 };
 };
