@@ -8,7 +8,7 @@ public:
 	Championsoldier_Enemy(const Championsoldier_Enemy&);
 	~Championsoldier_Enemy();
 	void Action();
-	void Rang_Player();
+	//void Rang_Player();
 
 public:
 	iPoint temp_point = { 0,0 };

@@ -5,6 +5,7 @@
 #include"j1Map.h"
 #include"j1Textures.h"
 #include"j1Player.h"
+#include"j1Pathfinding.h"
 #include"j1Audio.h"
 bool j1Enemy::Awake(pugi::xml_node &)
 {
@@ -299,6 +300,44 @@ void Enemy::Direction_Push_Election_ChSoldier()
 	}
 }
 
+void Enemy::Rang_Player() {
+	iPoint dist;
+	dist.x = App->player->Link->pos.x - this->pix_world_pos.x;
+	dist.y = App->player->Link->pos.y - this->pix_world_pos.y;
+	iPoint dist2;
+	dist2.x = App->player->Zelda->pos.x - pix_world_pos.x;
+	dist2.y = App->player->Zelda->pos.y - pix_world_pos.y;
+
+	if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG && enemy_doing_script == false) {
+		player_in_range = App->player->Link;
+		//green_enemy_path.clear();
+		if (tile_pos != iPoint(0, 0)) {
+			if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr && player_in_range->GetLogicHeightPlayer() == 0) {
+				green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
+			}
+			if (green_enemy_path.size()) {
+				App->pathfinding->Move(this, player_in_range);
+			}
+		}
+	}
+
+	else if (sqrt((dist2.x*dist2.x) + (dist2.y*dist2.y)) < RANG  && enemy_doing_script == false) {
+		player_in_range = App->player->Zelda;
+		//green_enemy_path.clear();
+		if (tile_pos != iPoint(0, 0)) {
+			if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr && player_in_range->GetLogicHeightPlayer() == 0) {
+				green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
+			}
+			if (green_enemy_path.size()) {
+				App->pathfinding->Move(this, player_in_range);
+			}
+		}
+	}
+
+
+}
+
+
 void Enemy::Enemy_Hurt_Displacement(int & pos, bool add)
 {
 	static int final_pos = 0;
@@ -359,10 +398,15 @@ void Enemy::UpdateState()
 {
 	if (enemy_doing_script == false) {
 		if (player_in_range == nullptr) {
-			state = EnemyState::doing_path;
+				state = EnemyState::doing_path;
 		}
 		else {
-			state = EnemyState::following_player;
+			if (type == enemyType::hyrulebombsoldier_enemy) {
+				state = EnemyState::throwing_bomb;
+			}
+			else {
+				state = EnemyState::following_player;
+			}
 		}
 	}
 	else {

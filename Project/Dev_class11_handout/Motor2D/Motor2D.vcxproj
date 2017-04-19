@@ -90,6 +90,7 @@
     <ClCompile Include="GuiScrollBar.cpp" />
     <ClCompile Include="GuiViewport.cpp" />
     <ClCompile Include="GuiWindow.cpp" />
+    <ClCompile Include="HyruleBombSoldier_Enemy.cpp" />
     <ClCompile Include="j1Camera.cpp" />
     <ClCompile Include="j1Collision.cpp" />
     <ClCompile Include="j1Console.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="ConsoleCommandCVar.h" />
     <ClInclude Include="Green_Enemy.h" />
     <ClInclude Include="Actions.h" />
+    <ClInclude Include="HyruleBombSoldier_Enemy.h" />
     <ClInclude Include="j1Actions.h" />
     <ClInclude Include="j1DialogueManager.h" />
     <ClInclude Include="j1Enemy.h" />

@@ -15,6 +15,7 @@ enum EnemyState {
 	doing_path,
 	following_player,
 	push_back_enemy,
+	throwing_bomb,
 };
 
 enum OrientationEnemy{
@@ -28,6 +29,7 @@ enum OrientationEnemy{
 enum enemyType {
 	green_enemy = 3847,
 	championsoldier_enemy= 3849,
+	hyrulebombsoldier_enemy,
 	no_enemy,
 
 };
@@ -55,7 +57,7 @@ public:
 	void UpdateState();
 	void Enemy_Hit_Comprobation(Collider*);
 	virtual void Action() {};
-	virtual void Rang_Player() {};
+	virtual void Rang_Player();
 	void Direction_Push_Election_ChSoldier();
 public:
 

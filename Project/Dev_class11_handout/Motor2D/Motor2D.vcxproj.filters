@@ -178,6 +178,9 @@
     <ClCompile Include="ChampionSoldier_Enemy.cpp">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="HyruleBombSoldier_Enemy.cpp">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -421,6 +424,9 @@
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
     <ClInclude Include="ChampionSoldier_Enemy.h">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="HyruleBombSoldier_Enemy.h">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
