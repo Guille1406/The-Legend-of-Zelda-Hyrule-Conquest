@@ -7,6 +7,7 @@
 #include"j1Player.h"
 #include"j1Pathfinding.h"
 #include"j1Audio.h"
+#include"HyruleBombSoldier_Enemy.h"
 bool j1Enemy::Awake(pugi::xml_node &)
 {
 
@@ -25,7 +26,7 @@ bool j1Enemy::Start()
 		for (int y = 0; y < App->map->data.height; ++y) {
 			for (int x = 0; x < App->map->data.width; ++x) {
 				if (App->map->V_Enemies[i]->Get(x, y) != 0) {
-					Create_Enemy(App->map->V_Enemies[i]->Get(x, y), iPoint(x, y));
+					Create_Enemy(App->map->V_Enemies[i]->Get(x, y), iPoint(x, y), i);
 
 				}
 			}
@@ -45,8 +46,11 @@ bool j1Enemy::PreUpdate()
 			if (V_MyEnemies[i]->tokill == true) {
 				if(V_MyEnemies[i]->collider->type ==collider_enemy)
 				V_MyEnemies[i]->collider->to_delete = true;
+				if(V_MyEnemies[i]->shield_test!=nullptr){
 				if(V_MyEnemies[i]->shield_test->type == collider_enemy_sword)
 				V_MyEnemies[i]->shield_test->to_delete = true;
+				}
+
 				std::vector<Enemy*>::iterator it = std::find(App->enemy->V_MyEnemies.begin(), App->enemy->V_MyEnemies.end(), V_MyEnemies[i]);
 				V_MyEnemies.erase(it);
 
@@ -54,8 +58,8 @@ bool j1Enemy::PreUpdate()
 			}
 		}
 		if (appear_enemies && one_time_appear < 1) {
-			Create_Enemy(enemyType::green_enemy, iPoint(75, 41));
-			Create_Enemy(enemyType::green_enemy, iPoint(63, 56));
+			Create_Enemy(enemyType::green_enemy, iPoint(75, 41),0);
+			Create_Enemy(enemyType::green_enemy, iPoint(63, 56),0);
 			one_time_appear++;
 			appear_enemies = false;
 		}
@@ -117,7 +121,7 @@ void j1Enemy::Draw(int height, int y_pos)
 }
 
 
-Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
+Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 {
 	Enemy* ret = nullptr;
 	SDL_Rect rect_test = { 0,0,0,0 };
@@ -148,7 +152,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 		
 		
 		//how to know if a enemy is in level one or two
-		ret->logic_height = 0;
+		ret->logic_height = height;
 		break;
 
 	case enemyType::championsoldier_enemy:
@@ -157,9 +161,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
 		ret->live = 5;
-		//This will not be usefull when the enemies will be readed from xml
-		rect_test = { ret->array_pos.x,ret->array_pos.y,20,60 };
-		ret->shield_test = App->collision->AddCollider(rect_test, COLLIDER_TYPE::collider_enemy_sword, ret, this);
+		
 		//Position in world pixel 
 		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
@@ -168,8 +170,30 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy)
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
 
 		//how to know if a enemy is in level one or two
-		ret->logic_height = 0;
+		ret->logic_height = height;
 		break;
+
+	case enemyType::hyrulebombsoldier_enemy:
+
+		ret = new HyruleBombSoldier_Enemy();
+		//i don't have the sprite of enemy
+		ret->rect = { 0,0,44,60 };
+		ret->array_pos = pos_array_enemy;
+		ret->live = 5;
+
+		//Position in world pixel 
+		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+
+		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
+		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
+
+		//how to know if a enemy is in level one or two
+		ret->logic_height = height;
+
+		break;
+
+
 
 
 	}
@@ -240,25 +264,26 @@ void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 {
 	int animation = (int)enemy->Enemy_Orientation;
 	enemy->ChangeAnimation(animation);
+	if (enemy->type== enemyType::green_enemy) {
+		switch (enemy->Enemy_Orientation) {
 
-	switch (enemy->Enemy_Orientation) {
+		case OrientationEnemy::up_enemy:
+			enemy->shield_test->rect = { enemy->collider->rect.x + enemy->item.up_ofset_item_enemy.x, enemy->collider->rect.y + enemy->item.up_ofset_item_enemy.y , enemy->item.Shield_dimensions.y, enemy->item.Shield_dimensions.x };
+			break;
 
-	case OrientationEnemy::up_enemy:
-		enemy->shield_test->rect = { enemy->collider->rect.x+enemy->item.up_ofset_item_enemy.x, enemy->collider->rect.y + enemy->item.up_ofset_item_enemy.y , enemy->item.Shield_dimensions.y, enemy->item.Shield_dimensions.x };
-		break;
+		case OrientationEnemy::down_enemy:
+			enemy->shield_test->rect = { enemy->collider->rect.x + enemy->item.down_ofset_item_enemy.x, enemy->collider->rect.y + enemy->item.down_ofset_item_enemy.y, enemy->item.Shield_dimensions.y, enemy->item.Shield_dimensions.x };
+			break;
 
-	case OrientationEnemy::down_enemy:
-		enemy->shield_test->rect = { enemy->collider->rect.x + enemy->item.down_ofset_item_enemy.x, enemy->collider->rect.y + enemy->item.down_ofset_item_enemy.y, enemy->item.Shield_dimensions.y, enemy->item.Shield_dimensions.x };
-		break;
+		case OrientationEnemy::right_enemy:
+			enemy->shield_test->rect = { enemy->collider->rect.x + enemy->item.right_ofset_item_enemy.x, enemy->collider->rect.y + enemy->item.right_ofset_item_enemy.y, enemy->item.Shield_dimensions.x, enemy->item.Shield_dimensions.y };
+			break;
 
-	case OrientationEnemy::right_enemy:
-		enemy->shield_test->rect = { enemy->collider->rect.x + enemy->item.right_ofset_item_enemy.x, enemy->collider->rect.y + enemy->item.right_ofset_item_enemy.y, enemy->item.Shield_dimensions.x, enemy->item.Shield_dimensions.y };
-		break;
-
-	case OrientationEnemy::left_enemy:
-		//20,10
-		enemy->shield_test->rect = { enemy->collider->rect.x + enemy->item.left_ofset_item_enemy.x, enemy->collider->rect.y + enemy->item.left_ofset_item_enemy.y,enemy->item.Shield_dimensions.x, enemy->item.Shield_dimensions.y };
-		break;
+		case OrientationEnemy::left_enemy:
+			//20,10
+			enemy->shield_test->rect = { enemy->collider->rect.x + enemy->item.left_ofset_item_enemy.x, enemy->collider->rect.y + enemy->item.left_ofset_item_enemy.y,enemy->item.Shield_dimensions.x, enemy->item.Shield_dimensions.y };
+			break;
+		}
 	}
 }
 
@@ -498,10 +523,12 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collision_type)
 					break;
 
 				}
-			if (live > 0 && hit==true) {
+			if (live > 0 ) {
 				//need to know how work direction of arrows
-				live--;
-				hit = false;
+				if (hit == true) {
+					live--;
+					hit = false;
+				}
 			}
 			else {
 				tokill = true;

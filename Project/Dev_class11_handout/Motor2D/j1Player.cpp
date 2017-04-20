@@ -391,13 +391,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			if(collider2->type == collider_arrow)
 			collider2->to_delete = true;
 			Enemy* n_enemy = (Enemy*)collider2->parent;
-			if (n_enemy->live > 0) {
-				n_enemy->live--;
-			}
-			else {
-				App->audio->PlayFx(App->enemy->enemy_dies_audio);
-				n_enemy->tokill = true;
-			}
+			n_enemy->Enemy_Hit_Comprobation(collider2);
 		}
 
 	}

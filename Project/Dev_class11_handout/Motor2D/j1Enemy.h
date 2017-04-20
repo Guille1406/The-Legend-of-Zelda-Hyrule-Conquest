@@ -97,7 +97,7 @@ public:
 	bool CleanUp();
 	void Draw(int height, int y);
 	iPoint CalculatePath(Enemy*);
-	Enemy* Create_Enemy(uint, iPoint Pos);
+	Enemy* Create_Enemy(uint, iPoint Pos, int height);
 	bool FindInPath(iPoint, Enemy* enemy);
 	void Update_Sword_Collision(Enemy* enemy);
 	
