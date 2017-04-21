@@ -189,9 +189,8 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		temp->bomb_point.x = temp->pix_world_pos.x;
 		temp->bomb_point.y = temp->pix_world_pos.y;
 
-		temp->max_bomb_point.x = temp->pix_world_pos.x+5;
-		temp->max_bomb_point.y = temp->pix_world_pos.y+5;
-
+		temp->max_bomb_point.x = temp->pix_world_pos.x;
+		temp->max_bomb_point.y = temp->pix_world_pos.y-50;
 		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
 		temp->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
 
@@ -330,7 +329,8 @@ void Enemy::Direction_Push_Election_ChSoldier()
 }
 
 void Enemy::Rang_Player() {
-	/*iPoint dist;
+	//this->player_in_range = nullptr;
+	iPoint dist;
 	dist.x = App->player->Link->pos.x - this->pix_world_pos.x;
 	dist.y = App->player->Link->pos.y - this->pix_world_pos.y;
 	iPoint dist2;
@@ -338,10 +338,10 @@ void Enemy::Rang_Player() {
 	dist2.y = App->player->Zelda->pos.y - pix_world_pos.y;
 
 	if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG && enemy_doing_script == false) {
-		player_in_range = App->player->Link;
+		this->player_in_range = App->player->Link;
 		//green_enemy_path.clear();
-		if (tile_pos != iPoint(0, 0)) {
-			if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr && player_in_range->GetLogicHeightPlayer() == 0) {
+		if (tile_pos != iPoint(0, 0) && player_in_range->GetLogicHeightPlayer() == 0) {
+			if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr) {
 				green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
 			}
 			if (green_enemy_path.size()) {
@@ -351,10 +351,10 @@ void Enemy::Rang_Player() {
 	}
 
 	else if (sqrt((dist2.x*dist2.x) + (dist2.y*dist2.y)) < RANG  && enemy_doing_script == false) {
-		player_in_range = App->player->Zelda;
+		this->player_in_range = App->player->Zelda;
 		//green_enemy_path.clear();
-		if (tile_pos != iPoint(0, 0)) {
-			if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr && player_in_range->GetLogicHeightPlayer() == 0) {
+		if (tile_pos != iPoint(0, 0) && player_in_range->GetLogicHeightPlayer() == 0) {
+			if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr ) {
 				green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
 			}
 			if (green_enemy_path.size()) {
@@ -362,7 +362,7 @@ void Enemy::Rang_Player() {
 			}
 		}
 	}
-	*/
+	
 
 }
 
@@ -431,6 +431,8 @@ void Enemy::UpdateState()
 		}
 		else {
 			if (type == enemyType::hyrulebombsoldier_enemy) {
+				//HyruleBombSoldier_Enemy* temp = (HyruleBombSoldier_Enemy*)this;
+				//temp->can_throw_bomb = true;
 				state = EnemyState::throwing_bomb;
 			}
 			else {

@@ -1,14 +1,15 @@
 #include "HyruleBombSoldier_Enemy.h"
 #include"j1Enemy.h"
 #include"j1Player.h"
-HyruleBombSoldier_Enemy::HyruleBombSoldier_Enemy() :Enemy(enemyType::championsoldier_enemy)
+#include"Color.h"
+HyruleBombSoldier_Enemy::HyruleBombSoldier_Enemy() :Enemy(enemyType::hyrulebombsoldier_enemy)
 {
 	this->sprites_vector = App->enemy->enemy_perf->sprites_vector;
 	this->entity_texture = App->enemy->enemy_perf->entity_texture;
 	this->ChangeAnimation(1);
 }
 
-HyruleBombSoldier_Enemy::HyruleBombSoldier_Enemy(const HyruleBombSoldier_Enemy& chs_enemy) :Enemy(enemyType::championsoldier_enemy)
+HyruleBombSoldier_Enemy::HyruleBombSoldier_Enemy(const HyruleBombSoldier_Enemy& chs_enemy) :Enemy(enemyType::hyrulebombsoldier_enemy)
 {
 	this->collider = chs_enemy.collider;
 	this->logic_height = chs_enemy.logic_height;
@@ -22,15 +23,32 @@ HyruleBombSoldier_Enemy::~HyruleBombSoldier_Enemy()
 void HyruleBombSoldier_Enemy::Action()
 {
 	//printing the bomb
-	if (state == EnemyState::throwing_bomb) {
+	SDL_Rect p = { bomb_point.x ,bomb_point.y, 10,10 };
+	App->render->DrawQuad(p, Black(0), Black(1), Black(2), 255, true);
+	if (can_throw_bomb==true && player_in_range!=nullptr) {
+		player_position = player_in_range->pos;
+		can_throw_bomb = false;
+	}
+
+	off_set = 100;
+	if (player_position.x<pix_world_pos.x) {
+		off_set = -100;
+	}
+	max_bomb_point.x = pix_world_pos.x + off_set;
+
+	if (state == EnemyState::throwing_bomb ) {
 		
-
-		bomb_point.x = (1 - t)*(1 - t)*bomb_point.x + 2 * t*(1 - t)*max_bomb_point.x + t*t*player_in_range->pos.x;
-		bomb_point.y = (1 - t)*(1 - t)*bomb_point.y + 2 * t*(1 - t)*max_bomb_point.y + t*t*player_in_range->pos.y;
-			
+		bomb_point.x = (1 - t)*(1 - t)*pix_world_pos.x + 2 * t*(1 - t)*max_bomb_point.x + t*t*player_position.x;
+		bomb_point.y = (1 - t)*(1 - t)*pix_world_pos.y + 2 * t*(1 - t)*max_bomb_point.y + t*t*player_position.y;
 		
-
-
+		if (t < 1) {
+			t += (float)1 / 100;
+		}
+		else {
+			t = 0;
+			can_throw_bomb = true;
+		}
+	
 
 	}
 

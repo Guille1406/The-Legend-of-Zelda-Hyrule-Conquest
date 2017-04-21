@@ -14,7 +14,10 @@ public:
 	iPoint temp_point = { 0,0 };
 	iPoint bomb_point = {0,0};
 	iPoint max_bomb_point = {0,0};
-	int t = 0;
+	iPoint player_position = { 0,0 };
+	float t = 0;
+	int off_set = 100;
+	bool can_throw_bomb = true;
 };
 
 
