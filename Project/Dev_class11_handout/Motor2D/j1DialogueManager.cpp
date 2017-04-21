@@ -4,26 +4,6 @@
 
 #include "j1Input.h"
 
-Dialogue::Dialogue(int id) : id(id)
-{
-
-}
-
-Dialogue::~Dialogue()
-{
-	DialogueSteps.clear();
-}
-
-DialogueStep::DialogueStep(int NPCstate, std::string text) : state(NPCstate)
-{
-
-}
-
-DialogueStep::~DialogueStep()
-{
-
-}
-
 j1DialogueManager::j1DialogueManager() : j1Module()
 {
 	name = ("dialogue");
@@ -31,31 +11,46 @@ j1DialogueManager::j1DialogueManager() : j1Module()
 
 j1DialogueManager::~j1DialogueManager()
 {
-	dialogue.clear();
+	dialogues.clear();
 }
 
 bool j1DialogueManager::Awake(pugi::xml_node& config)
 {
+	bool ret = false;
 	LOG("Loading DialogManager");
-	/*
-	folder = config.child("dialogues").attribute("folder").as_string();
-	path = config.child("dialogues").first_child().attribute("file").as_string();
 
-	std::string tmp = folder + path;
+	pugi::xml_document	config_file;
+	pugi::xml_node		dialogue_config;
 
-	char* buf;
-	int size = App->fs->Load(tmp.c_str(), &buf);
-	pugi::xml_parse_result result = dialogueDataFile.load_buffer(buf, size);
-
+	char* buf = nullptr;
+	int size = App->fs->Load("dialogues/Dialogues.xml", &buf);
+	pugi::xml_parse_result result = config_file.load_buffer(buf, size);
 	RELEASE(buf);
 
 	if (result == NULL)
+		LOG("Could not load map xml file Dialogues.xml. pugi error: %s", result.description());
+	else
+		dialogue_config = config_file.child("DialogueManager");
+
+	//Set config
+	if (dialogue_config.empty() == false)
+		ret = true;
+
+	if (ret == true)
 	{
-		LOG("Could not load gui xml file %s. pugi error: %s", dialogueDataFile, result.description());
-		return false;
+		/*
+		for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend() && ret == true; ++item)
+		{
+			ret = (*item)->Awake(dialogue_config.child((*item)->scene_str.c_str()));
+			if ((*item)->scene_name == Scene_ID::mainmenu)
+			{
+				main_active_scene = (*item);
+				sub_active_scene = (*item);
+			}
+		}
+		*/
 	}
-	*/
-	return true;
+	return ret;
 }
 
 bool j1DialogueManager::Start()
@@ -121,7 +116,7 @@ bool j1DialogueManager::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 		dialogueStep++;
 	*/
-	BlitDialog(id, NPCstate); //Calls Blit function
+	//BlitDialog(id, NPCstate); //Calls Blit function
 	return true;
 }
 
@@ -137,6 +132,7 @@ bool j1DialogueManager::CleanUp()
 
 bool j1DialogueManager::BlitDialog(uint id, uint state)
 {
+	/*
 	//Find the correct ID
 	for (uint i = 0; i < dialogue.size(); i++)
 		if (dialogue[i]->id == id)
@@ -147,6 +143,7 @@ bool j1DialogueManager::BlitDialog(uint id, uint state)
 					//text_on_screen->Set_String((char*)dialog[i]->texts[dialogueStep+j]->line->c_str());
 					return true;
 				}
+	*/
 	return false;
 }
 

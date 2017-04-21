@@ -96,12 +96,11 @@ bool j1Scene::Start()
 	//XML congig read
 	pugi::xml_document	config_file;
 	pugi::xml_node		config;
-	pugi::xml_node		app_config;
 
 	bool ret = false;
 
 	//Load XML
-	char* buf;
+	char* buf = nullptr;
 	int size = App->fs->Load("gui/gui_config.xml", &buf);
 	pugi::xml_parse_result result = config_file.load_buffer(buf, size);
 	RELEASE(buf);

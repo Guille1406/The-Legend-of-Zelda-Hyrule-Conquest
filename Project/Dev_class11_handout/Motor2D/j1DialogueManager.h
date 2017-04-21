@@ -20,25 +20,14 @@ enum DialogueID {
 	NullID
 };
 
-class DialogueStep
+struct DialogueStep
 {
-public:
-
-	DialogueStep(int state, std::string text);
-	~DialogueStep();
-
-	uint state = 0;
 	std::vector<std::string*> lines;
 };
 
-class Dialogue
+struct Dialogue
 {
-public:
-
-	Dialogue(int id);
-	~Dialogue();
-
-	uint id = 0;
+	DialogueID id = DialogueID::NullID;
 	std::vector<DialogueStep*> DialogueSteps;
 };
 
@@ -65,9 +54,7 @@ private:
 
 private:
 
-	int dialogueStep = 0; //Allows to order the conversarion correctly
-
-	std::vector<Dialogue*> dialogue;
+	std::vector<Dialogue*> dialogues;
 
 	std::string folder = empty_char;
 	std::string path = empty_char;
@@ -75,9 +62,6 @@ private:
 	pugi::xml_node dialogueNode;
 
 	std::vector<GuiLabel*> Labels;
-
-	uint id = 0;
-	uint NPCstate = 0;
 
 	DialogueID ActiveDialogue = DialogueID::NullID;
 };
