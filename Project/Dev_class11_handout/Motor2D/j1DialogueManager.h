@@ -68,6 +68,8 @@ private:
 	pugi::xml_node dialogueNode;
 
 	GuiImage* TextBackground = nullptr;
+	GuiButton* LeftCharacterLabel = nullptr;
+	GuiButton* RightCharacterLabel = nullptr;
 
 	DialogueID ActiveDialogue = DialogueID::NullID;
 };

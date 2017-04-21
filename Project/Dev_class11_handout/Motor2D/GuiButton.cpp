@@ -77,10 +77,20 @@ void GuiButton::Update(const Gui* mouse_hover, const Gui* focus)
 
 void GuiButton::Draw()
 {
+	SubDrawFunction(App->gui->GetAtlas());
+}
+
+void GuiButton::DrawWithAlternativeAtlas(SDL_Texture* alternativeatlas)
+{
+	SubDrawFunction(alternativeatlas);
+}
+
+void GuiButton::SubDrawFunction(SDL_Texture* atlas)
+{
 	if (this->visible == true)
 	{
 		//Button
-		App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, curent_state_texture, 1.0f, 0, INT_MAX, INT_MAX, false, opacity);
+		App->render->Blit(atlas, position.x - App->render->camera.x, position.y - App->render->camera.y, curent_state_texture, 1.0f, 0, INT_MAX, INT_MAX, false, opacity);
 		//Label
 		ButtonString->Draw();
 		//Debug

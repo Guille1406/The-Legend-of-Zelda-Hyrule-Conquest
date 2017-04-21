@@ -21,6 +21,7 @@ public:
 
 	void Update(const Gui* mouse_hover, const Gui* focus);
 	void Draw();
+	void DrawWithAlternativeAtlas(SDL_Texture* alternativeatlas);
 	void EditButtonStr(std::string* newstr);
 	void SetFont(_TTF_Font* newfont);
 	void SetButtonColor(Color* newcolor);
@@ -28,6 +29,7 @@ public:
 
 private:
 	void CreateButtonLabel(iPoint position, std::string* str, bool movable);
+	void SubDrawFunction(SDL_Texture* atlas);
 	void DebugDraw() const;
 	void CalculateStrWH(const std::string* str);
 	void CenterStr();

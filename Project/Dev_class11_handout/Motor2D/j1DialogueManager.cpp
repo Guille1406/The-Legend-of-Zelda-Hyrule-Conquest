@@ -5,8 +5,10 @@
 #include "j1Window.h"
 #include "j1Input.h"
 #include "j1HUD.h"
+#include "j1Fonts.h"
 
 #include "GuiImage.h"
+#include "GuiButton.h"
 
 j1DialogueManager::j1DialogueManager() : j1Module()
 {
@@ -18,6 +20,9 @@ j1DialogueManager::~j1DialogueManager()
 	for (std::vector<Dialogue*>::iterator item = dialogues.begin(); item != dialogues.cend(); ++item)
 		RELEASE(*item);
 	dialogues.clear();
+	RELEASE(TextBackground);
+	RELEASE(LeftCharacterLabel);
+	RELEASE(RightCharacterLabel);
 }
 
 bool j1DialogueManager::Awake(pugi::xml_node& config)
@@ -49,16 +54,19 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 	{
 		//Allocate dialogues from XML
 
+
+		//Set drawing areas and dialogue hud gui
+		SDL_Rect TextBackgroundRect = { 0,94,1233,231 };
+		TextBackground = App->gui->CreateImage({ 23,WindowRect.h - TextBackgroundRect.h - 11 }, &TextBackgroundRect, false, AddGuiTo::none);
+
+		SDL_Rect LeftCharacterLabelRect = { 0,0,336,94 };
+		LeftCharacterLabel = App->gui->CreateButton(iPoint(5, WindowRect.h - TextBackgroundRect.h - 11 - (int)(LeftCharacterLabelRect.h * 0.5f)), &std::string("Left Guy"), ButtonType::idle_only, &LeftCharacterLabelRect, false, AddGuiTo::none);
+		LeftCharacterLabel->SetFont(App->font->ReturnofGanon36);
+
+		SDL_Rect RightCharacterLabelRect = { 336,0,336,94 };
+		RightCharacterLabel = App->gui->CreateButton(iPoint(WindowRect.w - RightCharacterLabelRect.w - 5, WindowRect.h - TextBackgroundRect.h - 11 - (int)(LeftCharacterLabelRect.h * 0.5f)), &std::string("Right Guy"), ButtonType::idle_only, &RightCharacterLabelRect, false, AddGuiTo::none);
+		RightCharacterLabel->SetFont(App->font->ReturnofGanon36);
 	}
-
-	SDL_Rect TextBackgroundRect = { 0,94,1233,231 };
-	TextBackground = App->gui->CreateImage({ 0,0 }, &TextBackgroundRect, false, AddGuiTo::none);
-
-	/*
-	//Dialogue quad {0,94,1233,231}
-	//Left label {0,0,336,94}
-	//Right label {0337,336,94}
-	*/
 
 	return ret;
 }
@@ -98,39 +106,15 @@ bool j1DialogueManager::Update(float dt)
 {
 	if (ActiveDialogue == DialogueID::NullID)
 		return true;
+
+	//Blit Dark background
 	App->render->DrawQuad(WindowRect, Black(0), Black(1), Black(2), 80, true, false, false);
 
+	//Blit text background and Name labels
 	TextBackground->DrawWithAlternativeAtlas(App->hud->GetAtlas());
+	LeftCharacterLabel->DrawWithAlternativeAtlas(App->hud->GetAtlas());
+	RightCharacterLabel->DrawWithAlternativeAtlas(App->hud->GetAtlas());
 
-	/*--- CODE TO TEST RESULTS IN-GAME ---*/
-	/*
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
-	{
-		dialogueStep = 0;
-		if (id == 0)
-			id = 1;
-		else
-			id = 0;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
-	{
-		dialogueStep = 0;
-		if (NPCstate == 0)
-			NPCstate = 1;
-		else
-			NPCstate = 0;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
-		dialogueStep = 0;
-	*/
-	/*--- END ---*/
-	/*
-	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
-		dialogueStep++;
-	*/
-	//BlitDialog(id, NPCstate); //Calls Blit function
 	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
 		ActiveDialogue = DialogueID::NullID;
 	return true;
