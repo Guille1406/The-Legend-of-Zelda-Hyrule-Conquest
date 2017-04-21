@@ -18,6 +18,7 @@ public:
 	float t = 0;
 	int off_set = 100;
 	bool can_throw_bomb = true;
+	bool continue_path_bomb = false;
 };
 
 

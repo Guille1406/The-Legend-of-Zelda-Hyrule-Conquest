@@ -329,7 +329,7 @@ void Enemy::Direction_Push_Election_ChSoldier()
 }
 
 void Enemy::Rang_Player() {
-	//this->player_in_range = nullptr;
+	this->player_in_range = nullptr;
 	iPoint dist;
 	dist.x = App->player->Link->pos.x - this->pix_world_pos.x;
 	dist.y = App->player->Link->pos.y - this->pix_world_pos.y;
@@ -431,8 +431,6 @@ void Enemy::UpdateState()
 		}
 		else {
 			if (type == enemyType::hyrulebombsoldier_enemy) {
-				//HyruleBombSoldier_Enemy* temp = (HyruleBombSoldier_Enemy*)this;
-				//temp->can_throw_bomb = true;
 				state = EnemyState::throwing_bomb;
 			}
 			else {
