@@ -53,7 +53,7 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 	if (ret == true)
 	{
 		//Allocate dialogues from XML
-
+		AllocateDialogues(dialogue_config);
 
 		//Set drawing areas and dialogue hud gui
 		SDL_Rect TextBackgroundRect = { 0,94,1233,231 };
@@ -69,6 +69,11 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 	}
 
 	return ret;
+}
+
+void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
+{
+
 }
 
 bool j1DialogueManager::Start()
@@ -104,6 +109,13 @@ bool j1DialogueManager::PreUpdate()
 
 bool j1DialogueManager::Update(float dt)
 {
+	//Test code
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+		App->dialoguemanager->ActivateDialogue(DialogueID::Ric_test);
+	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+		ActiveDialogue = DialogueID::NullID;
+	//Test code end
+
 	if (ActiveDialogue == DialogueID::NullID)
 		return true;
 
@@ -115,8 +127,6 @@ bool j1DialogueManager::Update(float dt)
 	LeftCharacterLabel->DrawWithAlternativeAtlas(App->hud->GetAtlas());
 	RightCharacterLabel->DrawWithAlternativeAtlas(App->hud->GetAtlas());
 
-	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
-		ActiveDialogue = DialogueID::NullID;
 	return true;
 }
 

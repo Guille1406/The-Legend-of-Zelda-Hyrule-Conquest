@@ -54,6 +54,7 @@ public:
 	void ActivateDialogue(DialogueID id);
 
 private:
+	void AllocateDialogues(pugi::xml_node& dialoguenode);
 	bool BlitDialog(uint id, uint state);
 
 private:
