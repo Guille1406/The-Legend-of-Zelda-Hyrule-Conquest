@@ -11,7 +11,7 @@ Dialogue::Dialogue(int id) : id(id)
 
 Dialogue::~Dialogue()
 {
-	texts.clear();
+	DialogueSteps.clear();
 }
 
 DialogueStep::DialogueStep(int NPCstate, std::string text) : state(NPCstate)
@@ -31,7 +31,7 @@ j1DialogueManager::j1DialogueManager() : j1Module()
 
 j1DialogueManager::~j1DialogueManager()
 {
-	dialog.clear();
+	dialogue.clear();
 }
 
 bool j1DialogueManager::Awake(pugi::xml_node& config)
@@ -91,7 +91,7 @@ bool j1DialogueManager::PreUpdate()
 
 bool j1DialogueManager::Update(float dt)
 {
-	if (hidden)
+	if (ActiveDialogue == DialogueID::NullID)
 		return true;
 	/*--- CODE TO TEST RESULTS IN-GAME ---*/
 	/*
@@ -135,6 +135,26 @@ bool j1DialogueManager::CleanUp()
 	return true;
 }
 
+bool j1DialogueManager::BlitDialog(uint id, uint state)
+{
+	//Find the correct ID
+	for (uint i = 0; i < dialogue.size(); i++)
+		if (dialogue[i]->id == id)
+			for (uint j = 0; (j + dialogueStep) < dialogue[i]->DialogueSteps.size(); j++) //Search correct text inside Dialogue
+				if (dialogue[i]->DialogueSteps[dialogueStep + j]->state == state)
+				{
+					//for (uint k = 0; k < dialog[i]->texts[dialogueStep + j]->lines.size(); k++)
+					//text_on_screen->Set_String((char*)dialog[i]->texts[dialogueStep+j]->line->c_str());
+					return true;
+				}
+	return false;
+}
+
+void j1DialogueManager::ActivateDialogue(DialogueID id)
+{
+	ActiveDialogue = id;
+}
+
 void j1DialogueManager::OnGui(Gui* ui, GuiEvent event)
 {
 
@@ -148,24 +168,4 @@ void j1DialogueManager::OnConsoleCommand(const Command* command, const std::vect
 void j1DialogueManager::OnConsoleCVar(const CVar* cvar)
 {
 
-}
-
-bool j1DialogueManager::BlitDialog(uint id, uint state)
-{
-	//Find the correct ID
-	for (uint i = 0; i < dialog.size(); i++)
-		if (dialog[i]->id == id)
-			for (uint j = 0; (j + dialogueStep) < dialog[i]->texts.size(); j++) //Search correct text inside Dialogue
-				if (dialog[i]->texts[dialogueStep + j]->state == state)
-				{
-					//for (uint k = 0; k < dialog[i]->texts[dialogueStep + j]->lines.size(); k++)
-					//text_on_screen->Set_String((char*)dialog[i]->texts[dialogueStep+j]->line->c_str());
-					return true;
-				}
-	return false;
-}
-
-void j1DialogueManager::DialogueShown(bool visible)
-{
-	hidden = visible;
 }
