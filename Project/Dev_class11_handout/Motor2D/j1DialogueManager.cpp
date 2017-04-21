@@ -38,18 +38,16 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 
 	if (ret == true)
 	{
-		/*
-		for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend() && ret == true; ++item)
-		{
-			ret = (*item)->Awake(dialogue_config.child((*item)->scene_str.c_str()));
-			if ((*item)->scene_name == Scene_ID::mainmenu)
-			{
-				main_active_scene = (*item);
-				sub_active_scene = (*item);
-			}
-		}
-		*/
+		//Allocate dialogues from XML
+
 	}
+
+	/*
+	//Dialogue quad {0,94,1233,231}
+	//Left label {0,0,336,94}
+	//Right label {0337,336,94}
+	*/
+
 	return ret;
 }
 
@@ -165,4 +163,28 @@ void j1DialogueManager::OnConsoleCommand(const Command* command, const std::vect
 void j1DialogueManager::OnConsoleCVar(const CVar* cvar)
 {
 
+}
+
+DialogueStep::DialogueStep()
+{
+
+}
+
+DialogueStep::~DialogueStep()
+{
+	for (std::vector<std::string*>::iterator item = lines.begin(); item != lines.cend(); ++item)
+		RELEASE(*item);
+	lines.clear();
+}
+
+Dialogue::Dialogue()
+{
+
+}
+
+Dialogue::~Dialogue()
+{
+	for (std::vector<DialogueStep*>::iterator item = DialogueSteps.begin(); item != DialogueSteps.cend(); ++item)
+		RELEASE(*item);
+	DialogueSteps.clear();
 }

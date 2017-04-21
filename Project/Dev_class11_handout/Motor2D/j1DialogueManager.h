@@ -22,11 +22,15 @@ enum DialogueID {
 
 struct DialogueStep
 {
+	DialogueStep();
+	~DialogueStep();
 	std::vector<std::string*> lines;
 };
 
 struct Dialogue
 {
+	Dialogue();
+	~Dialogue();
 	DialogueID id = DialogueID::NullID;
 	std::vector<DialogueStep*> DialogueSteps;
 };
