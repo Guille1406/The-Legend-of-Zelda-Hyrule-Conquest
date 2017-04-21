@@ -20,10 +20,38 @@ enum DialogueID {
 	NullID
 };
 
+enum DialogueType {
+	Cutscene,
+	NPC,
+	item,
+	NullType
+};
+
+enum DialogueInterlucutor {
+	//Cutscene/NPC
+	Link,
+	Zelda,
+	Messenger,
+	King,
+	//NPC
+	Ric,
+	//None
+	item
+};
+
+enum DialogueInterlucutorPosition {
+	Left,
+	Right
+};
+
 struct DialogueStep
 {
 	DialogueStep();
 	~DialogueStep();
+	DialogueInterlucutor speaker = DialogueInterlucutor::item;
+	DialogueInterlucutor listener = DialogueInterlucutor::item;
+	DialogueInterlucutorPosition speaker_pos = DialogueInterlucutorPosition::Left;
+	DialogueInterlucutorPosition listener_pos = DialogueInterlucutorPosition::Left;
 	std::vector<std::string*> lines;
 };
 
@@ -33,6 +61,16 @@ struct Dialogue
 	~Dialogue();
 	DialogueID id = DialogueID::NullID;
 	std::vector<DialogueStep*> DialogueSteps;
+};
+
+struct ActiveDialogue
+{
+	ActiveDialogue();
+	~ActiveDialogue();
+	DialogueID id = DialogueID::NullID;
+	DialogueType type = DialogueType::NullType;
+	Dialogue* ActiveDialoguePtr = nullptr;
+	DialogueStep* ActiveDialogueStepPtr = nullptr;
 };
 
 class j1DialogueManager : public j1Module
@@ -62,6 +100,7 @@ private:
 	SDL_Rect WindowRect = { 0,0,0,0 };
 
 	std::vector<Dialogue*> dialogues;
+	ActiveDialogue* ActiveDialog = nullptr;
 
 	std::string folder = empty_char;
 	std::string path = empty_char;
@@ -71,8 +110,6 @@ private:
 	GuiImage* TextBackground = nullptr;
 	GuiButton* LeftCharacterLabel = nullptr;
 	GuiButton* RightCharacterLabel = nullptr;
-
-	DialogueID ActiveDialogue = DialogueID::NullID;
 };
 
 #endif

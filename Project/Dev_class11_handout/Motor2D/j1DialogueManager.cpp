@@ -20,6 +20,7 @@ j1DialogueManager::~j1DialogueManager()
 	for (std::vector<Dialogue*>::iterator item = dialogues.begin(); item != dialogues.cend(); ++item)
 		RELEASE(*item);
 	dialogues.clear();
+	RELEASE(ActiveDialog);
 	RELEASE(TextBackground);
 	RELEASE(LeftCharacterLabel);
 	RELEASE(RightCharacterLabel);
@@ -68,12 +69,15 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 		RightCharacterLabel->SetFont(App->font->ReturnofGanon36);
 	}
 
+	ActiveDialog = new ActiveDialogue();
+
 	return ret;
 }
 
 void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
 {
-
+	//TODO
+	//Allocate dialogues from XML 
 }
 
 bool j1DialogueManager::Start()
@@ -113,10 +117,10 @@ bool j1DialogueManager::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		App->dialoguemanager->ActivateDialogue(DialogueID::Ric_test);
 	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
-		ActiveDialogue = DialogueID::NullID;
+		ActiveDialog->id = DialogueID::NullID;
 	//Test code end
 
-	if (ActiveDialogue == DialogueID::NullID)
+	if (ActiveDialog->id == DialogueID::NullID)
 		return true;
 
 	//Blit Dark background
@@ -159,7 +163,7 @@ bool j1DialogueManager::BlitDialog(uint id, uint state)
 
 void j1DialogueManager::ActivateDialogue(DialogueID id)
 {
-	ActiveDialogue = id;
+	ActiveDialog->id = id;
 }
 
 void j1DialogueManager::OnGui(Gui* ui, GuiEvent event)
@@ -199,4 +203,14 @@ Dialogue::~Dialogue()
 	for (std::vector<DialogueStep*>::iterator item = DialogueSteps.begin(); item != DialogueSteps.cend(); ++item)
 		RELEASE(*item);
 	DialogueSteps.clear();
+}
+
+ActiveDialogue::ActiveDialogue()
+{
+
+}
+
+ActiveDialogue::~ActiveDialogue()
+{
+
 }
