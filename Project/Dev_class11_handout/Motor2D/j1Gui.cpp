@@ -53,47 +53,6 @@ bool j1Gui::PreUpdate()
 {
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		Gui_DebugDraw = !Gui_DebugDraw;
-
-	// Update all guis
-	std::list<Gui*>* list_to_iterate = nullptr;
-	if (App->console->IsActive())
-		list_to_iterate = &ConsoleElements;
-	else
-		list_to_iterate = &GuiElements;
-
-	const Gui* mouse_hover = FindMouseHover();
-	if (mouse_hover && mouse_hover->can_focus == true)
-		if(mouse_hover->GetSceneListener() == App->scene->GetActiveScene())
-			SetFocus(mouse_hover);
-
-	/*
-	if (mouse_hover &&
-		mouse_hover->can_focus == true &&
-		App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == j1KeyState::KEY_DOWN)
-		SetFocus(mouse_hover);
-	*/
-
-	for (std::list<Gui*>::iterator item = list_to_iterate->begin(); item != list_to_iterate->cend(); ++item)
-	{
-		if ((*item)->GetModuleListener() != nullptr)
-		{
-			(*item)->CheckInput(mouse_hover, focus);
-			(*item)->Update(mouse_hover, focus);
-		}
-		if ((*item)->GetSceneListener() != nullptr)//if is scene
-		{
-			if ((*item)->GetSceneListener() == App->scene->GetActiveScene())
-			{
-				(*item)->CheckInput(mouse_hover, focus);
-				(*item)->Update(mouse_hover, focus);
-			}
-		}
-		if (App->console->IsActive())
-		{
-			(*item)->CheckInput(mouse_hover, focus);
-			(*item)->Update(mouse_hover, focus);
-		}
-	}
 	return true;
 }
 
@@ -139,6 +98,46 @@ bool j1Gui::Update(float dt)
 // Called after all Updates
 bool j1Gui::PostUpdate()
 {
+	// Update all guis
+	std::list<Gui*>* list_to_iterate = nullptr;
+	if (App->console->IsActive())
+		list_to_iterate = &ConsoleElements;
+	else
+		list_to_iterate = &GuiElements;
+
+	const Gui* mouse_hover = FindMouseHover();
+	if (mouse_hover && mouse_hover->can_focus == true)
+		if (mouse_hover->GetSceneListener() == App->scene->GetActiveScene())
+			SetFocus(mouse_hover);
+
+	/*
+	if (mouse_hover &&
+	mouse_hover->can_focus == true &&
+	App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == j1KeyState::KEY_DOWN)
+	SetFocus(mouse_hover);
+	*/
+
+	for (std::list<Gui*>::iterator item = list_to_iterate->begin(); item != list_to_iterate->cend(); ++item)
+	{
+		if ((*item)->GetModuleListener() != nullptr)
+		{
+			(*item)->CheckInput(mouse_hover, focus);
+			(*item)->Update(mouse_hover, focus);
+		}
+		if ((*item)->GetSceneListener() != nullptr)//if is scene
+		{
+			if ((*item)->GetSceneListener() == App->scene->GetActiveScene())
+			{
+				(*item)->CheckInput(mouse_hover, focus);
+				(*item)->Update(mouse_hover, focus);
+			}
+		}
+		if (App->console->IsActive())
+		{
+			(*item)->CheckInput(mouse_hover, focus);
+			(*item)->Update(mouse_hover, focus);
+		}
+	}
 	return true;
 }
 

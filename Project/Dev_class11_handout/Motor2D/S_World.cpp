@@ -85,6 +85,7 @@ bool S_World::Update()
 			App->player->loop_game_menu = true;
 	return false;
 }
+
 bool S_World::PostUpdate()
 {
 
@@ -98,6 +99,7 @@ bool S_World::PostUpdate()
 	return true;
 
 }
+
 bool S_World::Clean()
 {
 	
