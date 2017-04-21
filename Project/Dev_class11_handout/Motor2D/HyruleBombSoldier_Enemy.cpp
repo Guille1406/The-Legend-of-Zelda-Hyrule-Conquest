@@ -37,6 +37,7 @@ void HyruleBombSoldier_Enemy::Action()
 	}
 	max_bomb_point.x = pix_world_pos.x + off_set;
 
+	if (state == EnemyState::throwing_bomb || t<1) {
 		
 		bomb_point.x = (1 - t)*(1 - t)*pix_world_pos.x + 2 * t*(1 - t)*max_bomb_point.x + t*t*player_position.x;
 		bomb_point.y = (1 - t)*(1 - t)*pix_world_pos.y + 2 * t*(1 - t)*max_bomb_point.y + t*t*player_position.y;
@@ -49,8 +50,8 @@ void HyruleBombSoldier_Enemy::Action()
 			can_throw_bomb = true;
 		}
 	
-	
-	}
 
+	}
+	
 }
 
