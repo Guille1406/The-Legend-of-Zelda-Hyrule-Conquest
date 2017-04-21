@@ -160,7 +160,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		//i don't have the sprite of enemy
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
-		ret->live = 5;
+		ret->live = 2;
 		
 		//Position in world pixel 
 		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
@@ -176,25 +176,29 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 	case enemyType::hyrulebombsoldier_enemy:
 
 		ret = new HyruleBombSoldier_Enemy();
+		HyruleBombSoldier_Enemy* temp = (HyruleBombSoldier_Enemy*)ret;
 		//i don't have the sprite of enemy
-		ret->rect = { 0,0,44,60 };
-		ret->array_pos = pos_array_enemy;
-		ret->live = 5;
+		temp->rect = { 0,0,44,60 };
+		temp->array_pos = pos_array_enemy;
+		temp->live = 5;
 
 		//Position in world pixel 
-		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
-		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+		temp->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		temp->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+
+		temp->bomb_point.x = temp->pix_world_pos.x;
+		temp->bomb_point.y = temp->pix_world_pos.y;
+
+		temp->max_bomb_point.x = temp->pix_world_pos.x+5;
+		temp->max_bomb_point.y = temp->pix_world_pos.y+5;
 
 		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
-		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
+		temp->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
 
 		//how to know if a enemy is in level one or two
-		ret->logic_height = height;
-
+		temp->logic_height = height;
+		ret = temp;
 		break;
-
-
-
 
 	}
 	//Position in array
@@ -326,7 +330,7 @@ void Enemy::Direction_Push_Election_ChSoldier()
 }
 
 void Enemy::Rang_Player() {
-	iPoint dist;
+	/*iPoint dist;
 	dist.x = App->player->Link->pos.x - this->pix_world_pos.x;
 	dist.y = App->player->Link->pos.y - this->pix_world_pos.y;
 	iPoint dist2;
@@ -358,7 +362,7 @@ void Enemy::Rang_Player() {
 			}
 		}
 	}
-
+	*/
 
 }
 

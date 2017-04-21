@@ -12,6 +12,9 @@ public:
 
 public:
 	iPoint temp_point = { 0,0 };
+	iPoint bomb_point = {0,0};
+	iPoint max_bomb_point = {0,0};
+	int t = 0;
 };
 
 
