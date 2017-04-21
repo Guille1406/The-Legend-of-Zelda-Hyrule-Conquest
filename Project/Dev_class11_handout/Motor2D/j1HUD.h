@@ -38,6 +38,8 @@ public:
 
 	void ToggleVisibility(bool value);
 
+	SDL_Texture* GetAtlas();
+
 private:
 	bool visible = true;
 

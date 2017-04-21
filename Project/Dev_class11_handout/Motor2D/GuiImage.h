@@ -10,9 +10,11 @@ public:
 	~GuiImage();
 
 	void Draw();
+	void DrawWithAlternativeAtlas(SDL_Texture* alternativeatlas);
 	void SetOpacity(uint newopacity);
 
 private:
+	void SubDrawFunction(SDL_Texture* atlas);
 	void DebugDraw() const;
 
 private:

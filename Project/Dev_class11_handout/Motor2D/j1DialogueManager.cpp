@@ -1,8 +1,12 @@
 #include "j1DialogueManager.h"
 #include "j1App.h"
 #include "j1FileSystem.h"
-
+#include "j1Render.h"
+#include "j1Window.h"
 #include "j1Input.h"
+#include "j1HUD.h"
+
+#include "GuiImage.h"
 
 j1DialogueManager::j1DialogueManager() : j1Module()
 {
@@ -11,6 +15,8 @@ j1DialogueManager::j1DialogueManager() : j1Module()
 
 j1DialogueManager::~j1DialogueManager()
 {
+	for (std::vector<Dialogue*>::iterator item = dialogues.begin(); item != dialogues.cend(); ++item)
+		RELEASE(*item);
 	dialogues.clear();
 }
 
@@ -18,6 +24,9 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 {
 	bool ret = false;
 	LOG("Loading DialogManager");
+
+	WindowRect.w = App->win->GetWindowW();
+	WindowRect.h = App->win->GetWindowH();
 
 	pugi::xml_document	config_file;
 	pugi::xml_node		dialogue_config;
@@ -41,6 +50,9 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 		//Allocate dialogues from XML
 
 	}
+
+	SDL_Rect TextBackgroundRect = { 0,94,1233,231 };
+	TextBackground = App->gui->CreateImage({ 0,0 }, &TextBackgroundRect, false, AddGuiTo::none);
 
 	/*
 	//Dialogue quad {0,94,1233,231}
@@ -86,6 +98,10 @@ bool j1DialogueManager::Update(float dt)
 {
 	if (ActiveDialogue == DialogueID::NullID)
 		return true;
+	App->render->DrawQuad(WindowRect, Black(0), Black(1), Black(2), 80, true, false, false);
+
+	TextBackground->DrawWithAlternativeAtlas(App->hud->GetAtlas());
+
 	/*--- CODE TO TEST RESULTS IN-GAME ---*/
 	/*
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
@@ -115,6 +131,8 @@ bool j1DialogueManager::Update(float dt)
 		dialogueStep++;
 	*/
 	//BlitDialog(id, NPCstate); //Calls Blit function
+	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+		ActiveDialogue = DialogueID::NullID;
 	return true;
 }
 

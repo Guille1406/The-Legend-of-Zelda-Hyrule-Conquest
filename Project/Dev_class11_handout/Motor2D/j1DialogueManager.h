@@ -12,7 +12,7 @@ enum DialogueID {
 
 
 	//NPC Dialogue
-
+	Ric_test,
 
 	//Item Dialogue
 
@@ -58,6 +58,8 @@ private:
 
 private:
 
+	SDL_Rect WindowRect = { 0,0,0,0 };
+
 	std::vector<Dialogue*> dialogues;
 
 	std::string folder = empty_char;
@@ -65,7 +67,7 @@ private:
 	pugi::xml_document dialogueDataFile;
 	pugi::xml_node dialogueNode;
 
-	std::vector<GuiLabel*> Labels;
+	GuiImage* TextBackground = nullptr;
 
 	DialogueID ActiveDialogue = DialogueID::NullID;
 };

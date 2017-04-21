@@ -7,6 +7,7 @@
 #include "j1Input.h"
 #include "SDL\include\SDL.h"
 #include "p2Log.h"
+#include "j1DialogueManager.h"
 
 #include "j1Gui.h"
 #include "GuiImage.h"

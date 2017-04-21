@@ -83,6 +83,9 @@ bool S_World::Update()
 	if (!App->player->paused)
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 			App->player->loop_game_menu = true;
+
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+		App->dialoguemanager->ActivateDialogue(DialogueID::Ric_test);
 	return false;
 }
 bool S_World::PostUpdate()

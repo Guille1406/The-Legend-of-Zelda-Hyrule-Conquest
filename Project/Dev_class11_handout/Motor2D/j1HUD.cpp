@@ -153,3 +153,8 @@ void j1HUD::ToggleVisibility(bool value)
 {
 	visible = value;
 }
+
+SDL_Texture* j1HUD::GetAtlas()
+{
+	return atlas;
+}

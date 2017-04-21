@@ -68,7 +68,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfinding);
 	AddModule(font);
 	AddModule(startmenuback);
-	AddModule(dialoguemanager);
 
 	// scene lastAddModule(scene);
 	AddModule(scene);
@@ -79,6 +78,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// gui after all to print above all
 	AddModule(hud);
 	AddModule(gui);
+	AddModule(dialoguemanager);
 	AddModule(fadetoblack);
 
 	//Console
