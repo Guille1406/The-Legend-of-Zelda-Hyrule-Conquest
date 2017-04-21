@@ -19,6 +19,7 @@ public:
 	int off_set = 100;
 	bool can_throw_bomb = true;
 	bool continue_path_bomb = false;
+	j1Timer bomb_timer;
 };
 
 

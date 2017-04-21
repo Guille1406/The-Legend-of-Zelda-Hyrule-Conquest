@@ -23,10 +23,13 @@ HyruleBombSoldier_Enemy::~HyruleBombSoldier_Enemy()
 void HyruleBombSoldier_Enemy::Action()
 {
 	//printing the bomb
+
 	SDL_Rect p = { bomb_point.x ,bomb_point.y, 10,10 };
 	App->render->DrawQuad(p, Black(0), Black(1), Black(2), 255, true);
 	if (can_throw_bomb==true && player_in_range!=nullptr) {
 		player_position = player_in_range->pos;
+		t = 0;
+		bomb_timer.Start();
 	//	continue_path_bomb = true;
 		can_throw_bomb = false;
 	}
@@ -46,8 +49,10 @@ void HyruleBombSoldier_Enemy::Action()
 			t += (float)1 / 100;
 		}
 		else {
-			t = 0;
-			can_throw_bomb = true;
+			if (bomb_timer.Read() > 5000) {
+				t = 0;
+				can_throw_bomb = true;
+			}
 		}
 	
 
