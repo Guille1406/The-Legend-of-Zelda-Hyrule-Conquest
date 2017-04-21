@@ -36,7 +36,7 @@ enum DialogueInterlucutor {
 	//NPC
 	Ric,
 	//None
-	item
+	item_nullinterlucutor
 };
 
 enum DialogueInterlucutorPosition {
@@ -48,8 +48,8 @@ struct DialogueStep
 {
 	DialogueStep();
 	~DialogueStep();
-	DialogueInterlucutor speaker = DialogueInterlucutor::item;
-	DialogueInterlucutor listener = DialogueInterlucutor::item;
+	DialogueInterlucutor speaker = DialogueInterlucutor::item_nullinterlucutor;
+	DialogueInterlucutor listener = DialogueInterlucutor::item_nullinterlucutor;
 	DialogueInterlucutorPosition speaker_pos = DialogueInterlucutorPosition::Left;
 	DialogueInterlucutorPosition listener_pos = DialogueInterlucutorPosition::Left;
 	std::vector<std::string*> lines;
