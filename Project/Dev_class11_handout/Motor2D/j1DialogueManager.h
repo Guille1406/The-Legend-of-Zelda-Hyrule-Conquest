@@ -70,6 +70,7 @@ struct Dialogue
 	Dialogue();
 	~Dialogue();
 	DialogueID id = DialogueID::NullID;
+	DialogueType type = DialogueType::NullType;
 	std::vector<DialogueStep*> DialogueSteps;
 };
 
@@ -77,8 +78,7 @@ struct ActiveDialogue
 {
 	ActiveDialogue();
 	~ActiveDialogue();
-	DialogueID id = DialogueID::NullID;
-	DialogueType type = DialogueType::NullType;
+	bool DialogueActive = false;
 	Dialogue* ActiveDialoguePtr = nullptr;
 	DialogueStep* ActiveDialogueStepPtr = nullptr;
 };
@@ -106,6 +106,7 @@ private:
 	bool BlitDialog(uint id, uint state);
 	DialogueInterlucutor CheckInterlocutor(std::string* interlocutor_str);
 	DialogueInterlucutorPosition CheckInterlocutorPosition(std::string* interlocutor_position_str);
+	void DialogueNextStep();
 
 private:
 

@@ -94,6 +94,7 @@ void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
 		dialogues.push_back(new Dialogue());
 		Dialogue* newdialogue = dialogues.back();
 		newdialogue->id = (DialogueID)newcutscene.attribute("enum_value").as_int(0);
+		newdialogue->type = DialogueType::Cutscene;
 		for (pugi::xml_node newcutscenesteps = newcutscene.child("step"); newcutscenesteps; newcutscenesteps = newcutscenesteps.next_sibling("step"))
 		{
 			newdialogue->DialogueSteps.push_back(new DialogueStep());
@@ -115,6 +116,7 @@ void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
 		dialogues.push_back(new Dialogue());
 		Dialogue* newdialogue = dialogues.back();
 		newdialogue->id = (DialogueID)newcutscene.attribute("enum_value").as_int(0);
+		newdialogue->type = DialogueType::NPC;
 		for (pugi::xml_node newcutscenesteps = newcutscene.child("step"); newcutscenesteps; newcutscenesteps = newcutscenesteps.next_sibling("step"))
 		{
 			newdialogue->DialogueSteps.push_back(new DialogueStep());
@@ -138,6 +140,7 @@ void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
 		dialogues.push_back(new Dialogue());
 		Dialogue* newdialogue = dialogues.back();
 		newdialogue->id = (DialogueID)newcutscene.attribute("enum_value").as_int(0);
+		newdialogue->type = DialogueType::item;
 		for (pugi::xml_node newcutscenesteps = newcutscene.child("step"); newcutscenesteps; newcutscenesteps = newcutscenesteps.next_sibling("step"))
 		{
 			newdialogue->DialogueSteps.push_back(new DialogueStep());
@@ -172,27 +175,6 @@ DialogueInterlucutorPosition j1DialogueManager::CheckInterlocutorPosition(std::s
 
 bool j1DialogueManager::Start()
 {
-	/*
-	dialogueNode = dialogueDataFile.child("npcs");
-	// Allocate memory
-	int i = 0;
-	for (pugi::xml_node npc = dialogueNode.child("npc"); npc != NULL; npc = npc.next_sibling(), i++)
-	{
-		//Allocate Dialog with his ID and State
-		Dialogue* tmp = new Dialogue(npc.attribute("id").as_int());
-		dialog.push_back(tmp);
-
-		//Allocate text
-		for (pugi::xml_node dialogue = npc.child("dialogue"); dialogue != NULL; dialogue = dialogue.next_sibling())
-			for (pugi::xml_node text = dialogue.child("text"); text != NULL; text = text.next_sibling("text"))
-			{
-				DialogueStep* tmp = new DialogueStep(dialogue.attribute("state").as_int(), text.attribute("value").as_string());
-				dialog[i]->texts.push_back(tmp);
-			}
-	}
-	*/
-	//Prepare UI to print
-	
 	return true;
 }
 
@@ -207,11 +189,14 @@ bool j1DialogueManager::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		App->dialoguemanager->ActivateDialogue(DialogueID::castle_intro);
 	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
-		ActiveDialog->id = DialogueID::NullID;
+		ActiveDialog->DialogueActive = false;
 	//Test code end
 
-	if (ActiveDialog->id == DialogueID::NullID)
+	if (!ActiveDialog->DialogueActive)
 		return true;
+
+	if ((App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_DOWN) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_DOWN))
+		DialogueNextStep();
 
 	//Blit Dark background
 	App->render->DrawQuad(WindowRect, Black(0), Black(1), Black(2), 80, true, false, false);
@@ -253,7 +238,30 @@ bool j1DialogueManager::BlitDialog(uint id, uint state)
 
 void j1DialogueManager::ActivateDialogue(DialogueID id)
 {
-	ActiveDialog->id = id;
+	ActiveDialog->DialogueActive = true;
+	for (std::vector<Dialogue*>::iterator item = dialogues.begin(); item != dialogues.cend(); ++item)
+		if ((*item)->id == id)
+		{
+			ActiveDialog->ActiveDialoguePtr = *item;
+			ActiveDialog->ActiveDialogueStepPtr = (*item)->DialogueSteps.front();
+		}
+}
+
+void j1DialogueManager::DialogueNextStep()
+{
+	for (std::vector<DialogueStep*>::iterator item = ActiveDialog->ActiveDialoguePtr->DialogueSteps.begin(); item != ActiveDialog->ActiveDialoguePtr->DialogueSteps.cend(); ++item)
+		if ((*item) == ActiveDialog->ActiveDialogueStepPtr)
+		{
+			if ((*item) != ActiveDialog->ActiveDialoguePtr->DialogueSteps.back())
+				ActiveDialog->ActiveDialogueStepPtr = *(++item);
+			else //if it the last step, quit and clean
+			{
+				ActiveDialog->DialogueActive = false;
+				ActiveDialog->ActiveDialoguePtr = nullptr;
+				ActiveDialog->ActiveDialogueStepPtr = nullptr;
+			}
+			return;
+		}
 }
 
 void j1DialogueManager::OnGui(Gui* ui, GuiEvent event)
