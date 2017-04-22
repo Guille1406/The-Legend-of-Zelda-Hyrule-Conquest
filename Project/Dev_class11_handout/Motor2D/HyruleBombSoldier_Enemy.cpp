@@ -49,6 +49,7 @@ void HyruleBombSoldier_Enemy::Action()
 			t += (float)1 / 100;
 		}
 		else {
+			//bomb.bomb_collider_explosion = App->collision->AddCollider(p, COLLIDER_TYPE::coolider_bomb_explosion, this, App->enemy);
 			if (bomb_timer.Read() > 5000) {
 				t = 0;
 				can_throw_bomb = true;

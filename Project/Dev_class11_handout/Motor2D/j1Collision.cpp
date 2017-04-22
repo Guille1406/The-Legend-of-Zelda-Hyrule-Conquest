@@ -73,6 +73,9 @@ j1Collision::j1Collision()
 	//WARP
 	matrix[collider_warp][collider_link] = true;
 	matrix[collider_warp][collider_zelda] = true;
+
+	matrix[coolider_bomb_explosion][collider_link] = true;
+	matrix[coolider_bomb_explosion][collider_zelda] = true;
 }
 
 // Destructor
@@ -227,6 +230,9 @@ void j1Collision::DebugDraw()
 			break;
 		case collider_enemy_sword:
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+			break;
+		case coolider_bomb_explosion:
+			App->render->DrawQuad(colliders[i]->rect, Red(1), Red(2), Red(3), alpha);
 			break;
 		case collider_door:
 			Object* temp = (Object*)colliders[i]->parent;

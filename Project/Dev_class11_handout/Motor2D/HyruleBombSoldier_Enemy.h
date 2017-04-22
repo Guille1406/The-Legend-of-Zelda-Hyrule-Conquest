@@ -2,6 +2,15 @@
 #define _HYRULEBOMBSOLDIER_ENEMY_
 #include "j1Enemy.h"
 #include"j1Render.h"
+
+struct Enemy_Bomb {
+	int position;
+	Collider bomb_collider_explosion;
+	SDL_Rect texture_bomb_rect;
+	j1Timer Explosion_delay;
+
+};
+
 class HyruleBombSoldier_Enemy : public Enemy {
 public:
 	HyruleBombSoldier_Enemy();
@@ -20,6 +29,7 @@ public:
 	bool can_throw_bomb = true;
 	bool continue_path_bomb = false;
 	j1Timer bomb_timer;
+	//Enemy_Bomb bomb;
 };
 
 
