@@ -48,9 +48,14 @@ public:
 	bool can_move = true;
 	SDL_Texture* boss_texture;
 	Legs* legs;
-	iPoint centre_pos;
+	iPoint centre_pos = {0,0};
 	boss_state state = boss_idle;
 	Foot* attacking_foot = nullptr;
+
+
+	int moving_state = 0;
+	float count = 0;
+
 
 	bool im_active = false;
 

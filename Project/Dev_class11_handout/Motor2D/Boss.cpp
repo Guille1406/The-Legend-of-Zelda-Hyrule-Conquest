@@ -16,18 +16,30 @@ Legs::Legs(const Legs& obj) {
 
 	temp_foot.parent_offset = { 50,30 };
 	temp_foot.pos = { parent_boss->centre_pos.x - 200, parent_boss->centre_pos.y  };
+	temp_foot.pivot_point = { parent_boss->pos.x + temp_foot.parent_offset.x, parent_boss->pos.y + temp_foot.parent_offset.y };
+	temp_foot.max_point = { (int)(temp_foot.pos.x - (float)(temp_foot.pos.x - temp_foot.pivot_point.x) / 1.5),temp_foot.pivot_point.y - 50 - abs(temp_foot.pos.y - temp_foot.pivot_point.y) };
+
 	foot1 = new Foot(temp_foot);
 
 	temp_foot.parent_offset = { 180,30};
 	temp_foot.pos = { parent_boss->centre_pos.x + 200, parent_boss->centre_pos.y  };
+	temp_foot.pivot_point = { parent_boss->pos.x + temp_foot.parent_offset.x, parent_boss->pos.y + temp_foot.parent_offset.y };
+	temp_foot.max_point = { (int)(temp_foot.pos.x - (float)(temp_foot.pos.x - temp_foot.pivot_point.x) / 1.5),temp_foot.pivot_point.y - 50 - abs(temp_foot.pos.y - temp_foot.pivot_point.y) };
+
 	foot2 = new Foot(temp_foot);	
 
 	temp_foot.pos = { parent_boss->centre_pos.x - 200, parent_boss->centre_pos.y +150 };
 	temp_foot.parent_offset = { 50,180};
+	temp_foot.pivot_point = { parent_boss->pos.x + temp_foot.parent_offset.x, parent_boss->pos.y + temp_foot.parent_offset.y };
+	temp_foot.max_point = { (int)(temp_foot.pos.x - (float)(temp_foot.pos.x - temp_foot.pivot_point.x) / 1.5),temp_foot.pivot_point.y - 50 - abs(temp_foot.pos.y - temp_foot.pivot_point.y) };
+
 	foot3 = new Foot(temp_foot);	
 
 	temp_foot.pos = { parent_boss->centre_pos.x +200, parent_boss->centre_pos.y +150 };
 	temp_foot.parent_offset = { 180,180 };
+	temp_foot.pivot_point = { parent_boss->pos.x + temp_foot.parent_offset.x, parent_boss->pos.y + temp_foot.parent_offset.y };
+	temp_foot.max_point = { (int)(temp_foot.pos.x - (float)(temp_foot.pos.x - temp_foot.pivot_point.x) / 1.5),temp_foot.pivot_point.y - 50 - abs(temp_foot.pos.y - temp_foot.pivot_point.y) };
+
 	foot4 = new Foot(temp_foot);
 
 	
@@ -37,6 +49,30 @@ Legs::Legs(const Legs& obj) {
 
 Legs::~Legs()
 {
+	
+	/*
+	foot1->parent_offset = { 50,30 };
+	foot1->pos = { parent_boss->centre_pos.x - 200, parent_boss->centre_pos.y };
+	foot1->pivot_point = { parent_boss->pos.x + foot1->parent_offset.x, parent_boss->pos.y + foot1->parent_offset.y };
+	foot1->max_point = { (int)(foot1->pos.x - (float)(foot1->pos.x - foot1->pivot_point.x) / 1.5),foot1->pivot_point.y - 50 - abs(foot1->pos.y - foot1->pivot_point.y) };
+
+	foot2->parent_offset = { 180,30 };
+	foot2->pos = { parent_boss->centre_pos.x + 200, parent_boss->centre_pos.y };
+	foot2->pivot_point = { parent_boss->pos.x + foot2->parent_offset.x, parent_boss->pos.y + foot2->parent_offset.y };
+	foot2->max_point = { (int)(foot2->pos.x - (float)(foot2->pos.x - foot2->pivot_point.x) / 1.5),foot2->pivot_point.y - 50 - abs(foot2->pos.y - foot2->pivot_point.y) };
+
+
+	foot3->pos = { parent_boss->centre_pos.x - 200, parent_boss->centre_pos.y + 150 };
+	foot3->parent_offset = { 50,180 };
+	foot3->pivot_point = { parent_boss->pos.x + foot3->parent_offset.x, parent_boss->pos.y + foot3->parent_offset.y };
+	foot3->max_point = { (int)(foot3->pos.x - (float)(foot3->pos.x - foot3->pivot_point.x) / 1.5),foot3->pivot_point.y - 50 - abs(foot3->pos.y - foot3->pivot_point.y) };
+
+
+	foot4->pos = { parent_boss->centre_pos.x + 200, parent_boss->centre_pos.y + 150 };
+	foot4->parent_offset = { 180,180 };
+	foot4->pivot_point = { parent_boss->pos.x + foot4->parent_offset.x, parent_boss->pos.y + foot4->parent_offset.y };
+	foot4->max_point = { (int)(foot4->pos.x - (float)(foot4->pos.x - foot4->pivot_point.x) / 1.5),foot4->pivot_point.y - 50 - abs(foot4->pos.y - foot4->pivot_point.y) };
+	*/
 }
 
 void Boss::Draw(int height)
@@ -112,8 +148,8 @@ void Boss::ExecuteEvent()
 void Boss::Move()
 {
 	int time = 10;
-	static float i = 0;
-	static int moving_state = 0;
+	
+	
 	static iPoint first_point = legs->foot1->pos;
 	static iPoint second_point = legs->foot3->pos;
 	iPoint link_pos = App->player->Link->pos;
@@ -122,7 +158,7 @@ void Boss::Move()
 
 	can_attack = false;
 	if (moving_state == 0) {
-		if (i == 0) {
+		if (count == 0) {
 			first_point = legs->foot1->pos;
 			second_point = legs->foot3->pos;
 			player_point = { centre_pos.x - link_pos.x ,  centre_pos.y - link_pos.y };
@@ -130,32 +166,32 @@ void Boss::Move()
 			player_point = { (int)((player_point.x / module) * 64),(int)((player_point.y / module) * 64) };
 
 		}
-		legs->foot1->pos = { (int)(first_point.x - player_point.x * (i / time)),(int)(first_point.y - player_point.y * (i / time)) };
-		legs->foot3->pos = { (int)(second_point.x - player_point.x * (i / time)),(int)(second_point.y - player_point.y * (i / time)) };
+		legs->foot1->pos = { (int)(first_point.x - player_point.x * (count / time)),(int)(first_point.y - player_point.y * (count / time)) };
+		legs->foot3->pos = { (int)(second_point.x - player_point.x * (count / time)),(int)(second_point.y - player_point.y * (count / time)) };
 
 	}
 	if (moving_state == 1) {
-		if (i == 0) {
+		if (count == 0) {
 			first_point = pos;
 
 		}
-		pos = { (int)(first_point.x - player_point.x * (i / time)), (int)(first_point.y - player_point.y * (i / time)) };
+		pos = { (int)(first_point.x - player_point.x * (count / time)), (int)(first_point.y - player_point.y * (count / time)) };
 
 	}
 	if (moving_state == 2) {
-		if (i == 0) {
+		if (count == 0) {
 			first_point = legs->foot2->pos;
 			second_point = legs->foot4->pos;
 
 
 		}
-		legs->foot2->pos = { (int)(first_point.x - player_point.x * (i / time)),(int)(first_point.y - player_point.y * (i / time)) };
-		legs->foot4->pos = { (int)(second_point.x - player_point.x * (i / time)),(int)(second_point.y - player_point.y * (i / time)) };
+		legs->foot2->pos = { (int)(first_point.x - player_point.x * (count / time)),(int)(first_point.y - player_point.y * (count / time)) };
+		legs->foot4->pos = { (int)(second_point.x - player_point.x * (count / time)),(int)(second_point.y - player_point.y * (count / time)) };
 
 	}
-	i++;
-	if (i > time) {
-		i = 0;
+	count++;
+	if (count > time) {
+		count = 0;
 		if (moving_state == 2) {
 			state = boss_idle;
 			can_attack = true;
@@ -366,6 +402,26 @@ Boss::Boss()
 
 Boss::~Boss()
 {
+	App->tex->UnLoad(boss_texture);
+	legs = NULL;
+	delete legs;
+	attacking_foot = nullptr;
+	state = boss_idle;
+
+	for (int i = 0; i < colision_tiles_vec.size(); i++) {
+		App->map->V_Colision[0]->data[(colision_tiles_vec[i].y / 16) * 100 + colision_tiles_vec[i].x / 16] = NOT_COLISION_ID;
+		App->map->V_Colision[1]->data[(colision_tiles_vec[i].y / 16) * 100 + colision_tiles_vec[i].x / 16] = NOT_COLISION_ID;
+	}
+	colision_tiles_vec.clear();
+	std::vector<Object*>::iterator it = App->object->V_Objects.begin();
+	while (it != App->object->V_Objects.end()) {
+		if ((*it) == jump_1 || (*it) == jump_2 || (*it) == jump_3 || (*it) == jump_4) {
+			(*it)->collider->to_delete = true;
+			it = App->object->V_Objects.erase(it);
+
+		}
+	}
+
 }
 
 void Foot::Draw()

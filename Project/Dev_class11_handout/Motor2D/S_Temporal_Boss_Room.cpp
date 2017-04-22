@@ -27,7 +27,7 @@ bool S_TempBossRoom::Start()
 	App->map->Enable();
 	App->player->Enable();
 	App->object->Enable();
-
+	App->enemy->Enable();
 
 	App->enemy->Final_Boss = new Boss();
 	App->enemy->Final_Boss->im_active = true;
@@ -107,6 +107,8 @@ bool S_TempBossRoom::PostUpdate()
 bool S_TempBossRoom::Clean()
 {
 	App->enemy->Final_Boss->im_active = false;
+	App->enemy->Final_Boss = NULL;
+	delete App->enemy->Final_Boss;
 	LOG("World Test Deleted");
 
 	App->player->Disable();
