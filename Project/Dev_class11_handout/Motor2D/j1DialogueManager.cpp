@@ -76,8 +76,40 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 
 void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
 {
-	//TODO
-	//Allocate dialogues from XML 
+	//Allocate dialogues from XML
+	//itereate cutscenes
+	for (pugi::xml_node newcutscene = dialoguenode.child("Cutscenes").child("cutscene"); newcutscene; newcutscene = newcutscene.next_sibling("cutscene"))
+	{
+		dialogues.push_back(new Dialogue());
+		Dialogue* newdialogue = dialogues.back();
+		newdialogue->id = (DialogueID)newcutscene.attribute("enum_value").as_int(0);
+		for (pugi::xml_node newcutscenesteps = newcutscene.child("step"); newcutscenesteps; newcutscenesteps = newcutscenesteps.next_sibling("step"))
+		{
+			newdialogue->DialogueSteps.push_back(new DialogueStep());
+			DialogueStep* newdialoguestep = newdialogue->DialogueSteps.back();
+			newdialoguestep->listener = CheckInterlocutor(&std::string(newcutscenesteps.attribute("listener").as_string()));
+			newdialoguestep->listener_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("listener_pos").as_string()));
+			newdialoguestep->speaker = CheckInterlocutor(&std::string(newcutscenesteps.attribute("speaker").as_string()));
+			newdialoguestep->speaker_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("speaker_pos").as_string()));
+			for (pugi::xml_node newcutscenesteplines = newcutscenesteps.child("line"); newcutscenesteplines; newcutscenesteplines = newcutscenesteplines.next_sibling("line"))
+			{
+				newdialoguestep->lines.push_back(std::string(newcutscenesteplines.child_value()));
+			}
+		}
+	}
+	//itereate NPCs
+
+	//itereate items
+}
+
+DialogueInterlucutor j1DialogueManager::CheckInterlocutor(std::string* interlocutor_str)
+{
+	return DialogueInterlucutor::item_nullinterlucutor;
+}
+
+DialogueInterlucutorPosition j1DialogueManager::CheckInterlocutorPosition(std::string* interlocutor_position_str)
+{
+	return DialogueInterlucutorPosition::Left;
 }
 
 bool j1DialogueManager::Start()
@@ -115,7 +147,7 @@ bool j1DialogueManager::Update(float dt)
 {
 	//Test code
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-		App->dialoguemanager->ActivateDialogue(DialogueID::Ric_test);
+		App->dialoguemanager->ActivateDialogue(DialogueID::castle_intro);
 	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
 		ActiveDialog->id = DialogueID::NullID;
 	//Test code end
@@ -188,9 +220,7 @@ DialogueStep::DialogueStep()
 
 DialogueStep::~DialogueStep()
 {
-	for (std::vector<std::string*>::iterator item = lines.begin(); item != lines.cend(); ++item)
-		RELEASE(*item);
-	lines.clear();
+
 }
 
 Dialogue::Dialogue()

@@ -9,10 +9,12 @@
 
 enum DialogueID {
 	//Cutscene Dialogue
-
+	castle_intro,
+	castle_sewers,
+	castle_sewers_exit,
 
 	//NPC Dialogue
-	Ric_test,
+	
 
 	//Item Dialogue
 
@@ -52,7 +54,7 @@ struct DialogueStep
 	DialogueInterlucutor listener = DialogueInterlucutor::item_nullinterlucutor;
 	DialogueInterlucutorPosition speaker_pos = DialogueInterlucutorPosition::Left;
 	DialogueInterlucutorPosition listener_pos = DialogueInterlucutorPosition::Left;
-	std::vector<std::string*> lines;
+	std::vector<std::string> lines;
 };
 
 struct Dialogue
@@ -94,6 +96,8 @@ public:
 private:
 	void AllocateDialogues(pugi::xml_node& dialoguenode);
 	bool BlitDialog(uint id, uint state);
+	DialogueInterlucutor CheckInterlocutor(std::string* interlocutor_str);
+	DialogueInterlucutorPosition CheckInterlocutorPosition(std::string* interlocutor_position_str);
 
 private:
 
