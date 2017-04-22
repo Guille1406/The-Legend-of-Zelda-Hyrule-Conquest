@@ -54,14 +54,21 @@ struct DialogueInterlucutorStrRelation {
 	DialogueInterlucutor DialogueInterlucutorEnum = DialogueInterlucutor::item_nullinterlucutor;
 };
 
+struct DialogueCharacter
+{
+	DialogueCharacter();
+	~DialogueCharacter();
+	std::string DialogueCharacter_str = empty_char;
+	DialogueInterlucutor DialogueCharacter_id = DialogueInterlucutor::item_nullinterlucutor;
+	DialogueInterlucutorPosition DialogueCharacter_pos = DialogueInterlucutorPosition::Left;
+};
+
 struct DialogueStep
 {
 	DialogueStep();
 	~DialogueStep();
-	DialogueInterlucutor speaker = DialogueInterlucutor::item_nullinterlucutor;
-	DialogueInterlucutor listener = DialogueInterlucutor::item_nullinterlucutor;
-	DialogueInterlucutorPosition speaker_pos = DialogueInterlucutorPosition::Left;
-	DialogueInterlucutorPosition listener_pos = DialogueInterlucutorPosition::Left;
+	DialogueCharacter* SpeakerDialogueCharacter = nullptr;
+	DialogueCharacter* ListenerDialogueCharacter = nullptr;
 	std::vector<std::string> lines;
 };
 
@@ -107,6 +114,7 @@ private:
 	DialogueInterlucutor CheckInterlocutor(std::string* interlocutor_str);
 	DialogueInterlucutorPosition CheckInterlocutorPosition(std::string* interlocutor_position_str);
 	void DialogueNextStep();
+	void SetCharacterBlit();
 
 private:
 

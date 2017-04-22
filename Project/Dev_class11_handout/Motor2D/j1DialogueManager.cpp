@@ -99,10 +99,14 @@ void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
 		{
 			newdialogue->DialogueSteps.push_back(new DialogueStep());
 			DialogueStep* newdialoguestep = newdialogue->DialogueSteps.back();
-			newdialoguestep->listener = CheckInterlocutor(&std::string(newcutscenesteps.attribute("listener").as_string()));
-			newdialoguestep->listener_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("listener_pos").as_string()));
-			newdialoguestep->speaker = CheckInterlocutor(&std::string(newcutscenesteps.attribute("speaker").as_string()));
-			newdialoguestep->speaker_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("speaker_pos").as_string()));
+			newdialoguestep->SpeakerDialogueCharacter = new DialogueCharacter();
+			newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_id = CheckInterlocutor(&std::string(newcutscenesteps.attribute("speaker").as_string()));
+			newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_str = std::string(newcutscenesteps.attribute("speaker").as_string());
+			newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("speaker_pos").as_string()));
+			newdialoguestep->ListenerDialogueCharacter = new DialogueCharacter();
+			newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_id = CheckInterlocutor(&std::string(newcutscenesteps.attribute("listener").as_string()));
+			newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_str = std::string(newcutscenesteps.attribute("listener").as_string());
+			newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("listener_pos").as_string()));
 			for (pugi::xml_node newcutscenesteplines = newcutscenesteps.child("line"); newcutscenesteplines; newcutscenesteplines = newcutscenesteplines.next_sibling("line"))
 			{
 				newdialoguestep->lines.push_back(std::string(newcutscenesteplines.child_value()));
@@ -113,23 +117,7 @@ void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
 	for (pugi::xml_node newcutscene = dialoguenode.child("NPCs").child("npc"); newcutscene; newcutscene = newcutscene.next_sibling("npc"))
 	{
 		/*
-		dialogues.push_back(new Dialogue());
-		Dialogue* newdialogue = dialogues.back();
-		newdialogue->id = (DialogueID)newcutscene.attribute("enum_value").as_int(0);
-		newdialogue->type = DialogueType::NPC;
-		for (pugi::xml_node newcutscenesteps = newcutscene.child("step"); newcutscenesteps; newcutscenesteps = newcutscenesteps.next_sibling("step"))
-		{
-			newdialogue->DialogueSteps.push_back(new DialogueStep());
-			DialogueStep* newdialoguestep = newdialogue->DialogueSteps.back();
-			newdialoguestep->listener = CheckInterlocutor(&std::string(newcutscenesteps.attribute("listener").as_string()));
-			newdialoguestep->listener_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("listener_pos").as_string()));
-			newdialoguestep->speaker = CheckInterlocutor(&std::string(newcutscenesteps.attribute("speaker").as_string()));
-			newdialoguestep->speaker_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("speaker_pos").as_string()));
-			for (pugi::xml_node newcutscenesteplines = newcutscenesteps.child("line"); newcutscenesteplines; newcutscenesteplines = newcutscenesteplines.next_sibling("line"))
-			{
-				newdialoguestep->lines.push_back(std::string(newcutscenesteplines.child_value()));
-			}
-		}
+		
 		*/
 	}
 
@@ -137,23 +125,7 @@ void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
 	for (pugi::xml_node newcutscene = dialoguenode.child("Items").child("item"); newcutscene; newcutscene = newcutscene.next_sibling("item"))
 	{
 		/*
-		dialogues.push_back(new Dialogue());
-		Dialogue* newdialogue = dialogues.back();
-		newdialogue->id = (DialogueID)newcutscene.attribute("enum_value").as_int(0);
-		newdialogue->type = DialogueType::item;
-		for (pugi::xml_node newcutscenesteps = newcutscene.child("step"); newcutscenesteps; newcutscenesteps = newcutscenesteps.next_sibling("step"))
-		{
-			newdialogue->DialogueSteps.push_back(new DialogueStep());
-			DialogueStep* newdialoguestep = newdialogue->DialogueSteps.back();
-			newdialoguestep->listener = CheckInterlocutor(&std::string(newcutscenesteps.attribute("listener").as_string()));
-			newdialoguestep->listener_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("listener_pos").as_string()));
-			newdialoguestep->speaker = CheckInterlocutor(&std::string(newcutscenesteps.attribute("speaker").as_string()));
-			newdialoguestep->speaker_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("speaker_pos").as_string()));
-			for (pugi::xml_node newcutscenesteplines = newcutscenesteps.child("line"); newcutscenesteplines; newcutscenesteplines = newcutscenesteplines.next_sibling("line"))
-			{
-				newdialoguestep->lines.push_back(std::string(newcutscenesteplines.child_value()));
-			}
-		}
+		
 		*/
 	}
 }
@@ -244,6 +216,7 @@ void j1DialogueManager::ActivateDialogue(DialogueID id)
 		{
 			ActiveDialog->ActiveDialoguePtr = *item;
 			ActiveDialog->ActiveDialogueStepPtr = (*item)->DialogueSteps.front();
+			SetCharacterBlit();
 		}
 }
 
@@ -253,7 +226,10 @@ void j1DialogueManager::DialogueNextStep()
 		if ((*item) == ActiveDialog->ActiveDialogueStepPtr)
 		{
 			if ((*item) != ActiveDialog->ActiveDialoguePtr->DialogueSteps.back())
+			{
 				ActiveDialog->ActiveDialogueStepPtr = *(++item);
+				SetCharacterBlit();
+			}
 			else //if it the last step, quit and clean
 			{
 				ActiveDialog->DialogueActive = false;
@@ -262,6 +238,18 @@ void j1DialogueManager::DialogueNextStep()
 			}
 			return;
 		}
+}
+
+void j1DialogueManager::SetCharacterBlit()
+{
+	if (ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->DialogueCharacter_pos == DialogueInterlucutorPosition::Left)
+		LeftCharacterLabel->EditButtonStr(&ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->DialogueCharacter_str);
+	else
+		RightCharacterLabel->EditButtonStr(&ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->DialogueCharacter_str);
+	if (ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->DialogueCharacter_pos == DialogueInterlucutorPosition::Left)
+		LeftCharacterLabel->EditButtonStr(&ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->DialogueCharacter_str);
+	else
+		RightCharacterLabel->EditButtonStr(&ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->DialogueCharacter_str);
 }
 
 void j1DialogueManager::OnGui(Gui* ui, GuiEvent event)
@@ -286,7 +274,8 @@ DialogueStep::DialogueStep()
 
 DialogueStep::~DialogueStep()
 {
-
+	delete SpeakerDialogueCharacter;
+	delete ListenerDialogueCharacter;
 }
 
 Dialogue::Dialogue()
@@ -317,6 +306,16 @@ DialogueInterlucutorStrRelation::DialogueInterlucutorStrRelation(std::string* st
 }
 
 DialogueInterlucutorStrRelation::~DialogueInterlucutorStrRelation()
+{
+
+}
+
+DialogueCharacter::DialogueCharacter()
+{
+
+}
+
+DialogueCharacter::~DialogueCharacter()
 {
 
 }
