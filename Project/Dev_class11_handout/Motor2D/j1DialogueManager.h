@@ -69,7 +69,7 @@ struct DialogueStep
 	~DialogueStep();
 	DialogueCharacter* SpeakerDialogueCharacter = nullptr;
 	DialogueCharacter* ListenerDialogueCharacter = nullptr;
-	std::vector<std::string> lines;
+	std::vector<GuiLabel*> lines;
 };
 
 struct Dialogue
@@ -109,7 +109,7 @@ public:
 	void ActivateDialogue(DialogueID id);
 
 private:
-	void AllocateDialogues(pugi::xml_node& dialoguenode);
+	void AllocateDialogues(pugi::xml_node& dialoguenode, iPoint* TextBackgroundPos);
 	bool BlitDialog(uint id, uint state);
 	DialogueInterlucutor CheckInterlocutor(std::string* interlocutor_str);
 	DialogueInterlucutorPosition CheckInterlocutorPosition(std::string* interlocutor_position_str);

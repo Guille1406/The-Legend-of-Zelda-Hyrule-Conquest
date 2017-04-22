@@ -8,6 +8,7 @@
 #include "j1Fonts.h"
 
 #include "GuiImage.h"
+#include "GuiLabel.h"
 #include "GuiButton.h"
 
 j1DialogueManager::j1DialogueManager() : j1Module()
@@ -77,7 +78,7 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("guard"), DialogueInterlucutor::Guard));
 
 		//Allocate dialogues from XML
-		AllocateDialogues(dialogue_config);
+		AllocateDialogues(dialogue_config, &TextBackground->GetLocalPos());
 	}
 
 	ActiveDialog = new ActiveDialogue();
@@ -85,7 +86,7 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 	return ret;
 }
 
-void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
+void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode, iPoint* TextBackgroundPos)
 {
 	//Allocate dialogues from XML
 	//itereate cutscenes
@@ -107,9 +108,11 @@ void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
 			newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_id = CheckInterlocutor(&std::string(newcutscenesteps.attribute("listener").as_string()));
 			newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_str = std::string(newcutscenesteps.attribute("listener").as_string());
 			newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("listener_pos").as_string()));
-			for (pugi::xml_node newcutscenesteplines = newcutscenesteps.child("line"); newcutscenesteplines; newcutscenesteplines = newcutscenesteplines.next_sibling("line"))
+			int y = 0;
+			for (pugi::xml_node newcutscenesteplines = newcutscenesteps.child("line"); newcutscenesteplines; newcutscenesteplines = newcutscenesteplines.next_sibling("line"), y += 30)
 			{
-				newdialoguestep->lines.push_back(std::string(newcutscenesteplines.child_value()));
+				newdialoguestep->lines.push_back(App->gui->CreateLabel({TextBackgroundPos->x + 60,TextBackgroundPos->y + 60 + y }, &std::string(newcutscenesteplines.child_value()), false, AddGuiTo::none));
+				newdialoguestep->lines.back()->SetFont(App->font->ReturnofGanon36);
 			}
 		}
 	}
@@ -167,9 +170,6 @@ bool j1DialogueManager::Update(float dt)
 	if (!ActiveDialog->DialogueActive)
 		return true;
 
-	if ((App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_DOWN) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_DOWN))
-		DialogueNextStep();
-
 	//Blit Dark background
 	App->render->DrawQuad(WindowRect, Black(0), Black(1), Black(2), 80, true, false, false);
 
@@ -177,6 +177,13 @@ bool j1DialogueManager::Update(float dt)
 	TextBackground->DrawWithAlternativeAtlas(App->hud->GetAtlas());
 	LeftCharacterLabel->DrawWithAlternativeAtlas(App->hud->GetAtlas());
 	RightCharacterLabel->DrawWithAlternativeAtlas(App->hud->GetAtlas());
+
+	//Blit text
+	for (std::vector<GuiLabel*>::iterator item = ActiveDialog->ActiveDialogueStepPtr->lines.begin(); item != ActiveDialog->ActiveDialogueStepPtr->lines.cend(); ++item)
+		(*item)->Draw();
+
+	if ((App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_DOWN) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_DOWN))
+		DialogueNextStep();
 
 	return true;
 }
@@ -276,6 +283,9 @@ DialogueStep::~DialogueStep()
 {
 	delete SpeakerDialogueCharacter;
 	delete ListenerDialogueCharacter;
+	for (std::vector<GuiLabel*>::iterator item = lines.begin(); item != lines.cend(); ++item)
+		RELEASE(*item);
+	lines.clear();
 }
 
 Dialogue::Dialogue()
