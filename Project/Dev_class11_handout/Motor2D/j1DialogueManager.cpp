@@ -108,10 +108,51 @@ void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
 			}
 		}
 	}
-	int i = 0;
 	//itereate NPCs
+	for (pugi::xml_node newcutscene = dialoguenode.child("NPCs").child("npc"); newcutscene; newcutscene = newcutscene.next_sibling("npc"))
+	{
+		/*
+		dialogues.push_back(new Dialogue());
+		Dialogue* newdialogue = dialogues.back();
+		newdialogue->id = (DialogueID)newcutscene.attribute("enum_value").as_int(0);
+		for (pugi::xml_node newcutscenesteps = newcutscene.child("step"); newcutscenesteps; newcutscenesteps = newcutscenesteps.next_sibling("step"))
+		{
+			newdialogue->DialogueSteps.push_back(new DialogueStep());
+			DialogueStep* newdialoguestep = newdialogue->DialogueSteps.back();
+			newdialoguestep->listener = CheckInterlocutor(&std::string(newcutscenesteps.attribute("listener").as_string()));
+			newdialoguestep->listener_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("listener_pos").as_string()));
+			newdialoguestep->speaker = CheckInterlocutor(&std::string(newcutscenesteps.attribute("speaker").as_string()));
+			newdialoguestep->speaker_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("speaker_pos").as_string()));
+			for (pugi::xml_node newcutscenesteplines = newcutscenesteps.child("line"); newcutscenesteplines; newcutscenesteplines = newcutscenesteplines.next_sibling("line"))
+			{
+				newdialoguestep->lines.push_back(std::string(newcutscenesteplines.child_value()));
+			}
+		}
+		*/
+	}
 
 	//itereate items
+	for (pugi::xml_node newcutscene = dialoguenode.child("Items").child("item"); newcutscene; newcutscene = newcutscene.next_sibling("item"))
+	{
+		/*
+		dialogues.push_back(new Dialogue());
+		Dialogue* newdialogue = dialogues.back();
+		newdialogue->id = (DialogueID)newcutscene.attribute("enum_value").as_int(0);
+		for (pugi::xml_node newcutscenesteps = newcutscene.child("step"); newcutscenesteps; newcutscenesteps = newcutscenesteps.next_sibling("step"))
+		{
+			newdialogue->DialogueSteps.push_back(new DialogueStep());
+			DialogueStep* newdialoguestep = newdialogue->DialogueSteps.back();
+			newdialoguestep->listener = CheckInterlocutor(&std::string(newcutscenesteps.attribute("listener").as_string()));
+			newdialoguestep->listener_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("listener_pos").as_string()));
+			newdialoguestep->speaker = CheckInterlocutor(&std::string(newcutscenesteps.attribute("speaker").as_string()));
+			newdialoguestep->speaker_pos = CheckInterlocutorPosition(&std::string(newcutscenesteps.attribute("speaker_pos").as_string()));
+			for (pugi::xml_node newcutscenesteplines = newcutscenesteps.child("line"); newcutscenesteplines; newcutscenesteplines = newcutscenesteplines.next_sibling("line"))
+			{
+				newdialoguestep->lines.push_back(std::string(newcutscenesteplines.child_value()));
+			}
+		}
+		*/
+	}
 }
 
 DialogueInterlucutor j1DialogueManager::CheckInterlocutor(std::string* interlocutor_str)
