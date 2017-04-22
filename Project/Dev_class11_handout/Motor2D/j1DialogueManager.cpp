@@ -20,6 +20,9 @@ j1DialogueManager::~j1DialogueManager()
 	for (std::vector<Dialogue*>::iterator item = dialogues.begin(); item != dialogues.cend(); ++item)
 		RELEASE(*item);
 	dialogues.clear();
+	for (std::vector<DialogueInterlucutorStrRelation*>::iterator item = DialogueInterlucutorStrRelationVec.begin(); item != DialogueInterlucutorStrRelationVec.cend(); ++item)
+		RELEASE(*item);
+	DialogueInterlucutorStrRelationVec.clear();
 	RELEASE(ActiveDialog);
 	RELEASE(TextBackground);
 	RELEASE(LeftCharacterLabel);
@@ -53,9 +56,6 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 
 	if (ret == true)
 	{
-		//Allocate dialogues from XML
-		AllocateDialogues(dialogue_config);
-
 		//Set drawing areas and dialogue hud gui
 		SDL_Rect TextBackgroundRect = { 0,94,1233,231 };
 		TextBackground = App->gui->CreateImage({ 23,WindowRect.h - TextBackgroundRect.h - 11 }, &TextBackgroundRect, false, AddGuiTo::none);
@@ -67,6 +67,17 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 		SDL_Rect RightCharacterLabelRect = { 336,0,336,94 };
 		RightCharacterLabel = App->gui->CreateButton(iPoint(WindowRect.w - RightCharacterLabelRect.w - 5, WindowRect.h - TextBackgroundRect.h - 11 - (int)(LeftCharacterLabelRect.h * 0.5f)), &std::string("Right Guy"), ButtonType::idle_only, &RightCharacterLabelRect, false, AddGuiTo::none);
 		RightCharacterLabel->SetFont(App->font->ReturnofGanon36);
+
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("item_nullinterlucutor"), DialogueInterlucutor::item_nullinterlucutor));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("king"), DialogueInterlucutor::King));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("link"), DialogueInterlucutor::Link));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("zelda"), DialogueInterlucutor::Zelda));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("messenger"), DialogueInterlucutor::Messenger));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("ric"), DialogueInterlucutor::Ric));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("guard"), DialogueInterlucutor::Guard));
+
+		//Allocate dialogues from XML
+		AllocateDialogues(dialogue_config);
 	}
 
 	ActiveDialog = new ActiveDialogue();
@@ -97,6 +108,7 @@ void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
 			}
 		}
 	}
+	int i = 0;
 	//itereate NPCs
 
 	//itereate items
@@ -104,11 +116,16 @@ void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode)
 
 DialogueInterlucutor j1DialogueManager::CheckInterlocutor(std::string* interlocutor_str)
 {
+	for (std::vector<DialogueInterlucutorStrRelation*>::iterator item = DialogueInterlucutorStrRelationVec.begin(); item != DialogueInterlucutorStrRelationVec.cend(); ++item)
+		if ((*item)->DialogueInterlucutorStr == *interlocutor_str)
+			return (*item)->DialogueInterlucutorEnum;
 	return DialogueInterlucutor::item_nullinterlucutor;
 }
 
 DialogueInterlucutorPosition j1DialogueManager::CheckInterlocutorPosition(std::string* interlocutor_position_str)
 {
+	if(*interlocutor_position_str == right_str)
+		return DialogueInterlucutorPosition::Right;
 	return DialogueInterlucutorPosition::Left;
 }
 
@@ -241,6 +258,16 @@ ActiveDialogue::ActiveDialogue()
 }
 
 ActiveDialogue::~ActiveDialogue()
+{
+
+}
+
+DialogueInterlucutorStrRelation::DialogueInterlucutorStrRelation(std::string* str, DialogueInterlucutor enu) : DialogueInterlucutorStr(*str), DialogueInterlucutorEnum(enu)
+{
+
+}
+
+DialogueInterlucutorStrRelation::~DialogueInterlucutorStrRelation()
 {
 
 }

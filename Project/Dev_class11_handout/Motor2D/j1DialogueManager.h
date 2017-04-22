@@ -35,6 +35,7 @@ enum DialogueInterlucutor {
 	Zelda,
 	Messenger,
 	King,
+	Guard,
 	//NPC
 	Ric,
 	//None
@@ -44,6 +45,13 @@ enum DialogueInterlucutor {
 enum DialogueInterlucutorPosition {
 	Left,
 	Right
+};
+
+struct DialogueInterlucutorStrRelation {
+	DialogueInterlucutorStrRelation(std::string* str, DialogueInterlucutor enu);
+	~DialogueInterlucutorStrRelation();
+	std::string DialogueInterlucutorStr = empty_char;
+	DialogueInterlucutor DialogueInterlucutorEnum = DialogueInterlucutor::item_nullinterlucutor;
 };
 
 struct DialogueStep
@@ -104,6 +112,7 @@ private:
 	SDL_Rect WindowRect = { 0,0,0,0 };
 
 	std::vector<Dialogue*> dialogues;
+	std::vector<DialogueInterlucutorStrRelation*> DialogueInterlucutorStrRelationVec;
 	ActiveDialogue* ActiveDialog = nullptr;
 
 	std::string folder = empty_char;

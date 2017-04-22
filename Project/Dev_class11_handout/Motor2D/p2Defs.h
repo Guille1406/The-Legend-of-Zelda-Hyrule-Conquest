@@ -68,11 +68,12 @@ inline const char* const PATH(const char* folder, const char* file)
 
 //some usefull str
 //doing that, they are created only one time
-const static std::string empty_char = "";
-const static std::string password_char = "*";
-const static std::string true_str = "true";
-const static std::string false_str = "false";
-
+static const std::string empty_char = "";
+static const std::string password_char = "*";
+static const std::string true_str = "true";
+static const std::string false_str = "false";
+static const std::string left_str = "left";
+static const std::string right_str = "right";
 
 static const SDL_Rect rect_button = { 0,0,32,32 };
 static const SDL_Rect rect_pressed_button = { 192,64,32,32 };
@@ -104,7 +105,6 @@ static const SDL_Rect rect_arrow_up = {158,96,10,30};
 static const SDL_Rect rect_arrow_down = { 168,96,10,30 };
 static const SDL_Rect rect_arrow_left = { 128,106,30,10 };
 static const SDL_Rect rect_arrow_right =  {128, 96, 30, 10};
-
 
 static const SDL_Rect rect_diana_right_idle = { 192,176,32,32 };
 static const SDL_Rect rect_diana_right_active = { 192,208,32,32 };
