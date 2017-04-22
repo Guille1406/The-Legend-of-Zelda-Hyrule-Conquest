@@ -329,7 +329,7 @@ void Enemy::Direction_Push_Election_ChSoldier()
 }
 
 void Enemy::Rang_Player() {
-	this->player_in_range = nullptr;
+	//this->player_in_range = nullptr;
 	iPoint dist;
 	dist.x = App->player->Link->pos.x - this->pix_world_pos.x;
 	dist.y = App->player->Link->pos.y - this->pix_world_pos.y;
@@ -362,7 +362,11 @@ void Enemy::Rang_Player() {
 			}
 		}
 	}
-	
+	else {
+		if (type == enemyType::hyrulebombsoldier_enemy) {
+			this->player_in_range = nullptr;
+		}
+	}
 
 }
 
@@ -486,7 +490,7 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collision_type)
 		if (collision_type->type == COLLIDER_TYPE::collider_link_sword) {
 			if (live > 0) {
 				if (App->player->Link->link_sword_impact_sword == false && App->player->Link->Compare_Link_Sword_Collision(this) == false) {
-					//App->player->Link->enemy_col_sword_sword_timer.Start();
+					App->player->Link->enemy_col_sword_sword_timer.Start();
 					state = EnemyState::push_back_enemy;
 					enemy_doing_script = true;
 					App->audio->PlayFx(App->enemy->enemy_dies_audio);
@@ -528,7 +532,6 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collision_type)
 
 				}
 			if (live > 0 ) {
-				//need to know how work direction of arrows
 				if (hit == true) {
 					live--;
 					hit = false;

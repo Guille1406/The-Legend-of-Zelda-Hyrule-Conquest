@@ -57,6 +57,5 @@ void HyruleBombSoldier_Enemy::Action()
 	
 
 	}
-	
 }
 
