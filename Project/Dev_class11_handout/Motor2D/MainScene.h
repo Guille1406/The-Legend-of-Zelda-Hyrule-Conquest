@@ -32,6 +32,7 @@ enum Scene_ID {
 	//Maps
 	map,
 	world,
+	tempbossroom,
 	dungeon,
 	Send, 
 

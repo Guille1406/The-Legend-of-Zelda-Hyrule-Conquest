@@ -75,6 +75,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="ChampionSoldier_Enemy.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Color.cpp" />
@@ -135,10 +136,12 @@
     <ClCompile Include="S_OptionsVideo.cpp" />
     <ClCompile Include="S_QuitGame.cpp" />
     <ClCompile Include="S_World.cpp" />
+    <ClCompile Include="S_Temporal_Boss_Room.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="A_Move.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="ChampionSoldier_Enemy.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Color.h" />
@@ -219,6 +222,7 @@
     <ClInclude Include="S_QuitGame.h" />
     <ClInclude Include="S_World.h" />
     <ClInclude Include="O_Switch.h" />
+    <ClInclude Include="S_Temporal_Boss_Room.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Game\config.xml" />

@@ -27,7 +27,10 @@ bool S_World::Start()
 	App->map->Enable();
 	App->player->Enable();
 	App->object->Enable();
+	
 
+	
+	
 	//PAUSE FALSE
 	App->player->paused = false;
 	App->enemy->paused = false;
@@ -80,6 +83,7 @@ bool S_World::Start()
 
 bool S_World::Update()
 {
+	
 	if (!App->player->paused)
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 			App->player->loop_game_menu = true;
@@ -88,7 +92,9 @@ bool S_World::Update()
 
 bool S_World::PostUpdate()
 {
-
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
+		App->scene->ChangeScene(Scene_ID::tempbossroom);
+	}
 	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
 		
 		App->scene->ChangeScene(Scene_ID::Send);	

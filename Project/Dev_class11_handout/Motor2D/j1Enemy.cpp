@@ -95,6 +95,7 @@ bool j1Enemy::PostUpdate()
 
 bool j1Enemy::CleanUp()
 {
+	delete Final_Boss;
 	for (int i = 0; i < V_MyEnemies.size(); i++)
 	{
 		App->tex->UnLoad(V_MyEnemies[i]->entity_texture);

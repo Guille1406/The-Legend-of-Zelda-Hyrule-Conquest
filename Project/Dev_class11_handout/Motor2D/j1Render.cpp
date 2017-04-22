@@ -183,6 +183,12 @@ void j1Render::Draw()
 		if(App->object->active)
 		App->object->Draw(i);
 
+		if (App->enemy->Final_Boss != nullptr) {
+			if (App->enemy->Final_Boss->im_active) {
+				App->enemy->Final_Boss->Draw(i);
+			}
+		}
+
 		for (int n = 0; n < 100; n++) {
 			if (App->enemy->active)
 				App->enemy->Draw(i,n);

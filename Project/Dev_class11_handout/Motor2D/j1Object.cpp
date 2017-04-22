@@ -392,6 +392,28 @@ Object * j1Object::CreateJump(pugi::xml_node object, int height)
 	return ret;
 }
 
+Object * j1Object::CreateJump(SDL_Rect rect, int height)
+{
+
+	Jump temp_jump;
+	int x = rect.x;
+	int y = rect.y;
+	int w = rect.w;
+	int h = rect.h;
+	temp_jump.logic_height = height;
+	temp_jump.name = "boss_jump";
+	temp_jump.rect = { x,y,w,h };
+	temp_jump.type = objectType::object_jump;
+	temp_jump.active = true;
+
+
+	Object* ret = new Jump(temp_jump);
+	ret->collider = App->collision->AddCollider({ ret->rect }, collider_jump, (Entity*)ret, this);
+	V_Objects.push_back(ret);
+	return ret;
+}
+
+
 
 void Entity::LoadAnimation(const char* path)
 {

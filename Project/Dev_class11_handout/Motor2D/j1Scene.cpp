@@ -22,6 +22,7 @@
 
 #include "S_World.h"
 #include "S_Dungeon.h"
+#include "S_Temporal_Boss_Room.h"
 #include "S_MainMenu.h"
 #include "S_Campaign.h"
 #include "S_Options.h"
@@ -85,6 +86,11 @@ bool j1Scene::Start()
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::world;
+	scene_pointer = nullptr;
+	scene_pointer = new S_TempBossRoom;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::tempbossroom;
 	scene_pointer = new S_Dungeon;
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
@@ -189,6 +195,7 @@ bool j1Scene::ChangeScene(Scene_ID name)
 	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
 		if ((*item)->scene_name == name)
 		{
+			if(*item != main_active_scene)
 			main_active_scene->Clean();
 			main_active_scene = *item;
 			return true;

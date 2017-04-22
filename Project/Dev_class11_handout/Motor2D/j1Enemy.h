@@ -6,6 +6,7 @@
 #include"j1Object.h"
 #include"p2Point.h"
 #include"Character.h"
+#include "Boss.h"
 enum COLLIDER_TYPE;
 class Green_Enemy;
 #define RANG 150
@@ -110,6 +111,7 @@ public:
 	uint one_time_appear = 0;
 	uint enemy_dies_audio=0;
 	uint enemy_pathfinding_audio = 0;
+	Boss* Final_Boss = nullptr;
 };
 
 #endif

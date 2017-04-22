@@ -90,6 +90,7 @@ public:
 	Object* CreateText(pugi::xml_node, int height);
 	Object* CreateChangeHeight(pugi::xml_node object, int height);
 	Object* CreateJump(pugi::xml_node object, int height);
+	Object* CreateJump(SDL_Rect rect, int height);
 	Object* CreateDoor(pugi::xml_node object, int height);
 	Object* CreateWarp(pugi::xml_node, int height);
 
