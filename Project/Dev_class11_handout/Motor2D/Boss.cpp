@@ -321,6 +321,7 @@ void Boss::Attack()
 				i = 0;
 				attacking_foot->actual_foot_state = foot_idle;
 				im_attacking = false;
+				attacking_foot->logic_height = 0;
 			}
 		}
 		
