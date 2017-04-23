@@ -68,6 +68,7 @@ void HyruleBombSoldier_Enemy::Action()
 				if (bomb->bomb_explosion ==false) {
 					bomb->rang_bomb = { bomb_point.x-25 ,bomb_point.y-25, 50,50 };
 					bomb->bomb_collider_explosion = App->collision->AddCollider(bomb->rang_bomb, COLLIDER_TYPE::coolider_bomb_explosion, this, App->enemy);
+					bomb->bomb_collider_explosion->logic_height = 0;
 					bomb->Explosion_delay.Start();
 					bomb->bomb_explosion = true;
 				}

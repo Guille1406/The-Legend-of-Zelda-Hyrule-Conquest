@@ -511,6 +511,21 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			//}
 		}
 	}
+
+	//Bomb explosion Collider doesn't detect the collision with Link
+
+	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::coolider_bomb_explosion) {
+		Link->actual_event = player_event::push_backwards;
+		Link->doing_script = true;
+		Link->Direction_Push_Election();
+		half_hearts_test_purpose--;
+	}
+	else if (collider1->type == COLLIDER_TYPE::coolider_bomb_explosion && collider2->type == COLLIDER_TYPE::collider_link) {
+		Link->actual_event = player_event::push_backwards;
+		Link->doing_script = true;
+		Link->Direction_Push_Election();
+		half_hearts_test_purpose--;
+	}
 	
 }
 

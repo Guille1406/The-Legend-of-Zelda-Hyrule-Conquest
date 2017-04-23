@@ -76,6 +76,8 @@ j1Collision::j1Collision()
 
 	matrix[coolider_bomb_explosion][collider_link] = true;
 	matrix[coolider_bomb_explosion][collider_zelda] = true;
+	matrix[collider_link][coolider_bomb_explosion] = true;
+	matrix[collider_zelda][coolider_bomb_explosion] = true;
 }
 
 // Destructor
