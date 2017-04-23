@@ -164,7 +164,10 @@ void Boss::Move()
 			player_point = { centre_pos.x - link_pos.x ,  centre_pos.y - link_pos.y };
 			module = sqrt(player_point.x * player_point.x + player_point.y * player_point.y);
 			player_point = { (int)((player_point.x / module) * 64),(int)((player_point.y / module) * 64) };
-
+			legs->foot1->logic_height = 1;
+			legs->foot3->logic_height = 1;
+			legs->foot2->logic_height = 0;
+			legs->foot4->logic_height = 0;
 		}
 		legs->foot1->pos = { (int)(first_point.x - player_point.x * (count / time)),(int)(first_point.y - player_point.y * (count / time)) };
 		legs->foot3->pos = { (int)(second_point.x - player_point.x * (count / time)),(int)(second_point.y - player_point.y * (count / time)) };
@@ -173,7 +176,8 @@ void Boss::Move()
 	if (moving_state == 1) {
 		if (count == 0) {
 			first_point = pos;
-
+			legs->foot1->logic_height = 0;
+			legs->foot3->logic_height = 0;
 		}
 		pos = { (int)(first_point.x - player_point.x * (count / time)), (int)(first_point.y - player_point.y * (count / time)) };
 
@@ -182,6 +186,8 @@ void Boss::Move()
 		if (count == 0) {
 			first_point = legs->foot2->pos;
 			second_point = legs->foot4->pos;
+			legs->foot2->logic_height = 1;
+			legs->foot4->logic_height = 1;
 
 
 		}
@@ -264,6 +270,7 @@ void Boss::Attack()
 			inc_x = (float)(start_foot_point.x - attacking_foot->pos.x) / 40;
 			inc_y = (float)((start_foot_point.y) - attacking_foot->pos.y) / 40;
 			i = 0;
+			attacking_foot->logic_height = 1;
 		}
 
 		if (i <20 && attacking_foot->actual_foot_state == charging) {
@@ -271,6 +278,7 @@ void Boss::Attack()
 			inc_y = (float)((App->player->Link->pos.y - 100) - temp_point.y) / 20;
 			f_foot_pos = { f_foot_pos.x + inc_x, f_foot_pos.y + inc_y };
 			i++;
+			attacking_foot->logic_height = 1;
 			if (i == 20) {
 				i = 0;
 				attacking_foot->actual_foot_state = following;
@@ -290,6 +298,7 @@ void Boss::Attack()
 		if (i < 10 && attacking_foot->actual_foot_state == attacking) {
 			f_foot_pos = { f_foot_pos.x + inc_x, f_foot_pos.y + inc_y };
 			i++;
+			attacking_foot->logic_height = 0;
 			if (i == 10) {
 				i = 0;
 				static_foot_time.Start();
@@ -307,6 +316,7 @@ void Boss::Attack()
 		if ( i < 40 && attacking_foot->actual_foot_state == back_to_start) {
 			f_foot_pos = { f_foot_pos.x + inc_x, f_foot_pos.y + inc_y };
 			i++;
+			attacking_foot->logic_height = 1;
 			if (i == 40) {
 				i = 0;
 				attacking_foot->actual_foot_state = foot_idle;
