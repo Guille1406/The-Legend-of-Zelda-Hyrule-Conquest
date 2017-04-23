@@ -60,7 +60,7 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 		RightCharacterLabel = App->gui->CreateButton(iPoint(WindowRect.w - RightCharacterLabelRect.w - 5, WindowRect.h - TextBackgroundRect.h - 11 - (int)(LeftCharacterLabelRect.h * 0.5f)), &std::string("Right Guy"), ButtonType::idle_only, &RightCharacterLabelRect, false, AddGuiTo::none);
 		RightCharacterLabel->SetFont(App->font->ReturnofGanon36);
 
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("item_nullinterlucutor"), DialogueInterlucutor::item_nullinterlucutor));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string(""), DialogueInterlucutor::item_nullinterlucutor));
 		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("king"), DialogueInterlucutor::King));
 		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("link"), DialogueInterlucutor::Link));
 		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("zelda"), DialogueInterlucutor::Zelda));
@@ -146,13 +146,28 @@ bool j1DialogueManager::PreUpdate()
 bool j1DialogueManager::Update(float dt)
 {
 	//Test code
+	//Different dialogues
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		App->dialoguemanager->ActivateDialogue(DialogueID::castle_intro);
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+		App->dialoguemanager->ActivateDialogue(DialogueID::castle_sewers_entrance);
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+		App->dialoguemanager->ActivateDialogue(DialogueID::castle_sewers_exit);
+	//Pause/resume dialogue
+	if (App->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
+		PauseActiveDialogue();
 	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+		ResumeActiveDialogue();
+	/*
+	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+	{
 		ActiveDialog->DialogueActive = false;
+		ActiveDialog->DialoguePaused = false;
+	}
+	*/
 	//Test code end
 
-	if (!ActiveDialog->DialogueActive)
+	if (!ActiveDialog->DialogueActive || ActiveDialog->DialoguePaused)
 		return true;
 
 	//Blit Dark background
@@ -193,26 +208,10 @@ bool j1DialogueManager::CleanUp()
 	return true;
 }
 
-bool j1DialogueManager::BlitDialog(uint id, uint state)
-{
-	/*
-	//Find the correct ID
-	for (uint i = 0; i < dialogue.size(); i++)
-		if (dialogue[i]->id == id)
-			for (uint j = 0; (j + dialogueStep) < dialogue[i]->DialogueSteps.size(); j++) //Search correct text inside Dialogue
-				if (dialogue[i]->DialogueSteps[dialogueStep + j]->state == state)
-				{
-					//for (uint k = 0; k < dialog[i]->texts[dialogueStep + j]->lines.size(); k++)
-					//text_on_screen->Set_String((char*)dialog[i]->texts[dialogueStep+j]->line->c_str());
-					return true;
-				}
-	*/
-	return false;
-}
-
 void j1DialogueManager::ActivateDialogue(DialogueID id)
 {
 	ActiveDialog->DialogueActive = true;
+	ActiveDialog->DialoguePaused = false;
 	for (std::vector<Dialogue*>::iterator item = dialogues.begin(); item != dialogues.cend(); ++item)
 		if ((*item)->id == id)
 		{
@@ -220,6 +219,18 @@ void j1DialogueManager::ActivateDialogue(DialogueID id)
 			ActiveDialog->ActiveDialogueStepPtr = (*item)->DialogueSteps.front();
 			SetCharacterBlit();
 		}
+}
+
+void j1DialogueManager::PauseActiveDialogue()
+{
+	if(ActiveDialog->DialogueActive == true)
+		ActiveDialog->DialoguePaused = true;
+}
+
+void j1DialogueManager::ResumeActiveDialogue()
+{
+	if (ActiveDialog->DialogueActive == true)
+		ActiveDialog->DialoguePaused = false;
 }
 
 void j1DialogueManager::DialogueNextStep()
@@ -235,6 +246,7 @@ void j1DialogueManager::DialogueNextStep()
 			else //if it the last step, quit and clean
 			{
 				ActiveDialog->DialogueActive = false;
+				ActiveDialog->DialoguePaused = false;
 				ActiveDialog->ActiveDialoguePtr = nullptr;
 				ActiveDialog->ActiveDialogueStepPtr = nullptr;
 			}

@@ -86,6 +86,7 @@ struct ActiveDialogue
 	ActiveDialogue();
 	~ActiveDialogue();
 	bool DialogueActive = false;
+	bool DialoguePaused = false;
 	Dialogue* ActiveDialoguePtr = nullptr;
 	DialogueStep* ActiveDialogueStepPtr = nullptr;
 };
@@ -107,11 +108,12 @@ public:
 	void OnConsoleCommand(const Command* command, const std::vector<std::string>& commandarguments);
 	void OnConsoleCVar(const CVar* cvar);
 	void ActivateDialogue(DialogueID id);
+	void PauseActiveDialogue();
+	void ResumeActiveDialogue();
 
 private:
 	void AllocateDialogues(pugi::xml_node& dialoguenode, iPoint* TextBackgroundPos);
 	void CreateDialogue(pugi::xml_node& dialoguenode, iPoint* TextBackgroundPos, DialogueType type);
-	bool BlitDialog(uint id, uint state);
 	DialogueInterlucutor CheckInterlocutor(std::string* interlocutor_str);
 	DialogueInterlucutorPosition CheckInterlocutorPosition(std::string* interlocutor_position_str);
 	void DialogueNextStep();
