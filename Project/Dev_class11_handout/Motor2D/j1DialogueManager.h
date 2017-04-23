@@ -10,7 +10,7 @@
 enum DialogueID {
 	//Cutscene Dialogue
 	castle_intro,
-	castle_sewers,
+	castle_sewers_entrance,
 	castle_sewers_exit,
 
 	//NPC Dialogue
