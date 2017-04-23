@@ -110,6 +110,7 @@ public:
 
 private:
 	void AllocateDialogues(pugi::xml_node& dialoguenode, iPoint* TextBackgroundPos);
+	void CreateDialogue(pugi::xml_node& dialoguenode, iPoint* TextBackgroundPos, DialogueType type);
 	bool BlitDialog(uint id, uint state);
 	DialogueInterlucutor CheckInterlocutor(std::string* interlocutor_str);
 	DialogueInterlucutorPosition CheckInterlocutorPosition(std::string* interlocutor_position_str);
