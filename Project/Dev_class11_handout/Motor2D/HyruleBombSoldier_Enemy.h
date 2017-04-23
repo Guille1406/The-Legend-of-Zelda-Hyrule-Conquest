@@ -4,10 +4,12 @@
 #include"j1Render.h"
 
 struct Enemy_Bomb {
-	int position;
-	Collider bomb_collider_explosion;
-	SDL_Rect texture_bomb_rect;
+	iPoint position = { 0,0 };
+	SDL_Rect rang_bomb = {0,0,0,0};
+	Collider *bomb_collider_explosion = nullptr;
+	SDL_Rect texture_bomb_rect = {0,0,0,0};
 	j1Timer Explosion_delay;
+	bool bomb_explosion = false;
 
 };
 
@@ -29,7 +31,7 @@ public:
 	bool can_throw_bomb = true;
 	bool continue_path_bomb = false;
 	j1Timer bomb_timer;
-	//Enemy_Bomb bomb;
+	Enemy_Bomb *bomb;
 };
 
 
