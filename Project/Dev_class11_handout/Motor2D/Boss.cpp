@@ -120,28 +120,31 @@ void Boss::GetEvent()
 
 void Boss::ExecuteEvent()
 {
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && attacking_foot->actual_foot_state == after_attack) {
-		pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 + 32};
-		CreateColliders();
-		state = boss_damaged;
-		can_move = false;
-		can_attack = false;
-		logic_height = 0;
+	if (attacking_foot != nullptr) {
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && attacking_foot->actual_foot_state == after_attack) {
+			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 + 32 };
+			CreateColliders();
+			state = boss_damaged;
+			can_move = false;
+			can_attack = false;
+			logic_height = 0;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN && state == boss_damaged) {
+			DeleteColliders();
+			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 - 32 };
+			can_attack = true;
+			state = boss_idle;
+			logic_height = 1;
+			attacking_foot->actual_foot_state == back_to_start;
+		}
 	}
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN && state == boss_damaged) {
-		DeleteColliders();
-		pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 - 32 };
-		can_attack = true;
-		state = boss_idle;
-		logic_height = 1;
-		attacking_foot->actual_foot_state == back_to_start;
-	}
-	if (state == boss_move) {
-		attacking_foot = nullptr;
-		Move();
-	}
-	if (state == boss_attack) {
-		Attack();
+		if (state == boss_move) {
+			attacking_foot = nullptr;
+			Move();
+		}
+		if (state == boss_attack) {
+			Attack();
+		
 	}
 }
 
