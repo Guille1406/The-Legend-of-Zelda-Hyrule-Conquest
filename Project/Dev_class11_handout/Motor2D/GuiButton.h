@@ -22,6 +22,7 @@ public:
 	void Update(const Gui* mouse_hover, const Gui* focus);
 	void Draw();
 	void DrawWithAlternativeAtlas(SDL_Texture* alternativeatlas);
+	const std::string* GetLabelStr() const;
 	void EditButtonStr(std::string* newstr);
 	void SetFont(_TTF_Font* newfont);
 	void SetButtonColor(Color* newcolor);

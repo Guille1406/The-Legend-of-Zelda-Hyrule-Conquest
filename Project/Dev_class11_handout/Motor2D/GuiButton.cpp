@@ -154,3 +154,8 @@ void GuiButton::SetOpacity(uint newopacity)
 	opacity = newopacity;
 	ButtonString->SetOpacity(opacity);
 }
+
+const std::string* GuiButton::GetLabelStr() const
+{
+	return ButtonString->GetLabelStr();
+}
