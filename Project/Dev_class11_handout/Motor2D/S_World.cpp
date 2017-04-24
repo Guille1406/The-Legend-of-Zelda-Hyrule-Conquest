@@ -66,7 +66,7 @@ bool S_World::Start()
 			//App->map->CreateLogicMap();
 	}
 	
-	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 1);
+	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 0);
 	App->audio->VolumeMusic(100);
 
 	App->render->camera.x = 0;
