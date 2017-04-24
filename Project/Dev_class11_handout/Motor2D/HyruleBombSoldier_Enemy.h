@@ -3,7 +3,7 @@
 #include "j1Enemy.h"
 #include"j1Render.h"
 
-struct Enemy_Bomb {
+struct Enemy_Bomb : public Entity {
 	iPoint position = { 0,0 };
 	SDL_Rect rang_bomb = {0,0,0,0};
 	Collider *bomb_collider_explosion = nullptr;

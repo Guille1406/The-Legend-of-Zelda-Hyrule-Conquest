@@ -11,6 +11,7 @@
 #include"j1Enemy.h"
 #include "j1HUD.h"
 #include"j1Audio.h"
+#include"HyruleBombSoldier_Enemy.h"
 bool j1Player::Awake(pugi::xml_node& config)
 {
 	//This need to be cleaned
@@ -440,9 +441,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			//}
 		}
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_enemy && collider2->type == COLLIDER_TYPE::collider_link) {
-		Link->Collision_Sword_EnemySword();
-	}
+
 
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
@@ -518,12 +517,16 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		Link->actual_event = player_event::push_backwards;
 		Link->doing_script = true;
 		Link->Direction_Push_Election();
+		Enemy_Bomb* n_bomb = (Enemy_Bomb*)collider2->parent;
+		n_bomb->bomb_collider_explosion->to_delete = true;
 		half_hearts_test_purpose--;
 	}
-	else if (collider1->type == COLLIDER_TYPE::coolider_bomb_explosion && collider2->type == COLLIDER_TYPE::collider_link) {
-		Link->actual_event = player_event::push_backwards;
-		Link->doing_script = true;
-		Link->Direction_Push_Election();
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::coolider_bomb_explosion) {
+		Zelda->actual_event = player_event::push_backwards;
+		Zelda->doing_script = true;
+		Zelda->Direction_Push_Election();
+		Enemy_Bomb* n_bomb = (Enemy_Bomb*)collider2->parent;
+		n_bomb->bomb_collider_explosion->to_delete = true;
 		half_hearts_test_purpose--;
 	}
 	
