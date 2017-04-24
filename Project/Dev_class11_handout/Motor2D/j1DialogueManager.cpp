@@ -103,11 +103,17 @@ void j1DialogueManager::CreateDialogue(pugi::xml_node& dialoguenode, iPoint* Tex
 		DialogueStep* newdialoguestep = newdialogue->DialogueSteps.back();
 		newdialoguestep->SpeakerDialogueCharacter = new DialogueCharacter();
 		newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_id = CheckInterlocutor(&std::string(newstep.attribute("speaker").as_string()));
-		newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_str = std::string(newstep.attribute("speaker").as_string());
+		if(newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_id == DialogueInterlucutor::item_nullinterlucutor)
+			newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_str = std::string("");
+		else
+			newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_str = std::string(newstep.attribute("speaker").as_string());
 		newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_pos = CheckInterlocutorPosition(&std::string(newstep.attribute("speaker_pos").as_string()));
 		newdialoguestep->ListenerDialogueCharacter = new DialogueCharacter();
 		newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_id = CheckInterlocutor(&std::string(newstep.attribute("listener").as_string()));
-		newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_str = std::string(newstep.attribute("listener").as_string());
+		if (newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_id == DialogueInterlucutor::item_nullinterlucutor)
+			newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_str = std::string("");
+		else
+			newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_str = std::string(newstep.attribute("listener").as_string());
 		newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_pos = CheckInterlocutorPosition(&std::string(newstep.attribute("listener_pos").as_string()));
 		int y = 0;
 		for (pugi::xml_node newsteplines = newstep.child("line"); newsteplines; newsteplines = newsteplines.next_sibling("line"), y += 30)
@@ -175,8 +181,10 @@ bool j1DialogueManager::Update(float dt)
 
 	//Blit text background and Name labels
 	TextBackground->DrawWithAlternativeAtlas(App->hud->GetAtlas());
-	LeftCharacterLabel->DrawWithAlternativeAtlas(App->hud->GetAtlas());
-	RightCharacterLabel->DrawWithAlternativeAtlas(App->hud->GetAtlas());
+	if(*LeftCharacterLabel->GetLabelStr() != empty_char)
+		LeftCharacterLabel->DrawWithAlternativeAtlas(App->hud->GetAtlas());
+	if (*RightCharacterLabel->GetLabelStr() != empty_char)
+		RightCharacterLabel->DrawWithAlternativeAtlas(App->hud->GetAtlas());
 
 	//Blit text
 	for (std::vector<GuiLabel*>::iterator item = ActiveDialog->ActiveDialogueStepPtr->lines.begin(); item != ActiveDialog->ActiveDialogueStepPtr->lines.cend(); ++item)
