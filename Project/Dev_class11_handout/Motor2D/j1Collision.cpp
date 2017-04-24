@@ -20,6 +20,9 @@ j1Collision::j1Collision()
 	matrix[collider_link][collider_enemy] = true;
 	matrix[collider_link][collider_double_button] = true;
 	matrix[collider_link][collider_warp] = true;
+	matrix[collider_link][collider_fall] = true;
+	matrix[collider_link][coolider_bomb_explosion] = true;
+	matrix[collider_link][collider_colour_block] = true;
 	//FRONT LINK
 	matrix[front_link][collider_jump] = true;
 	matrix[front_link][collider_zelda] = true;
@@ -31,6 +34,9 @@ j1Collision::j1Collision()
 	matrix[collider_zelda][collider_enemy] = true;
 	matrix[collider_zelda][collider_warp] = true;
 	matrix[collider_zelda][collider_double_button] = true;
+	matrix[collider_zelda][collider_fall] = true;
+	matrix[collider_zelda][coolider_bomb_explosion] = true;
+	matrix[collider_zelda][collider_colour_block] = true;
 	//FRONT ZELDA
 	matrix[front_zelda][collider_jump] = true;
 
@@ -74,10 +80,18 @@ j1Collision::j1Collision()
 	matrix[collider_warp][collider_link] = true;
 	matrix[collider_warp][collider_zelda] = true;
 
+	//FALL
+	matrix[collider_fall][collider_link] = true;
+	matrix[collider_fall][collider_zelda] = true;
+
+	//BOMB EXPLOSION
 	matrix[coolider_bomb_explosion][collider_link] = true;
 	matrix[coolider_bomb_explosion][collider_zelda] = true;
-	matrix[collider_link][coolider_bomb_explosion] = true;
-	matrix[collider_zelda][coolider_bomb_explosion] = true;
+	
+	//COLOUR BLOCK
+	matrix[collider_colour_block][collider_link] = true;
+	matrix[collider_colour_block][collider_zelda] = true;
+	
 }
 
 // Destructor
@@ -219,6 +233,9 @@ void j1Collision::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, 255);
 			break;
 		case collider_change_height:
+			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
+			break;
+		case collider_colour_block:
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
 			break;
 		case collider_jump:

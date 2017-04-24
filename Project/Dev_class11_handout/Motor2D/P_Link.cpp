@@ -59,6 +59,8 @@ player_event P_Link::GetEvent()
 		can_jump = false;
 	}
 
+	can_fall = true;
+
 	if (doing_script == false) {
 
 		//EVENTS FOR GAMEPAD

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="100" tilewidth="16" tileheight="16" nextobjectid="592">
- <tileset firstgid="1" name="tileset cave" tilewidth="16" tileheight="16" tilecount="217" columns="57">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="100" tilewidth="16" tileheight="16" nextobjectid="596">
+ <tileset firstgid="1" name="tileset cave" tilewidth="16" tileheight="16" tilecount="1710" columns="57">
   <image source="tileset cave.png" width="912" height="480"/>
  </tileset>
  <layer name="Capa de patrones 0" width="70" height="100">
@@ -422,1135 +422,1143 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Tiles" offsetx="-16" offsety="-176">
+ <objectgroup name="Tiles">
   <properties>
-   <property name="Navigation" type="int" value="1"/>
+   <property name="Objects" type="int" value="1"/>
   </properties>
-  <object id="210" x="480" y="608" width="32" height="32">
+  <object id="210" name="blue" x="464" y="432" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="231" x="512" y="608" width="32" height="32">
+  <object id="231" name="green" x="496" y="432" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="232" x="544" y="608" width="32" height="32">
+  <object id="232" name="red" x="528" y="432" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="233" x="608" y="608" width="32" height="32">
+  <object id="233" name="orange" x="592" y="432" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="234" x="640" y="608" width="32" height="32">
+  <object id="234" name="blue" x="624" y="432" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="235" x="672" y="608" width="32" height="32">
+  <object id="235" name="orange" x="656" y="432" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="236" x="704" y="608" width="32" height="32">
+  <object id="236" name="green" x="688" y="432" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="237" x="736" y="608" width="32" height="32">
+  <object id="237" name="orange" x="720" y="432" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="239" x="672" y="640" width="32" height="32">
+  <object id="239" name="green" x="656" y="464" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="241" x="640" y="640" width="32" height="32">
+  <object id="241" name="red" x="624" y="464" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="242" x="704" y="640" width="32" height="32">
+  <object id="242" name="orange" x="688" y="464" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="243" x="544" y="640" width="32" height="32">
+  <object id="243" name="blue" x="528" y="464" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="244" x="608" y="640" width="32" height="32">
+  <object id="244" name="green" x="592" y="464" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="245" x="736" y="640" width="32" height="32">
+  <object id="245" name="red" x="720" y="464" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="247" x="672" y="672" width="32" height="32">
+  <object id="247" name="green" x="656" y="496" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="249" x="640" y="672" width="32" height="32">
+  <object id="249" name="red" x="624" y="496" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="250" x="704" y="672" width="32" height="32">
+  <object id="250" name="blue" x="688" y="496" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="251" x="544" y="672" width="32" height="32">
+  <object id="251" name="green" x="528" y="496" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="252" x="608" y="672" width="32" height="32">
+  <object id="252" name="green" x="592" y="496" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="253" x="736" y="672" width="32" height="32">
+  <object id="253" name="green" x="720" y="496" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="254" x="480" y="704" width="32" height="32">
+  <object id="254" name="green" x="464" y="528" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="255" x="672" y="704" width="32" height="32">
+  <object id="255" name="red" x="656" y="528" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="256" x="512" y="704" width="32" height="32">
+  <object id="256" name="orange" x="496" y="528" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="257" x="640" y="704" width="32" height="32">
+  <object id="257" name="green" x="624" y="528" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="258" x="704" y="704" width="32" height="32">
+  <object id="258" name="orange" x="688" y="528" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="259" x="544" y="704" width="32" height="32">
+  <object id="259" name="red" x="528" y="528" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="260" x="608" y="704" width="32" height="32">
+  <object id="260" name="green" x="592" y="528" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="261" x="736" y="704" width="32" height="32">
+  <object id="261" name="blue" x="720" y="528" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="262" x="736" y="800" width="32" height="32">
+  <object id="262" name="blue" x="720" y="624" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="263" x="512" y="832" width="32" height="32">
+  <object id="263" name="red" x="496" y="656" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="264" x="512" y="800" width="32" height="32">
+  <object id="264" name="orange" x="496" y="624" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="265" x="640" y="736" width="32" height="32">
+  <object id="265" name="orange" x="624" y="560" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="266" x="640" y="832" width="32" height="32">
+  <object id="266" name="green" x="624" y="656" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="267" x="672" y="736" width="32" height="32">
+  <object id="267" name="orange" x="656" y="560" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="268" x="736" y="768" width="32" height="32">
+  <object id="268" name="red" x="720" y="592" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="270" x="544" y="832" width="32" height="32">
+  <object id="270" name="orange" x="528" y="656" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="272" x="512" y="768" width="32" height="32">
+  <object id="272" name="green" x="496" y="592" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="274" x="512" y="736" width="32" height="32">
+  <object id="274" name="green" x="496" y="560" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="275" x="672" y="800" width="32" height="32">
+  <object id="275" name="red" x="656" y="624" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="276" x="672" y="832" width="32" height="32">
+  <object id="276" name="blue" x="656" y="656" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="277" x="672" y="768" width="32" height="32">
+  <object id="277" name="blue" x="656" y="592" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="278" x="640" y="800" width="32" height="32">
+  <object id="278" name="blue" x="624" y="624" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="279" x="480" y="736" width="32" height="32">
+  <object id="279" name="red" x="464" y="560" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="280" x="544" y="768" width="32" height="32">
+  <object id="280" name="blue" x="528" y="592" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="282" x="480" y="832" width="32" height="32">
+  <object id="282" name="red" x="464" y="656" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="283" x="704" y="800" width="32" height="32">
+  <object id="283" name="orange" x="688" y="624" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="284" x="704" y="768" width="32" height="32">
+  <object id="284" name="green" x="688" y="592" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="285" x="704" y="736" width="32" height="32">
+  <object id="285" name="green" x="688" y="560" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="287" x="544" y="800" width="32" height="32">
+  <object id="287" name="orange" x="528" y="624" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="288" x="736" y="736" width="32" height="32">
+  <object id="288" name="orange" x="720" y="560" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="289" x="640" y="768" width="32" height="32">
+  <object id="289" name="green" x="624" y="592" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="290" x="480" y="800" width="32" height="32">
+  <object id="290" name="red" x="464" y="624" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="291" x="544" y="736" width="32" height="32">
+  <object id="291" name="green" x="528" y="560" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="292" x="704" y="832" width="32" height="32">
+  <object id="292" name="green" x="688" y="656" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="293" x="480" y="768" width="32" height="32">
+  <object id="293" name="blue" x="464" y="592" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="294" x="736" y="928" width="32" height="32">
+  <object id="294" name="green" x="720" y="752" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="295" x="512" y="960" width="32" height="32">
+  <object id="295" name="green" x="496" y="784" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="296" x="512" y="928" width="32" height="32">
+  <object id="296" name="orange" x="496" y="752" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="297" x="640" y="864" width="32" height="32">
+  <object id="297" name="green" x="624" y="688" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="298" x="640" y="960" width="32" height="32">
+  <object id="298" name="red" x="624" y="784" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="299" x="672" y="864" width="32" height="32">
+  <object id="299" name="orange" x="656" y="688" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="300" x="736" y="896" width="32" height="32">
+  <object id="300" name="blue" x="720" y="720" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="301" x="608" y="896" width="32" height="32">
+  <object id="301" name="green" x="592" y="720" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="302" x="544" y="960" width="32" height="32">
+  <object id="302" name="green" x="528" y="784" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="303" x="608" y="960" width="32" height="32">
+  <object id="303" name="blue" x="592" y="784" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="304" x="512" y="896" width="32" height="32">
+  <object id="304" name="orange" x="496" y="720" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="306" x="512" y="864" width="32" height="32">
+  <object id="306" name="blue" x="496" y="688" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="307" x="672" y="928" width="32" height="32">
+  <object id="307" name="red" x="656" y="752" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="308" x="672" y="960" width="32" height="32">
+  <object id="308" name="blue" x="656" y="784" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="309" x="672" y="896" width="32" height="32">
+  <object id="309" name="red" x="656" y="720" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="310" x="640" y="928" width="32" height="32">
+  <object id="310" name="orange" x="624" y="752" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="311" x="480" y="864" width="32" height="32">
+  <object id="311" name="green" x="464" y="688" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="312" x="544" y="896" width="32" height="32">
+  <object id="312" name="green" x="528" y="720" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="313" x="608" y="928" width="32" height="32">
+  <object id="313" name="blue" x="592" y="752" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="315" x="704" y="928" width="32" height="32">
+  <object id="315" name="green" x="688" y="752" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="316" x="704" y="896" width="32" height="32">
+  <object id="316" name="green" x="688" y="720" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="317" x="704" y="864" width="32" height="32">
+  <object id="317" name="green" x="688" y="688" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="318" x="736" y="960" width="32" height="32">
+  <object id="318" name="red" x="720" y="784" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="319" x="544" y="928" width="32" height="32">
+  <object id="319" name="red" x="528" y="752" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="321" x="640" y="896" width="32" height="32">
+  <object id="321" name="green" x="624" y="720" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="323" x="544" y="864" width="32" height="32">
+  <object id="323" name="green" x="528" y="688" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="324" x="704" y="960" width="32" height="32">
+  <object id="324" name="green" x="688" y="784" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="325" x="480" y="896" width="32" height="32">
+  <object id="325" name="green" x="464" y="720" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="326" x="736" y="1056" width="32" height="32">
+  <object id="326" name="red" x="720" y="880" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="329" x="640" y="992" width="32" height="32">
+  <object id="329" name="green" x="624" y="816" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="330" x="640" y="1088" width="32" height="32">
+  <object id="330" name="green" x="624" y="912" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="331" x="672" y="992" width="32" height="32">
+  <object id="331" name="green" x="656" y="816" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="332" x="736" y="1024" width="32" height="32">
+  <object id="332" name="green" x="720" y="848" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="333" x="608" y="1024" width="32" height="32">
+  <object id="333" name="orange" x="592" y="848" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="334" x="544" y="1088" width="32" height="32">
+  <object id="334" name="blue" x="528" y="912" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="335" x="608" y="1088" width="32" height="32">
+  <object id="335" name="red" x="592" y="912" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="336" x="512" y="1024" width="32" height="32">
+  <object id="336" name="red" x="496" y="848" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="337" x="608" y="992" width="32" height="32">
+  <object id="337" name="green" x="592" y="816" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="338" x="512" y="992" width="32" height="32">
+  <object id="338" name="blue" x="496" y="816" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="340" x="672" y="1088" width="32" height="32">
+  <object id="340" name="red" x="656" y="912" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="341" x="672" y="1024" width="32" height="32">
+  <object id="341" name="orange" x="656" y="848" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="343" x="480" y="992" width="32" height="32">
+  <object id="343" name="green" x="464" y="816" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="344" x="544" y="1024" width="32" height="32">
+  <object id="344" name="green" x="528" y="848" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="345" x="608" y="1056" width="32" height="32">
+  <object id="345" name="blue" x="592" y="880" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="348" x="704" y="1024" width="32" height="32">
+  <object id="348" name="blue" x="688" y="848" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="349" x="704" y="992" width="32" height="32">
+  <object id="349" name="red" x="688" y="816" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="350" x="736" y="1088" width="32" height="32">
+  <object id="350" name="red" x="720" y="912" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="351" x="544" y="1056" width="32" height="32">
+  <object id="351" name="red" x="528" y="880" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="352" x="736" y="992" width="32" height="32">
+  <object id="352" name="orange" x="720" y="816" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="353" x="640" y="1024" width="32" height="32">
+  <object id="353" name="orange" x="624" y="848" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="355" x="544" y="992" width="32" height="32">
+  <object id="355" name="orange" x="528" y="816" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="356" x="704" y="1088" width="32" height="32">
+  <object id="356" name="red" x="688" y="912" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="357" x="480" y="1024" width="32" height="32">
+  <object id="357" name="blue" x="464" y="848" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="358" x="576" y="672" width="32" height="32">
+  <object id="358" name="blue" x="560" y="496" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="359" x="576" y="640" width="32" height="32">
+  <object id="359" name="green" x="560" y="464" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="362" x="640" y="1184" width="32" height="32">
+  <object id="362" name="green" x="624" y="1008" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="363" x="544" y="1216" width="32" height="32">
+  <object id="363" name="green" x="528" y="1040" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="364" x="608" y="1216" width="32" height="32">
+  <object id="364" name="green" x="592" y="1040" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="365" x="512" y="1152" width="32" height="32">
+  <object id="365" name="blue" x="496" y="976" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="366" x="544" y="1120" width="32" height="32">
+  <object id="366" name="red" x="528" y="944" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="367" x="672" y="1120" width="32" height="32">
+  <object id="367" name="blue" x="656" y="944" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="369" x="480" y="1216" width="32" height="32">
+  <object id="369" name="green" x="464" y="1040" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="370" x="480" y="1152" width="32" height="32">
+  <object id="370" name="green" x="464" y="976" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="371" x="672" y="1184" width="32" height="32">
+  <object id="371" name="red" x="656" y="1008" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="372" x="640" y="1120" width="32" height="32">
+  <object id="372" name="green" x="624" y="944" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="373" x="544" y="1184" width="32" height="32">
+  <object id="373" name="orange" x="528" y="1008" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="374" x="704" y="1184" width="32" height="32">
+  <object id="374" name="red" x="688" y="1008" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="375" x="640" y="1152" width="32" height="32">
+  <object id="375" name="orange" x="624" y="976" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="376" x="480" y="1184" width="32" height="32">
+  <object id="376" name="red" x="464" y="1008" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="377" x="544" y="1152" width="32" height="32">
+  <object id="377" name="green" x="528" y="976" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="378" x="608" y="1120" width="32" height="32">
+  <object id="378" name="blue" x="592" y="944" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="379" x="704" y="1120" width="32" height="32">
+  <object id="379" name="blue" x="688" y="944" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="380" x="512" y="1120" width="32" height="32">
+  <object id="380" name="green" x="496" y="944" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="381" x="672" y="1216" width="32" height="32">
+  <object id="381" name="blue" x="656" y="1040" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="382" x="512" y="1184" width="32" height="32">
+  <object id="382" name="red" x="496" y="1008" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="383" x="640" y="1216" width="32" height="32">
+  <object id="383" name="orange" x="624" y="1040" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="385" x="608" y="1184" width="32" height="32">
+  <object id="385" name="red" x="592" y="1008" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="386" x="672" y="1152" width="32" height="32">
+  <object id="386" name="orange" x="656" y="976" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="387" x="736" y="1152" width="32" height="32">
+  <object id="387" name="green" x="720" y="976" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="389" x="480" y="1120" width="32" height="32">
+  <object id="389" name="orange" x="464" y="944" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="390" x="704" y="1216" width="32" height="32">
+  <object id="390" name="blue" x="688" y="1040" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="391" x="736" y="1120" width="32" height="32">
+  <object id="391" name="orange" x="720" y="944" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="392" x="704" y="1152" width="32" height="32">
+  <object id="392" name="green" x="688" y="976" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="393" x="608" y="1152" width="32" height="32">
+  <object id="393" name="blue" x="592" y="976" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="394" x="576" y="704" width="32" height="32">
+  <object id="394" name="orange" x="560" y="528" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="395" x="576" y="896" width="32" height="32">
+  <object id="395" name="orange" x="560" y="720" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="416" x="576" y="1216" width="32" height="32">
+  <object id="416" name="blue" x="560" y="1040" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="417" x="576" y="992" width="32" height="32">
+  <object id="417" name="green" x="560" y="816" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="418" x="576" y="1088" width="32" height="32">
+  <object id="418" name="orange" x="560" y="912" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="419" x="576" y="1184" width="32" height="32">
+  <object id="419" name="orange" x="560" y="1008" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="420" x="576" y="1024" width="32" height="32">
+  <object id="420" name="red" x="560" y="848" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="421" x="576" y="928" width="32" height="32">
+  <object id="421" name="green" x="560" y="752" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="422" x="576" y="1152" width="32" height="32">
+  <object id="422" name="green" x="560" y="976" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="423" x="576" y="1120" width="32" height="32">
+  <object id="423" name="green" x="560" y="944" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="424" x="576" y="1056" width="32" height="32">
+  <object id="424" name="green" x="560" y="880" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="425" x="576" y="960" width="32" height="32">
+  <object id="425" name="orange" x="560" y="784" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="544" x="736" y="1280" width="32" height="32">
+  <object id="544" name="red" x="720" y="1104" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="545" x="672" y="1248" width="32" height="32">
+  <object id="545" name="green" x="656" y="1072" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="547" x="544" y="1280" width="32" height="32">
+  <object id="547" name="green" x="528" y="1104" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="549" x="480" y="1312" width="32" height="32">
+  <object id="549" name="orange" x="464" y="1136" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="550" x="512" y="1344" width="32" height="32">
+  <object id="550" name="green" x="496" y="1168" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="551" x="576" y="1312" width="32" height="32">
+  <object id="551" name="green" x="560" y="1136" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="552" x="480" y="1344" width="32" height="32">
+  <object id="552" name="blue" x="464" y="1168" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="553" x="480" y="1248" width="32" height="32">
+  <object id="553" name="red" x="464" y="1072" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="554" x="576" y="1248" width="32" height="32">
+  <object id="554" name="orange" x="560" y="1072" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="555" x="640" y="1344" width="32" height="32">
+  <object id="555" name="blue" x="624" y="1168" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="556" x="480" y="1280" width="32" height="32">
+  <object id="556" name="blue" x="464" y="1104" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="557" x="736" y="1248" width="32" height="32">
+  <object id="557" name="red" x="720" y="1072" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="558" x="608" y="1344" width="32" height="32">
+  <object id="558" name="green" x="592" y="1168" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="559" x="576" y="1280" width="32" height="32">
+  <object id="559" name="red" x="560" y="1104" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="561" x="704" y="1312" width="32" height="32">
+  <object id="561" name="red" x="688" y="1136" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="562" x="704" y="1248" width="32" height="32">
+  <object id="562" name="red" x="688" y="1072" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="563" x="512" y="1312" width="32" height="32">
+  <object id="563" name="red" x="496" y="1136" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="564" x="640" y="1280" width="32" height="32">
+  <object id="564" name="green" x="624" y="1104" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="565" x="672" y="1312" width="32" height="32">
+  <object id="565" name="orange" x="656" y="1136" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="566" x="672" y="1344" width="32" height="32">
+  <object id="566" name="green" x="656" y="1168" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="567" x="544" y="1312" width="32" height="32">
+  <object id="567" name="orange" x="528" y="1136" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="568" x="704" y="1280" width="32" height="32">
+  <object id="568" name="red" x="688" y="1104" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="569" x="736" y="1312" width="32" height="32">
+  <object id="569" name="green" x="720" y="1136" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="570" x="608" y="1280" width="32" height="32">
+  <object id="570" name="red" x="592" y="1104" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="571" x="640" y="1312" width="32" height="32">
+  <object id="571" name="orange" x="624" y="1136" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="572" x="544" y="1344" width="32" height="32">
+  <object id="572" name="red" x="528" y="1168" width="32" height="32">
    <properties>
     <property name="colour" value="red"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="573" x="544" y="1248" width="32" height="32">
+  <object id="573" name="blue" x="528" y="1072" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="574" x="576" y="1344" width="32" height="32">
+  <object id="574" name="orange" x="560" y="1168" width="32" height="32">
    <properties>
     <property name="colour" value="orange"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="576" x="704" y="1344" width="32" height="32">
+  <object id="576" name="green" x="688" y="1168" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="577" x="736" y="1344" width="32" height="32">
+  <object id="577" name="blue" x="720" y="1168" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="578" x="608" y="1312" width="32" height="32">
+  <object id="578" name="blue" x="592" y="1136" width="32" height="32">
    <properties>
     <property name="colour" value="blue"/>
     <property name="type" value="Colour Panel"/>
    </properties>
   </object>
-  <object id="579" x="672" y="1280" width="32" height="32">
+  <object id="579" name="green" x="656" y="1104" width="32" height="32">
    <properties>
     <property name="colour" value="green"/>
     <property name="type" value="Colour Panel"/>
+   </properties>
+  </object>
+  <object id="595" x="416" y="448" width="384" height="736">
+   <properties>
+    <property name="type" value="fall"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="Buttons" offsetx="0" offsety="-48">
-  <object id="581" x="240" y="896" width="32" height="32">
+  <properties>
+   <property name="Objects" type="int" value="1"/>
+  </properties>
+  <object id="581" x="240" y="784" width="32" height="32">
    <properties>
     <property name="entity" value="blue"/>
     <property name="type" value="button"/>
    </properties>
   </object>
-  <object id="587" x="304" y="896" width="32" height="32">
+  <object id="587" x="304" y="784" width="32" height="32">
    <properties>
     <property name="entity" value="orange"/>
     <property name="type" value="button"/>
    </properties>
   </object>
-  <object id="588" x="240" y="960" width="32" height="32">
+  <object id="588" x="240" y="848" width="32" height="32">
    <properties>
     <property name="entity" value="green"/>
     <property name="type" value="button"/>
    </properties>
   </object>
-  <object id="589" x="304" y="960" width="32" height="32">
+  <object id="589" x="304" y="848" width="32" height="32">
    <properties>
     <property name="entity" value="red"/>
     <property name="type" value="button"/>
    </properties>
   </object>
-  <object id="590" x="240" y="336" width="32" height="32">
+  <object id="590" x="240" y="352" width="32" height="32">
    <properties>
     <property name="entity" value=""/>
     <property name="type" value="button"/>

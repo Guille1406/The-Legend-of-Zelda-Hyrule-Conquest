@@ -549,7 +549,7 @@ bool j1Map::LoadObjectLayer(pugi::xml_node & node, ObjectLayer * layer, int heig
 				iterator = iterator.next_sibling();
 			}
 			pugi::xml_node attribute = node_object.child("properties").child("property");
-			while (strcmp(attribute.attribute("name").value(), "type"))
+			while (strcmp(attribute.attribute("name").value(), "type") )
 				attribute = attribute.next_sibling();
 			char* type_name = (char*)attribute.attribute("value").as_string();
 			Object* temp = App->object->CreateObject(type_name, node_object, height);

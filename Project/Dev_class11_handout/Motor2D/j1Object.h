@@ -16,6 +16,8 @@ enum objectType {
 	change_height,
 	door,
 	warp,
+	object_fall,
+	colour_blocks,
 	locked_door,
 	object_jump,
 	object_lever, 
@@ -93,6 +95,8 @@ public:
 	Object* CreateJump(SDL_Rect rect, int height);
 	Object* CreateDoor(pugi::xml_node object, int height);
 	Object* CreateWarp(pugi::xml_node, int height);
+	Object* CreateFall(pugi::xml_node, int height);
+	Object* CreateColourBlock(pugi::xml_node object, int height);
 
 public: 
 	std::vector<Object*> V_Objects;

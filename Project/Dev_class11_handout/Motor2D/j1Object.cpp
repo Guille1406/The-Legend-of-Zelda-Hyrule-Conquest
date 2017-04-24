@@ -8,6 +8,8 @@
 #include "O_Door.h"
 #include "O_Warp.h"
 #include "O_Diana.h"
+#include "O_Fall.h"
+#include "O_ColourBlock.h"
 #include "j1Collision.h"
 #include "Character.h"
 #include "j1FileSystem.h"
@@ -135,6 +137,10 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int heigh
 		ret = CreateJump(object, height);
 	else if (!strcmp(type_name, "diana"))
 		ret = CreateDiana(object, height);
+	else if (!strcmp(type_name, "fall"))
+		ret = CreateFall(object, height);
+	else if (!strcmp(type_name, "Colour Panel"))
+		ret = CreateColourBlock(object, height);
 	return ret;
 }
 
@@ -342,7 +348,54 @@ Object * j1Object::CreateWarp(pugi::xml_node object, int height)
 
 	//FindObject("door_1");
 	return ret;
-	return nullptr;
+
+}
+
+Object * j1Object::CreateFall(pugi::xml_node object, int height)
+{
+	Fall temp_fall;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+	temp_fall.logic_height = height;
+	temp_fall.name = object.attribute("name").as_string();
+	temp_fall.rect = { x,y,w,h };
+	temp_fall.type = objectType::object_fall;
+	temp_fall.active = true;
+	
+
+	Object* ret = new Fall(temp_fall);
+	ret->collider = App->collision->AddCollider({ ret->rect }, collider_fall, (Entity*)ret, this);
+	V_Objects.push_back(ret);
+
+	//FindObject("door_1");
+	return ret;
+
+	
+}
+
+Object * j1Object::CreateColourBlock(pugi::xml_node object, int height)
+{
+	ColourBlock temp_colour_block;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+	temp_colour_block.logic_height = height;
+	temp_colour_block.name = object.attribute("name").as_string();
+	temp_colour_block.rect = { x,y,w,h };
+	temp_colour_block.type = objectType::object_fall;
+	temp_colour_block.active = true;
+
+
+	Object* ret = new ColourBlock(temp_colour_block);
+	ret->collider = App->collision->AddCollider({ ret->rect }, collider_colour_block, (Entity*)ret, this);
+	V_Objects.push_back(ret);
+
+	//FindObject("door_1");
+	return ret;
+	
 }
 
 

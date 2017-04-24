@@ -510,6 +510,24 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			//}
 		}
 	}
+	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_colour_block) {
+		
+		App->player->Link->can_fall = false;
+	}
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_colour_block) {
+		App->player->Zelda->can_fall = false;
+	}
+
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_fall) {
+		if(App->player->Zelda->can_fall)
+		App->player->Zelda->pos = App->player->Link->pos;
+	}
+
+	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_fall) {
+		if (App->player->Link->can_fall)
+		App->player->Link->pos = App->player->Zelda->pos;
+	}
+
 
 	//Bomb explosion Collider doesn't detect the collision with Link
 

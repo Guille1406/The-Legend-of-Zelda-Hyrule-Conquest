@@ -447,6 +447,12 @@
     <ClInclude Include="S_ColourPuzzle.h">
       <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
     </ClInclude>
+    <ClInclude Include="O_Fall.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="O_ColourBlock.h">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Desenvolupament  ========">

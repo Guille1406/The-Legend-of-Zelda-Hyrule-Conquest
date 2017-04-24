@@ -26,6 +26,8 @@ enum COLLIDER_TYPE
 	collider_enemy,
 	collider_door,
 	collider_warp,
+	collider_colour_block,
+	collider_fall,	
 	coolider_bomb_explosion,
 };
 
