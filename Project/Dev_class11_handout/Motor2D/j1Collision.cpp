@@ -161,23 +161,43 @@ bool j1Collision::Update(float dt)
 
 				c2 = colliders[k];
 
-				if (c1->CheckCollision(c2->rect) == true)
+				if (c1->CheckCollision(c2->rect, k) == true)
 				{
 					if (matrix[c1->type][c2->type] && c1->callback)
 					{
 						if (c1->parent->logic_height == c2->parent->logic_height)
-							c1->callback->OnCollision(c1, c2);
+							if (c1->parent->logic_height == c2->parent->logic_height) {
+								if (c1->state_collider[k] == im_colliding)
+									c1->callback->OnCollision(c1, c2);
+								else if (c1->state_collider[k] == start_collision)
+									c1->callback->StartCollision(c1, c2);
+								
+							}
 						//App->render->Blit(App->player->graphics, App->player->PreviousPos.x, App->player->PreviousPos.y-1, &(App->player->current_animation->GetCurrentFrame()));
 
 					}
 
 
+
 					if (matrix[c2->type][c1->type] && c2->callback)
 					{
-						if (c1->parent->logic_height == c2->parent->logic_height)
-							c2->callback->OnCollision(c2, c1);
+						if (c1->parent->logic_height == c2->parent->logic_height) {
+							if(c2->state_collider[k] == im_colliding)
+								c2->callback->OnCollision(c2, c1);
+							else if(c2->state_collider[k] == start_collision)
+								c2->callback->StartCollision(c2, c1);
+							
+						}
+							
 					}
 
+				}
+				if (matrix[c1->type][c2->type] && c1->callback)
+				{
+					if (c1->parent->logic_height == c2->parent->logic_height) {
+						if (c1->state_collider[k] == end_collision)
+							c1->callback->EndCollision(c1, c2);
+					}
 				}
 			}
 		}
@@ -235,9 +255,14 @@ void j1Collision::DebugDraw()
 		case collider_change_height:
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
 			break;
-		case collider_colour_block:
-			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
+		case collider_colour_block: {
+
+
+			Object* temp = (Object*)colliders[i]->parent;
+			if (temp->active)
+				App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
 			break;
+		}
 		case collider_jump:
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, 255);
 			break;
@@ -306,8 +331,27 @@ bool j1Collision::EraseCollider(Collider* collider)
 
 // -----------------------------------------------------
 
-bool Collider::CheckCollision(const SDL_Rect& r) const
+bool Collider::CheckCollision(const SDL_Rect& r, int k) 
 {
+	if (this->type == front_link)
+		int x = 0;
+	if ((rect.x < r.x + r.w &&	rect.x + rect.w > r.x && rect.y < r.y + r.h && rect.h + rect.y > r.y)) {
+		if (this->type == front_link)
+			int x = 0;
+		if (this->state_collider[k] == not_colliding) {
+			this->state_collider[k] = start_collision;
+		}
+		else if (this->state_collider[k] == start_collision) {
+			this->state_collider[k] = im_colliding;
+		}
+	}
+	else {
+		if (this->state_collider[k] == im_colliding || this->state_collider[k] == start_collision) {
+			this->state_collider[k] = end_collision;
+		}
+		else if (this->state_collider[k] == end_collision)
+			this->state_collider[k] = not_colliding;
+	}
 	return (rect.x < r.x + r.w &&
 		rect.x + rect.w > r.x &&
 		rect.y < r.y + r.h &&

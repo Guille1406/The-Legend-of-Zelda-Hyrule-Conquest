@@ -511,10 +511,13 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		}
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_colour_block) {
-		
+		Object* temp_colour_block = (Object*)collider2->parent;
+		if(temp_colour_block->active)
 		App->player->Link->can_fall = false;
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_colour_block) {
+		Object* temp_colour_block = (Object*)collider2->parent;
+		if (temp_colour_block->active)
 		App->player->Zelda->can_fall = false;
 	}
 
@@ -548,6 +551,32 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		half_hearts_test_purpose--;
 	}
 	
+}
+
+void j1Player::EndCollision(Collider * collider1, Collider * collider2)
+{
+	Character* character = nullptr;
+	if (collider1->type == collider_link || collider2->type == collider_link)
+		character = Link;
+	else if (collider1->type == collider_zelda || collider2->type == collider_zelda)
+		character = Zelda;
+	else if (collider1->type == front_zelda || collider2->type == front_zelda)
+		character = Zelda;
+	else if (collider1->type == front_link || collider2->type == front_link)
+		character = Link;
+
+
+	if (collider2->type == collider_button) {
+		static bool audio = false;
+		if (!audio) {
+			App->audio->PlayFx(App->audio->button_sound);
+			audio = true;
+		}
+		Button* temp = (Button*)collider2->parent;
+		temp->EndAction();
+		temp->texture_rect = temp->pressed_button;
+	}
+
 }
 
 

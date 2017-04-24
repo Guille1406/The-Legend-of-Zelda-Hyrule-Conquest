@@ -114,6 +114,7 @@ public:
 	~Object() {};
 
 	virtual void Action() {};
+	virtual void EndAction() {};
 
 public:
 	//Needed for animation

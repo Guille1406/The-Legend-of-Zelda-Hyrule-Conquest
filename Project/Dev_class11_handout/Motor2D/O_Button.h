@@ -36,6 +36,13 @@ public:
 			connected_object[i]->Action();
 		}
 	}
+	void EndAction() {
+
+		for (uint i = 0; i < connected_object.size(); i++)
+		{
+			connected_object[i]->EndAction();
+		}
+	}
 
 public:
 

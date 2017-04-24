@@ -385,7 +385,7 @@ Object * j1Object::CreateColourBlock(pugi::xml_node object, int height)
 	temp_colour_block.logic_height = height;
 	temp_colour_block.name = object.attribute("name").as_string();
 	temp_colour_block.rect = { x,y,w,h };
-	temp_colour_block.type = objectType::object_fall;
+	temp_colour_block.type = objectType::colour_blocks;
 	temp_colour_block.active = true;
 
 

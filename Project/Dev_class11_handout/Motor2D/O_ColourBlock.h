@@ -18,7 +18,7 @@ public:
 	{
 		type = obj.type;
 		rect = obj.rect;
-		active = obj.active;
+		active = false;
 		name = obj.name;
 		logic_height = obj.logic_height;
 		
@@ -31,7 +31,10 @@ public:
 
 	void Action()
 	{
-		
+		active = true;
+	}
+	void EndAction() {
+		active = false;
 	}
 
 public:

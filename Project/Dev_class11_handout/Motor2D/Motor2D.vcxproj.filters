@@ -451,7 +451,7 @@
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
     <ClInclude Include="O_ColourBlock.h">
-      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+      <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

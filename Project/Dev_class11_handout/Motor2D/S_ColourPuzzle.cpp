@@ -72,8 +72,8 @@ bool S_ColourPuzzle::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
-	App->player->Link->pos = { 660,1400 };
-	App->player->Zelda->pos = { 620,1400 };
+	App->player->Link->pos = { 660,1200 };
+	App->player->Zelda->pos = { 620,1200 };
 	App->player->Link->logic_height = 0;
 	App->player->Zelda->logic_height = 0;
 	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
@@ -83,7 +83,7 @@ bool S_ColourPuzzle::Start()
 
 bool S_ColourPuzzle::Update()
 {
-
+	
 	if (!App->player->paused)
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 			App->player->loop_game_menu = true;
@@ -102,7 +102,11 @@ bool S_ColourPuzzle::PostUpdate()
 		App->player->loop_game_menu = false;
 		App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
 	}
+
+
+
 	return true;
+
 
 }
 

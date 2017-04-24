@@ -31,6 +31,12 @@ enum COLLIDER_TYPE
 	coolider_bomb_explosion,
 };
 
+enum collider_state {
+	not_colliding,
+	start_collision,
+	im_colliding,
+	end_collision,
+};
 struct Collider
 {
 	SDL_Rect rect = {0,0,0,0};
@@ -39,6 +45,8 @@ struct Collider
 	j1Module* callback = nullptr;
 	uint logic_height = 0;
 	Entity* parent = nullptr;
+	collider_state  state_collider[MAX_COLLIDERS];
+	bool is_colliding = false;
 
 	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, Entity* parent, j1Module* callback = nullptr) :
 		rect(rectangle),
@@ -47,6 +55,9 @@ struct Collider
 		parent(parent)
 	{
 		logic_height = 1;
+		for (int i = 0; i < MAX_COLLIDERS; i++) {
+			state_collider[i] = not_colliding;
+		}
 	}
 
 	void SetPos(int x, int y, int n_logic_height)
@@ -56,7 +67,7 @@ struct Collider
 		logic_height = n_logic_height;
 	}
 
-	bool CheckCollision(const SDL_Rect& r) const;
+	bool CheckCollision(const SDL_Rect& r, int) ;
 };
 
 class j1Collision : public j1Module

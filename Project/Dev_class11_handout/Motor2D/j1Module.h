@@ -96,6 +96,12 @@ public:
 	virtual void OnCollision(Collider* collider1, Collider* collider2) {
 
 	}
+	virtual void StartCollision(Collider* collider1, Collider* collider2) {
+
+	}
+	virtual void EndCollision(Collider* collider1, Collider* collider2) {
+
+	}
 
 	void Enable()
 	{
