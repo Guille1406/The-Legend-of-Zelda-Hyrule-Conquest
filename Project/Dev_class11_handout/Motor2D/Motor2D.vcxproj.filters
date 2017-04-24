@@ -52,12 +52,6 @@
     <ClCompile Include="j1Gui.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="S_World.cpp">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="S_Dungeon.cpp">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="j1Player.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
@@ -190,6 +184,12 @@
     <ClCompile Include="SDLQuadtree.cpp">
       <Filter>P2/Quadtree ===========</Filter>
     </ClCompile>
+    <ClCompile Include="S_World.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="S_ColourPuzzle.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -253,12 +253,6 @@
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
     <ClInclude Include="MainScene.h">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="S_World.h">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="S_Dungeon.h">
       <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="j1Player.h">
@@ -447,6 +441,12 @@
     <ClInclude Include="SDLQuadtree.h">
       <Filter>P2/Quadtree ===========</Filter>
     </ClInclude>
+    <ClInclude Include="S_World.h">
+      <Filter>Desenvolupament  ========\Scenes\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="S_ColourPuzzle.h">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Desenvolupament  ========">
@@ -511,6 +511,12 @@
     </Filter>
     <Filter Include="P2/Quadtree ===========">
       <UniqueIdentifier>{a8bfab6a-5472-4969-943e-861a8b493f08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\Dungeon">
+      <UniqueIdentifier>{b010b282-f775-47fd-9766-39b558bcb43d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\Tutorial">
+      <UniqueIdentifier>{c3f11ebf-a1bf-4cfe-8b27-ebfad380564e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

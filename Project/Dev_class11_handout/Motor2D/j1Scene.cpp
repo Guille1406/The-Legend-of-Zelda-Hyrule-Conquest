@@ -21,8 +21,9 @@
 #include "j1FileSystem.h"
 
 #include "S_World.h"
-#include "S_Dungeon.h"
+
 #include "S_Temporal_Boss_Room.h"
+#include "S_ColourPuzzle.h"
 #include "S_MainMenu.h"
 #include "S_Campaign.h"
 #include "S_Options.h"
@@ -91,10 +92,12 @@ bool j1Scene::Start()
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::tempbossroom;
-	scene_pointer = new S_Dungeon;
+	
+	scene_pointer = new S_ColourPuzzle;
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
-	(*scene_list.back()).scene_name = Scene_ID::dungeon;
+	(*scene_list.back()).scene_name = Scene_ID::colourpuzzle;
+	
 	scene_pointer = new S_End;
 	scene_list.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::Send;

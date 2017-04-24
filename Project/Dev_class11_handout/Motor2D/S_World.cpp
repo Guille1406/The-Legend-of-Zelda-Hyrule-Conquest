@@ -95,6 +95,9 @@ bool S_World::PostUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
 		App->scene->ChangeScene(Scene_ID::tempbossroom);
 	}
+	if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
+		App->scene->ChangeScene(Scene_ID::colourpuzzle);
+	}
 	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
 		
 		App->scene->ChangeScene(Scene_ID::Send);	

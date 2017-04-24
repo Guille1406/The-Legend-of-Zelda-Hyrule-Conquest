@@ -348,23 +348,23 @@ void Boss::CreateColliders()
 			//object.collider_tiles.push_back(temp);
 			//if(App->map->V_Colision[0][object.logic_height].data[temp.y*App->map->data.width + temp.x] != CANT_PASS_COL_ID)	{
 			if (App->map->V_Colision[0]->data != nullptr)
-				if (App->map->V_Colision[0]->data[(temp.y / 16) * 100 + temp.x / 16] != TILE_COL_ID)
+				if (App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] != TILE_COL_ID)
 				{
 					iPoint diference_point = { temp.x - centre_pos.x, temp.y - centre_pos.y };
 					int dist = sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y);
 					if ((dist < 120 && dist >= 100) ) {
-						App->map->V_Colision[0]->data[(temp.y / 16) * 100 + temp.x / 16] = TILE_COL_ID;
+						App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = TILE_COL_ID;
 						//object.collider_tiles.push_back(temp);
 						temp_vector.push_back(temp);
 					}
 				}
 			if (App->map->V_Colision[1]->data != nullptr)
-				if (App->map->V_Colision[1]->data[(temp.y / 16) * 100 + temp.x / 16] != TILE_COL_ID)
+				if (App->map->V_Colision[1]->data[(temp.y / 16) *  App->map->data.height + temp.x / 16] != TILE_COL_ID)
 				{
 					iPoint diference_point = { temp.x - centre_pos.x, temp.y - centre_pos.y };
 					int dist = sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y);
 					if (dist < 80 && dist >= 60) {
-						App->map->V_Colision[1]->data[((temp.y - 16)  / 16) * 100 + temp.x / 16] = TILE_COL_ID;
+						App->map->V_Colision[1]->data[((temp.y - 16)  / 16) *  App->map->data.height + temp.x / 16] = TILE_COL_ID;
 						//object.collider_tiles.push_back(temp);
 						temp_vector.push_back(temp);
 					}
@@ -382,8 +382,8 @@ void Boss::CreateColliders()
 void Boss::DeleteColliders()
 {
 	for (int i = 0; i < colision_tiles_vec.size(); i++) {
-		App->map->V_Colision[0]->data[(colision_tiles_vec[i].y / 16) * 100 + colision_tiles_vec[i].x / 16] = NOT_COLISION_ID;
-		App->map->V_Colision[1]->data[(colision_tiles_vec[i].y / 16) * 100 + colision_tiles_vec[i].x / 16] = NOT_COLISION_ID;
+		App->map->V_Colision[0]->data[(colision_tiles_vec[i].y / 16) *  App->map->data.height + colision_tiles_vec[i].x / 16] = NOT_COLISION_ID;
+		App->map->V_Colision[1]->data[(colision_tiles_vec[i].y / 16) *  App->map->data.height + colision_tiles_vec[i].x / 16] = NOT_COLISION_ID;
 	}
 	colision_tiles_vec.clear();
 	std::vector<Object*>::iterator it = App->object->V_Objects.begin();
