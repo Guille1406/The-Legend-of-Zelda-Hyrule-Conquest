@@ -3,6 +3,7 @@
 
 #include "PugiXml/src/pugixml.hpp"
 #include "p2Point.h"
+#include "SDLQuadtree.h"
 #include "j1Module.h"
 #include "j1Object.h"
 
@@ -133,6 +134,7 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
+	//iPoint MapToWorldCenter(int x, int y) const;
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 	bool CreateEnemyMap(int& width, int& height, uchar** buffer) const;
 	bool CreateEnemyPathMap(int& width, int& height, uchar** buffer) const;
@@ -159,9 +161,8 @@ public:
 	//MapLayer* Logic;
 
 private:
-
-	int count = 0;
-	
+	int					count = 0;
+	Quadtree			map_quadtree;
 	pugi::xml_document	map_file;
 	std::string			folder=empty_char;
 	bool				map_loaded=false;

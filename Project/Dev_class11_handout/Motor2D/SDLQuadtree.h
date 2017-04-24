@@ -78,6 +78,11 @@ public:
 	AABB* root = nullptr;
 
 public:
+	Quadtree()
+	{
+
+	}
+
 	Quadtree(const SDL_Rect& r)
 	{
 		SetBoundaries(r);
