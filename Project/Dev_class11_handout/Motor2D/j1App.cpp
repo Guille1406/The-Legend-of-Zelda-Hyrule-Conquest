@@ -520,8 +520,10 @@ bool j1App::SaveLoadIterate(pugi::xml_node& root)
 		{
 			if (want_to_save)
 				ret = (*item)->Save(root.append_child((*item)->name.c_str()));
-			if (want_to_load)
+			else if (want_to_load)
 				ret = (*item)->Load(root.append_child((*item)->name.c_str()));
+			else
+				ret = false;
 		}
 		if (!ret)
 			LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->name.c_str() : "unknown");
@@ -536,8 +538,10 @@ bool j1App::SaveLoadIterate(pugi::xml_node& root)
 			{
 				if (want_to_save)
 					ret = (*item)->Save(root.append_child((*item)->scene_str.c_str()));
-				if (want_to_load)
+				else if (want_to_load)
 					ret = (*item)->Load(root.append_child((*item)->scene_str.c_str()));
+				else
+					ret = false;
 			}
 		}
 		if (!ret)
@@ -553,8 +557,10 @@ bool j1App::SaveLoadIterate(pugi::xml_node& root)
 			{
 				if (want_to_save)
 					ret = (*item)->Save(root.append_child((*item)->scene_str.c_str()));
-				if (want_to_load)
+				else if (want_to_load)
 					ret = (*item)->Load(root.append_child((*item)->scene_str.c_str()));
+				else
+					ret = false;
 			}
 		}
 		if (!ret)
