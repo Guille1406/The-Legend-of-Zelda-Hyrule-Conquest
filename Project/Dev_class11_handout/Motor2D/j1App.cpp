@@ -452,8 +452,7 @@ void j1App::GetSaveGames(std::list<std::string>& list_to_fill) const
 
 bool j1App::LoadGameNow()
 {
-	bool ret = false;
-
+	bool ret = true;
 	char* buffer = nullptr;
 	uint size = fs->Load(load_game.c_str(), &buffer);
 
@@ -461,54 +460,14 @@ bool j1App::LoadGameNow()
 	{
 		pugi::xml_document data;
 		pugi::xml_node root;
-
 		pugi::xml_parse_result result = data.load_buffer(buffer, size);
 		RELEASE(buffer);
 
 		if(result != NULL)
 		{
 			LOG("Loading new Game State from %s...", load_game.c_str());
-
 			root = data.child("game_state");
-			ret = true;
-
-			switch (WantTo_SaveLoadType)
-			{
-			case SaveLoadType::Module:
-			{
-				std::list<j1Module*>::const_iterator item = modules.cbegin();
-				for (; item != modules.cend() && ret == true; ++item)
-					ret = (*item)->Load(root.append_child((*item)->name.c_str()));
-				if (!ret)
-					LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->name.c_str() : "unknown");
-				break;
-			}
-			case SaveLoadType::Scene:
-			{
-				std::list<MainScene*>::const_iterator item = App->scene->Get_scene_list()->cbegin();
-				for (; item != App->scene->Get_scene_list()->cend() && ret == true; ++item)
-				{
-					if ((*item)->scene_name > Scene_ID::ingamemenu)
-						ret = (*item)->Load(root.append_child((*item)->scene_str.c_str()));
-				}
-				if (!ret)
-					LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->scene_str.c_str() : "unknown");
-				break;
-			}
-			case SaveLoadType::Menu:
-			{
-				std::list<MainScene*>::const_iterator item = App->scene->Get_scene_list()->cbegin();
-				for (; item != App->scene->Get_scene_list()->cend() && ret == true; ++item)
-				{
-					if (((*item)->scene_name > Scene_ID::mainmenu) && ((*item)->scene_name < Scene_ID::ingamemenu))
-						ret = (*item)->Load(root.append_child((*item)->scene_str.c_str()));
-				}
-				if (!ret)
-					LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->scene_str.c_str() : "unknown");
-				break;
-			}
-			}
-
+			ret = SaveLoadIterate(root);
 			data.reset();
 			if(ret == true)
 				LOG("...finished loading");
@@ -526,52 +485,14 @@ bool j1App::LoadGameNow()
 bool j1App::SavegameNow() const
 {
 	bool ret = true;
-
 	LOG("Saving Game State to %s...", save_game.c_str());
 
 	// xml object were we will store all data
 	pugi::xml_document data;
 	pugi::xml_node root;
-	
+
 	root = data.append_child("game_state");
-
-	switch (WantTo_SaveLoadType)
-	{
-	case SaveLoadType::Module:
-	{
-		std::list<j1Module*>::const_iterator item = modules.cbegin();
-		for (; item != modules.cend() && ret == true; ++item)
-			ret = (*item)->Save(root.append_child((*item)->name.c_str()));
-		if (!ret)
-			LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->name.c_str() : "unknown");
-		break;
-	}
-	case SaveLoadType::Scene:
-	{
-		std::list<MainScene*>::const_iterator item = App->scene->Get_scene_list()->cbegin();
-		for (; item != App->scene->Get_scene_list()->cend() && ret == true; ++item)
-		{
-			if ((*item)->scene_name > Scene_ID::ingamemenu)
-				ret = (*item)->Save(root.append_child((*item)->scene_str.c_str()));
-		}
-		if (!ret)
-			LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->scene_str.c_str() : "unknown");
-		break;
-	}
-	case SaveLoadType::Menu:
-	{
-		std::list<MainScene*>::const_iterator item = App->scene->Get_scene_list()->cbegin();
-		for (; item != App->scene->Get_scene_list()->cend() && ret == true; ++item)
-		{
-			if (((*item)->scene_name > Scene_ID::mainmenu) && ((*item)->scene_name < Scene_ID::ingamemenu))
-				ret = (*item)->Save(root.append_child((*item)->scene_str.c_str()));
-		}
-		if (!ret)
-			LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->scene_str.c_str() : "unknown");
-		break;
-	}
-	}
-
+	ret = const_cast<j1App*>(this)->SaveLoadIterate(root); //Warning Dangerous thing here "const_cast"
 	if(ret == true)
 	{
 		std::stringstream stream;
@@ -584,6 +505,63 @@ bool j1App::SavegameNow() const
 	data.reset();
 	want_to_save = false;
 
+	return ret;
+}
+
+bool j1App::SaveLoadIterate(pugi::xml_node& root)
+{
+	bool ret = true;
+	switch (WantTo_SaveLoadType)
+	{
+	case SaveLoadType::Module:
+	{
+		std::list<j1Module*>::const_iterator item = modules.cbegin();
+		for (; item != modules.cend() && ret == true; ++item)
+		{
+			if (want_to_save)
+				ret = (*item)->Save(root.append_child((*item)->name.c_str()));
+			if (want_to_load)
+				ret = (*item)->Load(root.append_child((*item)->name.c_str()));
+		}
+		if (!ret)
+			LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->name.c_str() : "unknown");
+		break;
+	}
+	case SaveLoadType::Scene:
+	{
+		std::list<MainScene*>::const_iterator item = App->scene->Get_scene_list()->cbegin();
+		for (; item != App->scene->Get_scene_list()->cend() && ret == true; ++item)
+		{
+			if ((*item)->scene_name > Scene_ID::ingamemenu)
+			{
+				if (want_to_save)
+					ret = (*item)->Save(root.append_child((*item)->scene_str.c_str()));
+				if (want_to_load)
+					ret = (*item)->Load(root.append_child((*item)->scene_str.c_str()));
+			}
+		}
+		if (!ret)
+			LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->scene_str.c_str() : "unknown");
+		break;
+	}
+	case SaveLoadType::Menu:
+	{
+		std::list<MainScene*>::const_iterator item = App->scene->Get_scene_list()->cbegin();
+		for (; item != App->scene->Get_scene_list()->cend() && ret == true; ++item)
+		{
+			if (((*item)->scene_name > Scene_ID::mainmenu) && ((*item)->scene_name < Scene_ID::ingamemenu))
+			{
+				if (want_to_save)
+					ret = (*item)->Save(root.append_child((*item)->scene_str.c_str()));
+				if (want_to_load)
+					ret = (*item)->Load(root.append_child((*item)->scene_str.c_str()));
+			}
+		}
+		if (!ret)
+			LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->scene_str.c_str() : "unknown");
+		break;
+	}
+	}
 	return ret;
 }
 

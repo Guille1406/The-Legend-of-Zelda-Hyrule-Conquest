@@ -108,6 +108,7 @@ private:
 	// Load / Save
 	bool LoadGameNow();
 	bool SavegameNow() const;
+	bool SaveLoadIterate(pugi::xml_node& root);
 
 public:
 
