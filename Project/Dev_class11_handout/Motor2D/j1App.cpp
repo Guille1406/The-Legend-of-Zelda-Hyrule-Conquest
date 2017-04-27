@@ -372,20 +372,76 @@ const char* j1App::GetOrganization() const
 // Load / Save
 void j1App::LoadGame(const char* file)
 {
-	// we should be checking if that file actually exist
-	// from the "GetSaveGames" list
-	want_to_load = true;
-	load_game=("%s%s", fs->GetSaveDirectory(), file);
+	LoadGameModules(file);
+	LoadGameScenes(file);
+	LoadGameMenus(file);
 }
 
 // ---------------------------------------
 void j1App::SaveGame(const char* file) const
 {
+	SaveGameModules(file);
+	SaveGameScenes(file);
+	SaveGameMenus(file);
+}
+
+void j1App::LoadGameModules(const char* file)
+{
+	// we should be checking if that file actually exist
+	// from the "GetSaveGames" list
+	want_to_load = true;
+	WantTo_SaveLoadType = SaveLoadType::Module;
+	load_game=("%s%s", fs->GetSaveDirectory(), file);
+}
+
+// ---------------------------------------
+void j1App::SaveGameModules(const char* file) const
+{
 	// we should be checking if that file actually exist
 	// from the "GetSaveGames" list ... should we overwrite ?
-
 	want_to_save = true;
+	WantTo_SaveLoadType = SaveLoadType::Module;
 	save_game=file;
+}
+
+// ---------------------------------------
+void j1App::LoadGameScenes(const char* file)
+{
+	// we should be checking if that file actually exist
+	// from the "GetSaveGames" list
+	want_to_load = true;
+	WantTo_SaveLoadType = SaveLoadType::Scene;
+	load_game = ("%s%s", fs->GetSaveDirectory(), file);
+}
+
+// ---------------------------------------
+void j1App::SaveGameScenes(const char* file) const
+{
+	// we should be checking if that file actually exist
+	// from the "GetSaveGames" list ... should we overwrite ?
+	want_to_save = true;
+	WantTo_SaveLoadType = SaveLoadType::Scene;
+	save_game = file;
+}
+
+// ---------------------------------------
+void j1App::LoadGameMenus(const char* file)
+{
+	// we should be checking if that file actually exist
+	// from the "GetSaveGames" list
+	want_to_load = true;
+	WantTo_SaveLoadType = SaveLoadType::Menu;
+	load_game = ("%s%s", fs->GetSaveDirectory(), file);
+}
+
+// ---------------------------------------
+void j1App::SaveGameMenus(const char* file) const
+{
+	// we should be checking if that file actually exist
+	// from the "GetSaveGames" list ... should we overwrite ?
+	want_to_save = true;
+	WantTo_SaveLoadType = SaveLoadType::Menu;
+	save_game = file;
 }
 
 // ---------------------------------------
@@ -416,11 +472,8 @@ bool j1App::LoadGameNow()
 			root = data.child("game_state");
 			ret = true;
 			std::list<j1Module*>::iterator item = modules.begin();
-			for (; item != modules.cend() && ret == true; ++item) {
+			for (; item != modules.cend() && ret == true; ++item)
 				ret = (*item)->Load(root.child((*item)->name.c_str()));
-
-			}
-
 			data.reset();
 			if(ret == true)
 				LOG("...finished loading");
@@ -449,23 +502,18 @@ bool j1App::SavegameNow() const
 	
 	root = data.append_child("game_state");
 	std::list<j1Module*>::const_iterator item = modules.cbegin();
-	for (; item != modules.cend() && ret == true; ++item) {
-
+	for (; item != modules.cend() && ret == true; ++item)
 		ret = (*item)->Save(root.append_child((*item)->name.c_str()));
-	}
-
 	if(ret == true)
 	{
 		std::stringstream stream;
 		data.save(stream);
-
 		// we are done, so write data to disk
 		fs->Save(save_game.c_str(), stream.str().c_str(), stream.str().length());
 		LOG("... finished saving", save_game.c_str());
 	}
 	else
 		LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->name.c_str() : "unknown");
-
 	data.reset();
 	want_to_save = false;
 	return ret;

@@ -32,7 +32,13 @@ class j1Enemy;
 class j1HUD;
 class j1GameStartMenuBackground;
 class j1DialogueManager;
-//using namespace std;
+
+enum SaveLoadType {
+	Module,
+	Scene,
+	Menu,
+	NullSaveLoadType
+};
 
 class j1App
 {
@@ -69,6 +75,12 @@ public:
 
 	void LoadGame(const char* file);
 	void SaveGame(const char* file) const;
+	void LoadGameModules(const char* file);
+	void SaveGameModules(const char* file) const;
+	void LoadGameScenes(const char* file);
+	void SaveGameScenes(const char* file) const;
+	void LoadGameMenus(const char* file);
+	void SaveGameMenus(const char* file) const;
 	void GetSaveGames(std::list<std::string>& list_to_fill) const;
 
 	void WantToQuit();
@@ -131,6 +143,7 @@ private:
 	std::string		title = empty_char;
 	std::string		organization;
 
+	mutable SaveLoadType WantTo_SaveLoadType = SaveLoadType::NullSaveLoadType;
 	mutable bool		want_to_save = false;
 	bool				want_to_load = false;
 	std::string			load_game = empty_char;
