@@ -60,6 +60,8 @@ public:
 	virtual void Action() {};
 	virtual void Rang_Player();
 	void Direction_Push_Election_ChSoldier();
+
+	
 public:
 
 	SDL_Rect rect = { 0,0,0,0 };
@@ -101,6 +103,10 @@ public:
 	Enemy* Create_Enemy(uint, iPoint Pos, int height);
 	bool FindInPath(iPoint, Enemy* enemy);
 	void Update_Sword_Collision(Enemy* enemy);
+
+	void OnCollision(Collider* collider1, Collider* collider2);
+	void EndCollision(Collider* collider1, Collider* collider2);
+	void StartCollision(Collider* collider1, Collider* collider2);
 	
 public:
 	std::vector<Animation*> Green_Enemy_Animation;

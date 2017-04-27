@@ -56,6 +56,7 @@ j1Collision::j1Collision()
 	matrix[collider_link][collider_enemy_sword] = true;
 	//ENEMY
 	matrix[collider_enemy][collider_link] = true;
+	matrix[collider_enemy][collider_link_sword] = true;
 	matrix[collider_enemy][collider_zelda] = true;
 	matrix[collider_enemy][collider_arrow] = true;
 

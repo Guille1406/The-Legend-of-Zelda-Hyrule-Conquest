@@ -28,6 +28,7 @@ public:
 	bool Move_Camera();
 	void OnCollision(Collider* collider1, Collider* collider2);
 	void EndCollision(Collider* collider1, Collider* collider2);
+	void StartCollision(Collider* collider1, Collider* collider2);
 
 public:
 	

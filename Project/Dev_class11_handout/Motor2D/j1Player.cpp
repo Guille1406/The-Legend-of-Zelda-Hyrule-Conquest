@@ -579,4 +579,10 @@ void j1Player::EndCollision(Collider * collider1, Collider * collider2)
 
 }
 
+void j1Player::StartCollision(Collider * collider1, Collider * collider2)
+{
+	
+
+}
+
 

@@ -135,14 +135,14 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->live = 2;
 		//This will not be usefull when the enemies will be readed from xml
 		rect_test = { ret->array_pos.x,ret->array_pos.y,20,10 };
-		ret->shield_test = App->collision->AddCollider(rect_test, COLLIDER_TYPE::collider_enemy_sword, ret, this);
+		ret->shield_test = App->collision->AddCollider(rect_test, COLLIDER_TYPE::collider_enemy_sword, ret, (j1Module*)App->enemy);
 		//Position in world pixel 
 		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
 
 		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
-		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
+		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret,(j1Module*) App->enemy);
 		
 
 		ret->item.up_ofset_item_enemy = { -10, 10 };
@@ -168,7 +168,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
 		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
-		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
+		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 
 		//how to know if a enemy is in level one or two
 		ret->logic_height = height;
@@ -193,7 +193,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		temp->max_bomb_point.x = temp->pix_world_pos.x;
 		temp->max_bomb_point.y = temp->pix_world_pos.y-50;
 		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
-		temp->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, App->enemy);
+		temp->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 
 		//how to know if a enemy is in level one or two
 		temp->logic_height = height;
@@ -326,6 +326,26 @@ void Enemy::Direction_Push_Election_ChSoldier()
 	case direction::right:
 		Enemy_Hurt_Displacement(pix_world_pos.x, true);
 		break;
+	}
+}
+
+void j1Enemy::OnCollision(Collider * collider1, Collider * collider2)
+{
+	int x = 0;
+}
+
+void j1Enemy::EndCollision(Collider * collider1, Collider * collider2)
+{
+	int x = 0;
+}
+
+void j1Enemy::StartCollision(Collider* collider1, Collider* collider2)
+{
+
+	if (collider2->type == COLLIDER_TYPE::collider_link_sword && collider1->type == COLLIDER_TYPE::collider_enemy) {
+		Enemy* n_enemy = (Enemy*)collider2->parent;
+		n_enemy->Enemy_Hit_Comprobation(collider1);
+
 	}
 }
 
