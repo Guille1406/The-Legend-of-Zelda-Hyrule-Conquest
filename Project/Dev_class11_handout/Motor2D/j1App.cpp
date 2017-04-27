@@ -479,6 +479,7 @@ bool j1App::LoadGameNow()
 		LOG("Could not load game state xml file %s", load_game.c_str());
 
 	want_to_load = false;
+	WantTo_SaveLoadType = SaveLoadType::NullSaveLoadType;
 	return ret;
 }
 
@@ -501,10 +502,10 @@ bool j1App::SavegameNow() const
 		fs->Save(save_game.c_str(), stream.str().c_str(), stream.str().length());
 		LOG("... finished saving", save_game.c_str());
 	}
-
 	data.reset();
-	want_to_save = false;
 
+	want_to_save = false;
+	WantTo_SaveLoadType = SaveLoadType::NullSaveLoadType;
 	return ret;
 }
 
