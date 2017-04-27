@@ -190,6 +190,9 @@
     <ClCompile Include="S_ColourPuzzle.cpp">
       <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
     </ClCompile>
+    <ClCompile Include="Statue_Enemy.cpp">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -452,6 +455,9 @@
     </ClInclude>
     <ClInclude Include="O_ColourBlock.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Statue_Enemy.h">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -116,6 +116,7 @@
     <ClCompile Include="j1Object.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="SDLQuadtree.cpp" />
+    <ClCompile Include="Statue_Enemy.cpp" />
     <ClCompile Include="S_Campaign.cpp" />
     <ClCompile Include="S_ColourPuzzle.cpp" />
     <ClCompile Include="S_End.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="O_Sign.h" />
     <ClInclude Include="O_Warp.h" />
     <ClInclude Include="SDLQuadtree.h" />
+    <ClInclude Include="Statue_Enemy.h" />
     <ClInclude Include="S_Campaign.h" />
     <ClInclude Include="S_ColourPuzzle.h" />
     <ClInclude Include="S_End.h" />

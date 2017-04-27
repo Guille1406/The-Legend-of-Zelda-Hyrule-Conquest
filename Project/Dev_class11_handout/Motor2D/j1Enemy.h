@@ -31,6 +31,7 @@ enum enemyType {
 	green_enemy = 3847,
 	championsoldier_enemy= 3849,
 	hyrulebombsoldier_enemy= 1498,
+	statue_enemy,
 	no_enemy,
 
 };

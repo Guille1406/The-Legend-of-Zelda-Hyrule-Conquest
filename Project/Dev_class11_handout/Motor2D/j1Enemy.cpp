@@ -8,6 +8,7 @@
 #include"j1Pathfinding.h"
 #include"j1Audio.h"
 #include"HyruleBombSoldier_Enemy.h"
+#include"Statue_Enemy.h"
 bool j1Enemy::Awake(pugi::xml_node &)
 {
 
@@ -19,7 +20,7 @@ bool j1Enemy::Start()
 	one_time_appear = 0;
 	appear_enemies = false;
 	enemy_perf = new Enemy();
-	enemy_perf->LoadAnimation("sprites/green_enemy.xml");
+	enemy_perf->LoadAnimation("sprites/enemies.xml");
 	
 
 	for (int i = 0; i < App->map->V_Enemies.size(); i++) {
@@ -174,6 +175,22 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->logic_height = height;
 		break;
 
+	case enemyType::statue_enemy:
+		ret = new Statue_Enemy();
+		ret->rect = { 0,0,44,60 };
+		ret->array_pos = pos_array_enemy;
+		ret->live = 6;
+		//Position in world pixel 
+		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+
+
+		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
+		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
+		//how to know if a enemy is in level one or two
+		ret->logic_height = height;
+		break;
+
 	case enemyType::hyrulebombsoldier_enemy:
 
 		ret = new HyruleBombSoldier_Enemy();
@@ -199,6 +216,10 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		temp->logic_height = height;
 		ret = temp;
 		break;
+
+
+
+
 
 	}
 	//Position in array
