@@ -143,3 +143,13 @@ void S_InGameMenu::OnGui(Gui* ui, GuiEvent event)
 		App->scene->Show(Scene_ID::quitgame);
 	}
 }
+
+bool S_InGameMenu::Save(pugi::xml_node& node) const
+{
+	return true;
+}
+
+bool S_InGameMenu::Load(pugi::xml_node& node)
+{
+	return true;
+}

@@ -70,3 +70,13 @@ void S_Campaign::OnGui(Gui* ui, GuiEvent event)
 		App->scene->Show(Scene_ID::mainmenu);
 	}
 }
+
+bool S_Campaign::Save(pugi::xml_node& node) const
+{
+	return true;
+}
+
+bool S_Campaign::Load(pugi::xml_node& node)
+{
+	return true;
+}

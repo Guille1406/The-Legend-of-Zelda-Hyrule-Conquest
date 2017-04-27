@@ -11,16 +11,10 @@
 struct BackgroundCharacter
 {
 	BackgroundCharacter(SDL_Rect* sdlrect, iPoint point): rect(*sdlrect), position(point)
-	{
-
-	}
-
+	{}
 	~BackgroundCharacter()
-	{
-
-	}
-
-	SDL_Rect rect;
+	{}
+	SDL_Rect rect = { 0,0,0,0 };
 	iPoint position = { 0,0 };
 };
 
@@ -48,7 +42,7 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
-	
+
 	void Freeze(bool freeze);
 
 	bool InGameMenuVisible() const

@@ -142,3 +142,13 @@ void S_MainMenu::OnGui(Gui* ui, GuiEvent event)
 		ShellExecute(NULL, "open", "https://github.com/Guille1406/The-Legend-of-Zelda-Hyrule-Conquest", NULL, NULL, SW_SHOWMAXIMIZED);
 	}
 }
+
+bool S_MainMenu::Save(pugi::xml_node& node) const
+{
+	return true;
+}
+
+bool S_MainMenu::Load(pugi::xml_node& node)
+{
+	return true;
+}

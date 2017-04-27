@@ -132,3 +132,13 @@ bool S_TempBossRoom::Clean()
 
 	return false;
 }
+
+bool S_TempBossRoom::Save(pugi::xml_node& node) const
+{
+	return true;
+}
+
+bool S_TempBossRoom::Load(pugi::xml_node& node)
+{
+	return true;
+}

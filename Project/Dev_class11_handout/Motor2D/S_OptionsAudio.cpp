@@ -82,3 +82,13 @@ void S_OptionsAudio::OnGui(Gui* ui, GuiEvent event)
 		App->scene->Show(Scene_ID::options);
 	}
 }
+
+bool S_OptionsAudio::Save(pugi::xml_node& node) const
+{
+	return true;
+}
+
+bool S_OptionsAudio::Load(pugi::xml_node& node)
+{
+	return true;
+}

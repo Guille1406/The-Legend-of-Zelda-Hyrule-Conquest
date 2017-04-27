@@ -18,6 +18,8 @@ public:
 	bool Start();
 	bool Update();
 	bool Clean();
+	bool Save(pugi::xml_node&) const;
+	bool Load(pugi::xml_node&);
 	void OnGui(Gui* ui, GuiEvent event);
 private:
 	SDL_Rect title_rec =			{ 0,0,493,211 };

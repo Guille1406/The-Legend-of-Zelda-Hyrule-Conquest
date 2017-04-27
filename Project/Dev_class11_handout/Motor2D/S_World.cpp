@@ -134,3 +134,13 @@ bool S_World::Clean()
 
 	return false;
 }
+
+bool S_World::Save(pugi::xml_node& node) const
+{
+	return true;
+}
+
+bool S_World::Load(pugi::xml_node& node)
+{
+	return true;
+}

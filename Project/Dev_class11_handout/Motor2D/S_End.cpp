@@ -49,3 +49,13 @@ bool S_End::Clean()
 	App->tex->UnLoad(finale_texture);
 	return false;
 }
+
+bool S_End::Save(pugi::xml_node& node) const
+{
+	return true;
+}
+
+bool S_End::Load(pugi::xml_node& node)
+{
+	return true;
+}

@@ -54,11 +54,9 @@ public:
 	virtual bool Awake(pugi::xml_node& conf) {
 		return true;
 	};
-
 	virtual bool Start() {
 		return true;
 	};
-	
 	virtual bool PreUpdate() {
 		return true;
 	};
@@ -69,6 +67,12 @@ public:
 		return true;
 	};
 	virtual bool Clean() {
+		return true;
+	}
+	virtual bool Load(pugi::xml_node&){
+		return true;
+	}
+	virtual bool Save(pugi::xml_node&) const{
 		return true;
 	}
 	virtual void OnGui(Gui* ui, GuiEvent event)
