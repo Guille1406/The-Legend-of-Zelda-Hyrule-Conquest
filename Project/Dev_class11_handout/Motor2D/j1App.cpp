@@ -471,14 +471,47 @@ bool j1App::LoadGameNow()
 
 			root = data.child("game_state");
 			ret = true;
-			std::list<j1Module*>::iterator item = modules.begin();
-			for (; item != modules.cend() && ret == true; ++item)
-				ret = (*item)->Load(root.child((*item)->name.c_str()));
+
+			switch (WantTo_SaveLoadType)
+			{
+			case SaveLoadType::Module:
+			{
+				std::list<j1Module*>::const_iterator item = modules.cbegin();
+				for (; item != modules.cend() && ret == true; ++item)
+					ret = (*item)->Load(root.append_child((*item)->name.c_str()));
+				if (!ret)
+					LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->name.c_str() : "unknown");
+				break;
+			}
+			case SaveLoadType::Scene:
+			{
+				std::list<MainScene*>::const_iterator item = App->scene->Get_scene_list()->cbegin();
+				for (; item != App->scene->Get_scene_list()->cend() && ret == true; ++item)
+				{
+					if ((*item)->scene_name > Scene_ID::ingamemenu)
+						ret = (*item)->Load(root.append_child((*item)->scene_str.c_str()));
+				}
+				if (!ret)
+					LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->scene_str.c_str() : "unknown");
+				break;
+			}
+			case SaveLoadType::Menu:
+			{
+				std::list<MainScene*>::const_iterator item = App->scene->Get_scene_list()->cbegin();
+				for (; item != App->scene->Get_scene_list()->cend() && ret == true; ++item)
+				{
+					if (((*item)->scene_name > Scene_ID::mainmenu) && ((*item)->scene_name < Scene_ID::ingamemenu))
+						ret = (*item)->Load(root.append_child((*item)->scene_str.c_str()));
+				}
+				if (!ret)
+					LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->scene_str.c_str() : "unknown");
+				break;
+			}
+			}
+
 			data.reset();
 			if(ret == true)
 				LOG("...finished loading");
-			else
-				LOG("...loading process interrupted with error on module %s", ((*item) != NULL) ? (*item)->name.c_str() : "unknown");
 		}
 		else
 			LOG("Could not parse game state xml file %s. pugi error: %s", load_game.c_str(), result.description());
@@ -501,9 +534,44 @@ bool j1App::SavegameNow() const
 	pugi::xml_node root;
 	
 	root = data.append_child("game_state");
-	std::list<j1Module*>::const_iterator item = modules.cbegin();
-	for (; item != modules.cend() && ret == true; ++item)
-		ret = (*item)->Save(root.append_child((*item)->name.c_str()));
+
+	switch (WantTo_SaveLoadType)
+	{
+	case SaveLoadType::Module:
+	{
+		std::list<j1Module*>::const_iterator item = modules.cbegin();
+		for (; item != modules.cend() && ret == true; ++item)
+			ret = (*item)->Save(root.append_child((*item)->name.c_str()));
+		if (!ret)
+			LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->name.c_str() : "unknown");
+		break;
+	}
+	case SaveLoadType::Scene:
+	{
+		std::list<MainScene*>::const_iterator item = App->scene->Get_scene_list()->cbegin();
+		for (; item != App->scene->Get_scene_list()->cend() && ret == true; ++item)
+		{
+			if ((*item)->scene_name > Scene_ID::ingamemenu)
+				ret = (*item)->Save(root.append_child((*item)->scene_str.c_str()));
+		}
+		if (!ret)
+			LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->scene_str.c_str() : "unknown");
+		break;
+	}
+	case SaveLoadType::Menu:
+	{
+		std::list<MainScene*>::const_iterator item = App->scene->Get_scene_list()->cbegin();
+		for (; item != App->scene->Get_scene_list()->cend() && ret == true; ++item)
+		{
+			if (((*item)->scene_name > Scene_ID::mainmenu) && ((*item)->scene_name < Scene_ID::ingamemenu))
+				ret = (*item)->Save(root.append_child((*item)->scene_str.c_str()));
+		}
+		if (!ret)
+			LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->scene_str.c_str() : "unknown");
+		break;
+	}
+	}
+
 	if(ret == true)
 	{
 		std::stringstream stream;
@@ -512,10 +580,10 @@ bool j1App::SavegameNow() const
 		fs->Save(save_game.c_str(), stream.str().c_str(), stream.str().length());
 		LOG("... finished saving", save_game.c_str());
 	}
-	else
-		LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->name.c_str() : "unknown");
+
 	data.reset();
 	want_to_save = false;
+
 	return ret;
 }
 

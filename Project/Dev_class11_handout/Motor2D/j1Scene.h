@@ -65,6 +65,11 @@ public:
 
 	bool AnyWorldActive() const;
 
+	const std::list<MainScene*>* Get_scene_list() const
+	{
+		return &scene_list;
+	}
+
 private:
 	bool ShowNewScene(Scene_ID);
 
