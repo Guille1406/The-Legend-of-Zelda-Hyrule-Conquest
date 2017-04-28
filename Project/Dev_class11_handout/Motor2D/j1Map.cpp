@@ -8,7 +8,10 @@
 #include <math.h>
 #include "j1Gui.h"
 #include "j1Player.h"
-#include"j1Window.h"
+#include "j1Window.h"
+
+#include "Brofiler/Brofiler.h"
+
 j1Map::j1Map() : j1Module(), map_loaded(false)
 {
 	name = "map";
@@ -31,6 +34,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 
 void j1Map::Draw(int height)
 {
+	BROFILER_CATEGORY("Map Draw", Profiler::Color::LightYellow);
 	float scale = App->win->GetScale();
 
 	if(map_loaded == false)

@@ -18,6 +18,8 @@
 #include "GuiWindow.h"
 #include "GuiViewport.h"
 
+#include "Brofiler/Brofiler.h"
+
 j1Gui::j1Gui() : j1Module()
 {
 	name = "gui";
@@ -59,6 +61,7 @@ bool j1Gui::PreUpdate()
 // Called each loop iteration
 bool j1Gui::Update(float dt)
 {
+	BROFILER_CATEGORY("j1Gui Update", Profiler::Color::LightYellow);
 	// Draw all guis
 	for (std::list<Gui*>::iterator item = GuiElements.begin(); item != GuiElements.cend(); ++item)
 		if ((*item)->GetPurpose() != AddGuiTo::viewport_purpose)
@@ -98,6 +101,7 @@ bool j1Gui::Update(float dt)
 // Called after all Updates
 bool j1Gui::PostUpdate()
 {
+	BROFILER_CATEGORY("j1Gui PostUpdate", Profiler::Color::LightYellow);
 	// Update all guis
 	std::list<Gui*>* list_to_iterate = nullptr;
 	if (App->console->IsActive())

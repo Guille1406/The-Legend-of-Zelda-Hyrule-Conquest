@@ -28,6 +28,8 @@
 #include "j1GameStartMenuBack.h"
 #include "j1DialogueManager.h"
 
+#include "Brofiler/Brofiler.h"
+
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
@@ -113,6 +115,7 @@ void j1App::AddModule(j1Module* module)
 // Called before render is available
 bool j1App::Awake()
 {
+	BROFILER_CATEGORY("Awake", Profiler::Color::LightYellow);
 	PERF_START(ptimer);
 
 	pugi::xml_document	config_file;
@@ -160,6 +163,7 @@ bool j1App::Awake()
 bool j1App::Start()
 {
 	SDL_StartTextInput();
+	BROFILER_CATEGORY("Start", Profiler::Color::LightYellow);
 	PERF_START(ptimer);
 	bool ret = true;
 
@@ -176,6 +180,7 @@ bool j1App::Start()
 // Called each loop iteration
 bool j1App::Update()
 {
+	BROFILER_CATEGORY("AppUpdate", Profiler::Color::LightYellow);
 	bool ret = true;
 	PrepareUpdate();
 
@@ -259,6 +264,7 @@ void j1App::FinishUpdate()
 // Call modules before each loop iteration
 bool j1App::PreUpdate()
 {
+	BROFILER_CATEGORY("Pre Update", Profiler::Color::LightYellow);
 	bool ret = true;
 	j1Module* pModule = nullptr;
 
@@ -282,6 +288,7 @@ bool j1App::PreUpdate()
 // Call modules on each loop iteration
 bool j1App::DoUpdate()
 {
+	BROFILER_CATEGORY("DoUpdate", Profiler::Color::LightYellow);
 	bool ret = true;
 
 	j1Module* pModule = nullptr;
@@ -305,6 +312,7 @@ bool j1App::DoUpdate()
 // Call modules after each loop iteration
 bool j1App::PostUpdate()
 {
+	BROFILER_CATEGORY("Post Update", Profiler::Color::LightYellow);
 	bool ret = true;
 
 	j1Module* pModule = nullptr;

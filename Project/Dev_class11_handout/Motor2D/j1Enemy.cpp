@@ -9,6 +9,9 @@
 #include"j1Audio.h"
 #include"HyruleBombSoldier_Enemy.h"
 #include"Statue_Enemy.h"
+
+#include "Brofiler/Brofiler.h"
+
 bool j1Enemy::Awake(pugi::xml_node &)
 {
 
@@ -42,6 +45,7 @@ bool j1Enemy::Start()
 
 bool j1Enemy::PreUpdate()
 {
+	BROFILER_CATEGORY("j1Enemy PreUpdate", Profiler::Color::LightYellow);
 	if (!paused) {
 		for (int i = 0; i < V_MyEnemies.size(); i++) {
 			if (V_MyEnemies[i]->tokill == true) {
@@ -70,20 +74,17 @@ bool j1Enemy::PreUpdate()
 
 bool j1Enemy::Update(float dt)
 {
+	BROFILER_CATEGORY("j1Enemy Update", Profiler::Color::LightYellow);
+	for (int i = 0; i < V_MyEnemies.size(); i++)
+		if (!paused) {
 
-		for (int i = 0; i < V_MyEnemies.size(); i++) {
-						
-			if (!paused) {
-				
-				V_MyEnemies[i]->UpdateState();
-				V_MyEnemies[i]->Rang_Player();
-				V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x;
-				V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y;
-				Update_Sword_Collision(V_MyEnemies[i]);
-				V_MyEnemies[i]->Action();
-			}
+			V_MyEnemies[i]->UpdateState();
+			V_MyEnemies[i]->Rang_Player();
+			V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x;
+			V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y;
+			Update_Sword_Collision(V_MyEnemies[i]);
+			V_MyEnemies[i]->Action();
 		}
-
 
 	return true;
 }

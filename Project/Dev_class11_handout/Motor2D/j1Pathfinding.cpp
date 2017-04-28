@@ -5,6 +5,9 @@
 #include"Character.h"
 #include"j1Map.h"
 #include"j1Enemy.h"
+
+#include "Brofiler/Brofiler.h"
+
 ///class Pathfinding ------------------
 // Constructors =======================
 j1Pathfinding::j1Pathfinding()
@@ -101,7 +104,7 @@ PathNode* j1Pathfinding::GetPathNode(int x, int y)
 
 std::vector<iPoint>* j1Pathfinding::SimpleAstar(const iPoint& origin, const iPoint& destination)
 {
-
+	BROFILER_CATEGORY("A star", Profiler::Color::LightYellow);
 	int size = width*height;
 	std::fill(path_nodes, path_nodes + size, PathNode(-1, -1, iPoint(-1, -1), nullptr));
 	iPoint dest_point(destination.x, destination.y);
