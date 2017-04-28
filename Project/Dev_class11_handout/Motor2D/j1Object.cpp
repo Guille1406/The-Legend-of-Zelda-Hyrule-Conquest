@@ -398,6 +398,76 @@ Object * j1Object::CreateColourBlock(pugi::xml_node object, int height)
 	
 }
 
+void j1Object::StartCollision(Collider * collider1, Collider * collider2)
+{
+	Character* character = nullptr;
+	if (collider1->type == collider_link || collider2->type == collider_link)
+		character = App->player->Link;
+	else if (collider1->type == collider_zelda || collider2->type == collider_zelda)
+		character = App->player->Zelda;
+	else if (collider1->type == front_zelda || collider2->type == front_zelda)
+		character = App->player->Zelda;
+	else if (collider1->type == front_link || collider2->type == front_link)
+		character = App->player->Link;
+
+	if (collider1->type == collider_button) {
+		static bool audio = false;
+		if (!audio) {
+			App->audio->PlayFx(App->audio->button_sound);
+			audio = true;
+		}
+		Button* temp = (Button*)collider1->parent;
+		temp->Action();
+		temp->texture_rect = temp->pressed_button;
+	}
+	
+	else if (collider1->type == collider_double_button) {
+		DoubleButton* temp = (DoubleButton*)collider2->parent;
+		temp->characters_on++;
+		temp->Action();
+
+	}
+	
+	else if (collider1->type == collider_warp) {
+		Object* temp = (Object*)collider1->parent;
+		App->player->loop_game_menu = true;
+	}
+	
+	else if (collider1->type == collider_change_height) {
+		ChangeHeight* temp = (ChangeHeight*)collider1->parent;
+		character->ChangeLogicHeightPlayer(temp->height);
+
+	}
+	
+	
+	
+}
+
+void j1Object::OnCollision(Collider * collider1, Collider * collider2)
+{
+	Character* character = nullptr;
+	if (collider1->type == collider_link || collider2->type == collider_link)
+		character = App->player->Link;
+	else if (collider1->type == collider_zelda || collider2->type == collider_zelda)
+		character = App->player->Zelda;
+	else if (collider1->type == front_zelda || collider2->type == front_zelda)
+		character = App->player->Zelda;
+	else if (collider1->type == front_link || collider2->type == front_link)
+		character = App->player->Link;
+	
+	if (collider1->type == collider_jump) {
+		if (character->can_move == false && character->doing_script == false) {
+			App->audio->PlayFx(App->player->Fall_Players_Audio);
+			character->can_jump = true;
+
+		}
+	}
+}
+
+void j1Object::EndCollision(Collider * collider1, Collider * collider2)
+{
+}
+
 
 Object * j1Object::CreateChangeHeight(pugi::xml_node object, int height)
 {

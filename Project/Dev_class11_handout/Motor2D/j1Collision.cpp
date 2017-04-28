@@ -183,9 +183,9 @@ bool j1Collision::Update(float dt)
 					if (matrix[c2->type][c1->type] && c2->callback)
 					{
 						if (c1->parent->logic_height == c2->parent->logic_height) {
-							if(c2->state_collider[k] == im_colliding)
+							if(c1->state_collider[k] == im_colliding)
 								c2->callback->OnCollision(c2, c1);
-							else if(c2->state_collider[k] == start_collision)
+							else if(c1->state_collider[k] == start_collision)
 								c2->callback->StartCollision(c2, c1);
 							
 						}

@@ -353,22 +353,56 @@ void Enemy::Direction_Push_Election_ChSoldier()
 
 void j1Enemy::OnCollision(Collider * collider1, Collider * collider2)
 {
-	int x = 0;
+	Character* character = nullptr;
+	if (collider1->type == collider_link || collider2->type == collider_link)
+		character = App->player->Link;
+	else if (collider1->type == collider_zelda || collider2->type == collider_zelda)
+		character = App->player->Zelda;
+	else if (collider1->type == front_zelda || collider2->type == front_zelda)
+		character = App->player->Zelda;
+	else if (collider1->type == front_link || collider2->type == front_link)
+		character = App->player->Link;
+
+	if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link) {
+		Enemy* n_enemy = (Enemy*)collider1->parent;
+		if (App->player->Link->is_rolling == false) {
+			//if (Link->roll_timer.Read() > 1500) {
+			if (App->player->Link->collision_by_enemy_timmer.Read() > 1500) {
+				App->player->Link->collision_by_enemy_timmer.Start();
+				App->player->Link->actual_event = player_event::push_backwards;
+				App->player->Link->doing_script = true;
+				App->player->Link->Direction_Push_Election();
+				App->player->half_hearts_test_purpose--;
+
+			}
+			//}
+		}
+	}
+	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_zelda) {
+		Enemy* n_enemy = (Enemy*)collider1->parent;
+		if (App->player->Zelda->is_rolling == false) {
+			if (App->player->Link->collision_by_enemy_timmer.Read() > 1500) {
+				App->player->Link->collision_by_enemy_timmer.Start();
+				App->player->Zelda->actual_event = player_event::push_backwards;
+				App->player->Zelda->doing_script = true;
+				App->player->Zelda->Direction_Push_Election();
+				App->player->half_hearts_test_purpose--;
+				
+			}
+
+		}
+	}
 }
 
 void j1Enemy::EndCollision(Collider * collider1, Collider * collider2)
 {
-	int x = 0;
+	
 }
 
 void j1Enemy::StartCollision(Collider* collider1, Collider* collider2)
 {
 
-	if (collider2->type == COLLIDER_TYPE::collider_link_sword && collider1->type == COLLIDER_TYPE::collider_enemy) {
-		Enemy* n_enemy = (Enemy*)collider2->parent;
-		n_enemy->Enemy_Hit_Comprobation(collider1);
-
-	}
+	
 }
 
 void Enemy::Rang_Player() {

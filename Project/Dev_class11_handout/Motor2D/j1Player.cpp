@@ -276,6 +276,8 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		character = Link;
 
 
+	/*TO OBJECT-------
+	------
 	if (collider1->type == collider_button) {
 		static bool audio = false;
 		if (!audio) {
@@ -341,7 +343,9 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 		}
 	}
-	else if (collider1->type == front_link) {
+	-----------
+	-----------*/
+	if (collider1->type == front_link) {
 		if (collider2->type == collider_zelda && !Link->im_lifting)
 			Link->can_pick_up = true;
 
@@ -376,26 +380,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			n_enemy->Enemy_Hit_Comprobation(collider1);
 		}
 	}
-	else if (collider2->type == collider_arrow) {
-		if (collider1->type == collider_diana) {
-			Object* temp = (Object*)collider1->parent;
-			temp->Action();
-		}
-		else {
-			Arrow* arrow_temp = (Arrow*)collider2->parent;
-			arrow_temp->can_move = false;
-			arrow_temp->is_attached = true;
-			arrow_temp->attached_enemy = (Enemy*)collider1->parent;
-			arrow_temp->offset.x = arrow_temp->pos.x - arrow_temp->attached_enemy->pix_world_pos.x;
-			arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pix_world_pos.y;
-
-			if(collider2->type == collider_arrow)
-			collider2->to_delete = true;
-			Enemy* n_enemy = (Enemy*)collider2->parent;
-			n_enemy->Enemy_Hit_Comprobation(collider2);
-		}
-
-	}
+	
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->collision_by_enemy_timmer.Read() > 1500) {
@@ -409,6 +394,9 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			}
 		}
 	}
+
+	/*TO DELETE-------
+	-----------------
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link_sword) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->collision_by_enemy_timmer.Read() > 1500) {
@@ -422,7 +410,8 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			}
 		}
 	}
-
+	-----------
+	----------*/
 	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_enemy) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->is_rolling == false) {
@@ -448,6 +437,9 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		n_enemy->Enemy_Hit_Comprobation(collider1);
 
 	}
+
+	/* TO ENEMY------
+	-----------------
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->is_rolling == false) {
@@ -463,6 +455,12 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			//}
 		}
 	}
+	------------
+	----------*/
+
+
+	/*TO DELETE-------
+	-----------------
 	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->is_rolling == false) {
@@ -478,7 +476,11 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			}
 		}
 	}
+	-----------
+	-----------*/
 
+	/*TO_ENEMY-----
+	---------------
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_zelda) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Zelda->is_rolling == false) {
@@ -492,7 +494,8 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 		}
 	}
-
+	-----------
+	-----------*/
 	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_enemy) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Zelda->is_rolling == false) {

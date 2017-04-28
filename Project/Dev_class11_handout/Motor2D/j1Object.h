@@ -98,6 +98,10 @@ public:
 	Object* CreateFall(pugi::xml_node, int height);
 	Object* CreateColourBlock(pugi::xml_node object, int height);
 
+	void StartCollision(Collider* collider1, Collider* collider2);
+	void OnCollision(Collider* collider1, Collider* collider2);
+	void EndCollision(Collider* collider1, Collider* collider2);
+
 public: 
 	std::vector<Object*> V_Objects;
 	SDL_Texture* objects_texture=	nullptr;
