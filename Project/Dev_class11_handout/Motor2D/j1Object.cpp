@@ -567,8 +567,8 @@ void Entity::LoadAnimation(const char* path)
 	int h = animations.attribute("h").as_int();
 	Frame anim_frame;
 
-	int piv_x = animations.attribute("pX").as_float() *(float)w;
-	int piv_y = animations.attribute("pY").as_float() * (float)h;
+	int piv_x = (int)(animations.attribute("pX").as_float() *(float)w);
+	int piv_y = (int)(animations.attribute("pY").as_float() * (float)h);
 	Animation temp_animation;
 	temp_animation.pivot.x = piv_x;
 	temp_animation.pivot.y = piv_y;
@@ -585,7 +585,7 @@ void Entity::LoadAnimation(const char* path)
 
 
 		if (strcmp(name, last_name)) {
-			temp_animation.speed = 0.05;
+			temp_animation.speed = 0.05f;
 
 			sprites_vector.push_back(temp_animation);
 
@@ -614,8 +614,8 @@ void Entity::LoadAnimation(const char* path)
 		w = temp.attribute("w").as_int();
 		h = temp.attribute("h").as_int();
 
-		temp_animation.pivot.x = temp.attribute("pX").as_float() *(float)w;
-		temp_animation.pivot.y = temp.attribute("pY").as_float() *(float)h;
+		temp_animation.pivot.x = (int)(temp.attribute("pX").as_float() *(float)w);
+		temp_animation.pivot.y = (int)(temp.attribute("pY").as_float() *(float)h);
 
 		anim_frame.rect = { x,y,w,h };
 		anim_frame.pivot = { temp_animation.pivot.x, temp_animation.pivot.y };

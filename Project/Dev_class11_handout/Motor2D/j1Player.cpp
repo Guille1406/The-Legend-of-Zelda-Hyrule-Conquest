@@ -82,10 +82,10 @@ bool j1Player::Start()
 	Zelda->can_move = true;
 	
 	//TEMP
-	Link->sprites_vector[attack * 4 + up].speed = 0.12;
-	Link->sprites_vector[attack * 4 + down].speed = 0.12;
-	Link->sprites_vector[attack * 4 + left].speed = 0.12; 
-	Link->sprites_vector[attack * 4 + right].speed = 0.12;
+	Link->sprites_vector[attack * 4 + up].speed = 0.12f;
+	Link->sprites_vector[attack * 4 + down].speed = 0.12f;
+	Link->sprites_vector[attack * 4 + left].speed = 0.12f; 
+	Link->sprites_vector[attack * 4 + right].speed = 0.12f;
 
 	return true;
 }
@@ -229,8 +229,8 @@ bool j1Player::Move_Camera()
 	static float rest_y;
 	int sum_x = 0;
 	int sum_y = 0;
-	int x = other_character->pos.x * App->win->GetScale() - selected_character->pos.x * App->win->GetScale();
-	int y = other_character->pos.y * App->win->GetScale() - selected_character->pos.y * App->win->GetScale();
+	int x = (int)(other_character->pos.x * App->win->GetScale() - selected_character->pos.x * App->win->GetScale());
+	int y = (int)(other_character->pos.y * App->win->GetScale() - selected_character->pos.y * App->win->GetScale());
 
 	if (x > 0)mult = 1;
 
@@ -358,28 +358,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 	}
 
-	else if (collider1->type == collider_arrow) {
-		if (collider2->type == collider_diana) {
-			Object* temp = (Object*)collider2->parent;
-			if (temp->name == "diana_2") {
-				App->enemy->appear_enemies = true;
-			}
-			temp->Action();
-		}
-		else {
-			Arrow* arrow_temp = (Arrow*)collider1->parent;
-			arrow_temp->can_move = false;
-			arrow_temp->is_attached = true;
-			arrow_temp->attached_enemy = (Enemy*)collider2->parent;
-			arrow_temp->offset.x = arrow_temp->pos.x - arrow_temp->attached_enemy->pix_world_pos.x;
-			arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pix_world_pos.y;
-
-			if(collider1->type == collider_arrow)
-			collider1->to_delete = true;
-			Enemy* n_enemy = (Enemy*)collider2->parent;
-			n_enemy->Enemy_Hit_Comprobation(collider1);
-		}
-	}
+	
 	
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy_sword) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
@@ -584,7 +563,28 @@ void j1Player::EndCollision(Collider * collider1, Collider * collider2)
 
 void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 {
-	
+	if (collider1->type == collider_arrow) {
+		if (collider2->type == collider_diana) {
+			Object* temp = (Object*)collider2->parent;
+			if (temp->name == "diana_2") {
+				App->enemy->appear_enemies = true;
+			}
+			temp->Action();
+		}
+		else {
+			Arrow* arrow_temp = (Arrow*)collider1->parent;
+			arrow_temp->can_move = false;
+			arrow_temp->is_attached = true;
+			arrow_temp->attached_enemy = (Enemy*)collider2->parent;
+			arrow_temp->offset.x = arrow_temp->pos.x - arrow_temp->attached_enemy->pix_world_pos.x;
+			arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pix_world_pos.y;
+
+			if (collider1->type == collider_arrow)
+				collider1->to_delete = true;
+			Enemy* n_enemy = (Enemy*)collider2->parent;
+			n_enemy->Enemy_Hit_Comprobation(collider1);
+		}
+	}
 
 }
 

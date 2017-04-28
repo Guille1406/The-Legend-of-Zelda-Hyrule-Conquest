@@ -108,7 +108,7 @@ void Boss::UpdateLegs()
 void Boss::GetEvent()
 {
 	iPoint diference_point = { App->player->Link->pos.x - centre_pos.x,App->player->Link->pos.y - centre_pos.y };
-	int dist = sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y);
+	int dist = (int)(sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y));
 	if (dist > 300 && can_move) {
 		state = boss_move;
 	}
@@ -226,28 +226,28 @@ void Boss::Attack()
 	static j1Timer following_time;
 	static j1Timer static_foot_time;
 	
-	int actual_dist = sqrt(((App->player->Link->pos.x - centre_pos.x) * (App->player->Link->pos.x - centre_pos.x)) + ((App->player->Link->pos.y - centre_pos.y)) * (App->player->Link->pos.y - centre_pos.y));
+	int actual_dist = (int)(sqrt(((App->player->Link->pos.x - centre_pos.x) * (App->player->Link->pos.x - centre_pos.x)) + ((App->player->Link->pos.y - centre_pos.y)) * (App->player->Link->pos.y - centre_pos.y)));
 	
 
 	
 	if (attacking_foot == nullptr) {
-		int dist = sqrt(((App->player->Link->pos.x - legs->foot1->pos.x) * (App->player->Link->pos.x - legs->foot1->pos.x)) + ((App->player->Link->pos.y - legs->foot1->pos.y)) * (App->player->Link->pos.y - legs->foot1->pos.y));
+		int dist = (int)(sqrt(((App->player->Link->pos.x - legs->foot1->pos.x) * (App->player->Link->pos.x - legs->foot1->pos.x)) + ((App->player->Link->pos.y - legs->foot1->pos.y)) * (App->player->Link->pos.y - legs->foot1->pos.y)));
 		attacking_foot = legs->foot1;
 		
 
-		if (dist > sqrt(((App->player->Link->pos.x - legs->foot2->pos.x) * (App->player->Link->pos.x - legs->foot2->pos.x)) + ((App->player->Link->pos.y - legs->foot2->pos.y)) * (App->player->Link->pos.y - legs->foot2->pos.y))) {
+		if (dist > (int)(sqrt(((App->player->Link->pos.x - legs->foot2->pos.x) * (App->player->Link->pos.x - legs->foot2->pos.x)) + ((App->player->Link->pos.y - legs->foot2->pos.y)) * (App->player->Link->pos.y - legs->foot2->pos.y)))) {
 			attacking_foot = legs->foot2;
-			dist = sqrt(((App->player->Link->pos.x - legs->foot2->pos.x) * (App->player->Link->pos.x - legs->foot2->pos.x)) + ((App->player->Link->pos.y - legs->foot2->pos.y)) * (App->player->Link->pos.y - legs->foot2->pos.y));
+			dist = (int)(sqrt(((App->player->Link->pos.x - legs->foot2->pos.x) * (App->player->Link->pos.x - legs->foot2->pos.x)) + ((App->player->Link->pos.y - legs->foot2->pos.y)) * (App->player->Link->pos.y - legs->foot2->pos.y)));
 
 		}
-		if (dist > sqrt(((App->player->Link->pos.x - legs->foot3->pos.x) * (App->player->Link->pos.x - legs->foot3->pos.x)) + ((App->player->Link->pos.y - legs->foot3->pos.y)) * (App->player->Link->pos.y - legs->foot3->pos.y))) {
+		if (dist > (int)(sqrt(((App->player->Link->pos.x - legs->foot3->pos.x) * (App->player->Link->pos.x - legs->foot3->pos.x)) + ((App->player->Link->pos.y - legs->foot3->pos.y)) * (App->player->Link->pos.y - legs->foot3->pos.y)))) {
 			attacking_foot = legs->foot3;
-			dist = sqrt(((App->player->Link->pos.x - legs->foot3->pos.x) * (App->player->Link->pos.x - legs->foot3->pos.x)) + ((App->player->Link->pos.y - legs->foot3->pos.y)) * (App->player->Link->pos.y - legs->foot3->pos.y));
+			dist = (int)(sqrt(((App->player->Link->pos.x - legs->foot3->pos.x) * (App->player->Link->pos.x - legs->foot3->pos.x)) + ((App->player->Link->pos.y - legs->foot3->pos.y)) * (App->player->Link->pos.y - legs->foot3->pos.y)));
 
 		}
-		if (dist > sqrt(((App->player->Link->pos.x - legs->foot4->pos.x) * (App->player->Link->pos.x - legs->foot4->pos.x)) + ((App->player->Link->pos.y - legs->foot4->pos.y)) * (App->player->Link->pos.y - legs->foot4->pos.y))) {
+		if (dist > (int)(sqrt(((App->player->Link->pos.x - legs->foot4->pos.x) * (App->player->Link->pos.x - legs->foot4->pos.x)) + ((App->player->Link->pos.y - legs->foot4->pos.y)) * (App->player->Link->pos.y - legs->foot4->pos.y)))) {
 			attacking_foot = legs->foot4;
-			dist = sqrt(((App->player->Link->pos.x - legs->foot4->pos.x) * (App->player->Link->pos.x - legs->foot4->pos.x)) + ((App->player->Link->pos.y - legs->foot4->pos.y)) * (App->player->Link->pos.y - legs->foot4->pos.y));
+			dist = (int)(sqrt(((App->player->Link->pos.x - legs->foot4->pos.x) * (App->player->Link->pos.x - legs->foot4->pos.x)) + ((App->player->Link->pos.y - legs->foot4->pos.y)) * (App->player->Link->pos.y - legs->foot4->pos.y)));
 
 		}
 	
@@ -351,7 +351,7 @@ void Boss::CreateColliders()
 				if (App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] != TILE_COL_ID)
 				{
 					iPoint diference_point = { temp.x - centre_pos.x, temp.y - centre_pos.y };
-					int dist = sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y);
+					int dist = (int)(sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y));
 					if ((dist < 120 && dist >= 100) ) {
 						App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = TILE_COL_ID;
 						//object.collider_tiles.push_back(temp);

@@ -6,7 +6,7 @@
 #include "j1Module.h"
 
 class Foot;
-class Legs;
+struct Legs;
 
 
 enum foot_state {

@@ -135,8 +135,8 @@ iPoint j1Map::MapToWorld(int x, int y) const
 	}
 	else if(data.type == MAPTYPE_ISOMETRIC)
 	{
-		ret.x = (x - y) * (data.tile_width * 0.5f);
-		ret.y = (x + y) * (data.tile_height * 0.5f);
+		ret.x =(int)( (x - y) * (data.tile_width * 0.5f));
+		ret.y = (int)((x + y) * (data.tile_height * 0.5f));
 	}
 	else
 	{
