@@ -20,7 +20,7 @@ bool j1Enemy::Start()
 	one_time_appear = 0;
 	appear_enemies = false;
 	enemy_perf = new Enemy();
-	enemy_perf->LoadAnimation("sprites/enemies.xml");
+	enemy_perf->LoadAnimation("sprites/Enemy_green.xml");
 	
 
 	for (int i = 0; i < App->map->V_Enemies.size(); i++) {
