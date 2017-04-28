@@ -6,8 +6,8 @@ HyruleBombSoldier_Enemy::HyruleBombSoldier_Enemy() :Enemy(enemyType::hyrulebombs
 {
 	bomb = new Enemy_Bomb();
 	
-	this->sprites_vector = App->enemy->enemy_perf->sprites_vector;
-	this->entity_texture = App->enemy->enemy_perf->entity_texture;
+	this->sprites_vector = App->enemy->enemy_hyrulebomb_perf->sprites_vector;
+	this->entity_texture = App->enemy->enemy_hyrulebomb_perf->entity_texture;
 	this->ChangeAnimation(1);
 }
 
@@ -17,7 +17,7 @@ HyruleBombSoldier_Enemy::HyruleBombSoldier_Enemy(const HyruleBombSoldier_Enemy& 
 
 	this->collider = chs_enemy.collider;
 	this->logic_height = chs_enemy.logic_height;
-	this->sprites_vector = App->enemy->enemy_perf->sprites_vector;
+	this->sprites_vector = App->enemy->enemy_hyrulebomb_perf->sprites_vector;
 }
 
 HyruleBombSoldier_Enemy::~HyruleBombSoldier_Enemy()
@@ -44,9 +44,16 @@ void HyruleBombSoldier_Enemy::Action()
 	
 
 	off_set = 100;
+	this->Enemy_Orientation = OrientationEnemy::down_enemy;
 	if (player_position.x<pix_world_pos.x) {
+		this->Enemy_Orientation = OrientationEnemy::left_enemy;
 		off_set = -100;
 	}
+	else {
+		this->Enemy_Orientation = OrientationEnemy::right_enemy;
+	}
+
+
 	max_bomb_point.x = pix_world_pos.x + off_set;
 	if (state == EnemyState::throwing_bomb || t<1) {
 		

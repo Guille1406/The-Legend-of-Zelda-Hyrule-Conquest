@@ -7,8 +7,8 @@
 #include"j1Audio.h"
 Championsoldier_Enemy::Championsoldier_Enemy() :Enemy(enemyType::championsoldier_enemy)
 {
-	this->sprites_vector = App->enemy->enemy_perf->sprites_vector;
-	this->entity_texture = App->enemy->enemy_perf->entity_texture;
+	this->sprites_vector = App->enemy->enemy_shield_perf->sprites_vector;
+	this->entity_texture = App->enemy->enemy_shield_perf->entity_texture;
 	this->ChangeAnimation(1);
 }
 
@@ -16,7 +16,7 @@ Championsoldier_Enemy::Championsoldier_Enemy(const Championsoldier_Enemy& chs_en
 {
 	this->collider = chs_enemy.collider;
 	this->logic_height = chs_enemy.logic_height;
-	this->sprites_vector = App->enemy->enemy_perf->sprites_vector;
+	this->sprites_vector = App->enemy->enemy_shield_perf->sprites_vector;
 }
 
 Championsoldier_Enemy::~Championsoldier_Enemy()

@@ -22,9 +22,13 @@ bool j1Enemy::Start()
 {
 	one_time_appear = 0;
 	appear_enemies = false;
-	enemy_perf = new Enemy();
-	enemy_perf->LoadAnimation("sprites/Enemy_green.xml");
-	
+	enemy_green_perf = new Enemy();
+	enemy_green_perf->LoadAnimation("sprites/Enemy_green.xml");
+	enemy_hyrulebomb_perf = new Enemy();
+	enemy_hyrulebomb_perf->LoadAnimation("sprites/Enemy_redsoldier.xml");
+	enemy_shield_perf = new Enemy();
+	enemy_shield_perf->LoadAnimation("sprites/Enemy_shield.xml");
+
 
 	for (int i = 0; i < App->map->V_Enemies.size(); i++) {
 		for (int y = 0; y < App->map->data.height; ++y) {
@@ -143,7 +147,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
 
-		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
+		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,30 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret,(j1Module*) App->enemy);
 		
 

@@ -34,6 +34,7 @@
 #include "S_QuitGame.h"
 #include "S_InGameMenu.h"
 #include "S_End.h"
+#include"Enemy_Test_Scene.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -97,6 +98,11 @@ bool j1Scene::Start()
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::colourpuzzle;
+
+	scene_pointer = new S_Enemy_Test_Scene;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::testenemies;
 	
 	scene_pointer = new S_End;
 	scene_list.push_back(scene_pointer);

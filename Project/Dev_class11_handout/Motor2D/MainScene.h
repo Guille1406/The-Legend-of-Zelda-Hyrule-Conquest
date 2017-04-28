@@ -35,7 +35,8 @@ enum Scene_ID {
 	tempbossroom,
 	colourpuzzle,
 	dungeon,
-	Send, 
+	Send,
+	testenemies,
 
 };
 

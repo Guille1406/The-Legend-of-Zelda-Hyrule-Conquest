@@ -111,7 +111,9 @@ public:
 	
 public:
 	std::vector<Animation*> Green_Enemy_Animation;
-	Enemy* enemy_perf=nullptr;
+	Enemy* enemy_green_perf=nullptr;
+	Enemy* enemy_hyrulebomb_perf = nullptr;
+	Enemy* enemy_shield_perf = nullptr;
 	std::vector<Enemy*> V_MyEnemies;
 	SDL_Texture* green_soldier_tex=nullptr;
 	bool appear_enemies = false;

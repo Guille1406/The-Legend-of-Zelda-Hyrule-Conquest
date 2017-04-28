@@ -7,15 +7,15 @@
 #include"j1Audio.h"
 Green_Enemy::Green_Enemy():Enemy(enemyType::green_enemy)
 {
-	this->sprites_vector = App->enemy->enemy_perf->sprites_vector;
-	this->entity_texture = App->enemy->enemy_perf->entity_texture;
+	this->sprites_vector = App->enemy->enemy_green_perf->sprites_vector;
+	this->entity_texture = App->enemy->enemy_green_perf->entity_texture;
 	this->ChangeAnimation(1);
 }
 Green_Enemy::Green_Enemy(const Green_Enemy& g_enemy) :Enemy(enemyType::green_enemy)
 {
 	this->collider = g_enemy.collider;
 	this->logic_height = g_enemy.logic_height;
-	this->sprites_vector = App->enemy->enemy_perf->sprites_vector;
+	this->sprites_vector = App->enemy->enemy_green_perf->sprites_vector;
 
 }
 
