@@ -116,6 +116,7 @@
     <ClCompile Include="j1Timer.cpp" />
     <ClCompile Include="j1Object.cpp" />
     <ClCompile Include="MainScene.cpp" />
+    <ClCompile Include="Rope_Enemy.cpp" />
     <ClCompile Include="SDLQuadtree.cpp" />
     <ClCompile Include="Statue_Enemy.cpp" />
     <ClCompile Include="S_Campaign.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="O_Movable_BLock.h" />
     <ClInclude Include="O_Sign.h" />
     <ClInclude Include="O_Warp.h" />
+    <ClInclude Include="Rope_Enemy.h" />
     <ClInclude Include="SDLQuadtree.h" />
     <ClInclude Include="Statue_Enemy.h" />
     <ClInclude Include="S_Campaign.h" />
