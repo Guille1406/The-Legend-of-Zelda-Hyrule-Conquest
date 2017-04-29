@@ -28,6 +28,8 @@ bool j1Enemy::Start()
 	enemy_hyrulebomb_perf->LoadAnimation("sprites/Enemy_redsoldier.xml");
 	enemy_shield_perf = new Enemy();
 	enemy_shield_perf->LoadAnimation("sprites/Enemy_shield.xml");
+	enemy_statue_perf = new Enemy();
+	enemy_statue_perf->LoadAnimation("sprites/Enemy_armos.xml");
 
 
 	for (int i = 0; i < App->map->V_Enemies.size(); i++) {
@@ -151,10 +153,11 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret,(j1Module*) App->enemy);
 		
 
-		ret->item.up_ofset_item_enemy = { -10, 10 };
-		ret->item.down_ofset_item_enemy = { 12, ret->collider->rect.h - 10 };
-		ret->item.right_ofset_item_enemy = { 10, 30 };
-		ret->item.left_ofset_item_enemy = { -18, 30 };
+		ret->item.up_ofset_item_enemy = { 0, 0 };//This may change
+
+		ret->item.down_ofset_item_enemy = { 20, 10 };
+		ret->item.right_ofset_item_enemy = { 16, 20 };
+		ret->item.left_ofset_item_enemy = { -5, 20 };
 		ret->item.Shield_dimensions = { 20,10 };
 		
 		
@@ -173,7 +176,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
-		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
+		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 
 		//how to know if a enemy is in level one or two
@@ -190,7 +193,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
 
-		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
+		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 		//how to know if a enemy is in level one or two
 		ret->logic_height = height;
@@ -214,7 +217,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 
 		temp->max_bomb_point.x = temp->pix_world_pos.x;
 		temp->max_bomb_point.y = temp->pix_world_pos.y-50;
-		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,42 };
+		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35};
 		temp->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 
 		//how to know if a enemy is in level one or two

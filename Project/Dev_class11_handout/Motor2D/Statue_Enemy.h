@@ -5,7 +5,8 @@
 
 enum state_statue {
 	state1,
-	state2
+	state2,
+	state3
 };
 
 class Statue_Enemy : public Enemy {

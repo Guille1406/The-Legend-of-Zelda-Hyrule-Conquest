@@ -2,8 +2,8 @@
 
 Statue_Enemy::Statue_Enemy() :Enemy(enemyType::statue_enemy)
 {
-	this->sprites_vector = App->enemy->enemy_green_perf->sprites_vector;
-	this->entity_texture = App->enemy->enemy_green_perf->entity_texture;
+	this->sprites_vector = App->enemy->enemy_statue_perf->sprites_vector;
+	this->entity_texture = App->enemy->enemy_statue_perf->entity_texture;
 	this->ChangeAnimation(1);
 }
 
@@ -11,7 +11,7 @@ Statue_Enemy::Statue_Enemy(const Statue_Enemy &g_enemy) :Enemy(enemyType::statue
 {
 	this->collider = g_enemy.collider;
 	this->logic_height = g_enemy.logic_height;
-	this->sprites_vector = App->enemy->enemy_green_perf->sprites_vector;
+	this->sprites_vector = App->enemy->enemy_statue_perf->sprites_vector;
 
 }
 

@@ -31,7 +31,7 @@ enum enemyType {
 	green_enemy = 3847,
 	championsoldier_enemy= 3849,
 	hyrulebombsoldier_enemy= 1498,
-	statue_enemy,
+	statue_enemy= 1495,
 	no_enemy,
 
 };
@@ -114,6 +114,7 @@ public:
 	Enemy* enemy_green_perf=nullptr;
 	Enemy* enemy_hyrulebomb_perf = nullptr;
 	Enemy* enemy_shield_perf = nullptr;
+	Enemy* enemy_statue_perf = nullptr;
 	std::vector<Enemy*> V_MyEnemies;
 	SDL_Texture* green_soldier_tex=nullptr;
 	bool appear_enemies = false;
