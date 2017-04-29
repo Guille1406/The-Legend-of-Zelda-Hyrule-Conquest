@@ -64,7 +64,7 @@ public:
 
 	
 public:
-
+	iPoint max_heigh_jump = { 0,0 };
 	SDL_Rect rect = { 0,0,0,0 };
 	enemyType type= no_enemy;
 	iPoint pix_world_pos = {0, 0};

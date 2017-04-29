@@ -34,6 +34,7 @@ void Statue_Enemy::Action()
 
 		}
 
+
 		int x = ((array_pos.x) - temp_point.x);
 
 
@@ -66,6 +67,25 @@ void Statue_Enemy::Action()
 	}
 	else {
 
+		pix_world_pos.y = (1 - t)*(1 - t)*pix_world_pos.y + 2 * t*(1 - t)*max_heigh_jump.y + t*t*pix_world_pos.y;
+
+		if (t < 1) {
+
+			t += (float)1 / 50;
+		}
+		else {
+			t = 0;
+			if (jump_up) {
+				max_heigh_jump.y = pix_world_pos.y - 50;
+				this->logic_height = 1;
+				jump_up = false;
+			}
+			else {
+				this->logic_height = 0;
+				max_heigh_jump.y = pix_world_pos.y + 50;
+				jump_up = true;
+			}
+		}
 
 	}
 }

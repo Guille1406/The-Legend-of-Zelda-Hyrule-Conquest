@@ -196,6 +196,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 		//how to know if a enemy is in level one or two
+		ret->max_heigh_jump.y = ret->pix_world_pos.y - 50;
 		ret->logic_height = height;
 		break;
 
@@ -536,13 +537,13 @@ void Enemy::UpdateState()
 	}
 }
 
-void Enemy::Enemy_Hit_Comprobation(Collider* collision_type)
+void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 {
 
 	switch (type)
 	{
 	case enemyType::green_enemy:
-		if (collision_type->type == COLLIDER_TYPE::collider_link_sword) {
+		if (collider->type == COLLIDER_TYPE::collider_link_sword) {
 			if (live > 0) {
 				if (App->player->Link->link_sword_impact_sword == false) {
 					App->player->Link->enemy_col_sword_sword_timer.Start();
@@ -560,7 +561,7 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collision_type)
 				tokill = true;
 			}
 		}
-		else if (collision_type->type == COLLIDER_TYPE::collider_arrow) {
+		else if (collider->type == COLLIDER_TYPE::collider_arrow) {
 			if (live > 0) {
 				live--;
 			}
@@ -571,7 +572,7 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collision_type)
 		break;
 
 	case enemyType::championsoldier_enemy:
-		if (collision_type->type == COLLIDER_TYPE::collider_link_sword) {
+		if (collider->type == COLLIDER_TYPE::collider_link_sword) {
 			if (live > 0) {
 				if (App->player->Link->link_sword_impact_sword == false && App->player->Link->Compare_Link_Sword_Collision(this) == false) {
 					App->player->Link->enemy_col_sword_sword_timer.Start();
@@ -592,10 +593,10 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collision_type)
 				tokill = true;
 			}
 		}
-		else if (collision_type->type == COLLIDER_TYPE::collider_arrow) {
+		else if (collider->type == COLLIDER_TYPE::collider_arrow) {
 			bool hit = false;
 			Arrow *temp;
-			temp = (Arrow*)collision_type->parent;
+			temp = (Arrow*)collider->parent;
 				switch (temp->direction) {
 				case arrow_direction::arrow_up:
 					if (Enemy_Orientation==OrientationEnemy::up_enemy)
@@ -629,6 +630,46 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collision_type)
 
 
 
+		break;
+	case enemyType::hyrulebombsoldier_enemy:
+		if (collider->type == COLLIDER_TYPE::collider_arrow && collider->logic_height==this->logic_height) {
+			if (live > 0) {
+				live--;
+			}
+			else {
+				tokill = true;
+			}
+		}
+		break;
+
+	case enemyType::statue_enemy:
+
+		if (collider->type == COLLIDER_TYPE::collider_link_sword) {
+			if (live > 0) {
+				if (App->player->Link->link_sword_impact_sword == false) {
+					App->player->Link->enemy_col_sword_sword_timer.Start();
+					state = EnemyState::push_back_enemy;
+					enemy_doing_script = true;
+					App->audio->PlayFx(App->enemy->enemy_dies_audio);
+					live--;
+				}
+				else {
+					App->player->Link->link_sword_impact_sword = false;
+				}
+			}
+			else {
+				App->audio->PlayFx(App->enemy->enemy_dies_audio);
+				tokill = true;
+			}
+		}
+		else if (collider->type == COLLIDER_TYPE::collider_arrow) {
+			if (live > 0) {
+				live--;
+			}
+			else {
+				tokill = true;
+			}
+		}
 		break;
 
 	}
