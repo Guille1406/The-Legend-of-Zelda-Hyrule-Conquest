@@ -18,9 +18,11 @@ public:
 	//void Rang_Player();
 public:
 	iPoint temp_point = { 0,0 };
-	state_statue state = state1;
+	state_statue state_statue = state1;
 	float t = 0;
-	bool jump_up = false;
+	iPoint first_point = {0,0};
+	iPoint last_point = { 0,0 };
+
 };
 
 

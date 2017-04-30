@@ -66,26 +66,63 @@ void Statue_Enemy::Action()
 		}
 	}
 	else {
-
-		pix_world_pos.y = (1 - t)*(1 - t)*pix_world_pos.y + 2 * t*(1 - t)*max_heigh_jump.y + t*t*pix_world_pos.y;
-
-		if (t < 1) {
-
-			t += (float)1 / 50;
-		}
-		else {
-			t = 0;
-			if (jump_up) {
+		if (!enemy_doing_script) {
+			if (this->state != jumping) {
+				first_point = pix_world_pos;
 				max_heigh_jump.y = pix_world_pos.y - 50;
-				this->logic_height = 1;
-				jump_up = false;
+				if (player_in_range->pos.x < pix_world_pos.x) {
+					last_point.x = pix_world_pos.x - 50;
+				}
+				else {
+					last_point.x = pix_world_pos.x + 50;
+				}
+				last_point.y = (player_in_range->pos.y + pix_world_pos.y) / 2;
+			}
+
+			if (abs(first_point.x - last_point.x) > abs(first_point.y - last_point.y)) {
+				if (first_point.x < last_point.x) {
+					Enemy_Orientation = OrientationEnemy::right_enemy;
+				}
+				else {
+					Enemy_Orientation = OrientationEnemy::left_enemy;
+				}
 			}
 			else {
-				this->logic_height = 0;
-				max_heigh_jump.y = pix_world_pos.y + 50;
-				jump_up = true;
+				if (first_point.y < last_point.y) {
+					Enemy_Orientation = OrientationEnemy::down_enemy;
+				}
+				else {
+					Enemy_Orientation = OrientationEnemy::up_enemy;
+				}
 			}
-		}
 
+			pix_world_pos.y = (1 - t)*(1 - t)*first_point.y + 2 * t*(1 - t)*max_heigh_jump.y + t*t*last_point.y;
+
+			if (t < 1) {
+
+				t += (float)1 / 50;
+
+			}
+			else {
+				t = 0;
+				this->logic_height = 0;
+				first_point = last_point;
+				if (player_in_range->pos.x < pix_world_pos.x) {
+					last_point.x = pix_world_pos.x - 50;
+				}
+				else {
+					last_point.x = pix_world_pos.x + 50;
+				}
+				max_heigh_jump.y = pix_world_pos.y - 50;
+				last_point.y = (player_in_range->pos.y + pix_world_pos.y) / 2;
+			}
+
+		}
+		else {
+			if(script_timer.Read()>1000)
+			enemy_doing_script = false;
+		}
 	}
+	
+	
 }

@@ -537,6 +537,9 @@ void Enemy::UpdateState()
 			if (type == enemyType::hyrulebombsoldier_enemy) {
 				state = EnemyState::throwing_bomb;
 			}
+			else if (type == enemyType::statue_enemy) {
+				state = EnemyState::jumping;
+			}
 			else {
 				state = EnemyState::following_player;
 			}
@@ -547,7 +550,9 @@ void Enemy::UpdateState()
 			Direction_Push_Election_ChSoldier();
 		}
 		else {
-			Direction_Push_Election();
+			if (type != enemyType::statue_enemy) {
+				Direction_Push_Election();
+			}
 		}
 	}
 }
@@ -663,8 +668,9 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 			if (live > 0) {
 				if (App->player->Link->link_sword_impact_sword == false) {
 					App->player->Link->enemy_col_sword_sword_timer.Start();
-					state = EnemyState::push_back_enemy;
+					state = EnemyState::stunned;
 					enemy_doing_script = true;
+					script_timer.Start();
 					App->audio->PlayFx(App->enemy->enemy_dies_audio);
 					live--;
 				}

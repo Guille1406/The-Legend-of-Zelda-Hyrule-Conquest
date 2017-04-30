@@ -17,6 +17,9 @@ enum EnemyState {
 	following_player,
 	push_back_enemy,
 	throwing_bomb,
+	jumping,
+	stunned,
+
 };
 
 enum OrientationEnemy{
@@ -84,6 +87,7 @@ public:
 	bool temp = false;
 	EnemyState state= doing_path;
 	bool enemy_doing_script=false;
+	j1Timer script_timer;
 };
 
 class j1Enemy : public j1Module {
