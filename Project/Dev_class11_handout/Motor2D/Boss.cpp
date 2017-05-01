@@ -405,19 +405,26 @@ void Boss::LaserAttack()
 
 	}
 
+	iPoint vect = { 0,0 };
+	float angle = 0;
 	if (laser_charging_time.Read() < 2000) {
 		for (float i = 0; i < 1; i += 1.0f / 20.0f) {
 			int x = focus_eye.x * (1 - i) + App->player->Zelda->pos.x * i;
 			int y = focus_eye.y * (1 - i) + App->player->Zelda->pos.y * i;
-			App->render->Blit(laser_texture, x, y);
+			vect = { App->player->Zelda->pos.x - focus_eye.x, App->player->Zelda->pos.y - focus_eye.y };
+			angle = atan2(vect.y, vect.x) * 57.2957795;
+			App->render->Blit(laser_texture, x, y,NULL,1.0f,angle);
 			focus_point_before_attack = { App->player->Zelda->pos.x,App->player->Zelda->pos.y };
+			
 		}
 	}
 	if (laser_charging_time.Read() > 2000 && laser_charging_time.Read() < 2500) {
 		for (float i = 0; i < 1; i += 1.0f / 20.0f) {
 			int x = focus_eye.x * (1 - i) + focus_point_before_attack.x * i;
 			int y = focus_eye.y * (1 - i) + focus_point_before_attack.y * i;
-			App->render->Blit(laser_texture, x, y);
+			vect = { App->player->Zelda->pos.x - focus_eye.x, App->player->Zelda->pos.y - focus_eye.y };
+			angle = atan2(vect.y, vect.x) * 57.2957795;
+			App->render->Blit(laser_texture, x, y, NULL, 1.0f, angle);
 			
 		}
 	}
