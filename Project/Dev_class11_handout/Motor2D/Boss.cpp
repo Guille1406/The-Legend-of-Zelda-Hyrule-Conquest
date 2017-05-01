@@ -442,10 +442,25 @@ void Foot::Draw()
 {
 	int x = 0;
 	int y = 0;
-	for (float i = 0; i <= 1; i += 0.01f) {
+	fPoint point1 = { 0,0 };
+	fPoint point2 = { 0,0 };
+	fPoint vect = { 0,0 };
+	fPoint temp = { 1,0 };
+	float cos_angle = 0;
+	float angle = 0;
+	SDL_Rect section = { 0,0,16,16 };
+	for (float i = 0; i <= 1; i += 1.0f/10.0f) {
 		x = ((1-i)*(1-i) * pos.x + 2*i*(1-i)*max_point.x + i*i*pivot_point.x);
 		y = ((1 - i)*(1 - i) * pos.y + 2 * i*(1 - i)*max_point.y + i*i*pivot_point.y);
-		App->render->Blit(leg, x, y);
+		point1 = { pos.x*(1 - i) + max_point.x*i,pos.y * (1 - i) + max_point.y * i };
+		point2 = { max_point.x*(1 - i) + pivot_point.x*i,max_point.y * (1 - i) + pivot_point.y * i };
+		//point1 = {pivot_point.x*(1-i) + max_point.y*i,pivot_point.y}
+		vect = { point2.x - point1.x,point2.y - point1.y };
+		//cos_angle = (vect.x * temp.x - vect.y*temp.y) / (sqrt(vect.x*vect.x + vect.y*vect.y)*sqrt(temp.x*temp.x + temp.y*temp.y));
+		angle = atan2(vect.y, vect.x) * 57.2957795;
+		//angle = acos(cos_angle)* 57.2957795;
+
+		App->render->Blit(leg, x, y, &section,1.0f,angle);
 	}
 	//App->render->Blit(leg, pos.x, pos.y);
 }
