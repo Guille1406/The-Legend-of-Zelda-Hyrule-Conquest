@@ -23,6 +23,7 @@ j1Collision::j1Collision()
 	matrix[collider_link][collider_fall] = true;
 	matrix[collider_link][coolider_bomb_explosion] = true;
 	matrix[collider_link][collider_colour_block] = true;
+	matrix[collider_link][collider_boss_foot] = true;
 	//FRONT LINK
 	matrix[front_link][collider_jump] = true;
 	matrix[front_link][collider_zelda] = true;
@@ -37,16 +38,19 @@ j1Collision::j1Collision()
 	matrix[collider_zelda][collider_fall] = true;
 	matrix[collider_zelda][coolider_bomb_explosion] = true;
 	matrix[collider_zelda][collider_colour_block] = true;
+	matrix[collider_zelda][collider_boss_foot] = true;
 	//FRONT ZELDA
 	matrix[front_zelda][collider_jump] = true;
 
 	//ARROW
 	matrix[collider_arrow][collider_enemy] = true;
 	matrix[collider_arrow][collider_diana] = true;
+	matrix[collider_arrow][collider_boss_eye] = true;
 
 	//sword
 	matrix[collider_link_sword][collider_enemy] = true;
 	matrix[collider_link_sword][collider_enemy_sword] = true;
+	matrix[collider_link_sword][collider_boss_foot] = true;
 	matrix[collider_enemy_sword][collider_link_sword] = true;
 
 	matrix[collider_enemy_sword][collider_zelda] = true;
@@ -93,6 +97,11 @@ j1Collision::j1Collision()
 	matrix[collider_colour_block][collider_link] = true;
 	matrix[collider_colour_block][collider_zelda] = true;
 	
+	//BOSS FOOT & EYE
+	matrix[collider_boss_foot][collider_link] = true;
+	matrix[collider_boss_foot][collider_zelda] = true;
+	matrix[collider_boss_foot][collider_link_sword] = true;
+	matrix[collider_boss_eye][collider_arrow] = true;
 }
 
 // Destructor
@@ -266,6 +275,12 @@ void j1Collision::DebugDraw()
 		}
 		case collider_jump:
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, 255);
+			break;
+		case collider_boss_foot:
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, 255);
+			break;
+		case collider_boss_eye:
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, 255);
 			break;
 		case collider_enemy:
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);

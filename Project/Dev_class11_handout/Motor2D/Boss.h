@@ -4,10 +4,16 @@
 #include "j1Collision.h"
 #include "j1App.h"
 #include "j1Module.h"
+#include "Character.h"
 
 class Foot;
 struct Legs;
 
+enum boss_phase {
+	boss_phase_1,
+	boss_phase_2,
+	boss_phase_3
+};
 
 enum foot_state {
 	foot_idle,
@@ -20,7 +26,9 @@ enum foot_state {
 enum boss_state {
 	boss_idle,
 	boss_move,
-	boss_attack,
+	boss_attack_link,
+	boss_attack_zelda,
+	boss_attack_both,
 	boss_damaged,
 	boss_charging_laser,
 	boss_laser,
@@ -34,7 +42,8 @@ public:
 	void GetEvent();
 	void ExecuteEvent();
 	void Move();
-	void Attack();
+	void Attack(Character* focused_character);
+	void LaserAttack();
 	void CreateColliders();
 	void DeleteColliders();
 
@@ -44,14 +53,16 @@ public:
 	iPoint pos;
 
 	bool im_attacking = false;
+	bool im_attacking_laser = false;
 	bool can_attack = false;
 	bool can_move = true;
 	SDL_Texture* boss_texture;
+	SDL_Texture* laser_texture;
 	Legs* legs;
 	iPoint centre_pos = {0,0};
 	boss_state state = boss_idle;
 	Foot* attacking_foot = nullptr;
-
+	boss_phase actual_phase = boss_phase_1;
 
 	int moving_state = 0;
 	float count = 0;

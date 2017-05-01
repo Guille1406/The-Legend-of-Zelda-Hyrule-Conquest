@@ -54,6 +54,7 @@ public:
 public:
 	int logic_height=	0;
 	Collider* collider= nullptr;
+	Collider* eye_collider = nullptr;
 	int	last_animation =		 0;
 	std::string					sprites_folder = empty_char;
 	pugi::xml_document			sprites_file;

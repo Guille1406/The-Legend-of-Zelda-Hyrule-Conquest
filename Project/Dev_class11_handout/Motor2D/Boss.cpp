@@ -50,29 +50,7 @@ Legs::Legs(const Legs& obj) {
 Legs::~Legs()
 {
 	
-	/*
-	foot1->parent_offset = { 50,30 };
-	foot1->pos = { parent_boss->centre_pos.x - 200, parent_boss->centre_pos.y };
-	foot1->pivot_point = { parent_boss->pos.x + foot1->parent_offset.x, parent_boss->pos.y + foot1->parent_offset.y };
-	foot1->max_point = { (int)(foot1->pos.x - (float)(foot1->pos.x - foot1->pivot_point.x) / 1.5),foot1->pivot_point.y - 50 - abs(foot1->pos.y - foot1->pivot_point.y) };
-
-	foot2->parent_offset = { 180,30 };
-	foot2->pos = { parent_boss->centre_pos.x + 200, parent_boss->centre_pos.y };
-	foot2->pivot_point = { parent_boss->pos.x + foot2->parent_offset.x, parent_boss->pos.y + foot2->parent_offset.y };
-	foot2->max_point = { (int)(foot2->pos.x - (float)(foot2->pos.x - foot2->pivot_point.x) / 1.5),foot2->pivot_point.y - 50 - abs(foot2->pos.y - foot2->pivot_point.y) };
-
-
-	foot3->pos = { parent_boss->centre_pos.x - 200, parent_boss->centre_pos.y + 150 };
-	foot3->parent_offset = { 50,180 };
-	foot3->pivot_point = { parent_boss->pos.x + foot3->parent_offset.x, parent_boss->pos.y + foot3->parent_offset.y };
-	foot3->max_point = { (int)(foot3->pos.x - (float)(foot3->pos.x - foot3->pivot_point.x) / 1.5),foot3->pivot_point.y - 50 - abs(foot3->pos.y - foot3->pivot_point.y) };
-
-
-	foot4->pos = { parent_boss->centre_pos.x + 200, parent_boss->centre_pos.y + 150 };
-	foot4->parent_offset = { 180,180 };
-	foot4->pivot_point = { parent_boss->pos.x + foot4->parent_offset.x, parent_boss->pos.y + foot4->parent_offset.y };
-	foot4->max_point = { (int)(foot4->pos.x - (float)(foot4->pos.x - foot4->pivot_point.x) / 1.5),foot4->pivot_point.y - 50 - abs(foot4->pos.y - foot4->pivot_point.y) };
-	*/
+	
 }
 
 void Boss::Draw(int height)
@@ -103,23 +81,57 @@ void Boss::UpdateLegs()
 	legs->foot3->collider->SetPos(legs->foot3->pos.x, legs->foot3->pos.y, legs->foot3->logic_height);
 	legs->foot4->collider->SetPos(legs->foot4->pos.x, legs->foot4->pos.y, legs->foot4->logic_height);
 	collider->SetPos(pos.x, pos.y, logic_height);
+	eye_collider->SetPos(centre_pos.x, centre_pos.y, logic_height + 1);
+	
 }
 
 void Boss::GetEvent()
 {
-	iPoint diference_point = { App->player->Link->pos.x - centre_pos.x,App->player->Link->pos.y - centre_pos.y };
-	int dist = (int)(sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y));
-	if (dist > 300 && can_move) {
+	if (state == boss_idle)
+		int x = 0;
+	iPoint diference_point_link = { App->player->Link->pos.x - centre_pos.x,App->player->Link->pos.y - centre_pos.y };
+	iPoint diference_point_zelda = { App->player->Zelda->pos.x - centre_pos.x,App->player->Zelda->pos.y - centre_pos.y };
+	int dist_link = (int)(sqrt(diference_point_link.x *diference_point_link.x + diference_point_link.y * diference_point_link.y));
+	int dist_zelda = (int)(sqrt(diference_point_zelda.x *diference_point_zelda.x + diference_point_zelda.y * diference_point_zelda.y));
+	if (dist_link > 300 && dist_zelda >400 && can_move) {
 		state = boss_move;
 	}
 	else if(can_attack) {
-		state = boss_attack;
+		switch (actual_phase) {
+		case boss_phase_1:
+			if (dist_link <= 300)
+				state = boss_attack_link;
+			else if(dist_zelda <=300)
+				state = boss_attack_zelda;
+			break;
+		case boss_phase_2:
+			if (!im_attacking) {
+				if (dist_link / 300.0f < dist_zelda / 400.0f)
+					state = boss_attack_link;
+				else if (state != boss_attack_link)
+					state = boss_attack_zelda;
+			}
+			break;
+		case boss_phase_3:
+			
+				if (dist_link < 300 && dist_zelda> 400 && !im_attacking_laser)
+					state = boss_attack_link;
+				else if (dist_link > 300 && dist_zelda < 400 && !im_attacking)
+					state = boss_attack_zelda;
+				else if(dist_link < 300 && dist_zelda < 400)
+					state = boss_attack_both;
+			
+		}
+		
 	}
 	
 }
 
 void Boss::ExecuteEvent()
 {
+	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
+		actual_phase = boss_phase_3;
+	}
 	if (attacking_foot != nullptr) {
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && attacking_foot->actual_foot_state == after_attack) {
 			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 + 32 };
@@ -142,10 +154,20 @@ void Boss::ExecuteEvent()
 			attacking_foot = nullptr;
 			Move();
 		}
-		if (state == boss_attack) {
-			Attack();
-		
+		if (state == boss_attack_link) {
+			Attack(App->player->Link);		
 	}
+		if (state == boss_attack_zelda) {
+			if (actual_phase == boss_phase_1)
+				Attack(App->player->Zelda);
+			else {
+				LaserAttack();
+			}
+		}
+		if (state == boss_attack_both) {
+			Attack(App->player->Link);
+			LaserAttack();
+		}
 }
 
 void Boss::Move()
@@ -212,7 +234,7 @@ void Boss::Move()
 
 }
 
-void Boss::Attack()
+void Boss::Attack(Character* focused_character)
 {
 	
 	static float inc_x = 0;
@@ -225,34 +247,35 @@ void Boss::Attack()
 
 	static j1Timer following_time;
 	static j1Timer static_foot_time;
+
 	
-	int actual_dist = (int)(sqrt(((App->player->Link->pos.x - centre_pos.x) * (App->player->Link->pos.x - centre_pos.x)) + ((App->player->Link->pos.y - centre_pos.y)) * (App->player->Link->pos.y - centre_pos.y)));
+	int actual_dist = (int)(sqrt(((focused_character->pos.x - centre_pos.x) * (focused_character->pos.x - centre_pos.x)) + ((focused_character->pos.y - centre_pos.y)) * (focused_character->pos.y - centre_pos.y)));
 	
 
 	
 	if (attacking_foot == nullptr) {
-		int dist = (int)(sqrt(((App->player->Link->pos.x - legs->foot1->pos.x) * (App->player->Link->pos.x - legs->foot1->pos.x)) + ((App->player->Link->pos.y - legs->foot1->pos.y)) * (App->player->Link->pos.y - legs->foot1->pos.y)));
+		int dist = (int)(sqrt(((focused_character->pos.x - legs->foot1->pos.x) * (focused_character->pos.x - legs->foot1->pos.x)) + ((focused_character->pos.y - legs->foot1->pos.y)) * (focused_character->pos.y - legs->foot1->pos.y)));
 		attacking_foot = legs->foot1;
 		
 
-		if (dist > (int)(sqrt(((App->player->Link->pos.x - legs->foot2->pos.x) * (App->player->Link->pos.x - legs->foot2->pos.x)) + ((App->player->Link->pos.y - legs->foot2->pos.y)) * (App->player->Link->pos.y - legs->foot2->pos.y)))) {
+		if (dist > (int)(sqrt(((focused_character->pos.x - legs->foot2->pos.x) * (focused_character->pos.x - legs->foot2->pos.x)) + ((focused_character->pos.y - legs->foot2->pos.y)) * (focused_character->pos.y - legs->foot2->pos.y)))) {
 			attacking_foot = legs->foot2;
-			dist = (int)(sqrt(((App->player->Link->pos.x - legs->foot2->pos.x) * (App->player->Link->pos.x - legs->foot2->pos.x)) + ((App->player->Link->pos.y - legs->foot2->pos.y)) * (App->player->Link->pos.y - legs->foot2->pos.y)));
+			dist = (int)(sqrt(((focused_character->pos.x - legs->foot2->pos.x) * (focused_character->pos.x - legs->foot2->pos.x)) + ((focused_character->pos.y - legs->foot2->pos.y)) * (focused_character->pos.y - legs->foot2->pos.y)));
 
 		}
-		if (dist > (int)(sqrt(((App->player->Link->pos.x - legs->foot3->pos.x) * (App->player->Link->pos.x - legs->foot3->pos.x)) + ((App->player->Link->pos.y - legs->foot3->pos.y)) * (App->player->Link->pos.y - legs->foot3->pos.y)))) {
+		if (dist > (int)(sqrt(((focused_character->pos.x - legs->foot3->pos.x) * (focused_character->pos.x - legs->foot3->pos.x)) + ((focused_character->pos.y - legs->foot3->pos.y)) * (focused_character->pos.y - legs->foot3->pos.y)))) {
 			attacking_foot = legs->foot3;
-			dist = (int)(sqrt(((App->player->Link->pos.x - legs->foot3->pos.x) * (App->player->Link->pos.x - legs->foot3->pos.x)) + ((App->player->Link->pos.y - legs->foot3->pos.y)) * (App->player->Link->pos.y - legs->foot3->pos.y)));
+			dist = (int)(sqrt(((focused_character->pos.x - legs->foot3->pos.x) * (focused_character->pos.x - legs->foot3->pos.x)) + ((focused_character->pos.y - legs->foot3->pos.y)) * (focused_character->pos.y - legs->foot3->pos.y)));
 
 		}
-		if (dist > (int)(sqrt(((App->player->Link->pos.x - legs->foot4->pos.x) * (App->player->Link->pos.x - legs->foot4->pos.x)) + ((App->player->Link->pos.y - legs->foot4->pos.y)) * (App->player->Link->pos.y - legs->foot4->pos.y)))) {
+		if (dist > (int)(sqrt(((focused_character->pos.x - legs->foot4->pos.x) * (focused_character->pos.x - legs->foot4->pos.x)) + ((focused_character->pos.y - legs->foot4->pos.y)) * (focused_character->pos.y - legs->foot4->pos.y)))) {
 			attacking_foot = legs->foot4;
-			dist = (int)(sqrt(((App->player->Link->pos.x - legs->foot4->pos.x) * (App->player->Link->pos.x - legs->foot4->pos.x)) + ((App->player->Link->pos.y - legs->foot4->pos.y)) * (App->player->Link->pos.y - legs->foot4->pos.y)));
+			dist = (int)(sqrt(((focused_character->pos.x - legs->foot4->pos.x) * (focused_character->pos.x - legs->foot4->pos.x)) + ((focused_character->pos.y - legs->foot4->pos.y)) * (focused_character->pos.y - legs->foot4->pos.y)));
 
 		}
 	
-		inc_x = (float)(App->player->Link->pos.x - attacking_foot->pos.x) / 20;
-		inc_y = (float)((App->player->Link->pos.y - 100) - attacking_foot->pos.y) / 20;
+		inc_x = (float)(focused_character->pos.x - attacking_foot->pos.x) / 20;
+		inc_y = (float)((focused_character->pos.y - 100) - attacking_foot->pos.y) / 20;
 
 		temp_point = { (float)attacking_foot->pos.x, (float)attacking_foot->pos.y };
 		attacking_foot->actual_foot_state = charging;
@@ -266,7 +289,7 @@ void Boss::Attack()
 		
 		static int i = 0;
 		
-		iPoint above_link_point = { App->player->Link->pos.x, App->player->Link->pos.y - 100 };
+		iPoint above_link_point = { focused_character->pos.x, focused_character->pos.y - 100 };
 
 		if (actual_dist > 300 && attacking_foot->actual_foot_state != back_to_start) {
 			attacking_foot->actual_foot_state = back_to_start;
@@ -277,8 +300,8 @@ void Boss::Attack()
 		}
 
 		if (i <20 && attacking_foot->actual_foot_state == charging) {
-			inc_x = (float)(App->player->Link->pos.x - temp_point.x) / 20;
-			inc_y = (float)((App->player->Link->pos.y - 100) - temp_point.y) / 20;
+			inc_x = (float)(focused_character->pos.x - temp_point.x) / 20;
+			inc_y = (float)((focused_character->pos.y - 100) - temp_point.y) / 20;
 			f_foot_pos = { f_foot_pos.x + inc_x, f_foot_pos.y + inc_y };
 			i++;
 			attacking_foot->logic_height = 1;
@@ -290,11 +313,11 @@ void Boss::Attack()
 		}
 		if (attacking_foot->actual_foot_state == following ) {
 			if(following_time.Read() < 2000)
-				f_foot_pos = { (float)App->player->Link->pos.x , (float)(App->player->Link->pos.y - 100) };
+				f_foot_pos = { (float)focused_character->pos.x , (float)(focused_character->pos.y - 100) };
 			else {
 				attacking_foot->actual_foot_state = attacking;
-				inc_x = (float)(App->player->Link->pos.x - attacking_foot->pos.x) / 10;
-				inc_y = (float)((App->player->Link->pos.y) - attacking_foot->pos.y) / 10;
+				inc_x = (float)(focused_character->pos.x - attacking_foot->pos.x) / 10;
+				inc_y = (float)((focused_character->pos.y) - attacking_foot->pos.y) / 10;
 				
 			}
 		}
@@ -325,6 +348,7 @@ void Boss::Attack()
 				attacking_foot->actual_foot_state = foot_idle;
 				im_attacking = false;
 				attacking_foot->logic_height = 0;
+				state = boss_idle;
 			}
 		}
 		
@@ -332,7 +356,79 @@ void Boss::Attack()
 	attacking_foot->pos = { (int)f_foot_pos.x, (int)f_foot_pos.y };
 	if (!im_attacking) {
 		attacking_foot = nullptr;
+		if(!im_attacking_laser)
 		can_move = true;
+		state = boss_idle;
+	}
+}
+
+void Boss::LaserAttack()
+{
+	//EYE POS
+	//         122,10
+	// 16,106           228,106
+	//         122,219
+	iPoint eye_1 = {pos.x + 122,pos.y + 10};
+	iPoint eye_2 = { pos.x + 16,pos.y + 106 };
+	iPoint eye_3 = { pos.x + 228,pos.y + 106 };
+	iPoint eye_4 = { pos.x + 122,pos.y + 219 };
+
+	static iPoint focus_eye = eye_1;
+
+
+	static iPoint focus_point_before_attack = { 0,0 };
+	static j1Timer laser_charging_time;
+	static bool first_loop = true;
+
+	if (first_loop) {
+		can_move = false;
+		im_attacking_laser = true;
+		laser_charging_time.Start();
+		first_loop = false;
+		int dist = (int)(sqrt(((App->player->Zelda->pos.x - eye_1.x) * (App->player->Zelda->pos.x - eye_1.x)) + ((App->player->Zelda->pos.y - eye_1.y)) * (App->player->Zelda->pos.y - eye_1.y)));
+		focus_eye = eye_1;
+		if (dist > (int)(sqrt(((App->player->Zelda->pos.x - eye_2.x) * (App->player->Zelda->pos.x - eye_2.x)) + ((App->player->Zelda->pos.y - eye_2.y)) * (App->player->Zelda->pos.y - eye_2.y)))) {
+			focus_eye = eye_2;
+			dist = (int)(sqrt(((App->player->Zelda->pos.x - eye_2.x) * (App->player->Zelda->pos.x - eye_2.x)) + ((App->player->Zelda->pos.y - eye_2.y)) * (App->player->Zelda->pos.y - eye_2.y)));
+
+		}
+		if (dist > (int)(sqrt(((App->player->Zelda->pos.x - eye_3.x) * (App->player->Zelda->pos.x - eye_3.x)) + ((App->player->Zelda->pos.y - eye_3.y)) * (App->player->Zelda->pos.y - eye_3.y)))) {
+			focus_eye = eye_3;
+			dist = (int)(sqrt(((App->player->Zelda->pos.x - eye_3.x) * (App->player->Zelda->pos.x - eye_3.x)) + ((App->player->Zelda->pos.y - eye_3.y)) * (App->player->Zelda->pos.y - eye_3.y)));
+
+		}
+		if (dist > (int)(sqrt(((App->player->Zelda->pos.x - eye_4.x) * (App->player->Zelda->pos.x - eye_4.x)) + ((App->player->Zelda->pos.y - eye_4.y)) * (App->player->Zelda->pos.y - eye_4.y)))) {
+			focus_eye = eye_4;
+			dist = (int)(sqrt(((App->player->Zelda->pos.x - eye_4.x) * (App->player->Zelda->pos.x - eye_4.x)) + ((App->player->Zelda->pos.y - eye_4.y)) * (App->player->Zelda->pos.y - eye_4.y)));
+
+		}
+
+	}
+
+	if (laser_charging_time.Read() < 2000) {
+		for (float i = 0; i < 1; i += 1.0f / 20.0f) {
+			int x = focus_eye.x * (1 - i) + App->player->Zelda->pos.x * i;
+			int y = focus_eye.y * (1 - i) + App->player->Zelda->pos.y * i;
+			App->render->Blit(laser_texture, x, y);
+			focus_point_before_attack = { App->player->Zelda->pos.x,App->player->Zelda->pos.y };
+		}
+	}
+	if (laser_charging_time.Read() > 2000 && laser_charging_time.Read() < 2500) {
+		for (float i = 0; i < 1; i += 1.0f / 20.0f) {
+			int x = focus_eye.x * (1 - i) + focus_point_before_attack.x * i;
+			int y = focus_eye.y * (1 - i) + focus_point_before_attack.y * i;
+			App->render->Blit(laser_texture, x, y);
+			
+		}
+	}
+	if (laser_charging_time.Read() > 2500) {
+		//Create collider
+		laser_charging_time.Start();
+		first_loop = true;
+		if(!im_attacking)
+		can_move = true;
+		im_attacking_laser = false;
+		state = boss_idle;
 	}
 }
 
@@ -404,11 +500,12 @@ Boss::Boss()
 		temp_legs.parent_boss = this;
 		pos = { 200,200 };
 
-		collider = App->collision->AddCollider({ pos.x,pos.y, 240,240 }, collider_enemy, this, (j1Module*)App->player);
+		collider = App->collision->AddCollider({ pos.x,pos.y, 240,240 }, collider_boss, this, (j1Module*)App->enemy);
 		centre_pos = { pos.x + collider->rect.w / 2 , pos.y + collider->rect.h / 2 };
-
+		eye_collider = App->collision->AddCollider({ centre_pos.x,centre_pos.y, 32,32 }, collider_boss_eye, this, (j1Module*)App->enemy);
 		legs = new Legs(temp_legs);
 		boss_texture = App->tex->Load("textures/boss.png");
+		laser_texture = App->tex->Load("textures/point.png");
 		logic_height = 1;
 		
 	}
@@ -445,7 +542,7 @@ void Foot::Draw()
 	fPoint point1 = { 0,0 };
 	fPoint point2 = { 0,0 };
 	fPoint vect = { 0,0 };
-	fPoint temp = { 1,0 };
+
 	float cos_angle = 0;
 	float angle = 0;
 	SDL_Rect section = { 0,0,16,16 };
@@ -454,15 +551,11 @@ void Foot::Draw()
 		y = ((1 - i)*(1 - i) * pos.y + 2 * i*(1 - i)*max_point.y + i*i*pivot_point.y);
 		point1 = { pos.x*(1 - i) + max_point.x*i,pos.y * (1 - i) + max_point.y * i };
 		point2 = { max_point.x*(1 - i) + pivot_point.x*i,max_point.y * (1 - i) + pivot_point.y * i };
-		//point1 = {pivot_point.x*(1-i) + max_point.y*i,pivot_point.y}
 		vect = { point2.x - point1.x,point2.y - point1.y };
-		//cos_angle = (vect.x * temp.x - vect.y*temp.y) / (sqrt(vect.x*vect.x + vect.y*vect.y)*sqrt(temp.x*temp.x + temp.y*temp.y));
 		angle = atan2(vect.y, vect.x) * 57.2957795;
-		//angle = acos(cos_angle)* 57.2957795;
-
 		App->render->Blit(leg, x, y, &section,1.0f,angle);
 	}
-	//App->render->Blit(leg, pos.x, pos.y);
+
 }
 
 void Foot::UpdatePivots()
@@ -478,7 +571,7 @@ Foot::Foot(const Foot& obj)
 	max_point = obj.max_point;
 	pivot_point = obj.pivot_point;
 	parent_boss = obj.parent_boss;
-	collider = App->collision->AddCollider({ pos.x,pos.y, 36,36 }, collider_enemy, this, (j1Module*)App->player);
+	collider = App->collision->AddCollider({ pos.x,pos.y, 36,36 }, collider_boss_foot, this, (j1Module*)App->enemy);
 	leg = App->tex->Load("textures/point.png");
 	parent_offset = obj.parent_offset;
 }
