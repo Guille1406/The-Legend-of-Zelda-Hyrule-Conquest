@@ -79,11 +79,11 @@ public:
 	//Create & DeleteFire Group
 	void CreateFire_Particle(Arrow* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, iPoint area = { 12, 2 }, iPoint timelife = { 15,5 }, fPoint speed = { 0,0 }, Part_Direction p_direction = Part_Direction::Part_Direc_NULL, int num_particles = 20, int num_textures = 4, bool active_ = false, Wind dir = Wind::Part_Wind_NULL);
 	bool DeleteFire_p(P_Fire* group);
-	/*
-	//Create & Delete Explosion Group
-	void CreateExplosion_Particle(SceneElement* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, Explosion_Type type, iPoint perimeter = { 20, 20 }, iPoint timelife = { 20,10 }, fPoint speed = { 0,0 }, Part_Direction p_direction = Part_Direction::Part_Direc_NULL, int num_particles = 20, int num_textures = 4);
-	bool DeleteExplosion_p(P_Explosion* group);
 
+	//Create & Delete Explosion Group
+	void CreateExplosion_Particle(Arrow* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, Explosion_Type type, iPoint perimeter = { 20, 20 }, iPoint timelife = { 20,10 }, fPoint speed = { 0,0 }, Part_Direction p_direction = Part_Direction::Part_Direc_NULL, int num_particles = 20, int num_textures = 4);
+	bool DeleteExplosion_p(P_Explosion* group);
+	/*
 	//Create & Delete Firework Group
 	void CreateFirework_Particle(SceneElement* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, iPoint timelife = { 15,5 }, fPoint speed = { 0,0 }, Part_Direction p_direction = Part_Direction::Part_Direc_NULL, int num_particles = 20, int num_textures = 4, iPoint next_textures = { 0, 4 }, iPoint last_textures = { 0, 4 });
 	bool DeleteFirework_p(P_Firework* group);

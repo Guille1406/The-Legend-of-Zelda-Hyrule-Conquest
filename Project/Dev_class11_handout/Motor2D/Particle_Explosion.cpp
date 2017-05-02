@@ -1,12 +1,12 @@
 #include "Particle_Explosion.h"
 #include "Particle.h"
-/*
-P_Explosion::P_Explosion(SceneElement* element, iPoint* object, iPoint position_static, SDL_Rect initial_rect, Explosion_Type type, iPoint perimeter_object, iPoint timelife_particle, fPoint speed_particle, Part_Direction p_direction, int num_particles, int num_textures)
+
+P_Explosion::P_Explosion(Arrow* element, iPoint* object, iPoint position_static, SDL_Rect initial_rect, Explosion_Type type, iPoint perimeter_object, iPoint timelife_particle, fPoint speed_particle, Part_Direction p_direction, int num_particles, int num_textures)
 {
 	if (element != nullptr)
 	{
-		pos.x = element->position.x;
-		pos.y = element->position.y;
+		pos.x = element->pos.x;
+		pos.y = element->pos.y;
 		arrow_to_follow = element;
 		object = nullptr;
 	}
@@ -236,4 +236,3 @@ void P_Explosion::MoveParticles()
 		particle[i]->Move(fPoint(particle[i]->GetSpeed().x * temp, particle[i]->GetSpeed().y * temp));
 	}
 }
-*/
