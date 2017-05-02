@@ -11,7 +11,7 @@ class Particle;
 class P_Follow
 {
 public:
-	P_Follow(SceneElement* element_to_follow, iPoint* object_follow, SDL_Rect initial_rect, iPoint area, iPoint timelife, int num_textures, int num_particles, bool active_, bool isMouse);
+	P_Follow(SceneElement* arrow_to_follow, iPoint* object_follow, SDL_Rect initial_rect, iPoint area, iPoint timelife, int num_textures, int num_particles, bool active_, bool isMouse);
 	~P_Follow();
 
 	// Called each loop iteration
@@ -31,7 +31,7 @@ public:
 	//Also, create a pointer to an entity (SceneElement*)
 	//And finally a pointer to an iPoint (iPoint*)
 	std::vector<Particle*> particle;
-	SceneElement* element_to_follow = nullptr;
+	SceneElement* arrow_to_follow = nullptr;
 	iPoint* object_follow = nullptr;
 	//-----------------------------------------------------------------------------
 	//Num of particles

@@ -3,15 +3,13 @@
 #define _P_FIRE_H_
 
 #include "ParticleManager.h"
-/*
-#include "SceneElements.h"
 
 class Particle;
 
 class P_Fire
 {
 public:
-	P_Fire(SceneElement* element_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, iPoint area, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures, bool active_, Wind dir);
+	P_Fire(Arrow* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, iPoint area, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures, bool active_, Wind dir);
 
 	~P_Fire();
 
@@ -29,7 +27,7 @@ public:
 
 public:
 	std::vector<Particle*> particle;
-	SceneElement* element_to_follow = nullptr;
+	Arrow* arrow_to_follow = nullptr;
 	//Num of particles
 	int number_particles = 0;
 
@@ -54,5 +52,4 @@ public:
 	bool godelete = false;
 
 };
-*/
 #endif /*_P_FIRE_H_*/

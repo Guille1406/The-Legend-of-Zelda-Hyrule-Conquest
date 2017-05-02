@@ -13,7 +13,7 @@ P_Follow::P_Follow(SceneElement* element, iPoint* object, SDL_Rect initial_rect,
 	{
 		pos.x = element->position.x;
 		pos.y = element->position.y;
-		element_to_follow = element;
+		arrow_to_follow = element;
 		object_follow = nullptr;
 	}
 	//Otherwise, do it backwards. //element == nullptr and position = object ------
@@ -22,7 +22,7 @@ P_Follow::P_Follow(SceneElement* element, iPoint* object, SDL_Rect initial_rect,
 		pos.x = object->x;
 		pos.y = object->y;
 		object_follow = object;
-		element_to_follow = nullptr;
+		arrow_to_follow = nullptr;
 	}
 	//--------------------------------------------------------------------------------------------
 	area = area_;
@@ -54,10 +54,10 @@ bool P_Follow::Update(float dt)
 	//TODO 5:-------------------------------------------------------------
 	//Here we have to Update the position.
 	//Check if the entity is diferent nullptr. On the contrary, use Update_position(iPoint* pos);
-	if (element_to_follow != nullptr)
+	if (arrow_to_follow != nullptr)
 	{
-		pos.x = element_to_follow->position.x;
-		pos.y = element_to_follow->position.y;
+		pos.x = arrow_to_follow->position.x;
+		pos.y = arrow_to_follow->position.y;
 	}
 	else
 	{

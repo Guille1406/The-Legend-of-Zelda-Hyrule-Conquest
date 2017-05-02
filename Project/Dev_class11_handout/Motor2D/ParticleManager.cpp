@@ -24,10 +24,9 @@ bool ParticleManager::Awake()
 
 bool ParticleManager::Start()
 {
-	/*
 	//texture
 	atlas_particle = App->tex->Load("particles/atlas_particle.png");
-
+	/*
 	//Link Follow
 	Group_Follow.push_back(new P_Follow(App->scene->player, nullptr, SDL_Rect{ 0,6,2,0 }, iPoint(5, 2), iPoint(15, 5), 4, 20, true, true));
 
@@ -48,12 +47,12 @@ bool ParticleManager::PreUpdate()
 
 bool ParticleManager::Update(float dt)
 {
-	/*
 	//SET FIRE
 	if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
 	{
 		Group_Fire.push_back(new P_Fire(nullptr, nullptr, App->input->GetMousePosition(), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(0, -60), Part_Direction::Part_Direc_NULL, 65, 4, true, Wind::Part_Wind_NULL));
 	}
+	/*
 	//FIREWORK
 	if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
 	{
@@ -86,7 +85,7 @@ bool ParticleManager::Update(float dt)
 		item._Ptr->_Myval->Update(dt);
 		item++;
 	}
-
+	*/
 	//Group FIRE -------------------------------------------------
 	std::list<P_Fire*>::iterator item_2 = Group_Fire.begin();
 	while (item_2 != Group_Fire.end())
@@ -94,7 +93,7 @@ bool ParticleManager::Update(float dt)
 		item_2._Ptr->_Myval->Update(dt);
 		item_2++;
 	}
-
+	/*
 	//Group EXPLOSION -------------------------------------------------
 	std::list<P_Explosion*>::iterator item_3 = Group_Explosion.begin();
 	while (item_3 != Group_Explosion.end())
@@ -141,6 +140,7 @@ bool ParticleManager::PostUpdate()
 		item._Ptr->_Myval->PostUpdate();
 		item++;
 	}
+	*/
 	//Group FRIE -------------------------------------------------
 	std::list<P_Fire*>::iterator item_2 = Group_Fire.begin();
 	while (item_2 != Group_Fire.end())
@@ -148,6 +148,7 @@ bool ParticleManager::PostUpdate()
 		item_2._Ptr->_Myval->PostUpdate();
 		item_2++;
 	}
+	/*
 	//Group EXPLOSION -------------------------------------------------
 	std::list<P_Explosion*>::iterator item_3 = Group_Explosion.begin();
 	while (item_3 != Group_Explosion.end())
@@ -173,29 +174,29 @@ bool ParticleManager::CleanUp()
 
 //CREATE GROUPS -------------------------------------------------------------------------------------------------------------------------------------
 /*
-void ParticleManager::CreateFollow_P(SceneElement* element_to_follow, iPoint* object_follow, SDL_Rect initial_rect, iPoint area, iPoint timelife, int num_textures, int num_particles, bool active, bool isMouse)
+void ParticleManager::CreateFollow_P(SceneElement* arrow_to_follow, iPoint* object_follow, SDL_Rect initial_rect, iPoint area, iPoint timelife, int num_textures, int num_particles, bool active, bool isMouse)
 {
-	Group_Follow.push_back(new P_Follow(element_to_follow, object_follow, initial_rect, area, timelife, num_textures, num_particles, active, isMouse));
+	Group_Follow.push_back(new P_Follow(arrow_to_follow, object_follow, initial_rect, area, timelife, num_textures, num_particles, active, isMouse));
+}
+*/
+void ParticleManager::CreateFire_Particle(Arrow* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, iPoint area, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures, bool active, Wind w_dir)
+{
+	Group_Fire.push_back(new P_Fire(arrow_to_follow, object_follow, position_static, initial_rect, area, timelife, speed, p_direction, num_particles, num_textures, active, w_dir));
+}
+/*
+void ParticleManager::CreateExplosion_Particle(SceneElement* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, Explosion_Type type, iPoint perimeter, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures)
+{
+	Group_Explosion.push_back(new P_Explosion(arrow_to_follow, object_follow, position_static, initial_rect, type, perimeter, timelife, speed, p_direction, num_particles, num_textures));
 }
 
-void ParticleManager::CreateFire_Particle(SceneElement* element_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, iPoint area, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures, bool active, Wind w_dir)
+void ParticleManager::CreateFirework_Particle(SceneElement* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures, iPoint next_textures, iPoint last_textures)
 {
-	Group_Fire.push_back(new P_Fire(element_to_follow, object_follow, position_static, initial_rect, area, timelife, speed, p_direction, num_particles, num_textures, active, w_dir));
+	Group_Firework.push_back(new P_Firework(arrow_to_follow, object_follow, position_static, initial_rect, timelife, speed, p_direction, num_particles, num_textures, next_textures, last_textures));
 }
-
-void ParticleManager::CreateExplosion_Particle(SceneElement* element_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, Explosion_Type type, iPoint perimeter, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures)
-{
-	Group_Explosion.push_back(new P_Explosion(element_to_follow, object_follow, position_static, initial_rect, type, perimeter, timelife, speed, p_direction, num_particles, num_textures));
-}
-
-void ParticleManager::CreateFirework_Particle(SceneElement* element_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures, iPoint next_textures, iPoint last_textures)
-{
-	Group_Firework.push_back(new P_Firework(element_to_follow, object_follow, position_static, initial_rect, timelife, speed, p_direction, num_particles, num_textures, next_textures, last_textures));
-}
-
+*/
 
 //DELETE GROUPS -------------------------------------------------------------------------------------------------------------------------------------
-
+/*
 bool ParticleManager::DeleteFollow_p(P_Follow* group)
 {
 	std::list<P_Follow*>::iterator item = Group_Follow.begin();
@@ -209,7 +210,7 @@ bool ParticleManager::DeleteFollow_p(P_Follow* group)
 	}
 	return true;
 }
-
+*/
 bool ParticleManager::DeleteFire_p(P_Fire* group)
 {
 	std::list<P_Fire*>::iterator item = Group_Fire.begin();
@@ -223,7 +224,7 @@ bool ParticleManager::DeleteFire_p(P_Fire* group)
 	}
 	return true;
 }
-
+/*
 bool ParticleManager::DeleteExplosion_p(P_Explosion* group)
 {
 	std::list<P_Explosion*>::iterator item = Group_Explosion.begin();

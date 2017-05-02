@@ -2,14 +2,14 @@
 #include "Particle.h"
 #include "j1Window.h"
 #include "j1Render.h"
-/*
-P_Fire::P_Fire(SceneElement* element, iPoint* object, iPoint position_static, SDL_Rect initial_rect, iPoint area_, iPoint timelife_, fPoint speed_particle, Part_Direction p_direction, int num_particles, int num_textures, bool active_, Wind dir)
+
+P_Fire::P_Fire(Arrow* element, iPoint* object, iPoint position_static, SDL_Rect initial_rect, iPoint area_, iPoint timelife_, fPoint speed_particle, Part_Direction p_direction, int num_particles, int num_textures, bool active_, Wind dir)
 {
 	if (element != nullptr)
 	{
-		pos.x = element->position.x;
-		pos.y = element->position.y;
-		element_to_follow = element;
+		pos.x = element->pos.x;
+		pos.y = element->pos.y;
+		arrow_to_follow = element;
 		object = nullptr;
 	}
 	else if (object != nullptr)
@@ -17,14 +17,14 @@ P_Fire::P_Fire(SceneElement* element, iPoint* object, iPoint position_static, SD
 		pos.x = object->x;
 		pos.y = object->y;
 		object_follow = object;
-		element_to_follow = nullptr;
+		arrow_to_follow = nullptr;
 	}
 	else
 	{
 		pos.x = position_static.x;
 		pos.y = position_static.y;
 		object_follow = nullptr;
-		element_to_follow = nullptr;
+		arrow_to_follow = nullptr;
 	}
 
 	speed = speed_particle;
@@ -57,12 +57,12 @@ P_Fire::~P_Fire()
 
 bool P_Fire::Update(float dt)
 {
-	if (element_to_follow != nullptr && object_follow == nullptr)
+	if (arrow_to_follow != nullptr && object_follow == nullptr)
 	{
-		pos.x = element_to_follow->position.x;
-		pos.y = element_to_follow->position.y;
+		pos.x = arrow_to_follow->pos.x;
+		pos.y = arrow_to_follow->pos.y;
 	}
-	else if (element_to_follow == nullptr && object_follow != nullptr)
+	else if (arrow_to_follow == nullptr && object_follow != nullptr)
 	{
 		Update_position(object_follow);
 	}
@@ -120,4 +120,3 @@ void P_Fire::Update_position(iPoint* element)
 	int temp = App->render->camera.y / scale;
 	pos.y = element->y - temp;
 }
-*/

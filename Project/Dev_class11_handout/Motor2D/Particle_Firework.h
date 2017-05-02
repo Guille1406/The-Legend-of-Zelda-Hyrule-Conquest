@@ -28,7 +28,7 @@ public:
 
 public:
 	std::vector<Particle*> particle;
-	SceneElement* element_to_follow = nullptr;
+	SceneElement* arrow_to_follow = nullptr;
 	//Num of particles
 	int number_particles = 0;
 	int number_multifirework = 0;

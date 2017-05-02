@@ -78,9 +78,9 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(object);
 	AddModule(enemy);
 	AddModule(player);
-	AddModule(particlemanager);
 	AddModule(collision);
 	// gui after all to print above all
+	AddModule(particlemanager);
 	AddModule(hud);
 	AddModule(gui);
 	AddModule(dialoguemanager);

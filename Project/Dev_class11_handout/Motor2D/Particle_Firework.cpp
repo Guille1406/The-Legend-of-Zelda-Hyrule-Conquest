@@ -7,7 +7,7 @@ P_Firework::P_Firework(SceneElement* element, iPoint* object, iPoint position_st
 	{
 		pos.x = element->position.x;
 		pos.y = element->position.y;
-		element_to_follow = element;
+		arrow_to_follow = element;
 		object = nullptr;
 	}
 	else if (object != nullptr)
@@ -15,14 +15,14 @@ P_Firework::P_Firework(SceneElement* element, iPoint* object, iPoint position_st
 		pos.x = object->x;
 		pos.y = object->y;
 		object_follow = object;
-		element_to_follow = nullptr;
+		arrow_to_follow = nullptr;
 	}
 	else
 	{
 		pos.x = position_static.x;
 		pos.y = position_static.y;
 		object_follow = nullptr;
-		element_to_follow = nullptr;
+		arrow_to_follow = nullptr;
 	}
 
 	speed = speed_particle;

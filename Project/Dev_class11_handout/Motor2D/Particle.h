@@ -3,6 +3,7 @@
 #define _PARTICLE_H_
 
 #include "ParticleManager.h"
+#include "P_Zelda.h"
 
 #define TIME_WIND 160
 

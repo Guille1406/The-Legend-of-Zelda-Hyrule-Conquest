@@ -364,5 +364,5 @@ void j1Input::DisconectGamePad(int instanceID)
 
 iPoint j1Input::GetMousePosition()
 {
-	return iPoint(mouse_x, mouse_y);
+	return iPoint(mouse_x / App->win->scale, mouse_y / App->win->scale);
 }
