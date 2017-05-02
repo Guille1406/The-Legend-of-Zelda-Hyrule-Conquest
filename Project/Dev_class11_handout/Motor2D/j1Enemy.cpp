@@ -684,6 +684,35 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 			}
 		}
 		else if (collider->type == COLLIDER_TYPE::collider_arrow) {
+			if (live > 0 && state != EnemyState::stunned) {
+				live--;
+			}
+			else {
+				tokill = true;
+			}
+		}
+		break;
+
+	case enemyType::rope_enemy:
+		if (collider->type == COLLIDER_TYPE::collider_link_sword) {
+			if (live > 0) {
+				if (App->player->Link->link_sword_impact_sword == false) {
+					App->player->Link->enemy_col_sword_sword_timer.Start();
+					state = EnemyState::push_back_enemy;
+					enemy_doing_script = true;
+					App->audio->PlayFx(App->enemy->enemy_dies_audio);
+					live--;
+				}
+				else {
+					App->player->Link->link_sword_impact_sword = false;
+				}
+			}
+			else {
+				App->audio->PlayFx(App->enemy->enemy_dies_audio);
+				tokill = true;
+			}
+		}
+		else if (collider->type == COLLIDER_TYPE::collider_arrow) {
 			if (live > 0) {
 				live--;
 			}

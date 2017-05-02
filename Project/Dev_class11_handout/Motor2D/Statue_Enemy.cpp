@@ -101,7 +101,7 @@ void Statue_Enemy::Action()
 			if (t < 1) {
 
 				t += (float)1 / 50;
-				if (t<=0.25 || t >= 0.75) {
+				if (t<=0.15 || t >= 0.85) {
 					this->logic_height = 0;
 				}
 				else {
