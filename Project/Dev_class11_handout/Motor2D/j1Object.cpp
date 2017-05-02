@@ -425,7 +425,7 @@ void j1Object::StartCollision(Collider * collider1, Collider * collider2)
 	
 	else if (collider1->type == collider_warp) {
 		Object* temp = (Object*)collider1->parent;
-		App->player->loop_game_menu = true;
+		temp->Action();
 	}
 	
 	else if (collider1->type == collider_change_height) {

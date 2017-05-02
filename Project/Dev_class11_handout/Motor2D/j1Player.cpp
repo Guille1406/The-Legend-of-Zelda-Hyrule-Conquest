@@ -2,6 +2,7 @@
 #include "j1Textures.h"
 #include "j1Render.h"
 #include "j1Window.h"
+#include "j1Scene.h"
 #include "j1Pathfinding.h"
 #include <algorithm>
 #include"j1Collision.h"
@@ -82,10 +83,10 @@ bool j1Player::Start()
 	Zelda->can_move = true;
 	
 	//TEMP
-	Link->sprites_vector[attack * 4 + up].speed = 0.12f;
-	Link->sprites_vector[attack * 4 + down].speed = 0.12f;
-	Link->sprites_vector[attack * 4 + left].speed = 0.12f; 
-	Link->sprites_vector[attack * 4 + right].speed = 0.12f;
+	Link->sprites_vector[player_event::attack * 4 + direction::up].speed = 0.12f;
+	Link->sprites_vector[player_event::attack * 4 + direction::down].speed = 0.12f;
+	Link->sprites_vector[player_event::attack * 4 + direction::left].speed = 0.12f;
+	Link->sprites_vector[player_event::attack * 4 + direction::right].speed = 0.12f;
 
 	return true;
 }
@@ -142,6 +143,9 @@ bool j1Player::Update(float dt)
 
 bool j1Player::PostUpdate()
 {
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
+		App->scene->ChangeScene(dungeon_entry);
+	}
 	return true;
 }
 
