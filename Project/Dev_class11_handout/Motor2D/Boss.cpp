@@ -99,26 +99,28 @@ void Boss::GetEvent()
 	else if(can_attack) {
 		switch (actual_phase) {
 		case boss_phase_1:
-			if (dist_link <= 300)
+			if (dist_link <= 300 && dist_link >120)
 				state = boss_attack_link;
-			else if(dist_zelda <=300)
+			else if(dist_zelda <=300 && dist_zelda >120)
 				state = boss_attack_zelda;
 			break;
 		case boss_phase_2:
 			if (!im_attacking) {
 				if (dist_link / 300.0f < dist_zelda / 400.0f)
+					if(dist_link >120)
 					state = boss_attack_link;
 				else if (state != boss_attack_link)
+					if(dist_zelda >120)
 					state = boss_attack_zelda;
 			}
 			break;
 		case boss_phase_3:
 			
-				if (dist_link < 300 && dist_zelda> 400 && !im_attacking_laser)
+				if (dist_link < 300 && dist_link >120 && dist_zelda> 400 && !im_attacking_laser)
 					state = boss_attack_link;
-				else if (dist_link > 300 && dist_zelda < 400 && !im_attacking)
+				else if (dist_link > 300 && dist_zelda < 400 && dist_zelda >120 && !im_attacking)
 					state = boss_attack_zelda;
-				else if(dist_link < 300 && dist_zelda < 400)
+				else if(dist_link < 300 && dist_link >120 && dist_zelda < 400 && dist_zelda >120)
 					state = boss_attack_both;
 			
 		}
@@ -291,7 +293,7 @@ void Boss::Attack(Character* focused_character)
 		
 		iPoint above_link_point = { focused_character->pos.x, focused_character->pos.y - 100 };
 
-		if (actual_dist > 300 && attacking_foot->actual_foot_state != back_to_start) {
+		if ((actual_dist > 300 ||  actual_dist < 120) && attacking_foot->actual_foot_state != back_to_start) {
 			attacking_foot->actual_foot_state = back_to_start;
 			inc_x = (float)(start_foot_point.x - attacking_foot->pos.x) / 40;
 			inc_y = (float)((start_foot_point.y) - attacking_foot->pos.y) / 40;
