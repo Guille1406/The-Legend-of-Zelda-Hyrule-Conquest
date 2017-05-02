@@ -341,7 +341,18 @@ Object * j1Object::CreateWarp(pugi::xml_node object, int height)
 		attribute = attribute.next_sibling();
 	}
 	temp_warp.scene = (Scene_ID)attribute.attribute("value").as_int();
-	
+
+	attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "x") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	temp_warp.warp_pos.x = (Scene_ID)attribute.attribute("value").as_int();
+	attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "y") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	temp_warp.warp_pos.y = (Scene_ID)attribute.attribute("value").as_int();
+
 	Object* ret = new Warp(temp_warp);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_warp, (Entity*)ret, this);
 	V_Objects.push_back(ret);

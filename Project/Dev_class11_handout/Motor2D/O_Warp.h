@@ -19,6 +19,7 @@ public:
 		logic_height = obj.logic_height;
 		scene = obj.scene;
 		texture_rect = { 0,0,0,0 };
+		warp_pos = obj.warp_pos;
 		//texture_rect = idle_button;
 	}
 	~Warp() {
@@ -26,12 +27,14 @@ public:
 	}
 	void Action() {
 		App->scene->ChangeScene(scene);
+		App->player->Link->pos = warp_pos;
+		App->player->Zelda->pos = warp_pos;
 	}
 
 public:
 
 	Scene_ID scene = mainmenu;
-
+	iPoint warp_pos = {0,0};
 };
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="85" height="85" tilewidth="16" tileheight="16" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="85" height="85" tilewidth="16" tileheight="16" nextobjectid="3">
  <properties>
   <property name="scene" type="int" value="22"/>
  </properties>
@@ -377,4 +377,22 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup name="Objects 1">
+  <object id="1" x="800" y="1168" width="32" height="32">
+   <properties>
+    <property name="scene" type="int" value="22"/>
+    <property name="type" value="warp"/>
+    <property name="x" type="int" value="576"/>
+    <property name="y" type="int" value="1296"/>
+   </properties>
+  </object>
+  <object id="2" x="192" y="384" width="32" height="32">
+   <properties>
+    <property name="scene" type="int" value="24"/>
+    <property name="type" value="warp"/>
+    <property name="x" type="int" value="2144"/>
+    <property name="y" type="int" value="608"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
