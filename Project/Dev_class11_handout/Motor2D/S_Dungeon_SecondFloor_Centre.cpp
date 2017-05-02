@@ -33,7 +33,7 @@ bool S_DungeonSecondFloorCentre::Start()
 	App->pathfinding->paused = false;
 
 
-	if (App->map->Load("Colours Puzzle.tmx") == true)
+	if (App->map->Load("Dungeon SecondLevel Up.tmx") == true)
 
 	{
 		int w, h = 0;

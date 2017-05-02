@@ -33,7 +33,7 @@ bool S_DungeonRightDown::Start()
 	App->pathfinding->paused = false;
 
 
-	if (App->map->Load("Colours Puzzle.tmx") == true)
+	if (App->map->Load("Dungeon Right Down.tmx") == true)
 
 	{
 		int w, h = 0;

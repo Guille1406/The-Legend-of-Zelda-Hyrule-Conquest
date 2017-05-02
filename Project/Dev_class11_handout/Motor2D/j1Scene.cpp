@@ -35,6 +35,10 @@
 #include "S_InGameMenu.h"
 #include "S_End.h"
 #include "S_Dungeon_Entry.h"
+#include "S_Dungeon_Right_Down.h"
+#include "S_Dungeon_Right_Up.h"
+#include "S_Dungeon_SecondFloor_Centre.h"
+#include "S_Dungeon_SecondFloor_Right.h"
 
 #include"Enemy_Test_Scene.h"
 
@@ -102,22 +106,22 @@ bool j1Scene::Start()
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::dungeon_entry;
 
-	scene_pointer = new S_DungeonEntry;
+	scene_pointer = new S_DungeonRightDown;
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::dungeon_right_down;
 
-	scene_pointer = new S_DungeonEntry;
+	scene_pointer = new S_DungeonRightUp;
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::dungeon_right_up;
 
-	scene_pointer = new S_DungeonEntry;
+	scene_pointer = new S_DungeonSecondFloorCentre;
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::dungeon_secondfloor_centre;
 
-	scene_pointer = new S_DungeonEntry;
+	scene_pointer = new S_DungeonSecondFloorRight;
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::dungeon_second_floor_right;
