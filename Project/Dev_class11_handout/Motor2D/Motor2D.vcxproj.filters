@@ -232,6 +232,12 @@
     <ClCompile Include="S_Dungeon_SecondFloor_Right.cpp">
       <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
     </ClCompile>
+    <ClCompile Include="SkullRopes_Enemy.cpp">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Rat_Enemy.cpp">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -536,6 +542,12 @@
     </ClInclude>
     <ClInclude Include="S_Dungeon_SecondFloor_Right.h">
       <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="SkullRopes_Enemy.h">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Rat_Enemy.h">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

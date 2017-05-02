@@ -36,6 +36,8 @@ enum enemyType {
 	hyrulebombsoldier_enemy= 3851,
 	statue_enemy= 3853,
 	rope_enemy= 3850,
+	skullrope_enemy=3855,
+	rat_enemy = 3852,
 	no_enemy,
 
 };
@@ -116,11 +118,15 @@ public:
 	
 public:
 	std::vector<Animation*> Green_Enemy_Animation;
+
 	Enemy* enemy_green_perf=nullptr;
 	Enemy* enemy_hyrulebomb_perf = nullptr;
 	Enemy* enemy_shield_perf = nullptr;
 	Enemy* enemy_statue_perf = nullptr;
 	Enemy* enemy_rope_perf = nullptr;
+	Enemy* enemy_skullrope_perf = nullptr;
+	Enemy* enemy_rat_perf = nullptr;
+
 	std::vector<Enemy*> V_MyEnemies;
 	SDL_Texture* green_soldier_tex=nullptr;
 	bool appear_enemies = false;

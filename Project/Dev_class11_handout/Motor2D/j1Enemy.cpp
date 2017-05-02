@@ -10,6 +10,8 @@
 #include"HyruleBombSoldier_Enemy.h"
 #include"Statue_Enemy.h"
 #include"Rope_Enemy.h"
+#include"SkullRopes_Enemy.h"
+#include"Rat_Enemy.h"
 #include "Brofiler/Brofiler.h"
 
 bool j1Enemy::Awake(pugi::xml_node &)
@@ -32,7 +34,10 @@ bool j1Enemy::Start()
 	enemy_statue_perf->LoadAnimation("sprites/Enemy_armos.xml");
 	enemy_rope_perf = new Enemy();
 	enemy_rope_perf->LoadAnimation("sprites/Enemy_rope.xml");
-
+	enemy_skullrope_perf = new Enemy();
+	enemy_skullrope_perf->LoadAnimation("sprites/Enemy_skullrope.xml");
+	enemy_rat_perf = new Enemy();
+	enemy_rat_perf->LoadAnimation("sprites/Enemy_rat.xml");
 
 	for (int i = 0; i < App->map->V_Enemies.size(); i++) {
 		for (int y = 0; y < App->map->data.height; ++y) {
@@ -203,6 +208,38 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 
 	case enemyType::rope_enemy:
 		ret = new Rope_Enemy();
+		ret->rect = { 0,0,44,60 };
+		ret->array_pos = pos_array_enemy;
+		ret->live = 6;
+		//Position in world pixel 
+		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+
+
+		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35 };
+		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
+		//how to know if a enemy is in level one or two
+		ret->logic_height = height;
+		break;
+
+	case enemyType::rat_enemy:
+		ret = new Rat_Enemy();
+		ret->rect = { 0,0,44,60 };
+		ret->array_pos = pos_array_enemy;
+		ret->live = 6;
+		//Position in world pixel 
+		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+
+
+		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35 };
+		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
+		//how to know if a enemy is in level one or two
+		ret->logic_height = height;
+		break;
+
+	case enemyType::skullrope_enemy:
+		ret = new SkullRope_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
 		ret->live = 6;
@@ -561,6 +598,9 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 
 	switch (type)
 	{
+	case enemyType::rat_enemy:
+	case enemyType::skullrope_enemy:
+	case enemyType::rope_enemy:
 	case enemyType::green_enemy:
 		if (collider->type == COLLIDER_TYPE::collider_link_sword) {
 			if (live > 0) {
@@ -691,35 +731,7 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 			}
 		}
 		break;
-
-	case enemyType::rope_enemy:
-		if (collider->type == COLLIDER_TYPE::collider_link_sword) {
-			if (live > 0) {
-				if (App->player->Link->link_sword_impact_sword == false) {
-					App->player->Link->enemy_col_sword_sword_timer.Start();
-					state = EnemyState::push_back_enemy;
-					enemy_doing_script = true;
-					App->audio->PlayFx(App->enemy->enemy_dies_audio);
-					live--;
-				}
-				else {
-					App->player->Link->link_sword_impact_sword = false;
-				}
-			}
-			else {
-				App->audio->PlayFx(App->enemy->enemy_dies_audio);
-				tokill = true;
-			}
-		}
-		else if (collider->type == COLLIDER_TYPE::collider_arrow) {
-			if (live > 0) {
-				live--;
-			}
-			else {
-				tokill = true;
-			}
-		}
-		break;
+	
 
 	}
 }

@@ -122,8 +122,10 @@
     <ClCompile Include="Particle_Fire.cpp" />
     <ClCompile Include="Particle_Firework.cpp" />
     <ClCompile Include="Particle_Follow.cpp" />
+    <ClCompile Include="Rat_Enemy.cpp" />
     <ClCompile Include="Rope_Enemy.cpp" />
     <ClCompile Include="SDLQuadtree.cpp" />
+    <ClCompile Include="SkullRopes_Enemy.cpp" />
     <ClCompile Include="Statue_Enemy.cpp" />
     <ClCompile Include="S_Campaign.cpp" />
     <ClCompile Include="S_ColourPuzzle.cpp" />
@@ -209,8 +211,10 @@
     <ClInclude Include="Particle_Fire.h" />
     <ClInclude Include="Particle_Firework.h" />
     <ClInclude Include="Particle_Follow.h" />
+    <ClInclude Include="Rat_Enemy.h" />
     <ClInclude Include="Rope_Enemy.h" />
     <ClInclude Include="SDLQuadtree.h" />
+    <ClInclude Include="SkullRopes_Enemy.h" />
     <ClInclude Include="Statue_Enemy.h" />
     <ClInclude Include="S_Campaign.h" />
     <ClInclude Include="S_ColourPuzzle.h" />
