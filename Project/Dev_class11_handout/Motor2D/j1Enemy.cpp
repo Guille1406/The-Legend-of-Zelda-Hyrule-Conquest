@@ -116,7 +116,6 @@ bool j1Enemy::CleanUp()
 	for (std::vector<Enemy*>::iterator item = V_MyEnemies.begin(); item != V_MyEnemies.cend(); ++item)
 		delete *item;
 	V_MyEnemies.clear();
-	App->tex->UnLoad(green_soldier_tex);
 	appear_enemies = false;
 	one_time_appear = 0;
 	return true;

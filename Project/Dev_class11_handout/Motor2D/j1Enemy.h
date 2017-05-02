@@ -33,9 +33,9 @@ enum OrientationEnemy{
 enum enemyType {
 	green_enemy = 3847,
 	championsoldier_enemy= 3849,
-	hyrulebombsoldier_enemy= 1498,
-	statue_enemy= 1495,
-	rope_enemy= 1242,
+	hyrulebombsoldier_enemy= 3851,
+	statue_enemy= 3853,
+	rope_enemy= 3850,
 	no_enemy,
 
 };
