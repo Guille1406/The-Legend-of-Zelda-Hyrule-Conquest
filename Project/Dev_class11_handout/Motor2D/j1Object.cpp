@@ -421,12 +421,7 @@ void j1Object::StartCollision(Collider * collider1, Collider * collider2)
 		temp->texture_rect = temp->pressed_button;
 	}
 	
-	else if (collider1->type == collider_double_button) {
-		DoubleButton* temp = (DoubleButton*)collider2->parent;
-		temp->characters_on++;
-		temp->Action();
-
-	}
+	
 	
 	else if (collider1->type == collider_warp) {
 		Object* temp = (Object*)collider1->parent;
@@ -461,6 +456,12 @@ void j1Object::OnCollision(Collider * collider1, Collider * collider2)
 			character->can_jump = true;
 
 		}
+	}
+	else if (collider1->type == collider_double_button) {
+		DoubleButton* temp = (DoubleButton*)collider1->parent;
+		temp->characters_on++;
+		temp->Action();
+
 	}
 }
 
