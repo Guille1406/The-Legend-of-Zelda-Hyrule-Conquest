@@ -46,7 +46,8 @@ void P_Link::Orientation_collider_link_sword()
 
 	}
 	Link_sword->collider = App->collision->AddCollider(Link_sword->Attack_range, COLLIDER_TYPE::collider_link_sword, Link_sword, App->player);
-	
+	//Link_sword->collider->logic_height = App->player->Link->logic_height;
+	//Link_sword->logic_height = App->player->Link->logic_height;
 }
 
 player_event P_Link::GetEvent()

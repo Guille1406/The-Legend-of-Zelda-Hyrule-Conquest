@@ -101,7 +101,12 @@ void Statue_Enemy::Action()
 			if (t < 1) {
 
 				t += (float)1 / 50;
-
+				if (t<=0.5) {
+					this->logic_height = 1;
+				}
+				else {
+					this->logic_height = 0;
+				}
 			}
 			else {
 				t = 0;
@@ -119,8 +124,9 @@ void Statue_Enemy::Action()
 
 		}
 		else {
-			if(script_timer.Read()>1000)
-			enemy_doing_script = false;
+			if (script_timer.Read() > 1000)
+				enemy_doing_script = false;
+			
 		}
 	}
 	

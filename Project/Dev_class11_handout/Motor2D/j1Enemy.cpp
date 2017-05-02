@@ -666,7 +666,7 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 
 		if (collider->type == COLLIDER_TYPE::collider_link_sword) {
 			if (live > 0) {
-				if (App->player->Link->link_sword_impact_sword == false) {
+				if (App->player->Link->link_sword_impact_sword == false && state!= EnemyState::stunned) {
 					App->player->Link->enemy_col_sword_sword_timer.Start();
 					state = EnemyState::stunned;
 					enemy_doing_script = true;

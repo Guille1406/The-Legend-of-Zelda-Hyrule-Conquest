@@ -57,7 +57,7 @@ struct Collider
 		callback(callback),
 		parent(parent)
 	{
-		logic_height = 1;
+		logic_height = parent->logic_height;
 		for (int i = 0; i < MAX_COLLIDERS; i++) {
 			state_collider[i] = not_colliding;
 		}
