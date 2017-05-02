@@ -2,8 +2,9 @@
 #define __j1INPUT_H__
 
 #include "j1Module.h"
+#include "p2Point.h"
 #include "SDL\include\SDL_gamecontroller.h"
-#include<queue>
+#include <queue>
 
 //#define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
@@ -46,8 +47,6 @@ struct GamePad
 	j1JoystickState		controller_axis[NUM_CONTROLLER_AXIS];
 	int					pad_num = -1;
 	int					id = -1;
-
-
 };
 
 class j1Input : public j1Module
@@ -91,15 +90,14 @@ public:
 
 	// Get mouse / axis position
 	void GetMousePosition(int &x, int &y);
+	iPoint GetMousePosition();
 	void GetMouseMotion(int& x, int& y);
 
 	//Get mouse wheel movement
 	int GetMouseWheelMotion() const;
 
-
 	j1KeyState GetControllerButton(int pad, int id) const;
 	
-
 	void AddController(int id);
 	void RemoveController(int id);
 

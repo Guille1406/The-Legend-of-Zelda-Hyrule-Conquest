@@ -199,6 +199,24 @@
     <ClCompile Include="Rope_Enemy.cpp">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle_Explosion.cpp">
+      <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle_Fire.cpp">
+      <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle_Firework.cpp">
+      <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle_Follow.cpp">
+      <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleManager.cpp">
+      <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -471,6 +489,24 @@
     <ClInclude Include="Rope_Enemy.h">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle_Explosion.h">
+      <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle_Fire.h">
+      <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle_Firework.h">
+      <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle_Follow.h">
+      <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleManager.h">
+      <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Desenvolupament  ========">
@@ -541,6 +577,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Scenes\Tutorial">
       <UniqueIdentifier>{c3f11ebf-a1bf-4cfe-8b27-ebfad380564e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Particles">
+      <UniqueIdentifier>{ec65069d-70a3-402b-b30c-a99d1da87ae5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

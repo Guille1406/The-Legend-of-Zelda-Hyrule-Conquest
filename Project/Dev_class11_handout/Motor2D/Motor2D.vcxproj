@@ -116,6 +116,12 @@
     <ClCompile Include="j1Timer.cpp" />
     <ClCompile Include="j1Object.cpp" />
     <ClCompile Include="MainScene.cpp" />
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleManager.cpp" />
+    <ClCompile Include="Particle_Explosion.cpp" />
+    <ClCompile Include="Particle_Fire.cpp" />
+    <ClCompile Include="Particle_Firework.cpp" />
+    <ClCompile Include="Particle_Follow.cpp" />
     <ClCompile Include="Rope_Enemy.cpp" />
     <ClCompile Include="SDLQuadtree.cpp" />
     <ClCompile Include="Statue_Enemy.cpp" />
@@ -192,6 +198,12 @@
     <ClInclude Include="O_Movable_BLock.h" />
     <ClInclude Include="O_Sign.h" />
     <ClInclude Include="O_Warp.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleManager.h" />
+    <ClInclude Include="Particle_Explosion.h" />
+    <ClInclude Include="Particle_Fire.h" />
+    <ClInclude Include="Particle_Firework.h" />
+    <ClInclude Include="Particle_Follow.h" />
     <ClInclude Include="Rope_Enemy.h" />
     <ClInclude Include="SDLQuadtree.h" />
     <ClInclude Include="Statue_Enemy.h" />

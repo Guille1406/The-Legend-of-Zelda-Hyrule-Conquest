@@ -27,6 +27,7 @@
 #include "j1HUD.h"
 #include "j1GameStartMenuBack.h"
 #include "j1DialogueManager.h"
+#include "ParticleManager.h"
 
 #include "Brofiler/Brofiler.h"
 
@@ -57,6 +58,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	hud = new j1HUD();
 	startmenuback = new j1GameStartMenuBackground();
 	dialoguemanager = new j1DialogueManager();
+	particlemanager = new ParticleManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -76,6 +78,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(object);
 	AddModule(enemy);
 	AddModule(player);
+	AddModule(particlemanager);
 	AddModule(collision);
 	// gui after all to print above all
 	AddModule(hud);

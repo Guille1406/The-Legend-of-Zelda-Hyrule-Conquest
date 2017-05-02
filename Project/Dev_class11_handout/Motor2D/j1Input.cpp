@@ -361,3 +361,8 @@ void j1Input::DisconectGamePad(int instanceID)
 		}
 	}
 }
+
+iPoint j1Input::GetMousePosition()
+{
+	return iPoint(mouse_x, mouse_y);
+}
