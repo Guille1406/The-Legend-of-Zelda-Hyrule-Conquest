@@ -217,6 +217,21 @@
     <ClCompile Include="ParticleManager.cpp">
       <Filter>Desenvolupament  ========\Particles</Filter>
     </ClCompile>
+    <ClCompile Include="S_Dungeon_Entry.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="S_Dungeon_Right_Up.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="S_Dungeon_Right_Down.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="S_Dungeon_SecondFloor_Centre.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="S_Dungeon_SecondFloor_Right.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -506,6 +521,21 @@
     </ClInclude>
     <ClInclude Include="ParticleManager.h">
       <Filter>Desenvolupament  ========\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Dungeon_Entry.h">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Dungeon_Right_Up.h">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Dungeon_Right_Down.h">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Dungeon_SecondFloor_Centre.h">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Dungeon_SecondFloor_Right.h">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

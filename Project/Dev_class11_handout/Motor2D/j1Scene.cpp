@@ -34,6 +34,8 @@
 #include "S_QuitGame.h"
 #include "S_InGameMenu.h"
 #include "S_End.h"
+#include "S_Dungeon_Entry.h"
+
 #include"Enemy_Test_Scene.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -89,10 +91,36 @@ bool j1Scene::Start()
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::world;
 	scene_pointer = nullptr;
+
 	scene_pointer = new S_TempBossRoom;
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::tempbossroom;
+
+	scene_pointer = new S_DungeonEntry;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::dungeon_entry;
+
+	scene_pointer = new S_DungeonEntry;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::dungeon_right_down;
+
+	scene_pointer = new S_DungeonEntry;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::dungeon_right_up;
+
+	scene_pointer = new S_DungeonEntry;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::dungeon_secondfloor_centre;
+
+	scene_pointer = new S_DungeonEntry;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::dungeon_second_floor_right;
 	
 	scene_pointer = new S_ColourPuzzle;
 	scene_list.push_back(scene_pointer);

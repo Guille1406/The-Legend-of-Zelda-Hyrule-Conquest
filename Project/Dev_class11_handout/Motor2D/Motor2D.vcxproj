@@ -127,6 +127,11 @@
     <ClCompile Include="Statue_Enemy.cpp" />
     <ClCompile Include="S_Campaign.cpp" />
     <ClCompile Include="S_ColourPuzzle.cpp" />
+    <ClCompile Include="S_Dungeon_Entry.cpp" />
+    <ClCompile Include="S_Dungeon_Right_Down.cpp" />
+    <ClCompile Include="S_Dungeon_Right_Up.cpp" />
+    <ClCompile Include="S_Dungeon_SecondFloor_Centre.cpp" />
+    <ClCompile Include="S_Dungeon_SecondFloor_Right.cpp" />
     <ClCompile Include="S_End.cpp" />
     <ClCompile Include="S_InGameMenu.cpp" />
     <ClCompile Include="S_MainMenu.cpp" />
@@ -209,6 +214,11 @@
     <ClInclude Include="Statue_Enemy.h" />
     <ClInclude Include="S_Campaign.h" />
     <ClInclude Include="S_ColourPuzzle.h" />
+    <ClInclude Include="S_Dungeon_Entry.h" />
+    <ClInclude Include="S_Dungeon_Right_Down.h" />
+    <ClInclude Include="S_Dungeon_Right_Up.h" />
+    <ClInclude Include="S_Dungeon_SecondFloor_Centre.h" />
+    <ClInclude Include="S_Dungeon_SecondFloor_Right.h" />
     <ClInclude Include="S_End.h" />
     <ClInclude Include="S_InGameMenu.h" />
     <ClInclude Include="S_MainMenu.h" />
