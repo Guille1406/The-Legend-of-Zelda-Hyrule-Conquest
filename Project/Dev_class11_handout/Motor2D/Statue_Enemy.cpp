@@ -1,5 +1,5 @@
 #include "Statue_Enemy.h"
-
+#include"Color.h"
 Statue_Enemy::Statue_Enemy() :Enemy(enemyType::statue_enemy)
 {
 	this->sprites_vector = App->enemy->enemy_statue_perf->sprites_vector;
@@ -23,6 +23,21 @@ void Statue_Enemy::Action()
 {
 	tile_pos.x = pix_world_pos.x / 16;
 	tile_pos.y = pix_world_pos.y / 16;
+	static float inc = 0;
+	static float temp = 0;
+	if (t == 0) {
+		temp = 0;
+		if (player_in_range != nullptr) {
+			inc = (float)(player_in_range->pos.y - pix_world_pos.y) / 2.0;
+			
+
+			new_y = pix_world_pos.y;
+		}
+	}
+	temp += (float)inc / 50.0f;
+	this->rect_en = { pix_world_pos.x - 2 , new_y + (int)temp, 35, this->rect.h / 2 };
+	App->render->DrawQuad(rect_en, Black(0), Black(1), Black(2), 50, true);
+
 	if (player_in_range == nullptr) {
 		iPoint actual_tile = pix_world_pos;
 		if (passedtile == true) {

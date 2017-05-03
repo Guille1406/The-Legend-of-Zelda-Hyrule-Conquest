@@ -22,7 +22,8 @@ public:
 	float t = 0;
 	iPoint first_point = {0,0};
 	iPoint last_point = { 0,0 };
-
+	SDL_Rect rect_en = { 0,0,0,0 };
+	int new_y = 0;
 };
 
 
