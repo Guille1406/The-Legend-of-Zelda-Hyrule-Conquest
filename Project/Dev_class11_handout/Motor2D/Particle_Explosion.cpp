@@ -143,7 +143,7 @@ P_Explosion::P_Explosion(Arrow* element, iPoint* object, iPoint position_static,
 				}
 			}
 			pos.x = save_pos.x;
-			pos.y += 3;
+			pos.y -= 3;
 		}
 		number_particles = num_test;
 	}
