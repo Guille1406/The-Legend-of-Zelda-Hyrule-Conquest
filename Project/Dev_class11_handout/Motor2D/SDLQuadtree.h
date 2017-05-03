@@ -128,8 +128,10 @@ public:
 	{
 		int tests = 1;
 		
-		if (root != NULL && AABB(root->aabb).intersects(&AABB(r)))
-			tests = root->CollectCandidates(nodes, r);
+		if (root != NULL)
+			if(AABB(root->aabb).intersects(&AABB(r)))
+				tests = root->CollectCandidates(nodes, r);
+			
 		return tests;
 	}
 

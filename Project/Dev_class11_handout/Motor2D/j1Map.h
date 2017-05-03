@@ -39,7 +39,7 @@ struct MapLayer
 	uint*		data = nullptr;
 	Properties	properties;
 	int			print_height = 0 ;
-	Quadtree	layer_quadtree;
+	Quadtree*	layer_quadtree = nullptr;
 
 	MapLayer() : data(NULL)
 	{}
@@ -60,10 +60,10 @@ struct MapLayer
 	{
 		iPoint pos = { 0,0 };
 
-		/*
-		if (x < 0)return 0;
-		if (y < 0)return 0;
-		*/
+		if (x < 0)return pos;
+		pos.x = x % width;
+		pos.y = x / width;
+
 		return pos;
 	}
 
