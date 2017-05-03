@@ -135,22 +135,34 @@ void Boss::ExecuteEvent()
 		actual_phase = boss_phase_3;
 	}
 	if (attacking_foot != nullptr) {
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && attacking_foot->actual_foot_state == after_attack) {
+		if (foot_live == 0 && state != boss_damaged) {
 			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 + 32 };
 			CreateColliders();
 			state = boss_damaged;
 			can_move = false;
 			can_attack = false;
 			logic_height = 0;
+			damaged_boss_timer.Start();
 		}
-		if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN && state == boss_damaged) {
+		/*if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && attacking_foot->actual_foot_state == after_attack) {
+			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 + 32 };
+			CreateColliders();
+			state = boss_damaged;
+			can_move = false;
+			can_attack = false;
+			logic_height = 0;
+		}*/
+		if (damaged_boss_timer.Read() > 5000 && state == boss_damaged) {
 			DeleteColliders();
 			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 - 32 };
 			can_attack = true;
 			state = boss_idle;
 			logic_height = 1;
 			attacking_foot->actual_foot_state == back_to_start;
+			foot_live = 5;
+			
 		}
+		
 	}
 		if (state == boss_move) {
 			attacking_foot = nullptr;
@@ -299,6 +311,9 @@ void Boss::Attack(Character* focused_character)
 			inc_y = (float)((start_foot_point.y) - attacking_foot->pos.y) / 40;
 			i = 0;
 			attacking_foot->logic_height = 1;
+			if (attacking_foot->foot_collider_tiles.size() > 0) {
+				attacking_foot->DeleteFootColliders();
+			}
 		}
 
 		if (i <20 && attacking_foot->actual_foot_state == charging) {
@@ -493,9 +508,20 @@ void Boss::CreateColliders()
 
 void Boss::DeleteColliders()
 {
+	/*
 	for (int i = 0; i < colision_tiles_vec.size(); i++) {
 		App->map->V_Colision[0]->data[(colision_tiles_vec[i].y / 16) *  App->map->data.height + colision_tiles_vec[i].x / 16] = NOT_COLISION_ID;
 		App->map->V_Colision[1]->data[(colision_tiles_vec[i].y / 16) *  App->map->data.height + colision_tiles_vec[i].x / 16] = NOT_COLISION_ID;
+	}
+	*/
+	for (int i = 0; i < collider->rect.w / 16; i++) {
+		for (int n = 0; n < collider->rect.h / 16; n++) {
+			iPoint temp;
+			temp.x = pos.x + 8 + i * 16;
+			temp.y = pos.y + 8 + n * 16;
+			App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = NOT_COLISION_ID;
+			App->map->V_Colision[1]->data[((temp.y - 16) / 16) *  App->map->data.height + temp.x / 16] = NOT_COLISION_ID;
+		}
 	}
 	colision_tiles_vec.clear();
 	std::vector<Object*>::iterator it = App->object->V_Objects.begin();

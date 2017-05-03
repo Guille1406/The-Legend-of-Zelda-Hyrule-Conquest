@@ -72,14 +72,15 @@ public:
 	SDL_Rect laser_aim;
 	SDL_Rect leg_rect;
 
-
+	int foot_live = 5;
+	int eye_live = 5;
 	int moving_state = 0;
 	float count = 0;
-
-
 	bool im_active = false;
 
 	std::vector<iPoint> colision_tiles_vec;
+
+	j1Timer damaged_boss_timer;
 
 	//JUMP OBJECTS
 	Object* jump_1;
@@ -102,7 +103,7 @@ public:
 	iPoint pivot_point = {0,0};
 	iPoint max_point = {0,0};
 	iPoint parent_offset = {0,0};
-	int live = 10;
+	
 	Boss* parent_boss = nullptr;
 	SDL_Texture* leg = nullptr;
 	int leg_height = 1;
