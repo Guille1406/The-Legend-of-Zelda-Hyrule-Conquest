@@ -56,13 +56,22 @@ public:
 	bool im_attacking_laser = false;
 	bool can_attack = false;
 	bool can_move = true;
-	SDL_Texture* boss_texture;
-	SDL_Texture* laser_texture;
+	//SDL_Texture* boss_texture;
+	//SDL_Texture* laser_texture;
 	Legs* legs;
 	iPoint centre_pos = {0,0};
 	boss_state state = boss_idle;
 	Foot* attacking_foot = nullptr;
 	boss_phase actual_phase = boss_phase_1;
+
+	SDL_Texture* boss_atlas;
+
+	SDL_Rect boss_rect;
+	SDL_Rect laser_rect;
+	SDL_Rect laser_rect_fire;
+	SDL_Rect laser_aim;
+	SDL_Rect leg_rect;
+
 
 	int moving_state = 0;
 	float count = 0;
@@ -96,6 +105,9 @@ public:
 	SDL_Texture* leg = nullptr;
 	int leg_height = 1;
 	foot_state actual_foot_state = foot_idle;
+
+	SDL_Rect foot_rect;
+	SDL_Rect foot_rect_invulnerable;
 	
 };
 struct Legs {
