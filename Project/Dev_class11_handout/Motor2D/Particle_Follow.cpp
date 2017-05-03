@@ -3,24 +3,24 @@
 #include "j1Player.h"
 #include "j1Window.h"
 #include "j1Render.h"
-/*
-P_Follow::P_Follow(SceneElement* element, iPoint* object, SDL_Rect initial_rect, iPoint area_, iPoint timelife_, int num_textures, int num_particles, bool active_, bool mouse)
+
+P_Follow::P_Follow(Arrow* element, iPoint* object, SDL_Rect initial_rect, iPoint area_, iPoint timelife_, int num_textures, int num_particles, bool active_, bool mouse)
 {
 	//TODO 3:---------------------------------------------------------------------------------------
 	//Check if entity (element) is different from nullptr
 	//Then set the position of the entity and the pointer iPoint (object) to nullptr and entity pointer has created in .h
 	if (element != nullptr)
 	{
-		pos.x = element->position.x;
-		pos.y = element->position.y;
+		pos.x = element->pos.x;
+		pos.y = element->pos.y;
 		arrow_to_follow = element;
 		object_follow = nullptr;
 	}
 	//Otherwise, do it backwards. //element == nullptr and position = object ------
 	else
 	{
-		pos.x = object->x;
-		pos.y = object->y;
+		pos.x = object->x / App->win->scale;
+		pos.y = object->y / App->win->scale;
 		object_follow = object;
 		arrow_to_follow = nullptr;
 	}
@@ -56,8 +56,8 @@ bool P_Follow::Update(float dt)
 	//Check if the entity is diferent nullptr. On the contrary, use Update_position(iPoint* pos);
 	if (arrow_to_follow != nullptr)
 	{
-		pos.x = arrow_to_follow->position.x;
-		pos.y = arrow_to_follow->position.y;
+		pos.x = arrow_to_follow->pos.x;
+		pos.y = arrow_to_follow->pos.y;
 	}
 	else
 	{
@@ -105,15 +105,15 @@ void P_Follow::Update_position(iPoint* element)
 {
 	if (isMouse == false)
 	{
-		pos.x = element->x;
-		pos.y = element->y;
+		pos.x = element->x + 15;
+		pos.y = element->y + 27;
 	}
 	else
 	{
-		pos.x = element->x - App->render->camera.x / 2;
-		pos.y = element->y - App->render->camera.y / 2;
+		pos.x = (element->x - App->render->camera.x / App->win->scale);
+		pos.y = (element->y - App->render->camera.y / App->win->scale);
 	}
 
 	LOG("%i - %i", element->x, element->y);
+	LOG("%i - %i", pos.x, pos.y);
 }
-*/

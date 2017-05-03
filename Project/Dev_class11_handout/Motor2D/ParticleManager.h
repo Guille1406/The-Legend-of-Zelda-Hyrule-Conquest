@@ -73,10 +73,9 @@ public:
 	//FUNCTIONS TO CREATE
 
 	//Create & Delete Follow Group
-	/*
-	void CreateFollow_P(SceneElement* arrow_to_follow, iPoint* object_follow, SDL_Rect initial_rect, iPoint area = { 12, 2 }, iPoint timelife = { 15,5 }, int num_textures = 4, int num_particles = 20, bool active_ = false, bool isMouse = false);
+	void CreateFollow_P(Arrow* arrow_to_follow, iPoint* object_follow, SDL_Rect initial_rect, iPoint area = { 12, 2 }, iPoint timelife = { 15,5 }, int num_textures = 4, int num_particles = 20, bool active_ = false, bool isMouse = false);
 	bool DeleteFollow_p(P_Follow* group);
-	*/
+	
 	//Create & DeleteFire Group
 	void CreateFire_Particle(Arrow* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, iPoint area = { 12, 2 }, iPoint timelife = { 15,5 }, fPoint speed = { 0,0 }, Part_Direction p_direction = Part_Direction::Part_Direc_NULL, int num_particles = 20, int num_textures = 4, bool active_ = false, Wind dir = Wind::Part_Wind_NULL);
 	bool DeleteFire_p(P_Fire* group);

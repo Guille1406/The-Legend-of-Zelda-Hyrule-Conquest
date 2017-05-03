@@ -3,15 +3,13 @@
 #define _P_FOLLOW_H_
 
 #include "ParticleManager.h"
-/*
-#include "SceneElements.h"
 
 class Particle;
 
 class P_Follow
 {
 public:
-	P_Follow(SceneElement* arrow_to_follow, iPoint* object_follow, SDL_Rect initial_rect, iPoint area, iPoint timelife, int num_textures, int num_particles, bool active_, bool isMouse);
+	P_Follow(Arrow* arrow_to_follow, iPoint* object_follow, SDL_Rect initial_rect, iPoint area, iPoint timelife, int num_textures, int num_particles, bool active_, bool isMouse);
 	~P_Follow();
 
 	// Called each loop iteration
@@ -31,7 +29,7 @@ public:
 	//Also, create a pointer to an entity (SceneElement*)
 	//And finally a pointer to an iPoint (iPoint*)
 	std::vector<Particle*> particle;
-	SceneElement* arrow_to_follow = nullptr;
+	Arrow* arrow_to_follow = nullptr;
 	iPoint* object_follow = nullptr;
 	//-----------------------------------------------------------------------------
 	//Num of particles
@@ -54,6 +52,5 @@ public:
 	bool godelete = false;
 
 };
-*/
 
 #endif /*_P_FOLLOW_H_*/
