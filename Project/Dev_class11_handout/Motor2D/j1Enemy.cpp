@@ -262,7 +262,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret = new Bat_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
-		ret->live = 6;
+		ret->live = 4;
 		//Position in world pixel 
 		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
@@ -619,7 +619,6 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 	switch (type)
 	{
 	case enemyType::rat_enemy:
-	case enemyType::bat_enemy:
 	case enemyType::skullrope_enemy:
 	case enemyType::rope_enemy:
 	case enemyType::green_enemy:
@@ -649,6 +648,19 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 				tokill = true;
 			}
 		}
+		break;
+	case enemyType::bat_enemy:
+
+		if (collider->type == COLLIDER_TYPE::collider_arrow) {
+			if (live > 0) {
+				live--;
+			}
+			else {
+				tokill = true;
+			}
+		}
+
+
 		break;
 
 	case enemyType::championsoldier_enemy:
