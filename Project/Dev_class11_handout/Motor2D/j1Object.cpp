@@ -15,6 +15,7 @@
 #include "j1FileSystem.h"
 #include"j1Player.h"
 #include"j1HUD.h"
+#include"O_Heart.h"
 
 bool j1Object::Start()
 {
@@ -42,6 +43,18 @@ bool j1Object::Update(float)
 
 bool j1Object::PostUpdate()
 {
+
+
+	for (int i = 0; i < V_Objects.size(); i++) {
+		if (V_Objects[i]->tokill == true) {
+			V_Objects[i]->collider->to_delete = true;
+			std::vector<Object*>::iterator it = std::find(V_Objects.begin(), V_Objects.end(), V_Objects[i]);
+			V_Objects.erase(it);
+		}
+	}
+
+
+
 	/*for (int i = 0; i < V_Objects.size(); i++) {
 		if (V_Objects[i]->type == objectType::warp) {
 			if (App->player->loop_game_menu == true) {
@@ -323,6 +336,25 @@ Object * j1Object::CreateDoor(pugi::xml_node object, int height)
 	return ret;
 }
 
+Object* j1Object::CreateHeart(Enemy* n_enemy, int height) {
+
+	Heart temp_corazon;
+
+	temp_corazon.name = "heart";
+	temp_corazon.rect = { n_enemy->pix_world_pos.x ,n_enemy->pix_world_pos.y,rect_Heart.w,rect_Heart.h};
+	temp_corazon.texture_rect = rect_Heart;
+	temp_corazon.type = objectType::heart;
+	temp_corazon.active = true;
+	temp_corazon.logic_height = n_enemy->logic_height;
+
+	Object* ret = new Heart(temp_corazon);
+	ret->collider = App->collision->AddCollider(temp_corazon.rect, COLLIDER_TYPE::collider_heart, (Entity*)ret, this);
+
+	V_Objects.push_back(ret);
+
+	return ret;
+}
+
 Object * j1Object::CreateWarp(pugi::xml_node object, int height)
 {
 	//we should change this
@@ -431,8 +463,12 @@ void j1Object::StartCollision(Collider * collider1, Collider * collider2)
 		temp->Action();
 		temp->texture_rect = temp->pressed_button;
 	}
-	
-	
+
+	if (collider1->type == COLLIDER_TYPE::collider_heart) {
+		Heart* temp = (Heart*)collider1->parent;
+		temp->Pick(App->player->Link);
+
+	}
 	
 	else if (collider1->type == collider_warp) {
 		Object* temp = (Object*)collider1->parent;

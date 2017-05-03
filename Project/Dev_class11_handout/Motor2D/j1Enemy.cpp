@@ -13,6 +13,7 @@
 #include"SkullRopes_Enemy.h"
 #include"Rat_Enemy.h"
 #include"Bat_Enemy.h"
+#include <time.h> 
 #include "Brofiler/Brofiler.h"
 
 bool j1Enemy::Awake(pugi::xml_node &)
@@ -66,8 +67,9 @@ bool j1Enemy::PreUpdate()
 	if (!paused) {
 		for (int i = 0; i < V_MyEnemies.size(); i++) {
 			if (V_MyEnemies[i]->tokill == true) {
-				if(V_MyEnemies[i]->collider->type ==collider_enemy)
-				V_MyEnemies[i]->collider->to_delete = true;
+				if (V_MyEnemies[i]->collider->type == collider_enemy)
+					V_MyEnemies[i]->DropObject();
+					V_MyEnemies[i]->collider->to_delete = true;
 				if(V_MyEnemies[i]->shield_test!=nullptr){
 				if(V_MyEnemies[i]->shield_test->type == collider_enemy_sword)
 				V_MyEnemies[i]->shield_test->to_delete = true;
@@ -367,7 +369,7 @@ bool j1Enemy::FindInPath(iPoint pos, Enemy* enemy) {
 
 void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 {
-	int animation = (int)enemy->Enemy_Orientation;
+	int animation = (int)enemy->state * 4 + (int)enemy->Enemy_Orientation;
 	enemy->ChangeAnimation(animation);
 	if (enemy->type== enemyType::green_enemy) {
 		switch (enemy->Enemy_Orientation) {
@@ -778,5 +780,22 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 	}
 }
 
+void Enemy::DropObject() {
 
+	srand(time(NULL));
+	switch (what_drope) {
+
+	case 0:
+		//Drop nothing
+		break;
+	case 1:
+		App->object->CreateHeart(this, this->logic_height);
+		break;
+
+	case 2:
+		//If we finally add fire arrows
+		break;
+	}
+
+}
 

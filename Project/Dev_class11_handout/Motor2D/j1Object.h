@@ -7,6 +7,9 @@
 #include <vector>
 #include "Animation.h"
 
+class Enemy;
+
+
 enum objectType {
 	chest,
 	giant_chest,
@@ -98,6 +101,7 @@ public:
 	Object* CreateWarp(pugi::xml_node, int height);
 	Object* CreateFall(pugi::xml_node, int height);
 	Object* CreateColourBlock(pugi::xml_node object, int height);
+	Object* CreateHeart(Enemy* n_enemy, int height);
 
 	void StartCollision(Collider* collider1, Collider* collider2);
 	void OnCollision(Collider* collider1, Collider* collider2);
@@ -133,7 +137,7 @@ public:
 	std::string name = empty_char;
 	std::vector<Object*> connected_object;
 	std::vector<iPoint> collider_tiles;
-
+	bool tokill = false;
 	SDL_Rect texture_rect = { 0,0,0,0 };
 
 };

@@ -11,18 +11,33 @@ public:
 
 	}
 	Heart(const Heart& obj) {
-		//*this = obj;
+		type = obj.type;
+		rect = obj.rect;
+		active = obj.active;
+		name = obj.name;
+		logic_height = obj.logic_height;
+		texture_rect = obj.texture_rect;
 	}
 	~Heart() {
 
 	}
 	void Pick(Character* player) {
-	
+		if (App->player->half_hearts_test_purpose == (App->player->hearts_containers_test_purpose * 2) - 1) {
+			App->player->half_hearts_test_purpose++;
+		}
+		else if ((App->player->half_hearts_test_purpose/2)<=(App->player->hearts_containers_test_purpose-1)) {
+			App->player->half_hearts_test_purpose += 2;
+		}
+
+		tokill = true;
 	}
 
 
 
 public:
+
+
+
 
 };
 

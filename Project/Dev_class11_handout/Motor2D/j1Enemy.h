@@ -13,12 +13,12 @@ class Green_Enemy;
 #define PUSH_DISTANCE 50
 
 enum EnemyState {
-	doing_path,
-	following_player,
-	push_back_enemy,
-	throwing_bomb,
-	jumping,
-	stunned,
+	doing_path= 0,
+	following_player =0,
+	push_back_enemy =0,
+	throwing_bomb = 1,
+	jumping =2,
+	stunned =3,
 
 };
 
@@ -67,6 +67,7 @@ public:
 	void Enemy_Hit_Comprobation(Collider*);
 	virtual void Action() {};
 	virtual void Rang_Player();
+	virtual void DropObject();
 	void Direction_Push_Election_ChSoldier();
 
 	
@@ -117,6 +118,8 @@ public:
 	void EndCollision(Collider* collider1, Collider* collider2);
 	void StartCollision(Collider* collider1, Collider* collider2);
 	
+
+
 public:
 	std::vector<Animation*> Green_Enemy_Animation;
 

@@ -32,6 +32,7 @@ enum COLLIDER_TYPE
 	collider_colour_block,
 	collider_fall,	
 	coolider_bomb_explosion,
+	collider_heart,
 };
 
 enum collider_state {

@@ -24,6 +24,9 @@ j1Collision::j1Collision()
 	matrix[collider_link][coolider_bomb_explosion] = true;
 	matrix[collider_link][collider_colour_block] = true;
 	matrix[collider_link][collider_boss_foot] = true;
+	matrix[collider_link][collider_heart] = true;
+
+
 	//FRONT LINK
 	matrix[front_link][collider_jump] = true;
 	matrix[front_link][collider_zelda] = true;
@@ -39,6 +42,7 @@ j1Collision::j1Collision()
 	matrix[collider_zelda][coolider_bomb_explosion] = true;
 	matrix[collider_zelda][collider_colour_block] = true;
 	matrix[collider_zelda][collider_boss_foot] = true;
+	matrix[collider_zelda][collider_heart] = true;
 	//FRONT ZELDA
 	matrix[front_zelda][collider_jump] = true;
 
@@ -96,6 +100,10 @@ j1Collision::j1Collision()
 	//COLOUR BLOCK
 	matrix[collider_colour_block][collider_link] = true;
 	matrix[collider_colour_block][collider_zelda] = true;
+
+	//HEART
+	matrix[collider_heart][collider_link] = true;
+	matrix[collider_heart][collider_zelda] = true;
 	
 	//BOSS FOOT & EYE
 	matrix[collider_boss_foot][collider_link] = true;
@@ -290,6 +298,9 @@ void j1Collision::DebugDraw()
 			break;
 		case collider_enemy_sword:
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+			break;
+		case collider_heart:
+			App->render->DrawQuad(colliders[i]->rect, Violet(1), Violet(2), Violet(3), alpha);
 			break;
 		case coolider_bomb_explosion:
 			App->render->DrawQuad(colliders[i]->rect, White(1), White(2), White(3), alpha);
