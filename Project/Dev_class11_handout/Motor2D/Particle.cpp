@@ -1,5 +1,6 @@
 #include "Particle.h"
 #include "j1Render.h"
+#include "j1Map.h"
 
 //Constructor
 Particle::Particle(fPoint respawn, iPoint area, iPoint timelife, fPoint speed_particle, Part_Direction p_direction, SDL_Rect pos_rect, int size, int num_tex_pixel, bool active, Wind dir, iPoint num_tex)

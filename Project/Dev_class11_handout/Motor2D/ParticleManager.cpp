@@ -52,6 +52,10 @@ bool ParticleManager::Update(float dt)
 	{
 		Group_Fire.push_back(new P_Fire(nullptr, nullptr, App->input->GetMousePosition(), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(0, -60), Part_Direction::Part_Direc_NULL, 65, 4, true, Wind::Part_Wind_NULL));
 	}
+	if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
+	{
+		Group_Fire.push_back(new P_Fire(nullptr, nullptr, App->player->Link->pos, SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(0, -60), Part_Direction::Part_Direc_NULL, 65, 4, true, Wind::Part_Wind_NULL));
+	}
 	/*
 	//FIREWORK
 	if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)

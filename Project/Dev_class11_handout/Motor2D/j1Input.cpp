@@ -4,6 +4,7 @@
 #include "j1Input.h"
 #include "j1Window.h"
 #include "j1InputManager.h"
+#include "j1Render.h"
 #include "SDL/include/SDL.h"
 
 #define MAX_KEYS 300
@@ -364,5 +365,5 @@ void j1Input::DisconectGamePad(int instanceID)
 
 iPoint j1Input::GetMousePosition()
 {
-	return iPoint(mouse_x / App->win->scale, mouse_y / App->win->scale);
+	return iPoint(-App->render->camera.x + mouse_x / App->win->scale, -App->render->camera.y - mouse_y / App->win->scale);
 }
