@@ -5,6 +5,7 @@
 #include "j1Window.h"
 #include "j1Camera.h"
 #include "S_InGameMenu.h"
+#include "ParticleManager.h"
 
 S_MainMenu::S_MainMenu()
 {
@@ -82,7 +83,7 @@ bool S_MainMenu::Start()
 		twitter->SetVisible(true);
 		github->SetVisible(true);
 	}
-
+	App->particlemanager->Disable();
 	App->gui->SetFocus(buttons.front());
 
 	//This must be revised

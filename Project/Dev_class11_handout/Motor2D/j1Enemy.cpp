@@ -494,35 +494,36 @@ void Enemy::Rang_Player() {
 	iPoint dist2;
 	dist2.x = App->player->Zelda->pos.x - pix_world_pos.x;
 	dist2.y = App->player->Zelda->pos.y - pix_world_pos.y;
-
-	if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG && enemy_doing_script == false) {
-		this->player_in_range = App->player->Link;
-		//green_enemy_path.clear();
-		if (tile_pos != iPoint(0, 0) && player_in_range->GetLogicHeightPlayer() == 0) {
-			if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr) {
-				green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
-			}
-			if (green_enemy_path.size()) {
-				App->pathfinding->Move(this, player_in_range);
-			}
-		}
-	}
-
-	else if (sqrt((dist2.x*dist2.x) + (dist2.y*dist2.y)) < RANG  && enemy_doing_script == false) {
-		this->player_in_range = App->player->Zelda;
-		//green_enemy_path.clear();
-		if (tile_pos != iPoint(0, 0) && player_in_range->GetLogicHeightPlayer() == 0) {
-			if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr ) {
-				green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
-			}
-			if (green_enemy_path.size()) {
-				App->pathfinding->Move(this, player_in_range);
+	if (this->type!= enemyType::rat_enemy) {
+		if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG && enemy_doing_script == false) {
+			this->player_in_range = App->player->Link;
+			//green_enemy_path.clear();
+			if (tile_pos != iPoint(0, 0) && player_in_range->GetLogicHeightPlayer() == 0) {
+				if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr) {
+					green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
+				}
+				if (green_enemy_path.size()) {
+					App->pathfinding->Move(this, player_in_range);
+				}
 			}
 		}
-	}
-	else {
-		if (type == enemyType::hyrulebombsoldier_enemy) {
-			this->player_in_range = nullptr;
+
+		else if (sqrt((dist2.x*dist2.x) + (dist2.y*dist2.y)) < RANG  && enemy_doing_script == false) {
+			this->player_in_range = App->player->Zelda;
+			//green_enemy_path.clear();
+			if (tile_pos != iPoint(0, 0) && player_in_range->GetLogicHeightPlayer() == 0) {
+				if (App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos) != nullptr) {
+					green_enemy_path = *App->pathfinding->SimpleAstar(tile_pos, player_in_range->tilepos);
+				}
+				if (green_enemy_path.size()) {
+					App->pathfinding->Move(this, player_in_range);
+				}
+			}
+		}
+		else {
+			if (type == enemyType::hyrulebombsoldier_enemy) {
+				this->player_in_range = nullptr;
+			}
 		}
 	}
 

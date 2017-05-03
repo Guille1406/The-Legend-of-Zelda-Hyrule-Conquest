@@ -10,6 +10,7 @@
 #include "GuiButton.h"
 #include "j1GameStartMenuBack.h"
 #include "j1Audio.h"
+#include "ParticleManager.h"
 
 S_InGameMenu::S_InGameMenu()
 {
@@ -72,6 +73,8 @@ bool S_InGameMenu::Start()
 
 	App->gui->SetFocus(buttons.front());
 
+	App->particlemanager->Disable();
+
 	active = true;
 
 	return true;
@@ -115,6 +118,7 @@ void S_InGameMenu::OnGui(Gui* ui, GuiEvent event)
 		App->collision->paused = !App->collision->paused;
 		App->pathfinding->paused = !App->pathfinding->paused;
 		App->scene->Hide();
+		App->particlemanager->Enable();
 		App->startmenuback->Freeze(true);
 	}
 	if ((ui == (Gui*)loadcheckpoint) && (event == GuiEvent::mouse_lclk_down))

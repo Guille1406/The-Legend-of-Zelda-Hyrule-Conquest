@@ -151,6 +151,8 @@ bool j1App::Awake()
 	map->active = false;
 	object->active = false;
 	hud->active = false;
+	particlemanager->active = false;
+
 	if(ret == true)
 	{
 		for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.cend() && ret == true; ++item)
