@@ -9,7 +9,7 @@ struct Enemy_Bomb : public Entity {
 	Collider *bomb_collider_explosion = nullptr;
 	SDL_Rect texture_bomb_rect = {0,0,0,0};
 	j1Timer Explosion_delay;
-	bool bomb_explosion = false;
+	bool bomb_explosion = true;
 
 };
 

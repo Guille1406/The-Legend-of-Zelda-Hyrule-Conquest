@@ -588,9 +588,18 @@ void Enemy::UpdateState()
 	if (enemy_doing_script == false) {
 		if (player_in_range == nullptr) {
 				state = EnemyState::doing_path;
+				/*if (type == enemyType::hyrulebombsoldier_enemy) {
+					HyruleBombSoldier_Enemy* temp_enemy = (HyruleBombSoldier_Enemy*) this;
+					if (temp_enemy->bomb->bomb_explosion == false)
+						state = EnemyState::throwing_bomb;
+					else
+						state = EnemyState::doing_path;
+				}*/
+
 		}
 		else {
 			if (type == enemyType::hyrulebombsoldier_enemy) {
+				
 				state = EnemyState::throwing_bomb;
 			}
 			else if (type == enemyType::statue_enemy) {
