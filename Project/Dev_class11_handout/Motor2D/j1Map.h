@@ -39,6 +39,7 @@ struct MapLayer
 	uint*		data = nullptr;
 	Properties	properties;
 	int			print_height = 0 ;
+	Quadtree	layer_quadtree;
 
 	MapLayer() : data(NULL)
 	{}
@@ -54,6 +55,18 @@ struct MapLayer
 		if (y < 0)return 0;
 		return data[(y*width) + x];
 	}
+
+	inline iPoint Get(uint x) const
+	{
+		iPoint pos = { 0,0 };
+
+		/*
+		if (x < 0)return 0;
+		if (y < 0)return 0;
+		*/
+		return pos;
+	}
+
 };
 
 struct ObjectLayer {
@@ -162,7 +175,6 @@ public:
 
 private:
 	int					count = 0;
-	Quadtree			map_quadtree;
 	pugi::xml_document	map_file;
 	std::string			folder=empty_char;
 	bool				map_loaded=false;

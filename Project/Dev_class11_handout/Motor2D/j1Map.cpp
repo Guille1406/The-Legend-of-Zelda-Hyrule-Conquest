@@ -516,6 +516,9 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 			int num = atoi(temp);
 
 			//Here implement quadtree
+			iPoint tilepos = { 0,0 };
+			layer->layer_quadtree.Insert(&tilepos);
+			//layer->Get()
 
 			layer->data[i++] = num;
 			temp = strtok(NULL, ",");
