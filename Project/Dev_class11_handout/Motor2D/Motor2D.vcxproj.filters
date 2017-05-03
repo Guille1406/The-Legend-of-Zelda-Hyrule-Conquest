@@ -238,6 +238,9 @@
     <ClCompile Include="Rat_Enemy.cpp">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Bat_Enemy.cpp">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -547,6 +550,9 @@
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Rat_Enemy.h">
+      <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Bat_Enemy.h">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClInclude>
   </ItemGroup>

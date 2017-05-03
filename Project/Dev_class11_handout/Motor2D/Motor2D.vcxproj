@@ -75,6 +75,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bat_Enemy.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="ChampionSoldier_Enemy.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -158,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="A_Move.h" />
+    <ClInclude Include="Bat_Enemy.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="ChampionSoldier_Enemy.h" />
     <ClInclude Include="Character.h" />

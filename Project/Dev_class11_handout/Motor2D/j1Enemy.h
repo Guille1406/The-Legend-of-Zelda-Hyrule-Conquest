@@ -38,6 +38,7 @@ enum enemyType {
 	rope_enemy= 3850,
 	skullrope_enemy=3855,
 	rat_enemy = 3852,
+	bat_enemy = 3854,
 	no_enemy,
 
 };
@@ -126,6 +127,7 @@ public:
 	Enemy* enemy_rope_perf = nullptr;
 	Enemy* enemy_skullrope_perf = nullptr;
 	Enemy* enemy_rat_perf = nullptr;
+	Enemy* enemy_bat_perf = nullptr;
 
 	std::vector<Enemy*> V_MyEnemies;
 	SDL_Texture* green_soldier_tex=nullptr;

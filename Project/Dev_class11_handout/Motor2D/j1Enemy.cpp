@@ -12,6 +12,7 @@
 #include"Rope_Enemy.h"
 #include"SkullRopes_Enemy.h"
 #include"Rat_Enemy.h"
+#include"Bat_Enemy.h"
 #include "Brofiler/Brofiler.h"
 
 bool j1Enemy::Awake(pugi::xml_node &)
@@ -38,6 +39,9 @@ bool j1Enemy::Start()
 	enemy_skullrope_perf->LoadAnimation("sprites/Enemy_skullrope.xml");
 	enemy_rat_perf = new Enemy();
 	enemy_rat_perf->LoadAnimation("sprites/Enemy_rat.xml");
+	enemy_bat_perf = new Enemy();
+	enemy_bat_perf->LoadAnimation("sprites/Enemy_bat.xml");
+
 
 	for (int i = 0; i < App->map->V_Enemies.size(); i++) {
 		for (int y = 0; y < App->map->data.height; ++y) {
@@ -240,6 +244,22 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 
 	case enemyType::skullrope_enemy:
 		ret = new SkullRope_Enemy();
+		ret->rect = { 0,0,44,60 };
+		ret->array_pos = pos_array_enemy;
+		ret->live = 6;
+		//Position in world pixel 
+		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+
+
+		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35 };
+		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
+		//how to know if a enemy is in level one or two
+		ret->logic_height = height;
+		break;
+
+	case enemyType::bat_enemy:
+		ret = new Bat_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
 		ret->live = 6;
@@ -599,6 +619,7 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 	switch (type)
 	{
 	case enemyType::rat_enemy:
+	case enemyType::bat_enemy:
 	case enemyType::skullrope_enemy:
 	case enemyType::rope_enemy:
 	case enemyType::green_enemy:
