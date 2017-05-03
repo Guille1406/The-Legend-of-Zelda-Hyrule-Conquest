@@ -410,7 +410,7 @@ void Boss::LaserAttack()
 	iPoint vect = { 0,0 };
 	float angle = 0;
 	if (laser_charging_time.Read() < 2000) {
-		for (float i = 0; i < 1; i += 1.0f / 20.0f) {
+		for (float i = 0; i < 1; i += 1.0f / 60.0f) {
 			int x = focus_eye.x * (1 - i) + App->player->Zelda->pos.x * i;
 			int y = focus_eye.y * (1 - i) + App->player->Zelda->pos.y * i;
 			vect = { App->player->Zelda->pos.x - focus_eye.x, App->player->Zelda->pos.y - focus_eye.y };
@@ -421,7 +421,7 @@ void Boss::LaserAttack()
 		}
 	}
 	if (laser_charging_time.Read() > 2000 && laser_charging_time.Read() < 2500) {
-		for (float i = 0; i < 1; i += 1.0f / 20.0f) {
+		for (float i = 0; i < 1; i += 1.0f / 60.0f) {
 			int x = focus_eye.x * (1 - i) + focus_point_before_attack.x * i;
 			int y = focus_eye.y * (1 - i) + focus_point_before_attack.y * i;
 			vect = { App->player->Zelda->pos.x - focus_eye.x, App->player->Zelda->pos.y - focus_eye.y };
@@ -514,7 +514,7 @@ Boss::Boss()
 		eye_collider = App->collision->AddCollider({ centre_pos.x,centre_pos.y, 32,32 }, collider_boss_eye, this, (j1Module*)App->enemy);
 		legs = new Legs(temp_legs);
 
-		boss_atlas = App->tex->Load("textures/boss_sprites.png");
+		boss_atlas = App->tex->Load("textures/boss_spritesheet.png");
 
 		boss_rect = { 0,0,244,244 };
 		laser_rect = { 293,0,4,4 };
@@ -564,14 +564,20 @@ void Foot::Draw()
 	float cos_angle = 0;
 	float angle = 0;
 	
-	for (float i = 0; i <= 1; i += 1.0f/10.0f) {
+	if (actual_foot_state == foot_state::after_attack) {
+		App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &foot_rect);
+	}
+	else {
+		App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &foot_rect_invulnerable);
+	}
+	for (float i = 0; i <= 1; i += 1.0f/20.0f) {
 		x = ((1-i)*(1-i) * pos.x + 2*i*(1-i)*max_point.x + i*i*pivot_point.x);
 		y = ((1 - i)*(1 - i) * pos.y + 2 * i*(1 - i)*max_point.y + i*i*pivot_point.y);
 		point1 = { pos.x*(1 - i) + max_point.x*i,pos.y * (1 - i) + max_point.y * i };
 		point2 = { max_point.x*(1 - i) + pivot_point.x*i,max_point.y * (1 - i) + pivot_point.y * i };
 		vect = { point2.x - point1.x,point2.y - point1.y };
 		angle = atan2(vect.y, vect.x) * 57.2957795;
-		App->render->Blit(parent_boss->boss_atlas, x, y, &parent_boss->leg_rect,1.0f,angle);
+		App->render->Blit(parent_boss->boss_atlas, x, y, &parent_boss->leg_rect,1.0f,angle + 90);
 	}
 
 }
@@ -590,7 +596,7 @@ Foot::Foot(const Foot& obj)
 	pivot_point = obj.pivot_point;
 	parent_boss = obj.parent_boss;
 	collider = App->collision->AddCollider({ pos.x,pos.y, 36,36 }, collider_boss_foot, this, (j1Module*)App->enemy);
-	leg = App->tex->Load("textures/point.png");
+	//leg = App->tex->Load("textures/point.png");
 	parent_offset = obj.parent_offset;
 	foot_rect = { 299,0,64,64 };
 	foot_rect_invulnerable = { 363,0,64,64 };
