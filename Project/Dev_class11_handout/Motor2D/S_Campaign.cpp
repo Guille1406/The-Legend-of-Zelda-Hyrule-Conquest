@@ -3,6 +3,7 @@
 #include "Gui.h"
 #include "j1GameStartMenuBack.h"
 #include "j1Render.h"
+#include "ParticleManager.h"
 
 S_Campaign::S_Campaign()
 {
@@ -63,6 +64,7 @@ void S_Campaign::OnGui(Gui* ui, GuiEvent event)
 	{
 		App->scene->ChangeScene(Scene_ID::world);
 		App->scene->Hide();
+		App->particlemanager->Enable();
 		App->startmenuback->Freeze(true);
 	}
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))

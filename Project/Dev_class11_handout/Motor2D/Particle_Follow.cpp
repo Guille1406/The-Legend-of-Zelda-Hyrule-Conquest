@@ -106,7 +106,7 @@ void P_Follow::Update_position(iPoint* element)
 	if (isMouse == false)
 	{
 		pos.x = element->x + 15;
-		pos.y = element->y + 27;
+		pos.y = element->y + 29;
 	}
 	else
 	{
