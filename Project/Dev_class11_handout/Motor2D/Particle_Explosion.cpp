@@ -71,7 +71,7 @@ P_Explosion::P_Explosion(Arrow* element, iPoint* object, iPoint position_static,
 		}
 		number_particles = num_test;
 	}
-	else if (type == Explosion_Type::SEMICIRCLE)
+	else if (type == Explosion_Type::SEMICIRCLE_UPPER)
 	{
 		pos.x -= num_particles * 2;
 		pos.y -= num_particles * 3;
@@ -84,7 +84,45 @@ P_Explosion::P_Explosion(Arrow* element, iPoint* object, iPoint position_static,
 		int num_test = 0;
 		float r = num_particles;
 		float pr = 2; // pr is the aspected pixel ratio which is almost equal to 2
-		for (int i = -r; i <= r; i++) // loop for horizontal movement
+		for (int i = -r; i <= 0; i++) // loop for horizontal movement
+		{
+			for (int j = -r; j <= r; j++) // loop for vertical movement
+			{
+				float d = ((i*pr) / r)*((i*pr) / r) + (j / r)*(j / r); //multiplying the i variable with pr to equalize pixel-width with the height
+				if (d > 0.95 && d < 1.08) // approximation
+				{
+					for (int k = 0; k < num_particles / 4; k++)
+					{
+						Particle* temp = new Particle(pos, iPoint(3, 3), timelife, speed, p_direction, initial_rect, size_rect, num_textures, true);
+						particle.push_back(temp);
+						num_test++;
+					}
+					pos.x += 3;
+				}
+				else
+				{
+					pos.x += 2;
+				}
+			}
+			pos.x = save_pos.x;
+			pos.y += 3;
+		}
+		number_particles = num_test;
+	}
+	else if (type == Explosion_Type::SEMICIRCLE_LOWER)
+	{
+		pos.x -= num_particles * 2;
+		pos.y -= num_particles * 3;
+		fPoint save_pos = pos;
+		speed = speed_particle;
+		float part_entre = (num_particles - 4) / 4;
+		float speed_modify = -speed.y / part_entre;
+		int time_quart = num_particles / 2;
+
+		int num_test = 0;
+		float r = num_particles;
+		float pr = 2; // pr is the aspected pixel ratio which is almost equal to 2
+		for (int i = -r; i <= 0; i++) // loop for horizontal movement
 		{
 			for (int j = -r; j <= r; j++) // loop for vertical movement
 			{

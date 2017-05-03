@@ -155,9 +155,7 @@ void Particle::render()
 {
 	degrade.y -= MIN(degrade.y, degrade.x);
 	if (degrade.y <= 0)
-	{
 		degrade.y = 0;
-	}
 	App->render->Blit(App->particlemanager->atlas_particle, position.x, position.y, &rect, 1.0f, 0, INT_MAX, INT_MAX, true, degrade.y);
 }
 

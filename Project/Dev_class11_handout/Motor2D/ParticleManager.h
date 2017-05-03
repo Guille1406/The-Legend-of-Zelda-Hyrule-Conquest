@@ -31,7 +31,8 @@ enum Part_Direction {
 
 enum Explosion_Type {
 	CIRCLE,
-	SEMICIRCLE,
+	SEMICIRCLE_UPPER,
+	SEMICIRCLE_LOWER,
 	CROSS,
 	RANDOM,
 	NOTHING
