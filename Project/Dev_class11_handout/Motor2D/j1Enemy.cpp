@@ -783,6 +783,8 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 void Enemy::DropObject() {
 
 	srand(time(NULL));
+	int what_drope = 0; 
+	what_drope = rand() % 2;
 	switch (what_drope) {
 
 	case 0:
