@@ -23,8 +23,9 @@ j1Collision::j1Collision()
 	matrix[collider_link][collider_fall] = true;
 	matrix[collider_link][coolider_bomb_explosion] = true;
 	matrix[collider_link][collider_colour_block] = true;
-	matrix[collider_link][collider_boss_foot] = true;
+	//matrix[collider_link][collider_boss_foot] = true;
 	matrix[collider_link][collider_heart] = true;
+	matrix[collider_link][collider_boss_hit] = true;
 
 
 	//FRONT LINK
@@ -41,8 +42,11 @@ j1Collision::j1Collision()
 	matrix[collider_zelda][collider_fall] = true;
 	matrix[collider_zelda][coolider_bomb_explosion] = true;
 	matrix[collider_zelda][collider_colour_block] = true;
-	matrix[collider_zelda][collider_boss_foot] = true;
+	//matrix[collider_zelda][collider_boss_foot] = true;
 	matrix[collider_zelda][collider_heart] = true;
+	matrix[collider_zelda][collider_boss_hit] = true;
+	matrix[collider_zelda][collider_boss_explosion] = true;
+
 	//FRONT ZELDA
 	matrix[front_zelda][collider_jump] = true;
 
@@ -106,10 +110,13 @@ j1Collision::j1Collision()
 	matrix[collider_heart][collider_zelda] = true;
 	
 	//BOSS FOOT & EYE
-	matrix[collider_boss_foot][collider_link] = true;
-	matrix[collider_boss_foot][collider_zelda] = true;
+	//matrix[collider_boss_foot][collider_link] = true;
+	//matrix[collider_boss_foot][collider_zelda] = true;
 	matrix[collider_boss_foot][collider_link_sword] = true;
 	matrix[collider_boss_eye][collider_arrow] = true;
+	matrix[collider_boss_hit][collider_link] = true;
+	matrix[collider_boss_hit][collider_link] = true;
+	matrix[collider_boss_explosion][collider_zelda] = true;
 }
 
 // Destructor
@@ -156,7 +163,7 @@ bool j1Collision::PreUpdate()
 // Called before render is available
 bool j1Collision::Update(float dt)
 {
-
+	
 	if (!paused) {
 		Collider* c1;
 		Collider* c2;
@@ -170,9 +177,15 @@ bool j1Collision::Update(float dt)
 
 			c1 = colliders[i];
 
+			for (uint n = colliders.size(); n < MAX_COLLIDERS; n++) {
+				c1->state_collider[n] = not_colliding;
+			}
+
+
 			// avoid checking collisions already checked
 			for (uint k = i + 1; k < colliders.size(); ++k)
 			{
+
 				// skip empty colliders
 				if (colliders[k] == nullptr)
 					continue;
@@ -364,7 +377,7 @@ bool j1Collision::EraseCollider(Collider* collider)
 
 bool Collider::CheckCollision(const SDL_Rect& r, int k) 
 {
-	if (this->type == front_link)
+	if (this->type == collider_link && k == 10)
 		int x = 0;
 	if ((rect.x < r.x + r.w &&	rect.x + rect.w > r.x && rect.y < r.y + r.h && rect.h + rect.y > r.y)) {
 		if (this->type == front_link)

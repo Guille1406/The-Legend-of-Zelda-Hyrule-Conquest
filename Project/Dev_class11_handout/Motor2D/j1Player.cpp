@@ -380,6 +380,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		}
 	}
 
+
 	/*TO DELETE-------
 	-----------------
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link_sword) {
@@ -415,6 +416,8 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 			//}
 		}
 	}
+
+	
 
 
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_enemy) {
@@ -590,6 +593,55 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 			Enemy* n_enemy = (Enemy*)collider2->parent;
 			n_enemy->Enemy_Hit_Comprobation(collider1);
 		}
+	}
+
+	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_boss_hit) {
+		//roll_timer
+		//if (Link->roll_timer.Read() > 1500) {
+		if (Link->collision_by_enemy_timmer.Read() > 1500) {
+			App->audio->PlayFx(Link->Link_Hurt_Audio);
+			Link->roll_timer.Start();
+			Link->collision_by_enemy_timmer.Start();
+			//Link->Collision_Sword_EnemySword();
+			Link->actual_event = player_event::push_backwards;
+			Link->doing_script = true;
+			Link->Direction_Push_Election();
+			half_hearts_test_purpose--;
+		}
+		//}
+
+	}
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_boss_hit) {
+		//roll_timer
+		//if (Link->roll_timer.Read() > 1500) {
+		if (Zelda->collision_by_enemy_timmer.Read() > 1500) {
+			App->audio->PlayFx(Link->Link_Hurt_Audio);
+			Zelda->roll_timer.Start();
+			Zelda->collision_by_enemy_timmer.Start();
+			//Link->Collision_Sword_EnemySword();
+			Zelda->actual_event = player_event::push_backwards;
+			Zelda->doing_script = true;
+			Zelda->Direction_Push_Election();
+			half_hearts_test_purpose--;
+		}
+		//}
+
+	}
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_boss_explosion) {
+		//roll_timer
+		//if (Link->roll_timer.Read() > 1500) {
+		if (Zelda->collision_by_enemy_timmer.Read() > 1500) {
+			App->audio->PlayFx(Link->Link_Hurt_Audio);
+			Zelda->roll_timer.Start();
+			Zelda->collision_by_enemy_timmer.Start();
+			//Link->Collision_Sword_EnemySword();
+			Zelda->actual_event = player_event::push_backwards;
+			Zelda->doing_script = true;
+			Zelda->Direction_Push_Election();
+			half_hearts_test_purpose--;
+		}
+		//}
+
 	}
 
 }

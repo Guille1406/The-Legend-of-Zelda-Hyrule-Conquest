@@ -106,6 +106,8 @@ public:
 	int leg_height = 1;
 	foot_state actual_foot_state = foot_idle;
 
+	
+
 	SDL_Rect foot_rect;
 	SDL_Rect foot_rect_invulnerable;
 	

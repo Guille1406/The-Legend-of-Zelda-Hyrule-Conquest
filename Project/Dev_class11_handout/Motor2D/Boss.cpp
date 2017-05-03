@@ -331,7 +331,8 @@ void Boss::Attack(Character* focused_character)
 				i = 0;
 				static_foot_time.Start();
 				attacking_foot->actual_foot_state = after_attack;
-				Collider* temp_collider = App->collision->AddCollider({ (int)f_foot_pos.x,(int)f_foot_pos.y,64,64 }, COLLIDER_TYPE::collider_boss_hit, this, App->enemy);
+				Collider* temp_collider = App->collision->AddCollider({ (int)f_foot_pos.x,(int)f_foot_pos.y,64,64 }, COLLIDER_TYPE::collider_boss_hit, attacking_foot, App->enemy);
+				temp_collider->logic_height = 0;
 				temp_collider->to_delete = true;
 			}
 
