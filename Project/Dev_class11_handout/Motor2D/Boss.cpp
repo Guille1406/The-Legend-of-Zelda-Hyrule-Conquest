@@ -76,10 +76,10 @@ void Boss::UpdateLegs()
 	GetEvent();
 	ExecuteEvent();
 
-	legs->foot1->collider->SetPos(legs->foot1->pos.x, legs->foot1->pos.y, legs->foot1->logic_height);
-	legs->foot2->collider->SetPos(legs->foot2->pos.x, legs->foot2->pos.y, legs->foot2->logic_height);
-	legs->foot3->collider->SetPos(legs->foot3->pos.x, legs->foot3->pos.y, legs->foot3->logic_height);
-	legs->foot4->collider->SetPos(legs->foot4->pos.x, legs->foot4->pos.y, legs->foot4->logic_height);
+	legs->foot1->collider->SetPos(legs->foot1->pos.x - 16, legs->foot1->pos.y - 16, legs->foot1->logic_height);
+	legs->foot2->collider->SetPos(legs->foot2->pos.x - 16, legs->foot2->pos.y - 16, legs->foot2->logic_height);
+	legs->foot3->collider->SetPos(legs->foot3->pos.x - 16, legs->foot3->pos.y - 16, legs->foot3->logic_height);
+	legs->foot4->collider->SetPos(legs->foot4->pos.x - 16, legs->foot4->pos.y - 16, legs->foot4->logic_height);
 	collider->SetPos(pos.x, pos.y, logic_height);
 	eye_collider->SetPos(centre_pos.x, centre_pos.y, logic_height + 1);
 	
@@ -331,6 +331,8 @@ void Boss::Attack(Character* focused_character)
 				i = 0;
 				static_foot_time.Start();
 				attacking_foot->actual_foot_state = after_attack;
+				Collider* temp_collider = App->collision->AddCollider({ (int)f_foot_pos.x,(int)f_foot_pos.y,64,64 }, COLLIDER_TYPE::collider_boss_hit, this, App->enemy);
+				temp_collider->to_delete = true;
 			}
 
 		}
@@ -416,7 +418,8 @@ void Boss::LaserAttack()
 			vect = { App->player->Zelda->pos.x - focus_eye.x, App->player->Zelda->pos.y - focus_eye.y };
 			angle = atan2(vect.y, vect.x) * 57.2957795;
 			App->render->Blit(boss_atlas, x, y,&laser_rect,1.0f,angle);
-			focus_point_before_attack = { App->player->Zelda->pos.x,App->player->Zelda->pos.y };
+			App->render->Blit(boss_atlas, App->player->Zelda->pos.x, App->player->Zelda->pos.y, &laser_aim);
+			focus_point_before_attack = { App->player->Zelda->pos.x,App->player->Zelda->pos.y};
 			
 		}
 	}
@@ -427,6 +430,7 @@ void Boss::LaserAttack()
 			vect = { App->player->Zelda->pos.x - focus_eye.x, App->player->Zelda->pos.y - focus_eye.y };
 			angle = atan2(vect.y, vect.x) * 57.2957795;
 			App->render->Blit(boss_atlas, x, y, &laser_rect_fire, 1.0f, angle);
+			App->render->Blit(boss_atlas, focus_point_before_attack.x, focus_point_before_attack.y, &laser_aim);
 			
 		}
 	}
@@ -595,7 +599,7 @@ Foot::Foot(const Foot& obj)
 	max_point = obj.max_point;
 	pivot_point = obj.pivot_point;
 	parent_boss = obj.parent_boss;
-	collider = App->collision->AddCollider({ pos.x,pos.y, 36,36 }, collider_boss_foot, this, (j1Module*)App->enemy);
+	collider = App->collision->AddCollider({ pos.x,pos.y, 64,64 }, collider_boss_foot, this, (j1Module*)App->enemy);
 	//leg = App->tex->Load("textures/point.png");
 	parent_offset = obj.parent_offset;
 	foot_rect = { 299,0,64,64 };

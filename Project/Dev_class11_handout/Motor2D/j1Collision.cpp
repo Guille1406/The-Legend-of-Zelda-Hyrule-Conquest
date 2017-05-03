@@ -281,11 +281,15 @@ void j1Collision::DebugDraw()
 				App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
 			break;
 		}
+
+		case collider_boss_hit:
+			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
+			break;
 		case collider_jump:
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, 255);
 			break;
 		case collider_boss_foot:
-			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, 255);
+			//App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, 255);
 			break;
 		case collider_boss_eye:
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, 255);
