@@ -1,5 +1,5 @@
 #include "Bat_Enemy.h"
-
+#include"Color.h"
 Bat_Enemy::Bat_Enemy() :Enemy(enemyType::bat_enemy)
 {
 	this->sprites_vector = App->enemy->enemy_bat_perf->sprites_vector;
@@ -24,6 +24,10 @@ void Bat_Enemy::Action()
 {
 	tile_pos.x = pix_world_pos.x / 16;
 	tile_pos.y = pix_world_pos.y / 16;
+
+	SDL_Rect shadow_rect = { pix_world_pos.x ,pix_world_pos.y+15, collider->rect.w, collider->rect.h-10 };
+	App->render->DrawQuad(shadow_rect, Black(0), Black(1), Black(2), 50, true);
+
 	if (player_in_range == nullptr) {
 		iPoint actual_tile = pix_world_pos;
 		if (passedtile == true) {
