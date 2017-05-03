@@ -92,6 +92,8 @@ class Foot : public Entity {
 public:
 	void Draw();
 	void UpdatePivots();
+	void CreateFootColliders();
+	void DeleteFootColliders();
 public:
 	Foot() {};
 	Foot(const Foot&);
@@ -106,7 +108,7 @@ public:
 	int leg_height = 1;
 	foot_state actual_foot_state = foot_idle;
 
-	
+	std::vector<iPoint> foot_collider_tiles;
 
 	SDL_Rect foot_rect;
 	SDL_Rect foot_rect_invulnerable;

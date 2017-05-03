@@ -334,6 +334,7 @@ void Boss::Attack(Character* focused_character)
 				Collider* temp_collider = App->collision->AddCollider({ (int)f_foot_pos.x,(int)f_foot_pos.y,64,64 }, COLLIDER_TYPE::collider_boss_hit, attacking_foot, App->enemy);
 				temp_collider->logic_height = 0;
 				temp_collider->to_delete = true;
+				attacking_foot->CreateFootColliders();
 			}
 
 		}
@@ -342,6 +343,7 @@ void Boss::Attack(Character* focused_character)
 				attacking_foot->actual_foot_state = back_to_start;
 				inc_x = (float)(start_foot_point.x - attacking_foot->pos.x) / 40;
 				inc_y = (float)((start_foot_point.y) - attacking_foot->pos.y) / 40;
+				attacking_foot->DeleteFootColliders();
 			}
 		}
 		if ( i < 40 && attacking_foot->actual_foot_state == back_to_start) {
@@ -592,6 +594,30 @@ void Foot::UpdatePivots()
 	parent_boss->centre_pos = { parent_boss->pos.x + parent_boss->collider->rect.w / 2 ,  parent_boss->pos.y + parent_boss->collider->rect.h / 2 };
 	pivot_point = { parent_boss->pos.x + parent_offset.x, parent_boss->pos.y +parent_offset.y};
 	max_point = { (int)(pos.x - (float)(pos.x-pivot_point.x)/1.5), pivot_point.y - 50 - abs(pos.y - pivot_point.y) };
+}
+
+void Foot::CreateFootColliders()
+{
+	iPoint temp = { 0,0 };
+	for (int i = 1; i < foot_rect.w / 16 - 1; i++) {
+		for (int n = 1; n < foot_rect.h / 16 - 1; n++) {
+			temp.x = pos.x + i * 16;
+			temp.y = pos.y + n * 16;
+			if (App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] == NOT_COLISION_ID) {
+				App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = CANT_PASS_COL_ID;
+				foot_collider_tiles.push_back(temp);
+			}
+		}
+	}
+}
+
+void Foot::DeleteFootColliders()
+{
+	iPoint temp = { 0,0 };
+	for (int i = 0; i < foot_collider_tiles.size(); i++) {
+		App->map->V_Colision[0]->data[(foot_collider_tiles[i].y / 16) * App->map->data.height + foot_collider_tiles[i].x / 16] = NOT_COLISION_ID;
+	}
+	foot_collider_tiles.clear();
 }
 
 Foot::Foot(const Foot& obj)

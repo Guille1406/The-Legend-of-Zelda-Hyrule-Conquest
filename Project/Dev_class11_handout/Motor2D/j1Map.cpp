@@ -53,10 +53,10 @@ void j1Map::Draw(int height)
 	for (; item != data.layers.cend(); ++item) {
 		MapLayer* layer = (*item);
 
-		if (!App->collision->debug) {
+		/*if (!App->collision->debug) {
 			if (layer->properties.Get("Navigation") != 0 || layer->properties.Get("Enemies") != 0 || layer->properties.Get("Path") != 0)
 				continue;
-		}
+		}*/
 		/*
 		//Quadtree
 		if (layer->print_height == height) {
