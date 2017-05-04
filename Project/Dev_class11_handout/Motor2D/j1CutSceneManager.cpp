@@ -937,6 +937,7 @@ CS_Image::CS_Image(CS_Type type, int n, const char* name, bool active, const cha
 
 CS_Image::~CS_Image()
 {
+	delete image;
 }
 
 SDL_Texture* CS_Image::GetTexture() const
