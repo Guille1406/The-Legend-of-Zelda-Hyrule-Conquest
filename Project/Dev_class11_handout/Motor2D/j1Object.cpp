@@ -33,8 +33,8 @@ bool j1Object::Update(float)
 {
 	for (int i = 0; i < V_Objects.size(); i++)
 		if (V_Objects[i]->type == double_button) {
-			//DoubleButton* temp_button = (DoubleButton*)V_Objects[i];
-			//temp_button->characters_on = 0;
+			DoubleButton* temp_button = (DoubleButton*)V_Objects[i];
+			temp_button->characters_on = 0;
 		}
 
 	//Blit all the objects
