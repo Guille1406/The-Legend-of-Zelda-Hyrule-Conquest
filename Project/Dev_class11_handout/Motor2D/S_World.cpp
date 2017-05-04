@@ -16,6 +16,7 @@
 #include"j1Audio.h"
 #include"j1GameStartMenuBack.h"
 #include "S_InGameMenu.h"
+#include"j1CutSceneManager.h"
 
 bool S_World::Start()
 {
@@ -37,9 +38,13 @@ bool S_World::Start()
 	App->collision->paused = false;
 	App->pathfinding->paused = false;
 
+
+	App->cutscenemanager->StartCutscene(0);
+
+	//GuiImage* title = App->gui->CreateImage(iPoint(0, 0), &title_rec, false, AddGuiTo::none);
+	//((Gui*)title)->SetListener(this);
 	
 	if (App->map->Load("tutorial map test.tmx") == true)
-
 	{
 		int w, h = 0;
 		uchar* data = nullptr;

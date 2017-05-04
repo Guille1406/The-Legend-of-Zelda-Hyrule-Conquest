@@ -15,6 +15,7 @@ public:
 	bool Load(pugi::xml_node&);
 
 public: 
+	//std::vector
 	char* test = nullptr;
 	uint World_Audio;
 };

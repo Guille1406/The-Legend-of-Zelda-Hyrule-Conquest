@@ -6,6 +6,7 @@
 #include <string>
 #include"j1Timer.h"
 #include"p2Point.h"
+#include"GuiImage.h"
 //TODO 1: Open config.xml and write a new path for the cutscene.
 
 enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_NONE };
@@ -64,14 +65,11 @@ public:
 
 	//UTILITY FUNCTIONS -------------
 	SDL_Texture* GetTexture()const;
-	SDL_Rect GetRect()const;
-	iPoint GetPos()const;
 	//-------------------------------
-
+	GuiImage* image;
+	SDL_Texture* tex;
 private:
-	SDL_Texture* tex = nullptr;
-	SDL_Rect rect = { 0, 0, 0, 0 };
-	iPoint pos = { 0, 0 };
+
 };
 
 

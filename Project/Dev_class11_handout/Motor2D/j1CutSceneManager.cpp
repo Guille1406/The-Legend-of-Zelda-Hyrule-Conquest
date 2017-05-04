@@ -7,6 +7,7 @@
 #include "j1HUD.h"
 #include "j1Render.h"
 #include "p2Log.h"
+#include"GuiImage.h"
 
 //TODO 5.1: open the IntroCutscene.xml (in data.zip, in cutscenes folder) and fill THESE ELEMENTS correctly with this info:
 //Image -> n = 0; name = BackgroundPokemon; x = -100; y = 0; tex_x = 0; tex_y = 0; tex_w = 1080; tex_h = 514; active = false; file = textures/PokemonBackground.png;
@@ -94,6 +95,10 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 				temp_cutscene->LoadNPC(temp);
 			}
 
+			for (temp = elements_node.child("IMAGES").child("image"); temp != NULL; temp = temp.next_sibling("image"))
+			{
+				temp_cutscene->LoadImg(temp);
+			}
 			//Load Texts
 
 			//TODO 5.2: Access the images node and load the data by calling the correct function.
@@ -415,8 +420,7 @@ bool Cutscene::DrawElements()
 		{
 			if (it._Ptr->_Myval->active == true)
 			{
-				CS_Image* image = dynamic_cast<CS_Image*>(*it);
-				App->render->Blit(image->GetTexture(), image->GetPos().x - App->render->camera.x, image->GetPos().y - App->render->camera.y, &image->GetRect(), NULL, false);
+				((CS_Image*)(*it))->image->DrawWithAlternativeAtlas(((CS_Image*)(*it))->tex);
 			}
 		}
 	}
@@ -477,7 +481,8 @@ bool Cutscene::LoadImg(pugi::xml_node& node)
 	if (node != NULL)
 	{
 		iPoint pos(node.attribute("x").as_int(0), node.attribute("y").as_int(0));
-		SDL_Rect rect = { node.attribute("tex_x").as_int(0), node.attribute("tex_y").as_int(0), node.attribute("tex_w").as_int(0), node.attribute("tex_h").as_int(0) };
+		SDL_Rect rect = { node.attribute("rectx").as_int(0), node.attribute("recty").as_int(0), node.attribute("rectw").as_int(0), node.attribute("recth").as_int(0) };
+		std::string str = node.attribute("file").as_string("");
 		elements.push_back(new CS_Image(CS_IMAGE, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), rect, pos));
 		ret = true;
 	}
@@ -924,8 +929,9 @@ void CS_Step::SetWait(bool wait)
 
 // CS IMAGE -----------------
 CS_Image::CS_Image(CS_Type type, int n, const char* name, bool active, const char* path, SDL_Rect rect, iPoint pos) :
-	CS_Element(type, n, name, active, path), rect(rect), pos(pos)
+	CS_Element(type, n, name, active, path)
 {
+	image = App->gui->CreateImage(pos, &rect, false, AddGuiTo::none);
 	tex = App->tex->Load(path);
 }
 
@@ -938,20 +944,12 @@ SDL_Texture* CS_Image::GetTexture() const
 	return tex;
 }
 
-SDL_Rect CS_Image::GetRect() const
-{
-	return rect;
-}
-
-iPoint CS_Image::GetPos() const
-{
-	return pos;
-}
-
 void CS_Image::Move(float x, float y)
 {
-	pos.x += x;
-	pos.y += y;
+
+	iPoint pos = image->GetLocalPos();
+	image->SetLocalPos(pos.x + x, pos.y + y);
+
 }
 
 //-----------------------------

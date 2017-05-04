@@ -83,8 +83,9 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// gui after all to print above all
 	AddModule(particlemanager);
 	AddModule(hud);
-	AddModule(cutscenemanager);
+	
 	AddModule(gui);
+	AddModule(cutscenemanager);
 	AddModule(dialoguemanager);
 	AddModule(fadetoblack);
 
