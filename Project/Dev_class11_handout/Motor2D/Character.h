@@ -11,8 +11,8 @@
 #include "j1Object.h"
 
 
-#define TILE_COL_ID 3329
-#define CANT_PASS_COL_ID 3332
+//#define App->map->TILE_COL_ID 3329
+//#define App->map->CANT_PASS_COL_ID 3332
 #define NOT_COLISION_ID 0
 
 struct dir_tiles {

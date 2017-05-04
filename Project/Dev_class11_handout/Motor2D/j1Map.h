@@ -165,7 +165,8 @@ private:
 	TileSet* GetTilesetFromTileId(int id) const;
 
 public:
-
+	int TILE_COL_ID = 0;
+	int CANT_PASS_COL_ID = 0;
 	MapData data;
 	std::vector<MapLayer*> V_Colision;
 	std::vector<MapLayer*> V_Logic;

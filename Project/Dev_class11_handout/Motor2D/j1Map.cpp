@@ -451,7 +451,12 @@ bool j1Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 {
 	bool ret = true;
 	set->name = tileset_node.attribute("name").as_string();
+
 	set->firstgid = tileset_node.attribute("firstgid").as_int();
+	if (strcmp(set->name.c_str(),"collision tileset") ==0) {
+		TILE_COL_ID = set->firstgid;
+		CANT_PASS_COL_ID = set->firstgid + 3;
+	}
 	set->tile_width = tileset_node.attribute("tilewidth").as_int();
 	set->tile_height = tileset_node.attribute("tileheight").as_int();
 	set->margin = tileset_node.attribute("margin").as_int();

@@ -481,25 +481,25 @@ void Boss::CreateColliders()
 			temp.x = pos.x + 8 + i * 16;
 			temp.y = pos.y + 8 + n * 16;
 			//object.collider_tiles.push_back(temp);
-			//if(App->map->V_Colision[0][object.logic_height].data[temp.y*App->map->data.width + temp.x] != CANT_PASS_COL_ID)	{
+			//if(App->map->V_Colision[0][object.logic_height].data[temp.y*App->map->data.width + temp.x] != App->map->CANT_PASS_COL_ID)	{
 			if (App->map->V_Colision[0]->data != nullptr)
-				if (App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] != TILE_COL_ID)
+				if (App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] != App->map->TILE_COL_ID)
 				{
 					iPoint diference_point = { temp.x - centre_pos.x, temp.y - centre_pos.y };
 					int dist = (int)(sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y));
 					if ((dist < 120 && dist >= 100) ) {
-						App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = TILE_COL_ID;
+						App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = App->map->TILE_COL_ID;
 						//object.collider_tiles.push_back(temp);
 						temp_vector.push_back(temp);
 					}
 				}
 			if (App->map->V_Colision[1]->data != nullptr)
-				if (App->map->V_Colision[1]->data[(temp.y / 16) *  App->map->data.height + temp.x / 16] != TILE_COL_ID)
+				if (App->map->V_Colision[1]->data[(temp.y / 16) *  App->map->data.height + temp.x / 16] != App->map->TILE_COL_ID)
 				{
 					iPoint diference_point = { temp.x - centre_pos.x, temp.y - centre_pos.y };
 					int dist = sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y);
 					if (dist < 80 && dist >= 60) {
-						App->map->V_Colision[1]->data[((temp.y - 16)  / 16) *  App->map->data.height + temp.x / 16] = TILE_COL_ID;
+						App->map->V_Colision[1]->data[((temp.y - 16)  / 16) *  App->map->data.height + temp.x / 16] = App->map->TILE_COL_ID;
 						//object.collider_tiles.push_back(temp);
 						temp_vector.push_back(temp);
 					}
@@ -638,7 +638,7 @@ void Foot::CreateFootColliders()
 			temp.x = pos.x + i * 16;
 			temp.y = pos.y + n * 16;
 			if (App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] == NOT_COLISION_ID) {
-				App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = CANT_PASS_COL_ID;
+				App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = App->map->CANT_PASS_COL_ID;
 				foot_collider_tiles.push_back(temp);
 			}
 		}

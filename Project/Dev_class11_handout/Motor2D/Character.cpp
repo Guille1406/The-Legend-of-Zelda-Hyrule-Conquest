@@ -106,7 +106,7 @@ int Character::GetLogic(int minus_height, iPoint _pos)
 		break;
 	}
 	
-	if (i == CANT_PASS_COL_ID || j == CANT_PASS_COL_ID) return CANT_PASS_COL_ID;
+	if (i == App->map->CANT_PASS_COL_ID || j == App->map->CANT_PASS_COL_ID) return App->map->CANT_PASS_COL_ID;
 
 	if (i != 0)return i;
 	if (j != 0)return j;
@@ -143,7 +143,7 @@ int Character::GetBehindLogic(int minus_height, iPoint _pos)
 		break;
 	}
 
-	if (i == CANT_PASS_COL_ID || j == CANT_PASS_COL_ID) return CANT_PASS_COL_ID;
+	if (i == App->map->CANT_PASS_COL_ID || j == App->map->CANT_PASS_COL_ID) return App->map->CANT_PASS_COL_ID;
 
 	if (i != 0)return i;
 	if (j != 0)return j;
@@ -425,28 +425,28 @@ void Character::Collision_Sword_EnemySword() {
 
 	case direction::up:
 		temp.y = tilepos.y + 2;
-		if (GetLogic(GetLogicHeightPlayer(), temp) != TILE_COL_ID) {
+		if (GetLogic(GetLogicHeightPlayer(), temp) != App->map->TILE_COL_ID) {
 			pos.y += 14;
 		}
 		break;
 
 	case direction::down:
 		temp.y = tilepos.y - 1;
-		if (GetLogic(GetLogicHeightPlayer(), temp) != TILE_COL_ID) {
+		if (GetLogic(GetLogicHeightPlayer(), temp) != App->map->TILE_COL_ID) {
 			pos.y -= 14;
 		}
 		break;
 
 	case direction::right:
 		temp.x = tilepos.x - 1;
-		if (GetLogic(GetLogicHeightPlayer(), temp) != TILE_COL_ID) {
+		if (GetLogic(GetLogicHeightPlayer(), temp) != App->map->TILE_COL_ID) {
 			pos.x -= 14;
 		}
 		break;
 
 	case direction::left:
 		temp.x = tilepos.x + 2;
-		if (GetLogic(GetLogicHeightPlayer(), temp) != TILE_COL_ID) {
+		if (GetLogic(GetLogicHeightPlayer(), temp) != App->map->TILE_COL_ID) {
 			pos.x += 14;
 		}
 		break;
