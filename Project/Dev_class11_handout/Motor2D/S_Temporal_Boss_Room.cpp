@@ -19,7 +19,7 @@
 
 bool S_TempBossRoom::Start()
 {
-	scene_str = "Castle Sewers";
+	scene_str = "Boss room";
 
 	App->camera->Enable();
 	App->hud->Enable();

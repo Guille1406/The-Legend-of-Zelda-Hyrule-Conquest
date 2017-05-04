@@ -19,6 +19,7 @@
 #include "j1Collision.h"
 #include "j1Enemy.h"
 #include "j1FileSystem.h"
+#include "j1HUD.h"
 
 #include "S_World.h"
 
@@ -239,6 +240,7 @@ bool j1Scene::ChangeScene(Scene_ID name)
 			if(*item != main_active_scene)
 			main_active_scene->Clean();
 			main_active_scene = *item;
+			App->hud->SceneChanged();
 			return true;
 		}
 	return false;

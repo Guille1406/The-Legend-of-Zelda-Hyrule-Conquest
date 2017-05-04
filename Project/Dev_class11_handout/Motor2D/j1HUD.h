@@ -3,6 +3,7 @@
 
 #include "p2Point.h"
 #include "j1Module.h"
+#include "j1Timer.h"
 #include "SDL\include\SDL.h"
 
 class j1HUD : public j1Module
@@ -40,6 +41,11 @@ public:
 
 	SDL_Texture* GetAtlas();
 
+	void SceneChanged()
+	{
+		scene_changed = true;
+	}
+
 private:
 	bool visible = true;
 
@@ -71,6 +77,11 @@ private:
 	iPoint Bow_centre = { 0,0 };
 	uint LRbuttonsoffset = 10;
 	
+	j1Timer PlaceLabel_timer;
+	SDL_Texture* texture_label_to_blit = nullptr;
+	int texture_label_to_blit_w, texture_label_to_blit_h = 0;
+	bool scene_changed = false;
+	int PlaceLabel_opacity = 255;
 
 };
 

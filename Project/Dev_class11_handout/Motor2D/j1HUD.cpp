@@ -103,20 +103,33 @@ bool j1HUD::Update(float dt)
 	App->render->Blit(atlas, -App->render->camera.x + Window_W - Zelda_circle.w - item_circles_output + Bow_centre.x, -App->render->camera.y + item_circles_output + Bow_centre.x, &Bow, 1.0f, 0, INT_MAX, INT_MAX, false);
 	
 	//Blit Link circle L
-	App->render->Blit(atlas, -App->render->camera.x + item_circles_output - LRbuttonsoffset, -App->render->camera.y + item_circles_output - LRbuttonsoffset, &Link_circle_L, 1.0f, 0, INT_MAX, INT_MAX, false);
+	//App->render->Blit(atlas, -App->render->camera.x + item_circles_output - LRbuttonsoffset, -App->render->camera.y + item_circles_output - LRbuttonsoffset, &Link_circle_L, 1.0f, 0, INT_MAX, INT_MAX, false);
 
 	//Blit Zelda circle R
 	App->render->Blit(atlas, -App->render->camera.x + Window_W - Zelda_circle.w - item_circles_output + Zelda_circle.w - Zelda_circle_R.w + LRbuttonsoffset, -App->render->camera.y + item_circles_output - LRbuttonsoffset, &Zelda_circle_R, 1.0f, 0, INT_MAX, INT_MAX, false);
 	
-	//Blit PlaceLabelBack
-	App->render->Blit(atlas, -App->render->camera.x, (-App->render->camera.y + Window_H - PlaceLabelBack.h ) + 1, &PlaceLabelBack, 1.0f, 0, INT_MAX, INT_MAX, false);
-
-	const char* scene_text = App->scene->GetActiveScene()->scene_str.c_str();
-	SDL_Texture* texture_to_blit = App->font->Print(scene_text, { 255,255,255,255 }, App->font->Triforce48);
-	int texture_to_blit_w, texture_to_blit_h = 0;
-	App->font->CalcSize(scene_text, texture_to_blit_w, texture_to_blit_h, App->font->Triforce48);
-	App->render->Blit(texture_to_blit, (int)(- App->render->camera.x + PlaceLabelBack.w * 0.5f - texture_to_blit_w * 0.5f), (int)(- App->render->camera.y + Window_H - PlaceLabelBack.h * 0.5f), nullptr, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
-	SDL_DestroyTexture(texture_to_blit);
+	//Blit PlaceLabel
+	if (scene_changed)
+	{
+		SDL_DestroyTexture(texture_label_to_blit);
+		const char* scene_text = App->scene->GetActiveScene()->scene_str.c_str();
+		texture_label_to_blit = App->font->Print(scene_text, { 255,255,255,255 }, App->font->Triforce48);
+		App->font->CalcSize(scene_text, texture_label_to_blit_w, texture_label_to_blit_h, App->font->Triforce48);
+		scene_changed = false;
+		PlaceLabel_opacity = 255;
+		PlaceLabel_timer.Start();
+	}
+	if (PlaceLabel_timer.Read() >= 5000)
+	{
+		PlaceLabel_opacity--;
+	}
+	if (PlaceLabel_opacity > 0 && PlaceLabel_opacity < 256)
+	{
+		//Blit PlaceLabelBack
+		App->render->Blit(atlas, -App->render->camera.x, (-App->render->camera.y + Window_H - PlaceLabelBack.h) + 1, &PlaceLabelBack, 1.0f, 0, INT_MAX, INT_MAX, false, PlaceLabel_opacity);
+		//Blit PlaceLabel
+		App->render->Blit(texture_label_to_blit, (int)(-App->render->camera.x + PlaceLabelBack.w * 0.5f - texture_label_to_blit_w * 0.5f), (int)(-App->render->camera.y + Window_H - PlaceLabelBack.h * 0.5f), nullptr, 1.0f, 0, INT_MAX, INT_MAX, false, PlaceLabel_opacity);
+	}
 
 	return true;
 }

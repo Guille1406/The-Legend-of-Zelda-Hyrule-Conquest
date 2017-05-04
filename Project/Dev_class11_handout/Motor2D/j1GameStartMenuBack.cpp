@@ -173,7 +173,6 @@ bool j1GameStartMenuBackground::CleanUp()
 
 void j1GameStartMenuBackground::Freeze(bool freeze)
 {
-	if (freeze)
-		ingamenushow = false;
+	ingamenushow = !freeze;
 	this->freeze = freeze;
 }
