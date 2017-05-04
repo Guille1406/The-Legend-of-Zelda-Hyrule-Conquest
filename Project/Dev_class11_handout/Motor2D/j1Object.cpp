@@ -16,6 +16,7 @@
 #include"j1Player.h"
 #include"j1HUD.h"
 #include"O_Heart.h"
+#include "O_Movable_BLock.h"
 
 bool j1Object::Start()
 {
@@ -92,6 +93,28 @@ void j1Object::Draw(int height)
 	}
 }
 
+int j1Object::GetLogic(int height, iPoint pos, bool is_horitzontal)
+{
+	
+		//Takes the id of the two front tiles of each player, depending on the locig height of each player
+		std::vector<MapLayer*> vector = App->map->V_Colision;
+
+		iPoint tile_pos = pos;
+		
+		int i =0, j = 0;
+		i = vector[height]->Get(tile_pos.x, tile_pos.y);
+		j = vector[height]->Get(tile_pos.x + 1*is_horitzontal, tile_pos.y + 1*!is_horitzontal);
+		
+
+		//if (i == App->map->CANT_PASS_COL_ID || j == App->map->CANT_PASS_COL_ID) return App->map->CANT_PASS_COL_ID;
+
+		if (i != 0)return i;
+		if (j != 0)return j;
+		return 0;
+	
+
+}
+
 std::vector<Object*> j1Object::FindObject(std::string name)
 {
 	std::vector<Object*> ret_vec;
@@ -154,6 +177,8 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int heigh
 		ret = CreateFall(object, height);
 	else if (!strcmp(type_name, "Colour Panel"))
 		ret = CreateColourBlock(object, height);
+	else if(!strcmp(type_name, "movable"))
+		ret = CreateMovableObject(object, height);
 	return ret;
 }
 
@@ -355,6 +380,38 @@ Object* j1Object::CreateHeart(Enemy* n_enemy, int height) {
 	return ret;
 }
 
+Object * j1Object::CreateMovableObject(pugi::xml_node object, int height)
+{
+	Movable_Block temp_block;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+
+	temp_block.logic_height = height;
+	temp_block.name = object.attribute("name").as_string();
+	temp_block.rect = { x,y,w,h };
+	temp_block.type = objectType::change_height;
+	temp_block.active = true;
+
+	for (int i = 0; i < temp_block.rect.w / 16; i++) {
+		for (int n = 0; n < temp_block.rect.h / 16; n++) {
+			iPoint temp;
+			temp.x = temp_block.rect.x + i * 16;
+			temp.y = temp_block.rect.y + n * 16;
+			//if(App->map->V_Colision[0][temp_door.logic_height].data[temp.y*App->map->data.width + temp.x] != App->map->CANT_PASS_COL_ID)
+			temp_block.collider_tiles.push_back(temp);
+			//App->map->V_Colision[0][temp_door.logic_height].data[temp.y*App->map->data.width + temp.x] = App->map->TILE_COL_ID;
+		}
+	}
+
+	Object* ret = new Movable_Block(temp_block);
+	ret->collider = App->collision->AddCollider(temp_block.rect, COLLIDER_TYPE::collider_movable_object, (Entity*)ret, this);
+	
+	V_Objects.push_back(ret);
+	return ret;
+}
+
 Object * j1Object::CreateWarp(pugi::xml_node object, int height)
 {
 	//we should change this
@@ -498,7 +555,7 @@ void j1Object::OnCollision(Collider * collider1, Collider * collider2)
 		character = App->player->Link;
 	
 	if (collider1->type == collider_jump) {
-		if (character->can_move == false && character->doing_script == false) {
+		if (character->can_walk == false && character->doing_script == false) {
 			App->audio->PlayFx(App->player->Fall_Players_Audio);
 			character->can_jump = true;
 

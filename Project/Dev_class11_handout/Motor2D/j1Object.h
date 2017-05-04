@@ -85,6 +85,8 @@ public:
 
 	void Draw(int height);
 
+	int GetLogic(int minus_height, iPoint pos, bool is_horitzontal);
+
 	std::vector<Object*> FindObject(std::string name);
 	void CreateColliders(Object&);
 
@@ -102,6 +104,7 @@ public:
 	Object* CreateFall(pugi::xml_node, int height);
 	Object* CreateColourBlock(pugi::xml_node object, int height);
 	Object* CreateHeart(Enemy* n_enemy, int height);
+	Object* CreateMovableObject(pugi::xml_node, int height);
 
 	void StartCollision(Collider* collider1, Collider* collider2);
 	void OnCollision(Collider* collider1, Collider* collider2);

@@ -9,6 +9,7 @@
 #include "O_ChangeHeight.h"
 #include "O_Button.h"
 #include "O_DoubleButton.h"
+#include "O_Movable_BLock.h"
 #include"j1Enemy.h"
 #include "j1HUD.h"
 #include"j1Audio.h"
@@ -75,7 +76,7 @@ bool j1Player::Start()
 	Link->is_rolling = false;
 	Link->im_lifting = false;
 	Link->can_jump = false;
-	Link->can_move = true;
+	Link->can_walk = true;
 	Link->can_pick_up = false;
 	Zelda->is_picked = false;
 	Zelda->is_rolling = false;
@@ -540,8 +541,22 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		Enemy_Bomb* n_bomb = (Enemy_Bomb*)collider2->parent;
 		n_bomb->bomb_collider_explosion->to_delete = true;
 		half_hearts_test_purpose--;
+	}	
+	else if (collider1->type == COLLIDER_TYPE::front_link && collider2->type == COLLIDER_TYPE::collider_movable_object) {
+		if (!Link->can_walk) {
+			Movable_Block* temp_object = (Movable_Block*)collider2->parent;
+			temp_object->Action(Link);
+		}
+
 	}
-	
+	else if (collider1->type == COLLIDER_TYPE::front_zelda && collider2->type == COLLIDER_TYPE::collider_movable_object) {
+		if (!Zelda->can_walk) {
+			Movable_Block* temp_object = (Movable_Block*)collider2->parent;
+			temp_object->Action(Zelda);
+		}
+
+	}
+
 }
 
 void j1Player::EndCollision(Collider * collider1, Collider * collider2)

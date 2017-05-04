@@ -36,6 +36,7 @@ enum COLLIDER_TYPE
 	collider_fall,	
 	coolider_bomb_explosion,
 	collider_heart,
+	collider_movable_object,
 };
 
 enum collider_state {

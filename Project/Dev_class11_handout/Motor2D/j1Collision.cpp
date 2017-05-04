@@ -32,6 +32,7 @@ j1Collision::j1Collision()
 	//FRONT LINK
 	matrix[front_link][collider_jump] = true;
 	matrix[front_link][collider_zelda] = true;
+	matrix[front_link][collider_movable_object] = true;
 	//ZELDA
 	matrix[collider_zelda][collider_link] = true;
 	matrix[collider_zelda][collider_button] = true;
@@ -51,6 +52,7 @@ j1Collision::j1Collision()
 
 	//FRONT ZELDA
 	matrix[front_zelda][collider_jump] = true;
+	matrix[front_zelda][collider_movable_object] = true;
 
 	//ARROW
 	matrix[collider_arrow][collider_enemy] = true;
@@ -103,6 +105,10 @@ j1Collision::j1Collision()
 	matrix[coolider_bomb_explosion][collider_link] = true;
 	matrix[coolider_bomb_explosion][collider_zelda] = true;
 	
+	//MOVABLE OBJECT
+	matrix[collider_movable_object][front_link] = true;
+	matrix[collider_movable_object][front_link] = true;
+
 	//COLOUR BLOCK
 	matrix[collider_colour_block][collider_link] = true;
 	matrix[collider_colour_block][collider_zelda] = true;
@@ -288,6 +294,9 @@ void j1Collision::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, 255);
 			break;
 		case collider_change_height:
+			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
+			break;
+		case collider_movable_object:
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
 			break;
 		case collider_colour_block: {

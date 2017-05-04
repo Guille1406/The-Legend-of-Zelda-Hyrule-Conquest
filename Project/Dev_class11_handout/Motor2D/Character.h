@@ -128,7 +128,7 @@ public:
 	player_event				actual_event;
 	direction					character_direction;
 	move_direction				movement_direction;
-	bool						can_move=false;
+	bool						can_walk=false;
 	bool						can_jump=false;
 	bool						can_fall = true;
 	bool						is_rolling = false;

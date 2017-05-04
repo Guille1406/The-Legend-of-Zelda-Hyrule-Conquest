@@ -37,42 +37,42 @@ void Character::Move(float dt)
 	switch (movement_direction) {
 	case move_up:
 
-		can_move = MoveFunction(dt, pos.y, pos.x, false, adjacent.up, adjacent.left.i, adjacent.right.i);
+		this->can_walk = MoveFunction(dt, pos.y, pos.x, false, adjacent.up, adjacent.left.i, adjacent.right.i);
 	
 		break;
 
 	case  move_down:
-		can_move = MoveFunction(dt, pos.y, pos.x, true, adjacent.down, adjacent.left.j,  adjacent.right.j, true);
+		this->can_walk = MoveFunction(dt, pos.y, pos.x, true, adjacent.down, adjacent.left.j,  adjacent.right.j, true);
 	
 		break;
 
 	case move_left:
-		can_move = MoveFunction(dt, pos.x, pos.y, false, adjacent.left, adjacent.up.i, adjacent.down.i);
+		this->can_walk = MoveFunction(dt, pos.x, pos.y, false, adjacent.left, adjacent.up.i, adjacent.down.i);
 		
 		break;
 
 	case move_right:
-		can_move = MoveFunction(dt, pos.x, pos.y, true, adjacent.right, adjacent.up.j, adjacent.down.j, true);
+		this->can_walk = MoveFunction(dt, pos.x, pos.y, true, adjacent.right, adjacent.up.j, adjacent.down.j, true);
 		
 		break;
 
 	case move_up_left:
-		can_move = MoveDiagonalFunction(dt, pos.y, pos.x, false, false, adjacent.up.i, adjacent.left.i, diagonal_left_up);
+		this->can_walk = MoveDiagonalFunction(dt, pos.y, pos.x, false, false, adjacent.up.i, adjacent.left.i, diagonal_left_up);
 		
 		break;
 
 	case move_up_right:
-		can_move = MoveDiagonalFunction(dt, pos.y, pos.x, false, true, adjacent.up.j, adjacent.right.i, diagonal_right_up);
+		this->can_walk = MoveDiagonalFunction(dt, pos.y, pos.x, false, true, adjacent.up.j, adjacent.right.i, diagonal_right_up);
 		
 		break;
 
 	case move_down_left:
-		can_move = MoveDiagonalFunction(dt, pos.y, pos.x, true, false, adjacent.down.i, adjacent.left.j, diagonal_left_down, true);
+		this->can_walk = MoveDiagonalFunction(dt, pos.y, pos.x, true, false, adjacent.down.i, adjacent.left.j, diagonal_left_down, true);
 		
 		break;
 
 	case move_down_right:
-		can_move = MoveDiagonalFunction(dt, pos.y, pos.x, true, true, adjacent.down.j, adjacent.right.j, diagonal_right_down, true);
+		this->can_walk = MoveDiagonalFunction(dt, pos.y, pos.x, true, true, adjacent.down.j, adjacent.right.j, diagonal_right_down, true);
 		
 		break;
 	}
