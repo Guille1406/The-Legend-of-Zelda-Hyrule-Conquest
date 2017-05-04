@@ -176,30 +176,23 @@ iPoint j1Render::WorldToScreen(int x, int y) const
 void j1Render::Draw()
 {
 	for (int i = 0; i < 5; i++) {
-
 		if(App->map->active)
-		App->map->Draw(i);
+			App->map->Draw(i);
 
 		if(App->object->active)
-		App->object->Draw(i);
+			App->object->Draw(i);
 
-		if (App->enemy->Final_Boss != nullptr) {
-			if (App->enemy->Final_Boss->im_active) {
+		if (App->enemy->Final_Boss != nullptr)
+			if (App->enemy->Final_Boss->im_active)
 				App->enemy->Final_Boss->Draw(i);
-			}
-		}
 
 		for (int n = 0; n < 100; n++) {
 			if (App->enemy->active)
 				App->enemy->Draw(i,n);
-
 			if (App->player->active)
 				App->player->Draw(i,n);
 		}
-		
 	}
-	
-
 }
 
 // Blit to screen

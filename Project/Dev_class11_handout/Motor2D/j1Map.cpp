@@ -58,6 +58,29 @@ void j1Map::Draw(int height)
 				continue;
 		}
 		if (layer->print_height == height) {
+			/*
+			//Quadtree culling
+			std::vector< iPoint*> tiles_in_view;
+			SDL_Rect viewport = { -App->render->camera.x / scale,-App->render->camera.y / scale,App->render->camera.w / scale,App->render->camera.h / scale };
+			BROFILER_CATEGORY("Map Draw CollectCandidates", Profiler::Color::LightYellow);
+			layer->layer_quadtree->CollectCandidates(tiles_in_view, viewport);
+			BROFILER_CATEGORY("Map Draw CollectCandidates for", Profiler::Color::LightYellow);
+			for (std::vector<iPoint*>::iterator item = tiles_in_view.begin(); item != tiles_in_view.cend(); ++item)
+			{
+				iPoint tile_pos = { (*item)->x / data.tile_width, (*item)->y / data.tile_height };
+				int tile_id = layer->Get(tile_pos.x, tile_pos.y);
+				if (tile_id > 0)
+				{
+					TileSet* tileset = GetTilesetFromTileId(tile_id);
+					SDL_Rect r = tileset->GetTileRect(tile_id);
+					iPoint pos = MapToWorld(tile_pos.x, tile_pos.y);
+					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+				}
+			}
+			*/
+			/**/
+			//Camera culling
+			BROFILER_CATEGORY("Map Draw camera culling", Profiler::Color::LightYellow);
 			for (int y = 0; y < data.height; ++y)
 			{
 				if (y * data.tile_height + I_CAMERAMARGINTILE >= -App->render->camera.y / scale && y *data.tile_height < -App->render->camera.y / scale + App->render->camera.h / scale) {
@@ -79,25 +102,8 @@ void j1Map::Draw(int height)
 					}
 				}
 			}
+			/**/
 		}
-
-		/*
-		if (layer->print_height == height) {
-			std::vector< iPoint*> tiles_in_view;
-			SDL_Rect viewport = { -App->render->camera.x,-App->render->camera.y,App->render->camera.w,App->render->camera.h };
-			layer->layer_quadtree->CollectCandidates(tiles_in_view, App->render->camera);
-			for (std::vector<iPoint*>::iterator item = tiles_in_view.begin(); item != tiles_in_view.cend(); ++item)
-			{
-				int tile_id = layer->Get((*item)->x, (*item)->y);
-				if (tile_id > 0)
-				{
-					TileSet* tileset = GetTilesetFromTileId(tile_id);
-					SDL_Rect r = tileset->GetTileRect(tile_id);
-					iPoint pos = MapToWorld((*item)->x, (*item)->y);
-					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
-				}
-			}
-		*/
 
 		/*
 		auto next_item = item;
@@ -507,6 +513,7 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 {
 	bool ret = true;
+	float scale = App->win->GetScale();
 
 	layer->name = node.attribute("name").as_string();
 	layer->width = node.attribute("width").as_int();
@@ -531,6 +538,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 		char* temp = strtok((char*)chain, " ,.-");
 		int i = 0;
 		/*
+		int count = 0;
 		SDL_Rect boundaries = { 0,0,layer->width * data.tile_width,layer->height * data.tile_height };
 		layer->layer_quadtree = new Quadtree(boundaries);
 		*/
@@ -540,15 +548,16 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 
 			//Here implement quadtree
 			/*
-			iPoint tilepos = { 0,0 };
-			tilepos = layer->Get(i);
+			iPoint tilepos = layer->Get(i);
 			tilepos.x *= data.tile_width;
 			tilepos.y *= data.tile_height;
-			layer->layer_quadtree->Insert(&tilepos);
+			bool inserted = layer->layer_quadtree->Insert(&tilepos);
+			if (inserted) count++;
 			*/
 			layer->data[i++] = num;
 			temp = strtok(NULL, ",");
 		}
+		LOG("Accepted points: %i/%i", count, layer->width * layer->height);
 	}
 
 	return ret;

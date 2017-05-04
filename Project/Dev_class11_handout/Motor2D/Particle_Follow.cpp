@@ -114,6 +114,6 @@ void P_Follow::Update_position(iPoint* element)
 		pos.y = (element->y - App->render->camera.y / App->win->scale);
 	}
 
-	LOG("%i - %i", element->x, element->y);
-	LOG("%i - %i", pos.x, pos.y);
+	//LOG("%i - %i", element->x, element->y);
+	//LOG("%i - %i", pos.x, pos.y);
 }
