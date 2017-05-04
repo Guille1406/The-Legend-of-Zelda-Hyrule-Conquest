@@ -562,7 +562,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 			layer->data[i++] = num;
 			temp = strtok(NULL, ",");
 		}
-		LOG("Accepted points: %i/%i", count, layer->width * layer->height);
+		//LOG("Accepted points: %i/%i", count, layer->width * layer->height);
 	}
 
 	return ret;
