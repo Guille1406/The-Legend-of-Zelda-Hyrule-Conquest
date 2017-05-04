@@ -53,29 +53,10 @@ void j1Map::Draw(int height)
 	for (; item != data.layers.cend(); ++item) {
 		MapLayer* layer = (*item);
 
-		/*if (!App->collision->debug) {
+		if (!App->collision->debug) {
 			if (layer->properties.Get("Navigation") != 0 || layer->properties.Get("Enemies") != 0 || layer->properties.Get("Path") != 0)
 				continue;
-		}*/
-		/*
-		//Quadtree
-		if (layer->print_height == height) {
-			std::vector< iPoint*> tiles_in_view;
-			SDL_Rect viewport = { -App->render->camera.x,-App->render->camera.y,App->render->camera.w,App->render->camera.h };
-			layer->layer_quadtree->CollectCandidates(tiles_in_view, App->render->camera);
-			for (std::vector<iPoint*>::iterator item = tiles_in_view.begin(); item != tiles_in_view.cend(); ++item)
-			{
-				int tile_id = layer->Get((*item)->x, (*item)->y);
-				if (tile_id > 0)
-				{
-					TileSet* tileset = GetTilesetFromTileId(tile_id);
-					SDL_Rect r = tileset->GetTileRect(tile_id);
-					iPoint pos = MapToWorld((*item)->x, (*item)->y);
-					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
-				}
-			}
-			*/
-			/**/
+		}
 		if (layer->print_height == height) {
 			for (int y = 0; y < data.height; ++y)
 			{
@@ -99,52 +80,41 @@ void j1Map::Draw(int height)
 				}
 			}
 		}
-			/**/
-			/*
-			//Camera culling
-			if (layer->print_height == height) {
-				for (int y = 0; y < data.height; ++y)
+
+		/*
+		if (layer->print_height == height) {
+			std::vector< iPoint*> tiles_in_view;
+			SDL_Rect viewport = { -App->render->camera.x,-App->render->camera.y,App->render->camera.w,App->render->camera.h };
+			layer->layer_quadtree->CollectCandidates(tiles_in_view, App->render->camera);
+			for (std::vector<iPoint*>::iterator item = tiles_in_view.begin(); item != tiles_in_view.cend(); ++item)
+			{
+				int tile_id = layer->Get((*item)->x, (*item)->y);
+				if (tile_id > 0)
 				{
-					if (y * data.tile_height + I_CAMERAMARGINTILE >= -App->render->camera.y / scale && y *data.tile_height < -App->render->camera.y / scale + App->render->camera.h / scale) {
-						for (int x = 0; x < data.width; ++x)
-						{
-							if (x*data.tile_width + I_CAMERAMARGINTILE >= -App->render->camera.x / scale && x*data.tile_width < -App->render->camera.x / scale + App->render->camera.w / scale) {
-								int tile_id = layer->Get(x, y);
-								if (tile_id > 0)
-								{
-									TileSet* tileset = GetTilesetFromTileId(tile_id);
-
-									SDL_Rect r = tileset->GetTileRect(tile_id);
-									iPoint pos = MapToWorld(x, y);
-
-									//if (layer->properties.Get("Navigation") == false && layer->properties.Get("Enemies") == false && layer->properties.Get("Path") == false)
-									App->render->Blit(tileset->texture, pos.x, pos.y, &r);
-								}
-							}
-						}
-					}
+					TileSet* tileset = GetTilesetFromTileId(tile_id);
+					SDL_Rect r = tileset->GetTileRect(tile_id);
+					iPoint pos = MapToWorld((*item)->x, (*item)->y);
+					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
 				}
 			}
-			*/
-		}
+		*/
+
 		/*
 		auto next_item = item;
 		next_item++;
-		if (layer->print_height == Link->logic_height && blit_link && (*next_item)->print_height != Link->logic_height)
+		if (layer->print_height == Link->logic_height && blit_link && (*next_item)->print_height !=Link->logic_height)
 		{
-			blit_link = false;
-			App->render->Blit(Link->entity_texture, Link->pos.x - Link->actual_animation.GetCurrentFrame().pivot.x, Link->pos.y - Link->actual_animation.GetCurrentFrame().pivot.y, &Link->actual_animation.GetCurrentFrame().rect);
+		blit_link = false;
+		App->render->Blit(Link->entity_texture, Link->pos.x - Link->actual_animation.GetCurrentFrame().pivot.x, Link->pos.y - Link->actual_animation.GetCurrentFrame().pivot.y, &Link->actual_animation.GetCurrentFrame().rect);
 		}
 		if (layer->print_height == Zelda->logic_height  && blit_zelda && (*next_item++)->print_height != Zelda->logic_height) {
-			blit_zelda = false;
-			App->render->Blit(Zelda->entity_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y, &Zelda->actual_animation.GetCurrentFrame().rect);
+		blit_zelda = false;
+		App->render->Blit(Zelda->entity_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y, &Zelda->actual_animation.GetCurrentFrame().rect);
 		}
 		*/
 		//App->player->Draw();
-		/*
-		for (std::vector<SDL_Rect>::iterator item = QuadtreeAABBs.begin(); item != QuadtreeAABBs.cend(); ++item)
-			App->render->DrawQuad(*item, 255, 255, 255, 255, false, false, false);
-		*/
+
+	}
 }
 
 int Properties::Get(const char* value, int default_value) const
