@@ -32,8 +32,8 @@ bool j1Object::Update(float)
 {
 	for (int i = 0; i < V_Objects.size(); i++)
 		if (V_Objects[i]->type == double_button) {
-			DoubleButton* temp_button = (DoubleButton*)V_Objects[i];
-			temp_button->characters_on = 0;
+			//DoubleButton* temp_button = (DoubleButton*)V_Objects[i];
+			//temp_button->characters_on = 0;
 		}
 
 	//Blit all the objects
@@ -87,8 +87,8 @@ void j1Object::Draw(int height)
 {
 	for (int i = 0; i < V_Objects.size(); i++) {
 		Object* object = V_Objects[i];
-		if (object->active && object->logic_height == height)
-			App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
+		if (object->active && object->logic_height == height) {}
+			//App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
 	}
 }
 

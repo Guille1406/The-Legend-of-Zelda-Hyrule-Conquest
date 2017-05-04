@@ -180,12 +180,13 @@ bool j1Collision::Update(float dt)
 				continue;
 
 			c1 = colliders[i];
-
+			if (c1->type == COLLIDER_TYPE::collider_colour_block)
+				continue;
 			for (uint n = colliders.size(); n < MAX_COLLIDERS; n++) {
 				c1->state_collider[n] = not_colliding;
 			}
 
-
+			
 			// avoid checking collisions already checked
 			for (uint k = i + 1; k < colliders.size(); ++k)
 			{
