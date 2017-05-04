@@ -82,6 +82,7 @@ private:
 	int texture_label_to_blit_w, texture_label_to_blit_h = 0;
 	bool scene_changed = false;
 	int PlaceLabel_opacity = 255;
+	bool PlaceLabel_disapeared = false;
 
 };
 

@@ -118,19 +118,25 @@ bool j1HUD::Update(float dt)
 		scene_changed = false;
 		PlaceLabel_opacity = 255;
 		PlaceLabel_timer.Start();
+		PlaceLabel_disapeared = false;
 	}
-	if (PlaceLabel_timer.Read() >= 5000)
+	if (!PlaceLabel_disapeared)
 	{
-		PlaceLabel_opacity--;
+		if (PlaceLabel_timer.Read() >= 5000)
+		{
+			PlaceLabel_opacity--;
+		}
+		if (PlaceLabel_opacity > 0 && PlaceLabel_opacity < 256)
+		{
+			//Blit PlaceLabelBack
+			App->render->Blit(atlas, -App->render->camera.x, (-App->render->camera.y + Window_H - PlaceLabelBack.h) + 1, &PlaceLabelBack, 1.0f, 0, INT_MAX, INT_MAX, false, PlaceLabel_opacity);
+			//Blit PlaceLabel
+			App->render->Blit(texture_label_to_blit, (int)(-App->render->camera.x + PlaceLabelBack.w * 0.5f - texture_label_to_blit_w * 0.5f), (int)(-App->render->camera.y + Window_H - PlaceLabelBack.h * 0.5f), nullptr, 1.0f, 0, INT_MAX, INT_MAX, false, PlaceLabel_opacity);
+		}
+		else
+			PlaceLabel_disapeared = true;
 	}
-	if (PlaceLabel_opacity > 0 && PlaceLabel_opacity < 256)
-	{
-		//Blit PlaceLabelBack
-		App->render->Blit(atlas, -App->render->camera.x, (-App->render->camera.y + Window_H - PlaceLabelBack.h) + 1, &PlaceLabelBack, 1.0f, 0, INT_MAX, INT_MAX, false, PlaceLabel_opacity);
-		//Blit PlaceLabel
-		App->render->Blit(texture_label_to_blit, (int)(-App->render->camera.x + PlaceLabelBack.w * 0.5f - texture_label_to_blit_w * 0.5f), (int)(-App->render->camera.y + Window_H - PlaceLabelBack.h * 0.5f), nullptr, 1.0f, 0, INT_MAX, INT_MAX, false, PlaceLabel_opacity);
-	}
-
+	
 	return true;
 }
 
