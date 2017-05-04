@@ -366,7 +366,7 @@ Object* j1Object::CreateHeart(Enemy* n_enemy, int height) {
 	Heart temp_corazon;
 
 	temp_corazon.name = "heart";
-	temp_corazon.rect = { n_enemy->pix_world_pos.x ,n_enemy->pix_world_pos.y,rect_Heart.w,rect_Heart.h};
+	temp_corazon.rect = { n_enemy->pos.x ,n_enemy->pos.y,rect_Heart.w,rect_Heart.h};
 	temp_corazon.texture_rect = rect_Heart;
 	temp_corazon.type = objectType::heart;
 	temp_corazon.active = true;
@@ -736,4 +736,17 @@ void Entity::ChangeAnimation(int animation)
 		this->actual_animation = this->sprites_vector[animation];
 		last_animation = animation;
 	}
+}
+
+bool Entity::MoveTo(int x, int y)
+{
+	bool ret = true;
+
+	// check if position is available/walkable
+
+	/*currentPos.x = x;
+	currentPos.y = y;
+	UpdateCollider();*/
+
+	return ret;
 }

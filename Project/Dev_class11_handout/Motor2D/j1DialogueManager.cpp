@@ -82,13 +82,13 @@ void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode, iPoint* 
 	//Allocate dialogues from XML
 	//itereate cutscenes
 	for (pugi::xml_node newcutscene = dialoguenode.child("Cutscenes").child("cutscene"); newcutscene; newcutscene = newcutscene.next_sibling("cutscene"))
-		CreateDialogue(newcutscene, TextBackgroundPos, DialogueType::Cutscene);
+		CreateDialogue(newcutscene, TextBackgroundPos, DialogueType::Cutscene_dialoguetype);
 	//itereate NPCs
 	for (pugi::xml_node newnpc = dialoguenode.child("NPCs").child("npc"); newnpc; newnpc = newnpc.next_sibling("npc"))
-		CreateDialogue(newnpc, TextBackgroundPos, DialogueType::NPC);
+		CreateDialogue(newnpc, TextBackgroundPos, DialogueType::NPC_dialoguetype);
 	//itereate items
 	for (pugi::xml_node newirtem = dialoguenode.child("Items").child("item"); newirtem; newirtem = newirtem.next_sibling("item"))
-		CreateDialogue(newirtem, TextBackgroundPos, DialogueType::item);
+		CreateDialogue(newirtem, TextBackgroundPos, DialogueType::item_dialoguetype);
 }
 
 void j1DialogueManager::CreateDialogue(pugi::xml_node& dialoguenode, iPoint* TextBackgroundPos, DialogueType type)

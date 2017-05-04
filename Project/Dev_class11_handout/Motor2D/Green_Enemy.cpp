@@ -25,10 +25,10 @@ Green_Enemy::~Green_Enemy()
 
 void Green_Enemy::Action()
 {
-	tile_pos.x = pix_world_pos.x / 16;
-	tile_pos.y = pix_world_pos.y / 16;
+	tile_pos.x = pos.x / 16;
+	tile_pos.y = pos.y / 16;
 	if (player_in_range == nullptr) {
-		iPoint actual_tile = pix_world_pos;
+		iPoint actual_tile = pos;
 		if (passedtile == true) {
 			temp_point = array_pos;
 			array_pos = App->enemy->CalculatePath(this);
@@ -44,8 +44,8 @@ void Green_Enemy::Action()
 		int y = ((array_pos.y) - temp_point.y);
 
 
-		pix_world_pos.x += x;
-		pix_world_pos.y += y;
+		pos.x += x;
+		pos.y += y;
 
 		if (x == 1) {
 			Enemy_Orientation = OrientationEnemy::right_enemy;

@@ -88,8 +88,8 @@ void P_Zelda::UpdateArrows()
 		}
 		else {
 			if (Vec_Arrow[i]->is_attached) {
-				Vec_Arrow[i]->pos.x = Vec_Arrow[i]->attached_enemy->pix_world_pos.x + Vec_Arrow[i]->offset.x;
-				Vec_Arrow[i]->pos.y = Vec_Arrow[i]->attached_enemy->pix_world_pos.y + Vec_Arrow[i]->offset.y;
+				Vec_Arrow[i]->pos.x = Vec_Arrow[i]->attached_enemy->pos.x + Vec_Arrow[i]->offset.x;
+				Vec_Arrow[i]->pos.y = Vec_Arrow[i]->attached_enemy->pos.y + Vec_Arrow[i]->offset.y;
 				Vec_Arrow[i]->collider->SetPos(Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
 			}
 		}

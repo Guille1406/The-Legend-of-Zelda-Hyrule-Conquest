@@ -22,14 +22,14 @@ Bat_Enemy::~Bat_Enemy()
 
 void Bat_Enemy::Action()
 {
-	tile_pos.x = pix_world_pos.x / 16;
-	tile_pos.y = pix_world_pos.y / 16;
+	tile_pos.x = pos.x / 16;
+	tile_pos.y = pos.y / 16;
 
-	SDL_Rect shadow_rect = { pix_world_pos.x ,pix_world_pos.y+15, collider->rect.w, collider->rect.h-10 };
+	SDL_Rect shadow_rect = { pos.x ,pos.y+15, collider->rect.w, collider->rect.h-10 };
 	App->render->DrawQuad(shadow_rect, Black(0), Black(1), Black(2), 50, true);
 
 	if (player_in_range == nullptr) {
-		iPoint actual_tile = pix_world_pos;
+		iPoint actual_tile = pos;
 		if (passedtile == true) {
 			temp_point = array_pos;
 			array_pos = App->enemy->CalculatePath(this);
@@ -45,8 +45,8 @@ void Bat_Enemy::Action()
 		int y = ((array_pos.y) - temp_point.y);
 
 
-		pix_world_pos.x += x;
-		pix_world_pos.y += y;
+		pos.x += x;
+		pos.y += y;
 
 		if (x == 1) {
 			Enemy_Orientation = OrientationEnemy::right_enemy;

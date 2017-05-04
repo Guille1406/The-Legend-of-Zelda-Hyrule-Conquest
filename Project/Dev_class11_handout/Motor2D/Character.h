@@ -120,7 +120,6 @@ private:
 public:
 	
 	j1Timer						attack_timer;
-	iPoint						pos = { 0,0 };
 	iPoint						tilepos = { 0,0 };
 	adjacent_tiles				adjacent;
 

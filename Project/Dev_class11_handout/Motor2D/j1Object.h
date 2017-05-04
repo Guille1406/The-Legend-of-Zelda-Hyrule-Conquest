@@ -54,6 +54,7 @@ public:
 	~Entity() {};
 	virtual void ChangeAnimation(int);
 	virtual void LoadAnimation(const char*);
+	virtual bool MoveTo(int, int);
 public:
 	int logic_height=	0;
 	Collider* collider= nullptr;
@@ -64,7 +65,7 @@ public:
 	std::vector<Animation>		sprites_vector;
 	Animation					actual_animation;
 	SDL_Texture*				entity_texture=nullptr;
-
+	iPoint pos = { 0,0 };
 };
 
 class j1Object : public j1Module {

@@ -43,13 +43,13 @@ void HyruleBombSoldier_Enemy::Action()
 	//	continue_path_bomb = true;
 		can_throw_bomb = false;
 		bomb->bomb_explosion = false;
-		bomb->position = this->pix_world_pos;
+		bomb->position = this->pos;
 	}
 	
 
 	off_set = 100;
 	this->Enemy_Orientation = OrientationEnemy::down_enemy;
-	if (player_position.x<pix_world_pos.x) {
+	if (player_position.x<pos.x) {
 		this->Enemy_Orientation = OrientationEnemy::left_enemy;
 		off_set = -100;
 	}
@@ -58,11 +58,11 @@ void HyruleBombSoldier_Enemy::Action()
 	}
 
 
-	max_bomb_point.x = pix_world_pos.x + off_set;
+	max_bomb_point.x = pos.x + off_set;
 	if (state == EnemyState::throwing_bomb || t<1 || bomb->bomb_explosion == false) {
 		
-		bomb_point.x = (1 - t)*(1 - t)*pix_world_pos.x + 2 * t*(1 - t)*max_bomb_point.x + t*t*player_position.x;
-		bomb_point.y = (1 - t)*(1 - t)*pix_world_pos.y + 2 * t*(1 - t)*max_bomb_point.y + t*t*player_position.y;
+		bomb_point.x = (1 - t)*(1 - t)*pos.x + 2 * t*(1 - t)*max_bomb_point.x + t*t*player_position.x;
+		bomb_point.y = (1 - t)*(1 - t)*pos.y + 2 * t*(1 - t)*max_bomb_point.y + t*t*player_position.y;
 		
 		if (t < 1) {
 			

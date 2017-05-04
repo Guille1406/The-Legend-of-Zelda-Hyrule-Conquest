@@ -23,9 +23,9 @@ enum DialogueID {
 };
 
 enum DialogueType {
-	Cutscene,
-	NPC,
-	item,
+	Cutscene_dialoguetype,
+	NPC_dialoguetype,
+	item_dialoguetype,
 	NullType
 };
 

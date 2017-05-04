@@ -37,10 +37,13 @@
   <map>
     <folder>maps/</folder>
   </map>
-  
+
+  <input>
+    <controller file="4c05c405000000000000504944564944,Sony DualShock 4,a:b1,b:b2,y:b3,x:b0,start:b9,guide:b12,back:b13,leftstick:b10,rightstick:b11,leftshoulder:b4,rightshoulder:b5,dpup:h0.1,dpleft:h0.8,dpdown:h0.4,dpright:h0.2,leftx:a0,lefty:a1,rightx:a2,righty:a5,lefttrigger:a3,righttrigger:a4,platform:Windows,"/>
+  </input>
+
   <inputManager>
-    
-    
+  
  
     <!--ATTACK-->
     <action  button="0" event="0" />
@@ -49,30 +52,32 @@
     <action  button="1" event="1" />
     
     <!--COVER-->
-    <action  button="9" event="2" /> 
+    <action  button="3" event="2" /> 
     
     <!--TUMBLE-->
-    <action  button="2" event="3" />
-
-    <!--INTERACT-->
-    <action  button="3" event="4" />
+    <action  button="10" event="3" />
     
     <!--Move UP-->
-    <action  button="11" event="5" />
+    <action  button="11" event="4" />
 
     <!--Move DOWN-->
-    <action  button="12" event="6" />
+    <action  button="12" event="5" />
 
     <!--Move LEFT-->
-    <action  button="13" event="7" />
+    <action  button="13" event="6" />
 
     <!--Move RIGHT-->
-    <action  button="14" event="8" />
+    <action  button="14" event="7" />
 
     <!--PAUSE-->
-    <action  button="6"  event="9" />
+    <action  button="6"  event="8" />
 
 
   </inputManager>
+  
+  <cutscenemanager>
+	<cutscene file="cutscenes/test.xml"/>
+</cutscenemanager>
+
 
 </config>

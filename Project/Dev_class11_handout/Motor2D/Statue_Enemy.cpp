@@ -21,25 +21,25 @@ Statue_Enemy::~Statue_Enemy()
 
 void Statue_Enemy::Action()
 {
-	tile_pos.x = pix_world_pos.x / 16;
-	tile_pos.y = pix_world_pos.y / 16;
+	tile_pos.x = pos.x / 16;
+	tile_pos.y = pos.y / 16;
 	static float inc = 0;
 	static float temp = 0;
 	if (t == 0) {
 		temp = 0;
 		if (player_in_range != nullptr) {
-			inc = (float)(player_in_range->pos.y - pix_world_pos.y) / 2.0;
+			inc = (float)(player_in_range->pos.y - pos.y) / 2.0;
 			
 
-			new_y = pix_world_pos.y;
+			new_y = pos.y;
 		}
 	}
 	temp += (float)inc / 50.0f;
-	this->rect_en = { pix_world_pos.x - 2 , new_y + (int)temp, 35, this->rect.h / 2 };
+	this->rect_en = { pos.x - 2 , new_y + (int)temp, 35, this->rect.h / 2 };
 	App->render->DrawQuad(rect_en, Black(0), Black(1), Black(2), 50, true);
 
 	if (player_in_range == nullptr) {
-		iPoint actual_tile = pix_world_pos;
+		iPoint actual_tile = pos;
 		if (passedtile == true) {
 			temp_point = array_pos;
 			array_pos = App->enemy->CalculatePath(this);
@@ -56,8 +56,8 @@ void Statue_Enemy::Action()
 		int y = ((array_pos.y) - temp_point.y);
 
 
-		pix_world_pos.x += x;
-		pix_world_pos.y += y;
+		pos.x += x;
+		pos.y += y;
 
 		if (x == 1) {
 			Enemy_Orientation = OrientationEnemy::right_enemy;
@@ -83,15 +83,15 @@ void Statue_Enemy::Action()
 	else {
 		if (!enemy_doing_script) {
 			if (this->state != jumping) {
-				first_point = pix_world_pos;
-				max_heigh_jump.y = pix_world_pos.y - 50;
-				if (player_in_range->pos.x < pix_world_pos.x) {
-					last_point.x = pix_world_pos.x - 50;
+				first_point = pos;
+				max_heigh_jump.y = pos.y - 50;
+				if (player_in_range->pos.x < pos.x) {
+					last_point.x = pos.x - 50;
 				}
 				else {
-					last_point.x = pix_world_pos.x + 50;
+					last_point.x = pos.x + 50;
 				}
-				last_point.y = (player_in_range->pos.y + pix_world_pos.y) / 2;
+				last_point.y = (player_in_range->pos.y + pos.y) / 2;
 			}
 
 			if (abs(first_point.x - last_point.x) > abs(first_point.y - last_point.y)) {
@@ -111,7 +111,7 @@ void Statue_Enemy::Action()
 				}
 			}
 
-			pix_world_pos.y = (1 - t)*(1 - t)*first_point.y + 2 * t*(1 - t)*max_heigh_jump.y + t*t*last_point.y;
+			pos.y = (1 - t)*(1 - t)*first_point.y + 2 * t*(1 - t)*max_heigh_jump.y + t*t*last_point.y;
 
 			if (t < 1) {
 
@@ -127,14 +127,14 @@ void Statue_Enemy::Action()
 				t = 0;
 				this->logic_height = 0;
 				first_point = last_point;
-				if (player_in_range->pos.x < pix_world_pos.x) {
-					last_point.x = pix_world_pos.x - 50;
+				if (player_in_range->pos.x < pos.x) {
+					last_point.x = pos.x - 50;
 				}
 				else {
-					last_point.x = pix_world_pos.x + 50;
+					last_point.x = pos.x + 50;
 				}
-				max_heigh_jump.y = pix_world_pos.y - 50;
-				last_point.y = (player_in_range->pos.y + pix_world_pos.y) / 2;
+				max_heigh_jump.y = pos.y - 50;
+				last_point.y = (player_in_range->pos.y + pos.y) / 2;
 			}
 
 		}

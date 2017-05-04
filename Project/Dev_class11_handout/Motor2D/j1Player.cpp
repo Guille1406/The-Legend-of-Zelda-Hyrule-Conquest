@@ -600,8 +600,8 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 			arrow_temp->can_move = false;
 			arrow_temp->is_attached = true;
 			arrow_temp->attached_enemy = (Enemy*)collider2->parent;
-			arrow_temp->offset.x = arrow_temp->pos.x - arrow_temp->attached_enemy->pix_world_pos.x;
-			arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pix_world_pos.y;
+			arrow_temp->offset.x = arrow_temp->pos.x - arrow_temp->attached_enemy->pos.x;
+			arrow_temp->offset.y = arrow_temp->pos.y - arrow_temp->attached_enemy->pos.y;
 
 			if (collider1->type == collider_arrow)
 				collider1->to_delete = true;

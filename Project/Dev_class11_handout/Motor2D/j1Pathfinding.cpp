@@ -385,8 +385,8 @@ void j1Pathfinding::Move(Enemy * enemy, Character* player)
 		if (y <= -1) { y = -1; enemy->Enemy_Orientation = OrientationEnemy::up_enemy; }
 
 
-		enemy->pix_world_pos.x += x;
-		enemy->pix_world_pos.y += y;
+		enemy->pos.x += x;
+		enemy->pos.y += y;
 
 		if (enemy->tile_pos == enemy->green_enemy_path[enemy->green_enemy_path.size()-i]) {
 			i++;

@@ -99,8 +99,8 @@ bool j1Enemy::Update(float dt)
 
 			V_MyEnemies[i]->UpdateState();
 			V_MyEnemies[i]->Rang_Player();
-			V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pix_world_pos.x;
-			V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pix_world_pos.y;
+			V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pos.x;
+			V_MyEnemies[i]->collider->rect.y = V_MyEnemies[i]->pos.y;
 			Update_Sword_Collision(V_MyEnemies[i]);
 			V_MyEnemies[i]->Action();
 		}
@@ -137,7 +137,7 @@ void j1Enemy::Draw(int height, int y_pos)
 {
 	for (int i = 0; i < V_MyEnemies.size(); i++) {
 		if(V_MyEnemies[i]->logic_height == height && V_MyEnemies[i]->tile_pos.y == y_pos)
-		App->render->Blit(V_MyEnemies[i]->entity_texture, V_MyEnemies[i]->pix_world_pos.x - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.x, V_MyEnemies[i]->pix_world_pos.y - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.y, &V_MyEnemies[i]->actual_animation.GetCurrentFrame().rect);
+		App->render->Blit(V_MyEnemies[i]->entity_texture, V_MyEnemies[i]->pos.x - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.x, V_MyEnemies[i]->pos.y - V_MyEnemies[i]->actual_animation.GetCurrentFrame().pivot.y, &V_MyEnemies[i]->actual_animation.GetCurrentFrame().rect);
 	}
 }
 
@@ -157,11 +157,11 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		rect_test = { ret->array_pos.x,ret->array_pos.y,20,10 };
 		ret->shield_test = App->collision->AddCollider(rect_test, COLLIDER_TYPE::collider_enemy_sword, ret, (j1Module*)App->enemy);
 		//Position in world pixel 
-		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
-		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+		ret->pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
 
-		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,26,30 };
+		rect = { ret->pos.x, ret->pos.y + 32,26,30 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret,(j1Module*) App->enemy);
 		
 
@@ -185,10 +185,10 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->live = 2;
 		
 		//Position in world pixel 
-		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
-		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+		ret->pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
-		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35 };
+		rect = { ret->pos.x, ret->pos.y + 32,30,35 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 
 		//how to know if a enemy is in level one or two
@@ -201,14 +201,14 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->array_pos = pos_array_enemy;
 		ret->live = 6;
 		//Position in world pixel 
-		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
-		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+		ret->pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
 
-		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35 };
+		rect = { ret->pos.x, ret->pos.y + 32,30,35 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 		//how to know if a enemy is in level one or two
-		ret->max_heigh_jump.y = ret->pix_world_pos.y - 50;
+		ret->max_heigh_jump.y = ret->pos.y - 50;
 		ret->logic_height = height;
 		break;
 
@@ -218,11 +218,11 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->array_pos = pos_array_enemy;
 		ret->live = 6;
 		//Position in world pixel 
-		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
-		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+		ret->pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
 
-		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35 };
+		rect = { ret->pos.x, ret->pos.y + 32,30,35 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 		//how to know if a enemy is in level one or two
 		ret->logic_height = height;
@@ -234,11 +234,11 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->array_pos = pos_array_enemy;
 		ret->live = 6;
 		//Position in world pixel 
-		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
-		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+		ret->pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
 
-		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35 };
+		rect = { ret->pos.x, ret->pos.y + 32,30,35 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 		//how to know if a enemy is in level one or two
 		ret->logic_height = height;
@@ -250,11 +250,11 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->array_pos = pos_array_enemy;
 		ret->live = 6;
 		//Position in world pixel 
-		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
-		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+		ret->pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
 
-		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35 };
+		rect = { ret->pos.x, ret->pos.y + 32,30,35 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 		//how to know if a enemy is in level one or two
 		ret->logic_height = height;
@@ -266,11 +266,11 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->array_pos = pos_array_enemy;
 		ret->live = 4;
 		//Position in world pixel 
-		ret->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
-		ret->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+		ret->pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		ret->pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
 
-		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35 };
+		rect = { ret->pos.x, ret->pos.y + 32,30,35 };
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 		//how to know if a enemy is in level one or two
 		ret->logic_height = height;
@@ -286,15 +286,15 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		temp->live = 5;
 
 		//Position in world pixel 
-		temp->pix_world_pos.x = pos_array_enemy.x*App->map->data.tile_width;
-		temp->pix_world_pos.y = pos_array_enemy.y*App->map->data.tile_height;
+		temp->pos.x = pos_array_enemy.x*App->map->data.tile_width;
+		temp->pos.y = pos_array_enemy.y*App->map->data.tile_height;
 
-		temp->bomb_point.x = temp->pix_world_pos.x;
-		temp->bomb_point.y = temp->pix_world_pos.y;
+		temp->bomb_point.x = temp->pos.x;
+		temp->bomb_point.y = temp->pos.y;
 
-		temp->max_bomb_point.x = temp->pix_world_pos.x;
-		temp->max_bomb_point.y = temp->pix_world_pos.y-50;
-		rect = { ret->pix_world_pos.x, ret->pix_world_pos.y + 32,30,35};
+		temp->max_bomb_point.x = temp->pos.x;
+		temp->max_bomb_point.y = temp->pos.y-50;
+		rect = { ret->pos.x, ret->pos.y + 32,30,35};
 		temp->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 
 		//how to know if a enemy is in level one or two
@@ -399,16 +399,16 @@ void Enemy::Direction_Push_Election()
 	//Calls the jump function depending on the player direction
 	switch (Enemy_Orientation) {
 	case OrientationEnemy::up_enemy:
-		Enemy_Hurt_Displacement(pix_world_pos.y, true);
+		Enemy_Hurt_Displacement(pos.y, true);
 		break;
 	case OrientationEnemy::down_enemy:
-		Enemy_Hurt_Displacement(pix_world_pos.y, false);
+		Enemy_Hurt_Displacement(pos.y, false);
 		break;
 	case OrientationEnemy::left_enemy:
-		Enemy_Hurt_Displacement(pix_world_pos.x, true);
+		Enemy_Hurt_Displacement(pos.x, true);
 		break;
 	case OrientationEnemy::right_enemy:
-		Enemy_Hurt_Displacement(pix_world_pos.x, false);
+		Enemy_Hurt_Displacement(pos.x, false);
 		break;
 	}
 }
@@ -418,16 +418,16 @@ void Enemy::Direction_Push_Election_ChSoldier()
 	//Calls the jump function depending on the player direction
 	switch (App->player->Link->character_direction) {
 	case direction::up:
-		Enemy_Hurt_Displacement(pix_world_pos.y, false);
+		Enemy_Hurt_Displacement(pos.y, false);
 		break;
 	case direction::down:
-		Enemy_Hurt_Displacement(pix_world_pos.y, true);
+		Enemy_Hurt_Displacement(pos.y, true);
 		break;
 	case direction::left:
-		Enemy_Hurt_Displacement(pix_world_pos.x, false);
+		Enemy_Hurt_Displacement(pos.x, false);
 		break;
 	case direction::right:
-		Enemy_Hurt_Displacement(pix_world_pos.x, true);
+		Enemy_Hurt_Displacement(pos.x, true);
 		break;
 	}
 }
@@ -489,11 +489,11 @@ void j1Enemy::StartCollision(Collider* collider1, Collider* collider2)
 void Enemy::Rang_Player() {
 	//this->player_in_range = nullptr;
 	iPoint dist;
-	dist.x = App->player->Link->pos.x - this->pix_world_pos.x;
-	dist.y = App->player->Link->pos.y - this->pix_world_pos.y;
+	dist.x = App->player->Link->pos.x - this->pos.x;
+	dist.y = App->player->Link->pos.y - this->pos.y;
 	iPoint dist2;
-	dist2.x = App->player->Zelda->pos.x - pix_world_pos.x;
-	dist2.y = App->player->Zelda->pos.y - pix_world_pos.y;
+	dist2.x = App->player->Zelda->pos.x - pos.x;
+	dist2.y = App->player->Zelda->pos.y - pos.y;
 	if (this->type!= enemyType::rat_enemy) {
 		if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG && enemy_doing_script == false) {
 			this->player_in_range = App->player->Link;

@@ -241,6 +241,9 @@
     <ClCompile Include="Bat_Enemy.cpp">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="j1CutSceneManager.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -554,6 +557,9 @@
     </ClInclude>
     <ClInclude Include="Bat_Enemy.h">
       <Filter>Desenvolupament  ========\Entity\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="j1CutSceneManager.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
