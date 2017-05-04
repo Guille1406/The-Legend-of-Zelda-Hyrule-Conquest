@@ -160,16 +160,16 @@ bool j1Player::CleanUp() {
 	{
 		if ((Link->collision != nullptr) && (Link->front_collider != nullptr))
 		{
-			Link->collision->to_delete = true;
-			Link->front_collider->to_delete = true;
+			//Link->collision->to_delete = true;
+			//Link->front_collider->to_delete = true;
 		}
 	}
 	if (Zelda != nullptr)
 	{
 		if ((Zelda->collision != nullptr) && (Zelda->front_collider != nullptr))
 		{
-			Zelda->collision->to_delete = true;
-			Zelda->front_collider->to_delete = true; // This may crash, can't read memory
+			//Zelda->collision->to_delete = true;
+			//Zelda->front_collider->to_delete = true; // This may crash, can't read memory
 		}
 	}
 	return true;
@@ -635,9 +635,27 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 			Zelda->roll_timer.Start();
 			Zelda->collision_by_enemy_timmer.Start();
 			//Link->Collision_Sword_EnemySword();
-			Zelda->actual_event = player_event::push_backwards;
-			Zelda->doing_script = true;
-			Zelda->Direction_Push_Election();
+			if (!Zelda->is_picked) {
+				Zelda->actual_event = player_event::push_backwards;
+				Zelda->doing_script = true;
+				Zelda->Direction_Push_Election();
+			}
+			half_hearts_test_purpose--;
+		}
+		//}
+
+	}
+	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_boss_explosion) {
+		//roll_timer
+		//if (Link->roll_timer.Read() > 1500) {
+		if (Link->collision_by_enemy_timmer.Read() > 1500) {
+			App->audio->PlayFx(Link->Link_Hurt_Audio);
+			Link->roll_timer.Start();
+			Link->collision_by_enemy_timmer.Start();
+			//Link->Collision_Sword_EnemySword();
+			Link->actual_event = player_event::push_backwards;
+			Link->doing_script = true;
+			Link->Direction_Push_Election();
 			half_hearts_test_purpose--;
 		}
 		//}

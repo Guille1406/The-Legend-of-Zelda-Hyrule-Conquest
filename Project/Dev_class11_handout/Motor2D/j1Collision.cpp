@@ -26,6 +26,7 @@ j1Collision::j1Collision()
 	//matrix[collider_link][collider_boss_foot] = true;
 	matrix[collider_link][collider_heart] = true;
 	matrix[collider_link][collider_boss_hit] = true;
+	matrix[collider_link][collider_boss_explosion] = true;
 
 
 	//FRONT LINK
@@ -117,6 +118,7 @@ j1Collision::j1Collision()
 	matrix[collider_boss_hit][collider_link] = true;
 	matrix[collider_boss_hit][collider_link] = true;
 	matrix[collider_boss_explosion][collider_zelda] = true;
+	matrix[collider_boss_explosion][collider_link] = true;
 }
 
 // Destructor
@@ -196,8 +198,7 @@ bool j1Collision::Update(float dt)
 				{
 					if (matrix[c1->type][c2->type] && c1->callback)
 					{
-						if (c1->parent->logic_height == c2->parent->logic_height)
-							if (c1->parent->logic_height == c2->parent->logic_height) {
+						if (c1->logic_height == c2->logic_height){							
 								if (c1->state_collider[k] == im_colliding)
 									c1->callback->OnCollision(c1, c2);
 								else if (c1->state_collider[k] == start_collision)
@@ -212,7 +213,7 @@ bool j1Collision::Update(float dt)
 
 					if (matrix[c2->type][c1->type] && c2->callback)
 					{
-						if (c1->parent->logic_height == c2->parent->logic_height) {
+						if (c1->logic_height == c2->logic_height) {
 							if(c1->state_collider[k] == im_colliding)
 								c2->callback->OnCollision(c2, c1);
 							else if(c1->state_collider[k] == start_collision)
@@ -296,6 +297,9 @@ void j1Collision::DebugDraw()
 		}
 
 		case collider_boss_hit:
+			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
+			break;
+		case collider_boss_explosion:
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, 255);
 			break;
 		case collider_jump:

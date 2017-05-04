@@ -454,6 +454,9 @@ void Boss::LaserAttack()
 	}
 	if (laser_charging_time.Read() > 2500) {
 		//Create collider
+		Collider* temp_collider = App->collision->AddCollider({ focus_point_before_attack.x,focus_point_before_attack.y - 32,64,64 }, collider_boss_explosion, this, App->enemy);
+		temp_collider->logic_height = App->player->Zelda->logic_height;
+		temp_collider->to_delete = true;
 		laser_charging_time.Start();
 		first_loop = true;
 		if(!im_attacking)
