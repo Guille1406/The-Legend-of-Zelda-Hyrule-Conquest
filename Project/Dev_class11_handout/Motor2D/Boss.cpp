@@ -135,10 +135,10 @@ void Boss::ExecuteEvent()
 		actual_phase = boss_phase_3;
 	}
 	if (attacking_foot != nullptr) {
-		if (foot_live == 0 && state != boss_damaged) {
+		if (foot_live == 0 && state != boss_state::boss_damaged) {
 			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 + 32 };
 			CreateColliders();
-			state = boss_damaged;
+			state = boss_state::boss_damaged;
 			can_move = false;
 			can_attack = false;
 			logic_height = 0;
@@ -152,7 +152,12 @@ void Boss::ExecuteEvent()
 			can_attack = false;
 			logic_height = 0;
 		}*/
-		if (damaged_boss_timer.Read() > 5000 && state == boss_damaged) {
+		if (damaged_boss_timer.Read() > 9000 && state == boss_state::boss_damaged) {
+			recover_collider = App->collision->AddCollider({ pos.x,pos.y,244,244 }, collider_boss_recover, this, App->enemy);
+			recover_collider->logic_height = 1;
+			recover_collider->to_delete = true;
+		}
+		if (damaged_boss_timer.Read() > 10000 && state == boss_state::boss_damaged) {			
 			DeleteColliders();
 			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 - 32 };
 			can_attack = true;

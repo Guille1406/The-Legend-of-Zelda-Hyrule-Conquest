@@ -81,6 +81,7 @@ public:
 	std::vector<iPoint> colision_tiles_vec;
 
 	j1Timer damaged_boss_timer;
+	Collider* recover_collider;
 
 	//JUMP OBJECTS
 	Object* jump_1;

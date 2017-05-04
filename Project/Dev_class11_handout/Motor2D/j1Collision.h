@@ -28,6 +28,7 @@ enum COLLIDER_TYPE
 	collider_boss_eye,
 	collider_boss_hit,
 	collider_boss_explosion,
+	collider_boss_recover,
 	collider_boss,
 	collider_door,
 	collider_warp,

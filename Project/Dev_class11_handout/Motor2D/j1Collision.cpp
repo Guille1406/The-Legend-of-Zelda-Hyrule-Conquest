@@ -47,6 +47,7 @@ j1Collision::j1Collision()
 	matrix[collider_zelda][collider_heart] = true;
 	matrix[collider_zelda][collider_boss_hit] = true;
 	matrix[collider_zelda][collider_boss_explosion] = true;
+	matrix[collider_zelda][collider_boss_recover] = true;
 
 	//FRONT ZELDA
 	matrix[front_zelda][collider_jump] = true;
@@ -119,6 +120,7 @@ j1Collision::j1Collision()
 	matrix[collider_boss_hit][collider_link] = true;
 	matrix[collider_boss_explosion][collider_zelda] = true;
 	matrix[collider_boss_explosion][collider_link] = true;
+	matrix[collider_boss_recover][collider_zelda] = true;
 }
 
 // Destructor

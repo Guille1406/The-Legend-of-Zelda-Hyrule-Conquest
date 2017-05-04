@@ -661,7 +661,14 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 		//}
 
 	}
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_boss_recover) {
+		
+			
+		Zelda->doing_script = true;
+		Zelda->Direction_Push_Election();
+		Zelda->logic_height = 0;
 
+	}
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_boss_foot) {
 		Foot* temp_foot = (Foot*)collider2->parent;
 		if (temp_foot->parent_boss->foot_live > 0)
