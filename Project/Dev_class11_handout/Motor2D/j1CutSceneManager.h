@@ -62,7 +62,7 @@ public:
 	CS_Image(CS_Type type, int n, const char* name, bool active, const char* path, SDL_Rect rect, iPoint pos);
 	~CS_Image();
 	void Move(float x, float y);
-
+	iPoint GetPos();
 	//UTILITY FUNCTIONS -------------
 	SDL_Texture* GetTexture()const;
 	//-------------------------------

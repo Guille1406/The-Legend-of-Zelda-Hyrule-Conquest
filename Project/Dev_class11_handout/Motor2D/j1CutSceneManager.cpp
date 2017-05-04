@@ -1044,6 +1044,12 @@ void CS_npc::Move(float x, float y)
 	entity->pos.x += x;
 	entity->pos.y += y;
 }
+
+iPoint CS_Image::GetPos()
+{
+	return image->GetLocalPos();
+}
+
 iPoint CS_npc::GetPos()
 {
 	return entity->pos;
