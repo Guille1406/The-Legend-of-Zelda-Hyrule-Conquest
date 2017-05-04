@@ -72,6 +72,11 @@ public:
 	SDL_Rect laser_aim;
 	SDL_Rect leg_rect;
 
+	Collider* eye1_collider;
+	Collider* eye2_collider;
+	Collider* eye3_collider;
+	Collider* eye4_collider;
+
 	int foot_live = 5;
 	int eye_live = 5;
 	int moving_state = 0;
@@ -88,6 +93,16 @@ public:
 	Object* jump_2;
 	Object* jump_3;
 	Object* jump_4;
+
+	//EYE POS
+	//         122,10
+	// 16,106           228,106
+	//         122,219
+	iPoint eye_1 = { pos.x + 122,pos.y + 10 };
+	iPoint eye_2 = { pos.x + 16,pos.y + 106 };
+	iPoint eye_3 = { pos.x + 228,pos.y + 106 };
+	iPoint eye_4 = { pos.x + 122,pos.y + 219 };
+
 };
 
 class Foot : public Entity {
@@ -114,6 +129,10 @@ public:
 
 	SDL_Rect foot_rect;
 	SDL_Rect foot_rect_invulnerable;
+
+
+
+
 	
 };
 struct Legs {

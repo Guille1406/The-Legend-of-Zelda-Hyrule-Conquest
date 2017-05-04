@@ -66,6 +66,11 @@ void Boss::Draw(int height)
 
 void Boss::UpdateLegs()
 {
+	eye_1 = { pos.x + 114,pos.y + 2 };
+	eye_2 = { pos.x + 8,pos.y + 98 };
+	eye_3 = { pos.x + 220,pos.y + 98 };
+	eye_4 = { pos.x + 114,pos.y + 211 };
+
 	int x = 0, y = 0;
 	//UPDATE PIVOTS
 	legs->foot1->UpdatePivots();
@@ -81,8 +86,12 @@ void Boss::UpdateLegs()
 	legs->foot3->collider->SetPos(legs->foot3->pos.x - 16, legs->foot3->pos.y - 16, legs->foot3->logic_height);
 	legs->foot4->collider->SetPos(legs->foot4->pos.x - 16, legs->foot4->pos.y - 16, legs->foot4->logic_height);
 	collider->SetPos(pos.x, pos.y, logic_height);
-	eye_collider->SetPos(centre_pos.x, centre_pos.y, logic_height + 1);
+	eye_collider->SetPos(centre_pos.x, centre_pos.y, logic_height+1);
 	
+	eye1_collider->SetPos(eye_1.x, eye_1.y, logic_height);
+	eye2_collider->SetPos(eye_2.x, eye_2.y, logic_height);
+	eye3_collider->SetPos(eye_3.x, eye_3.y, logic_height);
+	eye4_collider->SetPos(eye_4.x, eye_4.y, logic_height);
 }
 
 void Boss::GetEvent()
@@ -391,14 +400,7 @@ void Boss::Attack(Character* focused_character)
 
 void Boss::LaserAttack()
 {
-	//EYE POS
-	//         122,10
-	// 16,106           228,106
-	//         122,219
-	iPoint eye_1 = {pos.x + 122,pos.y + 10};
-	iPoint eye_2 = { pos.x + 16,pos.y + 106 };
-	iPoint eye_3 = { pos.x + 228,pos.y + 106 };
-	iPoint eye_4 = { pos.x + 122,pos.y + 219 };
+	
 
 	static iPoint focus_eye = eye_1;
 
@@ -545,7 +547,6 @@ void Boss::DeleteColliders()
 
 Boss::Boss()
 {
-	{
 		Legs temp_legs;
 		temp_legs.parent_boss = this;
 		pos = { 200,200 };
@@ -567,7 +568,10 @@ Boss::Boss()
 		//laser_texture = App->tex->Load("textures/point.png");
 		logic_height = 1;
 		
-	}
+		eye1_collider = App->collision->AddCollider({ eye_1.x,eye_1.y,16,16 }, collider_boss_little_eye, this, App->enemy);
+		eye2_collider = App->collision->AddCollider({ eye_2.x,eye_2.y,16,16 }, collider_boss_little_eye, this, App->enemy);
+		eye3_collider = App->collision->AddCollider({ eye_3.x,eye_3.y,16,16 }, collider_boss_little_eye, this, App->enemy);
+		eye4_collider = App->collision->AddCollider({ eye_4.x,eye_4.y,16,16 }, collider_boss_little_eye, this, App->enemy);
 }
 
 Boss::~Boss()

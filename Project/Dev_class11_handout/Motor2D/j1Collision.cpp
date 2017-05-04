@@ -323,6 +323,9 @@ void j1Collision::DebugDraw()
 		case collider_boss_eye:
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, 255);
 			break;
+		case collider_boss_little_eye:
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, 255);
+			break;
 		case collider_enemy:
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
