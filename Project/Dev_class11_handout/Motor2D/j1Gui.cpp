@@ -67,14 +67,10 @@ bool j1Gui::Update(float dt)
 		if ((*item)->GetPurpose() != AddGuiTo::viewport_purpose)
 		{
 			if ((*item)->GetModuleListener() != nullptr)
-			{
 				(*item)->Draw();
-			}
 			if ((*item)->GetSceneListener() != nullptr)//if is scene
-			{
 				if((*item)->GetSceneListener() == App->scene->GetActiveScene())
 					(*item)->Draw();
-			}
 		}
 
 	if (App->console->IsActive())

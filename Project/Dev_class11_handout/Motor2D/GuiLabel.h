@@ -28,6 +28,8 @@ private:
 	std::string LabelString;
 	_TTF_Font*  font;
 	Color* color = &White;
+	SDL_Texture* texture_to_blit = nullptr;
+	bool str_modified = false;
 };
 
 #endif // __GUILABEL_H__

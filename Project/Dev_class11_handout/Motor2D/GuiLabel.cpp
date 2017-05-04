@@ -7,6 +7,7 @@
 GuiLabel::GuiLabel(iPoint position, std::string* str, bool movable, AddGuiTo addto) : Gui(position, GuiType::gui_label, movable, addto),
 LabelString(*str), font(App->font->default)
 {
+	str_modified = true;
 	CalculateGui_Collider();
 }
 
@@ -17,14 +18,17 @@ GuiLabel::~GuiLabel()
 
 void GuiLabel::Draw()
 {
-	if (this->visible == true)
+	if (str_modified)
+	{
+		SDL_DestroyTexture(texture_to_blit);
+		if (LabelString != empty_char)
+			texture_to_blit = App->font->Print(LabelString.c_str(), { (Uint8)(*color)(0), (Uint8)(*color)(1), (Uint8)(*color)(2), (Uint8)opacity }, font);
+		str_modified = false;
+	}
+	if (this->visible)
 	{
 		if (LabelString != empty_char)
-		{
-			SDL_Texture* texture_to_blit = App->font->Print(LabelString.c_str(), { (Uint8)(*color)(0), (Uint8)(*color)(1), (Uint8)(*color)(2), 255 }, font);
 			App->render->Blit(texture_to_blit, position.x - App->render->camera.x, position.y - App->render->camera.y, nullptr, 1.0f, 0, INT_MAX, INT_MAX, false, opacity);
-			SDL_DestroyTexture(texture_to_blit);
-		}
 		if (App->gui->Gui_DebugDraw_isactive())
 			this->DebugDraw();
 	}
@@ -44,12 +48,14 @@ void GuiLabel::EditLabelStr(std::string* newstr)
 {
 	LabelString = *newstr;
 	CalculateGui_Collider();
+	str_modified = true;
 }
 
 void GuiLabel::SetFont(_TTF_Font* newfont)
 {
 	font = newfont;
 	CalculateGui_Collider();
+	str_modified = true;
 }
 
 _TTF_Font* GuiLabel::GetFont()
@@ -60,12 +66,14 @@ _TTF_Font* GuiLabel::GetFont()
 void GuiLabel::SetLabelColor(Color* newcolor)
 {
 	color = newcolor;
+	str_modified = true;
 }
 
 void GuiLabel::Clear()
 {
 	LabelString.clear();
 	CalculateGui_Collider();
+	str_modified = true;
 }
 
 void GuiLabel::CalculateGui_Collider()
@@ -83,4 +91,5 @@ void GuiLabel::SetOpacity(uint newopacity)
 		opacity = 255;
 	else
 		opacity = newopacity;
+	str_modified = true;
 }

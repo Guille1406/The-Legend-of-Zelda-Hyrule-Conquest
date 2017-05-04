@@ -123,9 +123,7 @@ bool j1HUD::Update(float dt)
 	if (!PlaceLabel_disapeared)
 	{
 		if (PlaceLabel_timer.Read() >= 5000)
-		{
 			PlaceLabel_opacity--;
-		}
 		if (PlaceLabel_opacity > 0 && PlaceLabel_opacity < 256)
 		{
 			//Blit PlaceLabelBack
