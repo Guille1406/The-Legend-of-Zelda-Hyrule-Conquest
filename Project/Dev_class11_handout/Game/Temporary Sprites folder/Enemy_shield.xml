@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:11738d0f518958a647ef58b2a3d7b087:731feccac03caa848dd257cb9f157a28:50e6f6ff569fcfc4b7ef238936621755$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="Enemy_shield.png" width="600" height="116">
+  <sprite n="up" x="288" y="60" w="50" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="up" x="338" y="60" w="50" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="up" x="288" y="60" w="50" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="up" x="388" y="60" w="50" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="down" x="0" y="0" w="50" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="down" x="50" y="0" w="50" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="down" x="0" y="0" w="50" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="down" x="100" y="0" w="50" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="left" x="300" y="0" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="left" x="348" y="0" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="left" x="300" y="0" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="left" x="396" y="0" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="right" x="0" y="60" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="right" x="48" y="60" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="right" x="0" y="60" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="right" x="96" y="60" w="48" h="56" pX="0.5" pY="0.5"/>
+   
+  
+    <sprite n="up_hit" x="438" y="60" w="50" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="up_hit" x="488" y="60" w="50" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="up_hit" x="438" y="60" w="50" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="up_hit" x="538" y="60" w="50" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="down_hit" x="150" y="0" w="50" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="down_hit" x="200" y="0" w="50" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="down_hit" x="150" y="0" w="50" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="down_hit" x="250" y="0" w="50" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="left_hit" x="444" y="0" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="left_hit" x="492" y="0" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="left_hit" x="444" y="0" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="left_hit" x="540" y="0" w="48" h="56" pX="0.5" pY="0.5"/>
+     <sprite n="right_hit" x="144" y="60" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="right_hit" x="192" y="60" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="right_hit" x="144" y="60" w="48" h="56" pX="0.5" pY="0.5"/>
+    <sprite n="right_hit" x="240" y="60" w="48" h="56" pX="0.5" pY="0.5"/>
+
+</TextureAtlas>

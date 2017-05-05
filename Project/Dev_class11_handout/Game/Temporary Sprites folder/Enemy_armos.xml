@@ -19,8 +19,43 @@ vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
 verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
 triangles  => sprite triangulation, 3 vertex indices per triangle
 -->
-<TextureAtlas imagePath="Enemy_armos.png" width="102" height="66">
-    <sprite n="armos_1.png" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
-    <sprite n="armos_2.png" x="35" y="1" w="32" h="64" pX="0" pY="0.5"/>
-    <sprite n="armos_3.png" x="69" y="1" w="32" h="64" pX="0" pY="0.5"/>
+<TextureAtlas imagePath="sprites/Enemy_armos.png" width="102" height="66">
+<!--Phase 1-->
+	<sprite n="up" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+        <sprite n="down" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+	<sprite n="left" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+<sprite n="right" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+<!--JUMPING-->
+  <sprite n="up" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+  <sprite n="down" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+  
+  <sprite n="left" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+<sprite n="right" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+
+  <!--JUMPING-->
+  <sprite n="up" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+  <sprite n="down" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+  
+  <sprite n="left" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+<sprite n="right" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+  
+<!--Phase 2-->
+	<sprite n="up2" x="35" y="1" w="32" h="64" pX="0" pY="0.5"/>
+	<sprite n="down2" x="35" y="1" w="32" h="64" pX="0" pY="0.5"/>
+   
+    <sprite n="left2" x="35" y="1" w="32" h="64" pX="0" pY="0.5"/>
+ <sprite n="right2" x="35" y="1" w="32" h="64" pX="0" pY="0.5"/>
+<!--Phase 3-->
+    <sprite n="up3" x="35" y="1" w="32" h="64" pX="0" pY="0.5"/>
+    <sprite n="down3" x="35" y="1" w="32" h="64" pX="0" pY="0.5"/>
+    
+    <sprite n="left3" x="35" y="1" w="32" h="64" pX="0" pY="0.5"/>	
+<sprite n="right3" x="35" y="1" w="32" h="64" pX="0" pY="0.5"/>
+
+    <sprite n="up_hit" x="69" y="1" w="32" h="64" pX="0" pY="0.5"/>
+    <sprite n="down_hit" x="69" y="1" w="32" h="64" pX="0" pY="0.5"/>
+    <sprite n="left_hit" x="69" y="1" w="32" h="64" pX="0" pY="0.5"/>
+    <sprite n="right_hit" x="69" y="1" w="32" h="64" pX="0" pY="0.5"/>
+
+
 </TextureAtlas>
