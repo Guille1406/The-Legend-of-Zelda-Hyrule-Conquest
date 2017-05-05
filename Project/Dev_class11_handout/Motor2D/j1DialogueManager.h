@@ -48,7 +48,7 @@ enum DialogueInterlucutorPosition {
 };
 
 struct DialogueInterlucutorStrRelation {
-	DialogueInterlucutorStrRelation(std::string* str, DialogueInterlucutor enu);
+	DialogueInterlucutorStrRelation(std::string* str, DialogueInterlucutor enU);
 	~DialogueInterlucutorStrRelation();
 	std::string DialogueInterlucutorStr = empty_char;
 	DialogueInterlucutor DialogueInterlucutorEnum = DialogueInterlucutor::item_nullinterlucutor;
@@ -61,6 +61,8 @@ struct DialogueCharacter
 	std::string DialogueCharacter_str = empty_char;
 	DialogueInterlucutor DialogueCharacter_id = DialogueInterlucutor::item_nullinterlucutor;
 	DialogueInterlucutorPosition DialogueCharacter_pos = DialogueInterlucutorPosition::Left;
+	SDL_Texture* Character_Atlas = nullptr;
+	SDL_Rect Character_Expression_Rect = { 0,0,0,0 };
 };
 
 struct DialogueStep
@@ -135,6 +137,13 @@ private:
 	GuiImage* TextBackground = nullptr;
 	GuiButton* LeftCharacterLabel = nullptr;
 	GuiButton* RightCharacterLabel = nullptr;
+
+	SDL_Texture* link_tex = nullptr;
+	SDL_Texture* zelda_tex = nullptr;
+	SDL_Texture* king_tex = nullptr;
+	SDL_Texture* guard_tex = nullptr;
+	SDL_Texture* ric_tex = nullptr;
+
 };
 
 #endif

@@ -68,6 +68,13 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("ric"), DialogueInterlucutor::Ric));
 		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("guard"), DialogueInterlucutor::Guard));
 
+		///Get characters atlas
+		link_tex = nullptr;
+		zelda_tex = nullptr;
+		king_tex = nullptr;
+		guard_tex = nullptr;
+		ric_tex = nullptr;
+
 		//Allocate dialogues from XML
 		AllocateDialogues(dialogue_config, &TextBackground->GetLocalPos());
 	}
@@ -108,6 +115,11 @@ void j1DialogueManager::CreateDialogue(pugi::xml_node& dialoguenode, iPoint* Tex
 		else
 			newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_str = std::string(newstep.attribute("speaker").as_string());
 		newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_pos = CheckInterlocutorPosition(&std::string(newstep.attribute("speaker_pos").as_string()));
+
+		///Set character atlas and expression
+		newdialoguestep->SpeakerDialogueCharacter->Character_Atlas = nullptr;
+		newdialoguestep->SpeakerDialogueCharacter->Character_Expression_Rect = { 0,0,0,0 };
+
 		newdialoguestep->ListenerDialogueCharacter = new DialogueCharacter();
 		newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_id = CheckInterlocutor(&std::string(newstep.attribute("listener").as_string()));
 		if (newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_id == DialogueInterlucutor::item_nullinterlucutor)
@@ -115,6 +127,11 @@ void j1DialogueManager::CreateDialogue(pugi::xml_node& dialoguenode, iPoint* Tex
 		else
 			newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_str = std::string(newstep.attribute("listener").as_string());
 		newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_pos = CheckInterlocutorPosition(&std::string(newstep.attribute("listener_pos").as_string()));
+		
+		///Set character atlas and expression
+		newdialoguestep->ListenerDialogueCharacter->Character_Atlas = nullptr;
+		newdialoguestep->ListenerDialogueCharacter->Character_Expression_Rect = { 0,0,0,0 };
+
 		int y = 0;
 		for (pugi::xml_node newsteplines = newstep.child("line"); newsteplines; newsteplines = newsteplines.next_sibling("line"), y += 30)
 		{
