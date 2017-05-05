@@ -95,13 +95,19 @@ public:
 	Object* jump_4;
 
 	//EYE POS
-	//         122,10
-	// 16,106           228,106
-	//         122,219
-	iPoint eye_1 = { pos.x + 122,pos.y + 10 };
-	iPoint eye_2 = { pos.x + 16,pos.y + 106 };
-	iPoint eye_3 = { pos.x + 228,pos.y + 106 };
-	iPoint eye_4 = { pos.x + 122,pos.y + 219 };
+	//         114,2
+	// 8,98          220,98
+	//         114,211
+	iPoint eye_1 = { pos.x + 114,pos.y + 2 };
+	iPoint eye_2 = { pos.x + 8,pos.y + 98 };
+	iPoint eye_3 = { pos.x + 220,pos.y + 98 };
+	iPoint eye_4 = { pos.x + 114,pos.y + 211 };
+
+	SDL_Rect eye_1_tex;
+	SDL_Rect eye_2_tex;
+	SDL_Rect eye_3_tex;
+	SDL_Rect eye_4_tex;
+
 
 };
 

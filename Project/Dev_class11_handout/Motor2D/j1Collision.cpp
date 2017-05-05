@@ -58,6 +58,7 @@ j1Collision::j1Collision()
 	matrix[collider_arrow][collider_enemy] = true;
 	matrix[collider_arrow][collider_diana] = true;
 	matrix[collider_arrow][collider_boss_eye] = true;
+	matrix[collider_arrow][collider_boss_little_eye] = true;
 
 	//sword
 	matrix[collider_link_sword][collider_enemy] = true;
@@ -127,6 +128,7 @@ j1Collision::j1Collision()
 	matrix[collider_boss_explosion][collider_zelda] = true;
 	matrix[collider_boss_explosion][collider_link] = true;
 	matrix[collider_boss_recover][collider_zelda] = true;
+	matrix[collider_boss_little_eye][collider_arrow] = true;
 }
 
 // Destructor

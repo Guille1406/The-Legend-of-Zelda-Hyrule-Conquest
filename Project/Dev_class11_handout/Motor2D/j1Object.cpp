@@ -88,7 +88,7 @@ void j1Object::Draw(int height)
 {
 	for (int i = 0; i < V_Objects.size(); i++) {
 		Object* object = V_Objects[i];
-		if (object->active && object->logic_height == height) {}
+		if (object->active && object->logic_height == height)
 			App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
 	}
 }

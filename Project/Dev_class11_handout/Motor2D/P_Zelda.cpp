@@ -81,7 +81,7 @@ void P_Zelda::UpdateArrows()
 {
 	int arrow_speed = 10;
 	for (uint i = 0; i < Vec_Arrow.size(); i++) {
-		Vec_Arrow[i]->Check_Wall();
+		
 		if (Vec_Arrow[i]->can_move) {
 		Vec_Arrow[i]->Check_Wall();
 		Vec_Arrow[i]->collider->SetPos(Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());

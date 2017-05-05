@@ -414,21 +414,21 @@ void Boss::LaserAttack()
 		im_attacking_laser = true;
 		laser_charging_time.Start();
 		first_loop = false;
-		int dist = (int)(sqrt(((App->player->Zelda->pos.x - eye_1.x) * (App->player->Zelda->pos.x - eye_1.x)) + ((App->player->Zelda->pos.y - eye_1.y)) * (App->player->Zelda->pos.y - eye_1.y)));
+		int dist = (int)(sqrt(((App->player->Zelda->pos.x - eye_1.x + 4) * (App->player->Zelda->pos.x - eye_1.x + 4)) + ((App->player->Zelda->pos.y - eye_1.y + 4)) * (App->player->Zelda->pos.y - eye_1.y + 4)));
 		focus_eye = eye_1;
-		if (dist > (int)(sqrt(((App->player->Zelda->pos.x - eye_2.x) * (App->player->Zelda->pos.x - eye_2.x)) + ((App->player->Zelda->pos.y - eye_2.y)) * (App->player->Zelda->pos.y - eye_2.y)))) {
+		if (dist > (int)(sqrt(((App->player->Zelda->pos.x - eye_2.x + 4) * (App->player->Zelda->pos.x - eye_2.x + 4)) + ((App->player->Zelda->pos.y - eye_2.y + 4)) * (App->player->Zelda->pos.y - eye_2.y + 4)))) {
 			focus_eye = eye_2;
-			dist = (int)(sqrt(((App->player->Zelda->pos.x - eye_2.x) * (App->player->Zelda->pos.x - eye_2.x)) + ((App->player->Zelda->pos.y - eye_2.y)) * (App->player->Zelda->pos.y - eye_2.y)));
+			dist = (int)(sqrt(((App->player->Zelda->pos.x - eye_2.x + 4) * (App->player->Zelda->pos.x - eye_2.x + 4)) + ((App->player->Zelda->pos.y - eye_2.y + 4)) * (App->player->Zelda->pos.y - eye_2.y + 4)));
 
 		}
-		if (dist > (int)(sqrt(((App->player->Zelda->pos.x - eye_3.x) * (App->player->Zelda->pos.x - eye_3.x)) + ((App->player->Zelda->pos.y - eye_3.y)) * (App->player->Zelda->pos.y - eye_3.y)))) {
+		if (dist > (int)(sqrt(((App->player->Zelda->pos.x - eye_3.x + 4) * (App->player->Zelda->pos.x - eye_3.x + 4)) + ((App->player->Zelda->pos.y - eye_3.y + 4)) * (App->player->Zelda->pos.y - eye_3.y + 4)))) {
 			focus_eye = eye_3;
-			dist = (int)(sqrt(((App->player->Zelda->pos.x - eye_3.x) * (App->player->Zelda->pos.x - eye_3.x)) + ((App->player->Zelda->pos.y - eye_3.y)) * (App->player->Zelda->pos.y - eye_3.y)));
-
+			dist = (int)(sqrt(((App->player->Zelda->pos.x - eye_3.x + 4) * (App->player->Zelda->pos.x - eye_3.x + 4)) + ((App->player->Zelda->pos.y - eye_3.y + 4)) * (App->player->Zelda->pos.y - eye_3.y + 4)));
+		
 		}
-		if (dist > (int)(sqrt(((App->player->Zelda->pos.x - eye_4.x) * (App->player->Zelda->pos.x - eye_4.x)) + ((App->player->Zelda->pos.y - eye_4.y)) * (App->player->Zelda->pos.y - eye_4.y)))) {
+		if (dist > (int)(sqrt(((App->player->Zelda->pos.x - eye_4.x + 4) * (App->player->Zelda->pos.x - eye_4.x + 4)) + ((App->player->Zelda->pos.y - eye_4.y + 4)) * (App->player->Zelda->pos.y - eye_4.y + 4)))) {
 			focus_eye = eye_4;
-			dist = (int)(sqrt(((App->player->Zelda->pos.x - eye_4.x) * (App->player->Zelda->pos.x - eye_4.x)) + ((App->player->Zelda->pos.y - eye_4.y)) * (App->player->Zelda->pos.y - eye_4.y)));
+			dist = (int)(sqrt(((App->player->Zelda->pos.x - eye_4.x + 4) * (App->player->Zelda->pos.x - eye_4.x + 4)) + ((App->player->Zelda->pos.y - eye_4.y + 4)) * (App->player->Zelda->pos.y - eye_4.y + 4)));
 
 		}
 
@@ -438,9 +438,9 @@ void Boss::LaserAttack()
 	float angle = 0;
 	if (laser_charging_time.Read() < 2000) {
 		for (float i = 0; i < 1; i += 1.0f / 60.0f) {
-			int x = focus_eye.x * (1 - i) + App->player->Zelda->pos.x * i;
-			int y = focus_eye.y * (1 - i) + App->player->Zelda->pos.y * i;
-			vect = { App->player->Zelda->pos.x - focus_eye.x, App->player->Zelda->pos.y - focus_eye.y };
+			int x = (focus_eye.x + 4) * (1 - i) + App->player->Zelda->pos.x * i;
+			int y = (focus_eye.y + 4)  * (1 - i) + App->player->Zelda->pos.y * i;
+			vect = { App->player->Zelda->pos.x -( focus_eye.x+4), App->player->Zelda->pos.y - (focus_eye.y+4) };
 			angle = atan2(vect.y, vect.x) * 57.2957795;
 			App->render->Blit(boss_atlas, x, y,&laser_rect,1.0f,angle);
 			App->render->Blit(boss_atlas, App->player->Zelda->pos.x, App->player->Zelda->pos.y, &laser_aim);
@@ -450,9 +450,9 @@ void Boss::LaserAttack()
 	}
 	if (laser_charging_time.Read() > 2000 && laser_charging_time.Read() < 2500) {
 		for (float i = 0; i < 1; i += 1.0f / 60.0f) {
-			int x = focus_eye.x * (1 - i) + focus_point_before_attack.x * i;
-			int y = focus_eye.y * (1 - i) + focus_point_before_attack.y * i;
-			vect = { App->player->Zelda->pos.x - focus_eye.x, App->player->Zelda->pos.y - focus_eye.y };
+			int x = (focus_eye.x + 4) * (1 - i) + focus_point_before_attack.x * i;
+			int y = (focus_eye.y + 4)* (1 - i) + focus_point_before_attack.y * i;
+			vect = { App->player->Zelda->pos.x - (focus_eye.x+4), App->player->Zelda->pos.y - (focus_eye.y+4) };
 			angle = atan2(vect.y, vect.x) * 57.2957795;
 			App->render->Blit(boss_atlas, x, y, &laser_rect_fire, 1.0f, angle);
 			App->render->Blit(boss_atlas, focus_point_before_attack.x, focus_point_before_attack.y, &laser_aim);
@@ -572,6 +572,11 @@ Boss::Boss()
 		eye2_collider = App->collision->AddCollider({ eye_2.x,eye_2.y,16,16 }, collider_boss_little_eye, this, App->enemy);
 		eye3_collider = App->collision->AddCollider({ eye_3.x,eye_3.y,16,16 }, collider_boss_little_eye, this, App->enemy);
 		eye4_collider = App->collision->AddCollider({ eye_4.x,eye_4.y,16,16 }, collider_boss_little_eye, this, App->enemy);
+
+		eye_1_tex = { 266,0,8,6 };
+		eye_2_tex = { 244,0,8,10 };
+		eye_3_tex = { 244,10,8,10 };
+		eye_4_tex = { 252,0,14,13 };
 }
 
 Boss::~Boss()

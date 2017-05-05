@@ -595,6 +595,15 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 			}
 			temp->Action();
 		}
+		else if (collider2->type == collider_boss_little_eye) {
+			Boss* temp_boss = (Boss*)collider2->parent;
+			Arrow* arrow_temp = (Arrow*)collider1->parent;
+			if (temp_boss->foot_live > 0)
+				temp_boss->foot_live--;
+			arrow_temp->can_move = false;
+			//arrow_temp->is_attached = true;
+			collider1->to_delete = true;
+		}
 		else {
 			Arrow* arrow_temp = (Arrow*)collider1->parent;
 			arrow_temp->can_move = false;
@@ -688,6 +697,10 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 		Foot* temp_foot = (Foot*)collider2->parent;
 		if (temp_foot->parent_boss->foot_live > 0)
 			temp_foot->parent_boss->foot_live--;
+
+	}
+	else if (collider1->type == COLLIDER_TYPE::collider_arrow && collider2->type == COLLIDER_TYPE::collider_boss_little_eye) {
+		int x = 0;
 
 	}
 
