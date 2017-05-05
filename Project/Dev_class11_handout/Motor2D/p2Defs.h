@@ -114,4 +114,19 @@ static const SDL_Rect rect_diana_up_active = { 192,240,32,32 };
 static const SDL_Rect rect_diana_up_idle = { 224,240,32,32 };
 static const SDL_Rect rect_diana_down_active = { 256,240,32,32 };
 static const SDL_Rect rect_diana_down_idle = {288,240,32,32 };
+
+static const SDL_Rect rect_red_block = { 160,272,32,32 };
+static const SDL_Rect rect_yellow_block = { 192,272,32,32 };
+static const SDL_Rect rect_green_block = { 128,304,32,32 };
+static const SDL_Rect rect_blue_block = { 160,304,32,32 };
+
+static const SDL_Rect rect_red_button_idle = {0,272,32,32};
+static const SDL_Rect rect_blue_button_idle = { 64,272,32,32 };
+static const SDL_Rect rect_green_button_idle = { 0,304,32,32 };
+static const SDL_Rect rect_yellow_button_idle = { 64,304,32,32 };
+
+static const SDL_Rect rect_red_button_pressed = { 32,272,32,32 };
+static const SDL_Rect rect_blue_button_pressed = { 96,272,32,32 };
+static const SDL_Rect rect_green_button_pressed = { 32,304,32,32 };
+static const SDL_Rect rect_yellow_button_pressed = { 96,304,32,32 };
 #endif

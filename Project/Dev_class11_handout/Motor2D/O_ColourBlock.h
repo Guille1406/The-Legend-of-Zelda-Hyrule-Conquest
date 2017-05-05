@@ -4,6 +4,13 @@
 #include "j1Object.h"
 #include"j1Render.h"
 
+enum blockcolor {
+	blue,
+	red,
+	green,
+	yellow,
+};
+
 class ColourBlock : public Object {
 private:
 	bool triggered = false;
@@ -21,6 +28,14 @@ public:
 		active = false;
 		name = obj.name;
 		logic_height = obj.logic_height;
+		if (strcmp(name.c_str(), "blue") == 0)
+			texture_rect = rect_blue_block;
+		if (strcmp(name.c_str(), "orange") == 0)
+			texture_rect = rect_yellow_block;
+		if (strcmp(name.c_str(), "green") == 0)
+			texture_rect = rect_green_block;
+		if (strcmp(name.c_str(), "red") == 0)
+			texture_rect = rect_red_block;
 		
 	}
 
@@ -44,6 +59,7 @@ public:
 
 	j1Timer block_delay;
 	bool can_dissapear = false;
+
 };
 
 #endif
