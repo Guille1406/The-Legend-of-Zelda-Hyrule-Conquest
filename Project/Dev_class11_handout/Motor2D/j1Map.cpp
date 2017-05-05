@@ -420,28 +420,6 @@ bool j1Map::LoadMap()
 		{
 			data.type = MAPTYPE_UNKNOWN;
 		}
-		/*
-		uint PointInsert = 0;
-		uint FailedInsert = 0;
-		j1Timer timer;
-
-		//Define map area 
-		SDL_Rect map_area = { -App->render->camera.x,-App->render->camera.y,data.width * data.tile_width,data.height * data.tile_height };
-
-		// Set map draw quad tree area
-		map_quadtree.SetBoundaries(map_area);
-
-		//Fill the draw quad tree with all the tiles coordinates
-		for (uint y = 0; y < data.height; y++)
-			for (uint x = 0; x < data.width; x++)
-			{
-				iPoint newPointToInsert = MapToWorldCenter(x, y);
-				if (!map_quadtree.Insert(&newPointToInsert))
-					FailedInsert++;
-				PointInsert++;
-			}
-		LOG("Map QuadTree generated in: %.3f / %i errors / %i points", timer.ReadSec(), FailedInsert, PointInsert);
-		*/
 	}
 
 	return ret;

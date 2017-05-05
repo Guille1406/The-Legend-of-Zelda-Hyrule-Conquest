@@ -47,11 +47,12 @@ enum DialogueInterlucutorPosition {
 	Right
 };
 
-struct DialogueInterlucutorStrRelation {
-	DialogueInterlucutorStrRelation(std::string* str, DialogueInterlucutor enu);
-	~DialogueInterlucutorStrRelation();
+struct DialogueInterlucutorStrAndAtalsRelation {
+	DialogueInterlucutorStrAndAtalsRelation(std::string* str, DialogueInterlucutor enu, SDL_Texture* atlas);
+	~DialogueInterlucutorStrAndAtalsRelation();
 	std::string DialogueInterlucutorStr = empty_char;
 	DialogueInterlucutor DialogueInterlucutorEnum = DialogueInterlucutor::item_nullinterlucutor;
+	SDL_Texture* DialogueInterlucutorAtlas = nullptr;
 };
 
 struct DialogueCharacter
@@ -61,6 +62,8 @@ struct DialogueCharacter
 	std::string DialogueCharacter_str = empty_char;
 	DialogueInterlucutor DialogueCharacter_id = DialogueInterlucutor::item_nullinterlucutor;
 	DialogueInterlucutorPosition DialogueCharacter_pos = DialogueInterlucutorPosition::Left;
+	SDL_Texture* Character_Atlas = nullptr;
+	SDL_Rect Character_Expression_Rect = { 0,0,0,0 };
 };
 
 struct DialogueStep
@@ -116,6 +119,7 @@ private:
 	void CreateDialogue(pugi::xml_node& dialoguenode, iPoint* TextBackgroundPos, DialogueType type);
 	DialogueInterlucutor CheckInterlocutor(std::string* interlocutor_str);
 	DialogueInterlucutorPosition CheckInterlocutorPosition(std::string* interlocutor_position_str);
+	SDL_Texture* CheckInterlocutorAtlas(DialogueInterlucutor interlocutor_enu);
 	void DialogueNextStep();
 	void SetCharacterBlit();
 
@@ -124,7 +128,7 @@ private:
 	SDL_Rect WindowRect = { 0,0,0,0 };
 
 	std::vector<Dialogue*> dialogues;
-	std::vector<DialogueInterlucutorStrRelation*> DialogueInterlucutorStrRelationVec;
+	std::vector<DialogueInterlucutorStrAndAtalsRelation*> DialogueInterlucutorStrRelationVec;
 	ActiveDialogue* ActiveDialog = nullptr;
 
 	std::string folder = empty_char;
@@ -135,6 +139,13 @@ private:
 	GuiImage* TextBackground = nullptr;
 	GuiButton* LeftCharacterLabel = nullptr;
 	GuiButton* RightCharacterLabel = nullptr;
+
+	SDL_Texture* king_tex = nullptr;
+	SDL_Texture* link_tex = nullptr;
+	SDL_Texture* zelda_tex = nullptr;
+	SDL_Texture* messenger_tex = nullptr;
+	SDL_Texture* ric_tex = nullptr;
+
 };
 
 #endif

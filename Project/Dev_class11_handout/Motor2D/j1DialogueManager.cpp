@@ -60,13 +60,20 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 		RightCharacterLabel = App->gui->CreateButton(iPoint(WindowRect.w - RightCharacterLabelRect.w - 5, WindowRect.h - TextBackgroundRect.h - 11 - (int)(LeftCharacterLabelRect.h * 0.5f)), &std::string("Right Guy"), ButtonType::idle_only, &RightCharacterLabelRect, false, AddGuiTo::none);
 		RightCharacterLabel->SetFont(App->font->ReturnofGanon36);
 
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string(""), DialogueInterlucutor::item_nullinterlucutor));
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("king"), DialogueInterlucutor::King));
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("link"), DialogueInterlucutor::Link));
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("zelda"), DialogueInterlucutor::Zelda));
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("messenger"), DialogueInterlucutor::Messenger));
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("ric"), DialogueInterlucutor::Ric));
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrRelation(&std::string("guard"), DialogueInterlucutor::Guard));
+		///Get characters atlas
+		king_tex = nullptr;
+		link_tex = nullptr;
+		zelda_tex = nullptr;
+		messenger_tex = nullptr;
+		ric_tex = nullptr;
+
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string(""), DialogueInterlucutor::item_nullinterlucutor, nullptr));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("king"), DialogueInterlucutor::King, king_tex));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("link"), DialogueInterlucutor::Link, link_tex));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("zelda"), DialogueInterlucutor::Zelda, zelda_tex));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("messenger"), DialogueInterlucutor::Messenger, messenger_tex));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("ric"), DialogueInterlucutor::Ric, ric_tex));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("guard"), DialogueInterlucutor::Guard, nullptr));
 
 		//Allocate dialogues from XML
 		AllocateDialogues(dialogue_config, &TextBackground->GetLocalPos());
@@ -108,6 +115,11 @@ void j1DialogueManager::CreateDialogue(pugi::xml_node& dialoguenode, iPoint* Tex
 		else
 			newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_str = std::string(newstep.attribute("speaker").as_string());
 		newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_pos = CheckInterlocutorPosition(&std::string(newstep.attribute("speaker_pos").as_string()));
+		newdialoguestep->SpeakerDialogueCharacter->Character_Atlas = CheckInterlocutorAtlas(newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_id);
+
+		///Set characte expression
+		newdialoguestep->SpeakerDialogueCharacter->Character_Expression_Rect = { 0,0,0,0 };
+
 		newdialoguestep->ListenerDialogueCharacter = new DialogueCharacter();
 		newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_id = CheckInterlocutor(&std::string(newstep.attribute("listener").as_string()));
 		if (newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_id == DialogueInterlucutor::item_nullinterlucutor)
@@ -115,6 +127,11 @@ void j1DialogueManager::CreateDialogue(pugi::xml_node& dialoguenode, iPoint* Tex
 		else
 			newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_str = std::string(newstep.attribute("listener").as_string());
 		newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_pos = CheckInterlocutorPosition(&std::string(newstep.attribute("listener_pos").as_string()));
+		newdialoguestep->ListenerDialogueCharacter->Character_Atlas = CheckInterlocutorAtlas(newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_id);
+
+		///Set character expression
+		newdialoguestep->ListenerDialogueCharacter->Character_Expression_Rect = { 0,0,0,0 };
+
 		int y = 0;
 		for (pugi::xml_node newsteplines = newstep.child("line"); newsteplines; newsteplines = newsteplines.next_sibling("line"), y += 30)
 		{
@@ -126,7 +143,7 @@ void j1DialogueManager::CreateDialogue(pugi::xml_node& dialoguenode, iPoint* Tex
 
 DialogueInterlucutor j1DialogueManager::CheckInterlocutor(std::string* interlocutor_str)
 {
-	for (std::vector<DialogueInterlucutorStrRelation*>::iterator item = DialogueInterlucutorStrRelationVec.begin(); item != DialogueInterlucutorStrRelationVec.cend(); ++item)
+	for (std::vector<DialogueInterlucutorStrAndAtalsRelation*>::iterator item = DialogueInterlucutorStrRelationVec.begin(); item != DialogueInterlucutorStrRelationVec.cend(); ++item)
 		if ((*item)->DialogueInterlucutorStr == *interlocutor_str)
 			return (*item)->DialogueInterlucutorEnum;
 	return DialogueInterlucutor::item_nullinterlucutor;
@@ -137,6 +154,14 @@ DialogueInterlucutorPosition j1DialogueManager::CheckInterlocutorPosition(std::s
 	if(*interlocutor_position_str == right_str)
 		return DialogueInterlucutorPosition::Right;
 	return DialogueInterlucutorPosition::Left;
+}
+
+SDL_Texture* j1DialogueManager::CheckInterlocutorAtlas(DialogueInterlucutor interlocutor_enu)
+{
+	for (std::vector<DialogueInterlucutorStrAndAtalsRelation*>::iterator item = DialogueInterlucutorStrRelationVec.begin(); item != DialogueInterlucutorStrRelationVec.cend(); ++item)
+		if ((*item)->DialogueInterlucutorEnum == interlocutor_enu)
+			return (*item)->DialogueInterlucutorAtlas;
+	return nullptr;
 }
 
 bool j1DialogueManager::Start()
@@ -179,6 +204,12 @@ bool j1DialogueManager::Update(float dt)
 	//Blit Dark background
 	App->render->DrawQuad(WindowRect, Black(0), Black(1), Black(2), 80, true, false, false);
 
+	//Blit Characters
+	ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter;
+	ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter;
+	//App->render->Blit(atlas, position.x - App->render->camera.x, position.y - App->render->camera.y, &texture_rect, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
+	//App->render->Blit(atlas, position.x - App->render->camera.x, position.y - App->render->camera.y, &texture_rect, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
+
 	//Blit text background and Name labels
 	TextBackground->DrawWithAlternativeAtlas(App->hud->GetAtlas());
 	if(*LeftCharacterLabel->GetLabelStr() != empty_char)
@@ -206,7 +237,7 @@ bool j1DialogueManager::CleanUp()
 	for (std::vector<Dialogue*>::iterator item = dialogues.begin(); item != dialogues.cend(); ++item)
 		RELEASE(*item);
 	dialogues.clear();
-	for (std::vector<DialogueInterlucutorStrRelation*>::iterator item = DialogueInterlucutorStrRelationVec.begin(); item != DialogueInterlucutorStrRelationVec.cend(); ++item)
+	for (std::vector<DialogueInterlucutorStrAndAtalsRelation*>::iterator item = DialogueInterlucutorStrRelationVec.begin(); item != DialogueInterlucutorStrRelationVec.cend(); ++item)
 		RELEASE(*item);
 	DialogueInterlucutorStrRelationVec.clear();
 	RELEASE(ActiveDialog);
@@ -325,12 +356,13 @@ ActiveDialogue::~ActiveDialogue()
 
 }
 
-DialogueInterlucutorStrRelation::DialogueInterlucutorStrRelation(std::string* str, DialogueInterlucutor enu) : DialogueInterlucutorStr(*str), DialogueInterlucutorEnum(enu)
+DialogueInterlucutorStrAndAtalsRelation::DialogueInterlucutorStrAndAtalsRelation(std::string* str, DialogueInterlucutor enu, SDL_Texture* atlas) : 
+	DialogueInterlucutorStr(*str), DialogueInterlucutorEnum(enu), DialogueInterlucutorAtlas(atlas)
 {
 
 }
 
-DialogueInterlucutorStrRelation::~DialogueInterlucutorStrRelation()
+DialogueInterlucutorStrAndAtalsRelation::~DialogueInterlucutorStrAndAtalsRelation()
 {
 
 }

@@ -733,6 +733,8 @@ void Entity::ChangeAnimation(int animation)
 {
 	//If the animation is diferent than the actual, change it
 	if (last_animation != animation) {
+		if (this == App->player->Link)
+			int x = 0;
 		this->actual_animation = this->sprites_vector[animation];
 		last_animation = animation;
 	}
@@ -746,8 +748,8 @@ bool Entity::MoveTo(int x, int y)
 	
 	pos.x = x;
 	pos.y = y;
-	collider->rect.x = pos.x;
-	collider->rect.y = pos.y;
+	/*collider->rect.x = pos.x;
+	collider->rect.y = pos.y;*/
 
 	return ret;
 }
