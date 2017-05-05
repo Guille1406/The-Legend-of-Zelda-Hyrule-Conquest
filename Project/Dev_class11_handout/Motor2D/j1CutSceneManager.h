@@ -22,6 +22,10 @@ enum EntityType_Cutscene {
 	none_cs
 };
 
+enum Cutscene_SceneNum {
+	cutscene_intro,
+
+};
 
 class Entity;
 class Cutscene;

@@ -32,7 +32,6 @@ bool S_DungeonEntry::Start()
 	App->collision->paused = false;
 	App->pathfinding->paused = false;
 
-
 	if (App->map->Load("Dungeon Entry.tmx") == true)
 
 	{

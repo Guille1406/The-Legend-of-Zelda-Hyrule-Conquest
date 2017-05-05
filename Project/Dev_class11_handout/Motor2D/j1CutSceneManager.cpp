@@ -964,6 +964,10 @@ void CS_Step::DisableElement()
 	if (element->active == true)
 	{
 		element->active = false;
+		if (element->GetType() == CS_TEXT) {
+			App->dialoguemanager->PauseActiveDialogue();
+			FinishStep();
+		}
 		//LOG("Step %i Disabling %s", n, element->name.c_str());
 	}
 }
