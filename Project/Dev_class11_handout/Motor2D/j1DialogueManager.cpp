@@ -6,6 +6,7 @@
 #include "j1Input.h"
 #include "j1HUD.h"
 #include "j1Fonts.h"
+#include "j1Textures.h"
 
 #include "GuiImage.h"
 #include "GuiLabel.h"
@@ -61,27 +62,51 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 		RightCharacterLabel->SetFont(App->font->ReturnofGanon36);
 
 		///Get characters atlas
-		king_tex = nullptr;
-		link_tex = nullptr;
-		zelda_tex = nullptr;
-		messenger_tex = nullptr;
-		ric_tex = nullptr;
+		king_tex_str = config.child("king_atlas").attribute("file").as_string();
+		link_tex_str = empty_char;
+		zelda_tex_str = empty_char;
+		messenger_tex_str = empty_char;
+		ric_tex_str = empty_char;
 
 		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string(""), DialogueInterlucutor::item_nullinterlucutor, nullptr));
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("king"), DialogueInterlucutor::King, king_tex));
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("link"), DialogueInterlucutor::Link, link_tex));
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("zelda"), DialogueInterlucutor::Zelda, zelda_tex));
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("messenger"), DialogueInterlucutor::Messenger, messenger_tex));
-		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("ric"), DialogueInterlucutor::Ric, ric_tex));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("king"), DialogueInterlucutor::King, nullptr));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("link"), DialogueInterlucutor::Link, nullptr));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("zelda"), DialogueInterlucutor::Zelda, nullptr));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("messenger"), DialogueInterlucutor::Messenger, nullptr));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("ric"), DialogueInterlucutor::Ric, nullptr));
 		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("guard"), DialogueInterlucutor::Guard, nullptr));
 
 		//Allocate dialogues from XML
 		AllocateDialogues(dialogue_config, &TextBackground->GetLocalPos());
 	}
 
-	ActiveDialog = new ActiveDialogue();
-
 	return ret;
+}
+
+bool j1DialogueManager::Start()
+{
+	king_tex = App->tex->Load(king_tex_str.c_str());
+	link_tex = App->tex->Load(king_tex_str.c_str());
+	zelda_tex = App->tex->Load(king_tex_str.c_str());
+	messenger_tex = App->tex->Load(king_tex_str.c_str());
+	ric_tex = App->tex->Load(king_tex_str.c_str());
+
+	for (std::vector<DialogueInterlucutorStrAndAtalsRelation*>::iterator item = DialogueInterlucutorStrRelationVec.begin(); item != DialogueInterlucutorStrRelationVec.cend(); ++item)
+	{
+		if ((*item)->DialogueInterlucutorEnum == DialogueInterlucutor::King)
+			(*item)->DialogueInterlucutorAtlas = king_tex;
+		if ((*item)->DialogueInterlucutorEnum == DialogueInterlucutor::Link)
+			(*item)->DialogueInterlucutorAtlas = link_tex;
+		if ((*item)->DialogueInterlucutorEnum == DialogueInterlucutor::Zelda)
+			(*item)->DialogueInterlucutorAtlas = zelda_tex;
+		if ((*item)->DialogueInterlucutorEnum == DialogueInterlucutor::Messenger)
+			(*item)->DialogueInterlucutorAtlas = messenger_tex;
+		if ((*item)->DialogueInterlucutorEnum == DialogueInterlucutor::Ric)
+			(*item)->DialogueInterlucutorAtlas = ric_tex;
+	}
+
+	ActiveDialog = new ActiveDialogue();
+	return true;
 }
 
 void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode, iPoint* TextBackgroundPos)
@@ -162,11 +187,6 @@ SDL_Texture* j1DialogueManager::CheckInterlocutorAtlas(DialogueInterlucutor inte
 		if ((*item)->DialogueInterlucutorEnum == interlocutor_enu)
 			return (*item)->DialogueInterlucutorAtlas;
 	return nullptr;
-}
-
-bool j1DialogueManager::Start()
-{
-	return true;
 }
 
 bool j1DialogueManager::PreUpdate()
