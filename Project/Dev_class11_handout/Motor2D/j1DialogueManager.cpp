@@ -224,8 +224,16 @@ bool j1DialogueManager::Update(float dt)
 	App->render->DrawQuad(WindowRect, Black(0), Black(1), Black(2), 80, true, false, false);
 
 	//Blit Characters
-	App->render->Blit(ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Atlas, 0 - App->render->camera.x, 0 - App->render->camera.y, &ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Expression_Rect, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
-	App->render->Blit(ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Atlas, 508 - App->render->camera.x, 0 - App->render->camera.y, &ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Expression_Rect, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
+
+	if(ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->DialogueCharacter_pos == DialogueInterlucutorPosition::Left)
+		App->render->Blit(ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Atlas, 0 - App->render->camera.x, 0 - App->render->camera.y, &ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Expression_Rect, 1.0f, 0, INT_MAX, INT_MAX, false, 255, SDL_RendererFlip::SDL_FLIP_HORIZONTAL);
+	else
+		App->render->Blit(ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Atlas, 508 - App->render->camera.x, 0 - App->render->camera.y, &ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Expression_Rect, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
+
+	if (ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->DialogueCharacter_pos == DialogueInterlucutorPosition::Left)
+		App->render->Blit(ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Atlas, 0 - App->render->camera.x, 0 - App->render->camera.y, &ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Expression_Rect, 1.0f, 0, INT_MAX, INT_MAX, false, 255, SDL_RendererFlip::SDL_FLIP_HORIZONTAL);
+	else
+		App->render->Blit(ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Atlas, 508 - App->render->camera.x, 0 - App->render->camera.y, &ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Expression_Rect, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
 
 	//Blit text background and Name labels
 	TextBackground->DrawWithAlternativeAtlas(App->hud->GetAtlas());
