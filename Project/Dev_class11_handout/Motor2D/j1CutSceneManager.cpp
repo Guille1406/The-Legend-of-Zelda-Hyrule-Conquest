@@ -8,6 +8,9 @@
 #include "j1Render.h"
 #include "p2Log.h"
 #include"GuiImage.h"
+#include"P_Link.h"
+#include"j1Player.h"
+#include"j1App.h"
 
 //TODO 5.1: open the IntroCutscene.xml (in data.zip, in cutscenes folder) and fill THESE ELEMENTS correctly with this info:
 //Image -> n = 0; name = BackgroundPokemon; x = -100; y = 0; tex_x = 0; tex_y = 0; tex_w = 1080; tex_h = 514; active = false; file = textures/PokemonBackground.png;
@@ -457,13 +460,14 @@ bool Cutscene::LoadNPC(pugi::xml_node& node)
 		CS_npc* tmp = new CS_npc(CS_NPC, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), nullptr);
 		this->elements.push_back(tmp);
 
-		Entity* tmp_ent = tmp->GetEntity(node.attribute("entity_id").as_int());
+
+		Entity* tmp_ent = tmp->GetEntity(tmp->ent_type);
 		if (tmp_ent)
 		{
 			tmp->LinkEntity(tmp_ent);
 			
-			iPoint new_pos = { node.attribute("x").as_int() / App->map->data.width, node.attribute("y").as_int() / App->map->data.height};
-			//tmp_ent->MoveTo(new_pos.x, new_pos.y);
+			iPoint new_pos = { node.attribute("x").as_int(), node.attribute("y").as_int()};
+			tmp_ent->MoveTo(new_pos.x, new_pos.y);
 		}
 		/*else
 		{
@@ -760,23 +764,30 @@ bool CS_Step::DoMovement(float dt)
 	if (element->GetType() == CS_NPC)
 	{
 		CS_npc* tmp = (CS_npc*)element;
+		Character* char_temp = nullptr;
+		if (tmp->ent_type== EntityType_Cutscene::link_cs) {
+			char_temp = App->player->Link;
+		}
+		else {
+			char_temp = App->player->Zelda;
+		}
 		switch (direction)
 		{
 		case CS_UP:
 			tmp->Move(0, -ceil(mov_speed*dt));
-		//	tmp->GetMyEntity()->currentDir = DIRECTION::D_UP;
+			char_temp->movement_direction = move_direction::move_up;
 			break;
 		case CS_DOWN:
 			tmp->Move(0, ceil(mov_speed*dt));
-			//tmp->GetMyEntity()->currentDir = DIRECTION::D_DOWN;
+			char_temp->movement_direction = move_direction::move_down;
 			break;
 		case CS_LEFT:
 			tmp->Move(-ceil(mov_speed*dt), 0);
-			//tmp->GetMyEntity()->currentDir = DIRECTION::D_LEFT;
+			char_temp->movement_direction = move_direction::move_left;
 			break;
 		case CS_RIGHT:
 			tmp->Move(ceil(mov_speed*dt), 0);
-			//tmp->GetMyEntity()->currentDir = DIRECTION::D_RIGHT;
+			char_temp->movement_direction = move_direction::move_right;
 			break;
 		case NO_DIR:
 			break;
@@ -1020,9 +1031,19 @@ CS_npc::~CS_npc()
 
 Entity* CS_npc::GetEntity(uint id) const
 {
-	/*if (Entity* tmp = App->game->em->GetEntityFromId(id))
+	EntityType_Cutscene cs_temp = EntityType_Cutscene::none_cs;
+
+	if (this->name == "Link") {
+		cs_temp = EntityType_Cutscene::link_cs;
+	}
+	else if (this->name == "Zelda") {
+		cs_temp = EntityType_Cutscene::zelda_cs;
+	}
+
+	if (Entity* tmp = App->object->GetEntityFromId(cs_temp)) {
 		return tmp;
-	else 
+	}
+	/*else 
 	{
 		//Create the entity
 		//App->game->em->CreateNPC()

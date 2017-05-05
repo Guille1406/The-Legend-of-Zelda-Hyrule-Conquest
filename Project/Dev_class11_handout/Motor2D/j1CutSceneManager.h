@@ -7,11 +7,20 @@
 #include"j1Timer.h"
 #include"p2Point.h"
 #include"GuiImage.h"
+
 //TODO 1: Open config.xml and write a new path for the cutscene.
 
 enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_NONE };
 enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_PLAY, ACT_STOP, ACT_NONE };
 enum Dir_Type { CS_UP, CS_DOWN, CS_LEFT, CS_RIGHT, NO_DIR };
+enum EntityType_Cutscene {
+
+	link_cs,
+	zelda_cs,
+	dark_ogity_cs,
+	none_cs
+};
+
 
 class Entity;
 class Cutscene;
@@ -51,8 +60,9 @@ public:
 
 	void Move(float x, float y);
 	iPoint GetPos();
-
+	EntityType_Cutscene ent_type;
 private:
+
 	Entity*	entity;	//Pointer to the entity that forms part of the game elements (to modify its state, do actions, etc)
 };
 

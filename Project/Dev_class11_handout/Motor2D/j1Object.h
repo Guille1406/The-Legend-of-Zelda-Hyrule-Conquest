@@ -6,7 +6,7 @@
 #include "p2Point.h"
 #include <vector>
 #include "Animation.h"
-
+#include"j1CutSceneManager.h"
 class Enemy;
 
 
@@ -46,6 +46,7 @@ enum objectType {
 };
 
 
+
 class Object;
 
 class Entity {
@@ -55,6 +56,7 @@ public:
 	virtual void ChangeAnimation(int);
 	virtual void LoadAnimation(const char*);
 	virtual bool MoveTo(int, int);
+
 public:
 	int logic_height=	0;
 	Collider* collider= nullptr;
@@ -110,7 +112,7 @@ public:
 	void StartCollision(Collider* collider1, Collider* collider2);
 	void OnCollision(Collider* collider1, Collider* collider2);
 	void EndCollision(Collider* collider1, Collider* collider2);
-
+	virtual Entity* GetEntityFromId(EntityType_Cutscene ent);
 public: 
 	std::vector<Object*> V_Objects;
 	SDL_Texture* objects_texture=	nullptr;

@@ -743,10 +743,22 @@ bool Entity::MoveTo(int x, int y)
 	bool ret = true;
 
 	// check if position is available/walkable
-
-	/*currentPos.x = x;
-	currentPos.y = y;
-	UpdateCollider();*/
+	
+	pos.x = x;
+	pos.y = y;
+	collider->rect.x = pos.x;
+	collider->rect.y = pos.y;
 
 	return ret;
+}
+
+Entity* j1Object::GetEntityFromId(EntityType_Cutscene ent) {
+	Entity*	temp = nullptr;
+	if (ent == EntityType_Cutscene::link_cs) {
+		temp = App->player->Link;
+	}
+	else if (ent == EntityType_Cutscene::zelda_cs) {
+		temp = App->player->Zelda;
+	}
+	return temp;
 }
