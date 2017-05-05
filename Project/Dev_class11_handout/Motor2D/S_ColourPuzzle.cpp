@@ -16,7 +16,7 @@
 #include"j1Audio.h"
 #include"j1GameStartMenuBack.h"
 #include "S_InGameMenu.h"
-
+#include "O_ColourBlock.h"
 bool S_ColourPuzzle::Start()
 {
 	scene_str = "Castle Sewers";
@@ -92,6 +92,13 @@ bool S_ColourPuzzle::Update()
 
 bool S_ColourPuzzle::PostUpdate()
 {
+	for (int i = 0; i < App->object->V_Objects.size(); i++) {
+		if (App->object->V_Objects[i]->type == objectType::colour_blocks) {
+			ColourBlock* temp_block = (ColourBlock*)App->object->V_Objects[i];
+			if (temp_block->block_delay.Read() > 1000 && temp_block->can_dissapear)
+				App->object->V_Objects[i]->active = false;
+		}
+	}
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
 		App->scene->ChangeScene(Scene_ID::tempbossroom);
 	}

@@ -32,15 +32,18 @@ public:
 	void Action()
 	{
 		active = true;
+		can_dissapear = false;
 	}
 	void EndAction() {
-		active = false;
+		block_delay.Start();
+		can_dissapear = true;
+		//active = false;
 	}
 
 public:
 
-	
-
+	j1Timer block_delay;
+	bool can_dissapear = false;
 };
 
 #endif
