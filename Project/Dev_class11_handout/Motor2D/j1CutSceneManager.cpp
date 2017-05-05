@@ -102,6 +102,11 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 			{
 				temp_cutscene->LoadImg(temp);
 			}
+
+			for (temp = elements_node.child("TEXTS").child("text"); temp != NULL; temp = temp.next_sibling("text"))
+			{
+				temp_cutscene->LoadText(temp);
+			}
 			//Load Texts
 
 			//TODO 5.2: Access the images node and load the data by calling the correct function.
@@ -130,7 +135,7 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 			//Set the active_scene pointer to the current scene -------------------------
 			active_cutscene = temp_cutscene;
 
-			LOG("Cutscene '%s' loaded with %i elements and %i steps.", temp_cutscene->name.c_str(), temp_cutscene->GetNumElements(), temp_cutscene->GetNumSteps());
+			//LOG("Cutscene '%s' loaded with %i elements and %i steps.", temp_cutscene->name.c_str(), temp_cutscene->GetNumElements(), temp_cutscene->GetNumSteps());
 			break;
 		}
 		i++;
@@ -194,7 +199,7 @@ bool j1CutSceneManager::FinishCutscene()
 	{
 		if (active_cutscene->isFinished() == true)
 		{
-			LOG("%s cutscene deactivated", active_cutscene->name.c_str());
+			//LOG("%s cutscene deactivated", active_cutscene->name.c_str());
 
 			//TODO 9.1: Load the destination map of the cutscene (if it has stored a map_id when accessed to the XML file (map_id > -1)).
 			//Do this by calling the appropiate function of the intro scene.
@@ -279,7 +284,7 @@ pugi::xml_node j1CutSceneManager::LoadXML(pugi::xml_document& config_file, std::
 
 	if (result == NULL)
 	{
-		LOG("Could not load map xml file. Pugi error: %s", result.description());
+		//LOG("Could not load map xml file. Pugi error: %s", result.description());
 	}
 	else
 	{
@@ -492,7 +497,30 @@ bool Cutscene::LoadImg(pugi::xml_node& node)
 		elements.push_back(new CS_Image(CS_IMAGE, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), rect, pos));
 		ret = true;
 	}
-	return false;
+	return ret;
+}
+
+bool Cutscene::LoadText(pugi::xml_node& node)
+{
+	bool ret = false;
+	if (node != NULL)
+	{
+		DialogueID id = DialogueID::NullID;
+		std::string id_string = node.attribute("name").as_string("");
+		if (id_string == "castle_intro" ) {
+			id = DialogueID::castle_intro;
+		}
+		else if (id_string == "castle_sewers_entrance") {
+			id = DialogueID::castle_sewers_entrance;
+		}
+		else if (id_string == "castle_sewers_exit") {
+			id = DialogueID::castle_sewers_exit;
+		}
+
+		elements.push_back(new CS_Text(CS_Type::CS_TEXT, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), id));
+		ret = true;
+	}
+	return ret;
 }
 
 bool Cutscene::LoadMusic(pugi::xml_node& node)
@@ -645,7 +673,7 @@ uint CS_Step::GetStartTime() const
 void CS_Step::StartStep()
 {
 	active = true;
-	LOG("Step %i started at %.3fs", n, cutscene->timer.ReadSec());
+	//LOG("Step %i started at %.3fs", n, cutscene->timer.ReadSec());
 }
 
 void CS_Step::FinishStep()
@@ -654,7 +682,7 @@ void CS_Step::FinishStep()
 	finished = true;
 	
 	cutscene->StepDone(); //Increment the "steps done" counter
-	LOG("Step %i finished at %.3fs", n, cutscene->timer.ReadSec());
+	//LOG("Step %i finished at %.3fs", n, cutscene->timer.ReadSec());
 }
 
 //Set the action programmed to that step that will execute the linked element
@@ -731,7 +759,7 @@ void CS_Step::LoadMovement(iPoint destination, int speed, const std::string& dir
 	//Set the movement speed
 	mov_speed = speed;
 
-	LOG("Movement Loaded-> oX:%i oY:%i dX:%i dY:%i speed:%i dir:%i", origin.x, origin.y, dest.x, dest.y, speed, direction);
+	//LOG("Movement Loaded-> oX:%i oY:%i dX:%i dY:%i speed:%i dir:%i", origin.x, origin.y, dest.x, dest.y, speed, direction);
 
 }
 
@@ -810,7 +838,7 @@ bool CS_Step::DoMovement(float dt)
 	//Check if the action is completed to finish the step
 	CheckMovementCompleted(curr_pos);
 
-	LOG("Step %i Moving %s X:%i Y:%i", n, element->name.c_str(), curr_pos.x, curr_pos.y);
+	//LOG("Step %i Moving %s X:%i Y:%i", n, element->name.c_str(), curr_pos.x, curr_pos.y);
 
 	return true;
 }
@@ -885,7 +913,7 @@ void CS_Step::Play()
 		CS_SoundFx* fx = static_cast<CS_SoundFx*>(element);
 		fx->Play();
 	}
-	LOG("Step %i Playing %s", n, element->name.c_str());
+	//LOG("Step %i Playing %s", n, element->name.c_str());
 }
 
 
@@ -895,7 +923,7 @@ void CS_Step::StopMusic()
 	if (element->GetType() == CS_MUSIC)
 	{
 		//App->audio->StopMusic();
-		LOG("Step %i Stoping %s", n, element->name.c_str());
+		//LOG("Step %i Stoping %s", n, element->name.c_str());
 	}
 }
 
@@ -905,15 +933,23 @@ void CS_Step::ActiveElement()
 	{
 		element->active = true;
 
-		/*if (element->GetType() == CS_TEXT)
+		if (element->GetType() == CS_TEXT && App->dialoguemanager->GetActiveDialogue()->DialogueActive==false)
 		{
 			CS_Text* tmp = (CS_Text*)element;
-			tmp->GetText()->Set_Active_state(true);
+			App->dialoguemanager->ActivateDialogue(tmp->id_dialgoue_cs);
 
-		}*/
+		}
+		
 
-		LOG("Step %i Enabling %s", n, element->name.c_str());
+		//LOG("Step %i Enabling %s", n, element->name.c_str());
 	}
+	else {
+		if (element->GetType() == CS_TEXT && App->dialoguemanager->GetActiveDialogue()->DialogueActive == false) {
+			//element->active = false;
+			FinishStep();
+		}
+	}
+	
 
 /*	if (element->GetType() == CS_TEXT)
 	{
@@ -928,7 +964,7 @@ void CS_Step::DisableElement()
 	if (element->active == true)
 	{
 		element->active = false;
-		LOG("Step %i Disabling %s", n, element->name.c_str());
+		//LOG("Step %i Disabling %s", n, element->name.c_str());
 	}
 }
 

@@ -118,10 +118,9 @@ class CS_Text : public CS_Element
 public:
 	CS_Text(CS_Type type, int n, const char* name, bool active, const char* path, DialogueID id_dialgoue_cs);
 	~CS_Text();
-
-private:
 	DialogueID id_dialgoue_cs;
-
+private:
+	
 };
 
 
@@ -204,7 +203,7 @@ public:
 	//LOAD ELEMENTS FUNCTIONS -------
 	bool LoadNPC(pugi::xml_node&);
 	bool LoadImg(pugi::xml_node&);
-	//bool LoadText(pugi::xml_node&);
+	bool LoadText(pugi::xml_node&);
 	bool LoadMusic(pugi::xml_node&);
 	bool LoadFx(pugi::xml_node&);
 	// ------------------------------
