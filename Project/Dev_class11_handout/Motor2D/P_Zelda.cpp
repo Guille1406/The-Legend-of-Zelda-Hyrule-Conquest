@@ -128,7 +128,10 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 	iPoint last_point = { 0,0 };
 	static int before_wall_pos = 0;
 
+	int max_collisions = 0;
+
 	if (!temp) {
+		
 		zelda_collides = false;
 		final_pos = pos + (n * JUMP_DISTANCE);
 		before_wall_pos = final_pos;
@@ -139,17 +142,30 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 			next_point.y = temp_point.y + !is_horitzontal * n;
 
 			uint i = 0;
-			if (!is_on_collision && temp_point != last_point) {
+			if (!is_on_collision ) {
 
 				if (stop)break;
 				for (i = 0; i <= GetLogicHeightPlayer() && i<3; i++) {
 					if (GetLogic(i, temp_point) == App->map->CANT_PASS_COL_ID) {
 						stop = true;
 						before_wall_pos = temp_pos;
+						//decrease = 1;
 						break;
 					}
 
-					if (GetLogic(i, temp_point) != 0) {
+					if (GetLogic(i, temp_point) != 0 && temp_point != last_point) {
+						max_collisions++;
+						if(max_collisions>=2)
+							before_wall_pos = temp_pos + n * 64;
+
+						
+						decrease = i;
+						
+
+						last_point = temp_point;
+						break;
+						/*
+						max_collisions++;
 						is_on_collision = true;
 						before_wall_pos = temp_pos;
 						last_point = temp_point;
@@ -161,11 +177,14 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 						zelda_collides = true;
 						decrease = i;
 
-						break;
+						break;*/
 					}
 				}
 			}
-			if (GetLogic(decrease, temp_point) == 0) {
+			if (max_collisions > 4) {
+				before_wall_pos = pos; decrease = 1;
+			}
+			if (GetLogic(decrease, temp_point) == 0  || temp_point != last_point) {
 				is_on_collision = false;
 			}
 			temp_pos = temp_pos + (n * 1);

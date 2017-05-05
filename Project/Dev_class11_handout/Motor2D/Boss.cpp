@@ -166,7 +166,7 @@ void Boss::ExecuteEvent()
 			recover_collider->logic_height = 1;
 			recover_collider->to_delete = true;
 		}
-		if (damaged_boss_timer.Read() > 10000 && state == boss_state::boss_damaged) {			
+		if (damaged_boss_timer.Read() > 20000 && state == boss_state::boss_damaged) {			
 			DeleteColliders();
 			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 - 32 };
 			can_attack = true;
@@ -477,6 +477,9 @@ void Boss::CreateColliders()
 {
 	centre_pos = { pos.x + collider->rect.w / 2 , pos.y + collider->rect.h / 2 };
 	std::vector<iPoint> temp_vector;
+
+	iPoint temp = { 0,0 };
+	
 	for (int i = 0; i < collider->rect.w / 16; i++) {
 		for (int n = 0; n < collider->rect.h / 16; n++) {
 			iPoint temp;
@@ -489,18 +492,21 @@ void Boss::CreateColliders()
 				{
 					iPoint diference_point = { temp.x - centre_pos.x, temp.y - centre_pos.y };
 					int dist = (int)(sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y));
-					if ((dist < 120 && dist >= 100) ) {
+					if ((dist < 120 && dist >= 107) ) {
 						App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = App->map->TILE_COL_ID;
 						//object.collider_tiles.push_back(temp);
 						temp_vector.push_back(temp);
 					}
 				}
+
+
+			
 			if (App->map->V_Colision[1]->data != nullptr)
 				if (App->map->V_Colision[1]->data[(temp.y / 16) *  App->map->data.height + temp.x / 16] != App->map->TILE_COL_ID)
 				{
 					iPoint diference_point = { temp.x - centre_pos.x, temp.y - centre_pos.y };
 					int dist = sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y);
-					if (dist < 80 && dist >= 60) {
+					if (dist < 90 && dist >= 77) {
 						App->map->V_Colision[1]->data[((temp.y - 16)  / 16) *  App->map->data.height + temp.x / 16] = App->map->TILE_COL_ID;
 						//object.collider_tiles.push_back(temp);
 						temp_vector.push_back(temp);
@@ -512,7 +518,7 @@ void Boss::CreateColliders()
 
 	jump_1 = App->object->CreateJump({centre_pos.x - 72,centre_pos.y - 56,16,80}, 1);
 	jump_2 = App->object->CreateJump({ centre_pos.x + 56,centre_pos.y - 56,16,80 }, 1);
-	jump_3 = App->object->CreateJump({ centre_pos.x - 40,centre_pos.y - 88,80,16 }, 1);
+	jump_3 = App->object->CreateJump({ centre_pos.x - 40,centre_pos.y - 106,80,16 }, 1);
 	jump_4 = App->object->CreateJump({ centre_pos.x - 40,centre_pos.y + 40,80,16 }, 1);
 }
 
