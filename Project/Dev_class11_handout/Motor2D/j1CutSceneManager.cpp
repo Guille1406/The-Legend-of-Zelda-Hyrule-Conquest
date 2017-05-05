@@ -147,10 +147,12 @@ bool j1CutSceneManager::Update(float dt)
 	{
 		if (active_cutscene->isFinished() == false) //Update the active cutscene until it's finished
 		{
+			App->player->paused = true;
 			active_cutscene->Update(dt);
 		}
 		else
 		{
+			App->player->paused = false;
 			FinishCutscene();
 		}
 	}
@@ -775,26 +777,33 @@ bool CS_Step::DoMovement(float dt)
 		{
 		case CS_UP:
 			tmp->Move(0, -ceil(mov_speed*dt));
-			char_temp->movement_direction = move_direction::move_up;
+			char_temp->actual_event = player_event::move;
+			//char_temp->movement_direction = move_direction::move_up;
+			char_temp->character_direction = direction::up;
 			break;
 		case CS_DOWN:
 			tmp->Move(0, ceil(mov_speed*dt));
-			char_temp->movement_direction = move_direction::move_down;
+			char_temp->actual_event = player_event::move;
+			//char_temp->character_direction = direction::down;
 			break;
 		case CS_LEFT:
 			tmp->Move(-ceil(mov_speed*dt), 0);
-			char_temp->movement_direction = move_direction::move_left;
+			char_temp->actual_event = player_event::move;
+			//char_temp->character_direction = direction::left;
 			break;
 		case CS_RIGHT:
 			tmp->Move(ceil(mov_speed*dt), 0);
-			char_temp->movement_direction = move_direction::move_right;
+			char_temp->actual_event = player_event::move;
+			char_temp->character_direction = direction::right;
 			break;
-		case NO_DIR:
+		case NO_DIR: 
 			break;
 		default:
 			break;
 		}
 
+		int animation = (int)char_temp->actual_event * 4 + (int)char_temp->character_direction;
+		char_temp->ChangeAnimation(animation);
 		curr_pos = element->GetPos();
 	}
 
@@ -808,6 +817,9 @@ bool CS_Step::DoMovement(float dt)
 
 bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 {
+	Entity* actual_entity = nullptr;
+	if(this->element->GetType()==CS_Type::CS_NPC)
+	actual_entity = ((CS_npc*)this->element)->GetMyEntity();
 	bool ret = false;
 	switch (direction)
 	{
@@ -815,6 +827,8 @@ bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 		if (curr_pos.y <= dest.y)
 		{
 			ret = true;
+			if (this->element->GetType() == CS_Type::CS_NPC)
+			((Character*)actual_entity)->actual_event = idle;
 			FinishStep();
 		}
 		break;
@@ -822,6 +836,8 @@ bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 		if (curr_pos.y >= dest.y)
 		{
 			ret = true;
+			if (this->element->GetType() == CS_Type::CS_NPC)
+			((Character*)actual_entity)->actual_event = idle;
 			FinishStep();
 		}
 		break;
@@ -829,6 +845,8 @@ bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 		if (curr_pos.x <= dest.x)
 		{
 			ret = true;
+			if (this->element->GetType() == CS_Type::CS_NPC)
+			((Character*)actual_entity)->actual_event = idle;
 			FinishStep();
 		}
 		break;
@@ -836,11 +854,19 @@ bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 		if (curr_pos.x >= dest.x)
 		{
 			ret = true;
+			if (this->element->GetType() == CS_Type::CS_NPC)
+			((Character*)actual_entity)->actual_event = idle;
 			FinishStep();
 		}
 		break;
 	default:
 		break;
+	}
+	if (actual_entity != nullptr ) {
+		if (this->element->GetType() == CS_Type::CS_NPC) {
+			int animation = (int)((Character*)actual_entity)->actual_event * 4 + (int)((Character*)actual_entity)->character_direction;
+			((Character*)actual_entity)->ChangeAnimation(animation);
+		}
 	}
 	return ret;
 }
@@ -1029,16 +1055,20 @@ CS_npc::~CS_npc()
 {
 }
 
-Entity* CS_npc::GetEntity(uint id) const
+Entity* CS_npc::GetEntity(uint id)
 {
+	Entity* tmp = nullptr;
 	EntityType_Cutscene cs_temp = EntityType_Cutscene::none_cs;
 
 	if (this->name == "Link") {
 		cs_temp = EntityType_Cutscene::link_cs;
+		
 	}
 	else if (this->name == "Zelda") {
 		cs_temp = EntityType_Cutscene::zelda_cs;
+		
 	}
+	this->ent_type = cs_temp;
 
 	if (Entity* tmp = App->object->GetEntityFromId(cs_temp)) {
 		return tmp;

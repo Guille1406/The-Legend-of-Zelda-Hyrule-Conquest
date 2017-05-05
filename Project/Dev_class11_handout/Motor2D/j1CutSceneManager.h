@@ -54,7 +54,7 @@ public:
 	CS_npc(CS_Type type, int n, const char* name, bool active, const char* path);
 	~CS_npc();
 
-	Entity* GetEntity(uint id) const;
+	Entity* GetEntity(uint id);
 	Entity* GetMyEntity() const;
 	void LinkEntity(Entity* e);
 
