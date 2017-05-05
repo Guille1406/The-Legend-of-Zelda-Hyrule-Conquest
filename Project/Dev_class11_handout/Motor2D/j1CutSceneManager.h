@@ -7,6 +7,7 @@
 #include"j1Timer.h"
 #include"p2Point.h"
 #include"GuiImage.h"
+#include"j1DialogueManager.h"
 
 //TODO 1: Open config.xml and write a new path for the cutscene.
 
@@ -110,6 +111,17 @@ public:
 private:
 	uint fx_id = 0;
 	uint loops = 0;
+};
+
+class CS_Text : public CS_Element
+{
+public:
+	CS_Text(CS_Type type, int n, const char* name, bool active, const char* path, DialogueID id_dialgoue_cs);
+	~CS_Text();
+
+private:
+	DialogueID id_dialgoue_cs;
+
 };
 
 

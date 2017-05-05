@@ -761,7 +761,7 @@ bool CS_Step::DoMovement(float dt)
 			break;
 		}
 		curr_pos = image->GetPos();
-	}
+	} 
 
 	if (element->GetType() == CS_NPC)
 	{
@@ -1107,3 +1107,11 @@ iPoint CS_npc::GetPos()
 	return entity->pos;
 }
 // ------------------------------------------------------
+
+CS_Text::CS_Text(CS_Type type, int n, const char* name, bool active, const char* path, DialogueID id_dialgoue_cs):
+	CS_Element(type, n, name, active, path), id_dialgoue_cs(id_dialgoue_cs)
+{}
+
+CS_Text::~CS_Text()
+{
+}
