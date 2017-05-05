@@ -31,6 +31,31 @@ public:
 	}
 
 	void Action(int note) {
+		for (; count < 8; count++) {
+			if (temp_notes[count] == 0) {
+				temp_notes[count] = note;
+				if (temp_notes[count] != notes_order[count]) {
+					for (int n = 0; n < 8; n++) {
+						temp_notes[n] = 0;
+						count = 0;
+
+					}
+				}
+				break;
+			}
+			
+			
+		}
+		if (temp_notes[7] == notes_order[7]) {
+			for (uint i = 0; i < connected_object.size(); i++)
+			{
+				
+				connected_object[i]->Action();
+			
+			}
+		}
+		
+		
 		App->audio->PlayFx(notes[note - 1]);
 	}
 	void Action() {
@@ -40,8 +65,11 @@ public:
 	}
 
 public:
+	int temp_notes[8] = { 0,0,0,0,0,0,0,0 };
+	int notes_order[8] = { 1,2,3,4,3,1,2,3 };
 	uint notes[4] = { 0,0,0,0 };
 	uint object_music =0;
+	int count = 0;
 };
 
 
