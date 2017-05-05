@@ -75,8 +75,8 @@ public:
 	const char* GetOrganization() const;
 	float GetDT() const;
 
-	void LoadGame(const char* file);
-	void SaveGame(const char* file) const;
+	void LoadGame(const char* module_file, const char* scenes_file, const char* menu_file);
+	void SaveGame(const char* module_file, const char* scenes_file, const char* menu_file) const;
 	void LoadGameModules(const char* file);
 	void SaveGameModules(const char* file) const;
 	void LoadGameScenes(const char* file);

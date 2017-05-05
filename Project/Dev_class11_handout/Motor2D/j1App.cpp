@@ -386,19 +386,19 @@ const char* j1App::GetOrganization() const
 }
 
 // Load / Save
-void j1App::LoadGame(const char* file)
+void j1App::LoadGame(const char* module_file, const char* scenes_file, const char* menu_file)
 {
-	LoadGameModules(file);
-	LoadGameScenes(file);
-	LoadGameMenus(file);
+	LoadGameModules(module_file);
+	LoadGameScenes(scenes_file);
+	LoadGameMenus(menu_file);
 }
 
 // ---------------------------------------
-void j1App::SaveGame(const char* file) const
+void j1App::SaveGame(const char* module_file, const char* scenes_file, const char* menu_file) const
 {
-	SaveGameModules(file);
-	SaveGameScenes(file);
-	SaveGameMenus(file);
+	SaveGameModules(module_file);
+	SaveGameScenes(scenes_file);
+	SaveGameMenus(menu_file);
 }
 
 void j1App::LoadGameModules(const char* file)
