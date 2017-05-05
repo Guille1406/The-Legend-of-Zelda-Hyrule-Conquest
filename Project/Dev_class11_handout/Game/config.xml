@@ -22,6 +22,10 @@
     <atlas file="gui/HUDAtlas.png"/>
   </hud>
     
+  <dialogue>
+    <king_atlas file="dialogues/king_atlas.png"/>
+  </dialogue>
+	
   <window>
     <resolution width="1280" height="720" scale="1"/>
     <fullscreen value="false"/>
