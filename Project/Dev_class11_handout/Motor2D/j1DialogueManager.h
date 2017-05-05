@@ -114,6 +114,11 @@ public:
 	void PauseActiveDialogue();
 	void ResumeActiveDialogue();
 
+	const ActiveDialogue* GetActiveDialogue()const 
+	{
+		return ActiveDialog;
+	}
+
 private:
 	void AllocateDialogues(pugi::xml_node& dialoguenode, iPoint* TextBackgroundPos);
 	void CreateDialogue(pugi::xml_node& dialoguenode, iPoint* TextBackgroundPos, DialogueType type);
