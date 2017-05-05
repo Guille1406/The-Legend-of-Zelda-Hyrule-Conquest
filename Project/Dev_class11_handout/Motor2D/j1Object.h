@@ -36,6 +36,8 @@ enum objectType {
 	bost_key,
 	heart,
 	nothing,
+	block,
+	object_music,
 
 	/*
 	.
@@ -108,6 +110,8 @@ public:
 	Object* CreateColourBlock(pugi::xml_node object, int height);
 	Object* CreateHeart(Enemy* n_enemy, int height);
 	Object* CreateMovableObject(pugi::xml_node, int height);
+	Object* CreateBlock(pugi::xml_node object, int height);
+	Object* CreateMusic(pugi::xml_node object, int height);
 
 	void StartCollision(Collider* collider1, Collider* collider2);
 	void OnCollision(Collider* collider1, Collider* collider2);

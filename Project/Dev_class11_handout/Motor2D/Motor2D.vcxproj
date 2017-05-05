@@ -176,6 +176,7 @@
     <ClInclude Include="j1Enemy.h" />
     <ClInclude Include="j1GameStartMenuBack.h" />
     <ClInclude Include="j1HUD.h" />
+    <ClInclude Include="O_Block.h" />
     <ClInclude Include="O_Boss_Key.h" />
     <ClInclude Include="O_ColourBlock.h" />
     <ClInclude Include="O_Diana.h" />
@@ -207,6 +208,7 @@
     <ClInclude Include="O_Door.h" />
     <ClInclude Include="O_Jump.h" />
     <ClInclude Include="O_Movable_BLock.h" />
+    <ClInclude Include="O_Music.h" />
     <ClInclude Include="O_Sign.h" />
     <ClInclude Include="O_Warp.h" />
     <ClInclude Include="Particle.h" />

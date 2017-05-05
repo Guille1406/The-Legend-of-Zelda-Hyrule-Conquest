@@ -580,7 +580,7 @@ void j1Player::EndCollision(Collider * collider1, Collider * collider2)
 		}
 		Button* temp = (Button*)collider2->parent;
 		temp->EndAction();
-		temp->texture_rect = temp->pressed_button;
+		//temp->texture_rect = temp->pressed_button;
 	}
 
 }

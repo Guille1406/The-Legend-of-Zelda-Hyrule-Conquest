@@ -4,12 +4,6 @@
 #include "j1Object.h"
 #include"j1Render.h"
 
-enum blockcolor {
-	blue,
-	red,
-	green,
-	yellow,
-};
 
 class ColourBlock : public Object {
 private:

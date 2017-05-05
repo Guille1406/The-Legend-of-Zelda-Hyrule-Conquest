@@ -17,6 +17,8 @@
 #include"j1HUD.h"
 #include"O_Heart.h"
 #include "O_Movable_BLock.h"
+#include "O_Block.h"
+#include "O_Music.h"
 
 bool j1Object::Start()
 {
@@ -177,8 +179,12 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int heigh
 		ret = CreateFall(object, height);
 	else if (!strcmp(type_name, "Colour Panel"))
 		ret = CreateColourBlock(object, height);
-	else if(!strcmp(type_name, "movable"))
+	else if (!strcmp(type_name, "movable"))
 		ret = CreateMovableObject(object, height);
+	else if (!strcmp(type_name, "block"))
+		ret = CreateBlock(object,height);
+	else if (!strcmp(type_name, "music"))
+		ret = CreateMusic(object, height);
 	return ret;
 }
 
@@ -214,6 +220,30 @@ Object * j1Object::CreateButton(pugi::xml_node object, int height)
 	temp_button.rect = { x,y,w,h };
 	temp_button.type = objectType::button;
 	temp_button.active = true;
+
+	pugi::xml_node attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "entity") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	std::string colour_button = attribute.attribute("value").as_string();
+
+	attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "note") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	temp_button.note = attribute.attribute("value").as_int();
+
+
+	if (strcmp(colour_button.c_str(), "blue") ==0)
+		temp_button.color = buttoncolor::blue;
+	else if (strcmp(colour_button.c_str(), "red")==0)
+		temp_button.color = buttoncolor::red;
+	else if (strcmp(colour_button.c_str(), "orange")==0)
+		temp_button.color = buttoncolor::yellow;
+	else if (strcmp(colour_button.c_str(), "green")==0)
+		temp_button.color = buttoncolor::green;
+	else
+		temp_button.color = buttoncolor::nonecolor;
 
 	Object* ret = new Button(temp_button);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_button, (Entity*)ret, this);
@@ -391,7 +421,7 @@ Object * j1Object::CreateMovableObject(pugi::xml_node object, int height)
 	temp_block.logic_height = height;
 	temp_block.name = object.attribute("name").as_string();
 	temp_block.rect = { x,y,w,h };
-	temp_block.type = objectType::change_height;
+	temp_block.type = objectType::movable_block;
 	temp_block.active = true;
 
 	for (int i = 0; i < temp_block.rect.w / 16; i++) {
@@ -408,6 +438,57 @@ Object * j1Object::CreateMovableObject(pugi::xml_node object, int height)
 	Object* ret = new Movable_Block(temp_block);
 	ret->collider = App->collision->AddCollider(temp_block.rect, COLLIDER_TYPE::collider_movable_object, (Entity*)ret, this);
 	
+	V_Objects.push_back(ret);
+	return ret;
+}
+
+Object * j1Object::CreateBlock(pugi::xml_node object, int height)
+{
+	Block temp_block;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+
+	temp_block.logic_height = height;
+	temp_block.name = object.attribute("name").as_string();
+	temp_block.rect = { x,y,w,h };
+	temp_block.type = objectType::block;
+	temp_block.active = true;
+
+	for (int i = 0; i < temp_block.rect.w / 16; i++) {
+		for (int n = 0; n < temp_block.rect.h / 16; n++) {
+			iPoint temp;
+			temp.x = temp_block.rect.x + i * 16;
+			temp.y = temp_block.rect.y + n * 16;
+			//if(App->map->V_Colision[0][temp_door.logic_height].data[temp.y*App->map->data.width + temp.x] != App->map->CANT_PASS_COL_ID)
+			temp_block.collider_tiles.push_back(temp);
+			//App->map->V_Colision[0][temp_door.logic_height].data[temp.y*App->map->data.width + temp.x] = App->map->TILE_COL_ID;
+		}
+	}
+	Object* ret = new Block(temp_block);
+	//ret->collider = App->collision->AddCollider(temp_block.rect, COLLIDER_TYPE::collider_movable_object, (Entity*)ret, this);
+
+	V_Objects.push_back(ret);
+	return ret;
+}
+
+Object * j1Object::CreateMusic(pugi::xml_node object, int height)
+{
+	Object_Music temp_music;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+
+	temp_music.logic_height = height;
+	temp_music.name = object.attribute("name").as_string();
+	temp_music.rect = { x,y,w,h };
+	temp_music.type = objectType::object_music;
+	temp_music.active = true;
+	Object* ret = new Object_Music(temp_music);
+	//ret->collider = App->collision->AddCollider(temp_block.rect, COLLIDER_TYPE::collider_movable_object, (Entity*)ret, this);
+
 	V_Objects.push_back(ret);
 	return ret;
 }
@@ -516,9 +597,14 @@ void j1Object::StartCollision(Collider * collider1, Collider * collider2)
 			App->audio->PlayFx(App->audio->button_sound);
 			audio = true;
 		}
+		
 		Button* temp = (Button*)collider1->parent;
-		temp->Action();
-		temp->texture_rect = temp->pressed_button;
+		if (temp->note != 0) {
+			temp->Action(temp->note);
+		}
+		else
+			temp->Action();
+		//temp->texture_rect = temp->pressed_button;
 	}
 
 	if (collider1->type == COLLIDER_TYPE::collider_heart) {
