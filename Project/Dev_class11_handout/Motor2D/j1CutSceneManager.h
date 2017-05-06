@@ -8,11 +8,12 @@
 #include"p2Point.h"
 #include"GuiImage.h"
 #include"j1DialogueManager.h"
+#include"MainScene.h"
 
 //TODO 1: Open config.xml and write a new path for the cutscene.
 
-enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_NONE };
-enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_PLAY, ACT_STOP, ACT_NONE };
+enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_CHANGESCENE, CS_NONE };
+enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_PLAY, ACT_STOP, ACT_NONE, ACT_CHANGESCENE };
 enum Dir_Type { CS_UP, CS_DOWN, CS_LEFT, CS_RIGHT, NO_DIR };
 enum EntityType_Cutscene {
 
@@ -87,6 +88,17 @@ private:
 
 };
 
+class CS_ChangeScene : public CS_Element
+{
+public:
+	CS_ChangeScene(CS_Type type, int n, const char* name, bool active, const char* path, Scene_ID);
+	~CS_ChangeScene();
+	Scene_ID id_newscene;
+private:
+	
+	MainScene* scene;
+};
+
 
 class CS_Music : public CS_Element
 {
@@ -149,6 +161,7 @@ public:
 	bool DoMovement(float dt);
 	bool CheckMovementCompleted(iPoint curr_pos);
 	void Play();
+	void DoChangeScene_CS();
 	//void ChangeString();
 	void StopMusic();
 	void ActiveElement();
@@ -210,6 +223,7 @@ public:
 	bool LoadText(pugi::xml_node&);
 	bool LoadMusic(pugi::xml_node&);
 	bool LoadFx(pugi::xml_node&);
+	bool LoadChangeScene(pugi::xml_node&);
 	// ------------------------------
 
 	//STEPS FUNCTIONS -------

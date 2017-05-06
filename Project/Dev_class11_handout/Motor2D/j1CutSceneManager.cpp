@@ -11,6 +11,8 @@
 #include"P_Link.h"
 #include"j1Player.h"
 #include"j1App.h"
+#include"j1Scene.h"
+
 
 //TODO 5.1: open the IntroCutscene.xml (in data.zip, in cutscenes folder) and fill THESE ELEMENTS correctly with this info:
 //Image -> n = 0; name = BackgroundPokemon; x = -100; y = 0; tex_x = 0; tex_y = 0; tex_w = 1080; tex_h = 514; active = false; file = textures/PokemonBackground.png;
@@ -106,6 +108,11 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 			for (temp = elements_node.child("TEXTS").child("text"); temp != NULL; temp = temp.next_sibling("text"))
 			{
 				temp_cutscene->LoadText(temp);
+			}
+
+			for (temp = elements_node.child("CHANGESCENES").child("changescene"); temp != NULL; temp = temp.next_sibling("changescene"))
+			{
+				temp_cutscene->LoadChangeScene(temp);
 			}
 			//Load Texts
 
@@ -523,6 +530,45 @@ bool Cutscene::LoadText(pugi::xml_node& node)
 	return ret;
 }
 
+bool Cutscene::LoadChangeScene(pugi::xml_node& node)
+{
+	bool ret = false;
+	if (node != NULL)
+	{
+		Scene_ID id = Scene_ID::NullScene;
+		std::string id_string = node.attribute("name").as_string("");
+		if (id_string == "world") {
+			id = Scene_ID::world;
+		}
+		else if (id_string == "tempbossroom") {
+			id = Scene_ID::tempbossroom;
+		}
+		else if (id_string == "dungeon_entry") {
+			id = Scene_ID::dungeon_entry;
+		}
+		else if (id_string == "dungeon_right_up") {
+			id = Scene_ID::dungeon_right_up;
+		}
+		else if (id_string == "colourpuzzle") {
+			id = Scene_ID::colourpuzzle;
+		}
+		else if (id_string == "dungeon_secondfloor_centre") {
+			id = Scene_ID::dungeon_secondfloor_centre;
+		}
+		else if (id_string == "dungeon_second_floor_right") {
+			id = Scene_ID::dungeon_second_floor_right;
+		}
+		else if (id_string == "dungeon") {
+			id = Scene_ID::dungeon;
+		}
+
+		elements.push_back(new CS_ChangeScene(CS_Type::CS_CHANGESCENE, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), id));
+
+		ret = true;
+	}
+	return ret;
+}
+
 bool Cutscene::LoadMusic(pugi::xml_node& node)
 {
 	bool ret = false;
@@ -647,6 +693,9 @@ bool CS_Step::DoAction(float dt)
 	case ACT_SET_STRING:
 		action_name = "setstring";
 
+	case Action_Type::ACT_CHANGESCENE:
+		action_name = "changescene";
+		this->DoChangeScene_CS();
 	default:
 		action_name = "none";
 		break;
@@ -697,6 +746,10 @@ void CS_Step::SetAction(pugi::xml_node& node)
 	else if (action_type == "disable")
 	{
 		act_type = ACT_DISABLE;
+	}
+	else if (action_type == "changescene")
+	{
+		act_type = ACT_CHANGESCENE;
 	}
 	else if (action_type == "move")
 	{
@@ -914,6 +967,18 @@ void CS_Step::Play()
 		fx->Play();
 	}
 	//LOG("Step %i Playing %s", n, element->name.c_str());
+}
+
+void CS_Step::DoChangeScene_CS()
+{
+	//this->element->
+	if (element->GetType() == CS_CHANGESCENE)
+	{
+		CS_ChangeScene* tmp = (CS_ChangeScene*)element;
+		App->scene->ChangeScene(tmp->id_newscene);
+		FinishStep();
+	}
+	//App->scene->ChangeScene()
 }
 
 
@@ -1153,5 +1218,15 @@ CS_Text::CS_Text(CS_Type type, int n, const char* name, bool active, const char*
 {}
 
 CS_Text::~CS_Text()
+{
+}
+
+CS_ChangeScene::CS_ChangeScene(CS_Type type, int n, const char * name, bool active, const char * path, Scene_ID scene):
+	CS_Element(type, n, name, active, path), id_newscene(scene)
+{
+
+}
+
+CS_ChangeScene::~CS_ChangeScene()
 {
 }

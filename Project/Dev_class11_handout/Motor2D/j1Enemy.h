@@ -15,7 +15,7 @@ class Green_Enemy;
 enum EnemyState {
 	doing_path= 0,
 	following_player =0,
-	push_back_enemy =0,
+	push_back_enemy =1,
 	throwing_bomb = 1,
 	jumping =2,
 	stunned =3,

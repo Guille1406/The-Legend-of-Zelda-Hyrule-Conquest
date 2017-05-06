@@ -42,6 +42,7 @@ enum Scene_ID {
 	dungeon,
 	Send,
 	testenemies,
+	NullScene,
 
 };
 

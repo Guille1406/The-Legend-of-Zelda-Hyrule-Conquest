@@ -397,18 +397,18 @@ void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 void Enemy::Direction_Push_Election()
 {
 	//Calls the jump function depending on the player direction
-	switch (Enemy_Orientation) {
-	case OrientationEnemy::up_enemy:
-		Enemy_Hurt_Displacement(pos.y, true);
-		break;
-	case OrientationEnemy::down_enemy:
+	switch (App->player->Link->character_direction) {
+	case direction::up:
 		Enemy_Hurt_Displacement(pos.y, false);
 		break;
-	case OrientationEnemy::left_enemy:
-		Enemy_Hurt_Displacement(pos.x, true);
+	case direction::down:
+		Enemy_Hurt_Displacement(pos.y, true);
 		break;
-	case OrientationEnemy::right_enemy:
+	case direction::left:
 		Enemy_Hurt_Displacement(pos.x, false);
+		break;
+	case direction::right:
+		Enemy_Hurt_Displacement(pos.x, true);
 		break;
 	}
 }
