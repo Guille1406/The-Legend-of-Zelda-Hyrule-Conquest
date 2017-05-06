@@ -216,7 +216,7 @@ player_event P_Zelda::GetEvent()
 	SDL_Scancode RIGHT;
 
 	//Change the actual event, direction and move_direction depending ont he key pressed
-	can_fall = true;
+	//can_fall = true;
 
 	if (App->player->cooperative == false) {
 		UP = SDL_SCANCODE_W;

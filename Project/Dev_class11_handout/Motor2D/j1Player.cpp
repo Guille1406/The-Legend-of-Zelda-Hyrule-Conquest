@@ -582,7 +582,14 @@ void j1Player::EndCollision(Collider * collider1, Collider * collider2)
 		temp->EndAction();
 		//temp->texture_rect = temp->pressed_button;
 	}
+	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_colour_block) {
 
+			App->player->Link->can_fall = true;
+	}
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_colour_block) {
+		
+			App->player->Zelda->can_fall = true;
+	}
 }
 
 void j1Player::StartCollision(Collider * collider1, Collider * collider2)
