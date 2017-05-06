@@ -197,6 +197,8 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int heigh
 		ret = CreateMusic(object, height);
 	else if (!strcmp(type_name, "container_heart"))
 		ret = CreateHeartContainer(object, height);
+	else if (!strcmp(type_name, "bridge"))
+		ret = CreateBridge(object, height);
 	return ret;
 }
 
@@ -511,6 +513,27 @@ Object * j1Object::CreateMusic(pugi::xml_node object, int height)
 	return ret;
 }
 
+Object * j1Object::CreateBridge(pugi::xml_node object, int height)
+{
+	Bridge temp_bridge;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+
+	temp_bridge.logic_height = height;
+	temp_bridge.name = object.attribute("name").as_string();
+	temp_bridge.rect = { x,y,w,h };
+	temp_bridge.type = objectType::bridge;
+	temp_bridge.active = false;
+	Object* ret = new Bridge(temp_bridge);
+	//ret->collider = App->collision->AddCollider(temp_bridge.rect, COLLIDER_TYPE::collider_colour_block, (Entity*)ret, this);
+
+	V_Objects.push_back(ret);
+	return ret;
+}
+
+/*
 Object * j1Object::CreateBridge(SDL_Rect rect, int height)
 {
 	Bridge temp_bridge;
@@ -529,7 +552,7 @@ Object * j1Object::CreateBridge(SDL_Rect rect, int height)
 
 	return ret;
 }
-
+*/
 Object * j1Object::CreateHeartContainer(pugi::xml_node object, int height)
 {
 	HeartContainer temp_heart;
@@ -700,12 +723,12 @@ void j1Object::StartCollision(Collider * collider1, Collider * collider2)
 		//temp->texture_rect = temp->pressed_button;
 	}
 
-	if (collider1->type == COLLIDER_TYPE::collider_heart) {
+	else if (collider1->type == COLLIDER_TYPE::collider_heart) {
 		Heart* temp = (Heart*)collider1->parent;
 		temp->Pick(App->player->Link);
 
 	}
-	if (collider1->type == COLLIDER_TYPE::collider_container_heart) {
+	else if (collider1->type == COLLIDER_TYPE::collider_container_heart) {
 		HeartContainer* temp = (HeartContainer*)collider1->parent;
 		temp->Pick(App->player->Link);
 	
@@ -722,7 +745,7 @@ void j1Object::StartCollision(Collider * collider1, Collider * collider2)
 	}
 	
 	else if (collider1->type == collider_warp) {
-		Object* temp = (Object*)collider1->parent;
+		Warp* temp = (Warp*)collider1->parent;
 		temp->Action();
 	}
 	

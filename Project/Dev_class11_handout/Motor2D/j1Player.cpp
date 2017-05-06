@@ -609,6 +609,7 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 			}
 			temp->Action();
 		}
+
 		else if (collider2->type == collider_boss_little_eye) {
 			Boss* temp_boss = (Boss*)collider2->parent;
 			Arrow* arrow_temp = (Arrow*)collider1->parent;

@@ -14,9 +14,15 @@ public:
 		height = obj.height;
 		name = obj.name;
 		logic_height = obj.logic_height;
-		texture_rect = obj.rect;
+		texture_rect = rect_bridge;
 	}
 	~Bridge() {
+
+	}
+	void Action(){
+		if (collider == nullptr)			
+		collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_colour_block, this, App->object);
+		active = true;
 
 	}
 

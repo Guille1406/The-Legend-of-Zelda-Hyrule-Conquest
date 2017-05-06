@@ -86,7 +86,7 @@ bool S_DungeonEntry::Start()
 bool S_DungeonEntry::Update()
 {
 	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
-		App->object->CreateBridge({ App->player->Link->pos.x,App->player->Link->pos.y,128,64 },0);
+		//App->object->CreateBridge({ App->player->Link->pos.x,App->player->Link->pos.y,128,64 },0);
 	}
 	if (!App->player->paused)
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)

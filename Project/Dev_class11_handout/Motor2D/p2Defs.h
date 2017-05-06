@@ -131,7 +131,7 @@ static const SDL_Rect rect_blue_button_pressed = { 96,272,32,32 };
 static const SDL_Rect rect_green_button_pressed = { 32,304,32,32 };
 static const SDL_Rect rect_yellow_button_pressed = { 96,304,32,32 };
 
-static const SDL_Rect rect_bridge = { 0,464,96,118 };
+static const SDL_Rect rect_bridge = { 464,0,96,118 };
 static const SDL_Rect rect_heart_healing = { 191,95,32,32 };
 static const SDL_Rect rect_bomb = { 224,272,32,32 };
 static const SDL_Rect explosion1 = { 0,464,96,118 };

@@ -209,10 +209,14 @@ bool j1Collision::Update(float dt)
 
 				c2 = colliders[k];
 
+				
 				if (c1->CheckCollision(c2->rect, k) == true)
 				{
 					if (matrix[c1->type][c2->type] && c1->callback)
 					{
+						if (c2->type == collider_warp) {
+							int a = 0;
+						}
 						if (c1->logic_height == c2->logic_height){							
 								if (c1->state_collider[k] == im_colliding)
 									c1->callback->OnCollision(c1, c2);
