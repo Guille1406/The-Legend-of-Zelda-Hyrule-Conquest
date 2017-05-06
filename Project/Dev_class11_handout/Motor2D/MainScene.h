@@ -33,6 +33,7 @@ enum Scene_ID {
 	map,
 	world,
 	tempbossroom,
+	before_dungeon = 19,
 	dungeon_entry = 20,
 	dungeon_right_up = 21,
 	dungeon_right_down = 22,

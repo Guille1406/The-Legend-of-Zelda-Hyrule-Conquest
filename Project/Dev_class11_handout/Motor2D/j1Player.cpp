@@ -145,7 +145,7 @@ bool j1Player::Update(float dt)
 bool j1Player::PostUpdate()
 {
 	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
-		App->scene->ChangeScene(dungeon_entry);
+		App->scene->ChangeScene(before_dungeon);
 		App->player->Link->pos = { 660,1200 };
 		App->player->Zelda->pos = { 620,1200 };
 	}

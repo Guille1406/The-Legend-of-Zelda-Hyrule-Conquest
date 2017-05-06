@@ -244,6 +244,9 @@
     <ClCompile Include="j1CutSceneManager.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="S_BeforeDungeon.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -569,6 +572,9 @@
     </ClInclude>
     <ClInclude Include="O_Bridge.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="S_BeforeDungeon.h">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

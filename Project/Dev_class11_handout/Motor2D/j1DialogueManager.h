@@ -36,6 +36,7 @@ enum DialogueInterlucutor {
 	Messenger,
 	King,
 	Guard,
+	Ogity,
 	//NPC
 	Ric,
 	//None
@@ -151,12 +152,14 @@ private:
 	SDL_Texture* zelda_tex = nullptr;
 	SDL_Texture* messenger_tex = nullptr;
 	SDL_Texture* ric_tex = nullptr;
+	SDL_Texture* ogity_tex = nullptr;
 
 	std::string king_tex_str = empty_char;
 	std::string link_tex_str = empty_char;
 	std::string zelda_tex_str = empty_char;
 	std::string messenger_tex_str = empty_char;
 	std::string ric_tex_str = empty_char;
+	std::string ogity_tex_str = empty_char;
 
 };
 
