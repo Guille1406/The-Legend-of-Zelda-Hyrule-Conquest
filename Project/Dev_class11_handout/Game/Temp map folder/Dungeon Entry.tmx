@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="150" height="120" tilewidth="16" tileheight="16" nextobjectid="58">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="150" height="120" tilewidth="16" tileheight="16" nextobjectid="59">
  <tileset firstgid="1" name="tileset cave" tilewidth="16" tileheight="16" tilecount="1710" columns="57">
   <image source="tileset cave.png" width="912" height="480"/>
  </tileset>
@@ -649,16 +649,16 @@
    <properties>
     <property name="scene" type="int" value="21"/>
     <property name="type" value="warp"/>
-    <property name="x" type="int" value="224"/>
-    <property name="y" type="int" value="432"/>
+    <property name="x" type="int" value="14"/>
+    <property name="y" type="int" value="27"/>
    </properties>
   </object>
   <object id="2" x="512" y="1296" width="32" height="32">
    <properties>
     <property name="scene" type="int" value="23"/>
     <property name="type" value="warp"/>
-    <property name="x" type="int" value="608"/>
-    <property name="y" type="int" value="1312"/>
+    <property name="x" type="int" value="38"/>
+    <property name="y" type="int" value="82"/>
    </properties>
   </object>
   <object id="3" x="784" y="224" width="64" height="384">
@@ -880,6 +880,14 @@
   <object id="16" x="1776" y="1168" width="144" height="16">
    <properties>
     <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="58" x="1728" y="1552" width="32" height="32">
+   <properties>
+    <property name="scene" type="int" value="21"/>
+    <property name="type" value="warp"/>
+    <property name="x" type="int" value="57"/>
+    <property name="y" type="int" value="15"/>
    </properties>
   </object>
  </objectgroup>

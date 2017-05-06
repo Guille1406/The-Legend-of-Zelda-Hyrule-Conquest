@@ -27,8 +27,8 @@ public:
 	}
 	void Action() {
 		App->scene->ChangeScene(scene);
-		App->player->Link->pos = warp_pos;
-		App->player->Zelda->pos = warp_pos;
+		App->player->Link->pos = { warp_pos.x * 16, warp_pos.y * 16 };
+		App->player->Zelda->pos = { warp_pos.x * 16, warp_pos.y * 16 };
 	}
 
 public:
