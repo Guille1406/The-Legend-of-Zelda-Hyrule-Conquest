@@ -135,7 +135,7 @@ private:
 	SDL_Rect WindowRect = { 0,0,0,0 };
 
 	std::vector<Dialogue*> dialogues;
-	std::vector<DialogueInterlucutorStrAndAtalsRelation*> DialogueInterlucutorStrRelationVec;
+	std::vector<DialogueInterlucutorStrAndAtalsRelation*> DialogueInterlucutorStrandAtlasRelationVec;
 	ActiveDialogue* ActiveDialog = nullptr;
 
 	std::string folder = empty_char;
