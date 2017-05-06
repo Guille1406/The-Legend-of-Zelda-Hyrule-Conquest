@@ -4,7 +4,7 @@
   <property name="scene" type="int" value="19"/>
  </properties>
  <tileset firstgid="1" name="overworld_tileset" tilewidth="16" tileheight="16" tilecount="3328" columns="52">
-  <image source="../Temporary Sprites folder/overworld_tileset.png" width="839" height="1024"/>
+  <image source="overworld_tileset.png" width="839" height="1024"/>
   <tile id="0">
    <properties>
     <property name="y" type="int" value="15"/>
@@ -528,6 +528,7 @@
   <object id="2" x="848" y="1248" width="112" height="32">
    <properties>
     <property name="scene" type="int" value="0"/>
+    <property name="type" value="warp"/>
     <property name="x" type="int" value="0"/>
     <property name="y" type="int" value="0"/>
    </properties>
@@ -542,7 +543,8 @@
   </object>
   <object id="5" x="1280" y="608" width="32" height="16">
    <properties>
-    <property name="scene" type="int" value="25"/>
+    <property name="scene" type="int" value="22"/>
+    <property name="type" value="warp"/>
     <property name="x" type="int" value="25"/>
     <property name="y" type="int" value="98"/>
    </properties>

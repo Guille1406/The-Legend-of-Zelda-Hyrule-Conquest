@@ -40,6 +40,7 @@
 #include "S_Dungeon_Right_Up.h"
 #include "S_Dungeon_SecondFloor_Centre.h"
 #include "S_Dungeon_SecondFloor_Right.h"
+#include "S_BeforeDungeon.h"
 
 #include"Enemy_Test_Scene.h"
 
@@ -101,6 +102,11 @@ bool j1Scene::Start()
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::tempbossroom;
+
+	scene_pointer = new S_BeforeDungeon;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::before_dungeon;
 
 	scene_pointer = new S_DungeonEntry;
 	scene_list.push_back(scene_pointer);
