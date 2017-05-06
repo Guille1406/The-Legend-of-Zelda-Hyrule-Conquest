@@ -178,6 +178,7 @@
     <ClInclude Include="j1HUD.h" />
     <ClInclude Include="O_Block.h" />
     <ClInclude Include="O_Boss_Key.h" />
+    <ClInclude Include="O_Bridge.h" />
     <ClInclude Include="O_ColourBlock.h" />
     <ClInclude Include="O_Diana.h" />
     <ClInclude Include="O_DoubleButton.h" />

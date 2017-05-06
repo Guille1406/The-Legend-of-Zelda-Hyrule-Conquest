@@ -38,6 +38,7 @@ enum objectType {
 	nothing,
 	block,
 	object_music,
+	bridge,
 
 	/*
 	.
@@ -113,6 +114,7 @@ public:
 	Object* CreateMovableObject(pugi::xml_node, int height);
 	Object* CreateBlock(pugi::xml_node object, int height);
 	Object* CreateMusic(pugi::xml_node object, int height);
+	Object* CreateBridge(SDL_Rect rect, int height);
 
 	void StartCollision(Collider* collider1, Collider* collider2);
 	void OnCollision(Collider* collider1, Collider* collider2);

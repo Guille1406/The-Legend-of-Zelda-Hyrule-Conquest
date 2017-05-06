@@ -19,6 +19,7 @@
 #include "O_Movable_BLock.h"
 #include "O_Block.h"
 #include "O_Music.h"
+#include "O_Bridge.h"
 
 bool j1Object::Start()
 {
@@ -504,6 +505,25 @@ Object * j1Object::CreateMusic(pugi::xml_node object, int height)
 	//ret->collider = App->collision->AddCollider(temp_block.rect, COLLIDER_TYPE::collider_movable_object, (Entity*)ret, this);
 
 	V_Objects.push_back(ret);
+	return ret;
+}
+
+Object * j1Object::CreateBridge(SDL_Rect rect, int height)
+{
+	Bridge temp_bridge;
+
+	temp_bridge.name = "heart";
+	temp_bridge.rect = rect;
+	temp_bridge.texture_rect = rect_Heart;
+	temp_bridge.type = objectType::bridge;
+	temp_bridge.active = true;
+	temp_bridge.logic_height = 0;
+
+	Object* ret = new Bridge(temp_bridge);
+	ret->collider = App->collision->AddCollider(temp_bridge.rect, COLLIDER_TYPE::collider_colour_block, (Entity*)ret, this);
+
+	V_Objects.push_back(ret);
+
 	return ret;
 }
 
