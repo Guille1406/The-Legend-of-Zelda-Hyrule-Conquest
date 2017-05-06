@@ -55,6 +55,9 @@ bool j1CutSceneManager::Awake(pugi::xml_node& config)
 bool j1CutSceneManager::Start()
 {
 
+	for (int i = 0; i < 1; i++)
+		bool_done_cutscenes.push_back(false);
+	
 	return true;
 }
 
@@ -87,63 +90,57 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 
 			temp_cutscene->id = cutscene_node.attribute("id").as_uint(0);			//Sets its identifier.
 			temp_cutscene->name = cutscene_node.attribute("name").as_string("");	//Sets its name.
+			bool temp_bool = bool_done_cutscenes[temp_cutscene->id-1];
+			if (temp_bool == false) {
 
-																					//LOAD ELEMENTS INVOLVED IN THE CUTSCENE --------------------------------------------------------------
-			elements_node = cutscene_node.child("elements");
+				bool_done_cutscenes[temp_cutscene->id-1] = true;
 
-			//Load map to change when cutscene is finished
-			temp_cutscene->SetMap(elements_node);
+				//LOAD ELEMENTS INVOLVED IN THE CUTSCENE --------------------------------------------------------------
+				elements_node = cutscene_node.child("elements");
+				//Load map to change when cutscene is finished
+				temp_cutscene->SetMap(elements_node);
 
-			//Load NPCs
-			for (temp = elements_node.child("NPC").child("npc"); temp != NULL; temp = temp.next_sibling("npc"))
-			{
-				temp_cutscene->LoadNPC(temp);
+				//Load NPCs
+				for (temp = elements_node.child("NPC").child("npc"); temp != NULL; temp = temp.next_sibling("npc"))
+				{
+					temp_cutscene->LoadNPC(temp);
+				}
+
+				for (temp = elements_node.child("IMAGES").child("image"); temp != NULL; temp = temp.next_sibling("image"))
+				{
+					temp_cutscene->LoadImg(temp);
+				}
+
+				for (temp = elements_node.child("TEXTS").child("text"); temp != NULL; temp = temp.next_sibling("text"))
+				{
+					temp_cutscene->LoadText(temp);
+				}
+
+				for (temp = elements_node.child("CHANGESCENES").child("changescene"); temp != NULL; temp = temp.next_sibling("changescene"))
+				{
+					temp_cutscene->LoadChangeScene(temp);
+				}
+
+				// -----------------------------------------------------------------------------------
+
+				// LOAD STEPS ---------------------------------
+				steps_node = cutscene_node.child("steps").child("step");
+				//TODO 6.2: Access the first step node and iterate it in order to load all of them by calling the correct function.
+				while (steps_node != NULL)
+				{
+					temp_cutscene->LoadStep(steps_node, temp_cutscene);
+					steps_node = steps_node.next_sibling();
+				}
+
+
+				// -----------------------------------------
+
+				//Set the active_scene pointer to the current scene -------------------------
+				active_cutscene = temp_cutscene;
+
+				//LOG("Cutscene '%s' loaded with %i elements and %i steps.", temp_cutscene->name.c_str(), temp_cutscene->GetNumElements(), temp_cutscene->GetNumSteps());
+				break;
 			}
-
-			for (temp = elements_node.child("IMAGES").child("image"); temp != NULL; temp = temp.next_sibling("image"))
-			{
-				temp_cutscene->LoadImg(temp);
-			}
-
-			for (temp = elements_node.child("TEXTS").child("text"); temp != NULL; temp = temp.next_sibling("text"))
-			{
-				temp_cutscene->LoadText(temp);
-			}
-
-			for (temp = elements_node.child("CHANGESCENES").child("changescene"); temp != NULL; temp = temp.next_sibling("changescene"))
-			{
-				temp_cutscene->LoadChangeScene(temp);
-			}
-			//Load Texts
-
-			//TODO 5.2: Access the images node and load the data by calling the correct function.
-			//Do the same with music and sound fx.
-
-			//Load Images
-
-			//Load Music
-
-			//Load Sound Fx
-
-			// -----------------------------------------------------------------------------------
-
-			// LOAD STEPS ---------------------------------
-			steps_node = cutscene_node.child("steps").child("step");
-			//TODO 6.2: Access the first step node and iterate it in order to load all of them by calling the correct function.
-			while (steps_node != NULL)
-			{
-				temp_cutscene->LoadStep(steps_node, temp_cutscene);
-				steps_node = steps_node.next_sibling();
-			}
-
-
-			// -----------------------------------------
-
-			//Set the active_scene pointer to the current scene -------------------------
-			active_cutscene = temp_cutscene;
-
-			//LOG("Cutscene '%s' loaded with %i elements and %i steps.", temp_cutscene->name.c_str(), temp_cutscene->GetNumElements(), temp_cutscene->GetNumSteps());
-			break;
 		}
 		i++;
 	}
@@ -170,6 +167,16 @@ bool j1CutSceneManager::Update(float dt)
 	}
 
 	return ret;
+}
+
+bool j1CutSceneManager::Load(pugi::xml_node &)
+{
+	return false;
+}
+
+bool j1CutSceneManager::Save(pugi::xml_node &) const
+{
+	return false;
 }
 
 //Set to active the correct cutscene
@@ -389,7 +396,7 @@ bool Cutscene::Update(float dt)
 	std::list<CS_Step*>::iterator temp = steps.begin();
 
 	//UPDATE STEPS (MODIFY ELEMENTS) -------------------------
-	while (temp != steps.end())
+	while (temp != steps.end() && done==false)
 	{
 		CS_Step* step = *temp;
 
@@ -400,7 +407,7 @@ bool Cutscene::Update(float dt)
 		// 3) if the start time has been reached by the cutscene timer
 		
 
-		if (temp != steps.begin() && temp._Ptr->_Prev->_Myval->isFinished() && temp._Ptr->_Prev->_Myval->isWait() && step->isActive() == false && step->isFinished() == false)
+		if (temp != steps.begin() && temp._Ptr->_Prev->_Myval->isFinished() && temp._Ptr->_Prev->_Myval->isWait() && step->isActive() == false && step->isFinished() == false )
 		{
 			if (step->n == 5)
 				int buenas_atrdes = 0;
@@ -422,6 +429,7 @@ bool Cutscene::Update(float dt)
 	//If all stpes have been reproduced, finish the cutscene
 	if (steps_done >= num_steps)
 	{
+		done = true;
 		finished = true;
 	}
 

@@ -178,7 +178,6 @@ public:
 	void SetWait(bool);
 	//void GetInput();
 	// --------------------------------
-
 	int n = -1;
 
 private:
@@ -248,7 +247,7 @@ public:
 	uint id = 0;							//ID to locate when triggered
 	j1Timer	timer;							//To control reproducing time of the cutscene
 	int map_id = -1;						//Id to know wich map charge
-
+	bool done = false;
 
 private:
 	std::list<CS_Element*> elements;		//Elements controlled by the cutscene
@@ -273,6 +272,10 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	bool Load(pugi::xml_node&);
+
+	bool Save(pugi::xml_node&) const;
+
 	//CUTSCENES MANAGEMENT ------
 	bool LoadCutscene(uint id);
 	bool StartCutscene(uint id);
@@ -290,7 +293,7 @@ public:
 private:
 
 	pugi::xml_node LoadXML(pugi::xml_document& config_file, std::string file) const;
-
+	std::vector<bool> bool_done_cutscenes;
 	std::list<std::string> paths;			//Container with names of all paths of the cutscenes (in order)
 	Cutscene* active_cutscene = nullptr;	//To know wich cutscene is active
 };
