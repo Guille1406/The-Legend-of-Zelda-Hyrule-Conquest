@@ -208,13 +208,6 @@ bool j1DialogueManager::Update(float dt)
 		PauseActiveDialogue();
 	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
 		ResumeActiveDialogue();
-	/*
-	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
-	{
-		ActiveDialog->DialogueActive = false;
-		ActiveDialog->DialoguePaused = false;
-	}
-	*/
 	//Test code end
 
 	if (!ActiveDialog->DialogueActive || ActiveDialog->DialoguePaused)
@@ -292,8 +285,21 @@ void j1DialogueManager::PauseActiveDialogue()
 
 void j1DialogueManager::ResumeActiveDialogue()
 {
+	DialogueNextStep();
 	if (ActiveDialog->DialogueActive == true)
 		ActiveDialog->DialoguePaused = false;
+}
+
+uint j1DialogueManager::GetActiveDialogueStep()
+{
+	uint ret = 0;
+
+	if(ActiveDialog->ActiveDialoguePtr != nullptr)
+		for (std::vector<DialogueStep*>::iterator item = ActiveDialog->ActiveDialoguePtr->DialogueSteps.begin(); item != ActiveDialog->ActiveDialoguePtr->DialogueSteps.cend(); ++item, ret++)
+			if ((*item) == ActiveDialog->ActiveDialogueStepPtr)
+				return ret;
+
+	return ret;
 }
 
 void j1DialogueManager::DialogueNextStep()

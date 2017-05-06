@@ -113,6 +113,7 @@ public:
 	void ActivateDialogue(DialogueID id);
 	void PauseActiveDialogue();
 	void ResumeActiveDialogue();
+	uint GetActiveDialogueStep();
 
 	const ActiveDialogue* GetActiveDialogue()const 
 	{
