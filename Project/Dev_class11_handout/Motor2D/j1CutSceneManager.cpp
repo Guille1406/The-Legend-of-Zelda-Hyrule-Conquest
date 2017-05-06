@@ -812,12 +812,12 @@ bool CS_Step::DoMovement(float dt)
 		case CS_DOWN:
 			tmp->Move(0, ceil(mov_speed*dt));
 			char_temp->actual_event = player_event::move;
-			//char_temp->character_direction = direction::down;
+			char_temp->character_direction = direction::down;
 			break;
 		case CS_LEFT:
 			tmp->Move(-ceil(mov_speed*dt), 0);
 			char_temp->actual_event = player_event::move;
-			//char_temp->character_direction = direction::left;
+			char_temp->character_direction = direction::left;
 			break;
 		case CS_RIGHT:
 			tmp->Move(ceil(mov_speed*dt), 0);
