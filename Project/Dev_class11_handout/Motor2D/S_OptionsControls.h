@@ -20,7 +20,7 @@ public:
 public:
 	GuiButton* ControlsLabel = nullptr;
 	GuiButton* ControllerLayout = nullptr;
-	GuiButton* MouseLayout = nullptr;
+	//GuiButton* MouseLayout = nullptr;
 	GuiButton* back = nullptr;
 };
 

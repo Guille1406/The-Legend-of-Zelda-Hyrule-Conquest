@@ -19,10 +19,10 @@ public:
 	void OnGui(Gui* ui, GuiEvent event);
 public:
 	GuiButton* VideoLabel = nullptr;
-	GuiButton* scale = nullptr;
+	//GuiButton* scale = nullptr;
 	GuiButton* fullscreen = nullptr;
 	GuiCheck* fullscreen_check = nullptr;
-	GuiButton* brightness = nullptr;
+	//GuiButton* brightness = nullptr;
 	GuiButton* vsync = nullptr;
 	GuiCheck* vsync_check = nullptr;
 	GuiButton* back = nullptr;
