@@ -21,7 +21,7 @@ public:
 	GuiButton* GameplayLabel = nullptr;
 	GuiButton* ShowhideHUD = nullptr;
 	GuiCheck* ShowhideHUD_check = nullptr;
-	GuiButton* Language = nullptr;
+	//GuiButton* Language = nullptr;
 	GuiButton* back = nullptr;
 };
 

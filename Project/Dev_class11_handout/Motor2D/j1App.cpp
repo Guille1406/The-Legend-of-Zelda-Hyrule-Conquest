@@ -407,7 +407,7 @@ void j1App::LoadGameModules(const char* file)
 	// from the "GetSaveGames" list
 	want_to_load = true;
 	WantTo_SaveLoadType = SaveLoadType::Module;
-	load_game=("%s%s", fs->GetSaveDirectory(), file);
+	load_game = ("%s%s", fs->GetSaveDirectory(), file);
 }
 
 // ---------------------------------------
@@ -417,7 +417,7 @@ void j1App::SaveGameModules(const char* file) const
 	// from the "GetSaveGames" list ... should we overwrite ?
 	want_to_save = true;
 	WantTo_SaveLoadType = SaveLoadType::Module;
-	save_game=file;
+	save_game = file;
 }
 
 // ---------------------------------------

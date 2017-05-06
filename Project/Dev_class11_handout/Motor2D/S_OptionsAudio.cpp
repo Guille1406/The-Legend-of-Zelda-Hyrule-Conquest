@@ -22,6 +22,7 @@ bool S_OptionsAudio::Awake(pugi::xml_node& conf)
 	((Gui*)MasterVolume)->SetListener(this);
 	MasterVolume->SetVisible(false);
 	MasterVolume->Focusable(true);
+	/*
 	MusicVolume = App->gui->CreateButton(iPoint(X_pos, 310), &std::string(conf.child("MusicVolume").attribute("value").as_string("Music Volume")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	MusicVolume->SetFont(App->font->Sherwood20);
 	((Gui*)MusicVolume)->SetListener(this);
@@ -32,6 +33,7 @@ bool S_OptionsAudio::Awake(pugi::xml_node& conf)
 	((Gui*)SFXVolume)->SetListener(this);
 	SFXVolume->SetVisible(false);
 	SFXVolume->Focusable(true);
+	*/
 	back = App->gui->CreateButton(iPoint(920, 600), &std::string(conf.child("back").attribute("value").as_string("Back")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	back->SetFont(App->font->Sherwood20);
 	((Gui*)back)->SetListener(this);
@@ -39,8 +41,8 @@ bool S_OptionsAudio::Awake(pugi::xml_node& conf)
 	back->Focusable(true);
 
 	buttons.push_back(MasterVolume);
-	buttons.push_back(MusicVolume);
-	buttons.push_back(SFXVolume);
+	//buttons.push_back(MusicVolume);
+	//buttons.push_back(SFXVolume);
 	buttons.push_back(back);
 
 	return true;
@@ -50,8 +52,8 @@ bool S_OptionsAudio::Start()
 {
 	AudioLabel->SetVisible(true);
 	MasterVolume->SetVisible(true);
-	MusicVolume->SetVisible(true);
-	SFXVolume->SetVisible(true);
+	//MusicVolume->SetVisible(true);
+	//SFXVolume->SetVisible(true);
 	back->SetVisible(true);
 
 	App->gui->SetFocus(buttons.front());
@@ -69,8 +71,8 @@ bool S_OptionsAudio::Clean()
 {
 	AudioLabel->SetVisible(false);
 	MasterVolume->SetVisible(false);
-	MusicVolume->SetVisible(false);
-	SFXVolume->SetVisible(false);
+	//MusicVolume->SetVisible(false);
+	//SFXVolume->SetVisible(false);
 	back->SetVisible(false);
 	return true;
 }

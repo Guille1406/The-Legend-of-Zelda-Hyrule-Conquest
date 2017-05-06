@@ -20,8 +20,8 @@ public:
 public:
 	GuiButton* AudioLabel = nullptr;
 	GuiButton* MasterVolume = nullptr;
-	GuiButton* MusicVolume = nullptr;
-	GuiButton* SFXVolume = nullptr;
+	//GuiButton* MusicVolume = nullptr;
+	//GuiButton* SFXVolume = nullptr;
 	GuiButton* back = nullptr;
 };
 
