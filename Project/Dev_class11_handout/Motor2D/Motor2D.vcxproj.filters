@@ -576,6 +576,9 @@
     <ClInclude Include="S_BeforeDungeon.h">
       <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
     </ClInclude>
+    <ClInclude Include="O_HeartContainer.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Desenvolupament  ========">
