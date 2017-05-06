@@ -35,10 +35,12 @@ enum objectType {
 	key,
 	bost_key,
 	heart,
+	heart_container,
 	nothing,
 	block,
 	object_music,
 	bridge,
+
 
 	/*
 	.
@@ -115,6 +117,7 @@ public:
 	Object* CreateBlock(pugi::xml_node object, int height);
 	Object* CreateMusic(pugi::xml_node object, int height);
 	Object* CreateBridge(SDL_Rect rect, int height);
+	Object* CreateHeartContainer(pugi::xml_node object, int height);
 
 	void StartCollision(Collider* collider1, Collider* collider2);
 	void OnCollision(Collider* collider1, Collider* collider2);

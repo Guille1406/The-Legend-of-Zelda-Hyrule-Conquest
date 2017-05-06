@@ -664,6 +664,8 @@
   <object id="3" x="784" y="224" width="64" height="384">
    <properties>
     <property name="type" value="fall"/>
+    <property name="x" type="int" value="67"/>
+    <property name="y" type="int" value="25"/>
    </properties>
   </object>
   <object id="4" x="1248" y="1120" width="16" height="32">

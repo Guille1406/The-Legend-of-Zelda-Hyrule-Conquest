@@ -9,7 +9,7 @@
 #include "j1Render.h"
 #include"j1Audio.h"
 
-#define JUMP_DISTANCE 96
+#define JUMP_DISTANCE 128
 
 void P_Zelda::Attack(float dt)
 {
@@ -155,7 +155,7 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 
 					if (GetLogic(i, temp_point) != 0 && temp_point != last_point) {
 						max_collisions++;
-						if(max_collisions>=2)
+						if(max_collisions%2 ==0)
 							before_wall_pos = temp_pos + n * 64;
 
 						

@@ -10,6 +10,7 @@
 #include "O_Button.h"
 #include "O_DoubleButton.h"
 #include "O_Movable_BLock.h"
+#include "O_Fall.h"
 #include"j1Enemy.h"
 #include "j1HUD.h"
 #include"j1Audio.h"
@@ -514,13 +515,19 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	}
 
 	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_fall) {
-		if(App->player->Zelda->can_fall)
-		App->player->Zelda->pos = App->player->Link->pos;
+		if (App->player->Zelda->can_fall && !App->player->Zelda->doing_script) {
+			Fall* temp = (Fall*)collider2->parent;
+			App->player->Zelda->pos = { temp->fallpos.x * 16,temp->fallpos.y * 16 };
+		}
+		
 	}
 
 	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_fall) {
-		if (App->player->Link->can_fall)
-		App->player->Link->pos = App->player->Zelda->pos;
+		if (App->player->Link->can_fall) {
+			Fall* temp = (Fall*)collider2->parent;
+			App->player->Link->pos = { temp->fallpos.x * 16,temp->fallpos.y * 16 };
+		}
+		
 	}
 
 

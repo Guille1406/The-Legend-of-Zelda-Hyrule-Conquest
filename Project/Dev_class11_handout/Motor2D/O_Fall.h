@@ -17,7 +17,7 @@ public:
 		active = obj.active;
 		name = obj.name;
 		logic_height = obj.logic_height;
-		
+		fallpos = obj.fallpos;
 		texture_rect = { 0,0,0,0 };
 		//texture_rect = idle_button;
 	}
@@ -29,7 +29,7 @@ public:
 	}
 
 public:
-
+	iPoint fallpos = { 0,0 };
 	
 
 };

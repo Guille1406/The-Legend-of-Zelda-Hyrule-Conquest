@@ -16,7 +16,8 @@ public:
 		active = obj.active;
 		name = obj.name;
 		logic_height = obj.logic_height;
-		//texture_rect = obj.texture_rect;
+		texture_rect = rect_Heart;
+		heart_id = obj.heart_id;
 	}
 	~HeartContainer() {
 
@@ -38,7 +39,7 @@ public:
 public:
 
 
-
+	int heart_id = 0;
 
 };
 

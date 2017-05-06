@@ -27,6 +27,7 @@ j1Collision::j1Collision()
 	matrix[collider_link][collider_heart] = true;
 	matrix[collider_link][collider_boss_hit] = true;
 	matrix[collider_link][collider_boss_explosion] = true;
+	matrix[collider_link][collider_container_heart] = true;
 
 
 	//FRONT LINK
@@ -49,6 +50,7 @@ j1Collision::j1Collision()
 	matrix[collider_zelda][collider_boss_hit] = true;
 	matrix[collider_zelda][collider_boss_explosion] = true;
 	matrix[collider_zelda][collider_boss_recover] = true;
+	matrix[collider_zelda][collider_container_heart] = true;
 
 	//FRONT ZELDA
 	matrix[front_zelda][collider_jump] = true;
@@ -117,6 +119,8 @@ j1Collision::j1Collision()
 	//HEART
 	matrix[collider_heart][collider_link] = true;
 	matrix[collider_heart][collider_zelda] = true;
+	matrix[collider_container_heart][collider_link] = true;
+	matrix[collider_container_heart][collider_zelda] = true;
 	
 	//BOSS FOOT & EYE
 	//matrix[collider_boss_foot][collider_link] = true;

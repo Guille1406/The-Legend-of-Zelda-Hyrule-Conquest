@@ -20,6 +20,7 @@
 #include "O_Block.h"
 #include "O_Music.h"
 #include "O_Bridge.h"
+#include "O_HeartContainer.h"
 
 bool j1Object::Start()
 {
@@ -191,9 +192,11 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int heigh
 	else if (!strcmp(type_name, "movable"))
 		ret = CreateMovableObject(object, height);
 	else if (!strcmp(type_name, "block"))
-		ret = CreateBlock(object,height);
+		ret = CreateBlock(object, height);
 	else if (!strcmp(type_name, "music"))
 		ret = CreateMusic(object, height);
+	else if (!strcmp(type_name, "container_heart"))
+		ret = CreateHeartContainer(object, height);
 	return ret;
 }
 
@@ -527,6 +530,52 @@ Object * j1Object::CreateBridge(SDL_Rect rect, int height)
 	return ret;
 }
 
+Object * j1Object::CreateHeartContainer(pugi::xml_node object, int height)
+{
+	HeartContainer temp_heart;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+
+	temp_heart.logic_height = height;
+	temp_heart.name = object.attribute("name").as_string();
+	temp_heart.rect = { x,y,w,h };
+	temp_heart.type = objectType::heart_container;
+	temp_heart.active = true;
+
+	pugi::xml_node attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "heart") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	temp_heart.heart_id = attribute.attribute("value").as_int();
+
+	Object* ret = nullptr;
+	if (temp_heart.heart_id == 1 && App->scene->heart_1) {
+		ret = new HeartContainer(temp_heart);
+		ret->collider = App->collision->AddCollider(temp_heart.rect, COLLIDER_TYPE::collider_container_heart, (Entity*)ret, this);
+
+		V_Objects.push_back(ret);
+	}
+	if (temp_heart.heart_id == 2 && App->scene->heart_2) {
+		ret = new HeartContainer(temp_heart);
+		ret->collider = App->collision->AddCollider(temp_heart.rect, COLLIDER_TYPE::collider_container_heart, (Entity*)ret, this);
+
+		V_Objects.push_back(ret);
+	}
+
+	if (temp_heart.heart_id == 3 && App->scene->heart_3) {
+		ret = new HeartContainer(temp_heart);
+		ret->collider = App->collision->AddCollider(temp_heart.rect, COLLIDER_TYPE::collider_container_heart, (Entity*)ret, this);
+
+		V_Objects.push_back(ret);
+	}
+
+
+	
+	return ret;
+}
+
 Object * j1Object::CreateWarp(pugi::xml_node object, int height)
 {
 	//we should change this
@@ -579,6 +628,16 @@ Object * j1Object::CreateFall(pugi::xml_node object, int height)
 	temp_fall.type = objectType::object_fall;
 	temp_fall.active = true;
 	
+	pugi::xml_node attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "x") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	temp_fall.fallpos.x = attribute.attribute("value").as_int();
+	attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "y") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	temp_fall.fallpos.y = attribute.attribute("value").as_int();
 
 	Object* ret = new Fall(temp_fall);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_fall, (Entity*)ret, this);
@@ -644,6 +703,21 @@ void j1Object::StartCollision(Collider * collider1, Collider * collider2)
 	if (collider1->type == COLLIDER_TYPE::collider_heart) {
 		Heart* temp = (Heart*)collider1->parent;
 		temp->Pick(App->player->Link);
+
+	}
+	if (collider1->type == COLLIDER_TYPE::collider_container_heart) {
+		HeartContainer* temp = (HeartContainer*)collider1->parent;
+		temp->Pick(App->player->Link);
+	
+		if (temp->heart_id == 1) {
+			App->scene->heart_1 = false;
+		}
+		if (temp->heart_id == 2) {
+			App->scene->heart_2 = false;
+		}
+		if (temp->heart_id == 3) {
+			App->scene->heart_3 = false;
+		}
 
 	}
 	

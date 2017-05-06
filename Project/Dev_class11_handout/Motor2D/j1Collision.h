@@ -37,6 +37,7 @@ enum COLLIDER_TYPE
 	collider_fall,	
 	coolider_bomb_explosion,
 	collider_heart,
+	collider_container_heart,
 	collider_movable_object,
 };
 
