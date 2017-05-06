@@ -33,6 +33,7 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 	zelda_tex_str = empty_char;
 	messenger_tex_str = empty_char;
 	ric_tex_str = empty_char;
+	ogity_tex_str = empty_char;
 	
 	return ret;
 }
@@ -84,12 +85,14 @@ bool j1DialogueManager::Start()
 		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("messenger"), DialogueInterlucutor::Messenger, nullptr));
 		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("ric"), DialogueInterlucutor::Ric, nullptr));
 		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("guard"), DialogueInterlucutor::Guard, nullptr));
+		DialogueInterlucutorStrRelationVec.push_back(new DialogueInterlucutorStrAndAtalsRelation(&std::string("ogity"), DialogueInterlucutor::Ogity, nullptr));
 
 		king_tex = App->tex->Load(king_tex_str.c_str());
-		link_tex = App->tex->Load(king_tex_str.c_str());
-		zelda_tex = App->tex->Load(king_tex_str.c_str());
-		messenger_tex = App->tex->Load(king_tex_str.c_str());
-		ric_tex = App->tex->Load(king_tex_str.c_str());
+		link_tex = App->tex->Load(link_tex_str.c_str());
+		zelda_tex = App->tex->Load(zelda_tex_str.c_str());
+		messenger_tex = App->tex->Load(messenger_tex_str.c_str());
+		ric_tex = App->tex->Load(ric_tex_str.c_str());
+		ogity_tex = App->tex->Load(ogity_tex_str.c_str());;
 
 		for (std::vector<DialogueInterlucutorStrAndAtalsRelation*>::iterator item = DialogueInterlucutorStrRelationVec.begin(); item != DialogueInterlucutorStrRelationVec.cend(); ++item)
 		{
@@ -103,6 +106,8 @@ bool j1DialogueManager::Start()
 				(*item)->DialogueInterlucutorAtlas = messenger_tex;
 			if ((*item)->DialogueInterlucutorEnum == DialogueInterlucutor::Ric)
 				(*item)->DialogueInterlucutorAtlas = ric_tex;
+			if ((*item)->DialogueInterlucutorEnum == DialogueInterlucutor::Ogity)
+				(*item)->DialogueInterlucutorAtlas = ogity_tex;
 		}
 
 		//Allocate dialogues from XML
