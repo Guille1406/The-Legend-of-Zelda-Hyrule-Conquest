@@ -78,6 +78,7 @@ static const std::string right_str = "right";
 static const SDL_Rect rect_button = { 0,0,32,32 };
 static const SDL_Rect rect_pressed_button = { 192,64,32,32 };
 static const SDL_Rect rect_movable_block = { 96,0,32,32 };
+static const SDL_Rect rect_block = { 64,0,32,32 };
 static const SDL_Rect rect_Heart = { 128,0,32,32 };
 static const SDL_Rect rect_jar = { 160,0,32,32 };
 static const SDL_Rect rect_key = { 192,0,16,32 };

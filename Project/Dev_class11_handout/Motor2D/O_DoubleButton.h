@@ -3,6 +3,7 @@
 #include "j1Object.h"
 #include"j1Render.h"
 #include "j1Audio.h"
+#include "j1Scene.h"
 class DoubleButton : public Object {
 private:
 	bool triggered = false;
@@ -18,6 +19,7 @@ public:
 		logic_height = obj.logic_height;
 		texture_rect = rect_double_button_idle;
 		sound = false;
+		cutscene = obj.cutscene;
 	}
 	~DoubleButton() {
 
@@ -36,6 +38,11 @@ public:
 				connected_object[i]->Action();
 				if (connected_object[i]->type == objectType::object_music)
 					return;
+			}
+			if (cutscene == 1) {
+				//App->cutscenemanager->StartCutscene(cutscene_intro);
+				App->scene->blocks_out = true;
+				
 			}
 			if (!sound) {
 				App->audio->PlayFx(App->audio->secret_sound);
@@ -57,6 +64,7 @@ public:
 	SDL_Rect pressed_button = rect_pressed_button;
 	SDL_Rect double_pressed_button = rect_pressed_button;
 	bool sound = false;
+	int cutscene = 0;
 
 };
 

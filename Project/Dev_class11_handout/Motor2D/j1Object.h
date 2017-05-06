@@ -94,6 +94,7 @@ public:
 
 	std::vector<Object*> FindObject(std::string name);
 	void CreateColliders(Object&);
+	void DeleteCollider(Object& object);
 
 	Object* CreateObject(char*, pugi::xml_node, int height);
 	Object* CreateChest(pugi::xml_node, int height);

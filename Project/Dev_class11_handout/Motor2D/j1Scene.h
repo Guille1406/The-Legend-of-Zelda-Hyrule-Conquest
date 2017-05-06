@@ -84,6 +84,9 @@ private:
 
 	Scene_ID new_sub_scene_to_load = Scene_ID::campaign;
 	bool sub_scene_to_load = false;
+
+public:
+	bool blocks_out = false;
 };
 
 #endif // __j1SCENE_H__

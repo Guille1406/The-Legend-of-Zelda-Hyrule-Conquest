@@ -15,6 +15,8 @@ public:
 		name = obj.name;
 		logic_height = obj.logic_height;
 		collider_tiles = obj.collider_tiles;
+		collider_tiles = obj.collider_tiles;
+		texture_rect = rect_block;
 	}
 	~Block() {
 

@@ -143,15 +143,23 @@ void j1Object::CreateColliders(Object& object)
 			//object.collider_tiles.push_back(temp);
 			//if(App->map->V_Colision[0][object.logic_height].data[temp.y*App->map->data.width + temp.x] != App->map->CANT_PASS_COL_ID)	{
 			if (App->map->V_Colision[object.logic_height]->data != nullptr)
-				if (App->map->V_Colision[object.logic_height]->data[(temp.y / 16) *  App->map->data.height + temp.x / 16] != App->map->CANT_PASS_COL_ID)
+				if (App->map->V_Colision[object.logic_height]->data[(temp.y / 16) *  App->map->data.width + temp.x / 16] != App->map->CANT_PASS_COL_ID)
 				{
-					App->map->V_Colision[object.logic_height]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = App->map->CANT_PASS_COL_ID;
+					App->map->V_Colision[object.logic_height]->data[(temp.y / 16) * App->map->data.width + temp.x / 16] = App->map->CANT_PASS_COL_ID;
 					//object.collider_tiles.push_back(temp);
 					temp_vector.push_back(temp);
 				}
 		}
 	}
 	object.collider_tiles = temp_vector;
+}
+
+void j1Object::DeleteCollider(Object & object)
+{
+	for (int i = 0; i < object.collider_tiles.size(); i++) {
+		App->map->V_Colision[object.logic_height]->data[(object.collider_tiles[i].y / 16) * App->map->data.width + object.collider_tiles[i].x / 16] = NOT_COLISION_ID;
+	}
+	object.collider_tiles.clear();
 }
 
 Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int height)
@@ -265,6 +273,12 @@ Object * j1Object::CreateDoubleButton(pugi::xml_node object, int height)
 	temp_button.rect = { x,y,w,h };
 	temp_button.type = objectType::double_button;
 	temp_button.active = true;
+
+	pugi::xml_node attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "cutscene") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	temp_button.cutscene = attribute.attribute("value").as_int();
 
 	Object* ret = new DoubleButton(temp_button);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_double_button, (Entity*)ret, this);
@@ -429,9 +443,9 @@ Object * j1Object::CreateMovableObject(pugi::xml_node object, int height)
 			iPoint temp;
 			temp.x = temp_block.rect.x + i * 16;
 			temp.y = temp_block.rect.y + n * 16;
-			//if(App->map->V_Colision[0][temp_door.logic_height].data[temp.y*App->map->data.width + temp.x] != App->map->CANT_PASS_COL_ID)
+			//if(App->map->V_Colision[temp_block.logic_height]->data[temp.y*App->map->data.width + temp.x] != App->map->CANT_PASS_COL_ID)
 			temp_block.collider_tiles.push_back(temp);
-			//App->map->V_Colision[0][temp_door.logic_height].data[temp.y*App->map->data.width + temp.x] = App->map->TILE_COL_ID;
+			//App->map->V_Colision[temp_block.logic_height]->data[temp.y*App->map->data.width + temp.x] = App->map->CANT_PASS_COL_ID;
 		}
 	}
 
@@ -461,9 +475,9 @@ Object * j1Object::CreateBlock(pugi::xml_node object, int height)
 			iPoint temp;
 			temp.x = temp_block.rect.x + i * 16;
 			temp.y = temp_block.rect.y + n * 16;
-			//if(App->map->V_Colision[0][temp_door.logic_height].data[temp.y*App->map->data.width + temp.x] != App->map->CANT_PASS_COL_ID)
-			temp_block.collider_tiles.push_back(temp);
-			//App->map->V_Colision[0][temp_door.logic_height].data[temp.y*App->map->data.width + temp.x] = App->map->TILE_COL_ID;
+			//if (App->map->V_Colision[temp_block.logic_height]->data[temp.y*App->map->data.width + temp.x] != App->map->CANT_PASS_COL_ID)
+				temp_block.collider_tiles.push_back(temp);
+			//App->map->V_Colision[temp_block.logic_height]->data[temp.y*App->map->data.width + temp.x] = App->map->CANT_PASS_COL_ID;
 		}
 	}
 	Object* ret = new Block(temp_block);

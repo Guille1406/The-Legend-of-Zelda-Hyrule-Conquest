@@ -15,6 +15,7 @@ public:
 		name = obj.name;
 		logic_height = obj.logic_height;
 		collider_tiles = obj.collider_tiles;
+		texture_rect = rect_movable_block;
 	}
 	~Movable_Block() {
 
@@ -24,23 +25,28 @@ public:
 		
 		iPoint tile_pos = { rect.x / 16,rect.y / 16 };
 		switch (pulling_character->character_direction) {
+
 		case direction::up:
-			if (App->object->GetLogic(logic_height, { rect.x/16 ,(rect.y-1)/16 -2 }, true) == 0) {
+			if (App->object->GetLogic(logic_height, { rect.x / 16 ,(rect.y - 1) / 16 - 2 }, true) == 0
+				&& App->object->GetLogic(logic_height, { rect.x / 16 ,(rect.y) / 16 -1}, true) == 0) {
 				rect.y--;
 			}
 			break;
 		case direction::down:
-			if (App->object->GetLogic(logic_height, { rect.x / 16 ,rect.y / 16 +4 }, true) == 0) {
+			if (App->object->GetLogic(logic_height, { rect.x / 16 ,rect.y / 16 + 4 }, true) == 0
+				&& App->object->GetLogic(logic_height, { rect.x / 16 ,(rect.y) / 16 + 2 }, true) == 0) {
 				rect.y++;
 			}
 			break;
 		case direction::left:
-			if (App->object->GetLogic(logic_height, { (rect.x-1 )/ 16 -2 ,rect.y / 16 }, false) ==0) {
+			if (App->object->GetLogic(logic_height, { (rect.x - 1) / 16 - 2 ,rect.y / 16 }, false) == 0
+				&& App->object->GetLogic(logic_height, { rect.x / 16 - 1 ,rect.y / 16 }, false) == 0) {
 				rect.x--;
 			}
 			break;
 		case direction::right:
-			if (App->object->GetLogic(logic_height, { rect.x / 16 + 4,rect.y / 16 }, false) == 0) {
+			if (App->object->GetLogic(logic_height, { rect.x / 16 + 4,rect.y / 16 }, false) == 0
+				&& App->object->GetLogic(logic_height, { rect.x / 16 + 2 ,rect.y / 16 }, false) == 0) {
 				rect.x++;
 			}
 			break;
