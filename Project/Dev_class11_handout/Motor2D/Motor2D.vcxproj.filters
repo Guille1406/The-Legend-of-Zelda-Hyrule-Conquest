@@ -585,6 +585,9 @@
     <ClInclude Include="S_Credits.h">
       <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Credits</Filter>
     </ClInclude>
+    <ClInclude Include="O_Bush.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Desenvolupament  ========">

@@ -21,6 +21,7 @@
 #include "O_Music.h"
 #include "O_Bridge.h"
 #include "O_HeartContainer.h"
+#include "O_Bush.h"
 
 bool j1Object::Start()
 {
@@ -45,6 +46,10 @@ bool j1Object::Update(float)
 			if (temp_door->is_opening && temp_door->active) {
 				temp_door->Open();
 			}
+		}
+		if (V_Objects[i]->type == objectType::bush) {
+			Bush* temp_bush = (Bush*)V_Objects[i];
+			temp_bush->texture_rect = temp_bush->object_animation.GetCurrentFrame().rect;
 		}
 	}
 
@@ -207,6 +212,8 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int heigh
 		ret = CreateHeartContainer(object, height);
 	else if (!strcmp(type_name, "bridge"))
 		ret = CreateBridge(object, height);
+	else if (!strcmp(type_name, "bush"))
+		ret = CreateBush(object, height);
 	return ret;
 }
 
@@ -644,6 +651,46 @@ Object * j1Object::CreateHeartContainer(pugi::xml_node object, int height)
 	return ret;
 }
 
+Object * j1Object::CreateBush(pugi::xml_node object, int height)
+{
+	Bush temp_bush;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+
+	temp_bush.logic_height = height;
+	temp_bush.name = object.attribute("name").as_string();
+	temp_bush.rect = { x,y,w,h };
+	temp_bush.type = objectType::bush;
+	temp_bush.active = false;
+	for (int i = 0; i < temp_bush.rect.w / 16; i++) {
+		for (int n = 0; n < temp_bush.rect.h / 16; n++) {
+			iPoint temp;
+			temp.x = temp_bush.rect.x + i * 16;
+			temp.y = temp_bush.rect.y + n * 16;
+			
+			temp_bush.collider_tiles.push_back(temp);
+			
+		}
+	}
+	SDL_Rect bush_rect = rect_door_up;
+	Frame bush_frame;
+	iPoint pivot = { 0,0 };
+	for (int i = 0; i <4; i++) {
+		bush_rect = { rect_bush.x + i *32,rect_bush.y, 32,32 };
+		bush_frame.rect = bush_rect;
+		temp_bush.object_animation.PushBack(bush_frame);
+
+	}
+
+	Object* ret = new Bush(temp_bush);
+	ret->collider = App->collision->AddCollider(temp_bush.rect, COLLIDER_TYPE::collider_bush, (Entity*)ret, this);
+
+	V_Objects.push_back(ret);
+	return ret;
+}
+
 Object * j1Object::CreateWarp(pugi::xml_node object, int height)
 {
 	//we should change this
@@ -800,7 +847,14 @@ void j1Object::StartCollision(Collider * collider1, Collider * collider2)
 		character->ChangeLogicHeightPlayer(temp->height);
 
 	}
-	
+	else if (collider1->type == collider_bush) {
+		Object* temp = (Object*)collider1->parent;
+		App->object->DeleteCollider(*temp);
+		temp->active = false;
+		temp->collider->to_delete = true;
+
+	}
+
 	
 	
 }

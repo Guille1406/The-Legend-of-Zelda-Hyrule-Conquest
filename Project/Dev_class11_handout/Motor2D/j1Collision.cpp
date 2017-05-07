@@ -66,6 +66,7 @@ j1Collision::j1Collision()
 	matrix[collider_link_sword][collider_enemy] = true;
 	matrix[collider_link_sword][collider_enemy_sword] = true;
 	matrix[collider_link_sword][collider_boss_foot] = true;
+	matrix[collider_link_sword][collider_bush] = true;
 	matrix[collider_enemy_sword][collider_link_sword] = true;
 
 	matrix[collider_enemy_sword][collider_zelda] = true;
@@ -116,6 +117,8 @@ j1Collision::j1Collision()
 	matrix[collider_colour_block][collider_link] = true;
 	matrix[collider_colour_block][collider_zelda] = true;
 
+	//BUSH
+	matrix[collider_bush][collider_link_sword] = true;
 	//HEART
 	matrix[collider_heart][collider_link] = true;
 	matrix[collider_heart][collider_zelda] = true;
