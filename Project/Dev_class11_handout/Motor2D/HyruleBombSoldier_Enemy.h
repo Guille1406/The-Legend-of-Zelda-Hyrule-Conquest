@@ -10,7 +10,7 @@ struct Enemy_Bomb : public Entity {
 	SDL_Rect texture_bomb_rect = {0,0,0,0};
 	j1Timer Explosion_delay;
 	bool bomb_explosion = true;
-
+	Animation Explosion_animation;
 };
 
 class HyruleBombSoldier_Enemy : public Enemy {

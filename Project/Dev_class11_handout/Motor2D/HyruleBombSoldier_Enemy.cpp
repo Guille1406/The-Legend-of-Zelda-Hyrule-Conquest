@@ -1,11 +1,22 @@
 #include "HyruleBombSoldier_Enemy.h"
 #include"j1Enemy.h"
 #include"j1Player.h"
+
 #include"Color.h"
+#include"Animation.h"
 HyruleBombSoldier_Enemy::HyruleBombSoldier_Enemy() :Enemy(enemyType::hyrulebombsoldier_enemy)
 {
 	bomb = new Enemy_Bomb();
-	
+	Frame bomb_frame;
+	bomb_frame.pivot = { 0,0 };
+	bomb_frame.rect = rect_bomb;
+	bomb->Explosion_animation.PushBack(bomb_frame);
+	for (int i = 0; i < 11; i++) {
+		bomb_frame.rect = { explosion1.x+94*i,explosion1.y,explosion1.w, explosion1.h };
+		bomb->Explosion_animation.PushBack(bomb_frame);
+	}
+	bomb->Explosion_animation.speed = 0;
+
 	this->sprites_vector = App->enemy->enemy_hyrulebomb_perf->sprites_vector;
 	this->entity_texture = App->enemy->enemy_hyrulebomb_perf->entity_texture;
 	this->ChangeAnimation(1);
@@ -16,6 +27,15 @@ HyruleBombSoldier_Enemy::HyruleBombSoldier_Enemy() :Enemy(enemyType::hyrulebombs
 HyruleBombSoldier_Enemy::HyruleBombSoldier_Enemy(const HyruleBombSoldier_Enemy& chs_enemy) :Enemy(enemyType::hyrulebombsoldier_enemy)
 {
 	bomb = new Enemy_Bomb();
+	Frame bomb_frame;
+	bomb_frame.pivot = { 0,0 };
+	bomb_frame.rect = rect_bomb;
+	bomb->Explosion_animation.PushBack(bomb_frame);
+	for (int i = 1; i < 12; i++) {
+		bomb_frame.rect = { explosion1.x*i,explosion1.y,explosion1.w, explosion1.h };
+		bomb->Explosion_animation.PushBack(bomb_frame);
+	}
+	bomb->Explosion_animation.speed = 0;
 	
 	this->collider = chs_enemy.collider;
 	this->logic_height = chs_enemy.logic_height;
@@ -86,12 +106,20 @@ void HyruleBombSoldier_Enemy::Action()
 				}
 			}
 		}
+		if (t >=1) {
+			bomb->Explosion_animation.speed = 0.0f;
+		}
+		if (bomb->Explosion_animation.Finished() == false) {
+			bomb->texture_bomb_rect = bomb->Explosion_animation.GetCurrentFrame().rect;
+			App->render->Blit(App->object->objects_texture, p.x, p.y, &bomb->texture_bomb_rect);
+		}
+		else {
+			bomb->Explosion_animation.Reset();
+			bomb->Explosion_animation.speed = 0.0f;
+		}
 	
 
 	}
-	if (t < 1) {
-		App->render->DrawQuad(p, Black(0), Black(1), Black(2), 255, true);
-	}
-
+	
 }
 
