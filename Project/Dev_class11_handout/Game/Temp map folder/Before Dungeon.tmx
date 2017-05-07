@@ -527,14 +527,15 @@
   </properties>
   <object id="2" x="848" y="1248" width="112" height="32">
    <properties>
-    <property name="scene" type="int" value="0"/>
+    <property name="scene" type="int" value="18"/>
     <property name="type" value="warp"/>
-    <property name="x" type="int" value="0"/>
-    <property name="y" type="int" value="0"/>
+    <property name="x" type="int" value="5"/>
+    <property name="y" type="int" value="173"/>
    </properties>
   </object>
   <object id="3" x="896" y="176" width="64" height="32">
    <properties>
+    <property name="height" type="int" value="1"/>
     <property name="scene" type="int" value="20"/>
     <property name="type" value="warp"/>
     <property name="x" type="int" value="108"/>
