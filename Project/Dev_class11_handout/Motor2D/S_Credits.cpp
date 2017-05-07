@@ -25,49 +25,42 @@ bool S_Credits::Awake(pugi::xml_node& conf)
 	MasterVolume->SetVisible(false);
 	MasterVolume->Focusable(true);
 	*/
-	CreditsLabel1 = App->gui->CreateButton(iPoint(40, 40), &std::string("Label 1"), ButtonType::idle_only, &label_title_rec, false);
+	int X_pos = App->win->GetWindowWHalf() - (int)(label_title_rec.w * 0.5f);
+
+	CreditsLabel1 = App->gui->CreateButton(iPoint(X_pos, 31), &std::string("Lead - "), ButtonType::idle_only, &label_title_rec, false);
 	CreditsLabel1->SetFont(App->font->Triforce48);
 	((Gui*)CreditsLabel1)->SetListener(this);
 	CreditsLabel1->SetVisible(false);
 
-	CreditsLabel2 = App->gui->CreateButton(iPoint(40, 40), &std::string("Label 2"), ButtonType::idle_only, &label_title_rec, false);
+	CreditsLabel2 = App->gui->CreateButton(iPoint(X_pos, 125), &std::string("Management - "), ButtonType::idle_only, &label_title_rec, false);
 	CreditsLabel2->SetFont(App->font->Triforce48);
 	((Gui*)CreditsLabel2)->SetListener(this);
 	CreditsLabel2->SetVisible(false);
 
-	CreditsLabel3 = App->gui->CreateButton(iPoint(40, 40), &std::string("Label 3"), ButtonType::idle_only, &label_title_rec, false);
+	CreditsLabel3 = App->gui->CreateButton(iPoint(X_pos, 219), &std::string("Art - "), ButtonType::idle_only, &label_title_rec, false);
 	CreditsLabel3->SetFont(App->font->Triforce48);
 	((Gui*)CreditsLabel3)->SetListener(this);
 	CreditsLabel3->SetVisible(false);
 
-	CreditsLabel4 = App->gui->CreateButton(iPoint(40, 40), &std::string("Label 4"), ButtonType::idle_only, &label_title_rec, false);
+	CreditsLabel4 = App->gui->CreateButton(iPoint(X_pos, 313), &std::string("Code - "), ButtonType::idle_only, &label_title_rec, false);
 	CreditsLabel4->SetFont(App->font->Triforce48);
 	((Gui*)CreditsLabel4)->SetListener(this);
 	CreditsLabel4->SetVisible(false);
 
-	CreditsLabel5 = App->gui->CreateButton(iPoint(40, 40), &std::string("Label 5"), ButtonType::idle_only, &label_title_rec, false);
+	CreditsLabel5 = App->gui->CreateButton(iPoint(X_pos, 407), &std::string("UI - "), ButtonType::idle_only, &label_title_rec, false);
 	CreditsLabel5->SetFont(App->font->Triforce48);
 	((Gui*)CreditsLabel5)->SetListener(this);
 	CreditsLabel5->SetVisible(false);
 
-	CreditsLabel6 = App->gui->CreateButton(iPoint(40, 40), &std::string("Label 6"), ButtonType::idle_only, &label_title_rec, false);
+	CreditsLabel6 = App->gui->CreateButton(iPoint(X_pos, 501), &std::string("QA - "), ButtonType::idle_only, &label_title_rec, false);
 	CreditsLabel6->SetFont(App->font->Triforce48);
 	((Gui*)CreditsLabel6)->SetListener(this);
 	CreditsLabel6->SetVisible(false);
 
-	CreditsLabel7 = App->gui->CreateButton(iPoint(40, 40), &std::string("Label 7"), ButtonType::idle_only, &label_title_rec, false);
+	CreditsLabel7 = App->gui->CreateButton(iPoint(X_pos, 595), &std::string("Game Design - "), ButtonType::idle_only, &label_title_rec, false);
 	CreditsLabel7->SetFont(App->font->Triforce48);
 	((Gui*)CreditsLabel7)->SetListener(this);
 	CreditsLabel7->SetVisible(false);
-
-	GuiButton* CreditsLabel1 = nullptr;
-	GuiButton* CreditsLabel2 = nullptr;
-	GuiButton* CreditsLabel3 = nullptr;
-	GuiButton* CreditsLabel4 = nullptr;
-	GuiButton* CreditsLabel5 = nullptr;
-	GuiButton* CreditsLabel6 = nullptr;
-	GuiButton* CreditsLabel7 = nullptr;
-
 
 	back = App->gui->CreateButton(iPoint(920, 600), &std::string(conf.child("back").attribute("value").as_string("Back")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	back->SetFont(App->font->Sherwood20);
