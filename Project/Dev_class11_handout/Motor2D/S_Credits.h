@@ -28,6 +28,7 @@ public:
 	GuiButton* CreditsLabel6 = nullptr;
 	GuiButton* CreditsLabel7 = nullptr;
 	GuiButton* back = nullptr;
+	uint CreditsLogo_Y_Pos = 0;
 };
 
 #endif // #pragma once

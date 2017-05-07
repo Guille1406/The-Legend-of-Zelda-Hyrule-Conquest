@@ -13,7 +13,10 @@ S_Credits::~S_Credits()
 
 bool S_Credits::Awake(pugi::xml_node& conf)
 {
-	int X_pos = App->win->GetWindowWHalf() - (int)(label_title_rec.w * 0.5f);
+	CreditsLogo_Rect = { 0,0,550,360 };
+	CreditsLogo_Y_Pos = App->win->GetWindowHHalf() - (int)(CreditsLogo_Rect.h * 0.5f) - 50;
+
+	int X_pos = 31;
 
 	CreditsLabel1 = App->gui->CreateButton(iPoint(X_pos, 31), &std::string("Lead - "), ButtonType::idle_only, &label_title_rec, false);
 	CreditsLabel1->SetFont(App->font->Triforce48);
@@ -56,8 +59,6 @@ bool S_Credits::Awake(pugi::xml_node& conf)
 	back->SetVisible(false);
 	back->Focusable(true);
 
-	CreditsLogo_Rect = { 0,0,550,360 };
-	
 	buttons.push_back(back);
 
 	return true;
@@ -65,7 +66,7 @@ bool S_Credits::Awake(pugi::xml_node& conf)
 
 bool S_Credits::Start()
 {
-	CreditsLogo = App->gui->CreateImage(iPoint(0, 0), &CreditsLogo_Rect, false);
+	CreditsLogo = App->gui->CreateImage(iPoint( 675, CreditsLogo_Y_Pos), &CreditsLogo_Rect, false, AddGuiTo::none);
 
 	CreditsLabel1->SetVisible(true);
 	CreditsLabel2->SetVisible(true);
