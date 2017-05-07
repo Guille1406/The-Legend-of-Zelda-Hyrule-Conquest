@@ -247,6 +247,9 @@
     <ClCompile Include="S_BeforeDungeon.cpp">
       <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
     </ClCompile>
+    <ClCompile Include="S_Credits.cpp">
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Credits</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -579,6 +582,9 @@
     <ClInclude Include="O_HeartContainer.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="S_Credits.h">
+      <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Credits</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Desenvolupament  ========">
@@ -652,6 +658,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Particles">
       <UniqueIdentifier>{ec65069d-70a3-402b-b30c-a99d1da87ae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\GUI\Main Menu\Credits">
+      <UniqueIdentifier>{691592b1-3ae4-4963-9a66-803bf5ec3214}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
