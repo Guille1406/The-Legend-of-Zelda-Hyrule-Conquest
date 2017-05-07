@@ -7,6 +7,7 @@
 #include "j1HUD.h"
 #include "j1Fonts.h"
 #include "j1Textures.h"
+#include "j1GameStartMenuBack.h"
 
 #include "GuiImage.h"
 #include "GuiLabel.h"
@@ -199,7 +200,7 @@ bool j1DialogueManager::Update(float dt)
 		ResumeActiveDialogue();
 	//Test code end
 
-	if (!ActiveDialog->DialogueActive || ActiveDialog->DialoguePaused)
+	if (!ActiveDialog->DialogueActive || ActiveDialog->DialoguePaused || App->startmenuback->InGameMenuVisible())
 		return true;
 
 	//Blit Dark background
