@@ -157,10 +157,8 @@ bool j1App::Awake()
 	particlemanager->active = false;
 
 	if(ret == true)
-	{
 		for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.cend() && ret == true; ++item)
 			ret = (*item)->Awake(config.child((*item)->name.c_str()));
-	}
 
 	PERF_PEEK(ptimer);
 
@@ -216,7 +214,7 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 	char* buf = nullptr;
 	int size = App->fs->Load("config.xml", &buf);
 	pugi::xml_parse_result result = config_file.load_buffer(buf, size);
-	RELEASE(buf);
+	delete[] buf;
 
 	if(result == NULL)
 		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
