@@ -69,6 +69,10 @@ public:
 	{
 		return &scene_list;
 	}
+	SDL_Texture* GetCredits_Logo_Atlas()
+	{
+		return credits_logo_atlas;
+	}
 
 private:
 	bool ShowNewScene(Scene_ID);
@@ -85,7 +89,7 @@ private:
 	Scene_ID new_sub_scene_to_load = Scene_ID::campaign;
 	bool sub_scene_to_load = false;
 
-	
+	SDL_Texture*	credits_logo_atlas = nullptr;
 
 public:
 	bool blocks_out = false;

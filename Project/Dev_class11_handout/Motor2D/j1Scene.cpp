@@ -183,6 +183,9 @@ bool j1Scene::Start()
 			}
 		}
 	}
+
+	credits_logo_atlas = App->tex->Load("gui/credits_logo.png");
+
 	return ret;
 }
 
@@ -237,6 +240,8 @@ bool j1Scene::CleanUp()
 		(*item)->buttons.clear();
 		delete *item;
 	}
+
+	App->tex->UnLoad(credits_logo_atlas);
 		
 	return true;
 }
