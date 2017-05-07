@@ -18,7 +18,27 @@
 
 bool j1Enemy::Awake(pugi::xml_node &)
 {
-
+	Frame smoke_frame;
+	smoke_frame.pivot = { 0,0 };
+	smoke_frame.rect = { 187,501,94,81 };
+	Enemies_Appear.PushBack(smoke_frame);
+	smoke_frame.rect = { 282,501,94,81 };
+	Enemies_Appear.PushBack(smoke_frame);
+	smoke_frame.rect = { 375,501,94,81 };
+	Enemies_Appear.PushBack(smoke_frame);
+	smoke_frame.rect = { 470,501,94,81 };
+	Enemies_Appear.PushBack(smoke_frame);
+	smoke_frame.rect = { 563,501,94,81 };
+	Enemies_Appear.PushBack(smoke_frame);
+	smoke_frame.rect = { 658,501,94,81 };
+	Enemies_Appear.PushBack(smoke_frame);
+	smoke_frame.rect = { 751,501,94,81 };
+	Enemies_Appear.PushBack(smoke_frame);
+	smoke_frame.rect = { 845,501,94,81 };
+	Enemies_Appear.PushBack(smoke_frame);
+	smoke_frame.rect = { 940,501,94,81 };
+	Enemies_Appear.PushBack(smoke_frame);
+	Enemies_Appear.speed = 0.0f;
 	
 	return true;
 }
@@ -56,8 +76,6 @@ bool j1Enemy::Start()
 	}
 
 
-	
-
 	return true;
 }
 
@@ -82,6 +100,8 @@ bool j1Enemy::PreUpdate()
 			}
 		}
 		if (appear_enemies && one_time_appear < 1) {
+			//smoke animation
+			
 			Create_Enemy(enemyType::green_enemy, iPoint(75, 41),0);
 			Create_Enemy(enemyType::green_enemy, iPoint(63, 56),0);
 			one_time_appear++;
@@ -122,10 +142,11 @@ bool j1Enemy::CleanUp()
 		App->tex->UnLoad(V_MyEnemies[i]->entity_texture);
 	}
 	for (std::vector<Animation*>::iterator item = Green_Enemy_Animation.begin(); item != Green_Enemy_Animation.cend(); ++item)
-		delete *item;
+		RELEASE(*item);
 	Green_Enemy_Animation.clear();
 	for (std::vector<Enemy*>::iterator item = V_MyEnemies.begin(); item != V_MyEnemies.cend(); ++item)
-		delete *item;
+		RELEASE(*item);
+
 	V_MyEnemies.clear();
 	appear_enemies = false;
 	one_time_appear = 0;
@@ -295,10 +316,11 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		temp->max_bomb_point.x = temp->pos.x;
 		temp->max_bomb_point.y = temp->pos.y-50;
 		rect = { ret->pos.x, ret->pos.y + 32,30,35};
+		temp->logic_height = height;
 		temp->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 
 		//how to know if a enemy is in level one or two
-		temp->logic_height = height;
+
 		ret = temp;
 		break;
 
@@ -736,7 +758,7 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 
 		break;
 	case enemyType::hyrulebombsoldier_enemy:
-		if (collider->type == COLLIDER_TYPE::collider_arrow && collider->logic_height==this->logic_height) {
+		if (collider->type == COLLIDER_TYPE::collider_arrow) {
 			if (live > 0) {
 				live--;
 			}

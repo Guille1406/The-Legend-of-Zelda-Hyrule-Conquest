@@ -131,6 +131,8 @@ public:
 	Enemy* enemy_rat_perf = nullptr;
 	Enemy* enemy_bat_perf = nullptr;
 
+	Animation Enemies_Appear;
+
 	std::vector<Enemy*> V_MyEnemies;
 	SDL_Texture* green_soldier_tex=nullptr;
 	bool appear_enemies = false;

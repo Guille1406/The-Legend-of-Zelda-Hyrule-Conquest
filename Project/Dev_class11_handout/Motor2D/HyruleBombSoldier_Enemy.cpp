@@ -32,8 +32,9 @@ HyruleBombSoldier_Enemy::HyruleBombSoldier_Enemy(const HyruleBombSoldier_Enemy& 
 	bomb_frame.pivot = { 0,0 };
 	bomb_frame.rect = rect_bomb;
 	bomb->Explosion_animation.PushBack(bomb_frame);
-	for (int i = 1; i < 12; i++) {
-		bomb_frame.rect = { explosion1.x*i,explosion1.y,explosion1.w, explosion1.h };
+	bomb_frame.pivot = { 40,40 };
+	for (int i = 0; i < 11; i++) {
+		bomb_frame.rect = { explosion1.x + 94 * i,explosion1.y,explosion1.w, explosion1.h };
 		bomb->Explosion_animation.PushBack(bomb_frame);
 	}
 	bomb->Explosion_animation.speed = 0;
@@ -98,7 +99,7 @@ void HyruleBombSoldier_Enemy::Action()
 			}
 			else {
 				if (bomb->bomb_explosion ==false) {
-					bomb->rang_bomb = { bomb_point.x-25 ,bomb_point.y-25, 50,50 };
+					bomb->rang_bomb = { bomb_point.x-12 ,bomb_point.y-12, 50,50 };
 					bomb->bomb_collider_explosion = App->collision->AddCollider(bomb->rang_bomb, COLLIDER_TYPE::coolider_bomb_explosion, bomb, App->player);
 					bomb->bomb_collider_explosion->logic_height = 0;
 					bomb->Explosion_delay.Start();
