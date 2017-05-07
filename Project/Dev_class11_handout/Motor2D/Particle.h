@@ -4,6 +4,7 @@
 
 #include "ParticleManager.h"
 #include "P_Zelda.h"
+#include "j1GameStartMenuBack.h"
 
 #define TIME_WIND 160
 

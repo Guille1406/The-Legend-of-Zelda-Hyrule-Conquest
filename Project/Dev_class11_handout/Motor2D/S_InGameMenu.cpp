@@ -73,8 +73,6 @@ bool S_InGameMenu::Start()
 
 	App->gui->SetFocus(buttons.front());
 
-	App->particlemanager->Disable();
-
 	active = true;
 
 	return true;
