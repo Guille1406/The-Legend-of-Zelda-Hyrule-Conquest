@@ -104,6 +104,9 @@ bool j1Player::Update(float dt)
 	
 	
 	if (!paused) {
+		Link->can_fall = true;
+		Zelda->can_fall = true;
+
 		//Change the tile_pos
 		Link->tilepos.x = (Link->pos.x + 8) / 16;
 		Link->tilepos.y = (Link->pos.y + 8) / 16;
@@ -589,14 +592,14 @@ void j1Player::EndCollision(Collider * collider1, Collider * collider2)
 		temp->EndAction();
 		//temp->texture_rect = temp->pressed_button;
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_colour_block) {
+	/*else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_colour_block) {
 
 			App->player->Link->can_fall = true;
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_colour_block) {
 		
 			App->player->Zelda->can_fall = true;
-	}
+	}*/
 }
 
 void j1Player::StartCollision(Collider * collider1, Collider * collider2)
