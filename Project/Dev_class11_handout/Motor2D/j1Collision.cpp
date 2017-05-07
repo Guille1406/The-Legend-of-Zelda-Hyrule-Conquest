@@ -229,7 +229,6 @@ bool j1Collision::Update(float dt)
 					}
 
 
-
 					if (matrix[c2->type][c1->type] && c2->callback)
 					{
 						if (c1->logic_height == c2->logic_height) {
@@ -242,12 +241,16 @@ bool j1Collision::Update(float dt)
 							
 					}
 
+
 				}
-				if (matrix[c1->type][c2->type] && c1->callback)
-				{
-					if (c1->parent->logic_height == c2->parent->logic_height) {
-						if (c1->state_collider[k] == end_collision)
-							c1->callback->EndCollision(c1, c2);
+
+				if (colliders.size() > 0) {
+					if (matrix[c1->type][c2->type] && c1->callback)
+					{
+						if (c1->parent->logic_height == c2->parent->logic_height) {
+							if (c1->state_collider[k] == end_collision)
+								c1->callback->EndCollision(c1, c2);
+						}
 					}
 				}
 			}

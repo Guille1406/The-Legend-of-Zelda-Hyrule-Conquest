@@ -35,11 +35,19 @@ bool j1Object::PreUpdate()
 
 bool j1Object::Update(float)
 {
-	for (int i = 0; i < V_Objects.size(); i++)
-		if (V_Objects[i]->type == double_button) {
+	for (int i = 0; i < V_Objects.size(); i++) {
+		if (V_Objects[i]->type == objectType::double_button) {
 			DoubleButton* temp_button = (DoubleButton*)V_Objects[i];
 			temp_button->characters_on = 0;
 		}
+		if (V_Objects[i]->type == objectType::door) {
+			Door* temp_door = (Door*)V_Objects[i];
+			if (temp_door->is_opening && temp_door->active) {
+				temp_door->Open();
+			}
+		}
+	}
+
 
 	//Blit all the objects
 
@@ -379,27 +387,64 @@ Object * j1Object::CreateDoor(pugi::xml_node object, int height)
 			//App->map->V_Colision[0][temp_door.logic_height].data[temp.y*App->map->data.width + temp.x] = App->map->TILE_COL_ID;
 		}
 	}
+	iPoint pivot = { 0,0 };
+	SDL_Rect door_rect = { 0,0 };
+	Frame door_frame;
+	door_frame.pivot = pivot;
 	
 	switch (temp_door.dir) {
-
+		
 		//UP
-	case 0:
+	case 0: {
+		door_rect = rect_door_up;
+		for (int i = 0; i <4; i++) {
+			door_rect = { rect_door_up.x,rect_door_up.y - i * 48, 64,48 };
+			door_frame.rect = door_rect;
+			temp_door.object_animation.PushBack(door_frame);
+				
+		}
 		temp_door.texture_rect = rect_door_up;
+	}
 		break;
 
 		//DOWN
-	case 1:
+	case 1:{
+		door_rect = rect_door_down;
+		for (int i = 0; i <4; i++) {
+			door_rect = { rect_door_down.x,rect_door_down.y + i * 48, 64,48 };
+			door_frame.rect = door_rect;
+			temp_door.object_animation.PushBack(door_frame);
+
+		}
 		temp_door.texture_rect = rect_door_down;
+	}
 		break;
 
 		//LEFT
 	case 2:
+	{
+		door_rect = rect_door_left;
+		for (int i = 0; i <4; i++) {
+			door_rect = { rect_door_left.x,rect_door_left.y + i * 64, 48,64 };
+			door_frame.rect = door_rect;
+			temp_door.object_animation.PushBack(door_frame);
+
+		}
 		temp_door.texture_rect = rect_door_left;
+	}
 		break;
 
 		//RIGHT
-	case 3:
+	case 3:{
+		door_rect = rect_door_right;
+		for (int i = 0; i <4; i++) {
+			door_rect = { rect_door_right.x,rect_door_right.y + i * 64, 48,64 };
+			door_frame.rect = door_rect;
+			temp_door.object_animation.PushBack(door_frame);
+
+		}
 		temp_door.texture_rect = rect_door_right;
+	}
 		break;
 	}
 
@@ -747,6 +792,7 @@ void j1Object::StartCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == collider_warp) {
 		Warp* temp = (Warp*)collider1->parent;
 		temp->Action();
+
 	}
 	
 	else if (collider1->type == collider_change_height) {

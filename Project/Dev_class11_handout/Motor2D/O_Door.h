@@ -17,20 +17,26 @@ public:
 		logic_height = obj.logic_height;
 		collider_tiles = obj.collider_tiles;
 		texture_rect = obj.texture_rect;
+		is_opening = false;
+		object_animation = obj.object_animation;
+		object_animation.speed = 0.1f;
 	}
 	~Door() {
 
 	}
 
 	void Open() {
+		texture_rect = object_animation.GetCurrentFrame().rect;
 
-		for (int i = 0; i < this->collider_tiles.size(); i++) {
-			if (App->player->loop_game_menu==false) {
-				if(App->map->V_Colision[logic_height]->data != nullptr)
-				App->map->V_Colision[logic_height]->data[(collider_tiles[i].y / 16) * App->map->data.width + (collider_tiles[i].x / 16)] = 0;
+		if (object_animation.Finished()) {
+			for (int i = 0; i < this->collider_tiles.size(); i++) {
+				if (App->player->loop_game_menu == false) {
+					if (App->map->V_Colision[logic_height]->data != nullptr)
+						App->map->V_Colision[logic_height]->data[(collider_tiles[i].y / 16) * App->map->data.width + (collider_tiles[i].x / 16)] = 0;
+				}
 			}
+			active = false;
 		}
-		active = false;
 		/*for (int i = 0; i < rect.w / 16; i++) {
 			for (int n = 0; n < rect.h / 16; n++) {
 				iPoint temp;
@@ -44,10 +50,11 @@ public:
 	};
 
 	void Action() {
-		Open();
+		is_opening = true;
 	}
 
 public:
+	bool is_opening = false;
 	bool multi_button = false;
 	bool key_needed = false;
 	bool open = false;

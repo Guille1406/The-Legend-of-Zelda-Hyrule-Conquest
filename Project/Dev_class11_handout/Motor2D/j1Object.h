@@ -155,7 +155,7 @@ public:
 	std::vector<iPoint> collider_tiles;
 	bool tokill = false;
 	SDL_Rect texture_rect = { 0,0,0,0 };
-
+	Animation object_animation;
 };
 
 
