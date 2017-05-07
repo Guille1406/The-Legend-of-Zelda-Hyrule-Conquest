@@ -76,6 +76,7 @@ bool S_DungeonEntry::Start()
 		for (int i = 0; i < App->object->V_Objects.size(); i++) {
 			if (App->object->V_Objects[i]->type == objectType::block) {
 				App->object->DeleteCollider(*App->object->V_Objects[i]);
+				App->object->V_Objects[i]->active = false;
 			}
 		}
 	}
