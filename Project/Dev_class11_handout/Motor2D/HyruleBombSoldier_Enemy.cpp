@@ -11,6 +11,7 @@ HyruleBombSoldier_Enemy::HyruleBombSoldier_Enemy() :Enemy(enemyType::hyrulebombs
 	bomb_frame.pivot = { 0,0 };
 	bomb_frame.rect = rect_bomb;
 	bomb->Explosion_animation.PushBack(bomb_frame);
+	bomb_frame.pivot = { 40,40 };
 	for (int i = 0; i < 11; i++) {
 		bomb_frame.rect = { explosion1.x+94*i,explosion1.y,explosion1.w, explosion1.h };
 		bomb->Explosion_animation.PushBack(bomb_frame);
@@ -106,19 +107,23 @@ void HyruleBombSoldier_Enemy::Action()
 				}
 			}
 		}
-		if (t >=1) {
-			bomb->Explosion_animation.speed = 0.0f;
-		}
-		if (bomb->Explosion_animation.Finished() == false) {
-			bomb->texture_bomb_rect = bomb->Explosion_animation.GetCurrentFrame().rect;
-			App->render->Blit(App->object->objects_texture, p.x, p.y, &bomb->texture_bomb_rect);
-		}
-		else {
-			bomb->Explosion_animation.Reset();
-			bomb->Explosion_animation.speed = 0.0f;
-		}
-	
+		
+	}
+	Frame bomb_actual_frame;
+	if (t <1) {
+		bomb->Explosion_animation.Reset();
+		bomb->Explosion_animation.speed = 0.0f;
+		App->render->Blit(App->object->objects_texture, p.x, p.y, &bomb->texture_bomb_rect);
+	}
+	else if (bomb->Explosion_animation.Finished() == false) {
+		bomb->Explosion_animation.speed = 0.1f;
+		bomb_actual_frame = bomb->Explosion_animation.GetCurrentFrame();
+		bomb->texture_bomb_rect = bomb_actual_frame.rect;
+		App->render->Blit(App->object->objects_texture, p.x - bomb_actual_frame.pivot.x, p.y - bomb_actual_frame.pivot.y, &bomb->texture_bomb_rect);
+	}
+	else {
 
+		bomb->Explosion_animation.speed = 0.0f;
 	}
 	
 }
