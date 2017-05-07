@@ -18,12 +18,13 @@ public:
 	bool Load(pugi::xml_node&);
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	/*
-	GuiButton* AudioLabel = nullptr;
-	GuiButton* MasterVolume = nullptr;
-	//GuiButton* MusicVolume = nullptr;
-	//GuiButton* SFXVolume = nullptr;
-	*/
+	GuiButton* CreditsLabel1 = nullptr;
+	GuiButton* CreditsLabel2 = nullptr;
+	GuiButton* CreditsLabel3 = nullptr;
+	GuiButton* CreditsLabel4 = nullptr;
+	GuiButton* CreditsLabel5 = nullptr;
+	GuiButton* CreditsLabel6 = nullptr;
+	GuiButton* CreditsLabel7 = nullptr;
 	GuiButton* back = nullptr;
 };
 
