@@ -42,6 +42,9 @@
 #include "S_Dungeon_SecondFloor_Centre.h"
 #include "S_Dungeon_SecondFloor_Right.h"
 #include "S_BeforeDungeon.h"
+#include "S_SecretExit.h"
+#include "S_Village.h"
+#include "S_Forest.h"
 
 #include"Enemy_Test_Scene.h"
 
@@ -99,6 +102,26 @@ bool j1Scene::Start()
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::world;
+	scene_pointer = nullptr;
+
+	scene_pointer = new S_SecretExit;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::secret_exit;
+	scene_pointer = nullptr;
+
+
+	scene_pointer = new S_Village;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::village;
+	scene_pointer = nullptr;
+
+
+	scene_pointer = new S_Forest;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::forest;
 	scene_pointer = nullptr;
 
 	scene_pointer = new S_TempBossRoom;

@@ -250,6 +250,15 @@
     <ClCompile Include="S_Credits.cpp">
       <Filter>Desenvolupament  ========\Scenes\GUI\Main Menu\Credits</Filter>
     </ClCompile>
+    <ClCompile Include="S_SecretExit.cpp">
+      <Filter>Desenvolupament  ========\Scenes\World</Filter>
+    </ClCompile>
+    <ClCompile Include="S_Village.cpp">
+      <Filter>Desenvolupament  ========\Scenes\World</Filter>
+    </ClCompile>
+    <ClCompile Include="S_Forest.cpp">
+      <Filter>Desenvolupament  ========\Scenes\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -588,6 +597,15 @@
     <ClInclude Include="O_Bush.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="S_SecretExit.h">
+      <Filter>Desenvolupament  ========\Scenes\World</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Village.h">
+      <Filter>Desenvolupament  ========\Scenes\World</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Forest.h">
+      <Filter>Desenvolupament  ========\Scenes\World</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Desenvolupament  ========">
@@ -664,6 +682,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Scenes\GUI\Main Menu\Credits">
       <UniqueIdentifier>{691592b1-3ae4-4963-9a66-803bf5ec3214}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\World">
+      <UniqueIdentifier>{6ddf1a63-ba02-40d5-a3ba-000c5d033270}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
