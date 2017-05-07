@@ -85,12 +85,13 @@ void Statue_Enemy::Action()
 			if (this->state != jumping) {
 				first_point = pos;
 				max_heigh_jump.y = pos.y - 50;
-				if (player_in_range->pos.x < pos.x) {
+				/*if (player_in_range->pos.x < pos.x) {
 					last_point.x = pos.x - 50;
 				}
 				else {
 					last_point.x = pos.x + 50;
-				}
+				}*/
+				last_point.x = (player_in_range->pos.x + pos.x) / 2;
 				last_point.y = (player_in_range->pos.y + pos.y) / 2;
 			}
 
@@ -112,7 +113,17 @@ void Statue_Enemy::Action()
 			}
 
 			pos.y = (1 - t)*(1 - t)*first_point.y + 2 * t*(1 - t)*max_heigh_jump.y + t*t*last_point.y;
-
+			if (pos.x!= last_point.x) {
+				switch (Enemy_Orientation) {
+				case OrientationEnemy::right_enemy:
+					pos.x += 1;
+					break;
+				case OrientationEnemy::left_enemy:
+					pos.x -= 1;
+					break;
+				}
+				
+			}
 			if (t < 1) {
 
 				t += (float)1 / 50;
