@@ -13,18 +13,6 @@ S_Credits::~S_Credits()
 
 bool S_Credits::Awake(pugi::xml_node& conf)
 {
-	/*
-	AudioLabel = App->gui->CreateButton(iPoint(40, 40), &std::string(conf.child("AudioLabel").attribute("value").as_string("Audio menu")), ButtonType::idle_only, &label_title_rec, false);
-	AudioLabel->SetFont(App->font->Triforce48);
-	((Gui*)AudioLabel)->SetListener(this);
-	AudioLabel->SetVisible(false);
-	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
-	MasterVolume = App->gui->CreateButton(iPoint(X_pos, 200), &std::string(conf.child("MasterVolume").attribute("value").as_string("Master Volume")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
-	MasterVolume->SetFont(App->font->Sherwood20);
-	((Gui*)MasterVolume)->SetListener(this);
-	MasterVolume->SetVisible(false);
-	MasterVolume->Focusable(true);
-	*/
 	int X_pos = App->win->GetWindowWHalf() - (int)(label_title_rec.w * 0.5f);
 
 	CreditsLabel1 = App->gui->CreateButton(iPoint(X_pos, 31), &std::string("Lead - "), ButtonType::idle_only, &label_title_rec, false);
@@ -68,6 +56,7 @@ bool S_Credits::Awake(pugi::xml_node& conf)
 	back->SetVisible(false);
 	back->Focusable(true);
 
+	CreditsLogo_Rect = { 0,0,550,360 };
 	
 	buttons.push_back(back);
 
@@ -76,7 +65,8 @@ bool S_Credits::Awake(pugi::xml_node& conf)
 
 bool S_Credits::Start()
 {
-	//App->render->DrawQuad({ 0,0,1280,720 }, 39, 39, 39, 255, true, true, false);
+	CreditsLogo = App->gui->CreateImage(iPoint(0, 0), &CreditsLogo_Rect, false);
+
 	CreditsLabel1->SetVisible(true);
 	CreditsLabel2->SetVisible(true);
 	CreditsLabel3->SetVisible(true);
@@ -93,12 +83,14 @@ bool S_Credits::Start()
 
 bool S_Credits::Update()
 {
+	CreditsLogo->DrawWithAlternativeAtlas(App->scene->GetCredits_Logo_Atlas());
 	MenuInput(&buttons);
 	return true;
 }
 
 bool S_Credits::Clean()
 {
+	delete CreditsLogo;
 	CreditsLabel1->SetVisible(false);
 	CreditsLabel2->SetVisible(false);
 	CreditsLabel3->SetVisible(false);

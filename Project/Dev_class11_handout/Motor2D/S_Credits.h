@@ -18,6 +18,8 @@ public:
 	bool Load(pugi::xml_node&);
 	void OnGui(Gui* ui, GuiEvent event);
 public:
+	SDL_Rect CreditsLogo_Rect = { 0,0,0,0 };
+	GuiImage* CreditsLogo = nullptr;
 	GuiButton* CreditsLabel1 = nullptr;
 	GuiButton* CreditsLabel2 = nullptr;
 	GuiButton* CreditsLabel3 = nullptr;
