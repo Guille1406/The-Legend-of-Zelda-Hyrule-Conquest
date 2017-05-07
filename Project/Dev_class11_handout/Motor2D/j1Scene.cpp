@@ -33,6 +33,7 @@
 #include "S_OptionsGameplay.h"
 #include "S_OptionsVideo.h"
 #include "S_QuitGame.h"
+#include "S_Credits.h"
 #include "S_InGameMenu.h"
 #include "S_End.h"
 #include "S_Dungeon_Entry.h"
@@ -81,6 +82,8 @@ bool j1Scene::Start()
 	scene_list.push_back(new S_OptionsVideo);
 	(*scene_list.back()).scene_name = Scene_ID::optionsvideo;
 	//Credits
+	scene_list.push_back(new S_Credits);
+	(*scene_list.back()).scene_name = Scene_ID::credits;
 	//Quit Game
 	scene_list.push_back(new S_QuitGame);
 	(*scene_list.back()).scene_name = Scene_ID::quitgame;

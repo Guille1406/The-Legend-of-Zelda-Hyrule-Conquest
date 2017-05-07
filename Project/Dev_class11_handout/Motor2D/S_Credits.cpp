@@ -1,5 +1,6 @@
 #include "S_Credits.h"
 #include "j1Window.h"
+#include "j1Render.h"
 
 S_Credits::S_Credits()
 {
@@ -52,6 +53,7 @@ bool S_Credits::Awake(pugi::xml_node& conf)
 
 bool S_Credits::Start()
 {
+	//App->render->DrawQuad({ 0,0,1280,720 }, 39, 39, 39, 255, true, true, false);
 	//AudioLabel->SetVisible(true);
 	//MasterVolume->SetVisible(true);
 	//MusicVolume->SetVisible(true);

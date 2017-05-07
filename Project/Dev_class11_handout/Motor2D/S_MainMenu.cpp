@@ -125,7 +125,7 @@ void S_MainMenu::OnGui(Gui* ui, GuiEvent event)
 
 	if ((ui == (Gui*)credits) && (event == GuiEvent::mouse_lclk_down))
 	{
-		//App->scene->Show(Scene_ID::world);
+		App->scene->Show(Scene_ID::credits);
 	}
 
 	if ((ui == (Gui*)quit) && (event == GuiEvent::mouse_lclk_down))
