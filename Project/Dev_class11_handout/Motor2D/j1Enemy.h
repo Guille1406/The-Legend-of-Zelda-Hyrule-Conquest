@@ -91,6 +91,22 @@ public:
 	EnemyState state= doing_path;
 	bool enemy_doing_script=false;
 	j1Timer script_timer;
+
+
+	//ENEMIES ID
+
+
+	/*
+	championsoldier_enemy = 3849,
+		hyrulebombsoldier_enemy = 3851,
+		statue_enemy = 3853,
+		rope_enemy = 3850,
+		skullrope_enemy = 3855,
+		rat_enemy = 3852,
+		bat_enemy = 3854,
+		no_enemy,
+
+		*/
 };
 
 class j1Enemy : public j1Module {
@@ -140,6 +156,17 @@ public:
 	uint enemy_dies_audio=0;
 	uint enemy_pathfinding_audio = 0;
 	Boss* Final_Boss = nullptr;
+
+
+	int green_enemy_id = 0;
+	uint enemy_path_id = 0;
+	uint championsoldier_enemy_id = 0;
+	uint hyrulebombsoldier_enemy_id = 0;
+	uint statue_enemy_id = 0;
+	uint rope_enemy_id = 0;
+	uint skullrope_enemy_id = 0;
+	uint rat_enemy_id = 0;
+	uint bat_enemy_id = 0;
 };
 
 #endif

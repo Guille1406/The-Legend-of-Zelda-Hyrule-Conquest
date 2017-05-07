@@ -168,8 +168,8 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 	Enemy* ret = nullptr;
 	SDL_Rect rect_test = { 0,0,0,0 };
 	SDL_Rect rect = { 0,0,0,0 };
-	switch (id_enemy) {
-	case enemyType::green_enemy:
+
+	if (id_enemy == green_enemy_id) {
 		ret = new Green_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
@@ -183,8 +183,8 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 
 
 		rect = { ret->pos.x, ret->pos.y + 32,26,30 };
-		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret,(j1Module*) App->enemy);
-		
+		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
+
 
 		ret->item.up_ofset_item_enemy = { 0, 0 };//This may change
 
@@ -192,19 +192,20 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->item.right_ofset_item_enemy = { 16, 20 };
 		ret->item.left_ofset_item_enemy = { -5, 20 };
 		ret->item.Shield_dimensions = { 20,10 };
-		
-		
+
+
 		//how to know if a enemy is in level one or two
 		ret->logic_height = height;
-		break;
+	}
 
-	case enemyType::championsoldier_enemy:
+	else if (id_enemy == championsoldier_enemy_id) {
+
 		ret = new Championsoldier_Enemy();
 		//i don't have the sprite of enemy
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
 		ret->live = 2;
-		
+
 		//Position in world pixel 
 		ret->pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pos.y = pos_array_enemy.y*App->map->data.tile_height;
@@ -214,9 +215,10 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 
 		//how to know if a enemy is in level one or two
 		ret->logic_height = height;
-		break;
+	}
 
-	case enemyType::statue_enemy:
+	else if (id_enemy == statue_enemy_id) {
+	
 		ret = new Statue_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
@@ -231,9 +233,11 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		//how to know if a enemy is in level one or two
 		ret->max_heigh_jump.y = ret->pos.y - 50;
 		ret->logic_height = height;
-		break;
+	}
 
-	case enemyType::rope_enemy:
+
+	else if (id_enemy == rope_enemy_id) {
+	
 		ret = new Rope_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
@@ -247,9 +251,11 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 		//how to know if a enemy is in level one or two
 		ret->logic_height = height;
-		break;
+	}
 
-	case enemyType::rat_enemy:
+
+	else if (id_enemy == rat_enemy_id) {
+	
 		ret = new Rat_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
@@ -263,9 +269,11 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 		//how to know if a enemy is in level one or two
 		ret->logic_height = height;
-		break;
+	}
 
-	case enemyType::skullrope_enemy:
+
+	else if (id_enemy == skullrope_enemy_id) {
+	
 		ret = new SkullRope_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
@@ -279,9 +287,11 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 		//how to know if a enemy is in level one or two
 		ret->logic_height = height;
-		break;
+	}
 
-	case enemyType::bat_enemy:
+
+	else if (id_enemy == bat_enemy_id) {
+	
 		ret = new Bat_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
@@ -295,9 +305,12 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 		//how to know if a enemy is in level one or two
 		ret->logic_height = height;
-		break;
+	}
 
-	case enemyType::hyrulebombsoldier_enemy:
+
+
+	else if (id_enemy == hyrulebombsoldier_enemy_id) {
+	
 
 		ret = new HyruleBombSoldier_Enemy();
 		HyruleBombSoldier_Enemy* temp = (HyruleBombSoldier_Enemy*)ret;
@@ -314,18 +327,15 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		temp->bomb_point.y = temp->pos.y;
 
 		temp->max_bomb_point.x = temp->pos.x;
-		temp->max_bomb_point.y = temp->pos.y-50;
-		rect = { ret->pos.x, ret->pos.y + 32,30,35};
+		temp->max_bomb_point.y = temp->pos.y - 50;
+		rect = { ret->pos.x, ret->pos.y + 32,30,35 };
 		temp->logic_height = height;
 		temp->collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_enemy, (Entity*)ret, (j1Module*)App->enemy);
 
-		//how to know if a enemy is in level one or two
-
 		ret = temp;
-		break;
-
+		//how to know if a enemy is in level one or two
 	}
-
+		
 	//Position in array
 	if (ret != nullptr) {
 		V_MyEnemies.push_back(ret);

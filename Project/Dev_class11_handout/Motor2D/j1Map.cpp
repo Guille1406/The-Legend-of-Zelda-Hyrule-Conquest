@@ -434,6 +434,16 @@ bool j1Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 	if (strcmp(set->name.c_str(),"collision tileset") ==0) {
 		TILE_COL_ID = set->firstgid;
 		CANT_PASS_COL_ID = set->firstgid + 3;
+		App->enemy->green_enemy_id = set->firstgid+2;
+		App->enemy->enemy_path_id = set->firstgid + 1;
+		App->enemy->championsoldier_enemy_id = set->firstgid + 4;
+		App->enemy->hyrulebombsoldier_enemy_id = set->firstgid + 6;
+		App->enemy->statue_enemy_id = set->firstgid + 8;
+		App->enemy->rope_enemy_id= set->firstgid + 5;
+		App->enemy->skullrope_enemy_id = set->firstgid + 10;
+		App->enemy->rat_enemy_id = set->firstgid + 7;
+		App->enemy->bat_enemy_id = set->firstgid + 9;
+
 	}
 	set->tile_width = tileset_node.attribute("tilewidth").as_int();
 	set->tile_height = tileset_node.attribute("tileheight").as_int();
