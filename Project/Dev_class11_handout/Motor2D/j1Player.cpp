@@ -149,9 +149,9 @@ bool j1Player::Update(float dt)
 bool j1Player::PostUpdate()
 {
 	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
-		App->scene->ChangeScene(dungeon_secondfloor_centre);
-		App->player->Link->pos = { 15*16,31*16};
-		App->player->Zelda->pos = { 15*16,31*16 };
+		App->scene->ChangeScene(village);
+		App->player->Link->pos = { 169*16,8*16};
+		App->player->Zelda->pos = {169*16,8*16 };
 	}
 	return true;
 }

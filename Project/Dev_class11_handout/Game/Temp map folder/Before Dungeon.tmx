@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" nextobjectid="22">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" nextobjectid="24">
  <properties>
   <property name="scene" type="int" value="19"/>
  </properties>
@@ -628,6 +628,16 @@
   <object id="21" x="1104" y="1104" width="32" height="32">
    <properties>
     <property name="type" value="bush"/>
+   </properties>
+  </object>
+  <object id="22" x="1104" y="608" width="32" height="32">
+   <properties>
+    <property name="type" value="movable"/>
+   </properties>
+  </object>
+  <object id="23" x="1136" y="608" width="32" height="32">
+   <properties>
+    <property name="type" value="movable"/>
    </properties>
   </object>
  </objectgroup>
