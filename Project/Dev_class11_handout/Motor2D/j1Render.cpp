@@ -186,7 +186,7 @@ void j1Render::Draw()
 			if (App->enemy->Final_Boss->im_active)
 				App->enemy->Final_Boss->Draw(i);
 
-		for (int n = 0; n < 100; n++) {
+		for (int n = 0; n < App->map->data.height; n++) {
 			if (App->enemy->active)
 				App->enemy->Draw(i,n);
 			if (App->player->active)
