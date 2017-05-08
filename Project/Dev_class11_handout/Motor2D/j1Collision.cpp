@@ -195,7 +195,7 @@ bool j1Collision::Update(float dt)
 				continue;
 
 			c1 = colliders[i];
-			if (c1->type == COLLIDER_TYPE::collider_colour_block)
+			if (c1->type == COLLIDER_TYPE::collider_colour_block || c1->type == COLLIDER_TYPE::collider_bush)
 				continue;
 			for (uint n = colliders.size(); n < MAX_COLLIDERS; n++) {
 				c1->state_collider[n] = not_colliding;
