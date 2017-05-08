@@ -157,7 +157,8 @@ void P_Zelda::ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal)
 						max_collisions++;
 						if(max_collisions%2 ==0)
 							before_wall_pos = temp_pos + n * 64;
-
+						if (max_collisions % 2 == 1)
+							before_wall_pos = temp_pos;
 						
 						decrease = i;
 						
@@ -433,12 +434,13 @@ player_event P_Zelda::GetEvent()
 				character_direction = aim_direction;
 			}
 			if (App->input->GetKey(SDL_SCANCODE_KP_1) == KEY_UP) {
-
+				if (!doing_script) {
 				attack_timer.Start();
 				App->audio->PlayFx(Arrow_Audio);
 				actual_event = attack;
 				doing_script = true;
 				character_direction = aim_direction;
+			}
 			}
 		}
 	}
