@@ -1635,15 +1635,15 @@
     <property name="scene" type="int" value="20"/>
     <property name="type" value="warp"/>
     <property name="x" type="int" value="32"/>
-    <property name="y" type="int" value="78"/>
+    <property name="y" type="int" value="15"/>
    </properties>
   </object>
   <object id="602" x="816" y="352" width="32" height="32">
    <properties>
-    <property name="scene" type="int" value="24"/>
+    <property name="scene" type="int" value="25"/>
     <property name="type" value="warp"/>
-    <property name="x" type="int" value="15"/>
-    <property name="y" type="int" value="31"/>
+    <property name="x" type="int" value="16"/>
+    <property name="y" type="int" value="24"/>
    </properties>
   </object>
   <object id="604" x="416" y="544" width="64" height="640">
