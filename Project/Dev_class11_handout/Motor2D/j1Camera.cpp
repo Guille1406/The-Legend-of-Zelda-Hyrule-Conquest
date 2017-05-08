@@ -100,37 +100,35 @@ bool j1Camera::PreUpdate()
 // Called each loop iteration
 bool j1Camera::Update(float dt)
 {
-	update_each_two_frames = !update_each_two_frames;
-
-	if (update_each_two_frames)
+	iPoint LinkPos = { 0,0 };
+	LinkPos = App->render->WorldToScreen(App->player->Link->pos.x, App->player->Link->pos.y);
+	/**/
+	//Is inside the little ellipse
+	if (LitleEllipse.InsideEllipse(LinkPos))
+		App->win->scale = f_Max_scale;
+	//Is out the little ellipse
+	else
 	{
-		iPoint LinkPos = { 0,0 };
-		LinkPos = App->render->WorldToScreen(App->player->Link->pos.x, App->player->Link->pos.y);
-		/**/
-		//Is inside the little ellipse
-		if (LitleEllipse.InsideEllipse(LinkPos))
-			App->win->scale = f_Max_scale;
-		//Is out the little ellipse
-		else
+		//Is between the big ellipse and the little one
+		if (BigEllipse.InsideEllipse(LinkPos))
 		{
-			//Is between the big ellipse and the little one
-			if (BigEllipse.InsideEllipse(LinkPos))
-			{
-				//Scale between f_Max_scale and f_Min_scale
-				float f_percentual_value = (((float)(BigEllipse.InsideEllipseValue(LinkPos) - f_border_between_ellipses)) / ((float)(1.0f - f_border_between_ellipses))) * 100.0f;
-				float f_invert_percentual_value = 100.0f - f_percentual_value;
-				if (f_invert_percentual_value < 0.0f)
-					f_invert_percentual_value = 0.0f;
-				else if (f_invert_percentual_value > 100.0f)
-					f_invert_percentual_value = 100.0f;
-				App->win->scale = (((f_Max_scale - f_Min_scale) * f_invert_percentual_value) / (100.0f)) + f_Min_scale;
-			}
-			//Is out the big ellipse
-			else
-				App->win->scale = f_Min_scale;
+			//Scale between f_Max_scale and f_Min_scale
+			float f_percentual_value = (((float)(BigEllipse.InsideEllipseValue(LinkPos) - f_border_between_ellipses)) / ((float)(1.0f - f_border_between_ellipses))) * 100.0f;
+			float f_invert_percentual_value = 100.0f - f_percentual_value;
+			if (f_invert_percentual_value < 0.0f)
+				f_invert_percentual_value = 0.0f;
+			else if (f_invert_percentual_value > 100.0f)
+				f_invert_percentual_value = 100.0f;
+			App->win->scale = (((f_Max_scale - f_Min_scale) * f_invert_percentual_value) / (100.0f)) + f_Min_scale;
 		}
-		/**/
+		//Is out the big ellipse
+		else
+			App->win->scale = f_Min_scale;
 	}
+
+	App->win->scale = floor(App->win->scale * 1000 + 0.5f) * 0.001;
+
+	/**/
 
 	//Some ellipses debug draw for testing
 	/*
