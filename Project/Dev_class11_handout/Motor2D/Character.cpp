@@ -317,6 +317,11 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 		negative = -1;
 	}
 
+	if (pos_one % 2 != 0)
+		pos_one++;
+	if (pos_two % 2 != 0)
+		pos_two++;
+
 	float speed = 2 / dt;
 	int tile_pos_one = (pos_one + (App->map->data.tile_width / 2)) / App->map->data.tile_width;
 	int tile_pos_side = (pos_two + (App->map->data.tile_width / 2)) / App->map->data.tile_width;
