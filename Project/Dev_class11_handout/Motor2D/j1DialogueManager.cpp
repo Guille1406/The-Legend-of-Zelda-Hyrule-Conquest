@@ -269,22 +269,25 @@ void j1DialogueManager::ActivateDialogue(DialogueID id)
 
 void j1DialogueManager::PauseActiveDialogue()
 {
-	if(ActiveDialog->DialogueActive == true)
-		ActiveDialog->DialoguePaused = true;
+	if(ActiveDialog != nullptr)
+		if(ActiveDialog->DialogueActive == true)
+			ActiveDialog->DialoguePaused = true;
 }
 
 void j1DialogueManager::ResumeActiveDialogue()
 {
-	DialogueNextStep();
-	if (ActiveDialog->DialogueActive == true)
-		ActiveDialog->DialoguePaused = false;
+	if (ActiveDialog != nullptr)
+	{
+		DialogueNextStep();
+		if (ActiveDialog->DialogueActive == true)
+			ActiveDialog->DialoguePaused = false;
+	}
 }
 
 uint j1DialogueManager::GetActiveDialogueStep()
 {
 	uint ret = 0;
-
-	if(ActiveDialog->ActiveDialoguePtr != nullptr)
+	if(ActiveDialog != nullptr)
 		for (std::vector<DialogueStep*>::iterator item = ActiveDialog->ActiveDialoguePtr->DialogueSteps.begin(); item != ActiveDialog->ActiveDialoguePtr->DialogueSteps.cend(); ++item, ret++)
 			if ((*item) == ActiveDialog->ActiveDialogueStepPtr)
 				return ret;
@@ -294,27 +297,30 @@ uint j1DialogueManager::GetActiveDialogueStep()
 
 void j1DialogueManager::DialogueNextStep()
 {
-	for (std::vector<DialogueStep*>::iterator item = ActiveDialog->ActiveDialoguePtr->DialogueSteps.begin(); item != ActiveDialog->ActiveDialoguePtr->DialogueSteps.cend(); ++item)
-		if ((*item) == ActiveDialog->ActiveDialogueStepPtr)
-		{
-			if ((*item) != ActiveDialog->ActiveDialoguePtr->DialogueSteps.back())
+	if (ActiveDialog != nullptr)
+		for (std::vector<DialogueStep*>::iterator item = ActiveDialog->ActiveDialoguePtr->DialogueSteps.begin(); item != ActiveDialog->ActiveDialoguePtr->DialogueSteps.cend(); ++item)
+			if ((*item) == ActiveDialog->ActiveDialogueStepPtr)
 			{
-				ActiveDialog->ActiveDialogueStepPtr = *(++item);
-				SetCharacterBlit();
+				if ((*item) != ActiveDialog->ActiveDialoguePtr->DialogueSteps.back())
+				{
+					ActiveDialog->ActiveDialogueStepPtr = *(++item);
+					SetCharacterBlit();
+				}
+				else //if it the last step, quit and clean
+				{
+					ActiveDialog->DialogueActive = false;
+					ActiveDialog->DialoguePaused = false;
+					ActiveDialog->ActiveDialoguePtr = nullptr;
+					ActiveDialog->ActiveDialogueStepPtr = nullptr;
+				}
+				return;
 			}
-			else //if it the last step, quit and clean
-			{
-				ActiveDialog->DialogueActive = false;
-				ActiveDialog->DialoguePaused = false;
-				ActiveDialog->ActiveDialoguePtr = nullptr;
-				ActiveDialog->ActiveDialogueStepPtr = nullptr;
-			}
-			return;
-		}
 }
 
 void j1DialogueManager::SetCharacterBlit()
 {
+	if (ActiveDialog == nullptr)
+		return;
 	if (ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->DialogueCharacter_pos == DialogueInterlucutorPosition::Left)
 		LeftCharacterLabel->EditButtonStr(&ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->DialogueCharacter_str);
 	else
