@@ -582,6 +582,8 @@ bool j1App::SaveLoadIterate(pugi::xml_node& root)
 			LOG("Save process halted from an error in module %s", ((*item) != NULL) ? (*item)->scene_str.c_str() : "unknown");
 		break;
 	}
+	default:
+		LOG("Save/Load invalid SaveLoadType");
 	}
 	return ret;
 }
