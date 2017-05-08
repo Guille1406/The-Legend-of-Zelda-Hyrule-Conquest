@@ -84,6 +84,7 @@ bool S_Credits::Start()
 
 bool S_Credits::Update()
 {
+	App->render->DrawQuad({ 0,0,1280,720 }, 39, 39, 39, 255, true, true, false);
 	CreditsLogo->DrawWithAlternativeAtlas(App->scene->GetCredits_Logo_Atlas());
 	MenuInput(&buttons);
 	return true;
