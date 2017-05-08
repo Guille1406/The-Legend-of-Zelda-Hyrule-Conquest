@@ -161,7 +161,7 @@ void Boss::ExecuteEvent()
 			can_attack = false;
 			logic_height = 0;
 		}*/
-		if (damaged_boss_timer.Read() > 9000 && state == boss_state::boss_damaged) {
+		if (damaged_boss_timer.Read() > 19000 && state == boss_state::boss_damaged) {
 			recover_collider = App->collision->AddCollider({ pos.x,pos.y,244,244 }, collider_boss_recover, this, App->enemy);
 			recover_collider->logic_height = 1;
 			recover_collider->to_delete = true;
@@ -275,6 +275,7 @@ void Boss::Attack(Character* focused_character)
 
 	static j1Timer following_time;
 	static j1Timer static_foot_time;
+	static j1Timer waiting_for_attack_time;
 
 	
 	int actual_dist = (int)(sqrt(((focused_character->pos.x - centre_pos.x) * (focused_character->pos.x - centre_pos.x)) + ((focused_character->pos.y - centre_pos.y)) * (focused_character->pos.y - centre_pos.y)));
@@ -346,11 +347,15 @@ void Boss::Attack(Character* focused_character)
 			if(following_time.Read() < 2000)
 				f_foot_pos = { (float)focused_character->pos.x , (float)(focused_character->pos.y - 100) };
 			else {
-				attacking_foot->actual_foot_state = attacking;
+				attacking_foot->actual_foot_state = waiting_for_attack;
 				inc_x = (float)(focused_character->pos.x - attacking_foot->pos.x) / 10;
 				inc_y = (float)((focused_character->pos.y) - attacking_foot->pos.y) / 10;
+				waiting_for_attack_time.Start();
 				
 			}
+		}
+		if (waiting_for_attack_time.Read() > 500 && attacking_foot->actual_foot_state== waiting_for_attack) {
+			attacking_foot->actual_foot_state = attacking;
 		}
 		if (i < 10 && attacking_foot->actual_foot_state == attacking) {
 			f_foot_pos = { f_foot_pos.x + inc_x, f_foot_pos.y + inc_y };

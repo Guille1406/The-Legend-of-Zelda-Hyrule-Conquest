@@ -878,8 +878,16 @@ void j1Object::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == front_link || collider2->type == front_link)
 		character = App->player->Link;
 	
-	if (collider1->type == collider_jump) {
+	if (collider1->type == collider_jump && collider2->type == collider_link) {
 		if (character->can_walk == false && character->doing_script == false) {
+			App->audio->PlayFx(App->player->Fall_Players_Audio);
+			character->can_jump = true;
+
+		}
+	}
+
+	else if (collider1->type == collider_jump && collider2->type == collider_zelda) {
+		if (character->can_walk == false && character->doing_script == false && !App->player->Zelda->is_picked) {
 			App->audio->PlayFx(App->player->Fall_Players_Audio);
 			character->can_jump = true;
 

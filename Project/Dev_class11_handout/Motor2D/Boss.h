@@ -19,6 +19,7 @@ enum foot_state {
 	foot_idle,
 	charging,
 	following,
+	waiting_for_attack,
 	attacking,
 	after_attack,
 	back_to_start,
