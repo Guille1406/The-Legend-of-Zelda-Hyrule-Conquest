@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="85" height="85" tilewidth="16" tileheight="16" nextobjectid="11">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="85" height="85" tilewidth="16" tileheight="16" nextobjectid="13">
  <properties>
   <property name="scene" type="int" value="22"/>
   <property name="y" type="int" value="11"/>
@@ -492,6 +492,12 @@
     <property name="type" value="double_button"/>
    </properties>
   </object>
+  <object id="11" x="560" y="928" width="16" height="32">
+   <properties>
+    <property name="height" type="int" value="1"/>
+    <property name="type" value="change_height"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Objects 2">
   <object id="3" x="816" y="1248" width="32" height="32">
@@ -515,6 +521,12 @@
   <object id="8" x="576" y="848" width="16" height="64">
    <properties>
     <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="12" x="608" y="928" width="16" height="32">
+   <properties>
+    <property name="height" type="int" value="0"/>
+    <property name="type" value="change_height"/>
    </properties>
   </object>
  </objectgroup>
