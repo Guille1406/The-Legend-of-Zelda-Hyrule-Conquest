@@ -68,8 +68,7 @@ bool S_DungeonEntry::Start()
 
 	//App->player->Link->pos = { 660,1200 };
 	//App->player->Zelda->pos = { 620,1200 };
-	App->player->Link->logic_height = 0;
-	App->player->Zelda->logic_height = 0;
+	
 	//App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
 
 	if (App->scene->blocks_out) {
