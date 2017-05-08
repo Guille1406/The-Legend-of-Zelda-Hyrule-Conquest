@@ -151,8 +151,42 @@ bool j1Player::PostUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
 		App->scene->ChangeScene(village);
 		App->player->Link->pos = { 169*16,8*16};
+		App->player->Link->logic_height = 0;
 		App->player->Zelda->pos = {169*16,8*16 };
+		App->player->Zelda->logic_height = 0;
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) { //TUTORIAL
+		App->scene->ChangeScene(world);
+		App->player->Link->pos = { 660,1400 };
+		App->player->Zelda->pos = { 620,1400 };
+		App->player->Link->logic_height = 1;
+		App->player->Zelda->logic_height = 1;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) { //PUZZLE COLOR
+		App->scene->ChangeScene(Scene_ID::colourpuzzle);
+		App->player->Link->pos = { 660,1270 };
+		App->player->Zelda->pos = { 620,1270 };
+		App->player->Link->logic_height = 0;
+		App->player->Zelda->logic_height = 0;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) { //DUNGEON SECOND FLOOR CENTER
+		App->scene->ChangeScene(Scene_ID::dungeon_second_floor_right);
+		App->player->Link->pos = { 660,500 };
+		App->player->Zelda->pos = { 620,500 };
+		App->player->Link->logic_height = 0;
+		App->player->Zelda->logic_height = 0;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) { //DUNGEON ENTRY BRIDGE BLOCKS
+		App->scene->ChangeScene(Scene_ID::dungeon_entry);
+		App->player->Link->pos = { 1660,500 };
+		App->player->Zelda->pos = { 1620,500 };
+		App->player->Link->logic_height = 0;
+		App->player->Zelda->logic_height = 0;
+	}
+
+
 	return true;
 }
 

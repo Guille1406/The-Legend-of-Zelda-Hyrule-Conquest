@@ -59,7 +59,7 @@ public:
 		App->audio->PlayFx(notes[note - 1]);
 	}
 	void Action() {
-
+		App->audio->StopMusic(0);
 		App->audio->PlayFx(object_music);
 
 	}

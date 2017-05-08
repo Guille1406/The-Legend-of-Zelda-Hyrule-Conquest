@@ -90,8 +90,7 @@ bool S_DungeonEntry::Update()
 		//App->object->CreateBridge({ App->player->Link->pos.x,App->player->Link->pos.y,128,64 },0);
 	}
 	if (!App->player->paused)
-		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-			App->player->loop_game_menu = true;
+
 	return false;
 }
 

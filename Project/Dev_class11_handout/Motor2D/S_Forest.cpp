@@ -87,8 +87,7 @@ bool S_Forest::Update()
 {
 
 	if (!App->player->paused)
-		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-			App->player->loop_game_menu = true;
+
 	return false;
 }
 
@@ -100,9 +99,7 @@ bool S_Forest::PostUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) {
 		App->scene->ChangeScene(Scene_ID::testenemies);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
-		App->scene->ChangeScene(Scene_ID::colourpuzzle);
-	}
+	
 	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
 
 		App->scene->ChangeScene(Scene_ID::Send);
