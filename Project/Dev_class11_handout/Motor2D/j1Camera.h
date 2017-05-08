@@ -75,6 +75,8 @@ private:
 	std::vector<GuiLabel*> DebugPerformanceData;
 	SDL_Rect DebugPerformanceData_Rect = { 0,0,0,0 };
 
+	bool update_each_two_frames = false;
+
 };
 
 #endif // __j1CAMERA_H__
