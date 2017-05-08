@@ -579,6 +579,7 @@ Object * j1Object::CreateBridge(pugi::xml_node object, int height)
 	temp_bridge.type = objectType::bridge;
 	temp_bridge.active = false;
 	Object* ret = new Bridge(temp_bridge);
+	temp_bridge.collider = App->collision->AddCollider(temp_bridge.rect, COLLIDER_TYPE::collider_colour_block, (Entity*)ret, this);
 	//ret->collider = App->collision->AddCollider(temp_bridge.rect, COLLIDER_TYPE::collider_colour_block, (Entity*)ret, this);
 
 	V_Objects.push_back(ret);

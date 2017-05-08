@@ -21,7 +21,7 @@ public:
 	}
 	void Action(){
 		if (collider == nullptr)			
-		collider = App->collision->AddCollider(rect, COLLIDER_TYPE::collider_colour_block, this, App->object);
+		
 		active = true;
 
 	}
