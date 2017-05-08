@@ -6,6 +6,7 @@
 #include "j1Camera.h"
 #include "S_InGameMenu.h"
 #include "ParticleManager.h"
+#include "j1GameStartMenuBack.h"
 
 S_MainMenu::S_MainMenu()
 {
@@ -85,7 +86,7 @@ bool S_MainMenu::Start()
 	}
 	App->particlemanager->Disable();
 	App->gui->SetFocus(buttons.front());
-
+	App->startmenuback->Freeze(false);
 	//This must be revised
 	((S_InGameMenu*)App->scene->InGameMenuScene())->active = false;
 

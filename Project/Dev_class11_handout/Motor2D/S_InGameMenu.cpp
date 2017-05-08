@@ -72,6 +72,7 @@ bool S_InGameMenu::Start()
 	quit->SetVisible(true);
 
 	App->gui->SetFocus(buttons.front());
+	App->startmenuback->Freeze(false);
 
 	active = true;
 
