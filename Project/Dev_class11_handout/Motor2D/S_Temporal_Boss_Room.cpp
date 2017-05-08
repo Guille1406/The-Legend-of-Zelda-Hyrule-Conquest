@@ -38,7 +38,7 @@ bool S_TempBossRoom::Start()
 	App->pathfinding->paused = false;
 
 
-	if (App->map->Load("TempBossMap.tmx") == true)
+	if (App->map->Load("final_boss_map_advanced.tmx") == true)
 
 	{
 		int w, h = 0;
@@ -72,8 +72,8 @@ bool S_TempBossRoom::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
-	App->player->Link->pos = { 660,1400 };
-	App->player->Zelda->pos = { 620,1400 };
+	//App->player->Link->pos = { 660,1400 };
+	//App->player->Zelda->pos = { 620,1400 };
 	App->player->Link->logic_height = 0;
 	App->player->Zelda->logic_height = 0;
 	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;

@@ -102,7 +102,7 @@ void Boss::GetEvent()
 	iPoint diference_point_zelda = { App->player->Zelda->pos.x - centre_pos.x,App->player->Zelda->pos.y - centre_pos.y };
 	int dist_link = (int)(sqrt(diference_point_link.x *diference_point_link.x + diference_point_link.y * diference_point_link.y));
 	int dist_zelda = (int)(sqrt(diference_point_zelda.x *diference_point_zelda.x + diference_point_zelda.y * diference_point_zelda.y));
-	if (dist_link > 300 && dist_zelda >400 && can_move) {
+	if (dist_link > 300 && dist_zelda >300 && can_move && centre_pos.x > 79*16 && centre_pos.x < 129*16 && centre_pos.y < 101*16 && centre_pos.y > 74*16) {
 		state = boss_move;
 	}
 	else if(can_attack) {
@@ -115,7 +115,7 @@ void Boss::GetEvent()
 			break;
 		case boss_phase_2:
 			if (!im_attacking) {
-				if (dist_link / 300.0f < dist_zelda / 400.0f)
+				if (dist_link / 300.0f < dist_zelda / 300.0f)
 					if(dist_link >120)
 					state = boss_attack_link;
 				else if (state != boss_attack_link)
@@ -125,11 +125,11 @@ void Boss::GetEvent()
 			break;
 		case boss_phase_3:
 			
-				if (dist_link < 300 && dist_link >120 && dist_zelda> 400 && !im_attacking_laser)
+				if (dist_link < 300 && dist_link >120 && dist_zelda> 300 && !im_attacking_laser)
 					state = boss_attack_link;
-				else if (dist_link > 300 && dist_zelda < 400 && dist_zelda >120 && !im_attacking)
+				else if (dist_link > 300 && dist_zelda < 300 && dist_zelda >120 && !im_attacking)
 					state = boss_attack_zelda;
-				else if(dist_link < 300 && dist_link >120 && dist_zelda < 400 && dist_zelda >120)
+				else if(dist_link < 300 && dist_link >120 && dist_zelda < 300 && dist_zelda >120)
 					state = boss_attack_both;
 			
 		}
@@ -493,12 +493,12 @@ void Boss::CreateColliders()
 			//object.collider_tiles.push_back(temp);
 			//if(App->map->V_Colision[0][object.logic_height].data[temp.y*App->map->data.width + temp.x] != App->map->CANT_PASS_COL_ID)	{
 			if (App->map->V_Colision[0]->data != nullptr)
-				if (App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] != App->map->TILE_COL_ID)
+				if (App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.width + temp.x / 16] != App->map->TILE_COL_ID)
 				{
 					iPoint diference_point = { temp.x - centre_pos.x, temp.y - centre_pos.y };
 					int dist = (int)(sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y));
 					if ((dist < 120 && dist >= 107) ) {
-						App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = App->map->TILE_COL_ID;
+						App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.width + temp.x / 16] = App->map->TILE_COL_ID;
 						//object.collider_tiles.push_back(temp);
 						temp_vector.push_back(temp);
 					}
@@ -507,12 +507,12 @@ void Boss::CreateColliders()
 
 			
 			if (App->map->V_Colision[1]->data != nullptr)
-				if (App->map->V_Colision[1]->data[(temp.y / 16) *  App->map->data.height + temp.x / 16] != App->map->TILE_COL_ID)
+				if (App->map->V_Colision[1]->data[(temp.y / 16) *  App->map->data.width + temp.x / 16] != App->map->TILE_COL_ID)
 				{
 					iPoint diference_point = { temp.x - centre_pos.x, temp.y - centre_pos.y };
 					int dist = sqrt(diference_point.x *diference_point.x + diference_point.y * diference_point.y);
 					if (dist < 90 && dist >= 77) {
-						App->map->V_Colision[1]->data[((temp.y - 16)  / 16) *  App->map->data.height + temp.x / 16] = App->map->TILE_COL_ID;
+						App->map->V_Colision[1]->data[((temp.y - 16)  / 16) *  App->map->data.width + temp.x / 16] = App->map->TILE_COL_ID;
 						//object.collider_tiles.push_back(temp);
 						temp_vector.push_back(temp);
 					}
@@ -540,8 +540,8 @@ void Boss::DeleteColliders()
 			iPoint temp;
 			temp.x = pos.x + 8 + i * 16;
 			temp.y = pos.y + 8 + n * 16;
-			App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = NOT_COLISION_ID;
-			App->map->V_Colision[1]->data[((temp.y - 16) / 16) *  App->map->data.height + temp.x / 16] = NOT_COLISION_ID;
+			App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.width + temp.x / 16] = NOT_COLISION_ID;
+			App->map->V_Colision[1]->data[((temp.y - 16) / 16) *  App->map->data.width + temp.x / 16] = NOT_COLISION_ID;
 		}
 	}
 	colision_tiles_vec.clear();
@@ -550,7 +550,10 @@ void Boss::DeleteColliders()
 		if ((*it) == jump_1 || (*it) == jump_2 || (*it) == jump_3 || (*it) == jump_4) {
 			(*it)->collider->to_delete = true;
 			it = App->object->V_Objects.erase(it);
-			
+						
+		}
+		else {
+			it++;
 		}
 	}
    //App->object->V_Objects
@@ -560,7 +563,7 @@ Boss::Boss()
 {
 		Legs temp_legs;
 		temp_legs.parent_boss = this;
-		pos = { 200,200 };
+		pos = {1520,1120 };
 
 		collider = App->collision->AddCollider({ pos.x,pos.y, 240,240 }, collider_boss, this, (j1Module*)App->enemy);
 		centre_pos = { pos.x + collider->rect.w / 2 , pos.y + collider->rect.h / 2 };
@@ -657,8 +660,8 @@ void Foot::CreateFootColliders()
 		for (int n = 1; n < foot_rect.h / 16 - 1; n++) {
 			temp.x = pos.x + i * 16;
 			temp.y = pos.y + n * 16;
-			if (App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] == NOT_COLISION_ID) {
-				App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.height + temp.x / 16] = App->map->CANT_PASS_COL_ID;
+			if (App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.width + temp.x / 16] == NOT_COLISION_ID) {
+				App->map->V_Colision[0]->data[(temp.y / 16) * App->map->data.width + temp.x / 16] = App->map->CANT_PASS_COL_ID;
 				foot_collider_tiles.push_back(temp);
 			}
 		}
@@ -669,7 +672,7 @@ void Foot::DeleteFootColliders()
 {
 	iPoint temp = { 0,0 };
 	for (int i = 0; i < foot_collider_tiles.size(); i++) {
-		App->map->V_Colision[0]->data[(foot_collider_tiles[i].y / 16) * App->map->data.height + foot_collider_tiles[i].x / 16] = NOT_COLISION_ID;
+		App->map->V_Colision[0]->data[(foot_collider_tiles[i].y / 16) * App->map->data.width + foot_collider_tiles[i].x / 16] = NOT_COLISION_ID;
 	}
 	foot_collider_tiles.clear();
 }
