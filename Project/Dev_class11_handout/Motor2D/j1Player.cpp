@@ -62,7 +62,7 @@ bool j1Player::Start()
 	Zelda->character_direction = direction::down;
 
 	Link->LoadAnimation("sprites/Link_Spritesheet_Finale.xml");
-	Zelda->LoadAnimation("sprites/Zelda_Spritesheet_Finale.xml");
+	Zelda->LoadAnimation("sprites/Zelda_Sprites.xml");
 
 	selected_character = Link;
 	other_character = Zelda;
