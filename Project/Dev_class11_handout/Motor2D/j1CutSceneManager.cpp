@@ -12,7 +12,7 @@
 #include"j1Player.h"
 #include"j1App.h"
 #include"j1Scene.h"
-
+#include"j1Camera.h"
 
 //TODO 5.1: open the IntroCutscene.xml (in data.zip, in cutscenes folder) and fill THESE ELEMENTS correctly with this info:
 //Image -> n = 0; name = BackgroundPokemon; x = -100; y = 0; tex_x = 0; tex_y = 0; tex_w = 1080; tex_h = 514; active = false; file = textures/PokemonBackground.png;
@@ -445,7 +445,8 @@ bool Cutscene::DrawElements()
 		{
 			if (it._Ptr->_Myval->active == true)
 			{
-				((CS_Image*)(*it))->image->DrawWithAlternativeAtlas(((CS_Image*)(*it))->tex);
+				((CS_Image*)(*it))->image->DrawWithAlternativeAtlas(((CS_Image*)(*it))->tex,false);
+				//(((CS_Image*)(*it))->tex)
 			}
 		}
 	}
@@ -506,6 +507,7 @@ bool Cutscene::LoadImg(pugi::xml_node& node)
 	bool ret = false;
 	if (node != NULL)
 	{
+		
 		iPoint pos(node.attribute("x").as_int(0), node.attribute("y").as_int(0));
 		SDL_Rect rect = { node.attribute("rectx").as_int(0), node.attribute("recty").as_int(0), node.attribute("rectw").as_int(0), node.attribute("recth").as_int(0) };
 		std::string str = node.attribute("file").as_string("");
