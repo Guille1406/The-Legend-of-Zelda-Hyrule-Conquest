@@ -45,6 +45,7 @@
 #include "S_SecretExit.h"
 #include "S_Village.h"
 #include "S_Forest.h"
+#include "S_VideoIntro.h"
 
 #include"Enemy_Test_Scene.h"
 
@@ -67,6 +68,9 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
+	//Video
+	scene_list.push_back(new S_VideoIntro);
+	(*scene_list.back()).scene_name = Scene_ID::introvideo;
 	//Main menu
 	scene_list.push_back(new S_MainMenu);
 	(*scene_list.back()).scene_name = Scene_ID::mainmenu;
@@ -199,7 +203,7 @@ bool j1Scene::Start()
 		for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend() && ret == true; ++item)
 		{
 			ret = (*item)->Awake(config.child((*item)->scene_str.c_str()));//send here xml for gui text
-			if ((*item)->scene_name == Scene_ID::mainmenu)
+			if ((*item)->scene_name == Scene_ID::introvideo)
 			{
 				main_active_scene = (*item);
 				sub_active_scene = (*item);

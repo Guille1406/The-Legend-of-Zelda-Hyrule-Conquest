@@ -265,6 +265,9 @@
     <ClCompile Include="theoraplay.c">
       <Filter>Desenvolupament  ========\Modules\Video</Filter>
     </ClCompile>
+    <ClCompile Include="S_VideoIntro.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Video Intro</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -618,6 +621,9 @@
     <ClInclude Include="theoraplay.h">
       <Filter>Desenvolupament  ========\Modules\Video</Filter>
     </ClInclude>
+    <ClInclude Include="S_VideoIntro.h">
+      <Filter>Desenvolupament  ========\Scenes\Video Intro</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Desenvolupament  ========">
@@ -700,6 +706,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Modules\Video">
       <UniqueIdentifier>{1caa68f5-2164-49ab-9bcd-7c772d4308f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\Video Intro">
+      <UniqueIdentifier>{a588e853-cb63-4236-9f9a-010c75e33ffb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

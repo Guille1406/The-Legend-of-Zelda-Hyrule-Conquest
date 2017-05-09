@@ -17,6 +17,7 @@
 
 enum Scene_ID {
 	//Main menu
+	introvideo,
 	mainmenu,
 	campaign,
 	options,

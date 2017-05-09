@@ -158,6 +158,7 @@
     <ClCompile Include="S_OptionsVideo.cpp" />
     <ClCompile Include="S_QuitGame.cpp" />
     <ClCompile Include="S_SecretExit.cpp" />
+    <ClCompile Include="S_VideoIntro.cpp" />
     <ClCompile Include="S_Village.cpp" />
     <ClCompile Include="S_World.cpp" />
     <ClCompile Include="S_Temporal_Boss_Room.cpp" />
@@ -276,6 +277,7 @@
     <ClInclude Include="S_OptionsVideo.h" />
     <ClInclude Include="S_QuitGame.h" />
     <ClInclude Include="S_SecretExit.h" />
+    <ClInclude Include="S_VideoIntro.h" />
     <ClInclude Include="S_Village.h" />
     <ClInclude Include="S_World.h" />
     <ClInclude Include="O_Switch.h" />

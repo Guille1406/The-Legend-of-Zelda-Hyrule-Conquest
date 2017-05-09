@@ -73,7 +73,7 @@ private:
 	uint backgroundcharactersspeed = 10;
 	int spacebetweenbackgroundcharacters = 500;
 	bool firstloop = false;
-	bool freeze = false;
+	bool freeze = true;
 };
 
 #endif // __j1GAMESTARTBACKGROUND_H__
