@@ -1,0 +1,199 @@
+<!-- All dialogues for the game -->
+
+<DialogueManager>
+  
+  <!-- Cutscenes -->
+  <Cutscenes>
+    <!-- castle_1 -->
+    <cutscene enum_value = "0">
+      
+    </cutscene>
+      
+    <!-- castle_2 -->
+    <cutscene enum_value = "1">
+      
+    </cutscene>
+        
+    <!-- castle_3 -->
+    <cutscene enum_value = "2">
+      
+    </cutscene>
+      
+    <!-- castle_sewers_1 -->
+    <cutscene enum_value = "3">
+      
+    </cutscene>
+      
+    <!-- castle_sewers_2 -->
+    <cutscene enum_value = "4">
+      
+    </cutscene>
+      
+    <!-- castle_exit_1 -->
+    <cutscene enum_value = "5">
+      
+    </cutscene>
+        
+    <!-- castle_exit_2 -->
+    <cutscene enum_value = "6">
+      
+    </cutscene>
+      
+    <!-- castle_exit_3 -->
+    <cutscene enum_value = "7">
+      
+    </cutscene>
+      
+    <!-- forest_1 -->
+    <cutscene enum_value = "8">
+      
+    </cutscene>
+        
+    <!-- forest_2 -->
+    <cutscene enum_value = "9">
+      
+    </cutscene>
+      
+    <!-- temple_1 -->
+    <cutscene enum_value = "10">
+      
+    </cutscene>
+    
+    <!-- temple_2 -->
+    <cutscene enum_value = "11">
+      
+    </cutscene>
+        
+    <!-- truth_1 -->
+    <cutscene enum_value = "12">
+      
+    </cutscene>
+      
+    <!-- truth_2 -->
+    <cutscene enum_value = "13">
+      
+    </cutscene>
+      
+    <!-- truth_3 -->
+    <cutscene enum_value = "14">
+      
+    </cutscene>
+      
+    <!-- truth_4 -->
+    <cutscene enum_value = "15">
+      
+    </cutscene>
+        
+    <!-- truth_5 -->
+    <cutscene enum_value = "16">
+      
+    </cutscene>
+      
+    <!-- castle_doors -->
+    <cutscene enum_value = "17">
+      
+    </cutscene>
+      
+    <!-- castle_yard_1 -->
+    <cutscene enum_value = "18">
+      
+    </cutscene>
+        
+    <!-- castle_yard_2 -->
+    <cutscene enum_value = "19">
+      
+    </cutscene>
+      
+    <!-- castle_yard_3 -->
+    <cutscene enum_value = "20">
+      
+    </cutscene>
+    
+    <!-- castle_yard_4 -->
+    <cutscene enum_value = "19">
+      
+    </cutscene>
+      
+    <!-- castle_yard_5 -->
+    <cutscene enum_value = "20">
+      
+    </cutscene>
+        
+    <!-- castle_intro -->
+    <cutscene enum_value = "0">
+      <!-- Step 1 -->
+      <step speaker = "king" listener = "messenger" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="1524" speaker_rec_y ="0" speaker_rec_w ="508" speaker_rec_h ="637" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Thank you Link for coming as soon as you were warned. News has come to us that a dark</line>
+        <line>force is planning to seize the triforce.</line>
+	    </step>
+      <!-- Step 2 -->
+      <step speaker = "messenger" listener = "king" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x ="0"  listener_rec_y ="0" listener_rec_w ="508" listener_rec_h ="637">
+        <line>Quite so. And it 's your duty prevent it.</line>
+      </step>
+      <!-- Step 3 -->
+      <step speaker = "king" listener = "messenger" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="1016" speaker_rec_y ="0" speaker_rec_w ="508" speaker_rec_h ="637" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+        <line>She is our unknown informant. As she said, we call you to come because the kingdom</line>
+        <line>needs you. With your strength and courage, you have served this kingdom in its</line>
+        <line>darkest She is our unknown informant. As she said, we call you moments, and now we</line>
+        <line>request your help again to protect the triforce.</line>
+      </step>
+      <!-- Step 4 -->
+      <step speaker = "guard" listener = "king" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x ="0"  listener_rec_y ="0" listener_rec_w ="508" listener_rec_h ="637">
+        <line>We are being attacked, my lord! The main entrance has been demolished!</line>
+      </step>
+      <!-- Step 5 -->
+      <step speaker = "messenger" listener = "king" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x ="0"  listener_rec_y ="0" listener_rec_w ="508" listener_rec_h ="637">
+        <line>****, they were fastest than I thought.</line>
+      </step>
+      <!-- Step 6 -->
+      <step speaker = "king" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="508" speaker_rec_y ="0" speaker_rec_w ="508" speaker_rec_h ="637" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+        <line>Oh no! Command the guards to protect at all costs the throne room. Link, take</line>
+        <line>my daughter and scape. I trust her to you. Don't let me. Please.</line>
+      </step>
+      <!-- Step 7 -->
+      <step speaker = "messenger" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+        <line>Take the secret path to the sewers, i'll help the guard.</line>
+      </step>
+      <!-- Step 8 -->
+      <step speaker = "zelda" listener = "messenger" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+        <line>Wait a moment, how do you know about the...</line>
+      </step>
+      <!-- Step 9 -->
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+        <line>Hurry!</line>
+      </step>
+      <!-- Step 10 -->
+      <step speaker = "zelda" listener = "link" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+        <line>Hey, what are you doing? Let me go! I don't wanna leave this place. Are you</line>
+        <line>listening?</line>
+      </step>
+    </cutscene>
+  </Cutscenes>
+      
+  <!-- NPC -->
+  <NPCs>
+    <!-- Ric -->
+    <npc  enum_value = "100">
+      <step>
+	    <line>Hello.</line>
+	  </step>
+	  <step>
+	    <line>I'm not the ric you think.</line>
+	  </step>
+	  <step>
+	    <line>Yay.</line>
+	  </step>
+    </npc>
+  </NPCs>
+  
+  <!-- Item -->
+  <Items>
+    <!-- SmallChest -->
+    <item enum_value = "101">
+      <step>
+	    <line>You need an small key.</line>
+	  </step>
+    </item>
+  </Items>
+  
+</DialogueManager>
