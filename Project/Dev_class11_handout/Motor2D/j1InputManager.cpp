@@ -35,8 +35,37 @@ bool j1InputManager::Awake(pugi::xml_node& conf)
 		actions_zelda.insert(new_action);
 	}
 
+	for (pugi::xml_node tmp = conf.child("action2"); tmp != nullptr; tmp = tmp.next_sibling())
+	{
+		std::pair<int, INPUTEVENT> new_action;
+		new_action.first = tmp.attribute("button").as_int();
+		new_action.second = (INPUTEVENT)tmp.attribute("event").as_int();
+
+		actions_link2.insert(new_action);
+		actions_zelda2.insert(new_action);
+		
+	}
+
 
 	return ret;
+}
+
+void j1InputManager::ChangeInput() {
+
+	
+
+	std::multimap<int, INPUTEVENT> new_action_l;
+	std::multimap<int, INPUTEVENT> new_action_z;
+
+	new_action_l = actions_link;
+	new_action_z = actions_zelda;
+
+	actions_link = actions_link2;
+	actions_zelda = actions_zelda2;
+	
+	actions_link2 = new_action_l;
+	actions_zelda2 = new_action_z;
+
 }
 
 // Called before all Updates
@@ -51,6 +80,12 @@ bool j1InputManager::Update(float dt)
 	if (EventPressed(PAUSE, 0) == E_DOWN)
 	{
 		ChangeInputEvent(MUP);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN){
+		ChangeInput();
+		
+
 	}
 
 

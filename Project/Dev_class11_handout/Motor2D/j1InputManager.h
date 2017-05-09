@@ -72,6 +72,8 @@ public:
 	//To Change the action button
 	void ChangeInputEvent(INPUTEVENT);
 
+	void ChangeInput();
+
 
 	//For Polling
 	EVENTSTATE EventPressed(INPUTEVENT,int) const;
@@ -87,6 +89,8 @@ private:
 	//All the actions possible int->button, INPUTEVENT->attack, moveup...
 	std::multimap<int, INPUTEVENT> actions_link;
 	std::multimap<int, INPUTEVENT> actions_zelda;
+	std::multimap<int, INPUTEVENT> actions_link2;
+	std::multimap<int, INPUTEVENT> actions_zelda2;
 
 	//All the actions in this frame
 	std::multimap<INPUTEVENT, EVENTSTATE> current_action_link;

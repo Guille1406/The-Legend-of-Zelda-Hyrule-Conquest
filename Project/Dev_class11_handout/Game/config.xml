@@ -75,6 +75,34 @@
 
     <!--PAUSE-->
     <action  button="6"  event="8" />
+    
+    
+   <!--ATTACK-->
+    <action2  button="10" event="0" />
+
+    <!--PICK-->
+    <action2  button="2" event="1" />
+    
+    <!--COVER-->
+    <action2  button="3" event="2" /> 
+    
+    <!--TUMBLE-->
+    <action2  button="0" event="3" />
+    
+    <!--Move UP-->
+    <action2  button="11" event="4" />
+
+    <!--Move DOWN-->
+    <action2  button="12" event="5" />
+
+    <!--Move LEFT-->
+    <action2  button="13" event="6" />
+
+    <!--Move RIGHT-->
+    <action2  button="14" event="7" />
+
+    <!--PAUSE-->
+    <action2  button="6"  event="8" />
 
 
   </inputManager>
