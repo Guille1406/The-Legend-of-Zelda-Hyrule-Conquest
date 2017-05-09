@@ -844,8 +844,10 @@ void j1Object::StartCollision(Collider * collider1, Collider * collider2)
 	}
 	
 	else if (collider1->type == collider_warp) {
-		Warp* temp = (Warp*)collider1->parent;
-		temp->Action();
+		if (!App->player->Link->doing_script && !App->player->Zelda->doing_script) {
+			Warp* temp = (Warp*)collider1->parent;
+			temp->Action();
+		}
 
 	}
 	
@@ -854,13 +856,7 @@ void j1Object::StartCollision(Collider * collider1, Collider * collider2)
 		character->ChangeLogicHeightPlayer(temp->height);
 
 	}
-	else if (collider1->type == collider_bush) {
-		Object* temp = (Object*)collider1->parent;
-		App->object->DeleteCollider(*temp);
-		temp->active = false;
-		temp->collider->to_delete = true;
 
-	}
 
 	
 	

@@ -756,6 +756,13 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 		int x = 0;
 
 	}
+	else if (collider2->type == collider_bush) {
+		Object* temp = (Object*)collider2->parent;
+		App->object->DeleteCollider(*temp);
+		temp->active = false;
+		temp->collider->to_delete = true;
+
+	}
 
 }
 
