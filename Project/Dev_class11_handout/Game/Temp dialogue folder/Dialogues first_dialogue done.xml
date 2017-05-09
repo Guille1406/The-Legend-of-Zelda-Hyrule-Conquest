@@ -19,12 +19,13 @@
     <cutscene enum_value = "1">
       <!-- Step 1 -->
       <!-- Masked entra en escena. -->
-      <step speaker = "king" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+      <!-- masked - -->
+      <step speaker = "messenger" listener = "king" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
 	      <line>Quite so. And it 's your duty prevent it.</line>
 	    </step>
       <!-- Step 2 -->
       <!-- King serio - -->
-      <step speaker = "king" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+      <step speaker = "king" listener = "messenger" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
 	      <line>She is our unknown informant. As she said, we call you to come because the kingdom</line>
         <line>needs you. With your strength and courage, you have served this kingdom in its</line>
         <line>darkest moments, and now we request your help again to protect the triforce.</line>
@@ -35,20 +36,28 @@
     <cutscene enum_value = "2">
       <!-- Step 1 -->
       <!-- Entra un guardia -->
-      <step speaker = "king" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+      <!--  -->
+      <step speaker = "guard" listener = "king" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
 	      <line>We are being attacked, my lord! The main entrance has been demolished!</line>
 	    </step>
       <!-- Step 2 -->
-      <step speaker = "king" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+      <!-- masked - -->
+      <step speaker = "messenger" listener = "king" speaker_pos = "left" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
 	      <line>****, they were fastest than I thought.</line>
 	    </step>
       <!-- Step 3 -->
-      <step speaker = "king" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
-	      <line>Oh no! Command the guards to protect at all costs the throne room. Link, take my</line>
-        <line>daughter and scape. I trust her to you. Don't let me. Please.</line>
+      <!-- king 2 - -->
+      <step speaker = "king" listener = "guard" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Oh no! Command the guards to protect at all costs the throne room. </line>
 	    </step>
-      <!-- Step 4 -->
+      <!-- Step 3 -->
+      <!-- king 2 - -->
       <step speaker = "king" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+        <line>Link, take my daughter and scape. I trust her to you. Don't let me. Please.</line>
+      </step>
+      <!-- Step 4 -->
+      <!-- masked - -->
+      <step speaker = "messenger" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
 	      <line>Take the secret path to the sewers, i'll help the guard.</line>
 	    </step>
       <!-- Salen de escena. -->
