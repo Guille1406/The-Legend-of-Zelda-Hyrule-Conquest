@@ -9,9 +9,9 @@
 
 enum DialogueID {
 	//Cutscene Dialogue
-	castle_intro,
-	castle_sewers_entrance,
-	castle_sewers_exit,
+	castle_1,
+	castle_2,
+	castle_3,
 
 	//NPC Dialogue
 	

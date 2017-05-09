@@ -523,13 +523,13 @@ bool Cutscene::LoadText(pugi::xml_node& node)
 		DialogueID id = DialogueID::NullID;
 		std::string id_string = node.attribute("name").as_string("");
 		if (id_string == "castle_intro" ) {
-			id = DialogueID::castle_intro;
+			id = DialogueID::castle_1;
 		}
 		else if (id_string == "castle_sewers_entrance") {
-			id = DialogueID::castle_sewers_entrance;
+			id = DialogueID::castle_2;
 		}
 		else if (id_string == "castle_sewers_exit") {
-			id = DialogueID::castle_sewers_exit;
+			id = DialogueID::castle_3;
 		}
 
 		elements.push_back(new CS_Text(CS_Type::CS_TEXT, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), id));

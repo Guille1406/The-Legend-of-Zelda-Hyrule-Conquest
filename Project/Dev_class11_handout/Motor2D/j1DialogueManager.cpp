@@ -188,11 +188,11 @@ bool j1DialogueManager::Update(float dt)
 	//Test code
 	//Different dialogues
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-		App->dialoguemanager->ActivateDialogue(DialogueID::castle_intro);
+		App->dialoguemanager->ActivateDialogue(DialogueID::castle_1);
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-		App->dialoguemanager->ActivateDialogue(DialogueID::castle_sewers_entrance);
+		App->dialoguemanager->ActivateDialogue(DialogueID::castle_2);
 	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-		App->dialoguemanager->ActivateDialogue(DialogueID::castle_sewers_exit);
+		App->dialoguemanager->ActivateDialogue(DialogueID::castle_3);
 	//Pause/resume dialogue
 	if (App->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
 		PauseActiveDialogue();
