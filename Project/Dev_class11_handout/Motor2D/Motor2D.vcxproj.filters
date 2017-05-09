@@ -259,6 +259,12 @@
     <ClCompile Include="S_Forest.cpp">
       <Filter>Desenvolupament  ========\Scenes\World</Filter>
     </ClCompile>
+    <ClCompile Include="Video.cpp">
+      <Filter>Desenvolupament  ========\Modules\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="theoraplay.c">
+      <Filter>Desenvolupament  ========\Modules\Video</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -606,6 +612,12 @@
     <ClInclude Include="S_Forest.h">
       <Filter>Desenvolupament  ========\Scenes\World</Filter>
     </ClInclude>
+    <ClInclude Include="Video.h">
+      <Filter>Desenvolupament  ========\Modules\Video</Filter>
+    </ClInclude>
+    <ClInclude Include="theoraplay.h">
+      <Filter>Desenvolupament  ========\Modules\Video</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Desenvolupament  ========">
@@ -685,6 +697,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Scenes\World">
       <UniqueIdentifier>{6ddf1a63-ba02-40d5-a3ba-000c5d033270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Modules\Video">
+      <UniqueIdentifier>{1caa68f5-2164-49ab-9bcd-7c772d4308f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -161,6 +161,8 @@
     <ClCompile Include="S_Village.cpp" />
     <ClCompile Include="S_World.cpp" />
     <ClCompile Include="S_Temporal_Boss_Room.cpp" />
+    <ClCompile Include="theoraplay.c" />
+    <ClCompile Include="Video.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -278,6 +280,8 @@
     <ClInclude Include="S_World.h" />
     <ClInclude Include="O_Switch.h" />
     <ClInclude Include="S_Temporal_Boss_Room.h" />
+    <ClInclude Include="theoraplay.h" />
+    <ClInclude Include="Video.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Game\config.xml" />

@@ -25,6 +25,7 @@
 #include "j1Object.h"
 #include "j1Enemy.h"
 #include "j1HUD.h"
+#include "Video.h"
 #include "j1GameStartMenuBack.h"
 #include "j1DialogueManager.h"
 #include "ParticleManager.h"
@@ -60,6 +61,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	dialoguemanager = new j1DialogueManager();
 	particlemanager = new ParticleManager();
 	cutscenemanager = new j1CutSceneManager();
+	videoplayer = new Video();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -88,6 +90,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(cutscenemanager);
 	AddModule(dialoguemanager);
 	AddModule(fadetoblack);
+	AddModule(videoplayer);
 
 	//Console
 	AddModule(console);

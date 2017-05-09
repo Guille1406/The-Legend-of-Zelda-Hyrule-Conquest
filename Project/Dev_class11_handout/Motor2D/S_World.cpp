@@ -17,6 +17,7 @@
 #include"j1GameStartMenuBack.h"
 #include "S_InGameMenu.h"
 #include"j1CutSceneManager.h"
+#include "Video.h"
 
 bool S_World::Start()
 {
@@ -83,6 +84,10 @@ bool S_World::Start()
 	App->player->Zelda->logic_height = 1;
 	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
 	LOG("World Open");
+
+	SDL_Rect r = { 0,0,300,300 };
+	App->videoplayer->PlayVideo("video.ogv", r);
+
 	return false;
 }
 

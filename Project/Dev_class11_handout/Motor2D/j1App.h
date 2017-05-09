@@ -34,6 +34,7 @@ class j1GameStartMenuBackground;
 class j1DialogueManager;
 class ParticleManager;
 class j1CutSceneManager;
+class Video;
 
 enum SaveLoadType {
 	Module,
@@ -139,6 +140,7 @@ public:
 	j1DialogueManager*	dialoguemanager = nullptr;
 	ParticleManager*	particlemanager = nullptr;
 	j1CutSceneManager*	cutscenemanager = nullptr;
+	Video*				videoplayer = nullptr;
 
 private:
 	std::list<j1Module*> modules;
