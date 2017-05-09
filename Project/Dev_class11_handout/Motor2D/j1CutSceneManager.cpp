@@ -522,13 +522,13 @@ bool Cutscene::LoadText(pugi::xml_node& node)
 	{
 		DialogueID id = DialogueID::NullID;
 		std::string id_string = node.attribute("name").as_string("");
-		if (id_string == "castle_intro" ) {
+		if (id_string == "castle_1" ) {
 			id = DialogueID::castle_1;
 		}
-		else if (id_string == "castle_sewers_entrance") {
+		else if (id_string == "castle_2") {
 			id = DialogueID::castle_2;
 		}
-		else if (id_string == "castle_sewers_exit") {
+		else if (id_string == "castle_3") {
 			id = DialogueID::castle_3;
 		}
 
