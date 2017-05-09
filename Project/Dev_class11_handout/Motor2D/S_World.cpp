@@ -85,8 +85,10 @@ bool S_World::Start()
 	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
 	LOG("World Open");
 
+	/*
 	SDL_Rect r = { 0,0,300,300 };
 	App->videoplayer->PlayVideo("video.ogv", r);
+	*/
 
 	return false;
 }
