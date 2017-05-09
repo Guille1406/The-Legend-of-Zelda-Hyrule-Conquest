@@ -91,9 +91,7 @@ bool S_Ric_House::Update()
 
 bool S_Ric_House::PostUpdate()
 {
-	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
-		App->scene->ChangeScene(Scene_ID::tempbossroom);
-	}
+	
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) {
 		App->scene->ChangeScene(Scene_ID::testenemies);
 	}

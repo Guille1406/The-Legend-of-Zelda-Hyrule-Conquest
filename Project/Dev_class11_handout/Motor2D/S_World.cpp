@@ -103,11 +103,6 @@ bool S_World::Update()
 
 bool S_World::PostUpdate()
 {
-	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
-		App->scene->ChangeScene(Scene_ID::tempbossroom);
-		App->player->Link->pos = { 102 * 16,108 * 16 };
-		App->player->Zelda->pos = { 102 * 16,108 * 16 };
-	}
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) {
 		App->scene->ChangeScene(Scene_ID::testenemies);
 	}

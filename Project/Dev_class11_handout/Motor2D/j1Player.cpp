@@ -171,6 +171,13 @@ bool j1Player::PostUpdate()
 		App->player->Link->logic_height = 0;
 		App->player->Zelda->logic_height = 0;
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
+		App->scene->ChangeScene(Scene_ID::tempbossroom);
+		App->player->Link->pos = { 102 * 16,108 * 16 };
+		App->player->Zelda->pos = { 102 * 16,108 * 16 };
+	}
+
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) { //DUNGEON SECOND FLOOR CENTER
 		App->scene->ChangeScene(Scene_ID::dungeon_second_floor_right);
 		App->player->Link->pos = { 660,500 };

@@ -555,13 +555,14 @@ void Enemy::Rang_Player() {
 					}
 				}
 			}
+		}
 			else {
 				if (type == enemyType::hyrulebombsoldier_enemy) {
 					this->player_in_range = nullptr;
 				}
 			}
 		}
-	}
+	
 
 }
 
@@ -638,7 +639,6 @@ void Enemy::UpdateState()
 		}
 		else {
 			if (type == enemyType::hyrulebombsoldier_enemy) {
-				
 				state = EnemyState::throwing_bomb;
 			}
 			else if (type == enemyType::statue_enemy) {
