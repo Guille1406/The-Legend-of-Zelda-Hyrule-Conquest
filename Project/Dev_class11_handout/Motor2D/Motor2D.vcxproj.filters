@@ -268,6 +268,18 @@
     <ClCompile Include="S_VideoIntro.cpp">
       <Filter>Desenvolupament  ========\Scenes\Video Intro</Filter>
     </ClCompile>
+    <ClCompile Include="S_House_1.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Houses</Filter>
+    </ClCompile>
+    <ClCompile Include="S_House_2.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Houses</Filter>
+    </ClCompile>
+    <ClCompile Include="S_House_3.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Houses</Filter>
+    </ClCompile>
+    <ClCompile Include="S_Ric_House.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Houses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -624,6 +636,18 @@
     <ClInclude Include="S_VideoIntro.h">
       <Filter>Desenvolupament  ========\Scenes\Video Intro</Filter>
     </ClInclude>
+    <ClInclude Include="S_House_1.h">
+      <Filter>Desenvolupament  ========\Scenes\Houses</Filter>
+    </ClInclude>
+    <ClInclude Include="S_House_2.h">
+      <Filter>Desenvolupament  ========\Scenes\Houses</Filter>
+    </ClInclude>
+    <ClInclude Include="S_House_3.h">
+      <Filter>Desenvolupament  ========\Scenes\Houses</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Ric_House.h">
+      <Filter>Desenvolupament  ========\Scenes\Houses</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Desenvolupament  ========">
@@ -709,6 +733,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Scenes\Video Intro">
       <UniqueIdentifier>{a588e853-cb63-4236-9f9a-010c75e33ffb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\Houses">
+      <UniqueIdentifier>{a8968255-4cd2-4515-b855-88656ac06b37}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

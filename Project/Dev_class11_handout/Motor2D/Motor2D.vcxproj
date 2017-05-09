@@ -140,6 +140,9 @@
     <ClCompile Include="S_Dungeon_SecondFloor_Right.cpp" />
     <ClCompile Include="S_End.cpp" />
     <ClCompile Include="S_Forest.cpp" />
+    <ClCompile Include="S_House_1.cpp" />
+    <ClCompile Include="S_House_2.cpp" />
+    <ClCompile Include="S_House_3.cpp" />
     <ClCompile Include="S_InGameMenu.cpp" />
     <ClCompile Include="S_MainMenu.cpp" />
     <ClCompile Include="j1FadeToBlack.cpp" />
@@ -157,6 +160,7 @@
     <ClCompile Include="S_OptionsGameplay.cpp" />
     <ClCompile Include="S_OptionsVideo.cpp" />
     <ClCompile Include="S_QuitGame.cpp" />
+    <ClCompile Include="S_Ric_House.cpp" />
     <ClCompile Include="S_SecretExit.cpp" />
     <ClCompile Include="S_VideoIntro.cpp" />
     <ClCompile Include="S_Village.cpp" />
@@ -244,6 +248,9 @@
     <ClInclude Include="S_Dungeon_SecondFloor_Right.h" />
     <ClInclude Include="S_End.h" />
     <ClInclude Include="S_Forest.h" />
+    <ClInclude Include="S_House_1.h" />
+    <ClInclude Include="S_House_2.h" />
+    <ClInclude Include="S_House_3.h" />
     <ClInclude Include="S_InGameMenu.h" />
     <ClInclude Include="S_MainMenu.h" />
     <ClInclude Include="j1FadeToBlack.h" />
@@ -276,6 +283,7 @@
     <ClInclude Include="S_OptionsGameplay.h" />
     <ClInclude Include="S_OptionsVideo.h" />
     <ClInclude Include="S_QuitGame.h" />
+    <ClInclude Include="S_Ric_House.h" />
     <ClInclude Include="S_SecretExit.h" />
     <ClInclude Include="S_VideoIntro.h" />
     <ClInclude Include="S_Village.h" />

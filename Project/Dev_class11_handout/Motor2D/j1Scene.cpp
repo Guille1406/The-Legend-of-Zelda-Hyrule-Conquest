@@ -46,6 +46,10 @@
 #include "S_Village.h"
 #include "S_Forest.h"
 #include "S_VideoIntro.h"
+#include "S_House_1.h"
+#include "S_House_2.h"
+#include "S_House_3.h"
+#include "S_Ric_House.h"
 
 #include"Enemy_Test_Scene.h"
 
@@ -120,6 +124,33 @@ bool j1Scene::Start()
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::village;
 	scene_pointer = nullptr;
+
+	scene_pointer = new S_House_1;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::house_1;
+	scene_pointer = nullptr;
+
+	scene_pointer = new S_House_2;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::house_2;
+	scene_pointer = nullptr;
+
+
+	scene_pointer = new S_House_3;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::house_3;
+	scene_pointer = nullptr;
+
+
+	scene_pointer = new S_Ric_House;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::ric_house;
+	scene_pointer = nullptr;
+
 
 
 	scene_pointer = new S_Forest;

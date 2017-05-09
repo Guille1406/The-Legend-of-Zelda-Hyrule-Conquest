@@ -2,9 +2,14 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" nextobjectid="4">
  <tileset firstgid="1" name="tileset casa" tilewidth="16" tileheight="16" tilecount="1196" columns="46">
   <image source="tileset casa.png" width="739" height="416"/>
+  <tile id="0">
+   <properties>
+    <property name="y" type="int" value="39"/>
+   </properties>
+  </tile>
  </tileset>
  <tileset firstgid="1197" name="collision tileset" tilewidth="16" tileheight="16" tilecount="13" columns="13">
-  <image source="The-Legend-of-Zelda-Hyrule-Conquest/Project/Dev_class11_handout/Game/Temp map folder/collision tileset.png" width="221" height="16"/>
+  <image source="collision tileset.png" width="221" height="16"/>
  </tileset>
  <layer name="floor" width="30" height="30">
   <data encoding="csv">
@@ -142,7 +147,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="Collisions 1" width="30" height="30" visible="0">
+ <layer name="Collisions 1" width="30" height="30">
   <properties>
    <property name="Navigation" type="int" value="1"/>
   </properties>
@@ -165,7 +170,7 @@
 0,0,0,1200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1200,0,0,0,
 0,0,0,1200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1200,0,0,0,
 0,0,0,1200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1200,0,0,0,
-0,0,0,1200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1200,0,0,0,
+0,0,0,1200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1200,1200,1200,1200,1200,1200,0,0,1200,0,0,0,
 0,0,0,1200,0,0,0,0,0,0,0,0,0,0,0,0,1200,1200,1200,1200,1200,1200,1200,1200,1200,1200,1200,0,0,0,
 0,0,0,1200,0,0,0,0,0,0,0,0,0,0,0,0,1200,1200,1200,1200,1200,1200,1200,1200,1200,1200,1200,0,0,0,
 0,0,0,1200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1200,1200,1200,1200,1200,1200,0,0,1200,0,0,0,
@@ -179,7 +184,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="Colisions 2" width="30" height="30" visible="0">
+ <layer name="Colisions 2" width="30" height="30">
   <properties>
    <property name="Navigation" type="int" value="1"/>
   </properties>
@@ -221,8 +226,8 @@
    <properties>
     <property name="scene" type="int" value="17"/>
     <property name="type" value="warp"/>
-    <property name="x" type="int" value="0"/>
-    <property name="y" type="int" value="0"/>
+    <property name="x" type="int" value="88"/>
+    <property name="y" type="int" value="92"/>
    </properties>
   </object>
  </objectgroup>

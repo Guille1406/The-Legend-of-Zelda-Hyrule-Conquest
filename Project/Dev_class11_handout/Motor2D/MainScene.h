@@ -50,6 +50,12 @@ enum Scene_ID {
 	testenemies,
 	NullScene,
 
+	//HOUSES
+	house_1 = 30,
+	house_2 = 31,
+	house_3 = 32,
+	ric_house = 33,
+
 };
 
 enum GuiEvent;
