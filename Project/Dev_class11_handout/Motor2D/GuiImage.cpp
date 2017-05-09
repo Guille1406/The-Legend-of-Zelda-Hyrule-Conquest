@@ -19,18 +19,23 @@ void GuiImage::Draw()
 	SubDrawFunction(App->gui->GetAtlas());
 }
 
-void GuiImage::DrawWithAlternativeAtlas(SDL_Texture* alternativeatlas)
+void GuiImage::DrawWithAlternativeAtlas(SDL_Texture* alternativeatlas, bool usecam)
 {
-	SubDrawFunction(alternativeatlas);
+	SubDrawFunction(alternativeatlas, usecam);
 }
 
-void GuiImage::SubDrawFunction(SDL_Texture* atlas)
+void GuiImage::SubDrawFunction(SDL_Texture* atlas, bool usecam)
 {
 	if (this->visible == true)
 	{
-		App->render->Blit(atlas, position.x - App->render->camera.x, position.y - App->render->camera.y, &texture_rect, 1.0f, 0, INT_MAX, INT_MAX, false, opacity);
-		if (App->gui->Gui_DebugDraw_isactive())
-			this->DebugDraw();
+		if (usecam)
+		{
+			App->render->Blit(atlas, position.x - App->render->camera.x, position.y - App->render->camera.y, &texture_rect, 1.0f, 0, INT_MAX, INT_MAX, false, opacity);
+			if (App->gui->Gui_DebugDraw_isactive())
+				this->DebugDraw();
+		}
+		else
+			App->render->Blit(atlas, position.x, position.y, &texture_rect, 1.0f, 0, INT_MAX, INT_MAX, false, opacity);
 	}
 }
 

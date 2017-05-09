@@ -10,11 +10,11 @@ public:
 	~GuiImage();
 
 	void Draw();
-	void DrawWithAlternativeAtlas(SDL_Texture* alternativeatlas);
+	void DrawWithAlternativeAtlas(SDL_Texture* alternativeatlas, bool usecam = true);
 	void SetOpacity(uint newopacity);
 
 private:
-	void SubDrawFunction(SDL_Texture* atlas);
+	void SubDrawFunction(SDL_Texture* atlas, bool usecam = true);
 	void DebugDraw() const;
 
 private:
