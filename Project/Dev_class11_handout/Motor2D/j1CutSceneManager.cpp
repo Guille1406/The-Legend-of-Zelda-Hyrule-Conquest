@@ -550,7 +550,7 @@ bool Cutscene::LoadText(pugi::xml_node& node)
 	bool ret = false;
 	if (node != NULL)
 	{
-		DialogueID id = DialogueID::NullID;
+		DialogueID id = DialogueID::NullID_dialogue;
 		std::string id_string = node.attribute("name").as_string("");
 		if (id_string == "castle_1" ) {
 			id = DialogueID::castle_1_dialogue;

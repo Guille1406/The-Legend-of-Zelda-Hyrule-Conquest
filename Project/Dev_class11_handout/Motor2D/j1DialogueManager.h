@@ -102,7 +102,7 @@ struct Dialogue
 {
 	Dialogue();
 	~Dialogue();
-	DialogueID id = DialogueID::NullID;
+	DialogueID id = DialogueID::NullID_dialogue;
 	DialogueType type = DialogueType::NullType;
 	std::vector<DialogueStep*> DialogueSteps;
 };
