@@ -7,6 +7,7 @@
 #include "S_InGameMenu.h"
 #include "ParticleManager.h"
 #include "j1GameStartMenuBack.h"
+#include "j1Audio.h"
 
 S_MainMenu::S_MainMenu()
 {
@@ -68,6 +69,8 @@ bool S_MainMenu::Awake(pugi::xml_node& conf)
 	buttons.push_back(quit);
 	buttons.push_back(twitter);
 	buttons.push_back(github);
+
+	App->audio->PlayMusic("audio/music/Intro_Song.ogg", 0);
 
 	return true;
 };
