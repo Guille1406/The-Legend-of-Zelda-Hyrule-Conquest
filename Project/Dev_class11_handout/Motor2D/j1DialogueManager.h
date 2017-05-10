@@ -9,53 +9,40 @@
 
 enum DialogueID {
 	//Cutscene Dialogue
-	castle_1,
-	castle_2,
-	castle_3,
+	castle_room_dialogue,
+	castle_1_dialogue,
+	castle_2_dialogue,
+	castle_3_dialogue,
+	castle_sewers_1_dialogue,
+	castle_sewers_2_dialogue,
+	villagev,
+	house_1_dialogue,
+	house_2_dialogue,
+	house_3_dialogue,
+	forest_1_dialogue,
+	forest_2_dialogue,
+	truth_1_dialogue,
+	truth_2_dialogue,
+	truth_3_dialogue,
+	truth_4_dialogue,
+	truth_5_dialogue,
+	castle_doors_dialogue,
+	castle_yard_1_dialogue,
+	castle_yard_2_dialogue,
+	castle_yard_3_dialogue,
+	castle_yard_4_dialogue,
+	castle_yard_5_dialogue,
 
 	//NPC Dialogue
-	
-	NullID
-};
-
-/*
-enum DialogueID {
-	//Cutscene Dialogue
-	castle_room,
-	castle_1,
-	castle_2,
-	castle_3,
-	castle_sewers_1,
-	castle_sewers_2,
-	village,
-	house_1,
-	house_2,
-	house_3,
-	forest_1,
-	forest_2,
-	truth_1,
-	truth_2,
-	truth_3,
-	truth_4,
-	truth_5,
-	castle_doors,
-	castle_yard_1,
-	castle_yard_2,
-	castle_yard_3,
-	castle_yard_4,
-	castle_yard_5,
-
-	//NPC Dialogue
-	ric_with_link,
-	ric_with_zelda,
-	npc_1_with_link,
-	npc_1_with_zelda,
-	npc_2_with_link,
-	npc_2_with_zelda,
+	ric_with_link_dialogue,
+	ric_with_zelda_dialogue,
+	npc_1_with_link_dialogue,
+	npc_1_with_zelda_dialogue,
+	npc_2_with_link_dialogue,
+	npc_2_with_zelda_dialogue,
 
 	NullID
 };
-*/
 
 enum DialogueType {
 	Cutscene_dialoguetype,
