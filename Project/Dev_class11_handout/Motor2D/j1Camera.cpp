@@ -79,17 +79,21 @@ bool j1Camera::PreUpdate()
 	App->render->camera.y = (int)(-Centre.y * Scale + i_Half_h);
 
 	int new_cam_x = App->map->data.width * App->map->data.tile_width * Scale - App->render->camera.w;
-	if(App->render->camera.x >= 0)
-		App->render->camera.x = 0;
-	if (-App->render->camera.x >= new_cam_x)
-		App->render->camera.x = -new_cam_x;
-
+	if (App->map->data.width * App->map->data.tile_width > 1280)
+	{
+		if (App->render->camera.x >= 0)
+			App->render->camera.x = 0;
+		if (-App->render->camera.x >= new_cam_x)
+			App->render->camera.x = -new_cam_x;
+	}
 	int new_cam_y = App->map->data.height * App->map->data.tile_height * Scale - App->render->camera.h;
-	if (App->render->camera.y >= 0)
-		App->render->camera.y = 0;
-	if (-App->render->camera.y >= new_cam_y)
-		App->render->camera.y = -new_cam_y;
-
+	if (App->map->data.height * App->map->data.tile_height > 720)
+	{
+		if (App->render->camera.y >= 0)
+			App->render->camera.y = 0;
+		if (-App->render->camera.y >= new_cam_y)
+			App->render->camera.y = -new_cam_y;
+	}
 	//Ellipss centre
 	iPoint CentrePos = { 0,0 };
 	CentrePos = App->render->WorldToScreen(Centre.x, Centre.y);
