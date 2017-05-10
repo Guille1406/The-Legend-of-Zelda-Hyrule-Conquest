@@ -121,6 +121,12 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 					temp_cutscene->LoadChangeScene(temp);
 				}
 
+				for (temp = elements_node.child("CAMERAS").child("camera"); temp != NULL; temp = temp.next_sibling("camera"))
+				{
+					//LOADCAMERA
+					temp_cutscene->LoadNPC(temp);
+				}
+
 				// -----------------------------------------------------------------------------------
 
 				// LOAD STEPS ---------------------------------
@@ -496,6 +502,28 @@ bool Cutscene::LoadNPC(pugi::xml_node& node)
 		{
 			tmp->LinkEntity(App->game->em->CreateNPC(1, (NPC_TYPE)node.attribute("type").as_int(), node.attribute("x").as_int(), node.attribute("y").as_int(), node.attribute("id").as_int()));
 		}*/
+
+		ret = true;
+	}
+	return ret;
+}
+
+bool Cutscene::LoadCamera(pugi::xml_node &node)
+{
+	bool ret = false;
+	if (node != NULL)
+	{
+		CS_Camera* tmp = new CS_Camera(CS_Type::CS_CAMERA, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), nullptr);
+		this->elements.push_back(tmp);
+
+		if (tmp)
+		{
+			
+			iPoint new_pos = { node.attribute("x").as_int(), node.attribute("y").as_int() };
+			tmp->cam.x = new_pos.x;
+			tmp->cam.y = new_pos.y;
+			tmp->player_cam->Cam_move_paused = node.attribute("following_player").as_bool();
+		}
 
 		ret = true;
 	}
@@ -898,7 +926,14 @@ bool CS_Step::DoMovement(float dt)
 		curr_pos = element->GetPos();
 	}
 
+	if (element->GetType() == CS_CAMERA)
+	{
+		CS_Camera* tmp = (CS_Camera*)element;
+		tmp->cam.x = dest.x;
+		tmp->cam.y = dest.y;
+	}
 	//Check if the action is completed to finish the step
+	if(element->GetType()!= CS_CAMERA)
 	CheckMovementCompleted(curr_pos);
 
 	//LOG("Step %i Moving %s X:%i Y:%i", n, element->name.c_str(), curr_pos.x, curr_pos.y);
@@ -1238,5 +1273,14 @@ CS_ChangeScene::CS_ChangeScene(CS_Type type, int n, const char * name, bool acti
 }
 
 CS_ChangeScene::~CS_ChangeScene()
+{
+}
+
+CS_Camera::CS_Camera(CS_Type type, int n, const char * name, bool active, const char * path):
+	CS_Element(type, n, name, active, path), player_cam(App->camera), cam(App->render->camera)
+{
+}
+
+CS_Camera::~CS_Camera()
 {
 }

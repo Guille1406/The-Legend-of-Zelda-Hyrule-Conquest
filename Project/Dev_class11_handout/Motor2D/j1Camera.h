@@ -65,6 +65,8 @@ public:
 
 	void ResumeCamMovement();
 
+	bool Cam_move_paused = false;
+
 private:
 	float		f_Max_scale = 0.0f;
 	float		f_Min_scale = 0.0f;
@@ -79,7 +81,7 @@ private:
 	std::vector<GuiLabel*> DebugPerformanceData;
 	SDL_Rect DebugPerformanceData_Rect = { 0,0,0,0 };
 
-	bool Cam_move_paused = false;
+	
 
 };
 

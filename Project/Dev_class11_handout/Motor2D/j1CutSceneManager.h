@@ -9,11 +9,13 @@
 #include"GuiImage.h"
 #include"j1DialogueManager.h"
 #include"MainScene.h"
+#include"j1Camera.h"
+#include"j1Render.h"
 
 //TODO 1: Open config.xml and write a new path for the cutscene.
 
-enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_CHANGESCENE, CS_NONE };
-enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_PLAY, ACT_STOP, ACT_NONE, ACT_CHANGESCENE };
+enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_CHANGESCENE, CS_CAMERA, CS_NONE };
+enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_PLAY, ACT_STOP, ACT_NONE, ACT_CHANGESCENE, ACT_DISABLE_CAMERA_PLAYER};
 enum Dir_Type { CS_UP, CS_DOWN, CS_LEFT, CS_RIGHT, NO_DIR };
 enum EntityType_Cutscene {
 
@@ -99,6 +101,17 @@ private:
 	MainScene* scene;
 };
 
+class CS_Camera : public CS_Element
+{
+public:
+	CS_Camera(CS_Type type, int n, const char* name, bool active, const char* path);
+	~CS_Camera();
+	SDL_Rect cam = App->render->camera;
+	j1Camera* player_cam = App->camera;
+
+private:
+	
+};
 
 class CS_Music : public CS_Element
 {
@@ -218,6 +231,7 @@ public:
 
 	//LOAD ELEMENTS FUNCTIONS -------
 	bool LoadNPC(pugi::xml_node&);
+	bool LoadCamera(pugi::xml_node&);
 	bool LoadImg(pugi::xml_node&);
 	bool LoadText(pugi::xml_node&);
 	bool LoadMusic(pugi::xml_node&);
