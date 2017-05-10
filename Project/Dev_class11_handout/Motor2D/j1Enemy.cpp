@@ -813,7 +813,7 @@ void Enemy::DropObject() {
 
 	srand(time(NULL));
 	int what_drope = 0; 
-	what_drope = rand() % 2;
+	what_drope = rand() % 6;
 	switch (what_drope) {
 
 	case 0:
@@ -822,8 +822,6 @@ void Enemy::DropObject() {
 	case 1:
 		App->object->CreateHeart(this, this->logic_height);
 		break;
-
-	case 2:
 		//If we finally add fire arrows
 		break;
 	}
