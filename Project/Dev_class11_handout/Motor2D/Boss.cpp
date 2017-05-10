@@ -100,7 +100,7 @@ void Boss::UpdateLegs()
 	legs->foot3->collider->SetPos(legs->foot3->pos.x - 16, legs->foot3->pos.y - 16, legs->foot3->logic_height);
 	legs->foot4->collider->SetPos(legs->foot4->pos.x - 16, legs->foot4->pos.y - 16, legs->foot4->logic_height);
 	collider->SetPos(pos.x, pos.y, logic_height);
-	eye_collider->SetPos(centre_pos.x, centre_pos.y, logic_height+1);
+	eye_collider->SetPos(centre_pos.x - 20, centre_pos.y - 48, logic_height+1);
 	
 	eye1_collider->SetPos(eye_1.x, eye_1.y, logic_height);
 	eye2_collider->SetPos(eye_2.x, eye_2.y, logic_height);
@@ -110,8 +110,7 @@ void Boss::UpdateLegs()
 
 void Boss::GetEvent()
 {
-	if (state == boss_idle)
-		int x = 0;
+
 	iPoint diference_point_link = { App->player->Link->pos.x - centre_pos.x,App->player->Link->pos.y - centre_pos.y };
 	iPoint diference_point_zelda = { App->player->Zelda->pos.x - centre_pos.x,App->player->Zelda->pos.y - centre_pos.y };
 	int dist_link = (int)(sqrt(diference_point_link.x *diference_point_link.x + diference_point_link.y * diference_point_link.y));
@@ -132,14 +131,14 @@ void Boss::GetEvent()
 				state = boss_attack_zelda;
 			break;
 		case boss_phase_2:
-			if (!im_attacking) {
-				if (dist_link / 300.0f < dist_zelda / 300.0f)
+			
+				if (dist_link / 300.0f < dist_zelda / 300.0f && state != boss_attack_zelda)
 					if(dist_link >120)
 					state = boss_attack_link;
-				else if (state != boss_attack_link)
+				else if (state != boss_attack_link && state != boss_attack_link)
 					if(dist_zelda >120)
 					state = boss_attack_zelda;
-			}
+			
 			break;
 		case boss_phase_3:
 			
@@ -158,8 +157,20 @@ void Boss::GetEvent()
 
 void Boss::ExecuteEvent()
 {
-	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN) {
-		actual_phase = boss_phase_3;
+	if (eye_live <= 0) {
+		if (actual_phase == boss_phase::boss_phase_1 && !can_recover) {
+			actual_phase = boss_phase::boss_phase_2;
+			eye_live = 5;
+			can_recover = true;
+		}
+		else if (actual_phase == boss_phase::boss_phase_2 && !can_recover) {
+			actual_phase = boss_phase::boss_phase_3;
+			eye_live = 5;
+			can_recover = true;
+		}
+		else if (actual_phase == boss_phase::boss_phase_3 && !can_recover) {
+			//INTRODUCIR AQUI CODIGO DE LO QUE PASA CUANDO MATAS AL BOSS
+		}
 	}
 	if (attacking_foot != nullptr) {
 		if (foot_live == 0 && state != boss_state::boss_damaged) {
@@ -183,17 +194,17 @@ void Boss::ExecuteEvent()
 			can_attack = false;
 			logic_height = 0;
 		}*/
-		if (damaged_boss_timer.Read() > 19000 && state == boss_state::boss_damaged) {
+		if ((damaged_boss_timer.Read() > 19000 && state == boss_state::boss_damaged)|| can_recover) {
 			recover_collider = App->collision->AddCollider({ pos.x,pos.y,244,244 }, collider_boss_recover, this, App->enemy);
 			recover_collider->logic_height = 1;
-			recover_collider->to_delete = true;
+			
 			is_eye_1_open = true;
 			is_eye_2_open = true;
 			is_eye_3_open = true;
 			is_eye_4_open = true;
 			eyes_open = 4;
 		}
-		if (damaged_boss_timer.Read() > 20000 && state == boss_state::boss_damaged) {			
+		if ((damaged_boss_timer.Read() > 20000 && state == boss_state::boss_damaged) || can_recover) {			
 			DeleteColliders();
 			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 - 32 };
 			can_attack = true;
@@ -201,7 +212,13 @@ void Boss::ExecuteEvent()
 			logic_height = 1;
 			attacking_foot->actual_foot_state == back_to_start;
 			foot_live = 5;
-			
+			can_recover = false;
+			recover_collider->to_delete = true;
+			iPoint diference_point_zelda = { App->player->Zelda->pos.x - centre_pos.x,App->player->Zelda->pos.y - centre_pos.y };
+			int dist_zelda = (int)(sqrt(diference_point_zelda.x *diference_point_zelda.x + diference_point_zelda.y * diference_point_zelda.y));
+			if (dist_zelda < 150 && !App->player->Zelda->is_picked) {
+				App->player->Zelda->logic_height = 0;
+			}
 		}
 		
 	}
@@ -381,7 +398,7 @@ void Boss::Attack(Character* focused_character)
 				
 			}
 		}
-		if (waiting_for_attack_time.Read() > 500 && attacking_foot->actual_foot_state== waiting_for_attack) {
+		if (waiting_for_attack_time.Read() > 400 && attacking_foot->actual_foot_state== waiting_for_attack) {
 			attacking_foot->actual_foot_state = attacking;
 		}
 		if (i < 10 && attacking_foot->actual_foot_state == attacking) {
@@ -594,7 +611,7 @@ Boss::Boss()
 
 		collider = App->collision->AddCollider({ pos.x,pos.y, 240,240 }, collider_boss, this, (j1Module*)App->enemy);
 		centre_pos = { pos.x + collider->rect.w / 2 , pos.y + collider->rect.h / 2 };
-		eye_collider = App->collision->AddCollider({ centre_pos.x,centre_pos.y, 32,32 }, collider_boss_eye, this, (j1Module*)App->enemy);
+		eye_collider = App->collision->AddCollider({ centre_pos.x - 64,centre_pos.y - 64, 48,32 }, collider_boss_eye, this, (j1Module*)App->enemy);
 		legs = new Legs(temp_legs);
 
 		boss_atlas = App->tex->Load("textures/boss_spritesheet.png");

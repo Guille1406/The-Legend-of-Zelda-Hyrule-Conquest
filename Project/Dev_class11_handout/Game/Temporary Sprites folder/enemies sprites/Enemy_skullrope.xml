@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:4449f7a8013ae8f94aa6f9d3ff29e4c8:82e1baf2e6a5c98bbff98779ad7782bf:2389c442d8c5ec0b23f19bd7e68ef3f8$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="Enemy_skullrope.png" width="378" height="32">
+ <sprite n="up" x="282" y="0" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="up" x="314" y="0" w="32" h="32" pX="0" pY="0"/>   
+ <sprite n="down" x="0" y="0" w="30" h="32" pX="0" pY="0"/>
+    <sprite n="down" x="30" y="0" w="30" h="32" pX="0" pY="0"/>
+   
+    <sprite n="left" x="90" y="0" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="left" x="122" y="0" w="32" h="32" pX="0" pY="0"/>
+   
+    <sprite n="right" x="186" y="0" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="right" x="218" y="0" w="32" h="32" pX="0" pY="0"/>
+ 
+    <sprite n="up_hit" x="346" y="0" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="down_hit" x="60" y="0" w="30" h="32" pX="0" pY="0"/>
+    <sprite n="left_hit" x="154" y="0" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="right_hit" x="250" y="0" w="32" h="32" pX="0" pY="0"/>
+    
+</TextureAtlas>

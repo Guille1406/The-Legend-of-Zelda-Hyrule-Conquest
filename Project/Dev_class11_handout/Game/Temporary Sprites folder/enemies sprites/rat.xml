@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:3f2b233e8cc2c2faa9024ca6bc7b05a5:08b3475e0a82610ebed1709220e05a0c:b2c4982122609f99dc76e65e4a249234$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="rat.png" width="127" height="127">
+    <sprite n="down/iddle/rat_iddle.png" x="1" y="35" w="26" h="31" pX="0" pY="0" oX="3" oY="1" oW="32" oH="32"/>
+    <sprite n="down/rat_down_1.png" x="85" y="1" w="26" h="32" pX="0" pY="0" oX="3" oY="0" oW="32" oH="32"/>
+    <sprite n="down/rat_down_2.png" x="29" y="1" w="26" h="32" pX="0" pY="0" oX="3" oY="0" oW="32" oH="32"/>
+    <sprite n="left/iddle/rat_left_iddle_1.png" x="29" y="35" w="31" h="32" pX="0" pY="0" oX="0" oY="0" oW="32" oH="32"/>
+    <sprite n="left/iddle/rat_left_iddle_2.png" x="1" y="69" w="31" h="32" pX="0" pY="0" oX="0" oY="0" oW="32" oH="32"/>
+    <sprite n="left/rat_left_1.png" x="1" y="103" w="32" h="23" pX="0" pY="0" oX="0" oY="9" oW="32" oH="32"/>
+    <sprite n="left/rat_left_2.png" x="34" y="69" w="32" h="25" pX="0" pY="0" oX="0" oY="7" oW="32" oH="32"/>
+    <sprite n="right/iddle/rat_right_iddle_1.png" x="62" y="35" w="31" h="32" pX="0" pY="0" oX="1" oY="0" oW="32" oH="32"/>
+    <sprite n="right/iddle/rat_right_iddle_2.png" x="95" y="35" w="31" h="32" pX="0" pY="0" oX="1" oY="0" oW="32" oH="32"/>
+    <sprite n="right/rat_right_1.png" x="35" y="103" w="32" h="23" pX="0" pY="0" oX="0" oY="9" oW="32" oH="32"/>
+    <sprite n="right/rat_right_2.png" x="68" y="69" w="32" h="25" pX="0" pY="0" oX="0" oY="7" oW="32" oH="32"/>
+    <sprite n="up/rat_up_1.png" x="1" y="1" w="26" h="32" pX="0" pY="0" oX="3" oY="0" oW="32" oH="32"/>
+    <sprite n="up/rat_up_2.png" x="57" y="1" w="26" h="32" pX="0" pY="0" oX="3" oY="0" oW="32" oH="32"/>
+</TextureAtlas>

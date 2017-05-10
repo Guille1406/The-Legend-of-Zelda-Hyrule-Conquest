@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:1876b7eeeeb3d0eb5158df784c56f0eb:d26d4406bcc4d783c7171ce2ed4bf8ea:3464ec2c65db85d60e30245ee3ec732a$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="Enemy_bat.png" width="204" height="32">
+    <sprite n="up" x="1" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="up" x="35" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="up" x="69" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="down" x="1" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="down" x="35" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="down" x="69" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="left" x="1" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="left" x="35" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="left" x="69" y="1" w="32" h="30" pX="0" pY="0"/> 
+    <sprite n="right" x="1" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="right" x="35" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="right" x="69" y="1" w="32" h="30" pX="0" pY="0"/>
+    
+    <sprite n="up_hit" x="103" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="up_hit" x="137" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="up_hit" x="171" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="down_hit" x="103" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="down_hit" x="137" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="down_hit" x="171" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="left_hit" x="103" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="left_hit" x="137" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="left_hit" x="171" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="right_hit" x="103" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="right_hit" x="137" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="right_hit" x="171" y="1" w="32" h="30" pX="0" pY="0"/>
+
+
+</TextureAtlas>

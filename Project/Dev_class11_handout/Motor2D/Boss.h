@@ -57,6 +57,7 @@ public:
 	bool im_attacking_laser = false;
 	bool can_attack = false;
 	bool can_move = true;
+	bool can_recover = true;
 	//SDL_Texture* boss_texture;
 	//SDL_Texture* laser_texture;
 	Legs* legs;
