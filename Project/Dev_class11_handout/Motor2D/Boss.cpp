@@ -100,7 +100,7 @@ void Boss::UpdateLegs()
 	legs->foot3->collider->SetPos(legs->foot3->pos.x - 16, legs->foot3->pos.y - 16, legs->foot3->logic_height);
 	legs->foot4->collider->SetPos(legs->foot4->pos.x - 16, legs->foot4->pos.y - 16, legs->foot4->logic_height);
 	collider->SetPos(pos.x, pos.y, logic_height);
-	eye_collider->SetPos(centre_pos.x, centre_pos.y, logic_height+1);
+	eye_collider->SetPos(centre_pos.x - 20, centre_pos.y - 48, logic_height+1);
 	
 	eye1_collider->SetPos(eye_1.x, eye_1.y, logic_height);
 	eye2_collider->SetPos(eye_2.x, eye_2.y, logic_height);
@@ -381,7 +381,7 @@ void Boss::Attack(Character* focused_character)
 				
 			}
 		}
-		if (waiting_for_attack_time.Read() > 500 && attacking_foot->actual_foot_state== waiting_for_attack) {
+		if (waiting_for_attack_time.Read() > 400 && attacking_foot->actual_foot_state== waiting_for_attack) {
 			attacking_foot->actual_foot_state = attacking;
 		}
 		if (i < 10 && attacking_foot->actual_foot_state == attacking) {
@@ -594,7 +594,7 @@ Boss::Boss()
 
 		collider = App->collision->AddCollider({ pos.x,pos.y, 240,240 }, collider_boss, this, (j1Module*)App->enemy);
 		centre_pos = { pos.x + collider->rect.w / 2 , pos.y + collider->rect.h / 2 };
-		eye_collider = App->collision->AddCollider({ centre_pos.x,centre_pos.y, 32,32 }, collider_boss_eye, this, (j1Module*)App->enemy);
+		eye_collider = App->collision->AddCollider({ centre_pos.x - 64,centre_pos.y - 64, 48,32 }, collider_boss_eye, this, (j1Module*)App->enemy);
 		legs = new Legs(temp_legs);
 
 		boss_atlas = App->tex->Load("textures/boss_spritesheet.png");
