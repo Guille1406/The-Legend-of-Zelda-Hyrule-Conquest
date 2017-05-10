@@ -111,7 +111,7 @@ j1Collision::j1Collision()
 	
 	//MOVABLE OBJECT
 	matrix[collider_movable_object][front_link] = true;
-	matrix[collider_movable_object][front_link] = true;
+	matrix[collider_movable_object][front_zelda] = true;
 
 	//COLOUR BLOCK
 	matrix[collider_colour_block][collider_link] = true;

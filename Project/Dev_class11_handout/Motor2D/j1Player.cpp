@@ -401,6 +401,13 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		if (collider2->type == collider_zelda && !Link->im_lifting)
 			Link->can_pick_up = true;
 
+		if (collider2->type == COLLIDER_TYPE::collider_movable_object) {
+			if (!Link->can_walk) {
+				Movable_Block* temp_object = (Movable_Block*)collider2->parent;
+				temp_object->Action(Link);
+			}
+
+		}
 
 
 	}
@@ -593,13 +600,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		n_bomb->bomb_collider_explosion->to_delete = true;
 		half_hearts_test_purpose--;
 	}	
-	else if (collider1->type == COLLIDER_TYPE::front_link && collider2->type == COLLIDER_TYPE::collider_movable_object) {
-		if (!Link->can_walk) {
-			Movable_Block* temp_object = (Movable_Block*)collider2->parent;
-			temp_object->Action(Link);
-		}
 
-	}
 	else if (collider1->type == COLLIDER_TYPE::front_zelda && collider2->type == COLLIDER_TYPE::collider_movable_object) {
 		if (!Zelda->can_walk) {
 			Movable_Block* temp_object = (Movable_Block*)collider2->parent;
@@ -679,6 +680,18 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 				temp_boss->eyes_open--;
 			}
 
+		}
+		else if (collider2->type == collider_boss_eye) {
+			Boss* temp_boss = (Boss*)collider2->parent;
+			iPoint diference_point_zelda = { App->player->Zelda->pos.x - temp_boss->centre_pos.x,App->player->Zelda->pos.y - temp_boss->centre_pos.y };
+			int dist_zelda = (int)(sqrt(diference_point_zelda.x *diference_point_zelda.x + diference_point_zelda.y * diference_point_zelda.y));
+			Arrow* arrow_temp = (Arrow*)collider1->parent;
+			if (dist_zelda < 120) {
+				arrow_temp->can_move = false;				
+				collider1->to_delete = true;
+				if(temp_boss->eye_live >0)
+				temp_boss->eye_live--;
+			}
 		}
 		else {
 			Arrow* arrow_temp = (Arrow*)collider1->parent;
