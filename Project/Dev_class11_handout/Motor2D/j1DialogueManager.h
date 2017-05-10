@@ -38,7 +38,6 @@ enum DialogueID {
 	truth_3,
 	truth_4,
 	truth_5,
-	truth_6,
 	castle_doors,
 	castle_yard_1,
 	castle_yard_2,
