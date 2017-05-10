@@ -57,11 +57,25 @@ void Boss::Draw(int height)
 {
 	if(height == logic_height)
 	App->render->Blit(boss_atlas, pos.x, pos.y, &boss_rect);
+	
+
+	if (!is_eye_1_open) {
+		App->render->Blit(boss_atlas, eye_1.x + 4, eye_1.y + 4, &eye_1_tex);
+	}
+	if (!is_eye_2_open) {
+		App->render->Blit(boss_atlas, eye_2.x+4, eye_2.y+4, &eye_2_tex);
+	}
+	if (!is_eye_3_open) {
+		App->render->Blit(boss_atlas, eye_3.x + 4, eye_3.y + 4, &eye_3_tex);
+	}
+	if (!is_eye_4_open) {
+		App->render->Blit(boss_atlas, eye_4.x + 1, eye_4.y + 1, &eye_4_tex);
+	}
+
 	legs->foot1->Draw();
 	legs->foot2->Draw();
 	legs->foot3->Draw();
 	legs->foot4->Draw();
-
 }
 
 void Boss::UpdateLegs()
@@ -604,6 +618,8 @@ Boss::Boss()
 		eye_2_tex = { 244,0,8,10 };
 		eye_3_tex = { 244,10,8,10 };
 		eye_4_tex = { 252,0,14,13 };
+
+		
 }
 
 Boss::~Boss()

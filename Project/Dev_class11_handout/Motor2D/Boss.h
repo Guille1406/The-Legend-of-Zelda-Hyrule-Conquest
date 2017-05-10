@@ -109,6 +109,8 @@ public:
 	SDL_Rect eye_3_tex;
 	SDL_Rect eye_4_tex;
 
+
+
 	int eyes_open = 4;
 
 	bool is_eye_1_open = true;
