@@ -131,6 +131,7 @@
     <ClCompile Include="Statue_Enemy.cpp" />
     <ClCompile Include="S_BeforeDungeon.cpp" />
     <ClCompile Include="S_Campaign.cpp" />
+    <ClCompile Include="S_CastleCutScene.cpp" />
     <ClCompile Include="S_ColourPuzzle.cpp" />
     <ClCompile Include="S_Credits.cpp" />
     <ClCompile Include="S_Dungeon_Entry.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="Statue_Enemy.h" />
     <ClInclude Include="S_BeforeDungeon.h" />
     <ClInclude Include="S_Campaign.h" />
+    <ClInclude Include="S_CastleCutScene.h" />
     <ClInclude Include="S_ColourPuzzle.h" />
     <ClInclude Include="S_Credits.h" />
     <ClInclude Include="S_Dungeon_Entry.h" />

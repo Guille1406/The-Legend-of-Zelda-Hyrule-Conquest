@@ -50,7 +50,7 @@
 #include "S_House_2.h"
 #include "S_House_3.h"
 #include "S_Ric_House.h"
-
+#include"S_CastleCutScene.h"
 #include"Enemy_Test_Scene.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -207,6 +207,10 @@ bool j1Scene::Start()
 	scene_pointer = new S_End;
 	scene_list.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::Send;
+
+	scene_pointer = new S_CastleCutScene;
+	scene_list.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::startcutscenegame;
 
 	//XML congig read
 	pugi::xml_document	config_file;

@@ -72,7 +72,7 @@ bool S_Enemy_Test_Scene::Start()
 	App->player->Zelda->logic_height = 0;
 	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
 	LOG("World Open");
-	return false;
+
 	return true;
 }
 

@@ -280,6 +280,9 @@
     <ClCompile Include="S_Ric_House.cpp">
       <Filter>Desenvolupament  ========\Scenes\Houses</Filter>
     </ClCompile>
+    <ClCompile Include="S_CastleCutScene.cpp">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -647,6 +650,9 @@
     </ClInclude>
     <ClInclude Include="S_Ric_House.h">
       <Filter>Desenvolupament  ========\Scenes\Houses</Filter>
+    </ClInclude>
+    <ClInclude Include="S_CastleCutScene.h">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
