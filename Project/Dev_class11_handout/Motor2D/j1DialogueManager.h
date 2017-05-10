@@ -15,7 +15,7 @@ enum DialogueID {
 	castle_3_dialogue,
 	castle_sewers_1_dialogue,
 	castle_sewers_2_dialogue,
-	villagev,
+	village_dialogue,
 	house_1_dialogue,
 	house_2_dialogue,
 	house_3_dialogue,
@@ -41,7 +41,7 @@ enum DialogueID {
 	npc_2_with_link_dialogue,
 	npc_2_with_zelda_dialogue,
 
-	NullID
+	NullID_dialogue
 };
 
 enum DialogueType {
