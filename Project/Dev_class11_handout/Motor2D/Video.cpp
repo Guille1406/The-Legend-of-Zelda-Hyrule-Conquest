@@ -158,17 +158,18 @@ void Video::LoadVideo(const char *fname)
 	texture = SDL_CreateTexture(App->render->renderer, SDL_PIXELFORMAT_IYUV, SDL_TEXTUREACCESS_STREAMING, video->width, video->height);
 
 	init_failed = quit = (!screen || !texture);
-
+	
 	memset(&spec, '\0', sizeof(SDL_AudioSpec));
 	spec.freq = audio->freq;
 	spec.format = AUDIO_S16SYS;
 	spec.channels = audio->channels;
 	spec.samples = 2048;
 	spec.callback = audio_callback;
-
+	
 	// Tip! Module Video needs "the control" of the sound. If not SDL_OpenAudio will not initialize.
 	// Right now module Audio has init the audio previously.
 	SDL_QuitSubSystem(SDL_INIT_AUDIO);
+	//SDL_Init(SDL_INIT_AUDIO);
 	init_failed = quit = (init_failed || (SDL_OpenAudio(&spec, NULL) != 0));
 
 	SDL_PauseAudio(0);
@@ -245,8 +246,12 @@ bool Video::PostUpdate()
 		//App->render->Blit(texture, App->player->Link->pos.y, App->player->Link->pos.y);
 	}
 
-	if (quit) ResetValues();
-
+	if (quit) {
+		ResetValues();
+		//SDL_InitSubSystem(SDL_INIT_AUDIO);
+		
+		
+	}
 	return true;
 }
 
@@ -256,6 +261,7 @@ void Video::ResetValues()
 	if (video) THEORAPLAY_freeVideo(video);
 	if (audio) THEORAPLAY_freeAudio(audio);
 	if (decoder) THEORAPLAY_stopDecode(decoder);
+
 
 	decoder = NULL;
 	video = NULL;

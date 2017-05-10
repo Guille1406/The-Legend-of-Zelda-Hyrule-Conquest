@@ -128,7 +128,7 @@ bool j1App::Awake()
 	PERF_START(ptimer);
 
 	pugi::xml_document	config_file;
-	pugi::xml_node		config;
+	
 	pugi::xml_node		app_config;
 
 	bool ret = false;

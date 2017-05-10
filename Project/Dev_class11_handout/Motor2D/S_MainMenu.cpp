@@ -70,13 +70,16 @@ bool S_MainMenu::Awake(pugi::xml_node& conf)
 	buttons.push_back(twitter);
 	buttons.push_back(github);
 
-	App->audio->PlayMusic("audio/music/Intro_Song.ogg", 0);
 
 	return true;
 };
 
 bool S_MainMenu::Start()
 {
+	
+	App->audio->PlayMusic("audio/music/Intro_Song.ogg", 0);
+	App->audio->VolumeMusic(100);
+
 	if (visibility)
 	{
 		title->SetVisible(true);

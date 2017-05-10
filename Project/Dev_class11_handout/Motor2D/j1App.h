@@ -115,6 +115,8 @@ private:
 
 public:
 
+	pugi::xml_node		config;
+
 	// Modules
 	j1Window*			win = nullptr;
 	j1Input*			input = nullptr;

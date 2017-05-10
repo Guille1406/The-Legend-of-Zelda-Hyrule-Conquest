@@ -3,6 +3,7 @@
 #include "j1Window.h"
 #include "S_VideoIntro.h"
 #include "Video.h"
+#include "j1Audio.h"
 
 S_VideoIntro::S_VideoIntro()
 {
@@ -29,7 +30,13 @@ bool S_VideoIntro::Update()
 {
 	//if(!App->videoplayer->active) //Change scene
 	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+
+	
 		App->scene->ChangeScene(Scene_ID::mainmenu);
+		App->audio->CleanUp();
+		App->audio->Awake(App->config);
+
+	
 	}
 
 	//MenuInput(&buttons);
