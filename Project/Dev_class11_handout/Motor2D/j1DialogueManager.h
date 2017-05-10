@@ -15,12 +15,48 @@ enum DialogueID {
 
 	//NPC Dialogue
 	
+	NullID
+};
 
-	//Item Dialogue
+/*
+enum DialogueID {
+	//Cutscene Dialogue
+	castle_room,
+	castle_1,
+	castle_2,
+	castle_3,
+	castle_sewers_1,
+	castle_sewers_2,
+	village,
+	house_1,
+	house_2,
+	house_3,
+	forest_1,
+	forest_2,
+	truth_1,
+	truth_2,
+	truth_3,
+	truth_4,
+	truth_5,
+	truth_6,
+	castle_doors,
+	castle_yard_1,
+	castle_yard_2,
+	castle_yard_3,
+	castle_yard_4,
+	castle_yard_5,
 
+	//NPC Dialogue
+	ric_with_link,
+	ric_with_zelda,
+	npc_1_with_link,
+	npc_1_with_zelda,
+	npc_2_with_link,
+	npc_2_with_zelda,
 
 	NullID
 };
+*/
 
 enum DialogueType {
 	Cutscene_dialoguetype,
