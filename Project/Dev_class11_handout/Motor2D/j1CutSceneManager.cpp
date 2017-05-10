@@ -13,6 +13,7 @@
 #include"j1App.h"
 #include"j1Scene.h"
 #include"j1Camera.h"
+#include"j1Window.h"
 
 //TODO 5.1: open the IntroCutscene.xml (in data.zip, in cutscenes folder) and fill THESE ELEMENTS correctly with this info:
 //Image -> n = 0; name = BackgroundPokemon; x = -100; y = 0; tex_x = 0; tex_y = 0; tex_w = 1080; tex_h = 514; active = false; file = textures/PokemonBackground.png;
@@ -451,7 +452,7 @@ bool Cutscene::DrawElements()
 		{
 			if (it._Ptr->_Myval->active == true)
 			{
-				((CS_Image*)(*it))->image->DrawWithAlternativeAtlas(((CS_Image*)(*it))->tex,false);
+				((CS_Image*)(*it))->image->DrawWithAlternativeAtlas(((CS_Image*)(*it))->tex, false);
 				//(((CS_Image*)(*it))->tex)
 			}
 		}
@@ -536,10 +537,11 @@ bool Cutscene::LoadImg(pugi::xml_node& node)
 	if (node != NULL)
 	{
 		
-		iPoint pos(node.attribute("x").as_int(0), node.attribute("y").as_int(0));
+		iPoint pos(node.attribute("x").as_int(0)*App->win->GetScale(), node.attribute("y").as_int(0)*App->win->GetScale());
 		SDL_Rect rect = { node.attribute("rectx").as_int(0), node.attribute("recty").as_int(0), node.attribute("rectw").as_int(0), node.attribute("recth").as_int(0) };
 		std::string str = node.attribute("file").as_string("");
 		elements.push_back(new CS_Image(CS_IMAGE, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), rect, pos));
+		
 		ret = true;
 	}
 	return ret;
@@ -709,6 +711,12 @@ bool CS_Step::DoAction(float dt)
 		DisableElement();
 		break;
 
+	case ACT_TELEPORT:
+		action_name = "disable";
+		doteleport_players();
+		break;
+		//ACT_TELEPORT
+
 	case ACT_ENABLE:
 		action_name = "enable";
 		ActiveElement();
@@ -802,6 +810,13 @@ void CS_Step::SetAction(pugi::xml_node& node)
 	{
 		act_type = ACT_PLAY;
 	}
+
+	else if (action_type == "teleport")
+	{
+		act_type = ACT_TELEPORT;
+		dest = { node.child("element").child("movement").attribute("dest_x").as_int(0), node.child("element").child("movement").attribute("dest_y").as_int(0) };
+	}
+	//ACT_TELEPORT
 	else if (action_type == "stop")
 	{
 		act_type = ACT_STOP;
@@ -1080,6 +1095,17 @@ void CS_Step::DisableElement()
 		}
 		//LOG("Step %i Disabling %s", n, element->name.c_str());
 	}
+}
+
+void CS_Step::doteleport_players()
+{
+
+	if (element->GetType() == CS_NPC) {
+		((CS_npc*)element)->GetMyEntity()->pos.x = this->dest.x;
+		((CS_npc*)element)->GetMyEntity()->pos.y = this->dest.y;
+		FinishStep();
+	}
+
 }
 
 //Link the element of the cutscene with the step

@@ -15,7 +15,7 @@
 //TODO 1: Open config.xml and write a new path for the cutscene.
 
 enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_CHANGESCENE, CS_CAMERA, CS_NONE };
-enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_PLAY, ACT_STOP, ACT_NONE, ACT_CHANGESCENE, ACT_DISABLE_CAMERA_PLAYER};
+enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_PLAY, ACT_STOP, ACT_NONE, ACT_CHANGESCENE, ACT_DISABLE_CAMERA_PLAYER, ACT_TELEPORT};
 enum Dir_Type { CS_UP, CS_DOWN, CS_LEFT, CS_RIGHT, NO_DIR };
 enum EntityType_Cutscene {
 
@@ -179,6 +179,7 @@ public:
 	void StopMusic();
 	void ActiveElement();
 	void DisableElement();
+	void doteleport_players();
 	//---------------------------
 
 	//UTILITY FUNCTIONS ------------
