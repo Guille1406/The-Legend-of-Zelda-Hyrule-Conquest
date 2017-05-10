@@ -519,11 +519,7 @@ bool Cutscene::LoadCamera(pugi::xml_node &node)
 
 		if (tmp)
 		{
-			
-			iPoint new_pos = { node.attribute("x").as_int(), node.attribute("y").as_int() };
-			tmp->cam.x = new_pos.x;
-			tmp->cam.y = new_pos.y;
-			tmp->player_cam->Cam_move_paused = node.attribute("following_player").as_bool();
+			tmp->follow_player = node.attribute("following_player").as_bool();
 		}
 
 		ret = true;
@@ -742,10 +738,18 @@ bool CS_Step::DoAction(float dt)
 		
 	case ACT_SET_STRING:
 		action_name = "setstring";
+		this->StopCameraFollowing();
+		break;
 
 	case Action_Type::ACT_CHANGESCENE:
 		action_name = "changescene";
 		this->DoChangeScene_CS();
+		break;
+
+	case ACT_DISABLE_CAMERA_PLAYER:
+		action_name = "disable_camera_player";
+		this->StopCameraFollowing();
+		break;
 	default:
 		action_name = "none";
 		break;
@@ -829,6 +833,11 @@ void CS_Step::SetAction(pugi::xml_node& node)
 	{
 		act_type = ACT_SET_STRING;
 		new_text = node.child("element").child("text").attribute("text").as_string();
+	}
+	else if (action_type == "cam_following_player")
+	{
+		act_type = Action_Type::ACT_DISABLE_CAMERA_PLAYER;
+		camera_following = node.child("element").attribute("follow_player").as_bool();
 	}
 	else
 	{
@@ -1045,7 +1054,11 @@ void CS_Step::DoChangeScene_CS()
 	//App->scene->ChangeScene()
 }
 
-
+void CS_Step::StopCameraFollowing()
+{
+	App->camera->Cam_move_paused = this->camera_following;
+	FinishStep();
+}
 
 void CS_Step::StopMusic()
 {
@@ -1307,7 +1320,7 @@ CS_ChangeScene::~CS_ChangeScene()
 }
 
 CS_Camera::CS_Camera(CS_Type type, int n, const char * name, bool active, const char * path):
-	CS_Element(type, n, name, active, path), player_cam(App->camera), cam(App->render->camera)
+	CS_Element(type, n, name, active, path), follow_player(App->camera->Cam_move_paused), cam(App->render->camera)
 {
 }
 
