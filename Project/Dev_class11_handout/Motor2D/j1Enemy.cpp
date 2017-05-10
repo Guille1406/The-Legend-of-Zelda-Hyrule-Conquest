@@ -259,7 +259,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret = new Rat_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
-		ret->live = 6;
+		ret->live = 0;
 		//Position in world pixel 
 		ret->pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pos.y = pos_array_enemy.y*App->map->data.tile_height;

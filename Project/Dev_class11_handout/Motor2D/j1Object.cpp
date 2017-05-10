@@ -469,7 +469,10 @@ Object* j1Object::CreateHeart(Enemy* n_enemy, int height) {
 
 	temp_corazon.name = "heart";
 	temp_corazon.rect = { n_enemy->pos.x ,n_enemy->pos.y,rect_Heart.w,rect_Heart.h};
-	temp_corazon.texture_rect = rect_Heart;
+	SDL_Rect tex_temp = { 192,96,32,32 };
+	temp_corazon.texture_rect = tex_temp;
+	//192,95
+	//32,32
 	temp_corazon.type = objectType::heart;
 	temp_corazon.active = true;
 	temp_corazon.logic_height = n_enemy->logic_height;
