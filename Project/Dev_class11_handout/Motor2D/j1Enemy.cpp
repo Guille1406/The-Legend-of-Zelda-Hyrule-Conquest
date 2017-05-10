@@ -99,14 +99,6 @@ bool j1Enemy::PreUpdate()
 
 			}
 		}
-		if (appear_enemies && one_time_appear < 1) {
-			//smoke animation
-			
-			Create_Enemy(enemyType::green_enemy, iPoint(75, 41),0);
-			Create_Enemy(enemyType::green_enemy, iPoint(63, 56),0);
-			one_time_appear++;
-			appear_enemies = false;
-		}
 	}
 	return true;
 }
