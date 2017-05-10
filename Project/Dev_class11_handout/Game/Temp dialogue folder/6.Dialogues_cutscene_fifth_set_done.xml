@@ -295,7 +295,7 @@
 	    </step>
       <!-- Step 2 -->
       <!-- Masked -->
-      <step speaker = "messenger" listener = "ogity" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+      <step speaker = "messenger" listener = "ogity" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
 	      <line>And it will continue to be as long as you still alive.</line>
 	    </step>
       <!-- Step 3 -->
@@ -319,7 +319,7 @@
 	    </step>
       <!-- Step 2 -->
       <!-- Masked- -->
-      <step speaker = "messenger" listener = "zelda" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
 	      <line>Zelda, come here, and... listen care- coff coff -fully...</line>
 	    </step>
       <!-- Step 3 -->
@@ -329,7 +329,7 @@
 	    </step>
       <!-- Step 4 -->
       <!-- Masked- -->
-      <step speaker = "messenger" listener = "zelda" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
 	      <line>In the castle... coff coff... go there, here's the door... Zelda</line>
         <line>stop the evil I couldn't, it's too late for me... coff coff...</line>
         <line>and I don't have anywhere to return... save your future... coff</line>
@@ -347,7 +347,7 @@
 	    </step>
       <!-- Step 2 -->
       <!-- Link serio/enfadado. -->
-      <step speaker = "link" listener = "item_nullinterlucutor" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+      <step speaker = "link" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
 	      <line></line>
 	    </step>
     </cutscene>
