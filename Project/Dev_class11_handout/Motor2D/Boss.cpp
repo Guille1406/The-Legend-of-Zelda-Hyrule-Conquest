@@ -102,15 +102,19 @@ void Boss::GetEvent()
 	iPoint diference_point_zelda = { App->player->Zelda->pos.x - centre_pos.x,App->player->Zelda->pos.y - centre_pos.y };
 	int dist_link = (int)(sqrt(diference_point_link.x *diference_point_link.x + diference_point_link.y * diference_point_link.y));
 	int dist_zelda = (int)(sqrt(diference_point_zelda.x *diference_point_zelda.x + diference_point_zelda.y * diference_point_zelda.y));
-	if (dist_link > 300 && dist_zelda >300 && can_move && centre_pos.x > 79*16 && centre_pos.x < 129*16 && centre_pos.y < 101*16 && centre_pos.y > 74*16) {
-		state = boss_move;
+	if (dist_link > 300 && dist_zelda > 300 && can_move) {
+		if ((centre_pos.x > 79 * 16 || App->player->Link->pos.x > centre_pos.x) && (centre_pos.x < 129 * 16 || App->player->Link->pos.x < centre_pos.x)) {
+			if ((centre_pos.y < 101 * 16 || App->player->Link->pos.y < centre_pos.y) && (centre_pos.y > 74 * 16 || App->player->Link->pos.y > centre_pos.y)) {
+				state = boss_move;
+			}
+		}
 	}
 	else if(can_attack) {
 		switch (actual_phase) {
 		case boss_phase_1:
-			if (dist_link <= 300 && dist_link >120)
+			if (dist_link <= 300 && dist_link >120 && state != boss_attack_zelda)
 				state = boss_attack_link;
-			else if(dist_zelda <=300 && dist_zelda >120)
+			else if(dist_zelda <=300 && dist_zelda >120 && state != boss_attack_link)
 				state = boss_attack_zelda;
 			break;
 		case boss_phase_2:
@@ -145,13 +149,17 @@ void Boss::ExecuteEvent()
 	}
 	if (attacking_foot != nullptr) {
 		if (foot_live == 0 && state != boss_state::boss_damaged) {
-			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 + 32 };
-			CreateColliders();
-			state = boss_state::boss_damaged;
-			can_move = false;
-			can_attack = false;
-			logic_height = 0;
-			damaged_boss_timer.Start();
+			if ((eyes_open <= 2 && actual_phase == boss_phase::boss_phase_1) ||
+				(eyes_open <= 1 && actual_phase == boss_phase::boss_phase_2) ||
+				(eyes_open <= 0 && actual_phase == boss_phase::boss_phase_3)) {
+				pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 + 32 };
+				CreateColliders();
+				state = boss_state::boss_damaged;
+				can_move = false;
+				can_attack = false;
+				logic_height = 0;
+				damaged_boss_timer.Start();
+			}
 		}
 		/*if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && attacking_foot->actual_foot_state == after_attack) {
 			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 + 32 };
@@ -165,6 +173,11 @@ void Boss::ExecuteEvent()
 			recover_collider = App->collision->AddCollider({ pos.x,pos.y,244,244 }, collider_boss_recover, this, App->enemy);
 			recover_collider->logic_height = 1;
 			recover_collider->to_delete = true;
+			is_eye_1_open = true;
+			is_eye_2_open = true;
+			is_eye_3_open = true;
+			is_eye_4_open = true;
+			eyes_open = 4;
 		}
 		if (damaged_boss_timer.Read() > 20000 && state == boss_state::boss_damaged) {			
 			DeleteColliders();
@@ -521,10 +534,10 @@ void Boss::CreateColliders()
 	}
 	colision_tiles_vec = temp_vector;
 
-	jump_1 = App->object->CreateJump({centre_pos.x - 72,centre_pos.y - 56,16,80}, 1);
-	jump_2 = App->object->CreateJump({ centre_pos.x + 56,centre_pos.y - 56,16,80 }, 1);
+	jump_1 = App->object->CreateJump({centre_pos.x - 88,centre_pos.y - 56,16,80}, 1);
+	jump_2 = App->object->CreateJump({ centre_pos.x + 72,centre_pos.y - 56,16,80 }, 1);
 	jump_3 = App->object->CreateJump({ centre_pos.x - 40,centre_pos.y - 106,80,16 }, 1);
-	jump_4 = App->object->CreateJump({ centre_pos.x - 40,centre_pos.y + 40,80,16 }, 1);
+	jump_4 = App->object->CreateJump({ centre_pos.x - 40,centre_pos.y + 56,80,16 }, 1);
 }
 
 void Boss::DeleteColliders()

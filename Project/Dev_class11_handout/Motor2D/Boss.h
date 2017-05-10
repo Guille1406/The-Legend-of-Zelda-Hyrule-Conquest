@@ -109,7 +109,12 @@ public:
 	SDL_Rect eye_3_tex;
 	SDL_Rect eye_4_tex;
 
+	int eyes_open = 4;
 
+	bool is_eye_1_open = true;
+	bool is_eye_2_open = true;
+	bool is_eye_3_open = true;
+	bool is_eye_4_open = true;
 };
 
 class Foot : public Entity {
