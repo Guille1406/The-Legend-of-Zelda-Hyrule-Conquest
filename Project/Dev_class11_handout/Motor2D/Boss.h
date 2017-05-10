@@ -105,12 +105,16 @@ public:
 	iPoint eye_3 = { pos.x + 220,pos.y + 98 };
 	iPoint eye_4 = { pos.x + 114,pos.y + 211 };
 
-	SDL_Rect eye_1_tex;
-	SDL_Rect eye_2_tex;
-	SDL_Rect eye_3_tex;
-	SDL_Rect eye_4_tex;
+	SDL_Rect eye_1_tex = { 0,0,0,0 };
+	SDL_Rect eye_2_tex = { 0,0,0,0 };
+	SDL_Rect eye_3_tex = { 0,0,0,0 };
+	SDL_Rect eye_4_tex = { 0,0,0,0 };
 
+	SDL_Rect eye_phase_2 = { 244,64,80,85 };
+	SDL_Rect eye_phase_3 = { 324,91,36,20 };
 
+	SDL_Rect boss_shadow = { 0,243,244,243 };
+	SDL_Rect foot_shadow = { 364,64,62,61 };
 
 	int eyes_open = 4;
 

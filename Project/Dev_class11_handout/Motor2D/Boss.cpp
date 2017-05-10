@@ -58,6 +58,14 @@ void Boss::Draw(int height)
 	if(height == logic_height)
 	App->render->Blit(boss_atlas, pos.x, pos.y, &boss_rect);
 	
+	if (actual_phase == boss_phase::boss_phase_2) {
+		App->render->Blit(boss_atlas,centre_pos.x - 38, centre_pos.y - 66, &eye_phase_2);
+	}
+
+	if (actual_phase == boss_phase::boss_phase_3) {
+		App->render->Blit(boss_atlas, centre_pos.x - 38, centre_pos.y - 66, &eye_phase_2);
+		App->render->Blit(boss_atlas, centre_pos.x +2-eye_phase_3.w / 2, centre_pos.y -32- eye_phase_3.h / 2,&eye_phase_3);
+	}
 
 	if (!is_eye_1_open) {
 		App->render->Blit(boss_atlas, eye_1.x + 4, eye_1.y + 4, &eye_1_tex);
