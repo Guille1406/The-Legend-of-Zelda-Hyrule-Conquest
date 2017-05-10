@@ -106,8 +106,8 @@ class CS_Camera : public CS_Element
 public:
 	CS_Camera(CS_Type type, int n, const char* name, bool active, const char* path);
 	~CS_Camera();
-	SDL_Rect cam = App->render->camera;
-	j1Camera* player_cam = App->camera;
+	SDL_Rect cam = { 0,0,0,0 };
+	bool follow_player=false;
 
 private:
 	
@@ -175,6 +175,7 @@ public:
 	bool CheckMovementCompleted(iPoint curr_pos);
 	void Play();
 	void DoChangeScene_CS();
+	void StopCameraFollowing();
 	//void ChangeString();
 	void StopMusic();
 	void ActiveElement();
@@ -206,7 +207,7 @@ private:
 	bool active = false;				//If step is reproducing.
 	bool finished = false;
 	bool wait_prev_step = false;
-
+	bool camera_following;
 	//ACTIONS VARIABLES
 	/*Movement*/
 	iPoint origin = { 0, 0 };
