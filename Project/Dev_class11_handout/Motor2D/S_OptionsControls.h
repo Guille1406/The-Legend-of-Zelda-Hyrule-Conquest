@@ -19,8 +19,8 @@ public:
 	void OnGui(Gui* ui, GuiEvent event);
 public:
 	GuiButton* ControlsLabel = nullptr;
-	GuiButton* ControllerLayout1 = nullptr;
-	GuiButton* ControllerLayout2 = nullptr;
+	GuiButton* ControllerAlternative = nullptr;
+	GuiCheck*  ControllerAlternative_check = nullptr;
 	GuiButton* back = nullptr;
 };
 
