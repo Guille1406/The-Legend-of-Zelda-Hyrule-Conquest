@@ -1,0 +1,423 @@
+<!-- All dialogues for the game -->
+
+<DialogueManager>
+  
+  <!-- Cutscenes -->
+  <Cutscenes>
+    <!-- castle_room -->
+    <cutscene enum_value = "0">
+      <!-- Step 1 -->
+      <!-- Link esta en una habitacion continua y entra Zelda entra: -->
+      <!-- Zelda seria- -->
+      <step speaker = "link" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Link come, my father is waiting for you.</line>
+	    </step>
+      <!-- Link y Zelda salen. -->
+    </cutscene>
+    
+    <!-- castle_1 -->
+    <cutscene enum_value = "1">
+      <!-- Step 1 -->
+      <!-- Rey en el trono, al lado Zelda. Link entra en la sala y se coloca delante del rey: -->
+      <!-- King serio- -->
+      <step speaker = "king" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Thank you Link for coming as soon as you were warned. News has come to us</line>
+        <line>that a dark force is planning to seize the triforce.</line>
+	    </step>
+    </cutscene>
+    
+    <!-- castle_2 -->
+    <cutscene enum_value = "2">
+      <!-- Step 1 -->
+      <!-- Masked entra en escena. -->
+      <!-- masked- -->
+      <step speaker = "messenger" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Quite so. And it 's your duty prevent it.</line>
+	    </step>
+      <!-- Step 2 -->
+      <!-- King serio- -->
+      <step speaker = "king" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>She is our unknown informant. As she said, we call you to come because the</line>
+        <line>kingdom needs you. With your strength and courage, you have served this</line>
+        <line>kingdom in its darkest moments, and now we request your help again to</line>
+        <line>protect the triforce.</line>
+	    </step>
+    </cutscene>
+    
+    <!-- castle_3 -->
+    <cutscene enum_value = "3">
+      <!-- Step 1 -->
+      <!-- Entra un guardia -->
+      <!-- guard- -->
+      <step speaker = "guard" listener = "king" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>We are being attacked, my lord! The main entrance has beendemolished!</line>
+	    </step>
+      <!-- Step 2 -->
+      <!-- masked- -->
+      <step speaker = "messenger" listener = "king" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>****, they were fastest than I thought.</line>
+	    </step>
+      <!-- Step 3 -->
+      <!-- king 2- -->
+      <step speaker = "king" listener = "guard" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Oh no! Command the guards to protect at all costs the throne room.</line>
+	    </step>
+      <!-- Step 4 -->
+      <!-- king 2- -->
+      <step speaker = "king" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Link, take my daughter and scape. I trust her to you.</line>
+        <line>Don't let me. Please.</line>
+	    </step>
+      <!-- Step 5 -->
+      <!-- masked- -->
+      <step speaker = "messenger" listener = "link" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Take the secret path to the sewers, i'll help the guard. I'll see you</line>
+        <line>in the village, we will talk there.</line>
+	    </step>
+      <!-- Salen de escena. -->
+    </cutscene>
+    
+    <!-- castle_sewers_1 -->
+    <cutscene enum_value = "4">
+      <!-- Step 1 -->
+      <!-- Link mira a Zelda con cara de preocupación -->
+      <!-- Zelda enfadada- -->
+      <step speaker = "guard" listener = "king" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>What? Why are you looking at me with that goron face? It's to late to</line>
+        <line>have regrets. Let's keep moving.</line>
+	    </step>
+    </cutscene>
+    
+    <!-- castle_sewers_2 -->
+    <cutscene enum_value = "5">
+      <!-- Step 1 -->
+      <!-- Zelda se adelanta. -->
+      <!-- Zelda sonriendo- -->
+      <step speaker = "guard" listener = "king" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Ooh and keep it in mind, this time you don't gonna need to worry, my</line>
+        <line>heeerooo; because this princess isn't going to be another damsel in</line>
+        <line>distress.</line>
+	    </step>
+      <!-- Step 2 -->
+      <!-- Link sonrie -->
+      <step speaker = "guard" listener = "king" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	    </step>
+    </cutscene>
+    
+    <!-- village -->
+    <cutscene enum_value = "6">
+      <!-- Step 1 -->
+      <!-- Masked les espera en el: -->
+      <!-- Zelda sorprendida- -->
+      <step speaker = "zelda" listener = "messenger" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>W-Wait...What are u doing here so fast? You where in the castle and</line>
+        <line>we get the only posible exit? Are you a ghost? Maybe a stalfos?</line>
+        <line>No you're a...</line>
+	    </step>
+      <!-- Masked- -->
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Princess keep calm.</line>
+	    </step>
+      <!-- Zelda sorprendida- -->
+      <step speaker = "zelda" listener = "messenger" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>But, but... I demand an explanation!</line>
+	    </step>
+      <!-- Masked- -->
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Well, let's say you'll understand when you grow up. But this is not</line>
+        <line>the moment for this, come to my huse and I will explain you</line>
+        <line>everything.</line>
+	    </step>
+    </cutscene>
+    
+    <!-- house_1 -->
+    <cutscene enum_value = "7">
+      <!-- Step 1 -->
+      <!-- Link, Zelda y la enmascarada en la casa: -->
+      <!-- Masked- -->
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>First of all, you need to know my true identity.</line>
+	    </step>
+      <!-- Step 2 -->
+      <!-- Enmascarada sin mascara -->
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line></line>
+	    </step>
+      <!-- Step 3 -->
+      <!-- Zeldaa sorprendida- -->
+      <step speaker = "zelda" listener = "messenger" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Wha-whaaaaaaaaaaaat!!!!!! What i'm doing there if i'm here, but you...</line>
+        <line>I mean I....</line>
+	    </step>
+      <!-- Step 4 -->
+      <!-- Masked- -->
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Keep calm princess, and listen carefully...I came from the future, a</line>
+        <line>future where the Hyrule kingdom no longer exists...In the future</line>
+        <line>Hyrule where attacked by a foreign tribe, wich want to steal the</line>
+        <line>triforce and take over the kingdom. The people of Hyrule fought with</line>
+        <line>all their might, but many of them perish, among them the king and</line>
+        <line>the commander of the hylian forces, Link. The tribe finally got the</line>
+        <line>triforce, they were planning to use it to open the portal that stays</line>
+        <line>under the palace, to awake the evil power which is confined within</line>
+        <line>it. In a final effort, the hyrulian people managed to stop the tribe,</line>
+        <line>which being defeated use the power of the triforce to travel back in</line>
+        <line>time. I was the only one that could try to stop them, getting trapped</line>
+        <line>in the anomaly and traveling with them. And there is where starts</line>
+        <line>the history that you already know...</line>
+	    </step>
+      <!-- Step 5 -->
+      <!-- Zelda preocupada- -->
+      <step speaker = "zelda" listener = "messenger" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>I-I'm a little bit confused. I-I don't know what to think...</line>
+        <line>My father... Even you Link... Bu-but the only thing I have clear</line>
+        <line>is that you are the cause of the suffering of my kingdom, and stop</line>
+        <line>you it's my duty.</line>
+	    </step>
+      <!-- Step 6 -->
+      <!-- Masked- -->
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>To prevent that you need to go to the mountain temple and protect</line>
+        <line>the last piece of the triforce. I'll get you some time, now, hurry,</line>
+        <line>I'll catch you up later. And Link, be careful, It may don't look</line>
+        <line>like it, but I really had a bad time when you died, and I my present</line>
+        <line>me will have it too if something bad happened to you.</line>
+	    </step>
+      <!-- Step 7 -->
+      <!-- Zelda enfadada- -->
+      <step speaker = "zelda" listener = "messenger" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Sh-shut up, what will you know about me?</line>
+	    </step>
+      <!-- Step 8 -->
+      <!-- Masked- -->
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Well, i'm literally you, so...</line>
+	    </step>
+      <!-- Step 9 -->
+      <!-- Zelda seria- -->
+      <step speaker = "zelda" listener = "link" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Wathever, link let's move, we don't have time for this, and erase</line>
+        <line>that stupid smile of your face...</line>
+	    </step>
+    </cutscene>
+    
+    <!-- house_2 -->
+    <cutscene enum_value = "8">
+      <!-- Step 1 -->
+      <!-- Zelda y Link se adelantan. De espaldas a Masked: -->
+      <!-- Zelda preocupada- -->
+      <step speaker = "zelda" listener = "messenger" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Before I go, I have a questio... I-Is my father... Is my father okay?</line>
+	    </step>
+      <!-- Step 2 -->
+      <!-- Masked- -->
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>...</line>
+	    </step>
+    </cutscene>
+    
+    <!-- house_3 -->
+    <cutscene enum_value = "9">
+      <!-- Step 1 -->
+      <!-- Link y Zelda salen de escena: -->
+      <!-- Masked- -->
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Please, don't make the same mistake I made.</line>
+	    </step>
+    </cutscene>
+    
+    <!-- forest_1 -->
+    <cutscene enum_value = "10">
+      <!-- Step 1 -->
+      <!-- Link más adelantado que zelda, zelda se detiene: -->
+      <!-- Zelda preocupada- -->
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+        <line>Tell me Link, do you ever have doubts about living up to what they</line>
+        <line>expect from you? I know you're used to this, but i'm not and – OMG</line>
+        <line>i can't believe i'm gonna tell this to you- I'm kinda afraid. This</line>
+	      <line>is the first time i'm so far away from the castle, without even</line>
+        <line>knowing what it was of my father's, and, and,...</line>
+	    </step>
+    </cutscene>
+    
+    <!-- forest_2 -->
+    <cutscene enum_value = "11">
+      <!-- Step 1 -->
+      <!-- Link se acerca con una sonrisa -->
+      <!-- Zelda sonriendo- -->
+      <step speaker = "messenger" listener = "zelda" speaker_pos = "right" listener_pos = "left" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Yes, I guess for once you're right, it's no time for regrets,</line>
+        <line>there's a kingdom to save.</line>
+	    </step>
+    </cutscene>
+    
+    <!-- truth_1 -->
+    <cutscene enum_value = "12">
+      
+    </cutscene>
+    
+    <!-- truth_2 -->
+    <cutscene enum_value = "13">
+      
+    </cutscene>
+    
+    <!-- truth_3 -->
+    <cutscene enum_value = "14">
+      
+    </cutscene>
+    
+    <!-- truth_4 -->
+    <cutscene enum_value = "15">
+      
+    </cutscene>
+    
+    <!-- truth_5 -->
+    <cutscene enum_value = "16">
+      
+    </cutscene>
+    
+    <!-- truth_6 -->
+    <cutscene enum_value = "17">
+      
+    </cutscene>
+    
+    <!-- castle_doors -->
+    <cutscene enum_value = "18">
+      
+    </cutscene>
+    
+    <!-- castle_yard_1 -->
+    <cutscene enum_value = "19">
+      
+    </cutscene>
+     
+    <!-- castle_yard_2 -->
+    <cutscene enum_value = "20">
+      
+    </cutscene>
+    
+    <!-- castle_yard_3 -->
+    <cutscene enum_value = "21">
+      
+    </cutscene>
+    
+    <!-- castle_yard_4 -->
+    <cutscene enum_value = "22">
+      
+    </cutscene>
+     
+    <!-- castle_yard_5 -->
+    <cutscene enum_value = "23">
+      
+    </cutscene>
+    
+  </Cutscenes>
+      
+  <!-- NPC -->
+  <NPCs>
+    <!-- Ric_with_link -->
+    <npc enum_value = "24">
+      <!-- Step 1 -->
+      <step speaker = "ric" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Suspended! Ohh sorry, it's a bad habit I have, don't pay attention to it. Hey</line>
+        <line>listen! If you have time, take a look at the lake, i'm sure I lost something</line>
+        <line>there but I can't remember what it was. Whatever, if you find it, you can have</line>
+        <line>it, I'm sure I wasn't going to use it.</line>
+	    </step>
+    </npc>
+    
+    <!-- Ric_with_zelda -->
+    <npc enum_value = "25">
+      <!-- Step 1 -->
+      <step speaker = "ric" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Suspended! Ohh sorry, it's a bad habit I have, don't pay attention to it. Hey</line>
+        <line>listen! If you have time, take a look at the lake, i'm sure I lost something</line>
+        <line>there but I can't remember what it was. Whatever, if you find it, you can have</line>
+        <line>it, I'm sure I wasn't going to use it.</line>
+	    </step>
+    </npc>
+    
+    <!-- NPC 1_with_link -->
+    <npc enum_value = "26">
+      <!-- Step 1 -->
+      <step speaker = "item_nullinterlucutor" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>I'm just an NPC, keep moving, I don't have more lines of dialogue.</line>
+	    </step>
+    </npc>
+    
+    <!-- NPC 1_with_zelda -->
+    <npc enum_value = "27">
+      <!-- Step 1 -->
+      <step speaker = "item_nullinterlucutor" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>I'm just an NPC, keep moving, I don't have more lines of dialogue.</line>
+	    </step>
+    </npc>
+        
+    <!-- NPC 2_with_link -->
+    <npc enum_value = "28">
+      <!-- Step 1 -->
+      <step speaker = "item_nullinterlucutor" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Do you know wich kingdom is the one wich greets you more?....</line>
+      </step>
+      <!-- Step 2 -->
+      <step speaker = "item_nullinterlucutor" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Hi-rule....</line>
+	    </step>
+      <!-- Step 3 -->
+      <step speaker = "item_nullinterlucutor" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>And you know why gorons makes a lot of mistakes?</line>
+	    </step>
+      <!-- Step 4 -->
+      <step speaker = "item_nullinterlucutor" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Because they always go-wrong...</line>
+	    </step>
+      <!-- Step 5 -->
+      <step speaker = "item_nullinterlucutor" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Hahahahahhahahahaha.</line>
+	    </step>
+      <!-- Step 6 -->
+      <step speaker = "item_nullinterlucutor" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+        <line>Mi mother says i'm special.</line>
+	    </step>
+    </npc>
+  
+    <!-- NPC 2_with_zelda -->
+    <npc enum_value = "29">
+      <!-- Step 1 -->
+      <step speaker = "item_nullinterlucutor" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Do you know wich kingdom is the one wich greets you more?....</line>
+      </step>
+      <!-- Step 2 -->
+      <step speaker = "item_nullinterlucutor" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Hi-rule....</line>
+	    </step>
+      <!-- Step 3 -->
+      <step speaker = "item_nullinterlucutor" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>And you know why gorons makes a lot of mistakes?</line>
+	    </step>
+      <!-- Step 4 -->
+      <step speaker = "item_nullinterlucutor" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Because they always go-wrong...</line>
+	    </step>
+      <!-- Step 5 -->
+      <step speaker = "item_nullinterlucutor" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Hahahahahhahahahaha.</line>
+	    </step>
+      <!-- Step 6 -->
+      <step speaker = "item_nullinterlucutor" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+        <line>Mi mother says i'm special.</line>
+	    </step>
+    </npc>
+  </NPCs>
+  
+  <!-- Item -->
+  <Items>
+    <!-- SmallChest -->
+    <item enum_value = "30">
+      <step>
+	    <line>You need an small key.</line>
+	  </step>
+    </item>
+  </Items>
+  
+</DialogueManager>
