@@ -1,0 +1,165 @@
+<!-- All dialogues for the game -->
+
+<DialogueManager>
+  
+  <!-- Cutscenes -->
+  <Cutscenes>
+    <!-- castle_room -->
+    <cutscene enum_value = "0">
+      <!-- Step 1 -->
+      <step speaker = "king" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Thank you Link for coming as soon as you were warned. News has come to us that a</line>
+        <line>dark force is planning to seize the triforce.</line>
+	    </step>
+    </cutscene>
+    
+    <!-- castle_1 -->
+    <cutscene enum_value = "1">
+      
+    </cutscene>
+    
+    <!-- castle_2 -->
+    <cutscene enum_value = "2">
+    
+    </cutscene>
+    
+    <!-- castle_3 -->
+    <cutscene enum_value = "3">
+      
+    </cutscene>
+    
+    <!-- castle_sewers_1 -->
+    <cutscene enum_value = "4">
+      
+    </cutscene>
+    
+    <!-- castle_sewers_2 -->
+    <cutscene enum_value = "5">
+      
+    </cutscene>
+    
+    <!-- village -->
+    <cutscene enum_value = "6">
+      
+    </cutscene>
+    
+    <!-- house_1 -->
+    <cutscene enum_value = "7">
+      
+    </cutscene>
+    
+    <!-- house_2 -->
+    <cutscene enum_value = "8">
+      
+    </cutscene>
+    
+    <!-- house_3 -->
+    <cutscene enum_value = "9">
+      
+    </cutscene>
+    
+    <!-- forest_1 -->
+    <cutscene enum_value = "10">
+      
+    </cutscene>
+    
+    <!-- forest_2 -->
+    <cutscene enum_value = "11">
+      
+    </cutscene>
+    
+    <!-- truth_1 -->
+    <cutscene enum_value = "12">
+      
+    </cutscene>
+    
+    <!-- truth_2 -->
+    <cutscene enum_value = "13">
+      
+    </cutscene>
+    
+    <!-- truth_3 -->
+    <cutscene enum_value = "14">
+      
+    </cutscene>
+    
+    <!-- truth_4 -->
+    <cutscene enum_value = "15">
+      
+    </cutscene>
+    
+    <!-- truth_5 -->
+    <cutscene enum_value = "16">
+      
+    </cutscene>
+    
+    <!-- truth_6 -->
+    <cutscene enum_value = "17">
+      
+    </cutscene>
+    
+    <!-- castle_doors -->
+    <cutscene enum_value = "18">
+      
+    </cutscene>
+    
+    <!-- castle_yard_1 -->
+    <cutscene enum_value = "19">
+      
+    </cutscene>
+     
+    <!-- castle_yard_2 -->
+    <cutscene enum_value = "20">
+      
+    </cutscene>
+    
+    <!-- castle_yard_3 -->
+    <cutscene enum_value = "21">
+      
+    </cutscene>
+    
+    <!-- castle_yard_4 -->
+    <cutscene enum_value = "22">
+      
+    </cutscene>
+     
+    <!-- castle_yard_5 -->
+    <cutscene enum_value = "23">
+      
+    </cutscene>
+    
+  </Cutscenes>
+      
+  <!-- NPC -->
+  <NPCs>
+    <!-- Ric -->
+    <npc enum_value = "24">
+      <!-- Step 1 -->
+      <step speaker = "king" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_rec_x ="" speaker_rec_y ="" speaker_rec_w ="" speaker_rec_h ="" listener_rec_x =""  listener_rec_y ="" listener_rec_w ="" listener_rec_h ="">
+	      <line>Thank you Link for coming as soon as you were warned. News has come to us that a</line>
+        <line>dark force is planning to seize the triforce.</line>
+	    </step>
+    </npc>
+    
+    <!-- NPC 1 -->
+    <npc enum_value = "25">
+      
+    </npc>
+        
+    <!-- NPC 2 -->
+    <npc enum_value = "26">
+      
+    </npc>
+  </NPCs>
+  
+  <!-- Item -->
+  <Items>
+    <!-- SmallChest -->
+    <item enum_value = "100">
+      <step>
+	    <line>You need an small key.</line>
+	  </step>
+    </item>
+  </Items>
+  
+</DialogueManager>
