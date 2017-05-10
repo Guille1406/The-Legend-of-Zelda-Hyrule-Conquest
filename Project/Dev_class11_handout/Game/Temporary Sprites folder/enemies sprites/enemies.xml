@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:aa94e3d7be09f306ad4211a6b33e634f:1efd98486b8740e487d1f2e212c0bc86:7b72fae99963a67690723dd461d21f27$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="enemies.png" width="491" height="390">
+    <sprite n="armos/armos_1.png" x="1" y="1" w="32" h="64" pX="0" pY="0.5"/>
+    <sprite n="armos/armos_2.png" x="35" y="1" w="32" h="64" pX="0" pY="0.5"/>
+    <sprite n="armos/armos_3.png" x="69" y="1" w="32" h="64" pX="0" pY="0.5"/>
+    <sprite n="bat/bat_1.png" x="103" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="bat/bat_2.png" x="137" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="bat/bat_3.png" x="171" y="1" w="32" h="30" pX="0" pY="0"/>
+    <sprite n="green enemy/down/green_soldier_down_1.png" x="205" y="1" w="32" h="56" pX="0" pY="0.5"/>
+    <sprite n="green enemy/down/green_soldier_down_2.png" x="239" y="1" w="32" h="56" pX="0" pY="0.5"/>
+    <sprite n="green enemy/down/green_soldier_down_3.png" x="273" y="1" w="32" h="56" pX="0" pY="0.5"/>
+    <sprite n="green enemy/down/green_soldier_down_4.png" x="307" y="1" w="32" h="56" pX="0" pY="0.5"/>
+    <sprite n="green enemy/left/green_soldier_left_1.png" x="341" y="1" w="35" h="56" pX="0" pY="0.392857"/>
+    <sprite n="green enemy/left/green_soldier_left_2.png" x="378" y="1" w="35" h="56" pX="0" pY="0"/>
+    <sprite n="green enemy/left/green_soldier_left_3.png" x="415" y="1" w="35" h="56" pX="0" pY="0"/>
+    <sprite n="green enemy/left/green_soldier_left_4.png" x="452" y="1" w="35" h="56" pX="0" pY="0"/>
+    <sprite n="green enemy/right/soldier_green_right_1.png" x="1" y="67" w="35" h="56" pX="0.0857143" pY="0.392857"/>
+    <sprite n="green enemy/right/soldier_green_right_2.png" x="38" y="67" w="35" h="56" pX="0.0857143" pY="0.392857"/>
+    <sprite n="green enemy/right/soldier_green_right_3.png" x="75" y="67" w="35" h="56" pX="0.0857143" pY="0.392857"/>
+    <sprite n="green enemy/right/soldier_green_right_4.png" x="112" y="67" w="35" h="56" pX="0.0857143" pY="0.392857"/>
+    <sprite n="green enemy/UP/green_soldier_up_1.png" x="149" y="67" w="32" h="56" pX="0" pY="0.392857"/>
+    <sprite n="green enemy/UP/green_soldier_up_2.png" x="183" y="67" w="32" h="56" pX="0" pY="0.392857"/>
+    <sprite n="green enemy/UP/green_soldier_up_3.png" x="183" y="67" w="32" h="56" pX="0" pY="0"/>
+    <sprite n="green enemy/UP/green_soldier_up_4.png" x="183" y="67" w="32" h="56" pX="0" pY="0"/>
+    <sprite n="rat/down/iddle/rat_iddle.png" x="217" y="67" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rat/down/rat_down_1.png" x="251" y="67" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rat/down/rat_down_2.png" x="285" y="67" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rat/left/iddle/rat_left_iddle_1.png" x="319" y="67" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rat/left/iddle/rat_left_iddle_2.png" x="353" y="67" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rat/left/rat_left_1.png" x="387" y="67" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rat/left/rat_left_2.png" x="421" y="67" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rat/right/iddle/rat_right_iddle_1.png" x="455" y="67" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rat/right/iddle/rat_right_iddle_2.png" x="1" y="125" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rat/right/rat_right_1.png" x="35" y="125" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rat/right/rat_right_2.png" x="69" y="125" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rat/up/rat_up_1.png" x="103" y="125" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rat/up/rat_up_2.png" x="137" y="125" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="red soldier/down/red_soldier_down_1.png" x="171" y="125" w="54" h="60" pX="0.111111" pY="0.4"/>
+    <sprite n="red soldier/down/red_soldier_down_2.png" x="227" y="125" w="54" h="60" pX="0.111111" pY="0.4"/>
+    <sprite n="red soldier/left/red_soldier_left_1.png" x="283" y="125" w="32" h="56" pX="0" pY="0.428571"/>
+    <sprite n="red soldier/left/red_soldier_left_2.png" x="317" y="125" w="32" h="56" pX="0" pY="0.428571"/>
+    <sprite n="red soldier/right/red_soldier_right_1.png" x="351" y="125" w="32" h="56" pX="0" pY="0.428571"/>
+    <sprite n="red soldier/right/red_soldier_right_2.png" x="385" y="125" w="32" h="56" pX="0" pY="0.428571"/>
+    <sprite n="red soldier/up/red_soldier_up.psd" x="419" y="125" w="50" h="62" pX="0.28" pY="0.5"/>
+    <sprite n="red soldier/up/red_soldier_up_1.png" x="1" y="189" w="50" h="62" pX="0.28" pY="0.483871"/>
+    <sprite n="red soldier/up/red_soldier_up_2.png" x="419" y="125" w="50" h="62" pX="0" pY="0"/>
+    <sprite n="rope/down/rope_down_1.png" x="53" y="189" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rope/down/rope_down_2.png" x="87" y="189" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rope/left/rope_left_1.png" x="121" y="189" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rope/left/rope_left_2.png" x="155" y="189" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rope/right/rope_right_1.png" x="189" y="189" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rope/right/rope_right_2.png" x="223" y="189" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rope/up/rope_up_1.png" x="257" y="189" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="rope/up/rope_up_2.png" x="291" y="189" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="shield enemy/down/shieldsoldier_down_1.png" x="325" y="189" w="50" h="60" pX="0.24" pY="0.266667"/>
+    <sprite n="shield enemy/down/shieldsoldier_down_2.png" x="377" y="189" w="50" h="60" pX="0.24" pY="0.266667"/>
+    <sprite n="shield enemy/down/shieldsoldier_down_3.png" x="325" y="189" w="50" h="60" pX="0" pY="0"/>
+    <sprite n="shield enemy/down/shieldsoldier_down_4.png" x="429" y="189" w="50" h="60" pX="0.24" pY="0.266667"/>
+    <sprite n="shield enemy/left/shieldsoldier_left_1.png" x="1" y="253" w="48" h="56" pX="0.25" pY="0.321429"/>
+    <sprite n="shield enemy/left/shieldsoldier_left_2.png" x="51" y="253" w="48" h="56" pX="0.25" pY="0.321429"/>
+    <sprite n="shield enemy/left/shieldsoldier_left_3.png" x="1" y="253" w="48" h="56" pX="0" pY="0"/>
+    <sprite n="shield enemy/left/shieldsoldier_left_4.png" x="101" y="253" w="48" h="56" pX="0.25" pY="0.321429"/>
+    <sprite n="shield enemy/right/shieldsoldier_right_1.png" x="151" y="253" w="48" h="56" pX="0" pY="0.321429"/>
+    <sprite n="shield enemy/right/shieldsoldier_right_2.png" x="201" y="253" w="48" h="56" pX="0" pY="0.321429"/>
+    <sprite n="shield enemy/right/shieldsoldier_right_3.png" x="151" y="253" w="48" h="56" pX="0" pY="0"/>
+    <sprite n="shield enemy/right/shieldsoldier_right_4.png" x="251" y="253" w="48" h="56" pX="0" pY="0.321429"/>
+    <sprite n="shield enemy/up/Shieldsoldier_up_1.png" x="301" y="253" w="50" h="56" pX="0.12" pY="0.285714"/>
+    <sprite n="shield enemy/up/Shieldsoldier_up_2.png" x="353" y="253" w="50" h="56" pX="0.12" pY="0.285714"/>
+    <sprite n="shield enemy/up/Shieldsoldier_up_3.png" x="301" y="253" w="50" h="56" pX="0" pY="0"/>
+    <sprite n="shield enemy/up/Shieldsoldier_up_4.png" x="405" y="253" w="50" h="56" pX="0.12" pY="0.285714"/>
+    <sprite n="skullrope/down/skullrope_down_1.png" x="457" y="253" w="30" h="32" pX="0" pY="0"/>
+    <sprite n="skullrope/down/skullrope_down_2.png" x="1" y="311" w="30" h="32" pX="0" pY="0"/>
+    <sprite n="skullrope/left/skullrope_right.psd" x="33" y="311" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="skullrope/left/skullrope_right_1.png" x="33" y="311" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="skullrope/left/skullrope_right_2.png" x="67" y="311" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="skullrope/right/skullrope_left.psd" x="101" y="311" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="skullrope/right/skullrope_left_1.png" x="135" y="311" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="skullrope/right/skullrope_left_2.png" x="101" y="311" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="skullrope/up/skullrope_up_1.png" x="169" y="311" w="32" h="32" pX="0" pY="0"/>
+    <sprite n="skullrope/up/skullrope_up_2.png" x="203" y="311" w="32" h="32" pX="0" pY="0"/>
+</TextureAtlas>
