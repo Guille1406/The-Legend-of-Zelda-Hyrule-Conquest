@@ -80,7 +80,7 @@ bool j1Player::Start()
 	Link->im_lifting = false;
 	Link->can_jump = false;
 	Link->can_walk = true;
-	Link->can_pick_up = false;
+	Link->can_pick_up = true;
 	Zelda->is_picked = false;
 	Zelda->is_rolling = false;
 	Zelda->can_jump = false;

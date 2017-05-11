@@ -233,7 +233,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret = new Rope_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
-		ret->live = 6;
+		ret->live = 1;
 		//Position in world pixel 
 		ret->pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pos.y = pos_array_enemy.y*App->map->data.tile_height;
@@ -269,7 +269,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret = new SkullRope_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
-		ret->live = 6;
+		ret->live = 2;
 		//Position in world pixel 
 		ret->pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pos.y = pos_array_enemy.y*App->map->data.tile_height;
@@ -287,7 +287,7 @@ Enemy* j1Enemy::Create_Enemy(uint id_enemy, iPoint pos_array_enemy, int height)
 		ret = new Bat_Enemy();
 		ret->rect = { 0,0,44,60 };
 		ret->array_pos = pos_array_enemy;
-		ret->live = 4;
+		ret->live = 2;
 		//Position in world pixel 
 		ret->pos.x = pos_array_enemy.x*App->map->data.tile_width;
 		ret->pos.y = pos_array_enemy.y*App->map->data.tile_height;
