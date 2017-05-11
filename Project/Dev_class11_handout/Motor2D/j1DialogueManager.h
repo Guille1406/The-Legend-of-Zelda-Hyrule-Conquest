@@ -73,6 +73,34 @@ enum DialogueInterlucutorPosition {
 enum CharaterSpriteRect_ID {
 	King_1,
 	King_2,
+
+	link_1,
+	link_2,
+	link_3,
+	link_4,
+	link_5,
+
+	zelda_1,
+	zelda_2,
+	zelda_3,
+	zelda_4,
+	zelda_5,
+
+	messenger_1,
+	messenger_2,
+	messenger_3,
+	messenger_4,
+	messenger_5,
+	messenger_6,
+
+	ogity_1,
+	ogity_2,
+	ogity_3,
+
+	ric_1,
+	ric_2,
+	ric_3,
+
 	CharaterSpriteRect_NULL
 };
 
@@ -171,6 +199,7 @@ private:
 
 	std::vector<Dialogue*> dialogues;
 	std::vector<DialogueInterlucutorStrAndAtalsRelation*> DialogueInterlucutorStrandAtlasRelationVec;
+	std::vector<CharaterSprite*> CharaterSpritesVec;
 	ActiveDialogue* ActiveDialog = nullptr;
 
 	std::string folder = empty_char;
