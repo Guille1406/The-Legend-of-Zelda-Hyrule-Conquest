@@ -20,7 +20,7 @@
 
 bool S_Forest::Start()
 {
-	scene_str = "Castle Sewers";
+	scene_str = "Eterna Forest";
 
 	App->camera->Enable();
 	App->hud->Enable();
@@ -39,7 +39,6 @@ bool S_Forest::Start()
 	App->pathfinding->paused = false;
 
 
-	App->cutscenemanager->StartCutscene(cutscene_intro);
 
 	//GuiImage* title = App->gui->CreateImage(iPoint(0, 0), &title_rec, false, AddGuiTo::none);
 	//((Gui*)title)->SetListener(this);
@@ -78,7 +77,7 @@ bool S_Forest::Start()
 	App->render->camera.y = 0;
 
 	
-	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
+	
 	LOG("World Open");
 	return false;
 }

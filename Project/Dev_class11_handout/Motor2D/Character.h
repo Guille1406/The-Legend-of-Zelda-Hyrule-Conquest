@@ -75,7 +75,9 @@ enum key_state;
 class Character : public Entity {
 public:
 	Character() {};
-	~Character() {};
+	~Character() {
+		App->tex->UnLoad(entity_texture);
+	};
 	
 	
 	virtual void Attack(float dt);

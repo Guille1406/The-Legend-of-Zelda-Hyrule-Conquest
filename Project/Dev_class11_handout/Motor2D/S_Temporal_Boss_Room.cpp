@@ -20,7 +20,7 @@
 
 bool S_TempBossRoom::Start()
 {
-	scene_str = "Boss room";
+	scene_str = "HYRULE CASTLE";
 
 	App->camera->Enable();
 	App->hud->Enable();

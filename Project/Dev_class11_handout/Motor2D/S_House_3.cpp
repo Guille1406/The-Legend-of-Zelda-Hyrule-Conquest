@@ -39,7 +39,6 @@ bool S_House_3::Start()
 	App->pathfinding->paused = false;
 
 
-	App->cutscenemanager->StartCutscene(cutscene_intro);
 
 	//GuiImage* title = App->gui->CreateImage(iPoint(0, 0), &title_rec, false, AddGuiTo::none);
 	//((Gui*)title)->SetListener(this);
@@ -59,15 +58,19 @@ bool S_House_3::Start()
 
 		int w_two, h_two = 0;
 		uchar* data_two = nullptr;
+		uchar* data_three = nullptr;
 		if (App->map->CreateEnemyMap(w_two, h_two, &data_two)) {
 			int w_three = 0;
 			int h_three = 0;
-			uchar* data_three = nullptr;
+			
 			if (App->map->CreateEnemyPathMap(w_three, h_three, &data_three)) {
 				App->enemy->Enable();
 			}
 		}
 		RELEASE_ARRAY(data);
+		RELEASE_ARRAY(data_two);
+		RELEASE_ARRAY(data_three);
+
 		//App->map->CreateLogicMap();
 	}
 
@@ -109,14 +112,10 @@ bool S_House_3::Clean()
 	App->collision->Disable();
 	App->hud->Disable();
 	App->object->Disable();
-
+	//App->audio->StopMusic(0);
 	//std::list <TileSet*>::iterator temp = App->map->data.tilesets.begin();
 
-	/*p2List_item<TileSet*>* temp = App->map->data.tilesets.start;
-	while (temp != NULL) {
-	App->tex->UnLoad(temp->data->texture);
-	temp = temp->next;
-	}*/
+	
 
 	//This must be revised
 	((S_InGameMenu*)App->scene->InGameMenuScene())->active = false;

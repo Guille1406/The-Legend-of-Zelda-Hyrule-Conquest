@@ -69,9 +69,15 @@ public:
 	{
 		return &scene_list;
 	}
+
 	SDL_Texture* GetCredits_Logo_Atlas()
 	{
 		return credits_logo_atlas;
+	}
+
+	SDL_Texture* GetDeath_Scene_Atlas()
+	{
+		return death_scene_atlas;
 	}
 
 private:
@@ -90,6 +96,7 @@ private:
 	bool sub_scene_to_load = false;
 
 	SDL_Texture*	credits_logo_atlas = nullptr;
+	SDL_Texture*	death_scene_atlas = nullptr;
 
 public:
 	bool blocks_out = false;

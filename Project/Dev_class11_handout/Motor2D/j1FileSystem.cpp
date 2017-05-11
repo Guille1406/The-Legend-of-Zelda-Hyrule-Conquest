@@ -108,8 +108,10 @@ unsigned int j1FileSystem::Load(const char* file, char** buffer) const
 				LOG("File System error while reading from file %s: %s\n", file, PHYSFS_getLastError());
 				RELEASE(buffer);
 			}
-			else
+			else {
 				ret = (uint)readed;
+				
+			}
 		}
 
 		if(PHYSFS_close(fs_file) == 0)

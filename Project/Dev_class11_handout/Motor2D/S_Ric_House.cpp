@@ -20,7 +20,7 @@
 
 bool S_Ric_House::Start()
 {
-	scene_str = "Castle Sewers";
+	scene_str = "Ric's Mansion";
 
 	App->camera->Enable();
 	App->hud->Enable();
@@ -39,7 +39,7 @@ bool S_Ric_House::Start()
 	App->pathfinding->paused = false;
 
 
-	App->cutscenemanager->StartCutscene(cutscene_intro);
+
 
 	//GuiImage* title = App->gui->CreateImage(iPoint(0, 0), &title_rec, false, AddGuiTo::none);
 	//((Gui*)title)->SetListener(this);

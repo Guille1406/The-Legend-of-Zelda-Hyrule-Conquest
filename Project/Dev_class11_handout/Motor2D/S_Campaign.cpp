@@ -17,11 +17,19 @@ S_Campaign::~S_Campaign()
 bool S_Campaign::Awake(pugi::xml_node& conf)
 {
 	controllerlayout_pos = { 1,0 };
-	newcampaign = App->gui->CreateButton(iPoint(920, 490), &std::string("New Campaign"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+
+	newcampaign = App->gui->CreateButton(iPoint(920, 380), &std::string("New Campaign"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	newcampaign->SetFont(App->font->Sherwood20);
 	((Gui*)newcampaign)->SetListener(this);
 	newcampaign->SetVisible(false);
 	newcampaign->Focusable(true);
+
+	loadcampaign = App->gui->CreateButton(iPoint(920, 490), &std::string("Load Campaign"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	loadcampaign->SetFont(App->font->Sherwood20);
+	((Gui*)loadcampaign)->SetListener(this);
+	loadcampaign->SetVisible(false);
+	loadcampaign->Focusable(true);
+
 	back = App->gui->CreateButton(iPoint(920, 600), &std::string("Back"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	back->SetFont(App->font->Sherwood20);
 	((Gui*)back)->SetListener(this);
@@ -29,6 +37,7 @@ bool S_Campaign::Awake(pugi::xml_node& conf)
 	back->Focusable(true);
 
 	buttons.push_back(newcampaign);
+	buttons.push_back(loadcampaign);
 	buttons.push_back(back);
 
 	return true;
@@ -37,6 +46,7 @@ bool S_Campaign::Awake(pugi::xml_node& conf)
 bool S_Campaign::Start()
 {
 	newcampaign->SetVisible(true);
+	loadcampaign->SetVisible(true);
 	back->SetVisible(true);
 
 	App->gui->SetFocus(buttons.front());
@@ -54,6 +64,7 @@ bool S_Campaign::Update()
 bool S_Campaign::Clean()
 {
 	newcampaign->SetVisible(false);
+	loadcampaign->SetVisible(false);
 	back->SetVisible(false);
 	return true;
 }
@@ -61,6 +72,13 @@ bool S_Campaign::Clean()
 void S_Campaign::OnGui(Gui* ui, GuiEvent event)
 {
 	if ((ui == (Gui*)newcampaign) && (event == GuiEvent::mouse_lclk_down))
+	{
+		App->startmenuback->Freeze(true);
+		App->scene->ChangeScene(Scene_ID::startcutscenegame);
+		App->scene->Hide();
+		App->particlemanager->Enable();
+	}
+	if ((ui == (Gui*)loadcampaign) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->startmenuback->Freeze(true);
 		App->scene->ChangeScene(Scene_ID::startcutscenegame);

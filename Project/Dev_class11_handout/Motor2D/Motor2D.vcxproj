@@ -135,6 +135,7 @@
     <ClCompile Include="S_CastleCutScene.cpp" />
     <ClCompile Include="S_ColourPuzzle.cpp" />
     <ClCompile Include="S_Credits.cpp" />
+    <ClCompile Include="S_Death.cpp" />
     <ClCompile Include="S_Dungeon_Entry.cpp" />
     <ClCompile Include="S_Dungeon_Right_Down.cpp" />
     <ClCompile Include="S_Dungeon_Right_Up.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="S_OptionsControls.cpp" />
     <ClCompile Include="S_OptionsGameplay.cpp" />
     <ClCompile Include="S_OptionsVideo.cpp" />
+    <ClCompile Include="S_PathToBoss.cpp" />
     <ClCompile Include="S_QuitGame.cpp" />
     <ClCompile Include="S_Ric_House.cpp" />
     <ClCompile Include="S_SecretExit.cpp" />
@@ -247,6 +249,7 @@
     <ClInclude Include="S_CastleCutScene.h" />
     <ClInclude Include="S_ColourPuzzle.h" />
     <ClInclude Include="S_Credits.h" />
+    <ClInclude Include="S_Death.h" />
     <ClInclude Include="S_Dungeon_Entry.h" />
     <ClInclude Include="S_Dungeon_Right_Down.h" />
     <ClInclude Include="S_Dungeon_Right_Up.h" />
@@ -288,6 +291,7 @@
     <ClInclude Include="S_OptionsControls.h" />
     <ClInclude Include="S_OptionsGameplay.h" />
     <ClInclude Include="S_OptionsVideo.h" />
+    <ClInclude Include="S_PathToBoss.h" />
     <ClInclude Include="S_QuitGame.h" />
     <ClInclude Include="S_Ric_House.h" />
     <ClInclude Include="S_SecretExit.h" />

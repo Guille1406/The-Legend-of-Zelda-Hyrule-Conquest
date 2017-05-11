@@ -2,6 +2,7 @@
 #include "GuiLabel.h"
 #include "j1App.h"
 #include "j1Render.h"
+#include "j1Textures.h"
 #include "j1Fonts.h"
 
 GuiLabel::GuiLabel(iPoint position, std::string* str, bool movable, AddGuiTo addto) : Gui(position, GuiType::gui_label, movable, addto),
@@ -20,7 +21,7 @@ void GuiLabel::Draw()
 {
 	if (str_modified)
 	{
-		SDL_DestroyTexture(texture_to_blit);
+		App->tex->UnLoad(texture_to_blit);
 		if (LabelString != empty_char)
 			texture_to_blit = App->font->Print(LabelString.c_str(), { (Uint8)(*color)(0), (Uint8)(*color)(1), (Uint8)(*color)(2), (Uint8)opacity }, font);
 		str_modified = false;
@@ -29,6 +30,7 @@ void GuiLabel::Draw()
 	{
 		if (LabelString != empty_char)
 			App->render->Blit(texture_to_blit, position.x - App->render->camera.x, position.y - App->render->camera.y, nullptr, 1.0f, 0, INT_MAX, INT_MAX, false, opacity);
+
 		if (App->gui->Gui_DebugDraw_isactive())
 			this->DebugDraw();
 	}

@@ -71,7 +71,7 @@ bool S_DungeonSecondFloorCentre::Start()
 	//App->player->Zelda->pos = { 620,1200 };
 	App->player->Link->logic_height = 0;
 	App->player->Zelda->logic_height = 0;
-	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
+	
 	LOG("World Open");
 	return false;
 }
