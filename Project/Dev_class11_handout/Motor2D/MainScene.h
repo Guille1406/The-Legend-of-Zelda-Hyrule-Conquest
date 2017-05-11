@@ -57,7 +57,9 @@ enum Scene_ID {
 	house_3 = 32,
 	ric_house = 33,
 
+
 	top_of_the_mountain = 34,
+	path_to_boss = 35,
 
 };
 

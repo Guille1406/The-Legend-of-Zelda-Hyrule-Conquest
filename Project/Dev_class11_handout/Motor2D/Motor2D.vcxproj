@@ -161,6 +161,7 @@
     <ClCompile Include="S_OptionsControls.cpp" />
     <ClCompile Include="S_OptionsGameplay.cpp" />
     <ClCompile Include="S_OptionsVideo.cpp" />
+    <ClCompile Include="S_PathToBoss.cpp" />
     <ClCompile Include="S_QuitGame.cpp" />
     <ClCompile Include="S_Ric_House.cpp" />
     <ClCompile Include="S_SecretExit.cpp" />
@@ -288,6 +289,7 @@
     <ClInclude Include="S_OptionsControls.h" />
     <ClInclude Include="S_OptionsGameplay.h" />
     <ClInclude Include="S_OptionsVideo.h" />
+    <ClInclude Include="S_PathToBoss.h" />
     <ClInclude Include="S_QuitGame.h" />
     <ClInclude Include="S_Ric_House.h" />
     <ClInclude Include="S_SecretExit.h" />

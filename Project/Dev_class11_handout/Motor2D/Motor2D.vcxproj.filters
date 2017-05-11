@@ -289,6 +289,9 @@
     <ClCompile Include="O_NPC.cpp">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="S_PathToBoss.cpp">
+      <Filter>Desenvolupament  ========\Scenes\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -665,6 +668,10 @@
     </ClInclude>
     <ClInclude Include="O_NPC.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="O_ElectricBall.h" />
+    <ClInclude Include="S_PathToBoss.h">
+      <Filter>Desenvolupament  ========\Scenes\World</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

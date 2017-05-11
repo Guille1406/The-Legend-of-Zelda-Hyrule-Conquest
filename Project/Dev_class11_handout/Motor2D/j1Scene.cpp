@@ -53,6 +53,7 @@
 #include "S_Ric_House.h"
 #include"S_CastleCutScene.h"
 #include "S_TopOfTheMountain.h"
+#include "S_PathToBoss.h"
 #include"Enemy_Test_Scene.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -119,6 +120,13 @@ bool j1Scene::Start()
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::secret_exit;
 	scene_pointer = nullptr;
+
+	scene_pointer = new S_PathToBoss;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::path_to_boss;
+	scene_pointer = nullptr;
+
 
 
 	scene_pointer = new S_Village;
