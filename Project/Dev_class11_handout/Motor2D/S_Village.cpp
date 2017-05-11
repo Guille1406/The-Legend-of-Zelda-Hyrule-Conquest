@@ -20,7 +20,7 @@
 
 bool S_Village::Start()
 {
-	scene_str = "Castle Sewers";
+	scene_str = "Kakariko Village";
 
 	App->camera->Enable();
 	App->hud->Enable();

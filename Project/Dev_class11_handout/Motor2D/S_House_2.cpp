@@ -20,7 +20,7 @@
 
 bool S_House_2::Start()
 {
-	scene_str = "Castle Sewers";
+	scene_str = "Drinking Tavern";
 
 	App->camera->Enable();
 	App->hud->Enable();

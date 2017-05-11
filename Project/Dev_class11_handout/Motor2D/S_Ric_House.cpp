@@ -20,7 +20,7 @@
 
 bool S_Ric_House::Start()
 {
-	scene_str = "Castle Sewers";
+	scene_str = "Ric's Mansion";
 
 	App->camera->Enable();
 	App->hud->Enable();

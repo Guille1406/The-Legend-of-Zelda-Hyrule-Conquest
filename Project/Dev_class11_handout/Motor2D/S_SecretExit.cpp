@@ -20,7 +20,7 @@
 
 bool S_SecretExit::Start()
 {
-	scene_str = "Castle Sewers";
+	scene_str = "Hyrule Fields";
 
 	App->camera->Enable();
 	App->hud->Enable();

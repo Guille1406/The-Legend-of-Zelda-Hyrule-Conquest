@@ -20,7 +20,7 @@
 
 bool S_Forest::Start()
 {
-	scene_str = "Castle Sewers";
+	scene_str = "Eterna Forest";
 
 	App->camera->Enable();
 	App->hud->Enable();
