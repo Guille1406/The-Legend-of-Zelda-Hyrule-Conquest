@@ -20,6 +20,7 @@ public:
 	void OnGui(Gui* ui, GuiEvent event);
 public:
 	GuiButton* newcampaign = nullptr;
+	GuiButton* loadcampaign = nullptr;
 	GuiButton* back = nullptr;
 
 	SDL_Rect controllerlayout_rec = { 0,2604,1278,720 };
