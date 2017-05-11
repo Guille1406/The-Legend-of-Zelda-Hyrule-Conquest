@@ -452,7 +452,7 @@ bool Cutscene::DrawElements()
 		{
 			if (it._Ptr->_Myval->active == true)
 			{
-				((CS_Image*)(*it))->image->DrawWithAlternativeAtlas(((CS_Image*)(*it))->tex, false);
+				((CS_Image*)(*it))->image->DrawWithAlternativeAtlas(((CS_Image*)(*it))->tex, false,true);
 				//(((CS_Image*)(*it))->tex)
 			}
 		}
@@ -533,7 +533,7 @@ bool Cutscene::LoadImg(pugi::xml_node& node)
 	if (node != NULL)
 	{
 		
-		iPoint pos(node.attribute("x").as_int(0)*App->win->GetScale(), node.attribute("y").as_int(0)*App->win->GetScale());
+		iPoint pos(node.attribute("x").as_int(0), node.attribute("y").as_int(0));
 		SDL_Rect rect = { node.attribute("rectx").as_int(0), node.attribute("recty").as_int(0), node.attribute("rectw").as_int(0), node.attribute("recth").as_int(0) };
 		std::string str = node.attribute("file").as_string("");
 		elements.push_back(new CS_Image(CS_IMAGE, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), rect, pos));
@@ -563,10 +563,21 @@ bool Cutscene::LoadText(pugi::xml_node& node)
 		else if (id_string == "castle_3") {
 			id = DialogueID::castle_3_dialogue;
 		}
-		else if (id_string == "castle_sewers_1_dialogue") {
-			id = DialogueID::castle_sewers_1_dialogue;
+		else if (id_string == "village") {
+			id = DialogueID::village_dialogue;
 		}
 
+		else if (id_string == "house_1_dialogue") {
+			id = DialogueID::house_1_dialogue;
+		}
+
+		else if (id_string == "house_2_dialogue") {
+			id = DialogueID::house_2_dialogue;
+		}
+
+		else if (id_string == "house_3_dialogue") {
+			id = DialogueID::house_3_dialogue;
+		}
 		elements.push_back(new CS_Text(CS_Type::CS_TEXT, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), id));
 		ret = true;
 	}
@@ -603,6 +614,13 @@ bool Cutscene::LoadChangeScene(pugi::xml_node& node)
 		}
 		else if (id_string == "dungeon") {
 			id = Scene_ID::dungeon;
+		}
+		else if (id_string == "village") {
+			id = Scene_ID::village;
+		}
+
+		else if (id_string == "house_3") {
+			id = Scene_ID::house_3;
 		}
 
 		elements.push_back(new CS_ChangeScene(CS_Type::CS_CHANGESCENE, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), id));
@@ -1051,10 +1069,11 @@ void CS_Step::DoChangeScene_CS()
 	if (element->GetType() == CS_CHANGESCENE)
 	{
 		CS_ChangeScene* tmp = (CS_ChangeScene*)element;
-		/*switch (tmp->id_newscene) {
+		switch (tmp->id_newscene) {
 
-		case Scene_ID::dungeon_right_down:
-
+		case Scene_ID::house_3:
+			App->player->Link->pos = {124,360};
+			App->player->Zelda->pos = {124,360};
 			break;
 
 
@@ -1062,7 +1081,7 @@ void CS_Step::DoChangeScene_CS()
 
 
 
-		}	*/	
+		}	
 		App->scene->ChangeScene(tmp->id_newscene);
 		FinishStep();
 	}
@@ -1096,7 +1115,9 @@ void CS_Step::ActiveElement()
 			App->dialoguemanager->ActivateDialogue(tmp->id_dialgoue_cs);
 
 		}
-		
+		else {
+			FinishStep();
+		}
 
 		//LOG("Step %i Enabling %s", n, element->name.c_str());
 	}
@@ -1105,6 +1126,7 @@ void CS_Step::ActiveElement()
 			//element->active = false;
 			FinishStep();
 		}
+		
 	}
 	
 
@@ -1125,6 +1147,7 @@ void CS_Step::DisableElement()
 			App->dialoguemanager->PauseActiveDialogue();
 			FinishStep();
 		}
+		
 		//LOG("Step %i Disabling %s", n, element->name.c_str());
 	}
 }

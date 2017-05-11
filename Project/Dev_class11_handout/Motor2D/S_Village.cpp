@@ -39,7 +39,7 @@ bool S_Village::Start()
 	App->pathfinding->paused = false;
 
 
-	App->cutscenemanager->StartCutscene(cutscene_intro);
+	App->cutscenemanager->StartCutscene(1);
 
 	//GuiImage* title = App->gui->CreateImage(iPoint(0, 0), &title_rec, false, AddGuiTo::none);
 	//((Gui*)title)->SetListener(this);

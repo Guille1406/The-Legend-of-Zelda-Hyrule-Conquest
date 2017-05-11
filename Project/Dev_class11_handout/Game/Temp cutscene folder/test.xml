@@ -22,8 +22,8 @@
 
 		<IMAGES>
 			<!--<image name="circlelink" posx="0" posy="0" rectx="135" recty="325" rectw="136" recth="136" active="true" file="gui/HUDAtlas.png"> </image>-->
-			<image name="King_sprite" x="1425" y="158" rectx="0" recty="0" rectw="175" recth="165" active="true" file="sprites/King_sprite.png"> </image>
-			<image name="messenger pixel" x="1538" y="240" rectx="0" recty="0" rectw="52" recth="71" active="true" file="sprites/messenger pixel.png"> </image>
+			<image name="King_sprite" x="1425" y="158" rectx="0" recty="0" rectw="70" recth="66" active="true" file="cutescenes/cutescene_spritesheet.png"> </image>
+			<image name="messenger pixel" x="1538" y="240" rectx="70" recty="8" rectw="46" recth="58" active="true" file="cutescenes/cutescene_spritesheet.png"> </image>
 		</IMAGES>
 
 		<TEXTS>
@@ -48,7 +48,7 @@
 	
 		<step  n="1" start="0" duration ="-1" input="false">
 			<element name="Zelda" action="move" dir="left">
-				<movement dest_x="-50" dest_y="0" speed="20"/>
+				<movement dest_x="-50" dest_y="0" speed="50"/>
 			</element>
 		</step>
 	
@@ -59,19 +59,19 @@
 		
 		<step  n="3" start="-1" duration ="-1" input="false">
 			<element name="Link" action="move" dir="right">
-				<movement dest_x="300" dest_y="0" speed="20"/>
+				<movement dest_x="300" dest_y="0" speed="50"/>
 			</element>
 		</step>
 		
 		<step  n="4" start="-1" duration ="-1" input="false">
 			<element name="Zelda" action="move" dir="right">
-				<movement dest_x="150" dest_y="0" speed="20"/>
+				<movement dest_x="150" dest_y="0" speed="50"/>
 			</element>
 		</step>
 		
 		<step  n="5" start="-1" duration ="-1" input="false">
 			<element name="Link" action="move" dir="right">
-				<movement dest_x="200" dest_y="0" speed="20"/>
+				<movement dest_x="200" dest_y="0" speed="50"/>
 			</element>
 		</step>
 		
