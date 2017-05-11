@@ -231,11 +231,13 @@ bool j1Player::CleanUp() {
 void j1Player::Draw(int height, int y_pos)
 {
 
+	
 	if(height ==Link->logic_height && y_pos == Link->tilepos.y)
 	App->render->Blit(Link->entity_texture, Link->pos.x - Link->actual_animation.GetCurrentFrame().pivot.x, Link->pos.y - Link->actual_animation.GetCurrentFrame().pivot.y, &Link->actual_animation.GetCurrentFrame().rect);
-	if(height ==Zelda->logic_height && y_pos == Zelda->tilepos.y)
-	App->render->Blit(Zelda->entity_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y + 3, &Zelda->actual_animation.GetCurrentFrame().rect);
 	
+	if (height == Zelda->logic_height - Zelda->is_picked * 1 && y_pos == Zelda->tilepos.y)
+		App->render->Blit(Zelda->entity_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y + 3, &Zelda->actual_animation.GetCurrentFrame().rect);
+
 	
 	
 }

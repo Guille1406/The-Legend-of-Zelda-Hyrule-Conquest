@@ -23,7 +23,7 @@ enum objectType {
 	colour_blocks,
 	locked_door,
 	object_jump,
-	object_lever, 
+	object_lever,
 	lever_block_blue,
 	lever_block_red,
 	green_rupee,
@@ -41,7 +41,12 @@ enum objectType {
 	object_music,
 	bridge,
 	bush,
+
 	npc,
+
+	electric_ball,
+
+
 
 	/*
 	.
@@ -120,7 +125,10 @@ public:
 	Object* CreateBridge(pugi::xml_node object, int height);
 	Object* CreateHeartContainer(pugi::xml_node object, int height);
 	Object* CreateBush(pugi::xml_node object, int height);
+
 	Object* CreateNPC(pugi::xml_node object, int height);
+
+	Object* CreateElectricBall(pugi::xml_node object, int height);
 
 	void StartCollision(Collider* collider1, Collider* collider2);
 	void OnCollision(Collider* collider1, Collider* collider2);

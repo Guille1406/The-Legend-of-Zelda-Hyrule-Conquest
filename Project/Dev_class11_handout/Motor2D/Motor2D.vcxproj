@@ -198,6 +198,7 @@
     <ClInclude Include="O_ColourBlock.h" />
     <ClInclude Include="O_Diana.h" />
     <ClInclude Include="O_DoubleButton.h" />
+    <ClInclude Include="O_ElectricBall.h" />
     <ClInclude Include="O_Fall.h" />
     <ClInclude Include="O_Giant_Chest.h" />
     <ClInclude Include="O_Heart.h" />

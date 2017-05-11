@@ -49,9 +49,10 @@ private:
 	// Load video file
 	void LoadVideo(const char *fname);
 
+	
 private:
 	THEORAPLAY_Decoder* decoder;
-	const THEORAPLAY_VideoFrame* video;
+
 	const THEORAPLAY_AudioPacket* audio;
 	SDL_Window* screen;
 	SDL_Texture* texture;
@@ -63,14 +64,21 @@ private:
 	int init_failed;
 	int quit;
 
+
+
 	void* pixels;
 	int pitch;
-	bool want_to_play;
+	
 
 	static AudioQueue* audio_queue;
 	static AudioQueue* audio_queue_tail;
 
 	SDL_Rect rendering_rect;
+
+public:
+	bool want_to_play;
+	const THEORAPLAY_VideoFrame* video;
+	bool video_finished;
 };
 
 #endif // __VIDEO_H__
