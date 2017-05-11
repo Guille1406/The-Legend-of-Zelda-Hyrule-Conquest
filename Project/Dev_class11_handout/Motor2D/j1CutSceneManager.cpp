@@ -1072,8 +1072,8 @@ void CS_Step::DoChangeScene_CS()
 		switch (tmp->id_newscene) {
 
 		case Scene_ID::house_3:
-			App->player->Link->pos = {124,360};
-			App->player->Zelda->pos = {124,360};
+			App->player->Link->pos = {100,300};
+			App->player->Zelda->pos = {160,300};
 			break;
 
 
