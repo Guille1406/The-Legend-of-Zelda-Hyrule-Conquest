@@ -106,9 +106,9 @@ bool S_TempBossRoom::PostUpdate()
 		if (App->object->V_Objects[i]->type == objectType::electric_ball) {
 			ElectricBall* temp = (ElectricBall*)App->object->V_Objects[i];
 			if (temp->active_phase == 1 && (App->enemy->Final_Boss->actual_phase == boss_phase_2 || App->enemy->Final_Boss->actual_phase == boss_phase_3))
-				App->render->DrawQuad({ temp->pos.x ,temp->pos.y,32,32 }, 0, 0, 255, 255, true, false);
+				temp->active = true;
 			if (temp->active_phase == 2 && (App->enemy->Final_Boss->actual_phase == boss_phase_3))
-				App->render->DrawQuad({ temp->pos.x ,temp->pos.y,32,32 }, 0, 0, 255, 255, true, false);
+				temp->active = true;
 		}
 	}
 	return true;
