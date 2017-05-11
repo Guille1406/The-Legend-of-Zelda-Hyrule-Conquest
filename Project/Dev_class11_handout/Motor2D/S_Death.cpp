@@ -4,7 +4,7 @@
 
 S_Death::S_Death()
 {
-	scene_str = "Credits";
+	scene_str = "Death";
 }
 
 S_Death::~S_Death()
@@ -13,7 +13,7 @@ S_Death::~S_Death()
 
 bool S_Death::Awake(pugi::xml_node& conf)
 {
-	CreditsLogo_Rect = { 0,0,1280,720 };
+	Death_Screen_Rect = { 0,0,1280,720 };
 	CreditsBack_Rect = { 1278,2061,145,39 };
 	CreditsBackHover_Rect = { 1278,2100,145,39 };
 	back = App->gui->CreateButton(iPoint(975, 625), &std::string(""), ButtonType::idle_pressed, &CreditsBack_Rect, &CreditsBackHover_Rect, false);
@@ -31,7 +31,7 @@ bool S_Death::Start()
 {
 	back->SetVisible(true);
 
-	CreditsLogo = App->gui->CreateImage(iPoint(0, 0), &CreditsLogo_Rect, false, AddGuiTo::none);
+	Death_Screen = App->gui->CreateImage(iPoint(0, 0), &Death_Screen_Rect, false, AddGuiTo::none);
 
 	App->gui->SetFocus(buttons.front());
 	return true;
@@ -40,14 +40,14 @@ bool S_Death::Start()
 bool S_Death::Update()
 {
 	//App->render->DrawQuad({ 0,0,1280,720 }, 39, 39, 39, 255, true, true, false);
-	CreditsLogo->DrawWithAlternativeAtlas(App->scene->GetCredits_Logo_Atlas());
+	Death_Screen->DrawWithAlternativeAtlas(App->scene->GetDeath_Scene_Atlas());
 	MenuInput(&buttons);
 	return true;
 }
 
 bool S_Death::Clean()
 {
-	delete CreditsLogo;
+	delete Death_Screen;
 	back->SetVisible(false);
 	return true;
 }
@@ -56,7 +56,7 @@ void S_Death::OnGui(Gui* ui, GuiEvent event)
 {
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->Show(Scene_ID::mainmenu);
+		App->scene->ChangeScene(Scene_ID::mainmenu);
 	}
 }
 
