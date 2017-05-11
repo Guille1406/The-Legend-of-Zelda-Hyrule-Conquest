@@ -21,15 +21,15 @@ bool S_VideoIntro::Awake(pugi::xml_node& conf)
 
 bool S_VideoIntro::Start()
 {
-	SDL_Rect r = { 0,0,640,360 };
-	App->videoplayer->PlayVideo("video.ogv", r);
+	SDL_Rect r = { 0,0,1280,720 };
+	App->videoplayer->PlayVideo("Game_Intro.ogv", r);
 	return true;
 }
 
 bool S_VideoIntro::Update()
 {
 	//if(!App->videoplayer->active) //Change scene
-	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+	if (App->videoplayer->video_finished) {
 
 	
 		App->scene->ChangeScene(Scene_ID::mainmenu);

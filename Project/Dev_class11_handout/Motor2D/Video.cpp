@@ -35,7 +35,7 @@ Video::Video() : j1Module()
 	quit = 0;
 	pitch = 0;
 	want_to_play = false;
-
+	video_finished = false;
 	name = "video";
 }
 
@@ -191,6 +191,8 @@ void Video::PlayVideo(const char *fname, SDL_Rect r)
 
 bool Video::PostUpdate()
 {
+	if (!video)
+		video_finished = true;
 	if (want_to_play && !quit && THEORAPLAY_isDecoding(decoder))
 	{
 		Uint32 now = SDL_GetTicks() - baseticks;
@@ -211,7 +213,7 @@ bool Video::PostUpdate()
 			queue_audio(audio);
 
 		// Setting the texture --------------------------------------------
-
+		
 		// TODO 3: Make sure that the code commented below is only done if the frame is completed.
 		if (video && (video->playms <= now))
 		{
@@ -239,6 +241,7 @@ bool Video::PostUpdate()
 
 			THEORAPLAY_freeVideo(video);
 			video = NULL;
+			video_finished = false;
 		}
 
 		// TODO 4: Render the texture. Use SDL_RenderCopy and the rendering rect (if you want).
