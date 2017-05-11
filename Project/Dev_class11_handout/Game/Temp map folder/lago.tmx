@@ -408,7 +408,7 @@
     <property name="scene" type="int" value="15"/>
     <property name="type" value="warp"/>
     <property name="x" type="int" value="92"/>
-    <property name="y" type="int" value="95"/>
+    <property name="y" type="int" value="54"/>
    </properties>
   </object>
   <object id="8" x="704" y="576" width="32" height="32">
