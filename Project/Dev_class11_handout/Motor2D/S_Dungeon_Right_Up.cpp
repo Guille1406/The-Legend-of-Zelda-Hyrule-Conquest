@@ -87,13 +87,6 @@ bool S_DungeonRightUp::Update()
 bool S_DungeonRightUp::PostUpdate()
 {
 
-	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
-
-		App->scene->ChangeScene(Scene_ID::Send);
-		App->startmenuback->Freeze(false);
-		App->player->loop_game_menu = false;
-		App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
-	}
 
 
 

@@ -92,22 +92,7 @@ bool S_BeforeDungeon::Update()
 
 bool S_BeforeDungeon::PostUpdate()
 {
-	for (int i = 0; i < App->object->V_Objects.size(); i++) {
-		if (App->object->V_Objects[i]->type == objectType::colour_blocks) {
-			ColourBlock* temp_block = (ColourBlock*)App->object->V_Objects[i];
-			if (temp_block->block_delay.Read() > 1000 && temp_block->can_dissapear)
-				App->object->V_Objects[i]->active = false;
-		}
-	}
 	
-	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
-
-		App->scene->ChangeScene(Scene_ID::Send);
-		App->startmenuback->Freeze(false);
-		App->player->loop_game_menu = false;
-		App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
-	}
-
 
 
 	return true;

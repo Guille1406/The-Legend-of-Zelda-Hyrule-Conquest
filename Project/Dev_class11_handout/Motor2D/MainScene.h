@@ -43,7 +43,7 @@ enum Scene_ID {
 	dungeon_entry = 20,
 	dungeon_right_up = 21,
 	dungeon_right_down = 22,
-	colourpuzzle = 23,	
+	colourpuzzle = 23,
 	dungeon_secondfloor_centre = 24,
 	dungeon_second_floor_right = 25,
 	dungeon,
@@ -56,6 +56,8 @@ enum Scene_ID {
 	house_2 = 31,
 	house_3 = 32,
 	ric_house = 33,
+
+	top_of_the_mountain = 34,
 
 };
 

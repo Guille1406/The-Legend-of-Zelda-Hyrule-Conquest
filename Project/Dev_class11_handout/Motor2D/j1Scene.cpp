@@ -20,7 +20,8 @@
 #include "j1Enemy.h"
 #include "j1FileSystem.h"
 #include "j1HUD.h"
-
+#include "j1Player.h"
+#include "j1GameStartMenuBack.h"
 #include "S_World.h"
 
 #include "S_Temporal_Boss_Room.h"
@@ -51,6 +52,7 @@
 #include "S_House_3.h"
 #include "S_Ric_House.h"
 #include"S_CastleCutScene.h"
+#include "S_TopOfTheMountain.h"
 #include"Enemy_Test_Scene.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -199,6 +201,11 @@ bool j1Scene::Start()
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::colourpuzzle;
 
+	scene_pointer = new S_TopOfTheMountain;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::top_of_the_mountain;
+
 	scene_pointer = new S_Enemy_Test_Scene;
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
@@ -275,6 +282,8 @@ bool j1Scene::Update(float dt)
 	if (main_active_scene != sub_active_scene)
 		sub_active_scene->Update();
 
+	
+
 	return true;
 }
 
@@ -285,6 +294,14 @@ bool j1Scene::PostUpdate()
 	if (main_active_scene != sub_active_scene)
 		sub_active_scene->PostUpdate();
 
+	
+	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
+
+		App->scene->ChangeScene(Scene_ID::Send);
+		App->startmenuback->Freeze(false);
+		App->player->loop_game_menu = false;
+		App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
+	}
 	if (sub_scene_to_load)
 	{
 		ShowNewScene(new_sub_scene_to_load);

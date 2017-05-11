@@ -94,17 +94,7 @@ bool S_Village::Update()
 bool S_Village::PostUpdate()
 {
 	
-	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) {
-		App->scene->ChangeScene(Scene_ID::testenemies);
-	}
 
-	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
-
-		App->scene->ChangeScene(Scene_ID::Send);
-		App->startmenuback->Freeze(false);
-		App->player->loop_game_menu = false;
-		App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
-	}
 	return true;
 
 }

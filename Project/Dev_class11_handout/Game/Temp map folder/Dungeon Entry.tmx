@@ -5,6 +5,11 @@
  </tileset>
  <tileset firstgid="1711" name="collision tileset" tilewidth="16" tileheight="16" tilecount="13" columns="13">
   <image source="collision tileset.png" width="221" height="16"/>
+  <tile id="3">
+   <properties>
+    <property name="Navigation" type="int" value="1"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Capa de Patrones 1" width="150" height="120">
   <properties>
@@ -786,10 +791,10 @@
   </object>
   <object id="43" x="1712" y="176" width="32" height="32">
    <properties>
-    <property name="scene" type="int" value="0"/>
+    <property name="scene" type="int" value="34"/>
     <property name="type" value="warp"/>
-    <property name="x" type="int" value="0"/>
-    <property name="y" type="int" value="0"/>
+    <property name="x" type="int" value="50"/>
+    <property name="y" type="int" value="90"/>
    </properties>
   </object>
   <object id="46" x="1280" y="400" width="32" height="32">

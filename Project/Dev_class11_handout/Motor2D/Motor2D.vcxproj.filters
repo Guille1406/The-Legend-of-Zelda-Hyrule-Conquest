@@ -283,6 +283,9 @@
     <ClCompile Include="S_CastleCutScene.cpp">
       <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="S_TopOfTheMountain.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -653,6 +656,9 @@
     </ClInclude>
     <ClInclude Include="S_CastleCutScene.h">
       <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="S_TopOfTheMountain.h">
+      <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

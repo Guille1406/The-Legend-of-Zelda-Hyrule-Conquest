@@ -163,6 +163,7 @@
     <ClCompile Include="S_QuitGame.cpp" />
     <ClCompile Include="S_Ric_House.cpp" />
     <ClCompile Include="S_SecretExit.cpp" />
+    <ClCompile Include="S_TopOfTheMountain.cpp" />
     <ClCompile Include="S_VideoIntro.cpp" />
     <ClCompile Include="S_Village.cpp" />
     <ClCompile Include="S_World.cpp" />
@@ -287,6 +288,7 @@
     <ClInclude Include="S_QuitGame.h" />
     <ClInclude Include="S_Ric_House.h" />
     <ClInclude Include="S_SecretExit.h" />
+    <ClInclude Include="S_TopOfTheMountain.h" />
     <ClInclude Include="S_VideoIntro.h" />
     <ClInclude Include="S_Village.h" />
     <ClInclude Include="S_World.h" />
