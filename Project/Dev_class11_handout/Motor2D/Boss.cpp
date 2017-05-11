@@ -5,6 +5,7 @@
 #include "j1Map.h"
 #include "j1Player.h"
 #include "j1Object.h"
+#include "j1Scene.h"
 
 Legs::Legs(const Legs& obj) {
 	
@@ -178,7 +179,7 @@ void Boss::ExecuteEvent()
 		}
 		else if (actual_phase == boss_phase::boss_phase_3 && !can_recover) {
 			//INTRODUCIR AQUI CODIGO DE LO QUE PASA CUANDO MATAS AL BOSS
-
+			App->scene->ChangeScene(Scene_ID::mainmenu);
 
 		}
 	}

@@ -110,7 +110,7 @@
  </layer>
  <layer name="Enemies" width="85" height="85">
   <properties>
-   <property name="Enemies " value="1"/>
+   <property name="Enemies" type="int" value="1"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -622,7 +622,7 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="Capa de patrones 7" width="85" height="85">
+ <layer name="Path" width="85" height="85">
   <properties>
    <property name="Path" type="int" value="1"/>
   </properties>
