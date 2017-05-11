@@ -20,15 +20,7 @@ public:
 public:
 	SDL_Rect CreditsLogo_Rect = { 0,0,0,0 };
 	GuiImage* CreditsLogo = nullptr;
-	GuiButton* CreditsLabel1 = nullptr;
-	GuiButton* CreditsLabel2 = nullptr;
-	GuiButton* CreditsLabel3 = nullptr;
-	GuiButton* CreditsLabel4 = nullptr;
-	GuiButton* CreditsLabel5 = nullptr;
-	GuiButton* CreditsLabel6 = nullptr;
-	GuiButton* CreditsLabel7 = nullptr;
 	GuiButton* back = nullptr;
-	uint CreditsLogo_Y_Pos = 0;
 };
 
 #endif // #pragma once

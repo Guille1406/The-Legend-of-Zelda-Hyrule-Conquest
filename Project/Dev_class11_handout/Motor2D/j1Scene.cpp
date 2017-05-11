@@ -253,7 +253,7 @@ bool j1Scene::Start()
 		}
 	}
 
-	credits_logo_atlas = App->tex->Load("gui/credits_logo.png");
+	credits_logo_atlas = App->tex->Load("gui/credits.png");
 
 	return ret;
 }
