@@ -14,7 +14,9 @@ S_Credits::~S_Credits()
 bool S_Credits::Awake(pugi::xml_node& conf)
 {
 	CreditsLogo_Rect = { 0,0,1280,720 };
-	back = App->gui->CreateButton(iPoint(920, 600), &std::string(conf.child("back").attribute("value").as_string("Back")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	CreditsBack_Rect = { 1278,2061,145,39 };
+	CreditsBackHover_Rect = { 1278,2100,145,39 };
+	back = App->gui->CreateButton(iPoint(920, 600), &std::string(conf.child("back").attribute("value").as_string("Back")), ButtonType::idle_hover, &CreditsBack_Rect, &CreditsBackHover_Rect, false);
 	back->SetFont(App->font->Sherwood20);
 	((Gui*)back)->SetListener(this);
 	back->SetVisible(false);
