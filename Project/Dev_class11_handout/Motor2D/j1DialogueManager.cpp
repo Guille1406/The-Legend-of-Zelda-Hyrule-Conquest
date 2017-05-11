@@ -105,6 +105,14 @@ bool j1DialogueManager::Start()
 void j1DialogueManager::AllocateDialogues(pugi::xml_node& dialoguenode, iPoint* TextBackgroundPos)
 {
 	//Allocate dialogues from XML
+	uint sprite_id = 0;
+	for (pugi::xml_node newcharacterrect = dialoguenode.child("Rects").child("rect"); newcharacterrect; newcharacterrect = newcharacterrect.next_sibling("rect"), sprite_id++)
+	{
+		CharaterSprite* newCharaterSprite = new CharaterSprite();
+		newCharaterSprite->sprite_id = (CharaterSpriteRect_ID)sprite_id;
+		newCharaterSprite->CharaterSpriteRect = { newcharacterrect.attribute("x").as_int(0) ,newcharacterrect.attribute("y").as_int(0) ,newcharacterrect.attribute("w").as_int(0) ,newcharacterrect.attribute("h").as_int(0) };
+		CharaterSpritesVec.push_back(newCharaterSprite);
+	}
 	//itereate cutscenes
 	for (pugi::xml_node newcutscene = dialoguenode.child("Cutscenes").child("cutscene"); newcutscene; newcutscene = newcutscene.next_sibling("cutscene"))
 		CreateDialogue(newcutscene, TextBackgroundPos, DialogueType::Cutscene_dialoguetype);
@@ -247,6 +255,9 @@ bool j1DialogueManager::CleanUp()
 	for (std::vector<DialogueInterlucutorStrAndAtalsRelation*>::iterator item = DialogueInterlucutorStrandAtlasRelationVec.begin(); item != DialogueInterlucutorStrandAtlasRelationVec.cend(); ++item)
 		RELEASE(*item);
 	DialogueInterlucutorStrandAtlasRelationVec.clear();
+	for (std::vector<CharaterSprite*>::iterator item = CharaterSpritesVec.begin(); item != CharaterSpritesVec.cend(); ++item)
+		RELEASE(*item);
+	CharaterSpritesVec.clear();
 	RELEASE(ActiveDialog);
 	RELEASE(TextBackground);
 	RELEASE(LeftCharacterLabel);
