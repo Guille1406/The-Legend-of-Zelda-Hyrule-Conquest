@@ -117,6 +117,8 @@ void j1Object::Draw(int height)
 				App->render->Blit(npc_objects_tex, object->rect.x - object->rect.w/2+10, object->rect.y- object->rect.h, &object->texture_rect);
 			if (((O_NPC*)object)->npc_type == NPC_Type::npc_ric)
 				App->render->Blit(npc_objects_tex, object->rect.x, object->rect.y - object->rect.h/2, &object->texture_rect);
+			if (((O_NPC*)object)->npc_type == NPC_Type::npc_neutral)
+				App->render->Blit(npc_objects_tex, object->rect.x, object->rect.y - object->rect.h, &object->texture_rect);
 		}
 		else if (object->active && object->logic_height == height)
 			App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
