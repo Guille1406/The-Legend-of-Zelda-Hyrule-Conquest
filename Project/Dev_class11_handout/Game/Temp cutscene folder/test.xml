@@ -1,0 +1,135 @@
+<!-- TEST CUTSCENE -->
+
+<Cutscene name="Test" id="1">
+
+ <!--CUTSCENE ELEMENTS-->
+	<elements>
+		<MAP>
+		</MAP>
+
+		<CHANGESCENES>
+			<changescene n="0" name="dungeon_entry" active="false"></changescene>
+		</CHANGESCENES>
+		
+		<CAMERAS>
+			<camera n="0" name="camera" following_player="false"/>
+		</CAMERAS>
+		
+		<NPC>
+			<npc n="0" name="Link" x="433" y="832"  active="true"></npc>
+			<npc n="1" name="Zelda" x="775" y="814"  active="true"></npc>
+		</NPC>
+
+		<IMAGES>
+			<!--<image name="circlelink" posx="0" posy="0" rectx="135" recty="325" rectw="136" recth="136" active="true" file="gui/HUDAtlas.png"> </image>-->
+			<image name="King_sprite" x="1425" y="158" rectx="0" recty="0" rectw="175" recth="165" active="true" file="sprites/King_sprite.png"> </image>
+			<image name="messenger pixel" x="1538" y="240" rectx="0" recty="0" rectw="52" recth="71" active="true" file="sprites/messenger pixel.png"> </image>
+		</IMAGES>
+
+		<TEXTS>
+			<text n="0" name="castle_room_dialogue" active="false"></text>
+			<text n="1" name="castle_1" active="false"></text>
+			<text n="2" name="castle_2" active="false"></text>
+			<text n="3" name="castle_3" active="false"></text>
+   		</TEXTS>
+
+		<MUSIC>
+		</MUSIC>
+
+		<FX>
+		</FX>
+
+
+	</elements>
+
+ <!--EXECUTE ALL STEPS IN ORDER-->
+
+	<steps>
+	
+		<step  n="1" start="0" duration ="-1" input="false">
+			<element name="Zelda" action="move" dir="left">
+				<movement dest_x="-50" dest_y="0" speed="20"/>
+			</element>
+		</step>
+	
+		<step  n="2" start="-1" duration ="-1" input="false">
+			<element name="castle_room_dialogue" action="enable">
+			</element>
+		</step>
+		
+		<step  n="3" start="-1" duration ="-1" input="false">
+			<element name="Link" action="move" dir="right">
+				<movement dest_x="300" dest_y="0" speed="20"/>
+			</element>
+		</step>
+		
+		<step  n="4" start="-1" duration ="-1" input="false">
+			<element name="Zelda" action="move" dir="right">
+				<movement dest_x="150" dest_y="0" speed="20"/>
+			</element>
+		</step>
+		
+		<step  n="5" start="-1" duration ="-1" input="false">
+			<element name="Link" action="move" dir="right">
+				<movement dest_x="200" dest_y="0" speed="20"/>
+			</element>
+		</step>
+		
+		<step  n="6" start="-1" duration ="-1" input="false">
+			<element name="Link" action="teleport">
+				<movement dest_x="1405" dest_y="334"/>
+			</element>
+		</step>
+		
+		<step  n="7" start="-1" duration ="-1" input="false">
+			<element name="Zelda" action="teleport">
+				<movement dest_x="1455" dest_y="334"/>
+			</element>
+		</step>
+		
+		<step  n="8" start="-1" duration ="-1" input="false">
+			<element name="Link" action="move" dir="up">
+				<movement dest_x="0" dest_y="-10" speed="20"/>
+			</element>
+		</step>
+		
+		<step  n="9" start="-1" duration ="-1" input="false">
+			<element name="Zelda" action="move" dir="up">
+				<movement dest_x="0" dest_y="-10" speed="20"/>
+			</element>
+		</step>
+		
+		<step  n="10" start="-1" duration ="-1" input="false">
+			<element name="castle_1" action="enable">
+			</element>
+		</step>
+		
+		<step  n="11" start="-1" duration ="-1" input="false">
+			<element name="castle_2" action="enable">
+			</element>
+		</step>
+		
+		<step  n="12" start="-1" duration ="-1" input="false">
+			<element name="castle_2" action="enable">
+			</element>
+		</step>
+		
+		<step  n="13" start="-1" duration ="-1" input="false">
+			<element name="dungeon_entry" action="changescene">
+			</element>
+		</step>
+		
+		<step  n="14" start="-1" duration ="-1" input="false">
+			<element name="camera" action="cam_following_player" follow_player="true">
+			</element>
+		</step>
+		
+		<step  n="15" start="-1" duration ="-1" input="false">
+			<element name="Link" action="move" dir="right">
+				<movement dest_x="300" dest_y="0" speed="20"/>
+			</element>
+		</step>
+		
+		
+	</steps>
+</Cutscene>
