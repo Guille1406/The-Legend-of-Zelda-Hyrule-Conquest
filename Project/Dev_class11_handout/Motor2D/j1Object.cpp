@@ -117,7 +117,9 @@ void j1Object::Draw(int height)
 			if(((O_NPC*)object)->npc_type== NPC_Type::npc_enmasked)
 				App->render->Blit(npc_objects_tex, object->rect.x - object->rect.w/2+10, object->rect.y- object->rect.h, &object->texture_rect);
 			if (((O_NPC*)object)->npc_type == NPC_Type::npc_ric)
-				App->render->Blit(npc_objects_tex, object->rect.x, object->rect.y, &object->texture_rect);
+				App->render->Blit(npc_objects_tex, object->rect.x, object->rect.y - object->rect.h/2, &object->texture_rect);
+			if (((O_NPC*)object)->npc_type == NPC_Type::npc_neutral)
+				App->render->Blit(npc_objects_tex, object->rect.x, object->rect.y - object->rect.h, &object->texture_rect);
 		}
 		else if (object->active && object->logic_height == height)
 			App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
@@ -746,13 +748,13 @@ Object * j1Object::CreateNPC(pugi::xml_node object, int height)
 	}
 	else if (npc_type_string == "ric") {
 		temp_npc.npc_type = NPC_Type::npc_ric;
-		temp_npc.texture_rect = { 221,17,32,48 };
+		temp_npc.texture_rect = { 222,17,32,48 };
 		temp_npc.dialogue_id_npc = DialogueID::ric_with_link_dialogue;
 	}
 	else if (npc_type_string == "neutral") {
 		temp_npc.npc_type = NPC_Type::npc_neutral;
 		temp_npc.texture_rect = { 254,7,32,58 };
-		temp_npc.dialogue_id_npc = DialogueID::ric_with_link_dialogue;
+		temp_npc.dialogue_id_npc = DialogueID::npc_1_with_link_dialogue;
 	}
 	else {
 		temp_npc.npc_type = NPC_Type::npc_none;
