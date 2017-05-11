@@ -69,6 +69,7 @@ public:
 	{
 		return &scene_list;
 	}
+
 	SDL_Texture* GetCredits_Logo_Atlas()
 	{
 		return credits_logo_atlas;

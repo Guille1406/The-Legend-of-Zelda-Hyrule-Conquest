@@ -35,7 +35,7 @@ void GuiImage::SubDrawFunction(SDL_Texture* atlas, bool usecam, bool usescale)
 				this->DebugDraw();
 		}
 		else
-			App->render->Blit(atlas, position.x, position.y, &texture_rect, 1.0f, 0, INT_MAX, INT_MAX, false, opacity);
+			App->render->Blit(atlas, position.x, position.y, &texture_rect, 1.0f, 0, INT_MAX, INT_MAX, usescale, opacity);
 	}
 }
 

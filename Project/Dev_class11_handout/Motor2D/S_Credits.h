@@ -19,6 +19,8 @@ public:
 	void OnGui(Gui* ui, GuiEvent event);
 public:
 	SDL_Rect CreditsLogo_Rect = { 0,0,0,0 };
+	SDL_Rect CreditsBack_Rect = { 0,0,0,0 };
+	SDL_Rect CreditsBackHover_Rect = { 0,0,0,0 };
 	GuiImage* CreditsLogo = nullptr;
 	GuiButton* back = nullptr;
 };
