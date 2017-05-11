@@ -402,3 +402,13 @@ DialogueCharacter::~DialogueCharacter()
 {
 
 }
+
+CharaterSprite::CharaterSprite()
+{
+
+}
+
+CharaterSprite::~CharaterSprite()
+{
+
+}

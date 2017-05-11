@@ -70,6 +70,19 @@ enum DialogueInterlucutorPosition {
 	Right
 };
 
+enum CharaterSpriteRect_ID {
+	King_1,
+	King_2,
+	CharaterSpriteRect_NULL
+};
+
+struct CharaterSprite {
+	CharaterSprite();
+	~CharaterSprite();
+	CharaterSpriteRect_ID sprite_id = CharaterSpriteRect_ID::CharaterSpriteRect_NULL;
+	SDL_Rect CharaterSpriteRect = { 0,0,0,0 };
+};
+
 struct DialogueInterlucutorStrAndAtalsRelation {
 	DialogueInterlucutorStrAndAtalsRelation(std::string* str, DialogueInterlucutor enu, SDL_Texture* atlas);
 	~DialogueInterlucutorStrAndAtalsRelation();
