@@ -753,7 +753,7 @@ Object * j1Object::CreateNPC(pugi::xml_node object, int height)
 	else if (npc_type_string == "neutral") {
 		temp_npc.npc_type = NPC_Type::npc_neutral;
 		temp_npc.texture_rect = { 254,7,32,58 };
-		temp_npc.dialogue_id_npc = DialogueID::ric_with_link_dialogue;
+		temp_npc.dialogue_id_npc = DialogueID::npc_1_with_link_dialogue;
 	}
 	else {
 		temp_npc.npc_type = NPC_Type::npc_none;
