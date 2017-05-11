@@ -142,8 +142,7 @@ void j1DialogueManager::CreateDialogue(pugi::xml_node& dialoguenode, iPoint* Tex
 			newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_str = std::string(newstep.attribute("speaker").as_string());
 		newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_pos = CheckInterlocutorPosition(&std::string(newstep.attribute("speaker_pos").as_string()));
 		newdialoguestep->SpeakerDialogueCharacter->Character_Atlas = CheckInterlocutorAtlas(newdialoguestep->SpeakerDialogueCharacter->DialogueCharacter_id);
-		newdialoguestep->SpeakerDialogueCharacter->Character_Expression_Rect = { newstep.attribute("speaker_rec_x").as_int(0),newstep.attribute("speaker_rec_y").as_int(0),newstep.attribute("speaker_rec_w").as_int(0),newstep.attribute("speaker_rec_h").as_int(0) };
-
+		newdialoguestep->SpeakerDialogueCharacter->Character_Expression_Rect = CheckExpressionRect((CharaterSpriteRect_ID)newstep.attribute("speaker_expression").as_int(0));
 		newdialoguestep->ListenerDialogueCharacter = new DialogueCharacter();
 		newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_id = CheckInterlocutor(&std::string(newstep.attribute("listener").as_string()));
 		if (newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_id == DialogueInterlucutor::item_nullinterlucutor)
@@ -152,8 +151,7 @@ void j1DialogueManager::CreateDialogue(pugi::xml_node& dialoguenode, iPoint* Tex
 			newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_str = std::string(newstep.attribute("listener").as_string());
 		newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_pos = CheckInterlocutorPosition(&std::string(newstep.attribute("listener_pos").as_string()));
 		newdialoguestep->ListenerDialogueCharacter->Character_Atlas = CheckInterlocutorAtlas(newdialoguestep->ListenerDialogueCharacter->DialogueCharacter_id);
-		newdialoguestep->ListenerDialogueCharacter->Character_Expression_Rect = { newstep.attribute("listener_rec_x").as_int(0),newstep.attribute("listener_rec_y").as_int(0),newstep.attribute("listener_rec_w").as_int(0),newstep.attribute("listener_rec_h").as_int(0) };
-
+		newdialoguestep->ListenerDialogueCharacter->Character_Expression_Rect = CheckExpressionRect((CharaterSpriteRect_ID)newstep.attribute("listener_expression").as_int(0));
 		int y = 0;
 		for (pugi::xml_node newsteplines = newstep.child("line"); newsteplines; newsteplines = newsteplines.next_sibling("line"), y += 30)
 		{
@@ -184,6 +182,14 @@ SDL_Texture* j1DialogueManager::CheckInterlocutorAtlas(DialogueInterlucutor inte
 		if ((*item)->DialogueInterlucutorEnum == interlocutor_enu)
 			return (*item)->DialogueInterlucutorAtlas;
 	return nullptr;
+}
+
+SDL_Rect j1DialogueManager::CheckExpressionRect(CharaterSpriteRect_ID id)
+{
+	for (std::vector<CharaterSprite*>::iterator item = CharaterSpritesVec.begin(); item != CharaterSpritesVec.cend(); ++item)
+		if ((*item)->sprite_id == id)
+			return (*item)->CharaterSpriteRect;
+	return { 0,0,0,0 };
 }
 
 bool j1DialogueManager::PreUpdate()

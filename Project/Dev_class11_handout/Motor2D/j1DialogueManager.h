@@ -190,6 +190,7 @@ private:
 	DialogueInterlucutor CheckInterlocutor(std::string* interlocutor_str);
 	DialogueInterlucutorPosition CheckInterlocutorPosition(std::string* interlocutor_position_str);
 	SDL_Texture* CheckInterlocutorAtlas(DialogueInterlucutor interlocutor_enu);
+	SDL_Rect CheckExpressionRect(CharaterSpriteRect_ID id);
 	void DialogueNextStep();
 	void SetCharacterBlit();
 
