@@ -33,7 +33,7 @@ enum Scene_ID {
 
 	//Maps
 	map,
-	startcutscenegame,
+	startcutscenegame=500,
 	world = 13,
 	tempbossroom = 14,
 	secret_exit = 15,
