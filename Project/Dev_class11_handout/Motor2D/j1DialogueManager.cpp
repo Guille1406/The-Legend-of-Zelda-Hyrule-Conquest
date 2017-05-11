@@ -268,6 +268,12 @@ bool j1DialogueManager::CleanUp()
 	RELEASE(TextBackground);
 	RELEASE(LeftCharacterLabel);
 	RELEASE(RightCharacterLabel);
+	SDL_DestroyTexture(king_tex);
+	SDL_DestroyTexture(link_tex);
+	SDL_DestroyTexture(zelda_tex);
+	SDL_DestroyTexture(messenger_tex);
+	SDL_DestroyTexture(ric_tex);
+	SDL_DestroyTexture(ogity_tex);
 	return true;
 }
 
