@@ -148,7 +148,9 @@ public:
 	Object() {
 		this->entity_texture = App->object->objects_texture;
 	};
-	~Object() {};
+	~Object() {
+		
+	};
 
 	virtual void Action() {};
 	virtual void EndAction() {};

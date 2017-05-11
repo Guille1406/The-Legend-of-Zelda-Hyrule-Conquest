@@ -191,7 +191,8 @@ bool ParticleManager::CleanUp()
 		RELEASE(*item);
 	Group_Firework.clear();
 
-	SDL_DestroyTexture(atlas_particle);
+	App->tex->UnLoad(atlas_particle);
+	
 	atlas_particle = nullptr;
 	
 	return true;

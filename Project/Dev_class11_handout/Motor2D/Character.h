@@ -76,7 +76,9 @@ class Character : public Entity {
 public:
 	Character() {};
 	~Character() {
+		int i = sizeof(this->actual_animation);
 		App->tex->UnLoad(entity_texture);
+	
 	};
 	
 	
