@@ -717,29 +717,25 @@ Object * j1Object::CreateNPC(pugi::xml_node object, int height)
 	temp_npc.name = object.attribute("name").as_string();
 	temp_npc.rect = { x,y,w,h };
 	pugi::xml_node attribute = object.child("properties").child("property");
-	
-
-
-		pugi::xml_node attribute = object.child("properties").child("property");
-		while (strcmp(attribute.attribute("name").as_string(), "npc_type") && attribute) {
+	while (strcmp(attribute.attribute("name").as_string(), "npc_type") && attribute) {
 			attribute = attribute.next_sibling();
 		}
-		std::string npc_type_string = attribute.attribute("value").as_string();
-		if (npc_type_string == "masked") {
+	std::string npc_type_string = attribute.attribute("value").as_string();
+	if (npc_type_string == "masked") {
 			temp_npc.npc_type = NPC_Type::npc_enmasked;
 		}
-		else if (npc_type_string == "ric") {
+	else if (npc_type_string == "ric") {
 			temp_npc.npc_type = NPC_Type::npc_ric;
 		}
-		else if (npc_type_string == "neutral") {
+	else if (npc_type_string == "neutral") {
 			temp_npc.npc_type = NPC_Type::npc_neutral;
 		}
-		else {
+	else {
 			temp_npc.npc_type = NPC_Type::npc_none;
 		}
-		temp_npc.active = true;
+	temp_npc.active = true;
 
-		return nullptr;
+	return nullptr;
 	}
 
 	

@@ -191,7 +191,7 @@ void Video::PlayVideo(const char *fname, SDL_Rect r)
 
 bool Video::PostUpdate()
 {
-	if (!video)
+	if (!THEORAPLAY_isDecoding(decoder))
 		video_finished = true;
 	if (want_to_play && !quit && THEORAPLAY_isDecoding(decoder))
 	{
