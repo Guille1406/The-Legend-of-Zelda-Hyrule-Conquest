@@ -289,6 +289,9 @@
     <ClCompile Include="O_NPC.cpp">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="S_Death.cpp">
+      <Filter>Desenvolupament  ========\Scenes\GUI\Death</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -666,6 +669,10 @@
     <ClInclude Include="O_NPC.h">
       <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="O_ElectricBall.h" />
+    <ClInclude Include="S_Death.h">
+      <Filter>Desenvolupament  ========\Scenes\GUI\Death</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Desenvolupament  ========">
@@ -754,6 +761,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Scenes\Houses">
       <UniqueIdentifier>{a8968255-4cd2-4515-b855-88656ac06b37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\GUI\Death">
+      <UniqueIdentifier>{75eb0368-20af-4c13-bef7-75f5078fdd4b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

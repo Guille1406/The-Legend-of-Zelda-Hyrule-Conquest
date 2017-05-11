@@ -135,6 +135,7 @@
     <ClCompile Include="S_CastleCutScene.cpp" />
     <ClCompile Include="S_ColourPuzzle.cpp" />
     <ClCompile Include="S_Credits.cpp" />
+    <ClCompile Include="S_Death.cpp" />
     <ClCompile Include="S_Dungeon_Entry.cpp" />
     <ClCompile Include="S_Dungeon_Right_Down.cpp" />
     <ClCompile Include="S_Dungeon_Right_Up.cpp" />
@@ -247,6 +248,7 @@
     <ClInclude Include="S_CastleCutScene.h" />
     <ClInclude Include="S_ColourPuzzle.h" />
     <ClInclude Include="S_Credits.h" />
+    <ClInclude Include="S_Death.h" />
     <ClInclude Include="S_Dungeon_Entry.h" />
     <ClInclude Include="S_Dungeon_Right_Down.h" />
     <ClInclude Include="S_Dungeon_Right_Up.h" />
