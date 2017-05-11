@@ -16,6 +16,7 @@
 #include"j1Audio.h"
 #include"j1GameStartMenuBack.h"
 #include "S_InGameMenu.h"
+#include "O_ElectricBall.h"
 
 bool S_TempBossRoom::Start()
 {
@@ -83,9 +84,10 @@ bool S_TempBossRoom::Start()
 
 bool S_TempBossRoom::Update()
 {
-	App->enemy->Final_Boss->UpdateLegs();
 	if (!App->player->paused)
+	App->enemy->Final_Boss->UpdateLegs();
 
+	
 	return false;
 }
 
@@ -98,6 +100,16 @@ bool S_TempBossRoom::PostUpdate()
 		App->startmenuback->Freeze(false);
 		App->player->loop_game_menu = false;
 		App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
+	}
+
+	for (int i = 0; i < App->object->V_Objects.size(); i++) {
+		if (App->object->V_Objects[i]->type == objectType::electric_ball) {
+			ElectricBall* temp = (ElectricBall*)App->object->V_Objects[i];
+			if (temp->active_phase == 1 && (App->enemy->Final_Boss->actual_phase == boss_phase_2 || App->enemy->Final_Boss->actual_phase == boss_phase_3))
+				App->render->DrawQuad({ temp->pos.x ,temp->pos.y,32,32 }, 0, 0, 255, 255, true, false);
+			if (temp->active_phase == 2 && (App->enemy->Final_Boss->actual_phase == boss_phase_3))
+				App->render->DrawQuad({ temp->pos.x ,temp->pos.y,32,32 }, 0, 0, 255, 255, true, false);
+		}
 	}
 	return true;
 

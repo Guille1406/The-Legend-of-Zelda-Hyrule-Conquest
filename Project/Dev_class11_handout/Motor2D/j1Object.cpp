@@ -22,6 +22,7 @@
 #include "O_Bridge.h"
 #include "O_HeartContainer.h"
 #include "O_Bush.h"
+#include "O_ElectricBall.h"
 
 bool j1Object::Start()
 {
@@ -214,6 +215,8 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int heigh
 		ret = CreateBridge(object, height);
 	else if (!strcmp(type_name, "bush"))
 		ret = CreateBush(object, height);
+	else if (!strcmp(type_name, "electric"))
+		ret = CreateElectricBall(object, height);
 	return ret;
 }
 
@@ -692,6 +695,33 @@ Object * j1Object::CreateBush(pugi::xml_node object, int height)
 	ret->collider = App->collision->AddCollider(temp_bush.rect, COLLIDER_TYPE::collider_bush, (Entity*)ret, this);
 
 	V_Objects.push_back(ret);
+	return ret;
+}
+
+Object * j1Object::CreateElectricBall(pugi::xml_node object, int height)
+{
+	ElectricBall temp_electric;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+	temp_electric.logic_height = height;
+	temp_electric.name = object.attribute("name").as_string();
+	temp_electric.rect = { x,y,w,h };
+	temp_electric.type = objectType::electric_ball;
+	temp_electric.active = true;
+
+	pugi::xml_node attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "phase") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	temp_electric.active_phase = attribute.attribute("value").as_int();
+
+	Object* ret = new ElectricBall(temp_electric);
+	ret->collider = App->collision->AddCollider({ ret->rect }, collider_electric_ball, (Entity*)ret, this);
+	V_Objects.push_back(ret);
+
+	//FindObject("door_1");
 	return ret;
 }
 

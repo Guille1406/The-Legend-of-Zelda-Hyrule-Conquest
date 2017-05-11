@@ -660,6 +660,9 @@
     <ClInclude Include="S_TopOfTheMountain.h">
       <Filter>Desenvolupament  ========\Scenes\Dungeon</Filter>
     </ClInclude>
+    <ClInclude Include="O_ElectricBall.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Desenvolupament  ========">
