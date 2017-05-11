@@ -563,6 +563,9 @@ bool Cutscene::LoadText(pugi::xml_node& node)
 		else if (id_string == "castle_3") {
 			id = DialogueID::castle_3_dialogue;
 		}
+		else if (id_string == "castle_sewers_1_dialogue") {
+			id = DialogueID::castle_sewers_1_dialogue;
+		}
 
 		elements.push_back(new CS_Text(CS_Type::CS_TEXT, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), id));
 		ret = true;
@@ -1048,6 +1051,18 @@ void CS_Step::DoChangeScene_CS()
 	if (element->GetType() == CS_CHANGESCENE)
 	{
 		CS_ChangeScene* tmp = (CS_ChangeScene*)element;
+		/*switch (tmp->id_newscene) {
+
+		case Scene_ID::dungeon_right_down:
+
+			break;
+
+
+
+
+
+
+		}	*/	
 		App->scene->ChangeScene(tmp->id_newscene);
 		FinishStep();
 	}
