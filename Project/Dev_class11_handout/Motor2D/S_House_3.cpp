@@ -39,7 +39,6 @@ bool S_House_3::Start()
 	App->pathfinding->paused = false;
 
 
-	App->cutscenemanager->StartCutscene(cutscene_intro);
 
 	//GuiImage* title = App->gui->CreateImage(iPoint(0, 0), &title_rec, false, AddGuiTo::none);
 	//((Gui*)title)->SetListener(this);
