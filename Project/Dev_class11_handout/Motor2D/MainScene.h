@@ -27,6 +27,7 @@ enum Scene_ID {
 	optionsgameplay,
 	credits,
 	quitgame,
+	death_scene,
 	//ingame menu
 	ingamemenu,
 

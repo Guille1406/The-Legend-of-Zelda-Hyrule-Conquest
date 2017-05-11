@@ -18,10 +18,10 @@ public:
 	bool Load(pugi::xml_node&);
 	void OnGui(Gui* ui, GuiEvent event);
 public:
-	SDL_Rect CreditsLogo_Rect = { 0,0,0,0 };
+	SDL_Rect Death_Screen_Rect = { 0,0,0,0 };
 	SDL_Rect CreditsBack_Rect = { 0,0,0,0 };
 	SDL_Rect CreditsBackHover_Rect = { 0,0,0,0 };
-	GuiImage* CreditsLogo = nullptr;
+	GuiImage* Death_Screen = nullptr;
 	GuiButton* back = nullptr;
 };
 

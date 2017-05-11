@@ -37,6 +37,7 @@
 #include "S_Credits.h"
 #include "S_InGameMenu.h"
 #include "S_End.h"
+#include "S_Death.h"
 #include "S_Dungeon_Entry.h"
 #include "S_Dungeon_Right_Down.h"
 #include "S_Dungeon_Right_Up.h"
@@ -51,7 +52,7 @@
 #include "S_House_2.h"
 #include "S_House_3.h"
 #include "S_Ric_House.h"
-#include"S_CastleCutScene.h"
+#include "S_CastleCutScene.h"
 #include "S_TopOfTheMountain.h"
 #include"Enemy_Test_Scene.h"
 
@@ -94,6 +95,9 @@ bool j1Scene::Start()
 	(*scene_list.back()).scene_name = Scene_ID::optionsgameplay;
 	scene_list.push_back(new S_OptionsVideo);
 	(*scene_list.back()).scene_name = Scene_ID::optionsvideo;
+	//Death
+	scene_list.push_back(new S_Death);
+	(*scene_list.back()).scene_name = Scene_ID::death_scene;
 	//Credits
 	scene_list.push_back(new S_Credits);
 	(*scene_list.back()).scene_name = Scene_ID::credits;
@@ -254,6 +258,7 @@ bool j1Scene::Start()
 	}
 
 	credits_logo_atlas = App->tex->Load("gui/credits.png");
+	death_scene_atlas = App->tex->Load("gui/died_screen.png");
 
 	return ret;
 }
@@ -281,9 +286,6 @@ bool j1Scene::Update(float dt)
 	main_active_scene->Update();
 	if (main_active_scene != sub_active_scene)
 		sub_active_scene->Update();
-
-	
-
 	return true;
 }
 
@@ -294,10 +296,16 @@ bool j1Scene::PostUpdate()
 	if (main_active_scene != sub_active_scene)
 		sub_active_scene->PostUpdate();
 
-	
-	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
-
+	if (App->player->loop_game_menu == true)
+	{
 		App->scene->ChangeScene(Scene_ID::Send);
+		App->startmenuback->Freeze(false);
+		App->player->loop_game_menu = false;
+		App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
+	}
+	if (App->player->half_hearts_test_purpose <= 0)
+	{
+		App->scene->ChangeScene(Scene_ID::death_scene);
 		App->startmenuback->Freeze(false);
 		App->player->loop_game_menu = false;
 		App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
@@ -321,6 +329,7 @@ bool j1Scene::CleanUp()
 	}
 
 	App->tex->UnLoad(credits_logo_atlas);
+	App->tex->UnLoad(death_scene_atlas);
 		
 	return true;
 }
@@ -331,7 +340,7 @@ bool j1Scene::ChangeScene(Scene_ID name)
 		if ((*item)->scene_name == name)
 		{
 			if(*item != main_active_scene)
-			main_active_scene->Clean();
+				main_active_scene->Clean();
 			main_active_scene = *item;
 			App->hud->SceneChanged();
 			return true;
