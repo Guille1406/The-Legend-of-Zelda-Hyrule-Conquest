@@ -23,15 +23,9 @@ public:
 
 	}
 	void Pick(Character* player) {
-		/*
-		if (App->player->half_hearts_test_purpose == (App->player->hearts_containers_test_purpose * 2) - 1) {
-			App->player->half_hearts_test_purpose++;
-		}
-		else if ((App->player->half_hearts_test_purpose / 2) <= (App->player->hearts_containers_test_purpose - 1)) {
-			App->player->half_hearts_test_purpose += 2;
-		}
+		
+		App->player->hearts_containers_test_purpose++;
 
-		tokill = true;*/
 	}
 
 

@@ -208,8 +208,7 @@ bool j1Player::CleanUp() {
 	App->tex->UnLoad(Link->entity_texture);
 	App->tex->UnLoad(Zelda->entity_texture);
 
-	for (std::vector<Animation>::iterator item = Link->sprites_vector.begin(); item != Link->sprites_vector.cend(); ++item)
-		RELEASE(&(*item).frames->rect);
+	
 	Link->sprites_vector.clear();
 	Zelda->sprites_vector.clear();
 	if (Link != nullptr)
