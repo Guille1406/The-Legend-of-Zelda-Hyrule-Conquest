@@ -122,6 +122,10 @@ public:
 	bool is_eye_2_open = true;
 	bool is_eye_3_open = true;
 	bool is_eye_4_open = true;
+
+
+	int dist_link = 0;
+	int dist_zelda = 0;
 };
 
 class Foot : public Entity {

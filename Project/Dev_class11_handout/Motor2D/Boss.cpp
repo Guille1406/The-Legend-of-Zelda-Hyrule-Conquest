@@ -121,8 +121,8 @@ void Boss::GetEvent()
 
 	iPoint diference_point_link = { App->player->Link->pos.x - centre_pos.x,App->player->Link->pos.y - centre_pos.y };
 	iPoint diference_point_zelda = { App->player->Zelda->pos.x - centre_pos.x,App->player->Zelda->pos.y - centre_pos.y };
-	int dist_link = (int)(sqrt(diference_point_link.x *diference_point_link.x + diference_point_link.y * diference_point_link.y));
-	int dist_zelda = (int)(sqrt(diference_point_zelda.x *diference_point_zelda.x + diference_point_zelda.y * diference_point_zelda.y));
+	dist_link = (int)(sqrt(diference_point_link.x *diference_point_link.x + diference_point_link.y * diference_point_link.y));
+	dist_zelda = (int)(sqrt(diference_point_zelda.x *diference_point_zelda.x + diference_point_zelda.y * diference_point_zelda.y));
 	if (dist_link > 300 && dist_zelda > 300 && can_move) {
 		if ((centre_pos.x > 79 * 16 || App->player->Link->pos.x > centre_pos.x) && (centre_pos.x < 129 * 16 || App->player->Link->pos.x < centre_pos.x)) {
 			if ((centre_pos.y < 101 * 16 || App->player->Link->pos.y < centre_pos.y) && (centre_pos.y > 74 * 16 || App->player->Link->pos.y > centre_pos.y)) {
@@ -140,10 +140,10 @@ void Boss::GetEvent()
 			break;
 		case boss_phase_2:
 			
-				if (dist_link / 300.0f < dist_zelda / 300.0f && state != boss_attack_zelda)
+				if ((dist_link < dist_zelda || dist_zelda<120) && state != boss_attack_zelda)
 					if(dist_link >120)
 					state = boss_attack_link;
-				else if (state != boss_attack_link && state != boss_attack_link)
+				else if (state != boss_attack_link)
 					if(dist_zelda >120)
 					state = boss_attack_zelda;
 			
@@ -192,6 +192,11 @@ void Boss::ExecuteEvent()
 				can_attack = false;
 				logic_height = 0;
 				damaged_boss_timer.Start();
+				if (dist_link < 150)
+					App->player->Link->pos = { centre_pos.x, centre_pos.y - 150 };
+				if (dist_zelda < 150)
+					App->player->Zelda->pos = { centre_pos.x, centre_pos.y - 150 };
+				
 			}
 		}
 		/*if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && attacking_foot->actual_foot_state == after_attack) {
