@@ -40,6 +40,7 @@ enum COLLIDER_TYPE
 	collider_heart,
 	collider_container_heart,
 	collider_movable_object,
+	collider_npc,
 };
 
 enum collider_state {

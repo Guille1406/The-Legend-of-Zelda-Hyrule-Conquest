@@ -118,6 +118,7 @@
     <ClCompile Include="j1Timer.cpp" />
     <ClCompile Include="j1Object.cpp" />
     <ClCompile Include="MainScene.cpp" />
+    <ClCompile Include="O_NPC.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="Particle_Explosion.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="O_Jump.h" />
     <ClInclude Include="O_Movable_BLock.h" />
     <ClInclude Include="O_Music.h" />
+    <ClInclude Include="O_NPC.h" />
     <ClInclude Include="O_Sign.h" />
     <ClInclude Include="O_Warp.h" />
     <ClInclude Include="Particle.h" />

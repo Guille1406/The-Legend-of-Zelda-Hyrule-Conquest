@@ -41,7 +41,7 @@ enum objectType {
 	object_music,
 	bridge,
 	bush,
-
+	npc,
 
 	/*
 	.
@@ -120,6 +120,7 @@ public:
 	Object* CreateBridge(pugi::xml_node object, int height);
 	Object* CreateHeartContainer(pugi::xml_node object, int height);
 	Object* CreateBush(pugi::xml_node object, int height);
+	Object* CreateNPC(pugi::xml_node object, int height);
 
 	void StartCollision(Collider* collider1, Collider* collider2);
 	void OnCollision(Collider* collider1, Collider* collider2);

@@ -22,6 +22,7 @@
 #include "O_Bridge.h"
 #include "O_HeartContainer.h"
 #include "O_Bush.h"
+#include"O_NPC.h"
 
 bool j1Object::Start()
 {
@@ -214,6 +215,9 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int heigh
 		ret = CreateBridge(object, height);
 	else if (!strcmp(type_name, "bush"))
 		ret = CreateBush(object, height);
+	else if (!strcmp(type_name, "npc"))
+		ret = CreateNPC(object, height);
+
 	return ret;
 }
 
@@ -693,6 +697,54 @@ Object * j1Object::CreateBush(pugi::xml_node object, int height)
 
 	V_Objects.push_back(ret);
 	return ret;
+}
+
+Object * j1Object::CreateNPC(pugi::xml_node object, int height)
+{
+
+	O_NPC temp_npc;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+	temp_npc.logic_height = height;
+	temp_npc.name = object.attribute("name").as_string();
+	temp_npc.rect = { x,y,w,h };
+	pugi::xml_node attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "type") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	std::string type_string = attribute.attribute("value").as_string();
+	if (type_string == "npc") {
+		temp_npc.type = objectType::npc;
+
+		pugi::xml_node attribute = object.child("properties").child("property");
+		while (strcmp(attribute.attribute("name").as_string(), "npc_type") && attribute) {
+			attribute = attribute.next_sibling();
+		}
+		std::string npc_type_string = attribute.attribute("value").as_string();
+		if (npc_type_string == "masked") {
+			temp_npc.npc_type = NPC_Type::npc_enmasked;
+		}
+		else if (npc_type_string == "ric") {
+			temp_npc.npc_type = NPC_Type::npc_ric;
+		}
+		else if (npc_type_string == "neutral") {
+			temp_npc.npc_type = NPC_Type::npc_neutral;
+		}
+		else {
+			temp_npc.npc_type = NPC_Type::npc_none;
+		}
+		temp_npc.active = true;
+
+	}
+
+	//Object* ret = new O_NPC(temp_npc);
+	//ret->collider = App->collision->AddCollider(temp_npc.rect, COLLIDER_TYPE::collider_npc, (Entity*)ret, this);
+
+	//V_Objects.push_back(ret);
+
+	return nullptr;
 }
 
 Object * j1Object::CreateWarp(pugi::xml_node object, int height)

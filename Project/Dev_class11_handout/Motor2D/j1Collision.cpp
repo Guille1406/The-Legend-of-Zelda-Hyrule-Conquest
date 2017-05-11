@@ -136,6 +136,12 @@ j1Collision::j1Collision()
 	matrix[collider_boss_explosion][collider_link] = true;
 	matrix[collider_boss_recover][collider_zelda] = true;
 	matrix[collider_boss_little_eye][collider_arrow] = true;
+
+	//NPC COLLIDER
+	matrix[collider_npc][collider_link] = true;
+	matrix[collider_npc][collider_zelda] = true;
+
+
 }
 
 // Destructor
@@ -356,6 +362,9 @@ void j1Collision::DebugDraw()
 			break;
 		case coolider_bomb_explosion:
 			App->render->DrawQuad(colliders[i]->rect, White(1), White(2), White(3), alpha);
+			break;
+		case collider_npc:
+			App->render->DrawQuad(colliders[i]->rect, Red(1), Red(2), Red(3), alpha);
 			break;
 		case collider_door:
 			Object* temp = (Object*)colliders[i]->parent;
