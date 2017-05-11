@@ -136,6 +136,7 @@ public:
 	virtual Entity* GetEntityFromId(EntityType_Cutscene ent);
 public: 
 	std::vector<Object*> V_Objects;
+	SDL_Texture* npc_objects_tex = nullptr;
 	SDL_Texture* objects_texture=	nullptr;
 
 };

@@ -12,6 +12,15 @@ enum NPC_Type {
 	npc_none
 };
 
+enum NPC_direcction {
+
+	npc_up,
+	npc_right,
+	npc_left,
+	npc_down,
+	npc_none_direction
+};
+
 
 class O_NPC : public Object {
 private:
@@ -23,6 +32,8 @@ public:
 	}
 	O_NPC(const O_NPC& obj) {
 		type = obj.type;
+		npc_type = obj.npc_type;
+		dialogue_id_npc = obj.dialogue_id_npc;
 		//need npc_type
 		rect = obj.rect;
 		active = obj.active;
@@ -33,12 +44,14 @@ public:
 	~O_NPC() {
 
 	}
-	void Active();
+	void Active() {
+		App->dialoguemanager->ActivateDialogue(dialogue_id_npc);
+	}
 
 
 
 public:
-
+	DialogueID dialogue_id_npc = DialogueID::NullID_dialogue;
 	NPC_Type npc_type = NPC_Type::npc_none;
 
 

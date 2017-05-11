@@ -31,6 +31,8 @@
 bool j1Object::Start()
 {
 	objects_texture = App->tex->Load("textures/items v2.png");
+	npc_objects_tex = App->tex->Load("cutscenes/cutscene_spritesheet.png");
+
 	return true;
 }
 
@@ -110,7 +112,13 @@ void j1Object::Draw(int height)
 {
 	for (int i = 0; i < V_Objects.size(); i++) {
 		Object* object = V_Objects[i];
-		if (object->active && object->logic_height == height)
+		if (object->type == objectType::npc) {
+			if(((O_NPC*)object)->npc_type== NPC_Type::npc_enmasked)
+				App->render->Blit(npc_objects_tex, object->rect.x - object->rect.w/2+10, object->rect.y- object->rect.h, &object->texture_rect);
+			if (((O_NPC*)object)->npc_type == NPC_Type::npc_ric)
+				App->render->Blit(npc_objects_tex, object->rect.x, object->rect.y, &object->texture_rect);
+		}
+		else if (object->active && object->logic_height == height)
 			App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
 	}
 }
@@ -716,24 +724,39 @@ Object * j1Object::CreateNPC(pugi::xml_node object, int height)
 	temp_npc.logic_height = height;
 	temp_npc.name = object.attribute("name").as_string();
 	temp_npc.rect = { x,y,w,h };
+
+	temp_npc.type = objectType::npc;
 	pugi::xml_node attribute = object.child("properties").child("property");
 	while (strcmp(attribute.attribute("name").as_string(), "npc_type") && attribute) {
 			attribute = attribute.next_sibling();
 		}
 	std::string npc_type_string = attribute.attribute("value").as_string();
 	if (npc_type_string == "masked") {
-			temp_npc.npc_type = NPC_Type::npc_enmasked;
-		}
+		temp_npc.npc_type = NPC_Type::npc_enmasked;
+		temp_npc.texture_rect = { 70,0,46,66 };
+		temp_npc.dialogue_id_npc = DialogueID::ric_with_link_dialogue;
+	}
 	else if (npc_type_string == "ric") {
-			temp_npc.npc_type = NPC_Type::npc_ric;
-		}
+		temp_npc.npc_type = NPC_Type::npc_ric;
+		temp_npc.texture_rect = { 221,17,32,48 };
+		temp_npc.dialogue_id_npc = DialogueID::ric_with_link_dialogue;
+	}
 	else if (npc_type_string == "neutral") {
-			temp_npc.npc_type = NPC_Type::npc_neutral;
-		}
+		temp_npc.npc_type = NPC_Type::npc_neutral;
+		temp_npc.texture_rect = { 254,7,32,58 };
+		temp_npc.dialogue_id_npc = DialogueID::ric_with_link_dialogue;
+	}
 	else {
-			temp_npc.npc_type = NPC_Type::npc_none;
-		}
+		temp_npc.npc_type = NPC_Type::npc_none;
+		temp_npc.texture_rect = { 0,0,0,0 };
+	}
+
 	temp_npc.active = true;
+
+	Object* ret = new O_NPC(temp_npc);
+	ret->collider = App->collision->AddCollider({ ret->rect }, COLLIDER_TYPE::collider_npc, (Entity*)ret, this);
+	V_Objects.push_back(ret);
+
 
 	return nullptr;
 	}
@@ -971,6 +994,16 @@ void j1Object::OnCollision(Collider * collider1, Collider * collider2)
 		DoubleButton* temp = (DoubleButton*)collider1->parent;
 		temp->characters_on++;
 		temp->Action();
+
+	}
+
+	else if (collider1->type == npc && collider2->type == collider_link) {
+		O_NPC* temp = (O_NPC*)collider1->parent;
+		if (temp!=nullptr) {
+			if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
+				temp->Active();
+			}
+		}
 
 	}
 }
