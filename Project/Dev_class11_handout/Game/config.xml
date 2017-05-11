@@ -24,6 +24,11 @@
     
   <dialogue>
     <king_atlas file="dialogues/king_atlas.png"/>
+	<link_atlas file="dialogues/link_atlas.png"/>
+	<zelda_atlas file="dialogues/zelda_atlas.png"/>
+	<messenger_atlas file="dialogues/anonymous_atlas.png"/>
+	<ogity_atlas file="dialogues/darkOjity_atlas.png"/>
+	<ric_atlas file="dialogues/ric_atlas.png"/>
   </dialogue>
 	
   <window>

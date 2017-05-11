@@ -30,11 +30,11 @@ bool j1DialogueManager::Awake(pugi::xml_node& config)
 
 	///Get characters atlas
 	king_tex_str = config.child("king_atlas").attribute("file").as_string();
-	link_tex_str = empty_char;
-	zelda_tex_str = empty_char;
-	messenger_tex_str = empty_char;
-	ric_tex_str = empty_char;
-	ogity_tex_str = empty_char;
+	link_tex_str = config.child("link_atlas").attribute("file").as_string();
+	zelda_tex_str = config.child("zelda_atlas").attribute("file").as_string();
+	messenger_tex_str = config.child("messenger_atlas").attribute("file").as_string();
+	ric_tex_str = config.child("ric_atlas").attribute("file").as_string();
+	ogity_tex_str = config.child("ogity_atlas").attribute("file").as_string();
 	
 	return ret;
 }
@@ -224,12 +224,12 @@ bool j1DialogueManager::Update(float dt)
 	if(ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->DialogueCharacter_pos == DialogueInterlucutorPosition::Left)
 		App->render->Blit(ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Atlas, 0 - App->render->camera.x, 0 - App->render->camera.y, &ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Expression_Rect, 1.0f, 0, INT_MAX, INT_MAX, false, 123, SDL_RendererFlip::SDL_FLIP_HORIZONTAL);
 	else
-		App->render->Blit(ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Atlas, 508 - App->render->camera.x, 0 - App->render->camera.y, &ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Expression_Rect, 1.0f, 0, INT_MAX, INT_MAX, false, 123);
+		App->render->Blit(ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Atlas, 1280 - ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Expression_Rect.w - App->render->camera.x, 0 - App->render->camera.y, &ActiveDialog->ActiveDialogueStepPtr->ListenerDialogueCharacter->Character_Expression_Rect, 1.0f, 0, INT_MAX, INT_MAX, false, 123);
 
 	if (ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->DialogueCharacter_pos == DialogueInterlucutorPosition::Left)
 		App->render->Blit(ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Atlas, 0 - App->render->camera.x, 0 - App->render->camera.y, &ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Expression_Rect, 1.0f, 0, INT_MAX, INT_MAX, false, 255, SDL_RendererFlip::SDL_FLIP_HORIZONTAL);
 	else
-		App->render->Blit(ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Atlas, 508 - App->render->camera.x, 0 - App->render->camera.y, &ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Expression_Rect, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
+		App->render->Blit(ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Atlas, 1280 - ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Expression_Rect.w - App->render->camera.x, 0 - App->render->camera.y, &ActiveDialog->ActiveDialogueStepPtr->SpeakerDialogueCharacter->Character_Expression_Rect, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
 
 	//Blit text background and Name labels
 	TextBackground->DrawWithAlternativeAtlas(App->hud->GetAtlas());
