@@ -103,6 +103,7 @@ public:
 	bool heart_1 = true;
 	bool heart_2 = true;
 	bool heart_3 = true;
+	bool heart_4 = true;
 };
 
 #endif // __j1SCENE_H__

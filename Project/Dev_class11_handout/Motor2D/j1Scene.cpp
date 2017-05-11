@@ -23,6 +23,7 @@
 #include "j1Player.h"
 #include "j1GameStartMenuBack.h"
 #include "S_World.h"
+#include "S_Lake.h"
 
 #include "S_Temporal_Boss_Room.h"
 #include "S_ColourPuzzle.h"
@@ -129,6 +130,12 @@ bool j1Scene::Start()
 	scene_list.push_back(scene_pointer);
 	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::path_to_boss;
+	scene_pointer = nullptr;
+
+	scene_pointer = new S_Lake;
+	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
+	(*scene_list.back()).scene_name = Scene_ID::lake;
 	scene_pointer = nullptr;
 
 

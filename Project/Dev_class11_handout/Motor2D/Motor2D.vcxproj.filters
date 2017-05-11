@@ -295,6 +295,9 @@
     <ClCompile Include="S_Death.cpp">
       <Filter>Desenvolupament  ========\Scenes\GUI\Death</Filter>
     </ClCompile>
+    <ClCompile Include="S_Lake.cpp">
+      <Filter>Desenvolupament  ========\Scenes\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -678,6 +681,9 @@
     </ClInclude>
     <ClInclude Include="S_Death.h">
       <Filter>Desenvolupament  ========\Scenes\GUI\Death</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Lake.h">
+      <Filter>Desenvolupament  ========\Scenes\World</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
