@@ -13,23 +13,36 @@ S_Death::~S_Death()
 
 bool S_Death::Awake(pugi::xml_node& conf)
 {
+	int X_pos = 0;
 	Death_Screen_Rect = { 0,0,1280,720 };
-	CreditsBack_Rect = { 1278,2061,145,39 };
-	CreditsBackHover_Rect = { 1278,2100,145,39 };
-	back = App->gui->CreateButton(iPoint(975, 625), &std::string(""), ButtonType::idle_pressed, &CreditsBack_Rect, &CreditsBackHover_Rect, false);
-	back->SetFont(App->font->Sherwood20);
-	((Gui*)back)->SetListener(this);
-	back->SetVisible(false);
-	back->Focusable(true);
 
-	buttons.push_back(back);
+	DeathTryAgain_Rect = { 1278,1940,229,30 };
+	DeathTryAgainHover_Rect = { 1278,1971,229,30 };
+
+	X_pos = App->win->GetWindowWHalf() - (int)(DeathTryAgain_Rect.w * 0.5f);
+	DeathTryAgain = App->gui->CreateButton(iPoint(X_pos, 350), &std::string(""), ButtonType::idle_hover, &DeathTryAgainHover_Rect, &DeathTryAgain_Rect, false);
+	((Gui*)DeathTryAgain)->SetListener(this);
+	DeathTryAgain->SetVisible(false);
+	DeathTryAgain->Focusable(true);
+	buttons.push_back(DeathTryAgain);
+
+	DeathMainMenu_Rect = { 1278,2001,250,30 };
+	DeathMainMenuHover_Rect = { 1278,2031,250,30 };
+
+	X_pos = App->win->GetWindowWHalf() - (int)(DeathMainMenu_Rect.w * 0.5f);
+	DeathMainMenu = App->gui->CreateButton(iPoint(X_pos, 400), &std::string(""), ButtonType::idle_hover, &DeathMainMenuHover_Rect, &DeathMainMenu_Rect, false);
+	((Gui*)DeathMainMenu)->SetListener(this);
+	DeathMainMenu->SetVisible(false);
+	DeathMainMenu->Focusable(true);
+	buttons.push_back(DeathMainMenu);
 
 	return true;
 };
 
 bool S_Death::Start()
 {
-	back->SetVisible(true);
+	DeathTryAgain->SetVisible(true);
+	DeathMainMenu->SetVisible(true);
 
 	Death_Screen = App->gui->CreateImage(iPoint(0, 0), &Death_Screen_Rect, false, AddGuiTo::none);
 
@@ -48,13 +61,18 @@ bool S_Death::Update()
 bool S_Death::Clean()
 {
 	delete Death_Screen;
-	back->SetVisible(false);
+	DeathTryAgain->SetVisible(false);
+	DeathMainMenu->SetVisible(true);
 	return true;
 }
 
 void S_Death::OnGui(Gui* ui, GuiEvent event)
 {
-	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
+	if ((ui == (Gui*)DeathTryAgain) && (event == GuiEvent::mouse_lclk_down))
+	{
+		App->scene->ChangeScene(Scene_ID::mainmenu);
+	}
+	if ((ui == (Gui*)DeathMainMenu) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->scene->ChangeScene(Scene_ID::mainmenu);
 	}

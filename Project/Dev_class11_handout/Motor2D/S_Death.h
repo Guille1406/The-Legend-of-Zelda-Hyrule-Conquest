@@ -19,10 +19,13 @@ public:
 	void OnGui(Gui* ui, GuiEvent event);
 public:
 	SDL_Rect Death_Screen_Rect = { 0,0,0,0 };
-	SDL_Rect CreditsBack_Rect = { 0,0,0,0 };
-	SDL_Rect CreditsBackHover_Rect = { 0,0,0,0 };
 	GuiImage* Death_Screen = nullptr;
-	GuiButton* back = nullptr;
+	SDL_Rect DeathTryAgain_Rect = { 0,0,0,0 };
+	SDL_Rect DeathTryAgainHover_Rect = { 0,0,0,0 };
+	GuiButton* DeathTryAgain = nullptr;
+	SDL_Rect DeathMainMenu_Rect = { 0,0,0,0 };
+	SDL_Rect DeathMainMenuHover_Rect = { 0,0,0,0 };
+	GuiButton* DeathMainMenu = nullptr;
 };
 
 #endif // #pragma once
