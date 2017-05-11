@@ -16,6 +16,7 @@ struct Properties
 		int value;
 	};
 
+
 	~Properties()
 	{
 

@@ -112,6 +112,7 @@ SDL_Texture* j1Fonts::Print(const char* text, SDL_Color color, TTF_Font* font)
 	else
 	{
 		ret = App->tex->LoadSurface(surface);
+		
 		SDL_FreeSurface(surface);
 	}
 

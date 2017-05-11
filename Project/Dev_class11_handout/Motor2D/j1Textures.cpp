@@ -50,7 +50,8 @@ bool j1Textures::CleanUp()
 
 	std::list<SDL_Texture*>::iterator item = textures.begin();
 	for (; item != textures.cend(); ++item) {
-		SDL_DestroyTexture((*item));
+		UnLoad((*item));
+		//SDL_DestroyTexture((*item));
 	}
 
 	textures.clear();

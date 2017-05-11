@@ -59,7 +59,9 @@ public:
 	Enemy(enemyType type): type(type) {
 
 	};
-	~Enemy() {};
+	~Enemy() {
+		App->tex->UnLoad(entity_texture);
+	};
 	void Direction_Push_Election();
 	void Enemy_Hurt_Displacement(int & pos, bool add);
 	int GetLogicEnemy(int minus_height, iPoint pos);

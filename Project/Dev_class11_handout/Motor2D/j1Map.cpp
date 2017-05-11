@@ -245,6 +245,7 @@ bool j1Map::CleanUp()
 		RELEASE((*item2));
 	}
 
+	
 	data.layers.clear();
 	V_Colision.clear();
 	V_Logic.clear();
