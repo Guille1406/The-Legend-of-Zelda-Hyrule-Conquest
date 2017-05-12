@@ -70,75 +70,83 @@ bool j1Camera::PreUpdate()
 
 	//Calculate camera centre
 	float Scale = App->win->GetScale();
-	iPoint Centre = { 0,0 };
-	Centre.x = (int)((((float)(App->player->Link->pos.x + App->player->Zelda->pos.x)) * 0.5f));
-	Centre.y = (int)((((float)(App->player->Link->pos.y + App->player->Zelda->pos.y)) * 0.5f));
+	//App->win->scale = Scale;
+
 	
-	//Camera position
-	App->render->camera.x = (int)(-Centre.x * Scale + i_Half_w);
-	App->render->camera.y = (int)(-Centre.y * Scale + i_Half_h);
+		iPoint Centre = { 0,0 };
+		Centre.x = (int)((((float)(App->player->Link->pos.x + App->player->Zelda->pos.x)) * 0.5f));
+		Centre.y = (int)((((float)(App->player->Link->pos.y + App->player->Zelda->pos.y)) * 0.5f));
 
-	int new_cam_x = App->map->data.width * App->map->data.tile_width * Scale - App->render->camera.w;
-	if (App->map->data.width * App->map->data.tile_width > 1280)
-	{
-		if (App->render->camera.x >= 0)
-			App->render->camera.x = 0;
-		if (-App->render->camera.x >= new_cam_x)
-			App->render->camera.x = -new_cam_x;
-	}
-	int new_cam_y = App->map->data.height * App->map->data.tile_height * Scale - App->render->camera.h;
-	if (App->map->data.height * App->map->data.tile_height > 720)
-	{
-		if (App->render->camera.y >= 0)
-			App->render->camera.y = 0;
-		if (-App->render->camera.y >= new_cam_y)
-			App->render->camera.y = -new_cam_y;
-	}
-	//Ellipss centre
-	iPoint CentrePos = { 0,0 };
-	CentrePos = App->render->WorldToScreen(Centre.x, Centre.y);
-	LitleEllipse.ellipsecentre = BigEllipse.ellipsecentre = { (int)(CentrePos.x), (int)(CentrePos.y) };
 
-	//Debug Performance Data
-	DebugPerformanceData_Rect.x = -App->render->camera.x;
-	DebugPerformanceData_Rect.y = -App->render->camera.y + App->win->GetWindowH() - DebugPerformanceData_Rect.h;
+		//Camera position
+		App->render->camera.x = (int)(-Centre.x * Scale + i_Half_w);
+		App->render->camera.y = (int)(-Centre.y * Scale + i_Half_h);
+
+		int new_cam_x = App->map->data.width * App->map->data.tile_width * Scale - App->render->camera.w;
+		if (App->map->data.width * App->map->data.tile_width > 1280)
+		{
+			if (App->render->camera.x >= 0)
+				App->render->camera.x = 0;
+			if (-App->render->camera.x >= new_cam_x)
+				App->render->camera.x = -new_cam_x;
+		}
+		int new_cam_y = App->map->data.height * App->map->data.tile_height * Scale - App->render->camera.h;
+		if (App->map->data.height * App->map->data.tile_height > 720)
+		{
+			if (App->render->camera.y >= 0)
+				App->render->camera.y = 0;
+			if (-App->render->camera.y >= new_cam_y)
+				App->render->camera.y = -new_cam_y;
+		}
+		//Ellipss centre
+		iPoint CentrePos = { 0,0 };
+		CentrePos = App->render->WorldToScreen(Centre.x, Centre.y);
+		LitleEllipse.ellipsecentre = BigEllipse.ellipsecentre = { (int)(CentrePos.x), (int)(CentrePos.y) };
+
+		//Debug Performance Data
+		DebugPerformanceData_Rect.x = -App->render->camera.x;
+		DebugPerformanceData_Rect.y = -App->render->camera.y + App->win->GetWindowH() - DebugPerformanceData_Rect.h;
+	
 	return true;
 }
 
 // Called each loop iteration
-bool j1Camera::Update(float dt)
+bool j1Camera::PostUpdate()
 {
 	if (Cam_move_paused)
 		return true;
 
 	iPoint LinkPos = { 0,0 };
+	
 	LinkPos = App->render->WorldToScreen(App->player->Link->pos.x, App->player->Link->pos.y);
+
 	/**/
-	//Is inside the little ellipse
-	if (LitleEllipse.InsideEllipse(LinkPos))
-		App->win->scale = f_Max_scale;
-	//Is out the little ellipse
-	else
-	{
-		//Is between the big ellipse and the little one
-		if (BigEllipse.InsideEllipse(LinkPos))
-		{
-			//Scale between f_Max_scale and f_Min_scale
-			float f_percentual_value = (((float)(BigEllipse.InsideEllipseValue(LinkPos) - f_border_between_ellipses)) / ((float)(1.0f - f_border_between_ellipses))) * 100.0f;
-			float f_invert_percentual_value = 100.0f - f_percentual_value;
-			if (f_invert_percentual_value < 0.0f)
-				f_invert_percentual_value = 0.0f;
-			else if (f_invert_percentual_value > 100.0f)
-				f_invert_percentual_value = 100.0f;
-			App->win->scale = (((f_Max_scale - f_Min_scale) * f_invert_percentual_value) / (100.0f)) + f_Min_scale;
-		}
-		//Is out the big ellipse
+	
+		//Is inside the little ellipse
+		if (LitleEllipse.InsideEllipse(LinkPos))
+			App->win->scale = f_Max_scale;
+		//Is out the little ellipse
 		else
-			App->win->scale = f_Min_scale;
-	}
+		{
+			//Is between the big ellipse and the little one
+			if (BigEllipse.InsideEllipse(LinkPos))
+			{
+				//Scale between f_Max_scale and f_Min_scale
+				float f_percentual_value = (((float)(BigEllipse.InsideEllipseValue(LinkPos) - f_border_between_ellipses)) / ((float)(1.0f - f_border_between_ellipses))) * 100.0f;
+				float f_invert_percentual_value = 100.0f - f_percentual_value;
+				if (f_invert_percentual_value < 0.0f)
+					f_invert_percentual_value = 0.0f;
+				else if (f_invert_percentual_value > 100.0f)
+					f_invert_percentual_value = 100.0f;
+				App->win->scale = (((f_Max_scale - f_Min_scale) * f_invert_percentual_value) / (100.0f)) + f_Min_scale;
+			}
+			//Is out the big ellipse
+			else
+				App->win->scale = f_Min_scale;
+		}
 
-	App->win->scale = floor(App->win->scale * 1000 + 0.5f) * 0.001;
-
+		App->win->scale = App->win->scale;
+	
 	/**/
 
 	//Some ellipses debug draw for testing
@@ -215,12 +223,13 @@ bool j1Camera::Update(float dt)
 	return true;
 }
 
+/*
 // Called each loop iteration
 bool j1Camera::PostUpdate()
 {
 	return true;
 }
-
+*/
 // Called before quitting
 bool j1Camera::CleanUp()
 {

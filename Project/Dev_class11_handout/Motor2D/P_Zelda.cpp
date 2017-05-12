@@ -220,10 +220,7 @@ player_event P_Zelda::GetEvent()
 	//can_fall = true;
 
 	if (App->player->cooperative == false) {
-		UP = SDL_SCANCODE_W;
-		DOWN = SDL_SCANCODE_S;
-		LEFT = SDL_SCANCODE_A;
-		RIGHT = SDL_SCANCODE_D;
+		
 
 	}
 	else {

@@ -47,7 +47,7 @@ public:
 	bool PreUpdate();
 
 	// Called each loop iteration
-	bool Update(float dt);
+	//bool Update(float dt);
 
 	// Called each loop iteration
 	bool PostUpdate();

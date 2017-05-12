@@ -976,13 +976,7 @@ void j1Object::StartCollision(Collider * collider1, Collider * collider2)
 
 	}
 	
-	else if (collider1->type == collider_warp) {
-		if (!App->player->Link->doing_script && !App->player->Zelda->doing_script) {
-			Warp* temp = (Warp*)collider1->parent;
-			temp->Action();
-		}
-
-	}
+	
 	
 	else if (collider1->type == collider_change_height) {
 		ChangeHeight* temp = (ChangeHeight*)collider1->parent;
@@ -1021,6 +1015,13 @@ void j1Object::OnCollision(Collider * collider1, Collider * collider2)
 			character->can_jump = true;
 
 		}
+	}
+	else if (collider1->type == collider_warp) {
+		if (!App->player->Link->doing_script && !App->player->Zelda->doing_script) {
+			Warp* temp = (Warp*)collider1->parent;
+			temp->Action();
+		}
+
 	}
 	else if (collider1->type == collider_double_button) {
 		DoubleButton* temp = (DoubleButton*)collider1->parent;
