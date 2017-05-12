@@ -384,7 +384,7 @@ bool j1Collision::CleanUp()
 {
 	LOG("Freeing all colliders");
 	for (std::vector<Collider*>::iterator item = colliders.begin(); item != colliders.cend(); ++item)
-		delete *item;
+		RELEASE(*item);
 	colliders.clear();
 
 	return true;

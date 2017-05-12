@@ -27,11 +27,13 @@ public:
 
 	}
 	void Action() {
-		App->scene->ChangeScene(scene);
-		App->player->Link->pos = { warp_pos.x * 16, warp_pos.y * 16 };
-		App->player->Zelda->pos = { warp_pos.x * 16, warp_pos.y * 16 };
-		App->player->Link->logic_height = height;
-		App->player->Zelda->logic_height = height;
+		if (App->object->V_Objects.size() > 0) {			
+			App->player->Link->pos = { warp_pos.x * 16, warp_pos.y * 16 };
+			App->player->Zelda->pos = { warp_pos.x * 16, warp_pos.y * 16 };
+			App->player->Link->logic_height = height;
+			App->player->Zelda->logic_height = height;
+			App->scene->ChangeScene(scene);
+		}
 	}
 
 public:

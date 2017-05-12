@@ -226,6 +226,8 @@ bool j1Map::CleanUp()
 
 	// Remove all tilesets
 	
+
+
 	for (std::list <TileSet*>::iterator temp = App->map->data.tilesets.begin(); temp != App->map->data.tilesets.cend(); ++temp) {
 		if (*temp != nullptr) {
 			App->tex->UnLoad((*temp)->texture);
@@ -238,6 +240,12 @@ bool j1Map::CleanUp()
 
 	data.tilesets.clear();
 
+	std::list<ObjectLayer*>::iterator item = data.objects.begin();
+	for (; item != data.objects.cend(); ++item) {
+		RELEASE((*item));
+	}
+	data.objects.clear();
+
 	// Remove all layers
 
 	std::list<MapLayer*>::iterator item2 = data.layers.begin();
@@ -245,8 +253,9 @@ bool j1Map::CleanUp()
 		RELEASE((*item2));
 	}
 
-	
 	data.layers.clear();
+
+
 	V_Colision.clear();
 	V_Logic.clear();
 	V_Enemies.clear();
@@ -356,7 +365,7 @@ bool j1Map::Load(const char* file_name)
 
 	}
 	map_loaded = ret;
-
+	
 	return ret;
 }
 

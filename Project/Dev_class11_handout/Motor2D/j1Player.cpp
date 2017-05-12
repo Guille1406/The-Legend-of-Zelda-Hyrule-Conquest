@@ -41,6 +41,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 
 bool j1Player::Start()
 {
+	
 	Link->Link_Hurt_Audio = App->audio->LoadFx("audio/fx/link hurt.wav");
 	Link->Link_Sword_Audio = App->audio->LoadFx("audio/fx/fighter sword 1.wav");
 	Link->Link_Sword_Collides_Sword_Audio = App->audio->LoadFx("audio/fx/sword shine 1.wav");
@@ -50,7 +51,7 @@ bool j1Player::Start()
 	Zelda->Arrow_Hit_Wall_Audio = App->audio->LoadFx("audio/fx/arrow hit wall.wav");
 	App->enemy->enemy_dies_audio = App->audio->LoadFx("audio/fx/enemy dies.wav");
 	App->enemy->enemy_pathfinding_audio = App->audio->LoadFx("audio/fx/soldier.wav");
-
+	
 	Link->collision = App->collision->AddCollider({ Link->pos.x,Link->pos.y,32,32 }, collider_link, Link, this);
 	Link->front_collider = App->collision->AddCollider({ Link->tilepos.x * 8,Link->tilepos.y * 8 + 32,32,16 }, front_link, Link, this);
 	Zelda->collision = App->collision->AddCollider({ Zelda->pos.x,Zelda->pos.y,32,32 }, collider_zelda, Zelda, this);
@@ -63,7 +64,9 @@ bool j1Player::Start()
 	Link->character_direction = direction::down;
 	Zelda->character_direction = direction::down;
 
+	if(Link->sprites_vector.size()==0)
 	Link->LoadAnimation("sprites/Link_Spritesheet_Finale.xml");
+	if (Zelda->sprites_vector.size()==0)
 	Zelda->LoadAnimation("sprites/Zelda_Sprites.xml");
 
 	selected_character = Link;
@@ -87,6 +90,8 @@ bool j1Player::Start()
 	Zelda->can_move = true;
 	
 	//TEMP
+
+	
 	Link->sprites_vector[player_event::attack * 4 + direction::up].speed = 0.12f;
 	Link->sprites_vector[player_event::attack * 4 + direction::down].speed = 0.12f;
 	Link->sprites_vector[player_event::attack * 4 + direction::left].speed = 0.12f;
