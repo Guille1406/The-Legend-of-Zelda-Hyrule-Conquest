@@ -574,6 +574,24 @@ bool Cutscene::LoadText(pugi::xml_node& node)
 		else if (id_string == "house_3_dialogue") {
 			id = DialogueID::house_3_dialogue;
 		}
+		else if (id_string == "truth_1_dialogue") {
+			id = DialogueID::truth_1_dialogue;
+		}
+		else if (id_string == "truth_2_dialogue") {
+			id = DialogueID::truth_2_dialogue;
+		}
+		else if (id_string == "truth_3_dialogue") {
+			id = DialogueID::truth_3_dialogue;
+		}
+		else if (id_string == "truth_4_dialogue") {
+			id = DialogueID::truth_4_dialogue;
+		}
+		else if (id_string == "truth_5_dialogue") {
+			id = DialogueID::truth_5_dialogue;
+		}
+		else if (id_string == "castle_doors_dialogue") {
+			id = DialogueID::castle_doors_dialogue;
+		}
 		elements.push_back(new CS_Text(CS_Type::CS_TEXT, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), id));
 		ret = true;
 	}
@@ -618,6 +636,15 @@ bool Cutscene::LoadChangeScene(pugi::xml_node& node)
 		else if (id_string == "house_3") {
 			id = Scene_ID::house_3;
 		}
+
+
+		else if (id_string == "top_of_the_mountain") {
+			id = Scene_ID::top_of_the_mountain;
+		}
+		else if (id_string == "path_to_boss") {
+			id = Scene_ID::path_to_boss;
+		}
+
 
 		elements.push_back(new CS_ChangeScene(CS_Type::CS_CHANGESCENE, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), id));
 
@@ -1070,6 +1097,11 @@ void CS_Step::DoChangeScene_CS()
 		case Scene_ID::house_3:
 			App->player->Link->pos = {100,300};
 			App->player->Zelda->pos = {160,300};
+			break;
+
+		case Scene_ID::path_to_boss:
+			App->player->Link->pos = { 623,928 };
+			App->player->Zelda->pos = { 680,928 };
 			break;
 
 

@@ -36,7 +36,7 @@ bool S_TopOfTheMountain::Start()
 	App->enemy->paused = false;
 	App->collision->paused = false;
 	App->pathfinding->paused = false;
-
+	
 
 	if (App->map->Load("top_of_the_mountain.tmx") == true)
 
@@ -74,7 +74,7 @@ bool S_TopOfTheMountain::Start()
 
 	//App->player->Link->pos = { 660,1200 };
 	//App->player->Zelda->pos = { 620,1200 };
-
+	App->cutscenemanager->StartCutscene(2);
 	
 	LOG("World Open");
 	return false;

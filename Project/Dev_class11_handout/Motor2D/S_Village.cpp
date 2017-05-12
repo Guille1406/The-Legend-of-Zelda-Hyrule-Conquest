@@ -40,7 +40,7 @@ bool S_Village::Start()
 
 
 
-	App->cutscenemanager->StartCutscene(1);
+	
 
 
 	//GuiImage* title = App->gui->CreateImage(iPoint(0, 0), &title_rec, false, AddGuiTo::none);
@@ -91,6 +91,7 @@ bool S_Village::Start()
 			}
 		}
 	}
+	App->cutscenemanager->StartCutscene(1);
 	LOG("World Open");
 	return false;
 }
