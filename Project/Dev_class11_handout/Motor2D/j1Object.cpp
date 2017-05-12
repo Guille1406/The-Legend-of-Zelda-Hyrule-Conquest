@@ -776,7 +776,7 @@ Object * j1Object::CreateNPC(pugi::xml_node object, int height)
 			temp_npc.object_animation.PushBack(temp_fr);
 		}		
 		temp_npc.texture_rect = { 254,7,32,58 };
-		temp_npc.dialogue_id_npc = DialogueID::npc_1_with_link_dialogue;
+		temp_npc.dialogue_id_npc = DialogueID::saved_game_dialogue;
 	}
 	else {
 		temp_npc.npc_type = NPC_Type::npc_none;
@@ -1223,6 +1223,30 @@ bool Entity::MoveTo(int x, int y)
 	/*collider->rect.x = pos.x;
 	collider->rect.y = pos.y;*/
 
+	return ret;
+}
+
+bool j1Object::Load(pugi::xml_node &node)
+{
+	bool ret = false;
+	if (node != nullptr) {
+
+		ret = true;
+	}
+	return ret;
+}
+
+bool j1Object::Save(pugi::xml_node &node) const
+{
+	/*iPoint Pos_but = button->Getpos();
+	temp.append_attribute("x").set_value(Pos_but.x);
+	temp.append_attribute("y").set_value(Pos_but.y);*/
+	bool ret = false;
+	pugi::xml_node temp = node.append_child("player_save");
+	if (node != nullptr) {
+
+		ret = true;
+	}
 	return ret;
 }
 

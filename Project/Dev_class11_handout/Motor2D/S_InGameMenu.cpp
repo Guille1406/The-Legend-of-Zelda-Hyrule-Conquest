@@ -122,7 +122,14 @@ void S_InGameMenu::OnGui(Gui* ui, GuiEvent event)
 	}
 	if ((ui == (Gui*)loadcheckpoint) && (event == GuiEvent::mouse_lclk_down))
 	{
-		//By now this do nothing
+		App->player->paused = !App->player->paused;
+		App->enemy->paused = !App->enemy->paused;
+		App->collision->paused = !App->collision->paused;
+		App->pathfinding->paused = !App->pathfinding->paused;
+		App->scene->Hide();
+		App->particlemanager->Enable();
+		App->startmenuback->Freeze(true);
+		App->LoadGameModules("save_modules.xml");
 	}
 	if ((ui == (Gui*)options) && (event == GuiEvent::mouse_lclk_down))
 	{

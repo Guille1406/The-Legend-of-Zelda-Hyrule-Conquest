@@ -178,12 +178,12 @@ bool j1CutSceneManager::Update(float dt)
 
 bool j1CutSceneManager::Load(pugi::xml_node &)
 {
-	return false;
+	return true;
 }
 
 bool j1CutSceneManager::Save(pugi::xml_node &) const
 {
-	return false;
+	return true;
 }
 
 //Set to active the correct cutscene

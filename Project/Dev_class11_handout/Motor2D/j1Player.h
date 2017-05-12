@@ -15,6 +15,11 @@ class Character;
 
 class j1Player :public j1Module {
 public:
+	
+	j1Player() {
+		name = "player";
+	}
+	~j1Player() {};
 	bool Awake(pugi::xml_node&);
 	bool Start();
 	bool PreUpdate();
@@ -29,6 +34,9 @@ public:
 	void OnCollision(Collider* collider1, Collider* collider2);
 	void EndCollision(Collider* collider1, Collider* collider2);
 	void StartCollision(Collider* collider1, Collider* collider2);
+
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
 
 public:
 	

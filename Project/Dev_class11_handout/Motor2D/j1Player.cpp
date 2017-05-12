@@ -819,4 +819,45 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 
 }
 
+bool j1Player::Load(pugi::xml_node &node)
+{
+	bool ret = false;
+	if (node != nullptr) {
+		pugi::xml_node temp = node.child("player_save");
+		App->player->Link->pos.x = temp.attribute("Link_pos_x").as_int();
+		App->player->Link->pos.y = temp.attribute("Link_pos_y").as_int();
+
+		App->player->Zelda->pos.x = temp.attribute("Zelda_pos_x").as_int();
+		App->player->Zelda->pos.y = temp.attribute("Zelda_pos_y").as_int();
+		int paco= temp.attribute("save_id_scene").as_int();
+		Scene_ID temp_scene = (Scene_ID)temp.attribute("save_id_scene").as_int();
+		App->scene->ChangeScene(temp_scene);
+	
+		ret = true;
+	}
+	return ret;
+}
+
+bool j1Player::Save(pugi::xml_node &node) const
+{
+	bool ret = false;
+	if (node != nullptr) {
+		pugi::xml_node temp = node.append_child("player_save");
+		temp.append_attribute("Link_pos_x").set_value(App->player->Link->pos.x);
+		temp.append_attribute("Link_pos_y").set_value(App->player->Link->pos.y);
+
+		temp.append_attribute("Zelda_pos_x").set_value(App->player->Zelda->pos.x);
+		temp.append_attribute("Zelda_pos_y").set_value(App->player->Zelda->pos.y);
+
+		temp.append_attribute("save_id_scene").set_value(App->scene->GetActiveScene()->scene_name);
+
+		temp.append_attribute("heart_containers").set_value(App->player->hearts_containers_test_purpose);
+
+		temp.append_attribute("heart_players").set_value(App->player->half_hearts_test_purpose);
+
+		ret = true;
+	}
+	return ret;
+}
+
 

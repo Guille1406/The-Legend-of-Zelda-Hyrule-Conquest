@@ -408,7 +408,9 @@ void j1App::LoadGameModules(const char* file)
 	// from the "GetSaveGames" list
 	want_to_load = true;
 	WantTo_SaveLoadType = SaveLoadType::Module;
-	load_game = ("%s%s", fs->GetSaveDirectory(), file);
+	std::string file_str = file;
+	std::string save_dir_str = fs->GetSaveDirectory();
+	load_game = save_dir_str + file_str;
 }
 
 // ---------------------------------------
@@ -539,7 +541,7 @@ bool j1App::SaveLoadIterate(pugi::xml_node& root)
 			if (want_to_save)
 				ret = (*item)->Save(root.append_child((*item)->name.c_str()));
 			else if (want_to_load)
-				ret = (*item)->Load(root.append_child((*item)->name.c_str()));
+				ret = (*item)->Load(root.child((*item)->name.c_str()));
 			else
 				ret = false;
 		}
@@ -557,7 +559,7 @@ bool j1App::SaveLoadIterate(pugi::xml_node& root)
 				if (want_to_save)
 					ret = (*item)->Save(root.append_child((*item)->scene_str.c_str()));
 				else if (want_to_load)
-					ret = (*item)->Load(root.append_child((*item)->scene_str.c_str()));
+					ret = (*item)->Load(root.child((*item)->scene_str.c_str()));
 				else
 					ret = false;
 			}
@@ -576,7 +578,7 @@ bool j1App::SaveLoadIterate(pugi::xml_node& root)
 				if (want_to_save)
 					ret = (*item)->Save(root.append_child((*item)->scene_str.c_str()));
 				else if (want_to_load)
-					ret = (*item)->Load(root.append_child((*item)->scene_str.c_str()));
+					ret = (*item)->Load(root.child((*item)->scene_str.c_str()));
 				else
 					ret = false;
 			}

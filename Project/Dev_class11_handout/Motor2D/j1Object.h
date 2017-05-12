@@ -10,6 +10,21 @@
 class Enemy;
 
 
+struct navi_save {
+	int link_containters = 0;
+	int link_hearts = 0;
+	Scene_ID id_scene = Scene_ID::NullScene;
+	iPoint Link_Pos = { 0,0 };
+	iPoint Zelda_Pos = { 0,0 };
+	bool blocks_out_save = false;
+	bool heart_1_picked = false;
+	bool heart_2_picked = false;
+	bool heart_3_picked = false;
+	bool heart_4_picked = false;
+	std::vector<bool>cutscenes_showed;
+
+};
+
 enum objectType {
 	chest,
 	giant_chest,
@@ -85,7 +100,7 @@ class j1Object : public j1Module {
 
 public:
 	j1Object() {
-		
+		name = "objects";
 
 	
 	};
@@ -134,11 +149,14 @@ public:
 	void OnCollision(Collider* collider1, Collider* collider2);
 	void EndCollision(Collider* collider1, Collider* collider2);
 	virtual Entity* GetEntityFromId(EntityType_Cutscene ent);
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
+
 public: 
 	std::vector<Object*> V_Objects;
 	SDL_Texture* npc_objects_tex = nullptr;
 	SDL_Texture* objects_texture=	nullptr;
-
+	navi_save save_objects_items;
 };
 
 

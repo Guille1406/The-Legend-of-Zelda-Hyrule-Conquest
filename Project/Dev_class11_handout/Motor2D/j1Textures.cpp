@@ -49,11 +49,12 @@ bool j1Textures::CleanUp()
 	LOG("Freeing textures and Image library");
 
 	std::list<SDL_Texture*>::iterator item = textures.begin();
-	for (; item != textures.cend(); ++item) {
-		UnLoad((*item));
-		//SDL_DestroyTexture((*item));
+	if ((*item) != nullptr) {
+		for (; item != textures.cend(); ++item) {
+			UnLoad((*item));
+			//SDL_DestroyTexture((*item));
+		}
 	}
-
 	textures.clear();
 	IMG_Quit();
 	return true;

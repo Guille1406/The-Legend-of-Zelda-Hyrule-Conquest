@@ -350,6 +350,29 @@ bool j1Scene::CleanUp()
 	return true;
 }
 
+bool j1Scene::Load(pugi::xml_node &node)
+{
+	return true;
+}
+
+bool j1Scene::Save(pugi::xml_node &node) const
+{
+
+	bool ret = false;
+	if (node != nullptr) {
+		pugi::xml_node temp = node.append_child("scene_save");
+		temp.append_attribute("heart_container_1").set_value(App->scene->heart_1);
+		temp.append_attribute("heart_container_2").set_value(App->scene->heart_2);
+		temp.append_attribute("heart_container_3").set_value(App->scene->heart_3);
+		temp.append_attribute("heart_container_4").set_value(App->scene->heart_4);
+
+		temp.append_attribute("blocks_out_music_save").set_value(App->scene->blocks_out);
+
+		ret = true;
+	}
+	return ret;
+}
+
 bool j1Scene::ChangeScene(Scene_ID name)
 {
 	for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend(); ++item)
