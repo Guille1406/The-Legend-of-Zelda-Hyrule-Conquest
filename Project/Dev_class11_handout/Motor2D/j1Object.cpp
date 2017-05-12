@@ -58,6 +58,12 @@ bool j1Object::Update(float)
 			Bush* temp_bush = (Bush*)V_Objects[i];
 			temp_bush->texture_rect = temp_bush->object_animation.GetCurrentFrame().rect;
 		}
+		if (V_Objects[i]->type == objectType::npc) {
+			if (((O_NPC*)V_Objects[i])->npc_type==NPC_Type::npc_navi) {
+				O_NPC* temp_navi = (O_NPC*)V_Objects[i];
+				temp_navi->texture_rect = temp_navi->object_animation.GetCurrentFrame().rect;
+			}
+		}
 	}
 
 
@@ -120,6 +126,8 @@ void j1Object::Draw(int height)
 				App->render->Blit(npc_objects_tex, object->rect.x, object->rect.y - object->rect.h/2, &object->texture_rect);
 			if (((O_NPC*)object)->npc_type == NPC_Type::npc_neutral)
 				App->render->Blit(npc_objects_tex, object->rect.x, object->rect.y - object->rect.h, &object->texture_rect);
+			if (((O_NPC*)object)->npc_type == NPC_Type::npc_navi)
+				App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
 		}
 		else if (object->active && object->logic_height == height)
 			App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
@@ -753,6 +761,20 @@ Object * j1Object::CreateNPC(pugi::xml_node object, int height)
 	}
 	else if (npc_type_string == "neutral") {
 		temp_npc.npc_type = NPC_Type::npc_neutral;
+		temp_npc.texture_rect = { 254,7,32,58 };
+		temp_npc.dialogue_id_npc = DialogueID::npc_1_with_link_dialogue;
+	}
+	else if (npc_type_string == "navi") {
+		temp_npc.npc_type = NPC_Type::npc_navi;
+		//479,127,48,64 
+		//527,127,48,64 (479+48*1)
+		//575,127,48,64 (479+48*2)
+		for (int i = 0; i < 4; i++) {
+			Frame temp_fr;
+			temp_fr.pivot = { 0,0 };
+			temp_fr.rect={ (479 + 48 * i ),127,48,64};
+			temp_npc.object_animation.PushBack(temp_fr);
+		}		
 		temp_npc.texture_rect = { 254,7,32,58 };
 		temp_npc.dialogue_id_npc = DialogueID::npc_1_with_link_dialogue;
 	}
