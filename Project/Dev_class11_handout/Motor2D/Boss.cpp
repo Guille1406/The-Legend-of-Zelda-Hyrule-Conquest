@@ -131,7 +131,7 @@ void Boss::GetEvent()
 			}
 		}
 	}
-	else if(can_attack) {
+	if((dist_link < 300 || dist_zelda < 300) &&can_attack) {
 		switch (actual_phase) {
 		case boss_phase_1:
 			if (dist_link <= 300 && dist_link >120 && state != boss_attack_zelda)
@@ -151,9 +151,9 @@ void Boss::GetEvent()
 			break;
 		case boss_phase_3:
 			
-				if (dist_link < 300 && dist_link >120 && dist_zelda> 300 && !im_attacking_laser)
+				if (dist_link < 300 && dist_link >120 && (dist_zelda> 300|| dist_zelda<120) && !im_attacking_laser)
 					state = boss_attack_link;
-				else if (dist_link > 300 && dist_zelda < 300 && dist_zelda >120 && !im_attacking)
+				else if ((dist_link > 300 || dist_link< 120) && dist_zelda < 300 && dist_zelda >120 && !im_attacking)
 					state = boss_attack_zelda;
 				else if(dist_link < 300 && dist_link >120 && dist_zelda < 300 && dist_zelda >120)
 					state = boss_attack_both;
