@@ -34,7 +34,7 @@ enum DialogueID {
 	castle_yard_5_dialogue,
 
 	//NPC Dialogue
-	ric_with_link_dialogue=24,
+	ric_with_link_dialogue,
 	ric_with_zelda_dialogue,
 	npc_1_with_link_dialogue,
 	npc_1_with_zelda_dialogue,
