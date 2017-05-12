@@ -279,6 +279,15 @@ bool j1CutSceneManager::CleanUp()
 	return true;
 }
 
+bool j1CutSceneManager::Is_Cutscene_Active()
+{
+	bool ret = false;
+	if (active_cutscene!=nullptr) {
+		ret = true;
+	}
+	return ret;
+}
+
 //Check if a cutscene is being reproduced
 bool j1CutSceneManager::CutsceneReproducing() const
 {

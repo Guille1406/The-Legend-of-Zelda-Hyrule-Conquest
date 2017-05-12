@@ -302,14 +302,14 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
-
+	bool Is_Cutscene_Active();
 	//Check if a cutscene is being reproduced
 	bool CutsceneReproducing() const;
-
+	std::vector<bool> bool_done_cutscenes;
 private:
 
 	pugi::xml_node LoadXML(pugi::xml_document& config_file, std::string file) const;
-	std::vector<bool> bool_done_cutscenes;
+	
 	std::list<std::string> paths;			//Container with names of all paths of the cutscenes (in order)
 	Cutscene* active_cutscene = nullptr;	//To know wich cutscene is active
 };
