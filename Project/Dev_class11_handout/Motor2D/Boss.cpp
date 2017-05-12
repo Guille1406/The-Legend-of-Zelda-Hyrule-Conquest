@@ -61,7 +61,16 @@ Legs::~Legs()
 
 void Boss::Draw(int height)
 {
+	if(height == 0 && state != boss_state::boss_damaged)
+		App->render->Blit(boss_atlas, pos.x, pos.y + 32, &boss_shadow);
+	if(attacking_foot)
+	if (height == 0 && attacking_foot->actual_foot_state != foot_state::after_attack) {
+		if (attacking_foot->actual_foot_state == foot_state::following || attacking_foot->actual_foot_state == foot_state::waiting_for_attack) {
+			App->render->Blit(boss_atlas, attacking_foot->pos.x - 10, attacking_foot->pos.y + 96, &foot_shadow);
+		}
+	}
 	if(height == logic_height)
+
 	App->render->Blit(boss_atlas, pos.x, pos.y, &boss_rect);
 	
 	if (actual_phase == boss_phase::boss_phase_2) {
