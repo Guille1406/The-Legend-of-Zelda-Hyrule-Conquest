@@ -237,6 +237,7 @@ bool j1Scene::Start()
 
 	scene_pointer = new S_CastleCutScene;
 	scene_list.push_back(scene_pointer);
+	world_scenes_vector.push_back(scene_pointer);
 	(*scene_list.back()).scene_name = Scene_ID::startcutscenegame;
 
 	//XML congig read

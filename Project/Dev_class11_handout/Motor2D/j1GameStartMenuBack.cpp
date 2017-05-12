@@ -14,6 +14,7 @@
 #include "GuiImage.h"
 #include "GuiButton.h"
 #include "j1InputManager.h"
+#include "j1CutSceneManager.h"
 
 j1GameStartMenuBackground::j1GameStartMenuBackground()
 {
@@ -55,7 +56,7 @@ bool j1GameStartMenuBackground::Start()
 // Called each loop iteration
 bool j1GameStartMenuBackground::PreUpdate()
 {
-	if (App->scene->AnyWorldActive())
+	if (App->scene->AnyWorldActive() && !App->cutscenemanager->CutsceneReproducing())
 	{
 		if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || (App->input->GetControllerButton(0, 6) == KEY_DOWN)) {
 			ingamenushow = !ingamenushow;

@@ -302,7 +302,6 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
-	bool Is_Cutscene_Active();
 	//Check if a cutscene is being reproduced
 	bool CutsceneReproducing() const;
 	std::vector<bool> bool_done_cutscenes;
