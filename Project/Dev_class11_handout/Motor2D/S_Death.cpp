@@ -1,7 +1,8 @@
 #include "S_Death.h"
 #include "j1Window.h"
 #include "j1Render.h"
-
+#include"j1GameStartMenuBack.h"
+#include"Particle.h"
 S_Death::S_Death()
 {
 	scene_str = "Death";
@@ -70,7 +71,10 @@ void S_Death::OnGui(Gui* ui, GuiEvent event)
 {
 	if ((ui == (Gui*)DeathTryAgain) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->ChangeScene(Scene_ID::mainmenu);
+		App->startmenuback->Freeze(true);
+		App->LoadGameModules("save_modules.xml");
+		//App->scene->Hide();
+		App->particlemanager->Enable();
 	}
 	if ((ui == (Gui*)DeathMainMenu) && (event == GuiEvent::mouse_lclk_down))
 	{

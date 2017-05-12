@@ -22,7 +22,7 @@
 #include "O_Bridge.h"
 #include "O_HeartContainer.h"
 #include "O_Bush.h"
-
+#include"j1InputManager.h"
 #include "O_NPC.h"
 
 #include "O_ElectricBall.h"
@@ -752,7 +752,7 @@ Object * j1Object::CreateNPC(pugi::xml_node object, int height)
 	if (npc_type_string == "masked") {
 		temp_npc.npc_type = NPC_Type::npc_enmasked;
 		temp_npc.texture_rect = { 70,0,46,66 };
-		temp_npc.dialogue_id_npc = DialogueID::ric_with_link_dialogue;
+		temp_npc.dialogue_id_npc = DialogueID::house_3_dialogue;
 	}
 	else if (npc_type_string == "ric") {
 		temp_npc.npc_type = NPC_Type::npc_ric;
@@ -1033,7 +1033,7 @@ void j1Object::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == npc && collider2->type == collider_link) {
 		O_NPC* temp = (O_NPC*)collider1->parent;
 		if (temp!=nullptr) {
-			if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN) {
+			if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || App->inputM->EventPressed(INPUTEVENT::ATTACK, 1) == EVENTSTATE::E_DOWN && !App->player->Link->im_lifting) {
 				temp->Active();
 			}
 		}

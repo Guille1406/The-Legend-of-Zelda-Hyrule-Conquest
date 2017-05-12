@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="220" height="150" tilewidth="16" tileheight="16" nextobjectid="377">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="220" height="150" tilewidth="16" tileheight="16" nextobjectid="378">
  <tileset firstgid="1" name="overworld_tileset" tilewidth="16" tileheight="16" tilecount="3328" columns="52">
   <image source="overworld_tileset.png" width="839" height="1024"/>
   <terraintypes>
@@ -1458,6 +1458,12 @@
   <object id="375" x="192" y="1648" width="32" height="32">
    <properties>
     <property name="type" value="block"/>
+   </properties>
+  </object>
+  <object id="377" x="2848" y="128" width="32" height="32">
+   <properties>
+    <property name="npc_type" value="navi"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
  </objectgroup>
