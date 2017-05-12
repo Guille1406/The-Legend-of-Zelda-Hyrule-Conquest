@@ -353,7 +353,7 @@
     </cutscene>
     
     <!-- castle_doors -->
-    <cutscene enum_value = "18">
+    <cutscene enum_value = "17">
       <!-- Step 1 -->
       <!-- Link y Zelda llegan al castillo, Zelda llega con cara confundida. -->
       <!-- Zelda preocupada- -->
@@ -384,7 +384,7 @@
     </cutscene>
 
     <!-- castle_yard_1 -->
-    <cutscene enum_value = "19">
+    <cutscene enum_value = "18">
       <!-- Step 1 -->
       <!-- Link y Zelda entran en la sala, Dark Ogity les espera en el centro de esta con la trifuerza: -->
       <!-- Ogity- -->
@@ -415,7 +415,7 @@
     </cutscene>
 
     <!-- castle_yard_2 -->
-    <cutscene enum_value = "20">
+    <cutscene enum_value = "19">
       <!-- Step 1 -->
       <!-- Dark Ogity permanece en el suelo, derrotado: -->
       <!-- Ogity- -->
@@ -426,7 +426,7 @@
     </cutscene>
 
     <!-- castle_yard_3 -->
-    <cutscene enum_value = "21">
+    <cutscene enum_value = "20">
       <!-- Step 1 -->
       <!-- Ogity activa la trifuerza para abrir la puerta(Png triforce parriba, pantalla blanco): -->
       <!-- Zelda preocupada- -->
@@ -442,7 +442,7 @@
     </cutscene>
 
     <!-- castle_yard_4 -->
-    <cutscene enum_value = "22">
+    <cutscene enum_value = "21">
       <!-- Step 1 -->
       <!-- Ya no esta dark ogity y esta el boss. -->
       <!-- Darkest Ogity- -->
@@ -459,7 +459,7 @@
     </cutscene>
 
     <!-- castle_yard_5 -->
-    <cutscene enum_value = "23">
+    <cutscene enum_value = "22">
       <!-- Step 1 -->
       <!-- Link se adelanta y pone cara confiada. -->
       <!-- Zelda confiada- -->
@@ -474,7 +474,7 @@
   <!-- NPC -->
   <NPCs>
     <!-- Ric_with_link -->
-    <npc enum_value = "24">
+    <npc enum_value = "23">
       <!-- Step 1 -->
       <step speaker = "ric" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_expression ="" listener_expression ="">
 	      <line>Suspended! Ohh sorry, it's a bad habit I have, don't pay attention to it. Hey</line>
@@ -485,7 +485,7 @@
     </npc>
     
     <!-- Ric_with_zelda -->
-    <npc enum_value = "25">
+    <npc enum_value = "24">
       <!-- Step 1 -->
       <step speaker = "ric" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_expression ="" listener_expression ="">
 	      <line>Suspended! Ohh sorry, it's a bad habit I have, don't pay attention to it. Hey</line>
@@ -496,7 +496,7 @@
     </npc>
     
     <!-- NPC 1_with_link -->
-    <npc enum_value = "26">
+    <npc enum_value = "25">
       <!-- Step 1 -->
       <step speaker = "item_nullinterlucutor" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_expression ="" listener_expression ="">
 	      <line>I'm just an NPC, keep moving, I don't have more lines of dialogue.</line>
@@ -504,7 +504,7 @@
     </npc>
     
     <!-- NPC 1_with_zelda -->
-    <npc enum_value = "27">
+    <npc enum_value = "26">
       <!-- Step 1 -->
       <step speaker = "item_nullinterlucutor" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_expression ="" listener_expression ="">
 	      <line>I'm just an NPC, keep moving, I don't have more lines of dialogue.</line>
@@ -512,7 +512,7 @@
     </npc>
         
     <!-- NPC 2_with_link -->
-    <npc enum_value = "28">
+    <npc enum_value = "27">
       <!-- Step 1 -->
       <step speaker = "item_nullinterlucutor" listener = "link" speaker_pos = "left" listener_pos = "right" speaker_expression ="" listener_expression ="">
 	      <line>Do you know wich kingdom is the one wich greets you more?....</line>
@@ -540,7 +540,7 @@
     </npc>
   
     <!-- NPC 2_with_zelda -->
-    <npc enum_value = "29">
+    <npc enum_value = "28">
       <!-- Step 1 -->
       <step speaker = "item_nullinterlucutor" listener = "zelda" speaker_pos = "left" listener_pos = "right" speaker_expression ="" listener_expression ="">
 	      <line>Do you know wich kingdom is the one wich greets you more?....</line>
@@ -571,7 +571,7 @@
   <!-- Item -->
   <Items>
     <!-- SmallChest -->
-    <item enum_value = "30">
+    <item enum_value = "29">
       <step>
 	    <line>You need an small key.</line>
 	  </step>
