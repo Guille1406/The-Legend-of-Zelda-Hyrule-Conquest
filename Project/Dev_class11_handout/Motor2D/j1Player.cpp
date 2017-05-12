@@ -107,9 +107,7 @@ bool j1Player::PreUpdate()
 }
 
 bool j1Player::Update(float dt)
-{
-	bool paco = App->cutscenemanager->Is_Cutscene_Active();
-	
+{	
 	if (!paused) {
 		Link->can_fall = true;
 		Zelda->can_fall = true;
