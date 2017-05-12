@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="88" height="27" tilewidth="16" tileheight="16" nextobjectid="7">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="88" height="27" tilewidth="16" tileheight="16" nextobjectid="14">
  <tileset firstgid="1" name="tileset casa" tilewidth="16" tileheight="16" tilecount="1196" columns="46">
   <image source="tileset casa.png" width="739" height="416"/>
  </tileset>
@@ -225,6 +225,12 @@
     <property name="type" value="warp"/>
     <property name="x" type="int" value="152"/>
     <property name="y" type="int" value="68"/>
+   </properties>
+  </object>
+  <object id="13" x="944" y="176" width="32" height="32">
+   <properties>
+    <property name="npc_type" value="ric"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
  </objectgroup>
