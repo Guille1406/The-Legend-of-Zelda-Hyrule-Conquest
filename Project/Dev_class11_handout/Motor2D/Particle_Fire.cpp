@@ -115,8 +115,8 @@ void P_Fire::MoveParticles()
 
 void P_Fire::Update_position(iPoint* element)
 {
-	pos.x = element->x - App->render->camera.x / App->win->GetScale();
-	int scale = App->win->GetScale();
-	int temp = App->render->camera.y / scale;
-	pos.y = element->y - temp;
+	pos.x = element->x ;
+	//int scale = App->win->GetScale();
+	//int temp = App->render->camera.y / scale;
+	pos.y = element->y ;
 }

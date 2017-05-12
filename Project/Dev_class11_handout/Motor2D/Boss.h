@@ -105,6 +105,11 @@ public:
 	iPoint eye_3 = { pos.x + 220,pos.y + 98 };
 	iPoint eye_4 = { pos.x + 114,pos.y + 211 };
 
+	iPoint particles_eye_1 = { eye_1.x + 10, eye_1.y };
+	iPoint particles_eye_2 = { eye_2.x + 10, eye_2.y };
+	iPoint particles_eye_3 = { eye_3.x + 10, eye_3.y };
+	iPoint particles_eye_4 = { eye_4.x + 10, eye_4.y };
+
 	SDL_Rect eye_1_tex = { 0,0,0,0 };
 	SDL_Rect eye_2_tex = { 0,0,0,0 };
 	SDL_Rect eye_3_tex = { 0,0,0,0 };

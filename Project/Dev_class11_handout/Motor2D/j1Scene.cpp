@@ -24,6 +24,7 @@
 #include "j1GameStartMenuBack.h"
 #include "S_World.h"
 #include "S_Lake.h"
+#include "ParticleManager.h"
 
 #include "S_Temporal_Boss_Room.h"
 #include "S_ColourPuzzle.h"
@@ -264,8 +265,11 @@ bool j1Scene::Start()
 		for (std::list<MainScene*>::iterator item = scene_list.begin(); item != scene_list.cend() && ret == true; ++item)
 		{
 			ret = (*item)->Awake(config.child((*item)->scene_str.c_str()));//send here xml for gui text
-			if ((*item)->scene_name == Scene_ID::introvideo)
+			if ((*item)->scene_name == Scene_ID::tempbossroom)
 			{
+				App->player->Link->pos ={ 102 * 16,108 * 16 };
+				App->player->Zelda->pos = { 102 * 16,108 * 16 }; 
+				App->particlemanager->Enable();
 				main_active_scene = (*item);
 				sub_active_scene = (*item);
 			}

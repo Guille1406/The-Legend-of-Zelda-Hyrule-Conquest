@@ -99,6 +99,12 @@ void Boss::UpdateLegs()
 	eye_3 = { pos.x + 220,pos.y + 98 };
 	eye_4 = { pos.x + 114,pos.y + 211 };
 
+
+	particles_eye_1 = { eye_1.x + 10, eye_1.y };
+	particles_eye_2 = { eye_2.x + 10, eye_2.y };
+	particles_eye_3 = { eye_3.x + 10, eye_3.y };
+	particles_eye_4 = { eye_4.x + 10, eye_4.y };
+
 	int x = 0, y = 0;
 	//UPDATE PIVOTS
 	legs->foot1->UpdatePivots();
@@ -171,6 +177,8 @@ void Boss::GetEvent()
 
 void Boss::ExecuteEvent()
 {
+	//App->particlemanager->Group_Explosion.push_back(new P_Explosion(nullptr, nullptr, { attacking_foot->pos.x + 20,attacking_foot->pos.y + 20 }, SDL_Rect{ 6,6,2,2 }, Explosion_Type::CIRCLE, iPoint(2, 2), iPoint(5, 5), fPoint(100, 100), Part_Direction::Part_Direc_RANDOM, 22, 1));
+	
 	if (eye_live <= 0) {
 		if (actual_phase == boss_phase::boss_phase_1 && !can_recover) {
 			actual_phase = boss_phase::boss_phase_2;
@@ -433,8 +441,8 @@ void Boss::Attack(Character* focused_character)
 				Collider* temp_collider = App->collision->AddCollider({ (int)f_foot_pos.x,(int)f_foot_pos.y,64,64 }, COLLIDER_TYPE::collider_boss_hit, attacking_foot, App->enemy);
 				temp_collider->logic_height = 0;
 				temp_collider->to_delete = true;
-				App->particlemanager->Group_Explosion.push_back(new P_Explosion(nullptr, nullptr, {attacking_foot->pos.x,attacking_foot->pos.y + 10 }, SDL_Rect{ 0,4,2,0 }, Explosion_Type::SEMICIRCLE_UPPER, iPoint(20, 20), iPoint(10, 2), fPoint(60, 60), Part_Direction::Part_Direc_RANDOM, 22, 4));
-				App->particlemanager->Group_Explosion.push_back(new P_Explosion(nullptr, nullptr, { attacking_foot->pos.x,attacking_foot->pos.y  + 40}, SDL_Rect{ 0,4,2,0 }, Explosion_Type::SEMICIRCLE_LOWER, iPoint(20, 20), iPoint(10, 2), fPoint(60, 60), Part_Direction::Part_Direc_RANDOM, 22, 4));
+				App->particlemanager->Group_Explosion.push_back(new P_Explosion(nullptr, nullptr, {attacking_foot->pos.x + 20,attacking_foot->pos.y + 20 }, SDL_Rect{ 6,6,2,2 }, Explosion_Type::CIRCLE, iPoint(2, 2), iPoint(5, 5), fPoint(100, 100), Part_Direction::Part_Direc_RANDOM, 22, 1));
+				//App->particlemanager->Group_Explosion.push_back(new P_Explosion(nullptr, nullptr, { attacking_foot->pos.x,attacking_foot->pos.y  + 40}, SDL_Rect{ 0,4,2,0 }, Explosion_Type::SEMICIRCLE_LOWER, iPoint(20, 20), iPoint(10, 2), fPoint(60, 60), Part_Direction::Part_Direc_RANDOM, 22, 4));
 
 				attacking_foot->CreateFootColliders();
 			}
@@ -661,6 +669,14 @@ Boss::Boss()
 		eye_4_tex = { 252,0,14,13 };
 
 		
+		App->particlemanager->Group_Fire.push_back(new P_Fire(nullptr, &particles_eye_1, particles_eye_1, SDL_Rect{ 8,0,2,0 }, iPoint(6, 2), iPoint(6, 6), fPoint(0, -60), Part_Direction::Part_Direc_NULL, 120, 1, true, Wind::Part_Wind_NULL));
+		App->particlemanager->Group_Fire.push_back(new P_Fire(nullptr, &particles_eye_2, particles_eye_2, SDL_Rect{ 8,0,2,0 }, iPoint(6, 2), iPoint(6, 6), fPoint(0, -60), Part_Direction::Part_Direc_NULL, 120, 1, true, Wind::Part_Wind_NULL));
+		App->particlemanager->Group_Fire.push_back(new P_Fire(nullptr, &particles_eye_3, particles_eye_3, SDL_Rect{ 8,0,2,0 }, iPoint(6, 2), iPoint(6, 6), fPoint(0, -60), Part_Direction::Part_Direc_NULL, 120, 1, true, Wind::Part_Wind_NULL));
+		App->particlemanager->Group_Fire.push_back(new P_Fire(nullptr, &particles_eye_4, particles_eye_4, SDL_Rect{ 8,0,2,0 }, iPoint(6, 2), iPoint(6, 6), fPoint(0,-60), Part_Direction::Part_Direc_NULL, 120, 1, true, Wind::Part_Wind_NULL));
+
+
+		//App->particlemanager->Group_Fire.push_back((new P_Fire(nullptr, &App->player->Link->pos, App->player->Link->pos, SDL_Rect{ 0,6,2,0 }, iPoint(200,200), iPoint(5000, 5000), fPoint(200, 200), Part_Direction::Part_Direc_UP, 20, 4, true, Wind::Part_Wind_NULL)));
+		
 }
 
 Boss::~Boss()
@@ -689,6 +705,7 @@ Boss::~Boss()
 
 void Foot::Draw()
 {
+	
 	int x = 0;
 	int y = 0;
 	fPoint point1 = { 0,0 };
