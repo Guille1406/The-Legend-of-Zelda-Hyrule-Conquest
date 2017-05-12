@@ -41,6 +41,8 @@ enum DialogueID {
 	npc_2_with_link_dialogue,
 	npc_2_with_zelda_dialogue,
 
+	saved_game_dialogue,
+
 	NullID_dialogue
 };
 
