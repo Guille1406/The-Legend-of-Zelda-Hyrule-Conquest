@@ -83,7 +83,14 @@ bool S_Village::Start()
 	App->render->camera.y = 0;
 
 	
-	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
+	if (App->scene->blocks_out) {
+		for (int i = 0; i < App->object->V_Objects.size(); i++) {
+			if (App->object->V_Objects[i]->type == objectType::block) {
+				App->object->DeleteCollider(*App->object->V_Objects[i]);
+				App->object->V_Objects[i]->active = false;
+			}
+		}
+	}
 	LOG("World Open");
 	return false;
 }

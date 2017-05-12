@@ -6,6 +6,11 @@
 #include "j1Player.h"
 #include "j1Object.h"
 #include "j1Scene.h"
+#include "ParticleManager.h"
+#include "Particle_Follow.h"
+#include "Particle_Fire.h"
+#include "Particle_Explosion.h"
+#include "Particle_Firework.h"
 
 Legs::Legs(const Legs& obj) {
 	
@@ -428,6 +433,9 @@ void Boss::Attack(Character* focused_character)
 				Collider* temp_collider = App->collision->AddCollider({ (int)f_foot_pos.x,(int)f_foot_pos.y,64,64 }, COLLIDER_TYPE::collider_boss_hit, attacking_foot, App->enemy);
 				temp_collider->logic_height = 0;
 				temp_collider->to_delete = true;
+				App->particlemanager->Group_Explosion.push_back(new P_Explosion(nullptr, nullptr, {attacking_foot->pos.x,attacking_foot->pos.y + 10 }, SDL_Rect{ 0,4,2,0 }, Explosion_Type::SEMICIRCLE_UPPER, iPoint(20, 20), iPoint(10, 2), fPoint(60, 60), Part_Direction::Part_Direc_RANDOM, 22, 4));
+				App->particlemanager->Group_Explosion.push_back(new P_Explosion(nullptr, nullptr, { attacking_foot->pos.x,attacking_foot->pos.y  + 40}, SDL_Rect{ 0,4,2,0 }, Explosion_Type::SEMICIRCLE_LOWER, iPoint(20, 20), iPoint(10, 2), fPoint(60, 60), Part_Direction::Part_Direc_RANDOM, 22, 4));
+
 				attacking_foot->CreateFootColliders();
 			}
 

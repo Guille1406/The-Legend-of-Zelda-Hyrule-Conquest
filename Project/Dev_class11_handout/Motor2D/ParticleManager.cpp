@@ -64,7 +64,7 @@ bool ParticleManager::Update(float dt)
 	//EXPLOSIONS
 	if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
 	{
-		Group_Explosion.push_back(new P_Explosion(nullptr, nullptr, App->input->GetMousePosition(), SDL_Rect{ 0,4,2,0 }, Explosion_Type::CROSS, iPoint(20, 20), iPoint(10, 2), fPoint(60, 60), Part_Direction::Part_Direc_NULL, 21, 4));
+		Group_Explosion.push_back(new P_Explosion(nullptr, nullptr, { App->player->Link->pos.x,App->player->Link->pos.y }, SDL_Rect{ 0,4,2,0 }, Explosion_Type::CROSS, iPoint(20, 20), iPoint(10, 2), fPoint(60, 60), Part_Direction::Part_Direc_NULL, 21, 4));
 	}
 	if (App->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN)
 	{
