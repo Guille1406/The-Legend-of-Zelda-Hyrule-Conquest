@@ -649,6 +649,9 @@ bool Cutscene::LoadChangeScene(pugi::xml_node& node)
 			id = Scene_ID::house_3;
 		}
 
+		else if (id_string == "house_1") {
+			id = Scene_ID::house_1;
+		}
 
 		else if (id_string == "top_of_the_mountain") {
 			id = Scene_ID::top_of_the_mountain;
@@ -1106,7 +1109,7 @@ void CS_Step::DoChangeScene_CS()
 		CS_ChangeScene* tmp = (CS_ChangeScene*)element;
 		switch (tmp->id_newscene) {
 
-		case Scene_ID::house_3:
+		case Scene_ID::house_1:
 			App->player->Link->pos = {100,300};
 			App->player->Zelda->pos = {160,300};
 			break;

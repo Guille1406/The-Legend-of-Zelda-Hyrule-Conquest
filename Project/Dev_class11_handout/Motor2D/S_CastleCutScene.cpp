@@ -79,6 +79,7 @@ bool S_CastleCutScene::Start()
 	App->player->Zelda->logic_height = 0;
 	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
 	App->cutscenemanager->StartCutscene(0);
+	App->SaveGameModules("save_modules.xml");
 	LOG("World Open");
 	return true;
 }

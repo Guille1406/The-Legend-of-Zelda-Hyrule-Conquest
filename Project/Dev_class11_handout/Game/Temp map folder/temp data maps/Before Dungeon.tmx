@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" nextobjectid="81">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" nextobjectid="83">
  <properties>
   <property name="scene" type="int" value="19"/>
  </properties>
  <tileset firstgid="1" name="overworld_tileset" tilewidth="16" tileheight="16" tilecount="3328" columns="52">
-  <image source="../../Temporary Sprites folder/tilesets/overworld_tileset.png" width="839" height="1024"/>
+  <image source="overworld_tileset.png" width="839" height="1024"/>
   <terraintypes>
    <terrain name="GREEN" tile="-1">
     <properties>
@@ -85,10 +85,10 @@
   <tile id="790" terrain="1,0,0,0"/>
  </tileset>
  <tileset firstgid="3329" name="collision tileset" tilewidth="16" tileheight="16" tilecount="13" columns="13">
-  <image source="../../Temporary Sprites folder/tilesets/collision tileset.png" width="221" height="16"/>
+  <image source="collision tileset.png" width="221" height="16"/>
  </tileset>
  <tileset firstgid="3342" name="Forest_tileset" tilewidth="16" tileheight="16" tilecount="440" columns="22">
-  <image source="../../Temporary Sprites folder/tilesets/Forest_tileset.png" width="352" height="320"/>
+  <image source="Forest_tileset.png" width="352" height="320"/>
  </tileset>
  <layer name="Capa de Patrones 1" width="100" height="80">
   <properties>
@@ -1105,6 +1105,12 @@
    <properties>
     <property name="heart" type="int" value="2"/>
     <property name="type" value="container_heart"/>
+   </properties>
+  </object>
+  <object id="81" x="528" y="1136" width="48" height="48">
+   <properties>
+    <property name="npc_type" value="navi"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
  </objectgroup>
