@@ -85,10 +85,7 @@ bool S_TopOfTheMountain::Start()
 
 bool S_TopOfTheMountain::Update()
 {
-	if (App->cutscenemanager->FinishCutscene()) {
-		SDL_Rect r = { 0,0,1280,720 };
-		App->videoplayer->PlayVideo("Top-of-the-mountain-video.ogv",r);
-	}
+	
 	if (!App->player->paused)
 
 		return false;
@@ -97,7 +94,24 @@ bool S_TopOfTheMountain::Update()
 bool S_TopOfTheMountain::PostUpdate()
 {
 
+	static bool cutscene = false;
+	static bool temp = true;
+	if (App->cutscenemanager->FinishCutscene() && temp) {
+		SDL_Rect r = { 0,0,1280,720 };
+		App->videoplayer->video_finished = false;
+		App->videoplayer->PlayVideo("Top-of-the-mountain-video.ogv", r);
+		cutscene = true;
+		temp = false;
 
+	}
+	if (App->videoplayer->video_finished && cutscene) {
+		App->cutscenemanager->StartCutscene(4);
+
+		App->audio->CleanUp();
+		App->audio->Awake(App->config);
+		App->audio->Start();
+		cutscene = false;
+	}
 
 
 

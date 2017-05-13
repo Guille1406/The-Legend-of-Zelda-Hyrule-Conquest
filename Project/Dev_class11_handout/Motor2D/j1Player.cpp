@@ -191,7 +191,7 @@ bool j1Player::PostUpdate()
 			App->player->Zelda->logic_height = 0;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) {
-			App->scene->ChangeScene(Scene_ID::testenemies);
+			App->scene->ChangeScene(Scene_ID::top_of_the_mountain);
 		}
 	}
 

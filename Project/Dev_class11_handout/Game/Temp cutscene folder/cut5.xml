@@ -1,0 +1,60 @@
+<!-- TEST CUTSCENE -->
+
+<Cutscene name="cut5" id="5">
+
+ <!--CUTSCENE ELEMENTS-->
+	<elements>
+		<MAP>
+		</MAP>
+
+    <CHANGESCENES>
+      <changescene n="0" name="path_to_boss" active="false"></changescene>
+    </CHANGESCENES>
+		
+    
+    <NPC>
+      <npc n="0" name="Link" x="820" y="750"  active="true"></npc>
+      <npc n="1" name="Zelda" x="780" y="840"  active="true"></npc>
+    </NPC>
+
+    <IMAGES>
+      <image n="0" name="messenger pixel" x="794" y="650" rectx="116" recty="8" rectw="46" recth="58" active="true" file="cutscenes/cutscene_spritesheet.png"> </image>
+     
+    </IMAGES>
+
+		<TEXTS>
+      <text n="0" name="truth_4_dialogue" active="false"></text>
+      <text n="1" name="truth_5_dialogue" active="false"></text>
+   		</TEXTS>
+
+		<MUSIC>
+		</MUSIC>
+
+		<FX>
+		</FX>
+
+
+	</elements>
+
+ <!--EXECUTE ALL STEPS IN ORDER-->
+
+	<steps>
+
+    <step  n="0" start="0" duration ="-1" input="false">
+      <element name="truth_4_dialogue" action="enable">
+      </element>
+    </step>
+
+
+    <step  n="1" start="-1" duration ="-1" input="false">
+      <element name="truth_5_dialogue" action="enable">
+      </element>
+    </step>
+
+    <step  n="2" start="-1" duration ="-1" input="false">
+      <element name="path_to_boss" action="changescene">
+      </element>
+    </step>
+    
+	</steps>
+</Cutscene>
