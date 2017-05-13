@@ -199,6 +199,7 @@ bool j1DialogueManager::PreUpdate()
 
 bool j1DialogueManager::Update(float dt)
 {
+	/*
 	//Test code
 	//Different dialogues
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
@@ -213,6 +214,7 @@ bool j1DialogueManager::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
 		ResumeActiveDialogue();
 	//Test code end
+	*/
 
 	if (!ActiveDialog->DialogueActive || ActiveDialog->DialoguePaused || App->startmenuback->InGameMenuVisible())
 		return true;
