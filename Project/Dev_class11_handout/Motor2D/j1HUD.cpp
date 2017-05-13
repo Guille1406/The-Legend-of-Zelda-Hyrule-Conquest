@@ -106,7 +106,7 @@ bool j1HUD::Update(float dt)
 	//App->render->Blit(atlas, -App->render->camera.x + item_circles_output - LRbuttonsoffset, -App->render->camera.y + item_circles_output - LRbuttonsoffset, &Link_circle_L, 1.0f, 0, INT_MAX, INT_MAX, false);
 
 	//Blit Zelda circle R
-	App->render->Blit(atlas, -App->render->camera.x + Window_W - Zelda_circle.w - item_circles_output + Zelda_circle.w - Zelda_circle_R.w + LRbuttonsoffset, -App->render->camera.y + item_circles_output - LRbuttonsoffset, &Zelda_circle_R, 1.0f, 0, INT_MAX, INT_MAX, false);
+	//App->render->Blit(atlas, -App->render->camera.x + Window_W - Zelda_circle.w - item_circles_output + Zelda_circle.w - Zelda_circle_R.w + LRbuttonsoffset, -App->render->camera.y + item_circles_output - LRbuttonsoffset, &Zelda_circle_R, 1.0f, 0, INT_MAX, INT_MAX, false);
 	
 	//Blit PlaceLabel
 	if (scene_changed)
