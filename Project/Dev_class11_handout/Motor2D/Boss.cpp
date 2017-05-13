@@ -48,14 +48,15 @@ Legs::Legs(const Legs& obj) {
 
 	foot4 = new Foot(temp_foot);
 
-	
-	
-	
+		
 }
 
 Legs::~Legs()
 {
-	
+	/*delete foot1;
+	delete foot2;
+	delete foot3;
+	delete foot4;*/
 	
 }
 
@@ -173,7 +174,7 @@ void Boss::GetEvent()
 			break;
 		case boss_phase_2:
 			
-				if ((dist_link < dist_zelda || dist_zelda<120) && state != boss_attack_zelda)
+				if ((dist_link <= dist_zelda || dist_zelda<120) && state != boss_attack_zelda)
 					if(dist_link >120)
 					state = boss_attack_link;
 				else if (state != boss_attack_link)
@@ -246,7 +247,15 @@ void Boss::ExecuteEvent()
 			can_attack = false;
 			logic_height = 0;
 		}*/
+		if (state == boss_state::boss_damaged) {
+			iPoint diference_point_zelda = { App->player->Zelda->pos.x - centre_pos.x,App->player->Zelda->pos.y - centre_pos.y };
+			int dist_zelda = (int)(sqrt(diference_point_zelda.x *diference_point_zelda.x + diference_point_zelda.y * diference_point_zelda.y));
+			if (dist_zelda < 150 && dist_zelda > 120 && !App->player->Zelda->is_picked && !App->player->Zelda->doing_script) {
+				App->player->Zelda->logic_height = 0;
+			}
+		}
 		if ((damaged_boss_timer.Read() > 19000 && state == boss_state::boss_damaged)|| can_recover) {
+			if(recover_collider == nullptr)
 			recover_collider = App->collision->AddCollider({ pos.x,pos.y,244,244 }, collider_boss_recover, this, App->enemy);
 			recover_collider->logic_height = 1;
 			
@@ -270,7 +279,7 @@ void Boss::ExecuteEvent()
 			DeleteColliders();
 			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 - 32 };
 			can_attack = true;
-			state = boss_idle;
+			//state = boss_idle;
 			logic_height = 1;
 			attacking_foot->actual_foot_state == back_to_start;
 			foot_live = 5;
@@ -736,8 +745,8 @@ Boss::~Boss()
 			it++;
 	}
 	App->particlemanager->Group_Fire.clear();
-
-
+	
+	
 }
 
 void Foot::Draw()

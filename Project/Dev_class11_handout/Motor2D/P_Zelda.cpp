@@ -35,11 +35,12 @@ void P_Zelda::Attack(float dt)
 		//actual_event = idle;
 		//doing_script = false;
 		//update
-		if (attack_timer.Read() > 300) {
+	if (attack_timer.Read() > 300 ) {
 			attack_timer.Start();
 			doing_script = false;
 			temp = false;
 		}
+	
 }
 
 void P_Zelda::CreateArrow(SDL_Rect rect)
