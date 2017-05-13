@@ -4,6 +4,7 @@
 #include "j1FileSystem.h"
 #include "j1Audio.h"
 
+#include "j1Player.h"
 #include "SDL/include/SDL.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
@@ -56,7 +57,6 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	
 
 
-
 	return ret;
 }
 
@@ -64,6 +64,17 @@ bool j1Audio::Start()
 {
 	button_sound = App->audio->LoadFx("audio/fx/button.wav");
 	secret_sound = App->audio->LoadFx("audio/fx/secret.wav");
+	App->player->Link->Link_Hurt_Audio = App->audio->LoadFx("audio/fx/link hurt.wav");
+	App->player->Link->Link_Sword_Audio = App->audio->LoadFx("audio/fx/fighter sword 1.wav");
+	App->player->Link->Link_Sword_Collides_Sword_Audio = App->audio->LoadFx("audio/fx/sword shine 1.wav");
+	App->player->Zelda->Throw_Audio = App->audio->LoadFx("audio/fx/throw.wav");
+	App->player->Fall_Players_Audio = App->audio->LoadFx("audio/fx/fall.wav");
+	App->player->Zelda->Arrow_Audio = App->audio->LoadFx("audio/fx/arrow 2.wav");
+	App->player->Zelda->Arrow_Hit_Wall_Audio = App->audio->LoadFx("audio/fx/arrow hit wall.wav");
+	App->enemy->enemy_dies_audio = App->audio->LoadFx("audio/fx/enemy dies.wav");
+	App->enemy->enemy_pathfinding_audio = App->audio->LoadFx("audio/fx/soldier.wav");
+
+
 	return true;
 }
 

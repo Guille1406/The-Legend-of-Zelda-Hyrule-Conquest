@@ -35,7 +35,7 @@ bool S_VideoIntro::Update()
 		App->scene->ChangeScene(Scene_ID::mainmenu);
 		App->audio->CleanUp();
 		App->audio->Awake(App->config);
-
+		App->audio->Start();
 	
 	}
 
