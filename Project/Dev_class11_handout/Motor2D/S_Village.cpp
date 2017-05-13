@@ -76,7 +76,7 @@ bool S_Village::Start()
 		//App->map->CreateLogicMap();
 	}
 
-	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 0);
+	App->audio->PlayMusic("audio/music/Village-theme.ogg", 0);
 	App->audio->VolumeMusic(100);
 
 	App->render->camera.x = 0;
