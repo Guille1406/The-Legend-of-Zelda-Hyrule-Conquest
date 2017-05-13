@@ -659,7 +659,9 @@ bool Cutscene::LoadChangeScene(pugi::xml_node& node)
 		else if (id_string == "tempbossroom") {
 			id = Scene_ID::tempbossroom;
 		}
-
+		else if (id_string == "path_to_boss") {
+			id = Scene_ID::path_to_boss;
+		}
 
 		elements.push_back(new CS_ChangeScene(CS_Type::CS_CHANGESCENE, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), id));
 
@@ -1115,8 +1117,8 @@ void CS_Step::DoChangeScene_CS()
 			break;
 
 		case Scene_ID::path_to_boss:
-			App->player->Link->pos = { 623,928 };
-			App->player->Zelda->pos = { 680,928 };
+			App->player->Link->pos = { 623,2734 };
+			App->player->Zelda->pos = { 680,2734 };
 			break;
 
 
