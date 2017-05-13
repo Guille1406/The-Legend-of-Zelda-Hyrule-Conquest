@@ -128,7 +128,15 @@ bool j1Enemy::PostUpdate()
 
 bool j1Enemy::CleanUp()
 {
-	
+	RELEASE(enemy_green_perf);
+	RELEASE(enemy_hyrulebomb_perf);
+	RELEASE(enemy_shield_perf);
+	RELEASE(enemy_statue_perf);
+	RELEASE(enemy_rope_perf);
+	RELEASE(enemy_skullrope_perf);
+	RELEASE(enemy_rat_perf);
+	RELEASE(enemy_bat_perf);
+
 	for (int i = 0; i < V_MyEnemies.size(); i++)
 	{
 		App->tex->UnLoad(V_MyEnemies[i]->entity_texture);

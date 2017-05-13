@@ -14,7 +14,7 @@ LabelString(*str), font(App->font->default)
 
 GuiLabel::~GuiLabel()
 {
-
+	App->tex->UnLoad(texture_to_blit);
 }
 
 void GuiLabel::Draw()
