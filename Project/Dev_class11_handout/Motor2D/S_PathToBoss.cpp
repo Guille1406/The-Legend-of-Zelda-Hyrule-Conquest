@@ -77,7 +77,7 @@ bool S_PathToBoss::Start()
 			}
 		}
 	}
-	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 0);
+	App->audio->PlayMusic("audio/music/Epic_way_to_boss.ogg", 0);
 	App->audio->VolumeMusic(100);
 
 	App->render->camera.x = 0;

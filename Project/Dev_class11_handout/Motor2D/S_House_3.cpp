@@ -20,7 +20,7 @@
 
 bool S_House_3::Start()
 {
-	scene_str = "Castle Sewers";
+	scene_str = "House";
 
 	App->camera->Enable();
 	App->hud->Enable();
@@ -74,7 +74,7 @@ bool S_House_3::Start()
 		//App->map->CreateLogicMap();
 	}
 
-	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 0);
+	App->audio->PlayMusic("audio/music/Village-theme.ogg", 0);
 	App->audio->VolumeMusic(100);
 
 	App->render->camera.x = 0;

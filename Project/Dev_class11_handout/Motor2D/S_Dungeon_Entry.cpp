@@ -14,7 +14,7 @@
 
 bool S_DungeonEntry::Start()
 {
-	scene_str = "Castle Sewers";
+	scene_str = "Ancient Master'Path ";
 
 	App->camera->Enable();
 	App->hud->Enable();
@@ -60,7 +60,7 @@ bool S_DungeonEntry::Start()
 		//App->map->CreateLogicMap();
 	}
 
-	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 0);
+	App->audio->PlayMusic("audio/music/Dungeon.ogg", 0);
 	App->audio->VolumeMusic(100);
 
 	App->render->camera.x = 0;

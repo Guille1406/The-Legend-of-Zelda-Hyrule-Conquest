@@ -20,7 +20,7 @@
 
 bool S_BeforeDungeon::Start()
 {
-	scene_str = "Castle Sewers";
+	scene_str = "Mountain Entrance";
 
 	App->camera->Enable();
 	App->hud->Enable();
@@ -67,7 +67,7 @@ bool S_BeforeDungeon::Start()
 		//App->map->CreateLogicMap();
 	}
 
-	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 0);
+	App->audio->PlayMusic("audio/music/Overworld_Theme.ogg", 0);
 	App->audio->VolumeMusic(100);
 
 	App->render->camera.x = 0;
