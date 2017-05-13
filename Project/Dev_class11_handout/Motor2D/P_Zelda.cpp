@@ -564,9 +564,9 @@ int Arrow::GetLogicArrow(int minus_height, iPoint pos)
 
 	int i, j;
 	int height = App->player->Zelda->GetLogicHeightPlayer();
-
+	
 	if (height - minus_height < 0) return 0;
-	if (height - minus_height >=3) return 0;
+	if (height - minus_height >= App->map->V_Colision.size()) return 0;
 	switch (direction)
 	{
 	case up:
