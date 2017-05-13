@@ -429,7 +429,6 @@ void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 void Enemy::Direction_Push_Election()
 {
 	//Calls the jump function depending on the player direction
-	if (this->player_hurt!=nullptr) {
 		switch (this->player_hurt->character_direction) {
 		case direction::up:
 			Enemy_Hurt_Displacement(pos.y, false);
@@ -444,7 +443,6 @@ void Enemy::Direction_Push_Election()
 			Enemy_Hurt_Displacement(pos.x, true);
 			break;
 		}
-	}
 }
 
 void Enemy::Direction_Push_Election_ChSoldier()
@@ -533,6 +531,7 @@ void Enemy::Rang_Player() {
 	if (this->type!= enemyType::rat_enemy) {
 		if (sqrt((dist.x*dist.x) + (dist.y*dist.y)) < RANG && enemy_doing_script == false) {
 			this->player_in_range = App->player->Link;
+			this->player_hurt = App->player->Link;
 			//green_enemy_path.clear();
 			if (this->type != enemyType::statue_enemy) {
 				if (tile_pos != iPoint(0, 0) && player_in_range->GetLogicHeightPlayer() == 0) {
@@ -548,6 +547,7 @@ void Enemy::Rang_Player() {
 
 		else if (sqrt((dist2.x*dist2.x) + (dist2.y*dist2.y)) < RANG  && enemy_doing_script == false) {
 			this->player_in_range = App->player->Zelda;
+			this->player_hurt = App->player->Zelda;
 			//green_enemy_path.clear();
 			if (this->type != enemyType::statue_enemy) {
 				if (tile_pos != iPoint(0, 0) && player_in_range->GetLogicHeightPlayer() == 0) {
@@ -667,7 +667,7 @@ void Enemy::UpdateState()
 			Direction_Push_Election_ChSoldier();
 		}
 		else {
-			if (type != enemyType::statue_enemy && type != enemyType::hyrulebombsoldier_enemy) {
+			if (type != enemyType::statue_enemy || type != enemyType::hyrulebombsoldier_enemy) {
 				Direction_Push_Election();
 			}
 		}
