@@ -13,6 +13,7 @@
 
 void P_Zelda::Attack(float dt)
 {
+
 	if (!temp) {
 		temp = true;
 	
@@ -24,10 +25,10 @@ void P_Zelda::Attack(float dt)
 				CreateArrow({ pos.x + 16,pos.y ,8,16 });
 				break;
 			case left:
-				CreateArrow({ pos.x,pos.y -4,16,8 });
+				CreateArrow({ pos.x,pos.y + 6 - 10 * is_picked ,16,8 });
 				break;
 			case right:
-				CreateArrow({ pos.x,pos.y - 4,16,8 });
+				CreateArrow({ pos.x,pos.y + 6 - 10 * is_picked,16,8 });
 				break;
 			}
 		}
@@ -499,20 +500,23 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 			temp_point.y = (temp_pos / 16) * !is_horitzontal + (this->pos.y / 16) * is_horitzontal;
 			if (!is_on_collision) {
 				for (int n = -1; n < 2; n++) {
-					if (GetLogicArrow(n, temp_point) != NOT_COLISION_ID ) {
-						before_wall_pos = temp_pos + i * 40;
-						
+					if (GetLogicArrow(n, temp_point) == App->map->TILE_COL_ID || GetLogicArrow(n, temp_point) == App->map->CANT_PASS_COL_ID) {
+
 						height = n;
 						is_on_collision = true;
 						if (is_second_wall && !is_first_wall) {
 							second_height = n;
 							stop = true;
+							if(abs(before_wall_pos - temp_pos) < 100)
 							not_second_wall = false;
 						}
+						before_wall_pos = temp_pos + i * 10;
+						
+					
 						if (is_first_wall) {
 							first_height = n;
 							is_first_wall = false;
-							first_wall_pos = temp_pos + i * 40;
+							first_wall_pos = temp_pos + i * 10;
 						}
 					}
 				}
@@ -566,20 +570,20 @@ int Arrow::GetLogicArrow(int minus_height, iPoint pos)
 	switch (direction)
 	{
 	case up:
-		i = vector[height - minus_height]->Get(tile_pos.x, tile_pos.y - 1);
-		j = vector[height - minus_height]->Get(tile_pos.x + 1, tile_pos.y - 1);
+		i = vector[height - minus_height]->Get(tile_pos.x, tile_pos.y);
+		j = vector[height - minus_height]->Get(tile_pos.x , tile_pos.y );
 		break;
 	case down:
-		i = vector[height - minus_height]->Get(tile_pos.x, tile_pos.y + 2);
-		j = vector[height - minus_height]->Get(tile_pos.x + 1, tile_pos.y + 2);
+		i = vector[height - minus_height]->Get(tile_pos.x, tile_pos.y );
+		j = vector[height - minus_height]->Get(tile_pos.x , tile_pos.y );
 		break;
 	case left:
-		i = vector[height - minus_height]->Get(tile_pos.x - 1, tile_pos.y);
-		j = vector[height - minus_height]->Get(tile_pos.x - 1, tile_pos.y + 1);
+		i = vector[height - minus_height]->Get(tile_pos.x , tile_pos.y);
+		j = vector[height - minus_height]->Get(tile_pos.x , tile_pos.y );
 		break;
 	case right:
-		i = vector[height - minus_height]->Get(tile_pos.x + 2, tile_pos.y);
-		j = vector[height - minus_height]->Get(tile_pos.x + 2, tile_pos.y + 1);
+		i = vector[height - minus_height]->Get(tile_pos.x , tile_pos.y);
+		j = vector[height - minus_height]->Get(tile_pos.x , tile_pos.y );
 		break;
 	}
 
