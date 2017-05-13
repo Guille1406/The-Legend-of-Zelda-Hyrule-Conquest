@@ -1016,6 +1016,7 @@
     <property name="type" value="container_heart"/>
    </properties>
   </object>
+  <object id="88" x="1168" y="320" width="48" height="48">
    <properties>
     <property name="npc_type" value="navi"/>
     <property name="type" value="npc"/>
