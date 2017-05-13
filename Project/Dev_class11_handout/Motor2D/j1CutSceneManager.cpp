@@ -589,8 +589,20 @@ bool Cutscene::LoadText(pugi::xml_node& node)
 		else if (id_string == "truth_5_dialogue") {
 			id = DialogueID::truth_5_dialogue;
 		}
-		else if (id_string == "castle_doors_dialogue") {
-			id = DialogueID::castle_doors_dialogue;
+		else if (id_string == "castle_yard_1_dialogue") {
+			id = DialogueID::castle_yard_1_dialogue;
+		}
+		else if (id_string == "castle_yard_2_dialogue") {
+			id = DialogueID::castle_yard_2_dialogue;
+		}
+		else if (id_string == "castle_yard_3_dialogue") {
+			id = DialogueID::castle_yard_3_dialogue;
+		}
+		else if (id_string == "castle_yard_4_dialogue") {
+			id = DialogueID::castle_yard_4_dialogue;
+		}
+		else if (id_string == "castle_yard_5_dialogue") {
+			id = DialogueID::castle_yard_5_dialogue;
 		}
 		elements.push_back(new CS_Text(CS_Type::CS_TEXT, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), id));
 		ret = true;
@@ -641,8 +653,8 @@ bool Cutscene::LoadChangeScene(pugi::xml_node& node)
 		else if (id_string == "top_of_the_mountain") {
 			id = Scene_ID::top_of_the_mountain;
 		}
-		else if (id_string == "path_to_boss") {
-			id = Scene_ID::path_to_boss;
+		else if (id_string == "tempbossroom") {
+			id = Scene_ID::tempbossroom;
 		}
 
 

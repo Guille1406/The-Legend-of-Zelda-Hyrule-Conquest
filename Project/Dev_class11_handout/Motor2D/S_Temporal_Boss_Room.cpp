@@ -79,6 +79,7 @@ bool S_TempBossRoom::Start()
 	App->player->Zelda->logic_height = 0;
 	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
 	LOG("World Open");
+	App->cutscenemanager->StartCutscene(3);
 	return false;
 }
 

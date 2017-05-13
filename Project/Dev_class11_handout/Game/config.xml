@@ -116,7 +116,7 @@
 	<cutscene file="cutscenes/test.xml"/>
 	<cutscene file="cutscenes/test2.xml"/>
 	<cutscene file="cutscenes/cut3.xml"/>
-		<cutscene file="cutscenes/cut4.xml"/>
+	<cutscene file="cutscenes/cut4.xml"/>
 </cutscenemanager>
 
 
