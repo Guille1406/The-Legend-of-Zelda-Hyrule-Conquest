@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" nextobjectid="79">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" nextobjectid="89">
  <properties>
   <property name="scene" type="int" value="19"/>
  </properties>
@@ -1014,6 +1014,11 @@
    <properties>
     <property name="heart" type="int" value="2"/>
     <property name="type" value="container_heart"/>
+   </properties>
+  </object>
+   <properties>
+    <property name="npc_type" value="navi"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
  </objectgroup>
