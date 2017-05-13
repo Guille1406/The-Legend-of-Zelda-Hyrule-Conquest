@@ -80,10 +80,7 @@ void S_Campaign::OnGui(Gui* ui, GuiEvent event)
 	}
 	if ((ui == (Gui*)loadcampaign) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->startmenuback->Freeze(true);
 		App->LoadGameModules("save_modules.xml");
-		App->scene->Hide();
-		App->particlemanager->Enable();
 	}
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
 	{

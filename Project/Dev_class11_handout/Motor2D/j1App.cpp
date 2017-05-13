@@ -476,6 +476,11 @@ bool j1App::LoadGameNow()
 			LOG("Loading new Game State from %s...", load_game.c_str());
 			root = data.child("game_state");
 			ret = SaveLoadIterate(root);
+
+			App->startmenuback->Freeze(true);
+			App->scene->Hide();
+			App->particlemanager->Enable();
+
 			data.reset();
 			if(ret == true)
 				LOG("...finished loading");
