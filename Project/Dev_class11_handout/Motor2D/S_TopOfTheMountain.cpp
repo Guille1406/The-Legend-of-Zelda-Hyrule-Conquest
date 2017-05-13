@@ -17,6 +17,9 @@
 #include"j1GameStartMenuBack.h"
 #include "S_InGameMenu.h"
 #include "O_ColourBlock.h"
+#include "j1CutSceneManager.h"
+#include "Video.h"
+
 bool S_TopOfTheMountain::Start()
 {
 	scene_str = "Top of The Mountain";
@@ -82,7 +85,10 @@ bool S_TopOfTheMountain::Start()
 
 bool S_TopOfTheMountain::Update()
 {
-
+	if (App->cutscenemanager->FinishCutscene()) {
+		SDL_Rect r = { 0,0,1280,720 };
+		App->videoplayer->PlayVideo("Top-of-the-mountain-video.ogv",r);
+	}
 	if (!App->player->paused)
 
 		return false;
