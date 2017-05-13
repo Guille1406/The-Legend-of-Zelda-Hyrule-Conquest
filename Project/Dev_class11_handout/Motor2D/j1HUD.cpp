@@ -111,7 +111,7 @@ bool j1HUD::Update(float dt)
 	//Blit PlaceLabel
 	if (scene_changed)
 	{
-		SDL_DestroyTexture(texture_label_to_blit);
+		App->tex->UnLoad(texture_label_to_blit);
 		const char* scene_text = App->scene->GetActiveScene()->scene_str.c_str();
 		texture_label_to_blit = App->font->Print(scene_text, { 255,255,255,255 }, App->font->Triforce48);
 		App->font->CalcSize(scene_text, texture_label_to_blit_w, texture_label_to_blit_h, App->font->Triforce48);
