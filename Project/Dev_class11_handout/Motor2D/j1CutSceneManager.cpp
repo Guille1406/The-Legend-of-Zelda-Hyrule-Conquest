@@ -301,7 +301,7 @@ pugi::xml_node j1CutSceneManager::LoadXML(pugi::xml_document& config_file, std::
 
 	if (result == NULL)
 	{
-		//LOG("Could not load map xml file. Pugi error: %s", result.description());
+		LOG("Could not load map xml file. Pugi error: %s", result.description());
 	}
 	else
 	{

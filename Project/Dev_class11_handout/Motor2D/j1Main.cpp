@@ -33,42 +33,40 @@ int main(int argc, char* args[])
 	MainState state = MainState::CREATE;
 	int result = EXIT_FAILURE;
 
-	while(state != EXIT)
+	while (state != EXIT)
 	{
 		BROFILER_FRAME("The Legend of Zelda Hyrule Conquest");
-		switch(state)
+		switch (state)
 		{
 
 			// Allocate the engine --------------------------------------------
-			case CREATE:
+		case CREATE:
 			LOG("CREATION PHASE ===============================");
 
 			App = new j1App(argc, args);
 
-			if(App != NULL)
+			if (App != NULL)
 				state = AWAKE;
 			else
 				state = FAIL;
-
 			break;
 
 			// Awake all modules -----------------------------------------------
-			case AWAKE:
+		case AWAKE:
 			LOG("AWAKE PHASE ===============================");
-			if(App->Awake() == true)
+			if (App->Awake() == true)
 				state = START;
 			else
 			{
 				LOG("ERROR: Awake failed");
 				state = FAIL;
 			}
-
 			break;
 
 			// Call all modules before first frame  ----------------------------
-			case START:
+		case START:
 			LOG("START PHASE ===============================");
-			if(App->Start() == true)
+			if (App->Start() == true)
 			{
 				state = LOOP;
 				LOG("UPDATE PHASE ===============================");
@@ -81,15 +79,15 @@ int main(int argc, char* args[])
 			break;
 
 			// Loop all modules until we are asked to leave ---------------------
-			case LOOP:
-			if(App->Update() == false)
+		case LOOP:
+			if (App->Update() == false)
 				state = CLEAN;
 			break;
 
 			// Cleanup allocated memory -----------------------------------------
-			case CLEAN:
+		case CLEAN:
 			LOG("CLEANUP PHASE ===============================");
-			if(App->CleanUp() == true)
+			if (App->CleanUp() == true)
 			{
 				RELEASE(App);
 				result = EXIT_SUCCESS;
@@ -97,11 +95,10 @@ int main(int argc, char* args[])
 			}
 			else
 				state = FAIL;
-
 			break;
 
 			// Exit with errors and shame ---------------------------------------
-			case FAIL:
+		case FAIL:
 			LOG("Exiting with errors :(");
 			result = EXIT_FAILURE;
 			state = EXIT;
@@ -111,6 +108,5 @@ int main(int argc, char* args[])
 
 	LOG("... Bye! :)\n");
 
-	// Dump memory leaks
 	return result;
 }

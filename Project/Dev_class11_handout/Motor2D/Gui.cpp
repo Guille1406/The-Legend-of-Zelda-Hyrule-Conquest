@@ -165,19 +165,19 @@ void Gui::CheckInput(const Gui* mouse_hover, const Gui* focus)
 
 	if (focus == this && listener != nullptr)
 	{
-		if ((App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_DOWN) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_DOWN))
+		if ((App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_DOWN) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_DOWN) || (App->input->GetControllerButton(1, 0) == j1KeyState::KEY_DOWN))
 			if (module_listener != nullptr)
 				listener->OnGui(this, GuiEvent::mouse_lclk_down);
 			else
 				((MainScene*)listener)->OnGui(this, GuiEvent::mouse_lclk_down);
 
-		if ((App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_REPEAT) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_REPEAT))
+		if ((App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_REPEAT) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_REPEAT) || (App->input->GetControllerButton(1, 0) == j1KeyState::KEY_REPEAT))
 			if (module_listener != nullptr)
 				listener->OnGui(this, GuiEvent::mouse_lclk_repeat);
 			else
 				((MainScene*)listener)->OnGui(this, GuiEvent::mouse_lclk_repeat);
 
-		if ((App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_UP) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_UP))
+		if ((App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_UP) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_UP) || (App->input->GetControllerButton(1, 0) == j1KeyState::KEY_UP))
 			if (module_listener != nullptr)
 				listener->OnGui(this, GuiEvent::mouse_lclk_up);
 			else

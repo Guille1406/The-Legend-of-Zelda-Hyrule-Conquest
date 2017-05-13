@@ -278,18 +278,12 @@ bool j1App::PreUpdate()
 	j1Module* pModule = nullptr;
 
 	for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.cend() && ret == true; ++item) {
-
 		pModule = *item;
-
 		if (pModule->active == false) {
 			continue;
 		}
-
 		ret = (*item)->PreUpdate();
-
-
 	}
-
 
 	return ret;
 }
@@ -303,16 +297,11 @@ bool j1App::DoUpdate()
 	j1Module* pModule = nullptr;
 
 	for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.cend() && ret == true; ++item) {
-
 		pModule = *item;
-
 		if (pModule->active == false) {
 			continue;
 		}
-
 		ret = (*item)->Update(dt);
-
-
 	}
 
 	return ret;

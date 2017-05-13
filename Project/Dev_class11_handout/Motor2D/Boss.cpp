@@ -81,25 +81,33 @@ void Boss::Draw(int height)
 			App->render->Blit(boss_atlas, centre_pos.x - 38, centre_pos.y - 66, &eye_phase_2);
 			App->render->Blit(boss_atlas, centre_pos.x + 2 - eye_phase_3.w / 2, centre_pos.y - 34 - eye_phase_3.h / 2, &eye_phase_3);
 		}
-
+		//std::_List_iterator<P_Fire*> eye_particles = App->particlemanager->Group_Fire.begin();
+		std::list<P_Fire*>::iterator eye_particles = App->particlemanager->Group_Fire.begin();
 		if (!is_eye_1_open) {
 			App->render->Blit(boss_atlas, eye_1.x + 4, eye_1.y + 4, &eye_1_tex);
+			(*eye_particles)->active = false;
 		}
+		eye_particles++;
 		if (!is_eye_2_open) {
 			App->render->Blit(boss_atlas, eye_2.x + 4, eye_2.y + 4, &eye_2_tex);
+			(*eye_particles)->active = false;
 		}
+		eye_particles++;
 		if (!is_eye_3_open) {
 			App->render->Blit(boss_atlas, eye_3.x + 4, eye_3.y + 4, &eye_3_tex);
+			(*eye_particles)->active = false;
 		}
+		eye_particles++;
 		if (!is_eye_4_open) {
 			App->render->Blit(boss_atlas, eye_4.x + 1, eye_4.y + 1, &eye_4_tex);
+			(*eye_particles)->active = false;
 		}
 
 		legs->foot1->Draw();
 		legs->foot2->Draw();
 		legs->foot3->Draw();
 		legs->foot4->Draw();
-		if (eye_hit_time.Read() < 200) {
+		if (eye_hit_time.Read() < 100) {
 			App->render->Blit(boss_atlas, centre_pos.x - 38, centre_pos.y - 66, &eye_hit);
 		}
 	}
@@ -247,6 +255,16 @@ void Boss::ExecuteEvent()
 			is_eye_3_open = true;
 			is_eye_4_open = true;
 			eyes_open = 4;
+
+			std::list<P_Fire*>::iterator eye_particles = App->particlemanager->Group_Fire.begin();
+			(*eye_particles)->active = true;
+			eye_particles++;
+			(*eye_particles)->active = true;
+			eye_particles++;
+			(*eye_particles)->active = true;
+			eye_particles++;
+			(*eye_particles)->active = true;
+			
 		}
 		if ((damaged_boss_timer.Read() > 20000 && state == boss_state::boss_damaged) || can_recover) {			
 			DeleteColliders();
@@ -712,9 +730,13 @@ Boss::~Boss()
 		if ((*it) == jump_1 || (*it) == jump_2 || (*it) == jump_3 || (*it) == jump_4) {
 			(*it)->collider->to_delete = true;
 			it = App->object->V_Objects.erase(it);
-
+		
 		}
+		else
+			it++;
 	}
+	App->particlemanager->Group_Fire.clear();
+
 
 }
 
@@ -731,7 +753,7 @@ void Foot::Draw()
 	float angle = 0;
 	
 	if (actual_foot_state == foot_state::after_attack) {
-		if(parent_boss->foot_hit_timer.Read()<200)
+		if(parent_boss->foot_hit_timer.Read()<100)
 			App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &parent_boss->foot_hit);
 		else
 		App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &foot_rect);

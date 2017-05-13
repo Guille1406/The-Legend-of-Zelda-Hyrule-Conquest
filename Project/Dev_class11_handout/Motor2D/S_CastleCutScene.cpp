@@ -58,6 +58,8 @@ bool S_CastleCutScene::Start()
 		RELEASE_ARRAY(data);
 		//App->map->CreateLogicMap();
 	}
+	
+	//Commit number 1000 :)
 
 	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 0);
 	App->audio->VolumeMusic(100);
