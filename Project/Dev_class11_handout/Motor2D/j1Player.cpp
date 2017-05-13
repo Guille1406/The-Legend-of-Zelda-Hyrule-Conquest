@@ -225,6 +225,13 @@ bool j1Player::CleanUp() {
 	return true;
 }
 
+bool j1Player::Sleep()
+{
+	delete Link;
+	delete Zelda;
+	return true;
+}
+
 void j1Player::Draw(int height, int y_pos)
 {
 

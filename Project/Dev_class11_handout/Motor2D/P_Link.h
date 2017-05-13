@@ -25,6 +25,7 @@ public:
 
 	}
 	~P_Link() {
+		delete Link_sword;
 		//delete sprites_vector;
 	}
 

@@ -53,6 +53,9 @@ P_Fire::P_Fire(Arrow* element, iPoint* object, iPoint position_static, SDL_Rect 
 
 P_Fire::~P_Fire()
 {
+	for (std::vector<Particle*>::iterator item = particle.begin(); item != particle.cend(); ++item)
+		RELEASE(*item);
+	particle.clear();
 }
 
 bool P_Fire::Update(float dt)

@@ -47,6 +47,9 @@ P_Follow::P_Follow(Arrow* element, iPoint* object, SDL_Rect initial_rect, iPoint
 
 P_Follow::~P_Follow()
 {
+	for (std::vector<Particle*>::iterator item = particle.begin(); item != particle.cend(); ++item)
+		RELEASE(*item);
+	particle.clear();
 }
 
 bool P_Follow::Update(float dt)

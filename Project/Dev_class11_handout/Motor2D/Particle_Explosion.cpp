@@ -221,6 +221,9 @@ P_Explosion::P_Explosion(Arrow* element, iPoint* object, iPoint position_static,
 
 P_Explosion::~P_Explosion()
 {
+	for (std::vector<Particle*>::iterator item = particle.begin(); item != particle.cend(); ++item)
+		RELEASE(*item);
+	particle.clear();
 }
 
 bool P_Explosion::Update(float dt)

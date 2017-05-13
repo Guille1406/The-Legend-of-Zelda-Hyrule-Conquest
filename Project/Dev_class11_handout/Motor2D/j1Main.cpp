@@ -3,6 +3,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
+#include "j1Player.h"
 
 // This is needed here because SDL redefines main function
 // do not add any other libraries here, instead put them in their modules
@@ -89,6 +90,7 @@ int main(int argc, char* args[])
 			LOG("CLEANUP PHASE ===============================");
 			if (App->CleanUp() == true)
 			{
+				App->player->Sleep();
 				RELEASE(App);
 				result = EXIT_SUCCESS;
 				state = EXIT;

@@ -26,6 +26,7 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
+	bool Sleep();
 
 	void Draw(int height, int y_pos);
 
