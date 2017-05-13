@@ -485,6 +485,7 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 	int first_height = 0;
 	int second_height = 0;
 	int height = 0;
+	bool not_second_wall = true;
 	//static int final_pos = temp_pos + i * 200;
 	if (!temp) {
 
@@ -505,6 +506,7 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 						if (is_second_wall && !is_first_wall) {
 							second_height = n;
 							stop = true;
+							not_second_wall = false;
 						}
 						if (is_first_wall) {
 							first_height = n;
@@ -526,7 +528,7 @@ bool Arrow::Check_Wall_Loop(int & pos, bool add, bool is_horitzontal)
 			}
 			temp_pos += i*1;
 		}
-		if (second_height > first_height) {
+		if (second_height >= first_height && !not_second_wall) {
 			before_wall_pos = temp_pos + i * 1000;
 		}
 		else {
