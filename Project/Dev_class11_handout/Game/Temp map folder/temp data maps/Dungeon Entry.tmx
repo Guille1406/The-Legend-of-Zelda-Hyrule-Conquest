@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="150" height="120" tilewidth="16" tileheight="16" nextobjectid="61">
  <tileset firstgid="1" name="tileset cave" tilewidth="16" tileheight="16" tilecount="1710" columns="57">
-  <image source="../../Temporary Sprites folder/tilesets/tileset cave.png" width="912" height="480"/>
+  <image source="tileset cave.png" width="912" height="480"/>
  </tileset>
  <tileset firstgid="1711" name="collision tileset" tilewidth="16" tileheight="16" tilecount="13" columns="13">
   <image source="collision tileset.png" width="221" height="16"/>
