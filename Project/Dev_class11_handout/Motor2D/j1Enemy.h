@@ -11,6 +11,7 @@ enum COLLIDER_TYPE;
 class Green_Enemy;
 #define RANG 150
 #define PUSH_DISTANCE 50
+#define PUSH_DISTANCE_BOMB 0
 
 enum EnemyState {
 	doing_path= 0,
@@ -19,6 +20,7 @@ enum EnemyState {
 	throwing_bomb = 1,
 	jumping =2,
 	stunned =3,
+	push_back_enemy_bomb=3,
 
 };
 
@@ -94,7 +96,7 @@ public:
 	bool enemy_doing_script=false;
 	j1Timer script_timer;
 	Character* player_hurt = nullptr;
-
+	j1Timer animationhurt;
 	//ENEMIES ID
 
 

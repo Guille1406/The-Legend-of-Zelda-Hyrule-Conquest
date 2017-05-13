@@ -448,7 +448,7 @@ void Enemy::Direction_Push_Election()
 void Enemy::Direction_Push_Election_ChSoldier()
 {
 	//Calls the jump function depending on the player direction
-	switch (App->player->Link->character_direction) {
+	switch (this->player_hurt->character_direction) {
 	case direction::up:
 		Enemy_Hurt_Displacement(pos.y, false);
 		break;
@@ -575,8 +575,14 @@ void Enemy::Enemy_Hurt_Displacement(int & pos, bool add)
 	if (!add)
 		i = -1;
 
-	if (!temp)
-		final_pos = pos + (i * PUSH_DISTANCE);
+	if (!temp) {
+		if (this->type == enemyType::hyrulebombsoldier_enemy) {
+			final_pos = pos + (i * PUSH_DISTANCE_BOMB);
+		}
+		else {
+			final_pos = pos + (i * PUSH_DISTANCE);
+		}
+	}
 	temp = true;
 
 	//if player have wall in front the roll will stop
@@ -650,11 +656,14 @@ void Enemy::UpdateState()
 		}
 	}
 	else {
+		if (this->state == EnemyState::push_back_enemy_bomb) {
+			Direction_Push_Election();
+		}
 		if (type == enemyType::championsoldier_enemy) {
 			Direction_Push_Election_ChSoldier();
 		}
 		else {
-			if (type != enemyType::statue_enemy) {
+			if (type != enemyType::statue_enemy && type != enemyType::hyrulebombsoldier_enemy) {
 				Direction_Push_Election();
 			}
 		}
@@ -764,6 +773,8 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 			if (live > 0 ) {
 				if (hit == true) {
 					live--;
+					state = EnemyState::push_back_enemy;
+					enemy_doing_script = true;
 					hit = false;
 				}
 			}
@@ -780,6 +791,9 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 		if (collider->type == COLLIDER_TYPE::collider_arrow) {
 			if (live > 0) {
 				live--;
+				state = EnemyState::push_back_enemy_bomb;
+				enemy_doing_script = true;
+				this->player_hurt = App->player->Zelda;
 			}
 			else {
 				tokill = true;
