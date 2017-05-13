@@ -5,6 +5,7 @@
 #include "j1FileSystem.h"
 #include"j1Player.h"
 #include "j1Map.h"
+#include "j1Window.h"
 static const uint JUMP_DISTANCE = 112;
 
 
@@ -249,6 +250,7 @@ bool Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 	bool ret = true;
 	int tile_pos = (pos + (App->map->data.tile_width / 2)) / App->map->data.tile_width;
 	int other_tile_pos = (other_pos + (App->map->data.tile_width / 2)) / App->map->data.tile_width;
+	iPoint actual_pos = this->pos;
 	float speed = 2 / dt;
 	int i = 1;
 	if (!add)
@@ -290,6 +292,11 @@ bool Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 			ret = false;
 		}		
 	}
+	float Scale = App->win->GetScale();
+	if (this->pos.x > (-App->render->camera.x / Scale + App->render->camera.w / Scale) || this->pos.x < -App->render->camera.x / Scale)
+					this->pos = actual_pos;
+	if (this->pos.y > (-App->render->camera.y / Scale + App->render->camera.h / Scale) || this->pos.y < -App->render->camera.y / Scale)
+			this->pos = actual_pos;
 	return ret;
 	
 }
@@ -297,6 +304,7 @@ bool Character::MoveFunction(float dt, int& pos, int& other_pos, bool add, dir_t
 bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, bool add_one, bool add_two, int front_tile, int side_tile, int diagonal_tile, bool is_down)
 {
 	bool ret = false;
+	iPoint actual_pos = this->pos;
 	//pos_one y;
 	//pos_two x;
 	int i = 1;
@@ -373,6 +381,11 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 		if ((pos_one + add_one*App->map->data.tile_width - !add_one) / App->map->data.tile_width == tile_pos_one)
 			pos_one += i*speed*dt;
 
+	float Scale = App->win->GetScale();
+	if (this->pos.x > (-App->render->camera.x / Scale + App->render->camera.w / Scale) || this->pos.x < -App->render->camera.x / Scale)
+		this->pos = actual_pos;
+	if (this->pos.y >(-App->render->camera.y / Scale + App->render->camera.h / Scale) || this->pos.y < -App->render->camera.y / Scale)
+		this->pos = actual_pos;
 
 	return ret;
 }
@@ -406,6 +419,8 @@ void Character::RollFunction(float dt, int & pos, bool add)
 {
 	
 	static int final_pos = 0;
+	iPoint actual_pos = this->pos;
+	bool end_roll = false;
 	//same as jump function
 	int i = 1;
 	if (!add)
@@ -415,8 +430,17 @@ void Character::RollFunction(float dt, int & pos, bool add)
 		final_pos = pos + (i * JUMP_DISTANCE);
 	temp = true;
 
+	float Scale = App->win->GetScale();
+	if (this->pos.x > (-App->render->camera.x / Scale + App->render->camera.w / Scale) || this->pos.x < -App->render->camera.x / Scale) {
+		this->pos = actual_pos;
+		end_roll = true;
+	}
+	if (this->pos.y > (-App->render->camera.y / Scale + App->render->camera.h / Scale) || this->pos.y < -App->render->camera.y / Scale) {
+		this->pos = actual_pos;
+		end_roll = true;
+	}
 	//if player have wall in front the roll will stop
-	if ((i * pos <  i*final_pos) && GetLogic(false, tilepos) == 0 ) {
+	if ((i * pos <  i*final_pos) && GetLogic(false, tilepos) == 0  && !end_roll) {
 		pos = pos + (i * 4);
 	}
 	else {

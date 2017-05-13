@@ -78,7 +78,7 @@ bool S_Ric_House::Start()
 	App->render->camera.y = 0;
 
 
-	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
+
 	LOG("World Open");
 	return false;
 }
