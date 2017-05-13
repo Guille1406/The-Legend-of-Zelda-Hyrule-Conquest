@@ -128,6 +128,8 @@ void j1Object::Draw(int height)
 				App->render->Blit(npc_objects_tex, object->rect.x, object->rect.y - object->rect.h, &object->texture_rect);
 			if (((O_NPC*)object)->npc_type == NPC_Type::npc_navi)
 				App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
+			if (((O_NPC*)object)->npc_type == NPC_Type::cartel)
+				App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
 		}
 		else if (object->active && object->logic_height == height)
 			App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
@@ -768,6 +770,11 @@ Object * j1Object::CreateNPC(pugi::xml_node object, int height)
 	else if (npc_type_string == "neutral") {
 		temp_npc.npc_type = NPC_Type::npc_neutral;
 		temp_npc.texture_rect = { 254,7,32,58 };
+		temp_npc.dialogue_id_npc = DialogueID::npc_2_with_link_dialogue;
+	}
+	else if (npc_type_string == "cartel") {
+		temp_npc.npc_type = NPC_Type::cartel;
+		temp_npc.texture_rect = { 144,32,32,32 };
 		temp_npc.dialogue_id_npc = DialogueID::npc_1_with_link_dialogue;
 	}
 	else if (npc_type_string == "navi") {
@@ -1036,10 +1043,20 @@ void j1Object::OnCollision(Collider * collider1, Collider * collider2)
 
 	}
 
-	else if (collider1->type == npc && collider2->type == collider_link) {
+	else if (collider1->type == npc && collider2->type == front_link) {
 		O_NPC* temp = (O_NPC*)collider1->parent;
 		if (temp!=nullptr) {
 			if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || App->inputM->EventPressed(INPUTEVENT::ATTACK, 1) == EVENTSTATE::E_REPEAT && !App->player->Link->im_lifting) {
+				temp->Active();
+			}
+		}
+
+	}
+
+	else if (collider1->type == npc && collider2->type == front_zelda) {
+		O_NPC* temp = (O_NPC*)collider1->parent;
+		if (temp != nullptr) {
+			if (App->input->GetKey(SDL_SCANCODE_KP_1) == KEY_DOWN || App->inputM->EventPressed(INPUTEVENT::ATTACK, 0) == EVENTSTATE::E_DOWN ) {
 				temp->Active();
 			}
 		}

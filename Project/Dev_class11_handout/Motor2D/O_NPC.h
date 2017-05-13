@@ -10,6 +10,7 @@ enum NPC_Type {
 	npc_enmasked,
 	npc_neutral,
 	npc_navi,
+	cartel,
 	npc_none
 };
 

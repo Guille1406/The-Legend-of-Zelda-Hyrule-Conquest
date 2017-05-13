@@ -35,7 +35,7 @@ bool j1Fonts::Awake(pugi::xml_node& conf)
 		int size = conf.child("default_font").attribute("size").as_int(DEFAULT_FONT_SIZE);
 		default = Load(path, size);
 
-		path = "fonts/The Legend of Zelda Fonts/SherwoodRegular.ttf";
+		path = "fonts/The Legend of Zelda Fonts/ReturnofGanon.ttf";
 		Sherwood12 = Load(path, 12);
 		Sherwood20 = Load(path, 20);
 		Sherwood28 = Load(path, 28);

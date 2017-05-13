@@ -117,7 +117,7 @@ void HyruleBombSoldier_Enemy::Action()
 		App->render->Blit(App->object->objects_texture, p.x, p.y, &bomb->texture_bomb_rect);
 	}
 	else if (bomb->Explosion_animation.Finished() == false) {
-		bomb->Explosion_animation.speed = 0.1f;
+		bomb->Explosion_animation.speed = 0.2f;
 		bomb_actual_frame = bomb->Explosion_animation.GetCurrentFrame();
 		bomb->texture_bomb_rect = bomb_actual_frame.rect;
 		App->render->Blit(App->object->objects_texture, p.x - bomb_actual_frame.pivot.x, p.y - bomb_actual_frame.pivot.y, &bomb->texture_bomb_rect);
