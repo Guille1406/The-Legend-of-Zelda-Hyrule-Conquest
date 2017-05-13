@@ -4,7 +4,7 @@
   <property name="scene" type="int" value="19"/>
  </properties>
  <tileset firstgid="1" name="overworld_tileset" tilewidth="16" tileheight="16" tilecount="3328" columns="52">
-  <image source="../../Temporary Sprites folder/tilesets/overworld_tileset.png" width="839" height="1024"/>
+  <image source="overworld_tileset.png" width="839" height="1024"/>
   <terraintypes>
    <terrain name="GREEN" tile="-1"/>
    <terrain name="WATER" tile="-1"/>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="95" height="200" tilewidth="16" tileheight="16" nextobjectid="31">
  <tileset firstgid="1" name="castle exterior corrected" tilewidth="16" tileheight="16" tilecount="1568" columns="56">
-  <image source="../../Temporary Sprites folder/tilesets/castle exterior corrected.png" width="903" height="456"/>
+  <image source="castle exterior corrected.png" width="903" height="456"/>
  </tileset>
  <tileset firstgid="1569" name="overworld_tileset" tilewidth="16" tileheight="16" tilecount="3328" columns="52">
-  <image source="../../Temporary Sprites folder/tilesets/overworld_tileset.png" width="839" height="1024"/>
+  <image source="overworld_tileset.png" width="839" height="1024"/>
   <terraintypes>
    <terrain name="grass" tile="-1"/>
    <terrain name="brown" tile="-1"/>
@@ -44,7 +44,7 @@
   <tile id="472" terrain="1,,,"/>
  </tileset>
  <tileset firstgid="4897" name="overworld_tileset" tilewidth="16" tileheight="16" tilecount="3328" columns="52">
-  <image source="../../Temporary Sprites folder/tilesets/overworld_tileset.png" width="839" height="1024"/>
+  <image source="overworld_tileset.png" width="839" height="1024"/>
   <terraintypes>
    <terrain name="earth" tile="-1"/>
    <terrain name="green" tile="-1"/>
@@ -172,10 +172,10 @@
   <tile id="790" terrain="2,1,1,1"/>
  </tileset>
  <tileset firstgid="8225" name="Forest_tileset" tilewidth="16" tileheight="16" tilecount="440" columns="22">
-  <image source="../../Temporary Sprites folder/tilesets/Forest_tileset.png" width="352" height="320"/>
+  <image source="Forest_tileset.png" width="352" height="320"/>
  </tileset>
  <tileset firstgid="8665" name="collision tileset" tilewidth="16" tileheight="16" tilecount="13" columns="13">
-  <image source="../../Temporary Sprites folder/tilesets/collision tileset.png" width="221" height="16"/>
+  <image source="collision tileset.png" width="221" height="16"/>
  </tileset>
  <layer name="Capa de Patrones 1" width="95" height="200">
   <data encoding="csv">

@@ -4,7 +4,7 @@
   <image source="../../Temporary Sprites folder/tilesets/tileset cave.png" width="912" height="480"/>
  </tileset>
  <tileset firstgid="1711" name="collision tileset" tilewidth="16" tileheight="16" tilecount="13" columns="13">
-  <image source="../../Temporary Sprites folder/tilesets/collision tileset.png" width="221" height="16"/>
+  <image source="collision tileset.png" width="221" height="16"/>
   <tile id="3">
    <properties>
     <property name="Navigation" type="int" value="1"/>
@@ -12,10 +12,10 @@
   </tile>
  </tileset>
  <tileset firstgid="1724" name="overworld_tileset" tilewidth="16" tileheight="16" tilecount="3328" columns="52">
-  <image source="../../Temporary Sprites folder/tilesets/overworld_tileset.png" width="839" height="1024"/>
+  <image source="overworld_tileset.png" width="839" height="1024"/>
  </tileset>
  <tileset firstgid="5052" name="tileset dungeon advanced" tilewidth="16" tileheight="16" tilecount="3844" columns="62">
-  <image source="../../Temporary Sprites folder/tilesets/tileset dungeon advanced.png" width="1000" height="1000"/>
+  <image source="tileset dungeon advanced.png" width="1000" height="1000"/>
  </tileset>
  <layer name="Capa de Patrones 1" width="150" height="120">
   <properties>
