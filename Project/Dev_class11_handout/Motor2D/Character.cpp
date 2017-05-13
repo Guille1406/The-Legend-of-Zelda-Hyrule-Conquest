@@ -395,23 +395,44 @@ void Character::JumpFunction(float dt, int& pos, bool add)
 	static int final_pos = 0;
 	//with "temp" we calculate the final position of the jump just one time
 	// "i" is used for changing the sign of the operation
-
+	static bool cant_jump = false;
 	int i = 1;
 	if (!add)
 		i = -1;
 
-	if (!jump_temp)
+	if (!jump_temp) {
 		final_pos = pos + (i * JUMP_DISTANCE);
+		float Scale = App->win->GetScale();
+		if (this->pos.x + i*JUMP_DISTANCE> (-App->render->camera.x / Scale + App->render->camera.w / Scale) || this->pos.x < -App->render->camera.x / Scale) {
+			//this->pos = actual_pos;
+			//end_roll = true;
+			cant_jump = true;
+		}
+		if (this->pos.y + i*JUMP_DISTANCE>(-App->render->camera.y / Scale + App->render->camera.h / Scale) || this->pos.y < -App->render->camera.y / Scale) {
+			//this->pos = actual_pos;
+			//end_roll = true;
+			cant_jump = true;
+		}
+	}
 	jump_temp = true;
 
-	if (( i * pos <  i*final_pos)) {
+	if (( i * pos <  i*final_pos) && !cant_jump) {
 		pos = pos + (i * 4);
 	}
 	// if player reached the final pos, player height decreases 1
+	else if (cant_jump) {
+		doing_script = false;
+		cant_jump = false;
+		jump_temp = false;
+		actual_event = player_event::idle;
+		can_walk = true;
+		
+	}
 	else {
 		jump_temp = false;
 		doing_script = false;
 		ChangeLogicHeightPlayer(GetLogicHeightPlayer() - 1);
+		cant_jump = false;
 	}
 }
 
@@ -459,6 +480,7 @@ void Character::ThrowFunction(float dt, int & pos, bool add, bool is_horitzontal
 void Character::Collision_Sword_EnemySword() {
 	iPoint temp = tilepos;
 
+	/*
 	switch (character_direction) {
 
 
@@ -491,7 +513,7 @@ void Character::Collision_Sword_EnemySword() {
 		break;
 
 
-	}
+	}*/
 
 }
 
@@ -520,22 +542,41 @@ void Character::Player_Hurt_Displacement(int & pos, bool add)
 {
 
 	static int final_pos = 0;
+	static bool cant_be_pushed = false;
 	//same as jump function
 	int i = 1;
 	if (!add)
 		i = -1;
 
-	if (!temp)
+	if (!temp) {
 		final_pos = pos + (i * PUSH_DISTANCE);
+		float Scale = App->win->GetScale();
+		if (this->pos.x + (i * PUSH_DISTANCE)> (-App->render->camera.x / Scale + App->render->camera.w / Scale) || this->pos.x < -App->render->camera.x / Scale) {
+			//this->pos = actual_pos;
+			//end_roll = true;
+			cant_be_pushed = true;
+		}
+		if (this->pos.y + (i * PUSH_DISTANCE)>(-App->render->camera.y / Scale + App->render->camera.h / Scale) || this->pos.y < -App->render->camera.y / Scale) {
+			//this->pos = actual_pos;
+			//end_roll = true;
+			cant_be_pushed = true;
+		}
+	}
 	temp = true;
 
 	//if player have wall in front the roll will stop
-	if ((i * pos <  i*final_pos) && GetBehindLogic(false, tilepos) == 0) {
+	if ((i * pos <  i*final_pos) && GetBehindLogic(false, tilepos) == 0 && !cant_be_pushed) {
 		pos = pos + (i * 4);
+	}
+	else if (cant_be_pushed) {
+		doing_script = false;
+		temp = false;
+		cant_be_pushed = false;
 	}
 	else {
 		doing_script = false;
 		temp = false;
+		cant_be_pushed = false;
 	}
 
 }
