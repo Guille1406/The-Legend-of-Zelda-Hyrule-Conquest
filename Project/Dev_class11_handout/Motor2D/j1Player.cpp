@@ -708,6 +708,11 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 				}
 			}
 		}
+		else if (collider2->type == collider_electric_ball) {
+			Arrow* arrow_temp = (Arrow*)collider1->parent;
+			arrow_temp->can_move = false;
+			collider1->to_delete = true;
+		}
 		else {
 			Arrow* arrow_temp = (Arrow*)collider1->parent;
 			arrow_temp->can_move = false;
@@ -787,6 +792,10 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 			half_hearts_test_purpose--;
 		}
 		//}
+
+	}
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_electric_ball) {
+		half_hearts_test_purpose--;
 
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_boss_recover) {

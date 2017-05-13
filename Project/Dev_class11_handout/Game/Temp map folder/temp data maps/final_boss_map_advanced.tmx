@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="140" tilewidth="16" tileheight="16" nextobjectid="101">
  <tileset firstgid="1" name="castle exterior corrected" tilewidth="16" tileheight="16" tilecount="1568" columns="56">
-  <image source="../../Temporary Sprites folder/tilesets/castle exterior corrected.png" width="903" height="456"/>
+  <image source="castle exterior corrected.png" width="903" height="456"/>
  </tileset>
  <tileset firstgid="1569" name="overworld_tileset" tilewidth="16" tileheight="16" tilecount="3328" columns="52">
-  <image source="../../Temporary Sprites folder/tilesets/overworld_tileset.png" width="839" height="1024"/>
+  <image source="overworld_tileset.png" width="839" height="1024"/>
  </tileset>
  <tileset firstgid="4897" name="castle inside" tilewidth="16" tileheight="16" tilecount="1596" columns="42">
-  <image source="../../Temporary Sprites folder/tilesets/castle inside.png" width="672" height="608"/>
+  <image source="castle inside.png" width="672" height="608"/>
  </tileset>
  <tileset firstgid="6493" name="collision tileset" tilewidth="16" tileheight="16" tilecount="13" columns="13">
-  <image source="../../Temporary Sprites folder/tilesets/collision tileset.png" width="221" height="16"/>
+  <image source="collision tileset.png" width="221" height="16"/>
  </tileset>
  <layer name="Capa de patrones 3" width="200" height="140">
   <data encoding="csv">

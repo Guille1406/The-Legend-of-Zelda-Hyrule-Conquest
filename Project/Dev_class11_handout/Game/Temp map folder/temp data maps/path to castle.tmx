@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="95" height="200" tilewidth="16" tileheight="16" nextobjectid="43">
  <tileset firstgid="1" name="castle exterior corrected" tilewidth="16" tileheight="16" tilecount="1568" columns="56">
-  <image source="../../Temporary Sprites folder/tilesets/castle exterior corrected.png" width="903" height="456"/>
+  <image source="castle exterior corrected.png" width="903" height="456"/>
  </tileset>
  <tileset firstgid="1569" name="overworld_tileset" tilewidth="16" tileheight="16" tilecount="3328" columns="52">
-  <image source="../../Temporary Sprites folder/tilesets/overworld_tileset.png" width="839" height="1024"/>
+  <image source="overworld_tileset.png" width="839" height="1024"/>
   <terraintypes>
    <terrain name="grass" tile="-1"/>
    <terrain name="brown" tile="-1"/>

@@ -53,6 +53,7 @@ j1Collision::j1Collision()
 	matrix[collider_zelda][collider_boss_recover] = true;
 	matrix[collider_zelda][collider_container_heart] = true;
 	matrix[collider_zelda][collider_npc] = true;
+	matrix[collider_zelda][collider_electric_ball] = true;
 
 	//FRONT ZELDA
 	matrix[front_zelda][collider_jump] = true;
@@ -63,6 +64,7 @@ j1Collision::j1Collision()
 	matrix[collider_arrow][collider_diana] = true;
 	matrix[collider_arrow][collider_boss_eye] = true;
 	matrix[collider_arrow][collider_boss_little_eye] = true;
+	matrix[collider_arrow][collider_electric_ball] = true;
 
 	//sword
 	matrix[collider_link_sword][collider_enemy] = true;
@@ -142,6 +144,8 @@ j1Collision::j1Collision()
 	//NPC COLLIDER
 	matrix[collider_npc][collider_link] = true;
 	matrix[collider_npc][collider_zelda] = true;
+	matrix[collider_electric_ball][collider_zelda] = true;
+	matrix[collider_electric_ball][collider_arrow] = true;
 
 
 }
