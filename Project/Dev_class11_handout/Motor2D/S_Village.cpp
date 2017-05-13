@@ -83,14 +83,7 @@ bool S_Village::Start()
 	App->render->camera.y = 0;
 
 	
-	if (App->scene->blocks_out) {
-		for (int i = 0; i < App->object->V_Objects.size(); i++) {
-			if (App->object->V_Objects[i]->type == objectType::block) {
-				App->object->DeleteCollider(*App->object->V_Objects[i]);
-				App->object->V_Objects[i]->active = false;
-			}
-		}
-	}
+	
 	App->cutscenemanager->StartCutscene(1);
 	LOG("World Open");
 	return false;

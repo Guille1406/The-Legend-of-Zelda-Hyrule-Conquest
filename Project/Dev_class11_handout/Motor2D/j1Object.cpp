@@ -685,6 +685,12 @@ Object * j1Object::CreateHeartContainer(pugi::xml_node object, int height)
 
 		V_Objects.push_back(ret);
 	}
+	if (temp_heart.heart_id == 5 && App->scene->heart_5) {
+		ret = new HeartContainer(temp_heart);
+		ret->collider = App->collision->AddCollider(temp_heart.rect, COLLIDER_TYPE::collider_container_heart, (Entity*)ret, this);
+
+		V_Objects.push_back(ret);
+	}
 
 
 	

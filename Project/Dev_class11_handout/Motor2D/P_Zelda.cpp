@@ -21,13 +21,13 @@ void P_Zelda::Attack(float dt)
 				CreateArrow({ pos.x + 4,pos.y ,8,16 });
 				break;
 			case down:
-				CreateArrow({ pos.x + 4,pos.y ,8,16 });
+				CreateArrow({ pos.x + 16,pos.y ,8,16 });
 				break;
 			case left:
-				CreateArrow({ pos.x,pos.y + 4,16,8 });
+				CreateArrow({ pos.x,pos.y -4,16,8 });
 				break;
 			case right:
-				CreateArrow({ pos.x,pos.y + 4,16,8 });
+				CreateArrow({ pos.x,pos.y - 4,16,8 });
 				break;
 			}
 		}

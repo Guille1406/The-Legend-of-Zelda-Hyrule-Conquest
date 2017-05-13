@@ -233,7 +233,7 @@ void j1Player::Draw(int height, int y_pos)
 	App->render->Blit(Link->entity_texture, Link->pos.x - Link->actual_animation.GetCurrentFrame().pivot.x, Link->pos.y - Link->actual_animation.GetCurrentFrame().pivot.y, &Link->actual_animation.GetCurrentFrame().rect);
 	
 	if (height == Zelda->logic_height - Zelda->is_picked * 1 && y_pos == Zelda->tilepos.y)
-		App->render->Blit(Zelda->entity_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y + 3, &Zelda->actual_animation.GetCurrentFrame().rect);
+		App->render->Blit(Zelda->entity_texture, Zelda->pos.x - Zelda->actual_animation.GetCurrentFrame().pivot.x, Zelda->pos.y - Zelda->actual_animation.GetCurrentFrame().pivot.y + 3 - Zelda->is_picked*16, &Zelda->actual_animation.GetCurrentFrame().rect);
 
 	
 	

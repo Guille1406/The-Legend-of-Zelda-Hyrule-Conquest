@@ -69,6 +69,14 @@ bool S_PathToBoss::Start()
 		//App->map->CreateLogicMap();
 	}
 
+	if (App->scene->blocks_out) {
+		for (int i = 0; i < App->object->V_Objects.size(); i++) {
+			if (App->object->V_Objects[i]->type == objectType::block) {
+				App->object->DeleteCollider(*App->object->V_Objects[i]);
+				App->object->V_Objects[i]->active = false;
+			}
+		}
+	}
 	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 0);
 	App->audio->VolumeMusic(100);
 

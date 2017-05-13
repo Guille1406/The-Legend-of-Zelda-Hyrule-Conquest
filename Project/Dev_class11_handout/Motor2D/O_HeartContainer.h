@@ -43,6 +43,11 @@ public:
 			App->scene->heart_4 = false;
 			active = false;
 		}
+		if (heart_id == 5) {
+			App->scene->heart_5 = false;
+			active = false;
+		}
+		
 	}
 
 
