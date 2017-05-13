@@ -69,36 +69,40 @@ void Boss::Draw(int height)
 			App->render->Blit(boss_atlas, attacking_foot->pos.x - 10, attacking_foot->pos.y + 96, &foot_shadow);
 		}
 	}
-	if(height == logic_height)
+	if (height == logic_height) {
 
-	App->render->Blit(boss_atlas, pos.x, pos.y, &boss_rect);
-	
-	if (actual_phase == boss_phase::boss_phase_2) {
-		App->render->Blit(boss_atlas,centre_pos.x - 38, centre_pos.y - 66, &eye_phase_2);
-	}
+		App->render->Blit(boss_atlas, pos.x, pos.y, &boss_rect);
 
-	if (actual_phase == boss_phase::boss_phase_3) {
-		App->render->Blit(boss_atlas, centre_pos.x - 38, centre_pos.y - 66, &eye_phase_2);
-		App->render->Blit(boss_atlas, centre_pos.x +2-eye_phase_3.w / 2, centre_pos.y -32- eye_phase_3.h / 2,&eye_phase_3);
-	}
+		if (actual_phase == boss_phase::boss_phase_2) {
+			App->render->Blit(boss_atlas, centre_pos.x - 38, centre_pos.y - 66, &eye_phase_2);
+		}
 
-	if (!is_eye_1_open) {
-		App->render->Blit(boss_atlas, eye_1.x + 4, eye_1.y + 4, &eye_1_tex);
-	}
-	if (!is_eye_2_open) {
-		App->render->Blit(boss_atlas, eye_2.x+4, eye_2.y+4, &eye_2_tex);
-	}
-	if (!is_eye_3_open) {
-		App->render->Blit(boss_atlas, eye_3.x + 4, eye_3.y + 4, &eye_3_tex);
-	}
-	if (!is_eye_4_open) {
-		App->render->Blit(boss_atlas, eye_4.x + 1, eye_4.y + 1, &eye_4_tex);
-	}
+		if (actual_phase == boss_phase::boss_phase_1) {
+			App->render->Blit(boss_atlas, centre_pos.x - 38, centre_pos.y - 66, &eye_phase_2);
+			App->render->Blit(boss_atlas, centre_pos.x + 2 - eye_phase_3.w / 2, centre_pos.y - 34 - eye_phase_3.h / 2, &eye_phase_3);
+		}
 
-	legs->foot1->Draw();
-	legs->foot2->Draw();
-	legs->foot3->Draw();
-	legs->foot4->Draw();
+		if (!is_eye_1_open) {
+			App->render->Blit(boss_atlas, eye_1.x + 4, eye_1.y + 4, &eye_1_tex);
+		}
+		if (!is_eye_2_open) {
+			App->render->Blit(boss_atlas, eye_2.x + 4, eye_2.y + 4, &eye_2_tex);
+		}
+		if (!is_eye_3_open) {
+			App->render->Blit(boss_atlas, eye_3.x + 4, eye_3.y + 4, &eye_3_tex);
+		}
+		if (!is_eye_4_open) {
+			App->render->Blit(boss_atlas, eye_4.x + 1, eye_4.y + 1, &eye_4_tex);
+		}
+
+		legs->foot1->Draw();
+		legs->foot2->Draw();
+		legs->foot3->Draw();
+		legs->foot4->Draw();
+		if (eye_hit_time.Read() < 200) {
+			App->render->Blit(boss_atlas, centre_pos.x - 38, centre_pos.y - 66, &eye_hit);
+		}
+	}
 }
 
 void Boss::UpdateLegs()
@@ -144,9 +148,9 @@ void Boss::GetEvent()
 	iPoint diference_point_zelda = { App->player->Zelda->pos.x - centre_pos.x,App->player->Zelda->pos.y - centre_pos.y };
 	dist_link = (int)(sqrt(diference_point_link.x *diference_point_link.x + diference_point_link.y * diference_point_link.y));
 	dist_zelda = (int)(sqrt(diference_point_zelda.x *diference_point_zelda.x + diference_point_zelda.y * diference_point_zelda.y));
-	if (dist_link > 300 && dist_zelda > 300 && can_move) {
-		if ((centre_pos.x > 79 * 16 || App->player->Link->pos.x > centre_pos.x) && (centre_pos.x < 129 * 16 || App->player->Link->pos.x < centre_pos.x)) {
-			if ((centre_pos.y < 101 * 16 || App->player->Link->pos.y < centre_pos.y) && (centre_pos.y > 74 * 16 || App->player->Link->pos.y > centre_pos.y)) {
+	if (dist_link > 300 && (dist_zelda > 300 || App->player->Zelda->logic_height == 1) && can_move) {
+		if ((centre_pos.x > 86 * 16 || App->player->Link->pos.x > centre_pos.x) && (centre_pos.x < 120 * 16 || App->player->Link->pos.x < centre_pos.x)) {
+			if ((centre_pos.y < 95 * 16 || App->player->Link->pos.y < centre_pos.y) && (centre_pos.y > 74 * 16 || App->player->Link->pos.y > centre_pos.y)) {
 				state = boss_move;
 			}
 		}
@@ -156,7 +160,7 @@ void Boss::GetEvent()
 		case boss_phase_1:
 			if (dist_link <= 300 && dist_link >120 && state != boss_attack_zelda)
 				state = boss_attack_link;
-			else if(dist_zelda <=300 && dist_zelda >120 && state != boss_attack_link)
+			else if(dist_zelda <=300 && dist_zelda >120 && App->player->Zelda->logic_height ==0 && state != boss_attack_link)
 				state = boss_attack_zelda;
 			break;
 		case boss_phase_2:
@@ -181,6 +185,8 @@ void Boss::GetEvent()
 		}
 		
 	}
+	
+
 	
 }
 
@@ -725,6 +731,9 @@ void Foot::Draw()
 	float angle = 0;
 	
 	if (actual_foot_state == foot_state::after_attack) {
+		if(parent_boss->foot_hit_timer.Read()<200)
+			App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &parent_boss->foot_hit);
+		else
 		App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &foot_rect);
 	}
 	else {

@@ -695,8 +695,10 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 			if (dist_zelda < 120) {
 				arrow_temp->can_move = false;				
 				collider1->to_delete = true;
-				if(temp_boss->eye_live >0)
-				temp_boss->eye_live--;
+				if (temp_boss->eye_live > 0) {
+					temp_boss->eye_hit_time.Start();
+					temp_boss->eye_live--;
+				}
 			}
 		}
 		else {
@@ -791,8 +793,10 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_link_sword && collider2->type == COLLIDER_TYPE::collider_boss_foot) {
 		Foot* temp_foot = (Foot*)collider2->parent;
-		if (temp_foot->parent_boss->foot_live > 0)
+		if (temp_foot->parent_boss->foot_live > 0) {
 			temp_foot->parent_boss->foot_live--;
+			temp_foot->parent_boss->foot_hit_timer.Start();
+		}
 
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_arrow && collider2->type == COLLIDER_TYPE::collider_boss_little_eye) {
