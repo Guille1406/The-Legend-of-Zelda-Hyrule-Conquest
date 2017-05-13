@@ -353,7 +353,21 @@ bool j1Scene::CleanUp()
 
 bool j1Scene::Load(pugi::xml_node &node)
 {
-	return true;
+
+	bool ret = false;
+	if (node != nullptr) {
+		pugi::xml_node temp = node.child("scene_save");
+		heart_1 = temp.attribute("heart_container_1").as_bool();
+		heart_2 = temp.attribute("heart_container_2").as_bool();
+		heart_3 = temp.attribute("heart_container_3").as_bool();
+		heart_4 = temp.attribute("heart_container_4").as_bool();
+		heart_5 = temp.attribute("heart_container_5").as_bool();
+
+		blocks_out = temp.attribute("blocks_out_music_save").set_value(App->scene->blocks_out);
+
+		ret = true;
+	}
+	return ret;
 }
 
 bool j1Scene::Save(pugi::xml_node &node) const
@@ -366,6 +380,7 @@ bool j1Scene::Save(pugi::xml_node &node) const
 		temp.append_attribute("heart_container_2").set_value(App->scene->heart_2);
 		temp.append_attribute("heart_container_3").set_value(App->scene->heart_3);
 		temp.append_attribute("heart_container_4").set_value(App->scene->heart_4);
+		temp.append_attribute("heart_container_5").set_value(App->scene->heart_5);
 
 		temp.append_attribute("blocks_out_music_save").set_value(App->scene->blocks_out);
 

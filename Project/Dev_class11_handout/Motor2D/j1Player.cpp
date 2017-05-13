@@ -822,6 +822,10 @@ bool j1Player::Load(pugi::xml_node &node)
 		int paco= temp.attribute("save_id_scene").as_int();
 		Scene_ID temp_scene = (Scene_ID)temp.attribute("save_id_scene").as_int();
 		App->scene->ChangeScene(temp_scene);
+
+		App->player->hearts_containers_test_purpose = temp.attribute("heart_containers").as_int();
+
+		App->player->half_hearts_test_purpose = temp.attribute("heart_players").as_int();
 	
 		ret = true;
 	}

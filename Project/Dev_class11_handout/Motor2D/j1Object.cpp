@@ -1033,7 +1033,7 @@ void j1Object::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == npc && collider2->type == collider_link) {
 		O_NPC* temp = (O_NPC*)collider1->parent;
 		if (temp!=nullptr) {
-			if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || App->inputM->EventPressed(INPUTEVENT::ATTACK, 1) == EVENTSTATE::E_DOWN && !App->player->Link->im_lifting) {
+			if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || App->inputM->EventPressed(INPUTEVENT::ATTACK, 1) == EVENTSTATE::E_REPEAT && !App->player->Link->im_lifting) {
 				temp->Active();
 			}
 		}
