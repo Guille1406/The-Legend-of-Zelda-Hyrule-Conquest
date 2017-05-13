@@ -119,8 +119,9 @@ bool S_TempBossRoom::PostUpdate()
 bool S_TempBossRoom::Clean()
 {
 	App->enemy->Final_Boss->im_active = false;
-	App->enemy->Final_Boss = NULL;
 	delete App->enemy->Final_Boss;
+	App->enemy->Final_Boss = NULL;
+	
 	LOG("World Test Deleted");
 
 	App->player->Disable();
