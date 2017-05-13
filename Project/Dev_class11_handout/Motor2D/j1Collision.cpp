@@ -35,6 +35,7 @@ j1Collision::j1Collision()
 	matrix[front_link][collider_jump] = true;
 	matrix[front_link][collider_zelda] = true;
 	matrix[front_link][collider_movable_object] = true;
+	matrix[front_link][collider_npc] = true;
 	//ZELDA
 	matrix[collider_zelda][collider_link] = true;
 	matrix[collider_zelda][collider_button] = true;
@@ -57,7 +58,7 @@ j1Collision::j1Collision()
 	//FRONT ZELDA
 	matrix[front_zelda][collider_jump] = true;
 	matrix[front_zelda][collider_movable_object] = true;
-
+	matrix[front_zelda][collider_npc] = true;
 	//ARROW
 	matrix[collider_arrow][collider_enemy] = true;
 	matrix[collider_arrow][collider_diana] = true;
@@ -142,7 +143,8 @@ j1Collision::j1Collision()
 	//NPC COLLIDER
 	matrix[collider_npc][collider_link] = true;
 	matrix[collider_npc][collider_zelda] = true;
-
+	matrix[collider_npc][front_link] = true;
+	matrix[collider_npc][front_zelda] = true;
 
 }
 

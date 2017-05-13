@@ -429,38 +429,42 @@ void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 void Enemy::Direction_Push_Election()
 {
 	//Calls the jump function depending on the player direction
-	switch (this->player_hurt->character_direction) {
-	case direction::up:
-		Enemy_Hurt_Displacement(pos.y, false);
-		break;
-	case direction::down:
-		Enemy_Hurt_Displacement(pos.y, true);
-		break;
-	case direction::left:
-		Enemy_Hurt_Displacement(pos.x, false);
-		break;
-	case direction::right:
-		Enemy_Hurt_Displacement(pos.x, true);
-		break;
+	if (this->player_hurt!=nullptr) {
+		switch (this->player_hurt->character_direction) {
+		case direction::up:
+			Enemy_Hurt_Displacement(pos.y, false);
+			break;
+		case direction::down:
+			Enemy_Hurt_Displacement(pos.y, true);
+			break;
+		case direction::left:
+			Enemy_Hurt_Displacement(pos.x, false);
+			break;
+		case direction::right:
+			Enemy_Hurt_Displacement(pos.x, true);
+			break;
+		}
 	}
 }
 
 void Enemy::Direction_Push_Election_ChSoldier()
 {
 	//Calls the jump function depending on the player direction
-	switch (this->player_hurt->character_direction) {
-	case direction::up:
-		Enemy_Hurt_Displacement(pos.y, false);
-		break;
-	case direction::down:
-		Enemy_Hurt_Displacement(pos.y, true);
-		break;
-	case direction::left:
-		Enemy_Hurt_Displacement(pos.x, false);
-		break;
-	case direction::right:
-		Enemy_Hurt_Displacement(pos.x, true);
-		break;
+	if (this->player_hurt != nullptr) {
+		switch (this->player_hurt->character_direction) {
+		case direction::up:
+			Enemy_Hurt_Displacement(pos.y, false);
+			break;
+		case direction::down:
+			Enemy_Hurt_Displacement(pos.y, true);
+			break;
+		case direction::left:
+			Enemy_Hurt_Displacement(pos.x, false);
+			break;
+		case direction::right:
+			Enemy_Hurt_Displacement(pos.x, true);
+			break;
+		}
 	}
 }
 
