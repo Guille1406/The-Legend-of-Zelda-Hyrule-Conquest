@@ -93,7 +93,7 @@ public:
 	EnemyState state= doing_path;
 	bool enemy_doing_script=false;
 	j1Timer script_timer;
-
+	Character* player_hurt = nullptr;
 
 	//ENEMIES ID
 

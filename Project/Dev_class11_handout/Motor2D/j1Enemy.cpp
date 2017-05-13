@@ -429,7 +429,7 @@ void j1Enemy::Update_Sword_Collision(Enemy* enemy)
 void Enemy::Direction_Push_Election()
 {
 	//Calls the jump function depending on the player direction
-	switch (App->player->Link->character_direction) {
+	switch (this->player_hurt->character_direction) {
 	case direction::up:
 		Enemy_Hurt_Displacement(pos.y, false);
 		break;
@@ -674,6 +674,7 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 			if (live > 0) {
 				if (App->player->Link->link_sword_impact_sword == false) {
 					App->player->Link->enemy_col_sword_sword_timer.Start();
+					this->player_hurt = App->player->Link;
 					state = EnemyState::push_back_enemy;
 					enemy_doing_script = true;
 					App->audio->PlayFx(App->enemy->enemy_dies_audio);
@@ -691,6 +692,10 @@ void Enemy::Enemy_Hit_Comprobation(Collider* collider)
 		else if (collider->type == COLLIDER_TYPE::collider_arrow) {
 			if (live > 0) {
 				live--;
+				state = EnemyState::push_back_enemy;
+				enemy_doing_script = true;
+				this->player_hurt = App->player->Zelda;
+				this->player_in_range = App->player->Zelda;
 			}
 			else {
 				tokill = true;
