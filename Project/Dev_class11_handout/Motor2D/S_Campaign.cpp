@@ -4,6 +4,7 @@
 #include "j1GameStartMenuBack.h"
 #include "j1Render.h"
 #include "ParticleManager.h"
+#include "j1Window.h"
 
 S_Campaign::S_Campaign()
 {
@@ -16,15 +17,15 @@ S_Campaign::~S_Campaign()
 
 bool S_Campaign::Awake(pugi::xml_node& conf)
 {
-	controllerlayout_pos = { 1,0 };
+	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
 
-	newcampaign = App->gui->CreateButton(iPoint(920, 380), &std::string("New Campaign"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	newcampaign = App->gui->CreateButton(iPoint(X_pos, 200), &std::string("New Campaign"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	newcampaign->SetFont(App->font->Sherwood20);
 	((Gui*)newcampaign)->SetListener(this);
 	newcampaign->SetVisible(false);
 	newcampaign->Focusable(true);
 
-	loadcampaign = App->gui->CreateButton(iPoint(920, 490), &std::string("Load Campaign"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	loadcampaign = App->gui->CreateButton(iPoint(X_pos, 310), &std::string("Load Campaign"), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	loadcampaign->SetFont(App->font->Sherwood20);
 	((Gui*)loadcampaign)->SetListener(this);
 	loadcampaign->SetVisible(false);
@@ -56,7 +57,6 @@ bool S_Campaign::Start()
 
 bool S_Campaign::Update()
 {
-	App->render->Blit(App->gui->GetAtlas(), controllerlayout_pos.x - App->render->camera.x, controllerlayout_pos.y - App->render->camera.y, &controllerlayout_rec, 1.0f, 0, INT_MAX, INT_MAX, false, 255);
 	MenuInput(&buttons);
 	return true;
 }
@@ -84,7 +84,7 @@ void S_Campaign::OnGui(Gui* ui, GuiEvent event)
 	}
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->Show(Scene_ID::mainmenu);
+		App->scene->Hide();
 	}
 }
 
