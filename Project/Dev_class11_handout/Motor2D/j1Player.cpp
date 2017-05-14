@@ -599,6 +599,8 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		if (App->player->Link->can_fall) {
 			Fall* temp = (Fall*)collider2->parent;
 			App->player->Link->pos = { temp->fallpos.x * 16,temp->fallpos.y * 16 };
+			App->player->Link->doing_script = false;
+			App->player->Link->actual_event = player_event::idle;
 		}
 		
 	}
