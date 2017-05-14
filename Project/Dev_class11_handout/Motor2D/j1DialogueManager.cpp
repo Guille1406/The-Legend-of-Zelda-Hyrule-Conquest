@@ -244,7 +244,7 @@ bool j1DialogueManager::Update(float dt)
 	for (std::vector<GuiLabel*>::iterator item = ActiveDialog->ActiveDialogueStepPtr->lines.begin(); item != ActiveDialog->ActiveDialogueStepPtr->lines.cend(); ++item)
 		(*item)->Draw();
 
-	if ((App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_DOWN) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_DOWN))
+	if ((App->input->GetKey(SDL_SCANCODE_RETURN) == j1KeyState::KEY_DOWN) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_DOWN) || (App->input->GetControllerButton(1, 0) == j1KeyState::KEY_DOWN))
 		DialogueNextStep();
 
 	return true;
