@@ -43,6 +43,9 @@ enum DialogueID {
 
 	saved_game_dialogue,
 
+	//Sign
+	sign_dungeon_entry,
+
 	NullID_dialogue
 };
 
