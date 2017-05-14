@@ -148,9 +148,9 @@ bool j1Player::PostUpdate()
 	if (!paused) {
 		if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
 			App->scene->ChangeScene(village);
-			App->player->Link->pos = { 169 * 16,8 * 16 };
+			App->player->Link->pos = { 43 * 16,4 * 16 };
 			App->player->Link->logic_height = 0;
-			App->player->Zelda->pos = { 169 * 16,8 * 16 };
+			App->player->Zelda->pos = { 43 * 16,4 * 16 };
 			App->player->Zelda->logic_height = 0;
 		}
 

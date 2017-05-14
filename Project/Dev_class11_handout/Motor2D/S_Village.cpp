@@ -46,7 +46,7 @@ bool S_Village::Start()
 	//GuiImage* title = App->gui->CreateImage(iPoint(0, 0), &title_rec, false, AddGuiTo::none);
 	//((Gui*)title)->SetListener(this);
 
-	if (App->map->Load("Village.tmx") == true)
+	if (App->map->Load("The real village.tmx") == true)
 	{
 		int w, h = 0;
 		uchar* data = nullptr;
