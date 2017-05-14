@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="150" height="120" tilewidth="16" tileheight="16" nextobjectid="61">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="150" height="120" tilewidth="16" tileheight="16" nextobjectid="62">
  <tileset firstgid="1" name="tileset cave" tilewidth="16" tileheight="16" tilecount="469" columns="57">
   <image source="tileset cave.png" width="912" height="480"/>
  </tileset>
@@ -990,6 +990,12 @@
     <property name="dir" type="int" value="1"/>
     <property name="entity" value="bridge"/>
     <property name="type" value="diana"/>
+   </properties>
+  </object>
+  <object id="61" x="1728" y="976" width="32" height="32">
+   <properties>
+    <property name="npc_type" value="cartel"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
  </objectgroup>
