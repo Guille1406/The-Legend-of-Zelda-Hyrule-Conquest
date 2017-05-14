@@ -829,6 +829,7 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 		App->object->DeleteCollider(*temp);
 		temp->active = false;
 		temp->collider->to_delete = true;
+		temp->Action();
 
 	}
 

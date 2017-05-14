@@ -1045,7 +1045,7 @@
   </object>
   <object id="71" x="672" y="816" width="32" height="32" rotation="90">
    <properties>
-    <property name="heart" type="int" value="2"/>
+    <property name="heart" type="int" value="3"/>
     <property name="type" value="heart_container"/>
    </properties>
   </object>

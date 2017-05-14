@@ -134,6 +134,7 @@ public:
 	Object* CreateFall(pugi::xml_node, int height);
 	Object* CreateColourBlock(pugi::xml_node object, int height);
 	Object* CreateHeart(Enemy* n_enemy, int height);
+	Object* CreateHeart(Object* n_object, int height);
 	Object* CreateMovableObject(pugi::xml_node, int height);
 	Object* CreateBlock(pugi::xml_node object, int height);
 	Object* CreateMusic(pugi::xml_node object, int height);

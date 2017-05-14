@@ -516,6 +516,28 @@ Object* j1Object::CreateHeart(Enemy* n_enemy, int height) {
 	return ret;
 }
 
+Object * j1Object::CreateHeart(Object * n_object, int height)
+{
+	Heart temp_corazon;
+
+	temp_corazon.name = "heart";
+	temp_corazon.rect = n_object->rect;
+	SDL_Rect tex_temp = { 192,96,32,32 };
+	temp_corazon.texture_rect = tex_temp;
+	//192,95
+	//32,32
+	temp_corazon.type = objectType::heart;
+	temp_corazon.active = true;
+	temp_corazon.logic_height = n_object->logic_height;
+
+	Object* ret = new Heart(temp_corazon);
+	ret->collider = App->collision->AddCollider(temp_corazon.rect, COLLIDER_TYPE::collider_heart, (Entity*)ret, this);
+
+	V_Objects.push_back(ret);
+
+	return ret;
+}
+
 Object * j1Object::CreateMovableObject(pugi::xml_node object, int height)
 {
 	Movable_Block temp_block;
