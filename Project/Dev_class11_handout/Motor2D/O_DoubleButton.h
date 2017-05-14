@@ -4,6 +4,7 @@
 #include"j1Render.h"
 #include "j1Audio.h"
 #include "j1Scene.h"
+#include "Video.h"
 class DoubleButton : public Object {
 private:
 	bool triggered = false;
@@ -39,10 +40,13 @@ public:
 				if (connected_object[i]->type == objectType::object_music)
 					return;
 			}
-			if (cutscene == 1) {
+			if (cutscene == 1 && !App->scene->blocks_out) {
 				//App->cutscenemanager->StartCutscene(cutscene_intro);
 				App->scene->blocks_out = true;
-				
+				SDL_Rect r = { 0,0,1280,720 };
+				App->videoplayer->PlayVideo("unlock-door.ogv",r);
+				App->videoplayer->video_finished = false;
+				App->scene->puzzle_video_finished = true;				
 			}
 			if (!sound) {
 				App->audio->PlayFx(App->audio->secret_sound);

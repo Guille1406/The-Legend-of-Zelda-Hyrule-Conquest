@@ -77,6 +77,14 @@ bool S_DungeonSecondFloorRight::Start()
 
 bool S_DungeonSecondFloorRight::Update()
 {
+	if (App->scene->puzzle_video_finished) {
+
+		App->scene->puzzle_video_finished = false;
+		App->audio->CleanUp();
+		App->audio->Awake(App->config);
+		App->audio->Start();
+
+	}
 
 	if (!App->player->paused)
 

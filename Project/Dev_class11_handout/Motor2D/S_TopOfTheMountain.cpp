@@ -106,10 +106,10 @@ bool S_TopOfTheMountain::PostUpdate()
 	}
 	if (App->videoplayer->video_finished && cutscene) {
 		App->cutscenemanager->StartCutscene(4);
-
 		App->audio->CleanUp();
 		App->audio->Awake(App->config);
 		App->audio->Start();
+		App->audio->PlayMusic("audio/music/Dungeon.ogg", 0);
 		cutscene = false;
 	}
 
