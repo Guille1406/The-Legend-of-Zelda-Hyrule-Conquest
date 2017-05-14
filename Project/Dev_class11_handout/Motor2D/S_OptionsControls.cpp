@@ -13,8 +13,8 @@ S_OptionsControls::~S_OptionsControls()
 
 bool S_OptionsControls::Awake(pugi::xml_node& conf)
 {
-	controller_layout_normal_rect = { 443,2604,450,450 };
-	controller_layout_alternative_rect = { 0, 2604, 443, 450 };
+	controller_layout_normal_rect = { 450,2604,450,450 };
+	controller_layout_alternative_rect = { 0,2604,450,450 };
 
 	int X_pos = App->win->GetWindowWHalf() - (int)(idle_button_rect.w * 0.5f);
 	ControlsLabel = App->gui->CreateButton(iPoint(40, 40), &std::string(conf.child("ControlsLabel").attribute("value").as_string("Controls menu")), ButtonType::idle_only, &label_title_rec, false);
