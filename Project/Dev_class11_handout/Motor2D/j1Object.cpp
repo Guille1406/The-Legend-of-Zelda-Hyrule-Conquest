@@ -47,6 +47,7 @@ bool j1Object::Update(float)
 		if (V_Objects[i]->type == objectType::double_button) {
 			DoubleButton* temp_button = (DoubleButton*)V_Objects[i];
 			temp_button->characters_on = 0;
+			temp_button->texture_rect = temp_button->idle_button;
 		}
 		if (V_Objects[i]->type == objectType::door) {
 			Door* temp_door = (Door*)V_Objects[i];

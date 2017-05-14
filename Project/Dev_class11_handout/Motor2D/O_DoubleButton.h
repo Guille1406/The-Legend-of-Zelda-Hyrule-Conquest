@@ -18,22 +18,37 @@ public:
 		active = obj.active;
 		name = obj.name;
 		logic_height = obj.logic_height;
-		texture_rect = rect_double_button_idle;
+		
 		sound = false;
 		cutscene = obj.cutscene;
+
+		bool temp = false;
+		
+		if (cutscene == 2) {
+			idle_button = rect_double_button_music_idle;
+			pressed_button = rect_double_button_music_one;
+			double_pressed_button = rect_double_button_music_pressed;
+		}
+		else {
+			idle_button = rect_double_button_idle;
+			pressed_button = rect_double_button_one;
+			double_pressed_button = rect_double_button_two;
+			
+		}
+		
 	}
 	~DoubleButton() {
 
 	}
 	void Action() {
 		if (characters_on == 1) {
-			texture_rect = rect_double_button_one;
+			texture_rect = pressed_button;
 			return;
 		}
 
 		if (characters_on>=2) {
 			
-			texture_rect = rect_double_button_two;
+			texture_rect = double_pressed_button;
 			
 			for (uint i = 0; i < connected_object.size(); i++) {
 				connected_object[i]->Action();

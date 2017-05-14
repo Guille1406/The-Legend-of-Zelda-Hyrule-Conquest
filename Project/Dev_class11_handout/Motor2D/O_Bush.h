@@ -28,7 +28,7 @@ public:
 	void Action() {
 		srand(time(NULL));
 		int what_drope = 0;
-		what_drope = rand() % 25;
+		what_drope = rand() % 10;
 		switch (what_drope) {
 
 		case 0:

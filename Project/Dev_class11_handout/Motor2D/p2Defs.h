@@ -138,5 +138,7 @@ static const SDL_Rect explosion1 = { 0,400,94,102 };
 static const SDL_Rect smoke = { 187,501,94,81 };
 static const SDL_Rect rect_bush = { 0,336,32,32 };
 
-
+static const SDL_Rect rect_double_button_music_pressed = { 256,272,64,64 };
+static const SDL_Rect rect_double_button_music_one = { 320,272,64,64 };
+static const SDL_Rect rect_double_button_music_idle = { 384,272,64,64 };
 #endif
