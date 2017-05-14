@@ -112,8 +112,10 @@ bool S_TempBossRoom::PostUpdate()
 				temp->active = true;
 		}
 	}
-	if (App->enemy->Final_Boss->boss_defeated) {
-		App->scene->ChangeScene(Scene_ID::mainmenu);
+	if (App->enemy->Final_Boss != nullptr) {
+		if (App->enemy->Final_Boss->boss_defeated) {
+			App->scene->ChangeScene(Scene_ID::mainmenu);
+		}
 	}
 	return true;
 
