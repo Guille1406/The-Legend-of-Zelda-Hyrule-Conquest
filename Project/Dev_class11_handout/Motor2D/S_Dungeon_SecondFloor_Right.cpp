@@ -11,6 +11,7 @@
 #include"j1GameStartMenuBack.h"
 #include "S_InGameMenu.h"
 #include "S_Dungeon_SecondFloor_Right.h"
+#include "Video.h"
 
 bool S_DungeonSecondFloorRight::Start()
 {
@@ -77,7 +78,7 @@ bool S_DungeonSecondFloorRight::Start()
 
 bool S_DungeonSecondFloorRight::Update()
 {
-	if (App->scene->puzzle_video_finished) {
+	if (App->scene->puzzle_video_finished && App->videoplayer->video_finished) {
 
 		App->scene->puzzle_video_finished = false;
 		App->audio->CleanUp();
