@@ -18,7 +18,7 @@ public:
 		collider_tiles = obj.collider_tiles;
 		//object_animation = obj.object_animation;
 		object_animation.speed = 0.08f;
-		texture_rect = { 480,192,32,32 };
+		texture_rect = { 464,192,32,32 };
 		active_phase = obj.active_phase;
 	}
 	~ElectricBall() {

@@ -5,7 +5,7 @@
   <property name="y" type="int" value="11"/>
  </properties>
  <tileset firstgid="1" name="tileset cave" tilewidth="16" tileheight="16" tilecount="1710" columns="57">
-  <image source="../../Temporary Sprites folder/tilesets/tileset cave.png" width="912" height="480"/>
+  <image source="tileset cave.png" width="912" height="480"/>
   <tile id="0">
    <properties>
     <property name="scene" type="int" value="23"/>
@@ -14,7 +14,7 @@
   </tile>
  </tileset>
  <tileset firstgid="1711" name="collision tileset" tilewidth="16" tileheight="16" tilecount="13" columns="13">
-  <image source="../../Temporary Sprites folder/tilesets/collision tileset.png" width="221" height="16"/>
+  <image source="collision tileset.png" width="221" height="16"/>
  </tileset>
  <layer name="Capa de Patrones 1" width="85" height="85">
   <properties>

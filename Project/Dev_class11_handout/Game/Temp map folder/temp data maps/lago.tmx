@@ -399,8 +399,8 @@
    <properties>
     <property name="scene" type="int" value="17"/>
     <property name="type" value="warp"/>
-    <property name="x" type="int" value="213"/>
-    <property name="y" type="int" value="99"/>
+    <property name="x" type="int" value="81"/>
+    <property name="y" type="int" value="30"/>
    </properties>
   </object>
   <object id="7" x="0" y="192" width="32" height="272">

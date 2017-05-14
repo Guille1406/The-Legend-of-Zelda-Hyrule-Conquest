@@ -2362,7 +2362,7 @@
     <property name="scene" type="int" value="17"/>
     <property name="type" value="warp"/>
     <property name="x" type="int" value="5"/>
-    <property name="y" type="int" value="97"/>
+    <property name="y" type="int" value="30"/>
    </properties>
   </object>
   <object id="30" x="1360" y="2800" width="32" height="32">
