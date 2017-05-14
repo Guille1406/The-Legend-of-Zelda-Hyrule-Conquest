@@ -122,10 +122,12 @@ public:
 	SDL_Rect foot_shadow = { 364,64,62,61 };
 
 	SDL_Rect foot_hit = { 427,0,64,64 };
+	SDL_Rect foot_destroyed = { 427,64,64,64 };
 	SDL_Rect eye_hit = { 244,234,80,85 };
 
 	j1Timer eye_hit_time;
 	j1Timer foot_hit_timer;
+
 	int eyes_open = 4;
 
 	bool is_eye_1_open = true;

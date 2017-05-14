@@ -178,7 +178,7 @@ void Boss::GetEvent()
 					if(dist_link >120)
 					state = boss_attack_link;
 				else if (state != boss_attack_link)
-					if(dist_zelda >120)
+					if(dist_zelda >120 && dist_zelda < 400)
 					state = boss_attack_zelda;
 			
 			break;
@@ -255,9 +255,6 @@ void Boss::ExecuteEvent()
 			}
 		}
 		if ((damaged_boss_timer.Read() > 19000 && state == boss_state::boss_damaged)|| can_recover) {
-			if(recover_collider == nullptr)
-			recover_collider = App->collision->AddCollider({ pos.x,pos.y,244,244 }, collider_boss_recover, this, App->enemy);
-			recover_collider->logic_height = 1;
 			
 			is_eye_1_open = true;
 			is_eye_2_open = true;
@@ -284,7 +281,8 @@ void Boss::ExecuteEvent()
 			attacking_foot->actual_foot_state == back_to_start;
 			foot_live = 5;
 			can_recover = false;
-			recover_collider->to_delete = true;
+
+			
 			iPoint diference_point_zelda = { App->player->Zelda->pos.x - centre_pos.x,App->player->Zelda->pos.y - centre_pos.y };
 			int dist_zelda = (int)(sqrt(diference_point_zelda.x *diference_point_zelda.x + diference_point_zelda.y * diference_point_zelda.y));
 			if (dist_zelda < 150 && !App->player->Zelda->is_picked) {
@@ -761,14 +759,19 @@ void Foot::Draw()
 	float cos_angle = 0;
 	float angle = 0;
 	
-	if (actual_foot_state == foot_state::after_attack) {
-		if(parent_boss->foot_hit_timer.Read()<100)
-			App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &parent_boss->foot_hit);
-		else
-		App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &foot_rect);
+	if (parent_boss->foot_live == 0) {
+		App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &parent_boss->foot_destroyed);
 	}
 	else {
-		App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &foot_rect_invulnerable);
+		if (actual_foot_state == foot_state::after_attack) {
+			if (parent_boss->foot_hit_timer.Read() < 100)
+				App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &parent_boss->foot_hit);
+			else
+				App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &foot_rect);
+		}
+		else {
+			App->render->Blit(parent_boss->boss_atlas, pos.x - 16, pos.y - 16, &foot_rect_invulnerable);
+		}
 	}
 	for (float i = 0; i <= 1; i += 1.0f/20.0f) {
 		x = ((1-i)*(1-i) * pos.x + 2*i*(1-i)*max_point.x + i*i*pivot_point.x);
