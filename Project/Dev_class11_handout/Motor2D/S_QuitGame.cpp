@@ -83,10 +83,10 @@ void S_QuitGame::OnGui(Gui* ui, GuiEvent event)
 
 	if ((ui == (Gui*)No) && (event == GuiEvent::mouse_lclk_down))
 	{
-		if(((S_InGameMenu*)App->scene->InGameMenuScene())->Active())
+		if (((S_InGameMenu*)App->scene->InGameMenuScene())->Active())
 			App->scene->Show(Scene_ID::ingamemenu);
 		else
-			App->scene->Show(Scene_ID::mainmenu);
+			App->scene->Hide();
 	}
 }
 

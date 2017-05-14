@@ -56,7 +56,8 @@ void S_Credits::OnGui(Gui* ui, GuiEvent event)
 {
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->Show(Scene_ID::mainmenu);
+		//App->scene->Show(Scene_ID::mainmenu);
+		App->scene->Hide();
 	}
 }
 
