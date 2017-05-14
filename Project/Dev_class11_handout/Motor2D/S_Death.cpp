@@ -61,7 +61,9 @@ bool S_Death::Update()
 
 bool S_Death::Clean()
 {
+	Death_Screen->SetVisible(false);
 	//delete Death_Screen;
+
 	DeathTryAgain->SetVisible(false);
 	DeathMainMenu->SetVisible(true);
 	return true;
