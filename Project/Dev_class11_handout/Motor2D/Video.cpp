@@ -52,7 +52,7 @@ bool Video::Awake(pugi::xml_node& config)
 // Called before quitting
 bool Video::CleanUp()
 {
-	if (!active)
+	if (want_to_play)
 		return true;
 
 	if (texture) SDL_DestroyTexture(texture);
@@ -226,7 +226,7 @@ bool Video::PostUpdate()
 			const Uint8 *u = y + (w * h);
 			const Uint8 *v = u + ((w / 2) * (h / 2));
 			Uint8 *dst = (Uint8*)pixels;
-			int i;
+			int i = 0;
 
 			for (i = 0; i < h; i++, y += w, dst += pitch)
 				memcpy(dst, y, w);
