@@ -40,6 +40,7 @@ bool S_World::Start()
 	App->pathfinding->paused = false;
 
 
+
 	
 
 	//GuiImage* title = App->gui->CreateImage(iPoint(0, 0), &title_rec, false, AddGuiTo::none);

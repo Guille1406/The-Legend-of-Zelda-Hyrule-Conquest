@@ -17,6 +17,7 @@
 #include"j1GameStartMenuBack.h"
 #include "S_InGameMenu.h"
 #include "O_ElectricBall.h"
+#include"Video.h"
 
 bool S_TempBossRoom::Start()
 {
@@ -37,7 +38,8 @@ bool S_TempBossRoom::Start()
 	App->enemy->paused = false;
 	App->collision->paused = false;
 	App->pathfinding->paused = false;
-
+	SDL_Rect r = { 0,0,1280,720 };
+	App->videoplayer->PlayVideo("placeholder.ogv", r);
 
 	if (App->map->Load("final_boss_map_advanced.tmx") == true)
 
@@ -85,36 +87,40 @@ bool S_TempBossRoom::Start()
 
 bool S_TempBossRoom::Update()
 {
-	if (!App->player->paused)
-	App->enemy->Final_Boss->UpdateLegs();
+	if (App->videoplayer->video_finished)
+	{
+		if (!App->player->paused)
+			App->enemy->Final_Boss->UpdateLegs();
 
-	
+	}
 	return false;
 }
 
 bool S_TempBossRoom::PostUpdate()
 {
+	if (App->videoplayer->video_finished)
+	{
+		if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
 
-	if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
-
-		App->scene->ChangeScene(Scene_ID::Send);
-		App->startmenuback->Freeze(false);
-		App->player->loop_game_menu = false;
-		App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
-	}
-
-	for (int i = 0; i < App->object->V_Objects.size(); i++) {
-		if (App->object->V_Objects[i]->type == objectType::electric_ball) {
-			ElectricBall* temp = (ElectricBall*)App->object->V_Objects[i];
-			if (temp->active_phase == 1 && (App->enemy->Final_Boss->actual_phase == boss_phase_2 || App->enemy->Final_Boss->actual_phase == boss_phase_3))
-				temp->active = true;
-			if (temp->active_phase == 2 && (App->enemy->Final_Boss->actual_phase == boss_phase_3))
-				temp->active = true;
+			App->scene->ChangeScene(Scene_ID::Send);
+			App->startmenuback->Freeze(false);
+			App->player->loop_game_menu = false;
+			App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
 		}
-	}
-	if (App->enemy->Final_Boss != nullptr) {
-		if (App->enemy->Final_Boss->boss_defeated) {
-			App->scene->ChangeScene(Scene_ID::mainmenu);
+
+		for (int i = 0; i < App->object->V_Objects.size(); i++) {
+			if (App->object->V_Objects[i]->type == objectType::electric_ball) {
+				ElectricBall* temp = (ElectricBall*)App->object->V_Objects[i];
+				if (temp->active_phase == 1 && (App->enemy->Final_Boss->actual_phase == boss_phase_2 || App->enemy->Final_Boss->actual_phase == boss_phase_3))
+					temp->active = true;
+				if (temp->active_phase == 2 && (App->enemy->Final_Boss->actual_phase == boss_phase_3))
+					temp->active = true;
+			}
+		}
+		if (App->enemy->Final_Boss != nullptr) {
+			if (App->enemy->Final_Boss->boss_defeated) {
+				App->scene->ChangeScene(Scene_ID::mainmenu);
+			}
 		}
 	}
 	return true;
