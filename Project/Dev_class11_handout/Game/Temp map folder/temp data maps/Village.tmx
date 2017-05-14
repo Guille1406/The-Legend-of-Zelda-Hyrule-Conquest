@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="220" height="150" tilewidth="16" tileheight="16" nextobjectid="378">
  <tileset firstgid="1" name="overworld_tileset" tilewidth="16" tileheight="16" tilecount="3328" columns="52">
-  <image source="../../Temporary Sprites folder/tilesets/overworld_tileset.png" width="839" height="1024"/>
+  <image source="overworld_tileset.png" width="839" height="1024"/>
   <terraintypes>
    <terrain name="Green" tile="-1"/>
    <terrain name="Terrain" tile="-1"/>
@@ -41,13 +41,13 @@
   <tile id="472" terrain="1,0,0,0"/>
  </tileset>
  <tileset firstgid="3329" name="items v2" tilewidth="16" tileheight="16" tilecount="2622" columns="69">
-  <image source="../../Temporary Sprites folder/tilesets/items v2.png" width="1110" height="608"/>
+  <image source="items v2.png" width="1110" height="608"/>
  </tileset>
  <tileset firstgid="5951" name="Forest_tileset v2" tilewidth="16" tileheight="16" tilecount="440" columns="22">
-  <image source="../../Temporary Sprites folder/tilesets/Forest_tileset.png" width="352" height="320"/>
+  <image source="Forest_tileset.png" width="352" height="320"/>
  </tileset>
  <tileset firstgid="6391" name="collision tileset" tilewidth="16" tileheight="16" tilecount="13" columns="13">
-  <image source="../../Temporary Sprites folder/tilesets/collision tileset.png" width="221" height="16"/>
+  <image source="collision tileset.png" width="221" height="16"/>
  </tileset>
  <layer name="Base" width="220" height="150">
   <properties>

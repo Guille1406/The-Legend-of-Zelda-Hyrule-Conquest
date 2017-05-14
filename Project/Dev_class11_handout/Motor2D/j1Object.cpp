@@ -785,7 +785,7 @@ Object * j1Object::CreateNPC(pugi::xml_node object, int height)
 		for (int i = 0; i < 4; i++) {
 			Frame temp_fr;
 			temp_fr.pivot = { 0,0 };
-			temp_fr.rect={ (479 + 48 * i ),127,48,64};
+			temp_fr.rect={ (464 + 48 * i ),130,45,58};
 			temp_npc.object_animation.PushBack(temp_fr);
 		}		
 		temp_npc.texture_rect = { 254,7,32,58 };
