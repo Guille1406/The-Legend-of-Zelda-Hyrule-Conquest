@@ -216,7 +216,7 @@ void Boss::ExecuteEvent()
 		}
 		else if (actual_phase == boss_phase::boss_phase_3 && !can_recover) {
 			//INTRODUCIR AQUI CODIGO DE LO QUE PASA CUANDO MATAS AL BOSS
-			App->scene->ChangeScene(Scene_ID::mainmenu);
+			boss_defeated = true;
 
 		}
 	}

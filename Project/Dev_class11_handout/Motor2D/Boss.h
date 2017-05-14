@@ -53,6 +53,8 @@ public:
 	~Boss();
 	iPoint pos;
 
+	bool boss_defeated = false;
+
 	bool im_attacking = false;
 	bool im_attacking_laser = false;
 	bool can_attack = false;
