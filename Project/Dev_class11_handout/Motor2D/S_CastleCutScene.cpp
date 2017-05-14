@@ -29,11 +29,11 @@ bool S_CastleCutScene::Start()
 	App->object->Enable();
 
 	App->scene->blocks_out = false;
-	App->scene->heart_1 = false;
-	App->scene->heart_2 = false;
-	App->scene->heart_3 = false;
-	App->scene->heart_4 = false;
-	App->scene->heart_5 = false;
+	App->scene->heart_1 = true;
+	App->scene->heart_2 = true;
+	App->scene->heart_3 = true;
+	App->scene->heart_4 = true;
+	App->scene->heart_5 = true;
 
 
 	//PAUSE FALSE
