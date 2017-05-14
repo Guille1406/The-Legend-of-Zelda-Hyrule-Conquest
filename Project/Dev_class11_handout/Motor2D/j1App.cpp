@@ -528,7 +528,7 @@ bool j1App::SavegameNow() const
 
 bool j1App::SaveLoadIterate(pugi::xml_node& root)
 {
-	bool ret = false;
+	bool ret = true;
 	switch (WantTo_SaveLoadType)
 	{
 	case SaveLoadType::Module:
