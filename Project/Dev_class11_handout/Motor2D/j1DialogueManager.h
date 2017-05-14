@@ -45,6 +45,7 @@ enum DialogueID {
 
 	//Sign
 	sign_dungeon_entry,
+	sign_river_village,
 
 	NullID_dialogue
 };
