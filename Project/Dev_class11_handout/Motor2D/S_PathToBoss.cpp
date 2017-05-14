@@ -84,7 +84,8 @@ bool S_PathToBoss::Start()
 	App->render->camera.y = 0;
 
 
-
+	App->player->Link->logic_height = 0;
+	App->player->Zelda->logic_height = 0;
 	LOG("World Open");
 	return false;
 }
