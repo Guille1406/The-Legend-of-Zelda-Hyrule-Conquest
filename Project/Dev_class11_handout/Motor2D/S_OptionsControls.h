@@ -18,10 +18,15 @@ public:
 	bool Load(pugi::xml_node&);
 	void OnGui(Gui* ui, GuiEvent event);
 public:
+	SDL_Rect controller_layout_normal_rect = { 0,0,0,0 };
+	SDL_Rect controller_layout_alternative_rect = { 0,0,0,0 };
+	GuiImage* controller_layout_normal = nullptr;
+	GuiImage* controller_layout_alternative = nullptr;
 	GuiButton* ControlsLabel = nullptr;
 	GuiButton* ControllerAlternative = nullptr;
 	GuiCheck*  ControllerAlternative_check = nullptr;
 	GuiButton* back = nullptr;
+	bool alternative_active = false;
 };
 
 #endif // #pragma once
