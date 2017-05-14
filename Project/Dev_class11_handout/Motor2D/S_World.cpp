@@ -30,7 +30,7 @@ bool S_World::Start()
 	App->player->Enable();
 	App->object->Enable();
 	
-
+	App->SaveGameModules("save_modules.xml");
 	
 	
 	//PAUSE FALSE

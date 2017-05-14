@@ -91,10 +91,6 @@ bool S_CastleCutScene::Start()
 
 bool S_CastleCutScene::Update()
 {
-	if (App->cutscenemanager->CutsceneReproducing() == false && !done) {
-		App->SaveGameModules("save_modules.xml");
-		done = true;
-	}
 	return false;
 }
 
