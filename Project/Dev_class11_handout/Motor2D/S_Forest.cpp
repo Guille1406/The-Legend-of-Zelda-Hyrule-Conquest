@@ -43,7 +43,7 @@ bool S_Forest::Start()
 	//GuiImage* title = App->gui->CreateImage(iPoint(0, 0), &title_rec, false, AddGuiTo::none);
 	//((Gui*)title)->SetListener(this);
 
-	if (App->map->Load("Woods.tmx") == true)
+	if (App->map->Load("Forest.tmx") == true)
 	{
 		int w, h = 0;
 		uchar* data = nullptr;
