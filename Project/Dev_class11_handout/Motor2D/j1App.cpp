@@ -461,7 +461,7 @@ void j1App::GetSaveGames(std::list<std::string>& list_to_fill) const
 
 bool j1App::LoadGameNow()
 {
-	bool ret = true;
+	bool ret = false;
 	char* buffer = nullptr;
 	uint size = fs->Load(load_game.c_str(), &buffer);
 
@@ -483,8 +483,11 @@ bool j1App::LoadGameNow()
 			App->particlemanager->Enable();
 
 			data.reset();
-			if(ret == true)
+			if (ret == true)
+			{
+				App->scene->Want_to_load = true;
 				LOG("...finished loading");
+			}
 		}
 		else
 			LOG("Could not parse game state xml file %s. pugi error: %s", load_game.c_str(), result.description());
@@ -499,7 +502,7 @@ bool j1App::LoadGameNow()
 
 bool j1App::SavegameNow() const
 {
-	bool ret = true;
+	bool ret = false;
 	LOG("Saving Game State to %s...", save_game.c_str());
 
 	// xml object were we will store all data
@@ -525,7 +528,7 @@ bool j1App::SavegameNow() const
 
 bool j1App::SaveLoadIterate(pugi::xml_node& root)
 {
-	bool ret = true;
+	bool ret = false;
 	switch (WantTo_SaveLoadType)
 	{
 	case SaveLoadType::Module:

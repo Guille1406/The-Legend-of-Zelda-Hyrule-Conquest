@@ -283,11 +283,12 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
-	if (main_active_scene != prev_scene)
+	if ((main_active_scene != prev_scene) || (Want_to_load))
 	{
 		main_active_scene->Start();
 		prev_scene = main_active_scene;
 		sub_active_scene = main_active_scene;
+		Want_to_load = false;
 	}
 
 	main_active_scene->PreUpdate();

@@ -110,6 +110,8 @@ public:
 	bool heart_5 = true;
 
 	bool puzzle_video_finished = false;
+
+	bool Want_to_load = false;
 };
 
 #endif // __j1SCENE_H__
