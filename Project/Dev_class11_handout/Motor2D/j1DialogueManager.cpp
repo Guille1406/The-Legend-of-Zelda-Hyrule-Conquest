@@ -283,6 +283,8 @@ bool j1DialogueManager::CleanUp()
 
 void j1DialogueManager::ActivateDialogue(DialogueID id)
 {
+	if (ActiveDialog->DialogueActive)
+		return;
 	ActiveDialog->DialogueActive = true;
 	ActiveDialog->DialoguePaused = false;
 	for (std::vector<Dialogue*>::iterator item = dialogues.begin(); item != dialogues.cend(); ++item)
