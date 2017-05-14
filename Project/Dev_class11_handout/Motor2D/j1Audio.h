@@ -44,6 +44,11 @@ private:
 
 	_Mix_Music*			music = nullptr;
 	std::list<Mix_Chunk*> fx;
+	/*boss_defeated_sound = App->audio->LoadFx("audio/fx/boss defeated");
+	boss_hit_sound = App->audio->LoadFx("audio/fx/boss-hit");
+	boss_invencible_sound = App->audio->LoadFx("audio/fx/boss-invencible");
+	boss_laser_sound = App->audio->LoadFx("audio/fx/boss_laser_countdown");
+	boss_dies_sound = App->audio->LoadFx("audio/fx/boss_dies");*/
 };
 
 #endif // __j1AUDIO_H__

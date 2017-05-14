@@ -140,6 +140,13 @@ public:
 
 	int dist_link = 0;
 	int dist_zelda = 0;
+
+	//SOUNDS
+	uint boss_defeated_sound = 0;
+	uint boss_laser_sound = 0;
+	uint boss_hit_sound = 0;
+	uint boss_invencible_sound = 0;
+	uint boss_dies_sound = 0;
 };
 
 class Foot : public Entity {

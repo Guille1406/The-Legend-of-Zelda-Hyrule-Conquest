@@ -676,6 +676,7 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 			arrow_temp->can_move = false;
 			//arrow_temp->is_attached = true;
 			collider1->to_delete = true;
+			App->audio->PlayFx(temp_boss->boss_hit_sound);
 			if (collider2 == temp_boss->eye1_collider && temp_boss->is_eye_1_open) {
 				temp_boss->is_eye_1_open = false;
 				temp_boss->eyes_open--;
@@ -817,7 +818,9 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 		if (temp_foot->parent_boss->foot_live > 0) {
 			temp_foot->parent_boss->foot_live--;
 			temp_foot->parent_boss->foot_hit_timer.Start();
+			App->audio->PlayFx(temp_foot->parent_boss->boss_hit_sound);
 		}
+		
 
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_arrow && collider2->type == COLLIDER_TYPE::collider_boss_little_eye) {

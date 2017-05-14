@@ -74,6 +74,11 @@ bool j1Audio::Start()
 	App->enemy->enemy_dies_audio = App->audio->LoadFx("audio/fx/enemy dies.wav");
 	App->enemy->enemy_pathfinding_audio = App->audio->LoadFx("audio/fx/soldier.wav");
 
+	/*App->enemy->Final_Boss->boss_defeated_sound = App->audio->LoadFx("audio/fx/boss defeated");
+	App->enemy->Final_Boss->boss_hit_sound = App->audio->LoadFx("audio/fx/boss-hit");
+	App->enemy->Final_Boss->boss_invencible_sound = App->audio->LoadFx("audio/fx/boss-invencible");
+	App->enemy->Final_Boss->boss_laser_sound = App->audio->LoadFx("audio/fx/boss_laser_countdown");
+	App->enemy->Final_Boss->boss_dies_sound = App->audio->LoadFx("audio/fx/boss_dies");*/
 
 	return true;
 }
