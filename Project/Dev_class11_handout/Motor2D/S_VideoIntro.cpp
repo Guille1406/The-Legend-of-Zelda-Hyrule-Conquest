@@ -30,15 +30,13 @@ bool S_VideoIntro::Start()
 bool S_VideoIntro::Update()
 {
 	//if(!App->videoplayer->active) //Change scene
-	if (App->videoplayer->video_finished) {
-
-	
-		App->scene->ChangeScene(Scene_ID::mainmenu);
-		App->startmenuback->Enable();
+	if (App->videoplayer->video_finished)
+	{
 		App->audio->CleanUp();
 		App->audio->Awake(App->config);
 		App->audio->Start();
-	
+		App->scene->ChangeScene(Scene_ID::mainmenu);
+		App->startmenuback->Enable();
 	}
 
 	//MenuInput(&buttons);

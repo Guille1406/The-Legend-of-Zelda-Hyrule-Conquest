@@ -44,11 +44,20 @@ public:
 	bool StopMusic(float fade_time);
 	bool ResumeMusic();
 	void VolumeMusic(int volume);
+
+	bool PlayingMusic()
+	{
+		if (music == nullptr || volume == 0)
+			return false;
+		else
+			return true;
+	}
 	
 private:
 
 	_Mix_Music*			music = nullptr;
 	std::list<Mix_Chunk*> fx;
+	uint volume = 0;
 	
 };
 

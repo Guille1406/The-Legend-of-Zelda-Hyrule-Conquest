@@ -8,6 +8,8 @@
 #include "ParticleManager.h"
 #include "j1GameStartMenuBack.h"
 
+#include "j1Audio.h"
+
 S_MainMenu::S_MainMenu()
 {
 	scene_str = "MainMenu";
@@ -75,6 +77,12 @@ bool S_MainMenu::Awake(pugi::xml_node& conf)
 
 bool S_MainMenu::Start()
 {
+	if (!App->audio->PlayingMusic())
+	{
+		App->audio->PlayMusic("audio/music/Intro_Song.ogg", 0);
+		App->audio->VolumeMusic(100);
+	}
+	
 	if (visibility)
 	{
 		title->SetVisible(true);

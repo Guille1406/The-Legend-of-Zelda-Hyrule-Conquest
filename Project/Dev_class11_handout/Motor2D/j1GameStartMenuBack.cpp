@@ -41,9 +41,6 @@ bool j1GameStartMenuBackground::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1GameStartMenuBackground::Start()
 {
-	App->audio->PlayMusic("audio/music/Intro_Song.ogg", 0);
-	App->audio->VolumeMusic(100);
-
 	atlas = App->tex->Load(atlas_file_name.c_str());
 
 	Background_Initial_pos = App->win->GetWindowH() - background.h;

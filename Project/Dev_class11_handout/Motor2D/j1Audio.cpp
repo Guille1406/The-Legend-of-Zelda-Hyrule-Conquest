@@ -252,5 +252,6 @@ void j1Audio::VolumeMusic(int volume)
 		LOG("volume was    : %d\n", Mix_VolumeMusic(MIX_MAX_VOLUME / 2));
 		Mix_VolumeMusic(volume);
 		LOG("volume is now : %d\n", Mix_VolumeMusic(-1));
+		this->volume = volume;
 	}
 }
