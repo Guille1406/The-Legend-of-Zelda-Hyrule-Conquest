@@ -228,7 +228,7 @@ void Boss::ExecuteEvent()
 				(eyes_open <= 0 && actual_phase == boss_phase::boss_phase_3)) {
 				pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 + 32 };
 				CreateColliders();
-				App->audio->PlayFx(boss_dies_sound);
+				App->audio->PlayFx(App->audio->boss_dies_sound);
 				state = boss_state::boss_damaged;
 				can_move = false;
 				can_attack = false;

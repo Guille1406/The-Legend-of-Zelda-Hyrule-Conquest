@@ -35,6 +35,11 @@ public:
 	bool PlayFx(unsigned int fx, int repeat = 0);
 	uint button_sound = 0;
 	uint secret_sound = 0;
+	uint boss_defeated_sound = 0;
+	uint boss_hit_sound = 0;
+	uint boss_invencible_sound = 0;
+	uint boss_laser_sound = 0;
+	uint boss_dies_sound = 0;
 
 	bool StopMusic(float fade_time);
 	bool ResumeMusic();
@@ -44,11 +49,7 @@ private:
 
 	_Mix_Music*			music = nullptr;
 	std::list<Mix_Chunk*> fx;
-	/*boss_defeated_sound = App->audio->LoadFx("audio/fx/boss defeated");
-	boss_hit_sound = App->audio->LoadFx("audio/fx/boss-hit");
-	boss_invencible_sound = App->audio->LoadFx("audio/fx/boss-invencible");
-	boss_laser_sound = App->audio->LoadFx("audio/fx/boss_laser_countdown");
-	boss_dies_sound = App->audio->LoadFx("audio/fx/boss_dies");*/
+	
 };
 
 #endif // __j1AUDIO_H__
