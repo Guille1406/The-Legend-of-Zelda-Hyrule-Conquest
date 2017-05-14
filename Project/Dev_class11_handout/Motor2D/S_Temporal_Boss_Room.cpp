@@ -34,7 +34,7 @@ bool S_TempBossRoom::Start()
 	App->enemy->Final_Boss = new Boss();
 	App->enemy->Final_Boss->im_active = true;
 	//PAUSE FALSE
-	App->player->paused = false;
+	App->player->paused = true;
 	App->enemy->paused = false;
 	App->collision->paused = false;
 	App->pathfinding->paused = false;
@@ -69,8 +69,7 @@ bool S_TempBossRoom::Start()
 		//App->map->CreateLogicMap();
 	}
 
-	App->audio->PlayMusic("audio/music/Final-boss-theme.ogg", 0);
-	App->audio->VolumeMusic(100);
+	
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -87,12 +86,20 @@ bool S_TempBossRoom::Start()
 
 bool S_TempBossRoom::Update()
 {
-	if (App->videoplayer->video_finished)
+	if (App->videoplayer->video_finished && done_video_boss == false)
 	{
-		if (!App->player->paused)
-			App->enemy->Final_Boss->UpdateLegs();
-
+		App->audio->CleanUp();
+		App->audio->Awake(App->config);
+		App->audio->Start();
+		App->player->paused = false;
+		done_video_boss = true;
+		App->audio->PlayMusic("audio/music/Final-boss-theme.ogg", 0);
+		App->audio->VolumeMusic(100);
 	}
+
+	if (!App->player->paused)
+		App->enemy->Final_Boss->UpdateLegs();
+
 	return false;
 }
 
