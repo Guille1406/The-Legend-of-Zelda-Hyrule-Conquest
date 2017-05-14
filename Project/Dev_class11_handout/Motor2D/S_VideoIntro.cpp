@@ -4,6 +4,7 @@
 #include "S_VideoIntro.h"
 #include "Video.h"
 #include "j1Audio.h"
+#include "j1GameStartMenuBack.h"
 
 S_VideoIntro::S_VideoIntro()
 {
@@ -33,6 +34,7 @@ bool S_VideoIntro::Update()
 
 	
 		App->scene->ChangeScene(Scene_ID::mainmenu);
+		App->startmenuback->Enable();
 		App->audio->CleanUp();
 		App->audio->Awake(App->config);
 		App->audio->Start();

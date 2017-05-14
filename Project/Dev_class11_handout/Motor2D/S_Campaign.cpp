@@ -84,7 +84,7 @@ void S_Campaign::OnGui(Gui* ui, GuiEvent event)
 	}
 	if ((ui == (Gui*)back) && (event == GuiEvent::mouse_lclk_down))
 	{
-		App->scene->Hide();
+		App->scene->Show(Scene_ID::mainmenu);
 	}
 }
 

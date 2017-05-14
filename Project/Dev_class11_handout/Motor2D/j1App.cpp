@@ -158,6 +158,7 @@ bool j1App::Awake()
 	object->active = false;
 	hud->active = false;
 	particlemanager->active = false;
+	startmenuback->active = false;
 
 	if(ret == true)
 		for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.cend() && ret == true; ++item)

@@ -111,7 +111,7 @@ void S_Options::OnGui(Gui* ui, GuiEvent event)
 		if (((S_InGameMenu*)App->scene->InGameMenuScene())->Active())
 			App->scene->Show(Scene_ID::ingamemenu);
 		else
-			App->scene->Hide();
+			App->scene->Show(Scene_ID::mainmenu);
 	}
 }
 
