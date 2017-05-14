@@ -621,7 +621,8 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		}
 
 	}
-
+	if (half_hearts_test_purpose <= 0)
+		half_hearts_test_purpose = 0;
 }
 
 void j1Player::EndCollision(Collider * collider1, Collider * collider2)
@@ -835,7 +836,8 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 		temp->Action();
 
 	}
-
+	if (half_hearts_test_purpose <= 0)
+		half_hearts_test_purpose = 0;
 }
 
 bool j1Player::Load(pugi::xml_node &node)
