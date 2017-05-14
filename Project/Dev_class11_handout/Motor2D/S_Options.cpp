@@ -28,12 +28,14 @@ bool S_Options::Awake(pugi::xml_node& conf)
 	((Gui*)video)->SetListener(this);
 	video->SetVisible(false);
 	video->Focusable(true);
-	audio = App->gui->CreateButton(iPoint(X_pos, 420), &std::string(conf.child("audio").attribute("value").as_string("Audio Settings")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	/*
+	audio = App->gui->CreateButton(iPoint(X_pos, 530), &std::string(conf.child("audio").attribute("value").as_string("Audio Settings")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	audio->SetFont(App->font->Sherwood20);
 	((Gui*)audio)->SetListener(this);
 	audio->SetVisible(false);
 	audio->Focusable(true);
-	gameplay = App->gui->CreateButton(iPoint(X_pos, 530), &std::string(conf.child("gameplay").attribute("value").as_string("Gameplay Settings")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
+	*/
+	gameplay = App->gui->CreateButton(iPoint(X_pos, 420), &std::string(conf.child("gameplay").attribute("value").as_string("Gameplay Settings")), ButtonType::idle_hover_pressed, &idle_button_rect, &hover_button_rect, &pressed_button_rect, false);
 	gameplay->SetFont(App->font->Sherwood20);
 	((Gui*)gameplay)->SetListener(this);
 	gameplay->SetVisible(false);
@@ -46,7 +48,7 @@ bool S_Options::Awake(pugi::xml_node& conf)
 
 	buttons.push_back(controls);
 	buttons.push_back(video);
-	buttons.push_back(audio);
+	//buttons.push_back(audio);
 	buttons.push_back(gameplay);
 	buttons.push_back(back);
 
@@ -58,7 +60,7 @@ bool S_Options::Start()
 	OptionsLabel->SetVisible(true);
 	controls->SetVisible(true);
 	video->SetVisible(true);
-	audio->SetVisible(true);
+	//audio->SetVisible(true);
 	gameplay->SetVisible(true);
 	back->SetVisible(true);
 
@@ -78,7 +80,7 @@ bool S_Options::Clean()
 	OptionsLabel->SetVisible(false);
 	controls->SetVisible(false);
 	video->SetVisible(false);
-	audio->SetVisible(false);
+	//audio->SetVisible(false);
 	gameplay->SetVisible(false);
 	back->SetVisible(false);
 	return true;
@@ -94,10 +96,12 @@ void S_Options::OnGui(Gui* ui, GuiEvent event)
 	{
 		App->scene->Show(Scene_ID::optionsvideo);
 	}
+	/*
 	if ((ui == (Gui*)audio) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->scene->Show(Scene_ID::optionsaudio);
 	}
+	*/
 	if ((ui == (Gui*)gameplay) && (event == GuiEvent::mouse_lclk_down))
 	{
 		App->scene->Show(Scene_ID::optionsgameplay);
@@ -107,7 +111,7 @@ void S_Options::OnGui(Gui* ui, GuiEvent event)
 		if (((S_InGameMenu*)App->scene->InGameMenuScene())->Active())
 			App->scene->Show(Scene_ID::ingamemenu);
 		else
-			App->scene->Show(Scene_ID::mainmenu);
+			App->scene->Hide();
 	}
 }
 

@@ -21,7 +21,7 @@ public:
 	GuiButton* OptionsLabel = nullptr;
 	GuiButton* controls = nullptr;
 	GuiButton* video = nullptr;
-	GuiButton* audio = nullptr;
+	//GuiButton* audio = nullptr;
 	GuiButton* gameplay = nullptr;
 	GuiButton* back = nullptr;
 };
