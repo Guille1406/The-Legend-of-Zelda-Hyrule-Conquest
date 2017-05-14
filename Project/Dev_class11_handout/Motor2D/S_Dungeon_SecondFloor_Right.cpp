@@ -83,7 +83,7 @@ bool S_DungeonSecondFloorRight::Update()
 		App->audio->CleanUp();
 		App->audio->Awake(App->config);
 		App->audio->Start();
-
+		App->enemy->paused = false;
 	}
 
 	if (!App->player->paused)

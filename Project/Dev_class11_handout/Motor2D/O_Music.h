@@ -23,6 +23,7 @@ public:
 		notes[2] = App->audio->LoadFx("audio/fx/note_3.wav");
 		notes[3] = App->audio->LoadFx("audio/fx/note_4.wav");
 
+		
 		object_music = App->audio->LoadFx("audio/fx/Zelda Lullaby.wav");
 	
 	}
@@ -60,7 +61,10 @@ public:
 	}
 	void Action() {
 		App->audio->StopMusic(0);
-		App->audio->PlayFx(object_music);
+		if (music_delay.Read() > 3000) {
+			App->audio->PlayFx(object_music);
+			music_delay.Start();
+		}
 
 	}
 
@@ -70,6 +74,7 @@ public:
 	uint notes[4] = { 0,0,0,0 };
 	uint object_music =0;
 	int count = 0;
+	j1Timer music_delay;
 };
 
 

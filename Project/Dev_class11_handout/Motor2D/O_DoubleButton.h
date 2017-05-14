@@ -5,6 +5,7 @@
 #include "j1Audio.h"
 #include "j1Scene.h"
 #include "Video.h"
+#include "j1Enemy.h"
 class DoubleButton : public Object {
 private:
 	bool triggered = false;
@@ -43,6 +44,8 @@ public:
 	void Action() {
 		if (characters_on == 1) {
 			texture_rect = pressed_button;
+			if(can_reproduce_audio)
+
 			return;
 		}
 
@@ -61,7 +64,8 @@ public:
 				SDL_Rect r = { 0,0,1280,720 };
 				App->videoplayer->PlayVideo("unlock-door.ogv",r);
 				App->videoplayer->video_finished = false;
-				App->scene->puzzle_video_finished = true;				
+				App->scene->puzzle_video_finished = true;		
+				App->enemy->paused = true;
 			}
 			if (!sound) {
 				App->audio->PlayFx(App->audio->secret_sound);
@@ -84,6 +88,7 @@ public:
 	SDL_Rect double_pressed_button = rect_pressed_button;
 	bool sound = false;
 	int cutscene = 0;
+	bool can_reproduce_audio = true;
 
 };
 

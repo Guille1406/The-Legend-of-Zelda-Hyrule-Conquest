@@ -570,16 +570,16 @@ int Arrow::GetLogicArrow(int minus_height, iPoint pos)
 	switch (direction)
 	{
 	case up:
-		i = vector[height - minus_height]->Get(tile_pos.x, tile_pos.y);
-		j = vector[height - minus_height]->Get(tile_pos.x , tile_pos.y );
+		i = vector[height - minus_height]->Get(tile_pos.x, tile_pos.y + 1);
+		j = vector[height - minus_height]->Get(tile_pos.x , tile_pos.y + 1 );
 		break;
 	case down:
 		i = vector[height - minus_height]->Get(tile_pos.x, tile_pos.y );
 		j = vector[height - minus_height]->Get(tile_pos.x , tile_pos.y );
 		break;
 	case left:
-		i = vector[height - minus_height]->Get(tile_pos.x , tile_pos.y);
-		j = vector[height - minus_height]->Get(tile_pos.x , tile_pos.y );
+		i = vector[height - minus_height]->Get(tile_pos.x +1, tile_pos.y );
+		j = vector[height - minus_height]->Get(tile_pos.x +1, tile_pos.y );
 		break;
 	case right:
 		i = vector[height - minus_height]->Get(tile_pos.x , tile_pos.y);
