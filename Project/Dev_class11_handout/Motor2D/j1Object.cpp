@@ -775,7 +775,7 @@ Object * j1Object::CreateNPC(pugi::xml_node object, int height)
 	else if (npc_type_string == "cartel") {
 		temp_npc.npc_type = NPC_Type::cartel;
 		temp_npc.texture_rect = { 144,32,32,32 };
-		temp_npc.dialogue_id_npc = DialogueID::npc_1_with_link_dialogue;
+		temp_npc.dialogue_id_npc = DialogueID::sign_dungeon_entry;
 	}
 	else if (npc_type_string == "navi") {
 		temp_npc.npc_type = NPC_Type::npc_navi;
