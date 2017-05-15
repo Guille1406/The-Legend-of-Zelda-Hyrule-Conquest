@@ -61,20 +61,24 @@ bool j1GameStartMenuBackground::PreUpdate()
 	{
 		if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || (App->input->GetControllerButton(0, 6) == KEY_DOWN) || (App->input->GetControllerButton(1, 6) == KEY_DOWN)) {
 			ingamenushow = !ingamenushow;
-			App->player->paused = !App->player->paused;
-			App->enemy->paused = !App->enemy->paused;
-			App->collision->paused = !App->collision->paused;
-			App->pathfinding->paused = !App->pathfinding->paused;
 		}
 		if (((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) || (App->input->GetControllerButton(0, 6) == KEY_DOWN) || (App->input->GetControllerButton(1, 6) == KEY_DOWN)) && (ingamenushow))
 		{
 			App->scene->Show(Scene_ID::ingamemenu);
 			Freeze(false);
+			App->player->paused = true;
+			App->enemy->paused = true;
+			App->collision->paused = true;
+			App->pathfinding->paused = true;
 		}
 		if (((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) || (App->input->GetControllerButton(0, 6) == KEY_DOWN) || (App->input->GetControllerButton(1, 6) == KEY_DOWN)) && (!ingamenushow))
 		{
 			App->scene->Hide();
 			Freeze(true);
+			App->player->paused = false;
+			App->enemy->paused = false;
+			App->collision->paused = false;
+			App->pathfinding->paused = false;
 		}
 	}
 	return true;
