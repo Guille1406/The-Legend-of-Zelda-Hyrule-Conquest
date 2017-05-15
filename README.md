@@ -68,19 +68,97 @@ Finally they will have to infiltrate in the castle to be able to release it of t
  
  ### Debug Shortcuts
  F1: Toggle visibility of colliders
-  
- F2: Restart Game
  
+ F2: teleport Tutorial
+
+ F3: teleport village
+
+ F4: teleport color puzzle
+
+ F5: teleport boss
+
+ F6: teleport after color puzzle
+
+ F7: teleport music puzzle
+
+ F8: teleport summit
+
  F9: Togle visibility performance window
- 
+
  F10: Report a bug
- 
+
  F11: Screenshot
  
  
  ## CHANGELOG
+  #0.7
+  
+New features
+
+-new videos
+
+-new village
+
+-added savepoints (fairies)
+
+-added heart containers
+
+-full map
+
+ #0.6
  
+New features
+
+-Added improved art for the dialogues
+
+-Npcs are now implemented (just some of them)
+
+-Boss level added.
+
+-All scenes are implemented
+
+-Zelda is now a playable character (instead of blue link).
+
+-all enemy types can be tested in the a testinc scene.
+
+-Cutscenes added. They are placeholders, and will be improved for the next versions.
+
+-Credits added.
+
+-Death scene added.
+
+-Players can now choose between two control patterns.
+
+-Amazing video intro added.
+
+ #0.5
  
+Cutscenes added
+
+Map Sewers exit if the player finishes the tutorial.
+
+Color and sound puzzle added(inside dungeon).
+
+Movable blocks puzzle added.
+
+Village added- F3 (botton to access).
+
+Forest map added (player can't access).
+
+Image npc/player dialogue implemented.
+
+Object animations.
+
+ #0.4
+ 
+-Boss Added- F5
+
+-Dungeon Added -F3
+
+-Enemies testing - F8
+
+With this bottons you can enter to this rooms.
+
  # 0.3.1
  
  -Bugs fixed & improve game
