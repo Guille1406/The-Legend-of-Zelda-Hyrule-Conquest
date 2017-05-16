@@ -126,7 +126,9 @@ bool S_TempBossRoom::PostUpdate()
 		}
 		if (App->enemy->Final_Boss != nullptr) {
 			if (App->enemy->Final_Boss->boss_defeated) {
-				App->scene->ChangeScene(Scene_ID::mainmenu);
+				//Play final video
+				//if finished App->scene->ChangeScene(Scene_ID::credits);
+				App->scene->ChangeScene(Scene_ID::credits);
 			}
 		}
 	}
