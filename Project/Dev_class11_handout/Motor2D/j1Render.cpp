@@ -179,18 +179,22 @@ void j1Render::Draw()
 		if(App->map->active)
 			App->map->Draw(i);
 
-		if(App->object->active)
+		/*if(App->object->active)
 			App->object->Draw(i);
-
+*/
 		if (App->enemy->Final_Boss != nullptr)
 			if (App->enemy->Final_Boss->im_active)
 				App->enemy->Final_Boss->Draw(i);
 
 		for (int n = 0; n < App->map->data.height; n++) {
+
+			if (App->object->active)
+				App->object->Draw(i,n);
 			if (App->enemy->active)
 				App->enemy->Draw(i,n);
 			if (App->player->active)
 				App->player->Draw(i,n);
+			
 		}
 	}
 }

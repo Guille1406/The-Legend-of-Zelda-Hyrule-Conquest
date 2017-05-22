@@ -112,7 +112,7 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
-	void Draw(int height);
+	void Draw(int height, int n);
 
 	int GetLogic(int minus_height, iPoint pos, bool is_horitzontal);
 
