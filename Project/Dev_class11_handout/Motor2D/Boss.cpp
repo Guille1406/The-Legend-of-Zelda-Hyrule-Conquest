@@ -300,11 +300,9 @@ void Boss::ExecuteEvent()
 			Attack(App->player->Link);		
 	}
 		if (state == boss_attack_zelda) {
-			if (actual_phase == boss_phase_1)
-				Attack(App->player->Zelda);
-			else {
+			
 				LaserAttack();
-			}
+			
 		}
 		if (state == boss_attack_both) {
 			Attack(App->player->Link);
