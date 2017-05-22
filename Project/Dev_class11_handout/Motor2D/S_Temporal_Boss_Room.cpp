@@ -129,6 +129,7 @@ bool S_TempBossRoom::PostUpdate()
 				//Play final video
 				//if finished App->scene->ChangeScene(Scene_ID::credits);
 				App->scene->ChangeScene(Scene_ID::credits);
+				App->scene->win_game_variableforshowcredits = true;
 			}
 		}
 	}

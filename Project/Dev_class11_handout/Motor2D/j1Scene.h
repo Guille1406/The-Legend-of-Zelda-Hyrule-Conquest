@@ -102,6 +102,8 @@ private:
 	SDL_Texture*	death_scene_atlas = nullptr;
 
 public:
+	bool win_game_variableforshowcredits = false;
+
 	bool blocks_out = false;
 	bool heart_1 = true;
 	bool heart_2 = true;
