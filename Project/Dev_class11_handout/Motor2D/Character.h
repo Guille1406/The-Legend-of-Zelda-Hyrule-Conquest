@@ -142,6 +142,8 @@ public:
 	bool						doing_script = false;
 	j1Timer roll_timer;
 	j1Timer collision_by_enemy_timmer;
+
+	int jump_final_pos = 0;
 private:
 
 	//For jump

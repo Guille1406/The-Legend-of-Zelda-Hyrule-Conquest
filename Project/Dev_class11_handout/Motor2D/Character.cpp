@@ -392,7 +392,7 @@ bool Character::MoveDiagonalFunction(float dt, int & pos_one, int & pos_two, boo
 
 void Character::JumpFunction(float dt, int& pos, bool add)
 {
-	static int final_pos = 0;
+	
 	//with "temp" we calculate the final position of the jump just one time
 	// "i" is used for changing the sign of the operation
 	static bool cant_jump = false;
@@ -400,8 +400,8 @@ void Character::JumpFunction(float dt, int& pos, bool add)
 	if (!add)
 		i = -1;
 
-	if (!jump_temp) {
-		final_pos = pos + (i * JUMP_DISTANCE);
+	if (!this->jump_temp) {
+		jump_final_pos = pos + (i * JUMP_DISTANCE);
 		float Scale = App->win->GetScale();
 		if (this->pos.x + i*JUMP_DISTANCE> (-App->render->camera.x / Scale + App->render->camera.w / Scale) || this->pos.x < -App->render->camera.x / Scale) {
 			//this->pos = actual_pos;
@@ -416,7 +416,7 @@ void Character::JumpFunction(float dt, int& pos, bool add)
 	}
 	jump_temp = true;
 
-	if (( i * pos <  i*final_pos) && !cant_jump) {
+	if (( i * pos <  i*jump_final_pos) && !cant_jump) {
 		pos = pos + (i * 4);
 	}
 	// if player reached the final pos, player height decreases 1
