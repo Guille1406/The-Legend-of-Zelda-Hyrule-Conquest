@@ -175,12 +175,11 @@ void Boss::GetEvent()
 			break;
 		case boss_phase_2:
 			
-				if ((dist_link <= dist_zelda || dist_zelda<120) && state != boss_attack_zelda)
-					if(dist_link >120)
-					state = boss_attack_link;
-				else if (state != boss_attack_link)
-					if(dist_zelda >120 && dist_zelda < 400)
-					state = boss_attack_zelda;
+			if (dist_link <= 300 && dist_link >120 && state != boss_attack_zelda)
+				state = boss_attack_link;
+			else if (dist_zelda <= 300 && dist_zelda >120 && App->player->Zelda->logic_height == 0 && state != boss_attack_link)
+				state = boss_attack_zelda;
+			break;
 			
 			break;
 		case boss_phase_3:
