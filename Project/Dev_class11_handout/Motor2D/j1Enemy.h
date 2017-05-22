@@ -21,6 +21,7 @@ enum EnemyState {
 	jumping =2,
 	stunned =3,
 	push_back_enemy_bomb=3,
+	enemy_dying,
 
 };
 
@@ -154,12 +155,14 @@ public:
 	Animation Enemies_Appear;
 
 	std::vector<Enemy*> V_MyEnemies;
+	std::queue<iPoint> V_DeadPos;
 	SDL_Texture* green_soldier_tex=nullptr;
 	bool appear_enemies = false;
 	uint one_time_appear = 0;
 	uint enemy_dies_audio=0;
 	uint enemy_pathfinding_audio = 0;
 	Boss* Final_Boss = nullptr;
+
 
 
 	int green_enemy_id = 0;

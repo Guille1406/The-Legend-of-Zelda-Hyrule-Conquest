@@ -19,7 +19,7 @@
 bool j1Enemy::Awake(pugi::xml_node &)
 {
 	Frame smoke_frame;
-	smoke_frame.pivot = { 0,0 };
+	smoke_frame.pivot = { 40,40 };
 	smoke_frame.rect = { 187,501,94,81 };
 	Enemies_Appear.PushBack(smoke_frame);
 	smoke_frame.rect = { 282,501,94,81 };
@@ -39,7 +39,7 @@ bool j1Enemy::Awake(pugi::xml_node &)
 	smoke_frame.rect = { 940,501,94,81 };
 	Enemies_Appear.PushBack(smoke_frame);
 	Enemies_Appear.speed = 0.0f;
-	
+	Enemies_Appear.loop = false;
 	return true;
 }
 bool j1Enemy::Start()
@@ -85,6 +85,7 @@ bool j1Enemy::PreUpdate()
 	if (!paused) {
 		for (int i = 0; i < V_MyEnemies.size(); i++) {
 			if (V_MyEnemies[i]->tokill == true) {
+				V_DeadPos.push(V_MyEnemies[i]->pos);
 				if (V_MyEnemies[i]->collider->type == collider_enemy)
 					V_MyEnemies[i]->DropObject();
 					V_MyEnemies[i]->collider->to_delete = true;
@@ -108,7 +109,6 @@ bool j1Enemy::Update(float dt)
 	BROFILER_CATEGORY("j1Enemy Update", Profiler::Color::LightYellow);
 	for (int i = 0; i < V_MyEnemies.size(); i++)
 		if (!paused) {
-
 			V_MyEnemies[i]->UpdateState();
 			V_MyEnemies[i]->Rang_Player();
 			V_MyEnemies[i]->collider->rect.x = V_MyEnemies[i]->pos.x;
@@ -116,6 +116,19 @@ bool j1Enemy::Update(float dt)
 			Update_Sword_Collision(V_MyEnemies[i]);
 			V_MyEnemies[i]->Action();
 		}
+	if (!paused) {
+		if (V_DeadPos.size() > 0) {
+			iPoint p = V_DeadPos.front();
+			if (Enemies_Appear.Finished() == false) {
+				Enemies_Appear.speed = 0.3f;
+				App->render->Blit(App->object->objects_texture, p.x - 94 / 2, p.y - 81 / 2, &Enemies_Appear.GetCurrentFrame().rect);
+			}
+			else {
+				V_DeadPos.pop();
+				Enemies_Appear.Reset();
+			}
+		}
+	}
 
 	return true;
 }
@@ -635,6 +648,7 @@ int Enemy::GetLogicEnemy(int minus_height, iPoint pos)
 
 void Enemy::UpdateState()
 {
+
 	if (enemy_doing_script == false) {
 		if (player_in_range == nullptr) {
 				state = EnemyState::doing_path;
