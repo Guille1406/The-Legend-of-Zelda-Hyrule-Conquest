@@ -79,29 +79,30 @@ void P_Zelda::CreateArrow(SDL_Rect rect)
 	Vec_Arrow.push_back(temp_arrow);
 }
 
-void P_Zelda::UpdateArrows()
+void P_Zelda::UpdateArrows(int height)
 {
 	int arrow_speed = 10;
 	for (uint i = 0; i < Vec_Arrow.size(); i++) {
-		
-		if (Vec_Arrow[i]->can_move) {
-		Vec_Arrow[i]->Check_Wall();
-		Vec_Arrow[i]->collider->SetPos(Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
-		}
-		else {
-			if (Vec_Arrow[i]->is_attached) {
-				Vec_Arrow[i]->pos.x = Vec_Arrow[i]->attached_enemy->pos.x + Vec_Arrow[i]->offset.x;
-				Vec_Arrow[i]->pos.y = Vec_Arrow[i]->attached_enemy->pos.y + Vec_Arrow[i]->offset.y;
+		if (height == Vec_Arrow[i]->logic_height) {
+			if (Vec_Arrow[i]->can_move) {
+				Vec_Arrow[i]->Check_Wall();
 				Vec_Arrow[i]->collider->SetPos(Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
 			}
-		}
-		App->render->Blit(Vec_Arrow[i]->entity_texture, Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, &Vec_Arrow[i]->arrow_rect);
+			else {
+				if (Vec_Arrow[i]->is_attached) {
+					Vec_Arrow[i]->pos.x = Vec_Arrow[i]->attached_enemy->pos.x + Vec_Arrow[i]->offset.x;
+					Vec_Arrow[i]->pos.y = Vec_Arrow[i]->attached_enemy->pos.y + Vec_Arrow[i]->offset.y;
+					Vec_Arrow[i]->collider->SetPos(Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, App->player->Zelda->GetLogicHeightPlayer());
+				}
+			}
+			App->render->Blit(Vec_Arrow[i]->entity_texture, Vec_Arrow[i]->pos.x, Vec_Arrow[i]->pos.y, &Vec_Arrow[i]->arrow_rect);
 
-		if (SDL_GetTicks() - Vec_Arrow[i]->timer > 1000) {
-			if(Vec_Arrow[i]->collider != nullptr && Vec_Arrow[i]->collider->type == collider_arrow)
-			Vec_Arrow[i]->collider->to_delete = true;
-			Vec_Arrow.erase(Vec_Arrow.begin() + i);
-			i--;
+			if (SDL_GetTicks() - Vec_Arrow[i]->timer > 1000) {
+				if (Vec_Arrow[i]->collider != nullptr && Vec_Arrow[i]->collider->type == collider_arrow)
+					Vec_Arrow[i]->collider->to_delete = true;
+				Vec_Arrow.erase(Vec_Arrow.begin() + i);
+				i--;
+			}
 		}
 	}
 }
@@ -405,7 +406,7 @@ player_event P_Zelda::GetEvent()
 			*/
 
 			if (is_picked) {
-				static bool can_throw = false;
+				
 				actual_event = pick;
 				ChangeLogicHeightPlayer(App->player->Link->GetLogicHeightPlayer() + 1);
 				pos = App->player->Link->pos;

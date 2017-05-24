@@ -60,7 +60,7 @@ public:
 	void Attack(float dt);
 	void ThrowFunction(float dt, int &pos, bool add, bool is_horitzontal);
 	void CreateArrow(SDL_Rect);
-	void UpdateArrows();
+	void UpdateArrows(int height);
 	player_event GetEvent();
 
 public:
@@ -73,6 +73,7 @@ public:
 	uint Arrow_Audio = 0;
 	uint Arrow_Hit_Wall_Audio = 0;
 	std::vector<Arrow*> Vec_Arrow;
+	bool can_throw = false;
 };
 
 #endif

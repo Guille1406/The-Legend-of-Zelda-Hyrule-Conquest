@@ -80,6 +80,7 @@ bool j1Player::Start()
 	Zelda->is_rolling = false;
 	Zelda->can_jump = false;
 	Zelda->can_move = true;
+	Zelda->can_throw = false;
 	
 	//TEMP
 
@@ -138,7 +139,7 @@ bool j1Player::Update(float dt)
 		Zelda->collision->SetPos(Zelda->pos.x, Zelda->pos.y, Zelda->GetLogicHeightPlayer());
 		Link->UpdateColliderFront();
 		Zelda->UpdateColliderFront();
-		Zelda->UpdateArrows();
+		
 	}
 	return true;
 }

@@ -439,7 +439,7 @@ void Character::JumpFunction(float dt, int& pos, bool add)
 void Character::RollFunction(float dt, int & pos, bool add)
 {
 	
-	static int final_pos = 0;
+	
 	iPoint actual_pos = this->pos;
 	bool end_roll = false;
 	//same as jump function
@@ -448,7 +448,7 @@ void Character::RollFunction(float dt, int & pos, bool add)
 		i = -1;
 
 	if (!temp)
-		final_pos = pos + (i * JUMP_DISTANCE);
+		roll_final_pos = pos + (i * JUMP_DISTANCE);
 	temp = true;
 
 	float Scale = App->win->GetScale();
@@ -461,7 +461,7 @@ void Character::RollFunction(float dt, int & pos, bool add)
 		end_roll = true;
 	}
 	//if player have wall in front the roll will stop
-	if ((i * pos <  i*final_pos) && GetLogic(false, tilepos) == 0  && !end_roll) {
+	if ((i * pos <  i*roll_final_pos) && GetLogic(false, tilepos) == 0  && !end_roll) {
 		pos = pos + (i * 4);
 	}
 	else {
@@ -541,7 +541,7 @@ void Character::Direction_Push_Election()
 void Character::Player_Hurt_Displacement(int & pos, bool add)
 {
 
-	static int final_pos = 0;
+	
 	static bool cant_be_pushed = false;
 	//same as jump function
 	int i = 1;
@@ -549,7 +549,7 @@ void Character::Player_Hurt_Displacement(int & pos, bool add)
 		i = -1;
 
 	if (!temp) {
-		final_pos = pos + (i * PUSH_DISTANCE);
+		hurt_final_pos = pos + (i * PUSH_DISTANCE);
 		float Scale = App->win->GetScale();
 		if (this->pos.x + (i * PUSH_DISTANCE)> (-App->render->camera.x / Scale + App->render->camera.w / Scale) || this->pos.x < -App->render->camera.x / Scale) {
 			//this->pos = actual_pos;
@@ -565,7 +565,7 @@ void Character::Player_Hurt_Displacement(int & pos, bool add)
 	temp = true;
 
 	//if player have wall in front the roll will stop
-	if ((i * pos <  i*final_pos) && GetBehindLogic(false, tilepos) == 0 && !cant_be_pushed) {
+	if ((i * pos <  i*hurt_final_pos) && GetBehindLogic(false, tilepos) == 0 && !cant_be_pushed) {
 		pos = pos + (i * 4);
 	}
 	else if (cant_be_pushed) {

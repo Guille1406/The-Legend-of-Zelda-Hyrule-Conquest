@@ -144,6 +144,8 @@ public:
 	j1Timer collision_by_enemy_timmer;
 
 	int jump_final_pos = 0;
+	int roll_final_pos = 0;
+	int hurt_final_pos = 0;
 private:
 
 	//For jump
