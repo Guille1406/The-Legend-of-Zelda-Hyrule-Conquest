@@ -204,7 +204,7 @@ bool j1Collision::Update(float dt)
 	if (!paused) {
 		Collider* c1;
 		Collider* c2;
-
+		/*
 		for (uint i = 0; i < colliders.size(); ++i)
 		{
 
@@ -213,7 +213,7 @@ bool j1Collision::Update(float dt)
 				continue;
 
 			c1 = colliders[i];
-			if (c1->type == COLLIDER_TYPE::collider_colour_block )
+			//if (c1->type == COLLIDER_TYPE::collider_colour_block )
 				continue;
 			for (uint n = colliders.size(); n < MAX_COLLIDERS; n++) {
 				c1->state_collider[n] = not_colliding;
@@ -276,7 +276,7 @@ bool j1Collision::Update(float dt)
 				}
 			}
 		}
-
+		*/
 		DebugDraw();
 	}
 	return true;

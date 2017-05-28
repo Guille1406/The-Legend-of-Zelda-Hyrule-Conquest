@@ -76,7 +76,7 @@ bool j1Object::Update(float)
 bool j1Object::PostUpdate()
 {
 
-
+	/*
 	for (int i = 0; i < V_Objects.size(); i++) {
 		if (V_Objects[i]->tokill == true) {
 			V_Objects[i]->collider->to_delete = true;
@@ -85,7 +85,7 @@ bool j1Object::PostUpdate()
 		}
 	}
 
-
+	*/
 
 	/*for (int i = 0; i < V_Objects.size(); i++) {
 		if (V_Objects[i]->type == objectType::warp) {
@@ -116,12 +116,12 @@ bool j1Object::CleanUp()
 	return true;
 }
 
-void j1Object::Draw(int height, int n)
+void j1Object::Draw(int height)
 {
 	for (int i = 0; i < V_Objects.size(); i++) {
 		Object* object = V_Objects[i];
 		if (object->type == objectType::npc) {
-			if ((object->rect.y / 16 +1) == n &&  object->logic_height == height) {
+			if ( object->logic_height == height) {
 				if (((O_NPC*)object)->npc_type == NPC_Type::npc_enmasked)
 					App->render->Blit(npc_objects_tex, object->rect.x - object->rect.w / 2 + 10, object->rect.y - object->rect.h, &object->texture_rect);
 				if (((O_NPC*)object)->npc_type == NPC_Type::npc_ric)
@@ -134,7 +134,7 @@ void j1Object::Draw(int height, int n)
 					App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
 			}
 		}
-		else if (object->active && object->logic_height == height  && object->rect.y/16 == n)
+		else if (object->active && object->logic_height == height )
 			App->render->Blit(object->entity_texture, object->rect.x, object->rect.y, &object->texture_rect);
 	}
 }
