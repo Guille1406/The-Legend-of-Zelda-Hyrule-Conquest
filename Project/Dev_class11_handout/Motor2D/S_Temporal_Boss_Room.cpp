@@ -33,6 +33,7 @@ bool S_TempBossRoom::Start()
 
 	App->enemy->Final_Boss = new Boss();
 	App->enemy->Final_Boss->im_active = true;
+	App->enemy->Final_Boss->is_testing = true;
 	//PAUSE FALSE
 	App->player->paused = true;
 	App->enemy->paused = false;

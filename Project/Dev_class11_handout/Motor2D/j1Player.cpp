@@ -163,6 +163,14 @@ bool j1Player::PostUpdate()
 			App->player->Zelda->logic_height = 1;
 		}
 
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) { //PUZZLE COLOR
+			App->scene->ChangeScene(Scene_ID::testenemies);
+			//App->player->Link->pos = { 800,200 };
+			//App->player->Zelda->pos = { 800,200 };
+			App->player->Link->logic_height = 0;
+			App->player->Zelda->logic_height = 0;
+		}
+
 		if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) { //PUZZLE COLOR
 			App->scene->ChangeScene(Scene_ID::secret_exit);
 			App->player->Link->pos = { 800,200 };

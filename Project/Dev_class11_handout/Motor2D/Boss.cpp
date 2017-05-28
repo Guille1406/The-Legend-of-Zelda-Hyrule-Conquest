@@ -158,9 +158,9 @@ void Boss::GetEvent()
 	iPoint diference_point_zelda = { App->player->Zelda->pos.x - centre_pos.x,App->player->Zelda->pos.y - centre_pos.y };
 	dist_link = (int)(sqrt(diference_point_link.x *diference_point_link.x + diference_point_link.y * diference_point_link.y));
 	dist_zelda = (int)(sqrt(diference_point_zelda.x *diference_point_zelda.x + diference_point_zelda.y * diference_point_zelda.y));
-	if (dist_link > 300 && (dist_zelda > 300 || App->player->Zelda->logic_height == 1) && can_move) {
-		if ((centre_pos.x > 86 * 16 || App->player->Link->pos.x > centre_pos.x) && (centre_pos.x < 120 * 16 || App->player->Link->pos.x < centre_pos.x)) {
-			if ((centre_pos.y < 95 * 16 || App->player->Link->pos.y < centre_pos.y) && (centre_pos.y > 74 * 16 || App->player->Link->pos.y > centre_pos.y)) {
+	if (dist_link > 300 && (dist_zelda > 300 || App->player->Zelda->logic_height == 1) && can_move ) {
+		if (((centre_pos.x > 86 * 16 || App->player->Link->pos.x > centre_pos.x) && (centre_pos.x < 120 * 16 || App->player->Link->pos.x < centre_pos.x) ) || is_testing) {
+			if (((centre_pos.y < 95 * 16 || App->player->Link->pos.y < centre_pos.y) && (centre_pos.y > 74 * 16 || App->player->Link->pos.y > centre_pos.y)) || is_testing) {
 				state = boss_move;
 			}
 		}

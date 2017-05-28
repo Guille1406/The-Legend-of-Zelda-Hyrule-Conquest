@@ -76,7 +76,7 @@ bool j1Object::Update(float)
 bool j1Object::PostUpdate()
 {
 
-	/*
+	
 	for (int i = 0; i < V_Objects.size(); i++) {
 		if (V_Objects[i]->tokill == true) {
 			V_Objects[i]->collider->to_delete = true;
@@ -85,7 +85,7 @@ bool j1Object::PostUpdate()
 		}
 	}
 
-	*/
+	
 
 	/*for (int i = 0; i < V_Objects.size(); i++) {
 		if (V_Objects[i]->type == objectType::warp) {

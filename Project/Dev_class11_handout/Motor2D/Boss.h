@@ -141,8 +141,8 @@ public:
 	int dist_link = 0;
 	int dist_zelda = 0;
 
-	//SOUNDS
-	
+
+	bool is_testing = false;
 };
 
 class Foot : public Entity {

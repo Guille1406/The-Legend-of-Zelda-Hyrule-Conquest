@@ -30,7 +30,11 @@ bool S_Enemy_Test_Scene::Start()
 
 
 
+	App->enemy->Final_Boss = new Boss();
+	App->enemy->Final_Boss->im_active = true;
 
+	App->player->Link->pos = App->enemy->Final_Boss->centre_pos;
+	App->player->Zelda->pos = App->enemy->Final_Boss->centre_pos;
 	//PAUSE FALSE
 	App->player->paused = false;
 	App->enemy->paused = false;
@@ -38,7 +42,7 @@ bool S_Enemy_Test_Scene::Start()
 	App->pathfinding->paused = false;
 
 
-	if (App->map->Load("Enemy_Map.tmx") == true)
+	if (App->map->Load("TempBossMap.tmx") == true)
 
 	{
 		int w, h = 0;
@@ -63,13 +67,14 @@ bool S_Enemy_Test_Scene::Start()
 	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 0);
 	App->audio->VolumeMusic(100);
 
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
+	//App->render->camera.x = 0;
+	//App->render->camera.y = 0;
 
-	App->player->Link->pos = { 660,1200 };
-	App->player->Zelda->pos = { 620,1200 };
+	App->player->Link->pos = { 0,0 };
+	App->player->Zelda->pos = { 0,0 };
 	App->player->Link->logic_height = 0;
 	App->player->Zelda->logic_height = 0;
+	App->enemy->Final_Boss->is_testing = true;
 	App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
 	LOG("World Open");
 
@@ -78,6 +83,7 @@ bool S_Enemy_Test_Scene::Start()
 
 bool S_Enemy_Test_Scene::Update()
 {
+	App->enemy->Final_Boss->UpdateLegs();
 	if (!App->player->paused)
 
 	return true;
