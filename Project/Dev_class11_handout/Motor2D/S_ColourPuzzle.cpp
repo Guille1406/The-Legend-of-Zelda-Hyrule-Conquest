@@ -17,6 +17,7 @@
 #include"j1GameStartMenuBack.h"
 #include "S_InGameMenu.h"
 #include "O_ColourBlock.h"
+#include "O_DoubleButton.h"
 bool S_ColourPuzzle::Start()
 {
 	scene_str = "Van Ruhda Quest";
@@ -72,6 +73,14 @@ bool S_ColourPuzzle::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	for (uint i = 0; i < App->object->V_Objects.size(); i++) {
+		if (App->object->V_Objects[i]->type == objectType::double_button) {
+			DoubleButton* temp = (DoubleButton*)App->object->V_Objects[i];
+			temp->idle_button = rect_double_red_button_idle;
+			temp->pressed_button = rect_double_red_button_one;
+			temp->double_pressed_button = rect_double_red_button_pressed;
+		}
+	}
 	//App->player->Link->pos = { 660,1200 };
 	//App->player->Zelda->pos = { 620,1200 };
 	App->player->Link->logic_height = 0;

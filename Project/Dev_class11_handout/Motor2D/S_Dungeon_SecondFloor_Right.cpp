@@ -12,6 +12,7 @@
 #include "S_InGameMenu.h"
 #include "S_Dungeon_SecondFloor_Right.h"
 #include "Video.h"
+#include "O_DoubleButton.h"
 
 bool S_DungeonSecondFloorRight::Start()
 {
@@ -60,6 +61,14 @@ bool S_DungeonSecondFloorRight::Start()
 		}
 		RELEASE_ARRAY(data);
 		//App->map->CreateLogicMap();
+	}
+	for (uint i = 0; i < App->object->V_Objects.size(); i++) {
+		if (App->object->V_Objects[i]->type == objectType::double_button) {
+			DoubleButton* temp = (DoubleButton*)App->object->V_Objects[i];
+			temp->idle_button = rect_double_red_button_idle;
+			temp->pressed_button = rect_double_red_button_one;
+			temp->double_pressed_button = rect_double_red_button_pressed;
+		}
 	}
 
 	App->audio->PlayMusic("audio/music/Dungeon.ogg", 0);

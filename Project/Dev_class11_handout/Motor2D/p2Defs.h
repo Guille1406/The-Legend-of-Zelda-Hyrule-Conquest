@@ -141,4 +141,9 @@ static const SDL_Rect rect_bush = { 0,336,32,32 };
 static const SDL_Rect rect_double_button_music_pressed = { 256,272,64,64 };
 static const SDL_Rect rect_double_button_music_one = { 320,272,64,64 };
 static const SDL_Rect rect_double_button_music_idle = { 384,272,64,64 };
+
+static const SDL_Rect rect_double_red_button_pressed = { 448,272,64,64 };
+static const SDL_Rect rect_double_red_button_one = { 512,272,64,64 };
+static const SDL_Rect rect_double_red_button_idle = { 576,272,64,64 };
+
 #endif
