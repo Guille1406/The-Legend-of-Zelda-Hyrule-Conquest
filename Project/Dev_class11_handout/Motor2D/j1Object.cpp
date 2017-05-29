@@ -684,42 +684,44 @@ Object * j1Object::CreateHeartContainer(pugi::xml_node object, int height)
 		attribute = attribute.next_sibling();
 	}
 	temp_heart.heart_id = attribute.attribute("value").as_int();
-
+	
 	Object* ret = nullptr;
-	if (temp_heart.heart_id == 1 && App->scene->heart_1) {
-		ret = new HeartContainer(temp_heart);
-		ret->collider = App->collision->AddCollider(temp_heart.rect, COLLIDER_TYPE::collider_container_heart, (Entity*)ret, this);
+	ret = new HeartContainer(temp_heart);
+	ret->active = false;
 
-		V_Objects.push_back(ret);
+	if (temp_heart.heart_id == 1 && App->scene->heart_1) {
+		
+		ret->collider = App->collision->AddCollider(temp_heart.rect, COLLIDER_TYPE::collider_container_heart, (Entity*)ret, this);
+		ret->active = true;
+		
 	}
 	if (temp_heart.heart_id == 2 && App->scene->heart_2) {
-		ret = new HeartContainer(temp_heart);
+		
 		ret->collider = App->collision->AddCollider(temp_heart.rect, COLLIDER_TYPE::collider_container_heart, (Entity*)ret, this);
-
-		V_Objects.push_back(ret);
+		ret->active = true;
 	}
 
 	if (temp_heart.heart_id == 3 && App->scene->heart_3) {
-		ret = new HeartContainer(temp_heart);
+		
 		ret->collider = App->collision->AddCollider(temp_heart.rect, COLLIDER_TYPE::collider_container_heart, (Entity*)ret, this);
 
-		V_Objects.push_back(ret);
+		ret->active = true;
 	}
 
 	if (temp_heart.heart_id == 4 && App->scene->heart_4) {
-		ret = new HeartContainer(temp_heart);
+		
 		ret->collider = App->collision->AddCollider(temp_heart.rect, COLLIDER_TYPE::collider_container_heart, (Entity*)ret, this);
 
-		V_Objects.push_back(ret);
+		ret->active = true;
 	}
 	if (temp_heart.heart_id == 5 && App->scene->heart_5) {
-		ret = new HeartContainer(temp_heart);
+		
 		ret->collider = App->collision->AddCollider(temp_heart.rect, COLLIDER_TYPE::collider_container_heart, (Entity*)ret, this);
 
-		V_Objects.push_back(ret);
+		ret->active = true;
 	}
 
-
+	V_Objects.push_back(ret);
 	
 	return ret;
 }
