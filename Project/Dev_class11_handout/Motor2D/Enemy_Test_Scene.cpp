@@ -98,7 +98,11 @@ bool S_Enemy_Test_Scene::PostUpdate()
 
 bool S_Enemy_Test_Scene::Clean()
 {
-
+	if (App->enemy->Final_Boss != NULL) {
+		App->enemy->Final_Boss->im_active = false;
+		delete App->enemy->Final_Boss;
+		App->enemy->Final_Boss = NULL;
+	}
 	App->player->Disable();
 	App->enemy->Disable();
 	App->map->Disable();
