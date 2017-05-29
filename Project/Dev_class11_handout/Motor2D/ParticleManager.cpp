@@ -49,11 +49,13 @@ bool ParticleManager::PreUpdate()
 
 bool ParticleManager::Update(float dt)
 {
+	/*
 	//SET FIRE
 	if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 	{
 		Group_Fire.push_back(new P_Fire(nullptr, nullptr, App->input->GetMousePosition(), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(0, -60), Part_Direction::Part_Direc_NULL, 65, 4, true, Wind::Part_Wind_NULL));
 	}
+	*/
 	/*
 	//FIREWORK
 	if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
@@ -61,6 +63,7 @@ bool ParticleManager::Update(float dt)
 		Group_Firework.push_back(new P_Firework(nullptr, nullptr, App->input->GetMousePosition(), SDL_Rect{ 0,8,2,0 }, iPoint(0, 2), fPoint(0, -400), Part_Direction::Part_Direc_NULL, 20, 1, iPoint(1,1), iPoint(1, 4)));
 	}
 	*/
+	/*
 	//EXPLOSIONS
 	if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
 	{
@@ -82,6 +85,7 @@ bool ParticleManager::Update(float dt)
 	{
 		Group_Explosion.push_back(new P_Explosion(nullptr, nullptr, App->input->GetMousePosition(), SDL_Rect{ 0,4,2,0 }, Explosion_Type::SEMICIRCLE_LOWER, iPoint(20, 20), iPoint(10, 2), fPoint(60, 60), Part_Direction::Part_Direc_RANDOM, 22, 4));
 	}
+	*/
 
 	//Iterate all list
 	//Group FOLLOW -------------------------------------------------
