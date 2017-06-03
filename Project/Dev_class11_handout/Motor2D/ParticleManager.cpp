@@ -203,19 +203,25 @@ bool ParticleManager::CleanUp()
 }
 
 //CREATE GROUPS -------------------------------------------------------------------------------------------------------------------------------------
-void ParticleManager::CreateFollow_P(Arrow* arrow_to_follow, iPoint* object_follow, SDL_Rect initial_rect, iPoint area, iPoint timelife, int num_textures, int num_particles, bool active, bool isMouse)
+P_Follow* ParticleManager::CreateFollow_P(Arrow* arrow_to_follow, iPoint* object_follow, SDL_Rect initial_rect, iPoint area, iPoint timelife, int num_textures, int num_particles, bool active, bool isMouse)
 {
-	Group_Follow.push_back(new P_Follow(arrow_to_follow, object_follow, initial_rect, area, timelife, num_textures, num_particles, active, isMouse));
+	P_Follow* ret = new P_Follow(arrow_to_follow, object_follow, initial_rect, area, timelife, num_textures, num_particles, active, isMouse);
+	Group_Follow.push_back(ret);
+	return ret;
 }
 
-void ParticleManager::CreateFire_Particle(Arrow* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, iPoint area, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures, bool active, Wind w_dir)
+P_Fire* ParticleManager::CreateFire_Particle(Arrow* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, iPoint area, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures, bool active, Wind w_dir)
 {
-	Group_Fire.push_back(new P_Fire(arrow_to_follow, object_follow, position_static, initial_rect, area, timelife, speed, p_direction, num_particles, num_textures, active, w_dir));
+	P_Fire* ret = new P_Fire(arrow_to_follow, object_follow, position_static, initial_rect, area, timelife, speed, p_direction, num_particles, num_textures, active, w_dir);
+	Group_Fire.push_back(ret);
+	return ret;
 }
 
-void ParticleManager::CreateExplosion_Particle(Arrow* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, Explosion_Type type, iPoint perimeter, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures)
+P_Explosion* ParticleManager::CreateExplosion_Particle(Arrow* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, Explosion_Type type, iPoint perimeter, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures)
 {
-	Group_Explosion.push_back(new P_Explosion(arrow_to_follow, object_follow, position_static, initial_rect, type, perimeter, timelife, speed, p_direction, num_particles, num_textures));
+	P_Explosion* ret = new P_Explosion(arrow_to_follow, object_follow, position_static, initial_rect, type, perimeter, timelife, speed, p_direction, num_particles, num_textures);
+	Group_Explosion.push_back(ret);
+	return ret;
 }
 /*
 void ParticleManager::CreateFirework_Particle(SceneElement* arrow_to_follow, iPoint* object_follow, iPoint position_static, SDL_Rect initial_rect, iPoint timelife, fPoint speed, Part_Direction p_direction, int num_particles, int num_textures, iPoint next_textures, iPoint last_textures)
