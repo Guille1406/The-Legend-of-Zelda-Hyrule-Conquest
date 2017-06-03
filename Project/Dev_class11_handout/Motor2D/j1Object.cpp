@@ -110,6 +110,8 @@ bool j1Object::CleanUp()
 {
 	App->tex->UnLoad(objects_texture);
 	App->tex->UnLoad(npc_objects_tex);
+	for (std::list<P_Fire*>::iterator item = App->particlemanager->Group_Fire.begin(); item != App->particlemanager->Group_Fire.cend(); ++item)
+		App->particlemanager->DeleteFire_p(((*item)));
 	for (std::vector<Object*>::iterator item = V_Objects.begin(); item != V_Objects.cend(); ++item)
 		RELEASE(*item);
 	V_Objects.clear();
@@ -786,8 +788,9 @@ Object * j1Object::CreateFireParticle(pugi::xml_node object, int height)
 	while (strcmp(attribute.attribute("name").as_string(), "fire_type") && attribute) {
 		attribute = attribute.next_sibling();
 	}
-
-	temp_particles.big_particle_fire = attribute.attribute("value").as_int();
+	int paco= attribute.attribute("value").as_int();
+	temp_particles.big_particle_fire = paco;
+	attribute = object.child("properties").child("property");
 	while (strcmp(attribute.attribute("name").as_string(), "fire_direction") && attribute) {
 		attribute = attribute.next_sibling();
 	}
@@ -799,16 +802,16 @@ Object * j1Object::CreateFireParticle(pugi::xml_node object, int height)
 	else {
 		switch (temp_particles.direction) {
 		case 1:
-
+			App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(0, -60), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
 			break;
 		case 2:
-
+			App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(0, 60), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
 			break;
 		case 3:
-
+			App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(60, 0), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
 			break;
 		case 4:
-
+			App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(-60, 0), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
 			break;
 		}
 	}
