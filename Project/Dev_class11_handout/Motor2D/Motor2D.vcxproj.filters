@@ -298,6 +298,9 @@
     <ClCompile Include="S_Lake.cpp">
       <Filter>Desenvolupament  ========\Scenes\World</Filter>
     </ClCompile>
+    <ClCompile Include="O_FireParticles.cpp">
+      <Filter>Desenvolupament  ========\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -684,6 +687,9 @@
     </ClInclude>
     <ClInclude Include="S_Lake.h">
       <Filter>Desenvolupament  ========\Scenes\World</Filter>
+    </ClInclude>
+    <ClInclude Include="O_FireParticles.h">
+      <Filter>Desenvolupament  ========\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

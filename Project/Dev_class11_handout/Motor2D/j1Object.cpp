@@ -24,9 +24,10 @@
 #include "O_Bush.h"
 #include"j1InputManager.h"
 #include "O_NPC.h"
-
+#include"O_FireParticles.h"
+#include "Particle_Fire.h"
 #include "O_ElectricBall.h"
-
+#include"j1Window.h";
 
 bool j1Object::Start()
 {
@@ -245,6 +246,8 @@ Object* j1Object::CreateObject(char* type_name, pugi::xml_node object, int heigh
 		ret = CreateBush(object, height);
 	else if (!strcmp(type_name, "npc"))
 		ret = CreateNPC(object, height);
+	else if (!strcmp(type_name, "fire_particle"))
+		ret = CreateFireParticle(object, height);
 	else if (!strcmp(type_name, "electric"))
 		ret = CreateElectricBall(object, height);
 
@@ -764,6 +767,34 @@ Object * j1Object::CreateBush(pugi::xml_node object, int height)
 
 	V_Objects.push_back(ret);
 	return ret;
+}
+
+Object * j1Object::CreateFireParticle(pugi::xml_node object, int height)
+{
+	//1-Up  2-Down 3-Right 4-Left
+	Fire_Particles temp_particles;
+	int x = object.attribute("x").as_int();
+	int y = object.attribute("y").as_int();
+	int w = object.attribute("width").as_int();
+	int h = object.attribute("height").as_int();
+	temp_particles.logic_height = height;
+	temp_particles.name = object.attribute("name").as_string();
+	temp_particles.rect.x = x;
+	temp_particles.rect.y = y;
+	temp_particles.type = objectType::fire_particle;
+	pugi::xml_node attribute = object.child("properties").child("property");
+	while (strcmp(attribute.attribute("name").as_string(), "fire_type") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	temp_particles.direction = attribute.attribute("fire_direction").as_int();
+	temp_particles.big_particle_fire = attribute.attribute("fire_type").as_int();
+	Object* ret = new Fire_Particles(temp_particles);
+	V_particles_scene.push_back(ret);
+	V_Objects.push_back(ret);
+	
+	temp_particles.active = true;
+
+	return nullptr;
 }
 
 

@@ -56,7 +56,7 @@ enum objectType {
 	object_music,
 	bridge,
 	bush,
-
+	fire_particle,
 	npc,
 
 	electric_ball,
@@ -141,7 +141,7 @@ public:
 	Object* CreateBridge(pugi::xml_node object, int height);
 	Object* CreateHeartContainer(pugi::xml_node object, int height);
 	Object* CreateBush(pugi::xml_node object, int height);
-
+	Object* CreateFireParticle(pugi::xml_node object, int height);
 	Object* CreateNPC(pugi::xml_node object, int height);
 
 	Object* CreateElectricBall(pugi::xml_node object, int height);
@@ -154,6 +154,7 @@ public:
 	bool Save(pugi::xml_node&) const;
 
 public: 
+	std::vector<Object*> V_particles_scene;
 	std::vector<Object*> V_Objects;
 	SDL_Texture* npc_objects_tex = nullptr;
 	SDL_Texture* objects_texture=	nullptr;
@@ -179,7 +180,8 @@ public:
 
 
 public:
-
+	
+	
 	SDL_Rect rect = {0,0,0,0};
 	bool active=false;
 	objectType type= objectType::nothing;
