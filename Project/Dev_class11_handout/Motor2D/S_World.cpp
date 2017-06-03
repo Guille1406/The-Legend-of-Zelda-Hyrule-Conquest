@@ -41,32 +41,6 @@ bool S_World::Start()
 	App->collision->paused = false;
 	App->pathfinding->paused = false;
 
-	
-	for (int i = 0; i < App->object->V_particles_scene.size(); i++) {
-		Fire_Particles* temp = (Fire_Particles*)App->object->V_particles_scene[i];
-		if (temp->big_particle_fire == 1) {
-			App->particlemanager->CreateFire_Particle(nullptr, &iPoint(temp->rect.x, temp->rect.y), iPoint(temp->rect.x, temp->rect.y), SDL_Rect{ 8,0,2,0 }, iPoint(6, 2), iPoint(6, 6), fPoint(0, -60), Part_Direction::Part_Direc_NULL, 120, 1, true, Wind::Part_Wind_NULL);
-		}
-		else {
-			switch (temp->direction) {
-			case 1:
-
-				break;
-			case 2:
-
-				break;
-			case 3:
-
-				break;
-			case 4:
-
-				break;
-			}
-		}
-	}
-
-	
-
 	//GuiImage* title = App->gui->CreateImage(iPoint(0, 0), &title_rec, false, AddGuiTo::none);
 	//((Gui*)title)->SetListener(this);
 	
@@ -96,6 +70,7 @@ bool S_World::Start()
 			RELEASE_ARRAY(data);
 			//App->map->CreateLogicMap();
 	}
+
 	
 	App->audio->PlayMusic("audio/music/Sewers_Song.ogg", 0);
 	App->audio->VolumeMusic(100);

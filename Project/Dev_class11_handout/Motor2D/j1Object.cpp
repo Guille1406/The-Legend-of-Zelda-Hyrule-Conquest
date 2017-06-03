@@ -786,12 +786,37 @@ Object * j1Object::CreateFireParticle(pugi::xml_node object, int height)
 	while (strcmp(attribute.attribute("name").as_string(), "fire_type") && attribute) {
 		attribute = attribute.next_sibling();
 	}
-	temp_particles.direction = attribute.attribute("fire_direction").as_int();
-	temp_particles.big_particle_fire = attribute.attribute("fire_type").as_int();
+
+	temp_particles.big_particle_fire = attribute.attribute("value").as_int();
+	while (strcmp(attribute.attribute("name").as_string(), "fire_direction") && attribute) {
+		attribute = attribute.next_sibling();
+	}
+	temp_particles.direction = attribute.attribute("value").as_int();
+
+	if (temp_particles.big_particle_fire == true) {
+		App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(0, -60), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
+	}
+	else {
+		switch (temp_particles.direction) {
+		case 1:
+
+			break;
+		case 2:
+
+			break;
+		case 3:
+
+			break;
+		case 4:
+
+			break;
+		}
+	}
+
 	Object* ret = new Fire_Particles(temp_particles);
 	V_particles_scene.push_back(ret);
 	V_Objects.push_back(ret);
-	
+
 	temp_particles.active = true;
 
 	return nullptr;
