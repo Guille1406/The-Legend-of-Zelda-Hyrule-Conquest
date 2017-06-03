@@ -184,9 +184,9 @@ void Boss::GetEvent()
 			break;
 		case boss_phase_3:
 			
-				if (dist_link < 300 && dist_link >120 && (dist_zelda> 300|| dist_zelda<120) && !im_attacking_laser)
+				if (dist_link < 300 && dist_link >120 && (dist_zelda> 300|| dist_zelda<120) && state != boss_attack_zelda)
 					state = boss_attack_link;
-				else if ((dist_link > 300 || dist_link< 120) && dist_zelda < 300 && dist_zelda >120 && !im_attacking)
+				else if ((dist_link > 300 || dist_link< 120) && dist_zelda < 300 && dist_zelda >120 && state != boss_attack_link)
 					state = boss_attack_zelda;
 				else if(dist_link < 300 && dist_link >120 && dist_zelda < 300 && dist_zelda >120)
 					state = boss_attack_both;
@@ -529,6 +529,9 @@ void Boss::LaserAttack()
 	static j1Timer laser_charging_time;
 	static bool first_loop = true;
 
+	int actual_dist = (int)(sqrt(((App->player->Zelda->pos.x - centre_pos.x) * (App->player->Zelda->pos.x - centre_pos.x)) + ((App->player->Zelda->pos.y - centre_pos.y)) * (App->player->Zelda->pos.y - centre_pos.y)));
+
+
 	if (first_loop) {
 		can_move = false;
 		im_attacking_laser = true;
@@ -556,6 +559,19 @@ void Boss::LaserAttack()
 
 	iPoint vect = { 0,0 };
 	float angle = 0;
+
+	bool stop_laser = false;
+
+	if (actual_dist < 140) {
+		laser_charging_time.Start();
+		first_loop = true;
+		if (!im_attacking)
+			can_move = true;
+		im_attacking_laser = false;
+		state = boss_idle;
+		return;
+	}
+
 	if (laser_charging_time.Read() < 2000) {
 		for (float i = 0; i < 1; i += 1.0f / 60.0f) {
 			int x = (focus_eye.x + 4) * (1 - i) + App->player->Zelda->pos.x * i;
