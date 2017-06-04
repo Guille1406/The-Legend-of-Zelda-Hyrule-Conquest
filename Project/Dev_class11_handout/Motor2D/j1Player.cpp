@@ -163,12 +163,16 @@ bool j1Player::PostUpdate()
 			App->player->Zelda->logic_height = 1;
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) { //PUZZLE COLOR
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
 			App->scene->ChangeScene(Scene_ID::testenemies);
 			//App->player->Link->pos = { 800,200 };
 			//App->player->Zelda->pos = { 800,200 };
 			App->player->Link->logic_height = 0;
 			App->player->Zelda->logic_height = 0;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) {
+			god_mode = !god_mode;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) { //PUZZLE COLOR
@@ -482,7 +486,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	}
 	-----------
 	----------*/
-	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_enemy) {
+	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_enemy && !App->player->god_mode) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Link->is_rolling == false) {
 			//roll_timer
@@ -568,7 +572,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 	}
 	-----------
 	-----------*/
-	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_enemy) {
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_enemy && !App->player->god_mode) {
 		Enemy* n_enemy = (Enemy*)collider2->parent;
 		if (Zelda->is_rolling == false) {
 			//roll_timer
@@ -617,7 +621,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 
 	//Bomb explosion Collider doesn't detect the collision with Link
 
-	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::coolider_bomb_explosion) {
+	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::coolider_bomb_explosion && !App->player->god_mode) {
 		Link->actual_event = player_event::push_backwards;
 		Link->doing_script = true;
 		Link->Direction_Push_Election();
@@ -625,7 +629,7 @@ void j1Player::OnCollision(Collider * collider1, Collider * collider2)
 		n_bomb->bomb_collider_explosion->to_delete = true;
 		half_hearts_test_purpose--;
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::coolider_bomb_explosion) {
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::coolider_bomb_explosion && !App->player->god_mode) {
 		Zelda->actual_event = player_event::push_backwards;
 		Zelda->doing_script = true;
 		Zelda->Direction_Push_Election();
@@ -753,7 +757,7 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 		}
 	}
 
-	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_boss_hit) {
+	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_boss_hit && !App->player->god_mode) {
 		//roll_timer
 		//if (Link->roll_timer.Read() > 1500) {
 		if (Link->collision_by_enemy_timmer.Read() > 1500) {
@@ -769,7 +773,7 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 		//}
 
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_boss_hit) {
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_boss_hit && !App->player->god_mode) {
 		//roll_timer
 		//if (Link->roll_timer.Read() > 1500) {
 		if (Zelda->collision_by_enemy_timmer.Read() > 1500) {
@@ -785,7 +789,7 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 		//}
 
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_boss_explosion) {
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_boss_explosion && !App->player->god_mode) {
 		//roll_timer
 		//if (Link->roll_timer.Read() > 1500) {
 		if (Zelda->collision_by_enemy_timmer.Read() > 1500) {
@@ -803,7 +807,7 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 		//}
 
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_boss_explosion) {
+	else if (collider1->type == COLLIDER_TYPE::collider_link && collider2->type == COLLIDER_TYPE::collider_boss_explosion && !App->player->god_mode) {
 		//roll_timer
 		//if (Link->roll_timer.Read() > 1500) {
 		if (Link->collision_by_enemy_timmer.Read() > 1500) {
@@ -819,7 +823,7 @@ void j1Player::StartCollision(Collider * collider1, Collider * collider2)
 		//}
 
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_electric_ball) {
+	else if (collider1->type == COLLIDER_TYPE::collider_zelda && collider2->type == COLLIDER_TYPE::collider_electric_ball && !App->player->god_mode) {
 		Object* temp_object = (Object*)collider2->parent;
 		if (temp_object->active)
 			half_hearts_test_purpose--;

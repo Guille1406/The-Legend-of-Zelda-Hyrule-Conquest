@@ -491,9 +491,9 @@ void j1Enemy::OnCollision(Collider * collider1, Collider * collider2)
 	else if (collider1->type == front_link || collider2->type == front_link)
 		character = App->player->Link;
 
-	if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link) {
+	if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_link && !App->player->god_mode) {
 		Enemy* n_enemy = (Enemy*)collider1->parent;
-		if (App->player->Link->is_rolling == false) {
+		if (App->player->Link->is_rolling == false ) {
 			//if (Link->roll_timer.Read() > 1500) {
 			if (App->player->Link->collision_by_enemy_timmer.Read() > 1500) {
 				App->player->Link->collision_by_enemy_timmer.Start();
@@ -506,7 +506,7 @@ void j1Enemy::OnCollision(Collider * collider1, Collider * collider2)
 			//}
 		}
 	}
-	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_zelda) {
+	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_zelda && !App->player->god_mode) {
 		Enemy* n_enemy = (Enemy*)collider1->parent;
 		if (App->player->Zelda->is_rolling == false) {
 			if (App->player->Link->collision_by_enemy_timmer.Read() > 1500) {
