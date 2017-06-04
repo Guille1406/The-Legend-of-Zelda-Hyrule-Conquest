@@ -113,6 +113,15 @@ void Boss::Draw(int height)
 			App->render->Blit(boss_atlas, centre_pos.x - 38, centre_pos.y - 66, &eye_hit);
 		}
 	}
+
+	if (App->enemy->Enemies_Appear.Finished() == false && finished_laser) {
+		App->enemy->Enemies_Appear.speed = 0.3f;
+		App->render->Blit(App->object->objects_texture,focus_point_before_attack.x-32, focus_point_before_attack.y-32, &App->enemy->Enemies_Appear.GetCurrentFrame().rect);
+	}
+	else if (App->enemy->Enemies_Appear.Finished()) {
+		finished_laser = false;
+		App->enemy->Enemies_Appear.Reset();
+	}
 }
 
 void Boss::UpdateLegs()
@@ -525,7 +534,6 @@ void Boss::LaserAttack()
 	static iPoint focus_eye = eye_1;
 
 
-	static iPoint focus_point_before_attack = { 0,0 };
 	static j1Timer laser_charging_time;
 	static bool first_loop = true;
 
@@ -606,6 +614,7 @@ void Boss::LaserAttack()
 		can_move = true;
 		im_attacking_laser = false;
 		state = boss_idle;
+		finished_laser = true;
 	}
 }
 
@@ -797,6 +806,7 @@ void Foot::Draw()
 		angle = atan2(vect.y, vect.x) * 57.2957795;
 		App->render->Blit(parent_boss->boss_atlas, x, y, &parent_boss->leg_rect,1.0f,angle + 90);
 	}
+	
 
 }
 

@@ -60,6 +60,7 @@ public:
 	bool can_attack = false;
 	bool can_move = true;
 	bool can_recover = true;
+	bool finished_laser = false;
 	//SDL_Texture* boss_texture;
 	//SDL_Texture* laser_texture;
 	Legs* legs;
@@ -98,6 +99,8 @@ public:
 	Object* jump_3;
 	Object* jump_4;
 
+
+	iPoint focus_point_before_attack = { 0,0 };
 	//EYE POS
 	//         114,2
 	// 8,98          220,98
