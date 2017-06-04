@@ -101,6 +101,7 @@ public:
 
 
 	iPoint focus_point_before_attack = { 0,0 };
+	iPoint focus_point_explosion = { 0,0 };
 	//EYE POS
 	//         114,2
 	// 8,98          220,98

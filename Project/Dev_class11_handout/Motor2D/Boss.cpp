@@ -115,8 +115,8 @@ void Boss::Draw(int height)
 	}
 
 	if (App->enemy->Enemies_Appear.Finished() == false && finished_laser) {
-		App->enemy->Enemies_Appear.speed = 0.3f;
-		App->render->Blit(App->object->objects_texture,focus_point_before_attack.x-32, focus_point_before_attack.y-32, &App->enemy->Enemies_Appear.GetCurrentFrame().rect);
+		App->enemy->Enemies_Appear.speed = 0.03f;
+		App->render->Blit(App->object->objects_texture, focus_point_explosion.x-32, focus_point_explosion.y-32, &App->enemy->Enemies_Appear.GetCurrentFrame().rect);
 	}
 	else if (App->enemy->Enemies_Appear.Finished()) {
 		finished_laser = false;
@@ -615,6 +615,7 @@ void Boss::LaserAttack()
 		im_attacking_laser = false;
 		state = boss_idle;
 		finished_laser = true;
+		focus_point_explosion = focus_point_before_attack;
 	}
 }
 
