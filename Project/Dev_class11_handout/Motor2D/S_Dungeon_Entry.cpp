@@ -79,6 +79,23 @@ bool S_DungeonEntry::Start()
 			}
 		}
 	}
+
+	for (int i = 0; i < App->object->V_Objects.size(); i++) {
+		if (App->object->V_Objects[i]->type == objectType::door) {
+			App->object->V_Objects[i]->texture_rect = { 564,0,64,48 };
+			Frame temp_frame;
+			temp_frame.rect = { 0, 0, 0, 0 };
+			temp_frame.pivot = { 0,0 };
+			for (int n = 0; n < 25; n++) {
+				App->object->V_Objects[i]->object_animation.frames[n] = temp_frame;
+			}
+			App->object->V_Objects[i]->object_animation.last_frame = 0;
+			for (int n = 0; n < 6; n++) {
+				temp_frame.rect = { 564+n*64, 0, 64, 48 };
+				App->object->V_Objects[i]->object_animation.PushBack(temp_frame);
+			}
+		}
+	}
 	LOG("World Open");
 	return false;
 }
