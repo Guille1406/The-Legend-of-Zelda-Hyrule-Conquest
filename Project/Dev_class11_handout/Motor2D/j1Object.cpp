@@ -802,16 +802,16 @@ Object * j1Object::CreateFireParticle(pugi::xml_node object, int height)
 	else {
 		switch (temp_particles.direction) {
 		case 1:
-			App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(0, -60), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
+			App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(0, -30), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
 			break;
 		case 2:
-			App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(0, 60), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
+			App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(0, 30), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
 			break;
 		case 3:
-			App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(60, 0), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
+			App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(30, 0), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
 			break;
 		case 4:
-			App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(-60, 0), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
+			App->particlemanager->CreateFire_Particle(nullptr, nullptr, iPoint(x, y), SDL_Rect{ 0,2,2,0 }, iPoint(5, 2), iPoint(12, 4), fPoint(-30, 0), Part_Direction::Part_Direc_NULL, 120, 4, true, Wind::Part_Wind_NULL);
 			break;
 		}
 	}
