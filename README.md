@@ -89,8 +89,29 @@ Finally they will have to infiltrate in the castle to be able to release it of t
 
  F11: Screenshot
  
+ ##WEBSITE
+ 
+ We have a website where our team have explain how the project have been, you can see it there:
+ 
+ https://javiortiz.github.io/The-Lengend-of-Zelda-Hyrule-Conquest/index.html
+ 
  
  ## CHANGELOG
+ 
+ #1.0
+ 
+ Particles added
+ 
+ Bugs fixed
+ 
+ fps improvement
+ 
+ #0.8
+
+Bugs fixed
+
+When you win credits screen is showed.
+
   #0.7
   
 New features
