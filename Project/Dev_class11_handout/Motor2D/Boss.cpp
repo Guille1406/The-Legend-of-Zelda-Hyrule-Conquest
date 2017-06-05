@@ -231,8 +231,8 @@ void Boss::ExecuteEvent()
 	}
 	if (attacking_foot != nullptr) {
 		if (foot_live == 0 && state != boss_state::boss_damaged) {
-			if ((eyes_open <= 2 && actual_phase == boss_phase::boss_phase_1) ||
-				(eyes_open <= 1 && actual_phase == boss_phase::boss_phase_2) ||
+			if ((eyes_open <= 0 && actual_phase == boss_phase::boss_phase_1) ||
+				(eyes_open <= 0 && actual_phase == boss_phase::boss_phase_2) ||
 				(eyes_open <= 0 && actual_phase == boss_phase::boss_phase_3)) {
 				pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 + 32 };
 				CreateColliders();
