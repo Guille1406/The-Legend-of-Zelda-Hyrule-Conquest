@@ -40,7 +40,7 @@ bool S_TempBossRoom::Start()
 	App->collision->paused = false;
 	App->pathfinding->paused = false;
 	SDL_Rect r = { 0,0,1280,720 };
-	App->videoplayer->PlayVideo("Boss video.ogv", r);
+	App->videoplayer->PlayVideo("Final_boss_intro.ogv", r);
 	App->videoplayer->video_finished = false;
 
 	done_second_video = false;
