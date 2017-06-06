@@ -264,8 +264,10 @@ void Boss::ExecuteEvent()
 				App->player->Zelda->logic_height = 0;
 			}
 		}
-		if ((damaged_boss_timer.Read() > 19000 && state == boss_state::boss_damaged)|| can_recover) {
-			
+	
+		if ((damaged_boss_timer.Read() > 20000 && state == boss_state::boss_damaged) || can_recover) {	
+
+
 			is_eye_1_open = true;
 			is_eye_2_open = true;
 			is_eye_3_open = true;
@@ -280,13 +282,11 @@ void Boss::ExecuteEvent()
 			(*eye_particles)->active = true;
 			eye_particles++;
 			(*eye_particles)->active = true;
-			
-		}
-		if ((damaged_boss_timer.Read() > 20000 && state == boss_state::boss_damaged) || can_recover) {			
+
 			DeleteColliders();
 			pos = { (int)round((float)pos.x / 16) * 16 , (int)round((float)pos.y / 16) * 16 - 32 };
 			can_attack = true;
-			//state = boss_idle;
+			state = boss_idle;
 			logic_height = 1;
 			attacking_foot->actual_foot_state == back_to_start;
 			foot_live = 5;
