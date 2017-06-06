@@ -248,7 +248,7 @@ void j1App::FinishUpdate()
 		LoadGameNow();
 
 	// Framerate calculations --
-
+	App->win->SetTitle("The Legend of Zelda Hyrule Conquest, Summit Games");
 	if(last_sec_frame_time.Read() > 1000)
 	{
 		last_sec_frame_time.Start();
@@ -261,7 +261,7 @@ void j1App::FinishUpdate()
 	last_frame_ms = frame_time.Read();
 	frames_on_last_update = prev_last_sec_frame_count;
 
-	App->win->SetTitle("The Legend of Zelda Hyrule Conquest, Summit Games");
+	
 
 	if(capped_ms > 0 && (int)last_frame_ms < capped_ms)
 	{
