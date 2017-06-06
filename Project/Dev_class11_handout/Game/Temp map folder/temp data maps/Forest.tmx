@@ -1043,7 +1043,7 @@
     <property name="type" value="bush"/>
    </properties>
   </object>
-  <object id="71" x="656" y="816" width="32" height="32" rotation="90">
+  <object id="71" x="640" y="816" width="32" height="32" rotation="90">
    <properties>
     <property name="heart" type="int" value="3"/>
     <property name="type" value="container_heart"/>
