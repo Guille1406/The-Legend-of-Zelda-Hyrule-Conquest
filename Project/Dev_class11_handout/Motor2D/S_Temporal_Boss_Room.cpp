@@ -114,7 +114,7 @@ bool S_TempBossRoom::Update()
 
 bool S_TempBossRoom::PostUpdate()
 {
-	if (App->videoplayer->video_finished && done_video_boss == false)
+	if (App->videoplayer->video_finished && done_video_boss == true)
 	{
 		/*if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
 
@@ -138,7 +138,7 @@ bool S_TempBossRoom::PostUpdate()
 				//Play final video
 				//if finished App->scene->ChangeScene(Scene_ID::credits);
 				SDL_Rect r = { 0,0,1280,720 };
-				App->videoplayer->PlayVideo("Credits Sequence.ogv", r);
+				App->videoplayer->PlayVideo("Credits-sequence.ogv", r);
 				App->videoplayer->video_finished = false;
 				App->enemy->Final_Boss->boss_defeated = false;
 				done_second_video = true;
