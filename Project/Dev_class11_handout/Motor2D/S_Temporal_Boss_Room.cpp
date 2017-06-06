@@ -112,15 +112,15 @@ bool S_TempBossRoom::Update()
 
 bool S_TempBossRoom::PostUpdate()
 {
-	if (App->videoplayer->video_finished)
+	if (App->videoplayer->video_finished && done_video_boss == false)
 	{
-		if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
+		/*if (App->player->loop_game_menu == true || App->player->half_hearts_test_purpose <= 0) {
 
 			App->scene->ChangeScene(Scene_ID::Send);
 			App->startmenuback->Freeze(false);
 			App->player->loop_game_menu = false;
 			App->player->half_hearts_test_purpose = App->player->hearts_containers_test_purpose * 2;
-		}
+		}*/
 
 		for (int i = 0; i < App->object->V_Objects.size(); i++) {
 			if (App->object->V_Objects[i]->type == objectType::electric_ball) {
