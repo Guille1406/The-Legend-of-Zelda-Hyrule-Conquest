@@ -17,7 +17,7 @@
         
         
  
- ## DESCRIPTION
+ # DESCRIPTION
  In The Legend Of Zelda: Hyrule Conquest, you must join your partner in a unique adventure in which your synergy when fighting and solving puzzles will make you emerge victorious from each room full of enemies and enigmas.
 
 Link and Zelda will join forces in this multiplayer adventure, completing puzzles for two players and fighting against different enemies. To overcome it you will have available unique weapons for each player being Link a melee character and Zelda a ranged character.
@@ -30,7 +30,19 @@ In the dungeon, you will find even more complicated enemies and a very powerful 
 
 Finally they will have to infiltrate in the castle to be able to release it of the forces of the evil, to finally measure its forces with a very powerful final boss.
 
- ## GAMEPAD CONTROLS (XBOX)
+# How to install
+
+Just download the release and execute the .exe file.
+
+# Win Condition
+
+Kill the final boss and save Hyrule.
+
+# Lose Condition
+
+Get killed by an enemy.
+
+ # GAMEPAD CONTROLS (XBOX)
  
  Player 1: Link
  
@@ -44,9 +56,9 @@ Finally they will have to infiltrate in the castle to be able to release it of t
  
  Left Joystic  - Move Around
  
- ## KEYBOARD CONTROLS
+ # KEYBOARD CONTROLS
  
- ### Link
+ ## Link
  
  W/A/S/D: movement
  
@@ -56,7 +68,7 @@ Finally they will have to infiltrate in the castle to be able to release it of t
  
  B: pick Zelda
  
- ### Zelda
+ ## Zelda
  
  I/J/K/L: movement
  
@@ -66,7 +78,7 @@ Finally they will have to infiltrate in the castle to be able to release it of t
  
  NUMPAD 3: get throwed
  
- ### Debug Shortcuts
+ ## Debug Shortcuts
  F1: Toggle visibility of colliders
  
  F2: teleport Tutorial
@@ -89,16 +101,16 @@ Finally they will have to infiltrate in the castle to be able to release it of t
 
  F11: Screenshot
  
- ##WEBSITE
+ # WEBSITE
  
  We have a website where our team have explain how the project have been, you can see it there:
  
  https://javiortiz.github.io/The-Lengend-of-Zelda-Hyrule-Conquest/index.html
  
  
- ## CHANGELOG
+ # CHANGELOG
  
- #1.0
+ ## 1.0
  
  Particles added
  
@@ -106,13 +118,13 @@ Finally they will have to infiltrate in the castle to be able to release it of t
  
  fps improvement
  
- #0.8
+ ## 0.8
 
 Bugs fixed
 
 When you win credits screen is showed.
 
-  #0.7
+  ## 0.7
   
 New features
 
@@ -126,7 +138,7 @@ New features
 
 -full map
 
- #0.6
+ ## 0.6
  
 New features
 
@@ -152,7 +164,7 @@ New features
 
 -Amazing video intro added.
 
- #0.5
+ ## 0.5
  
 Cutscenes added
 
@@ -170,7 +182,7 @@ Image npc/player dialogue implemented.
 
 Object animations.
 
- #0.4
+ ## 0.4
  
 -Boss Added- F5
 
@@ -180,12 +192,12 @@ Object animations.
 
 With this bottons you can enter to this rooms.
 
- # 0.3.1
+ ## 0.3.1
  
  -Bugs fixed & improve game
 
  
-# 0.3
+## 0.3
 
 -Tutorial Map
 
@@ -212,7 +224,7 @@ With this bottons you can enter to this rooms.
 -Life implemented
 
 
- # 0.2 In this release you can:
+ ## 0.2 In this release you can:
  
 -play multiplayer
 
@@ -227,6 +239,6 @@ With this bottons you can enter to this rooms.
 -Zoom with K & L
 
  
- # 0.1
+ ## 0.1
  Link is moving with collisions
  
