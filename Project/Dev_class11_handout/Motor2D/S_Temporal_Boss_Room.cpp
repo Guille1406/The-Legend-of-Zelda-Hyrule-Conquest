@@ -134,7 +134,7 @@ bool S_TempBossRoom::PostUpdate()
 			}
 		}
 		if (App->enemy->Final_Boss != nullptr) {
-			if (App->enemy->Final_Boss->boss_defeated) {
+			if (App->enemy->Final_Boss->boss_defeated && done_second_video == false) {
 				//Play final video
 				//if finished App->scene->ChangeScene(Scene_ID::credits);
 				SDL_Rect r = { 0,0,1280,720 };

@@ -252,6 +252,7 @@ bool Video::PostUpdate()
 	}
 
 	if (quit) {
+		
 		ResetValues();
 		//SDL_InitSubSystem(SDL_INIT_AUDIO);
 		
