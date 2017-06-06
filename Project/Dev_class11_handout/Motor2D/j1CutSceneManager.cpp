@@ -56,7 +56,7 @@ bool j1CutSceneManager::Awake(pugi::xml_node& config)
 bool j1CutSceneManager::Start()
 {
 
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 5; i++)
 		bool_done_cutscenes.push_back(false);
 	
 	return true;

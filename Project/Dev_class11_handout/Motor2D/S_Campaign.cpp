@@ -77,6 +77,10 @@ void S_Campaign::OnGui(Gui* ui, GuiEvent event)
 		App->scene->ChangeScene(Scene_ID::startcutscenegame);
 		App->scene->Hide();
 		App->particlemanager->Enable();
+		for (int i = 0; i < App->cutscenemanager->bool_done_cutscenes.size(); i++) {
+			App->cutscenemanager->bool_done_cutscenes[i] = false;
+		}
+
 	}
 	if ((ui == (Gui*)loadcampaign) && (event == GuiEvent::mouse_lclk_down))
 	{
