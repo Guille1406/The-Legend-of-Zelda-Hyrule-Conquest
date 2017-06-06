@@ -80,6 +80,8 @@ void S_Campaign::OnGui(Gui* ui, GuiEvent event)
 		for (int i = 0; i < App->cutscenemanager->bool_done_cutscenes.size(); i++) {
 			App->cutscenemanager->bool_done_cutscenes[i] = false;
 		}
+		App->player->hearts_containers_test_purpose = 4;
+		App->player->half_hearts_test_purpose = 8;
 
 	}
 	if ((ui == (Gui*)loadcampaign) && (event == GuiEvent::mouse_lclk_down))
