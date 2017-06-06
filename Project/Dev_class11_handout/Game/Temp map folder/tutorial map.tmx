@@ -31,8 +31,8 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="3845" name="collision tileset" tilewidth="16" tileheight="16" tilecount="1" columns="1">
-  <image source="collision tileset.png" width="16" height="16"/>
+ <tileset firstgid="3845" name="collision tileset" tilewidth="16" tileheight="16" tilecount="13" columns="13">
+  <image source="collision tileset.png" width="221" height="16"/>
  </tileset>
  <layer name="fondo" width="100" height="100">
   <data encoding="csv">
