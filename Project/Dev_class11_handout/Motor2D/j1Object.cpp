@@ -1134,7 +1134,7 @@ void j1Object::OnCollision(Collider * collider1, Collider * collider2)
 
 	}
 
-	else if (collider1->type == npc && collider2->type == front_link) {
+	else if (collider1->type == collider_npc && collider2->type == front_link) {
 		O_NPC* temp = (O_NPC*)collider1->parent;
 		if (temp!=nullptr) {
 			if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN || App->inputM->EventPressed(INPUTEVENT::COVER, 1) == EVENTSTATE::E_REPEAT && !App->player->Link->im_lifting) {
@@ -1144,7 +1144,7 @@ void j1Object::OnCollision(Collider * collider1, Collider * collider2)
 
 	}
 
-	else if (collider1->type == npc && collider2->type == front_zelda) {
+	else if (collider1->type == collider_npc && collider2->type == front_zelda) {
 		O_NPC* temp = (O_NPC*)collider1->parent;
 		if (temp != nullptr) {
 			if (App->input->GetKey(SDL_SCANCODE_KP_1) == KEY_DOWN || App->inputM->EventPressed(INPUTEVENT::COVER, 0) == EVENTSTATE::E_DOWN ) {
