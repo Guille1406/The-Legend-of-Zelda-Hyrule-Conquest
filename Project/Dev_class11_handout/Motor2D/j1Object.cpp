@@ -919,9 +919,14 @@ Object * j1Object::CreateElectricBall(pugi::xml_node object, int height)
 		attribute = attribute.next_sibling();
 	}
 	temp_electric.active_phase = attribute.attribute("value").as_int();
-
+	Frame temp_frame;
+	temp_frame.rect = { 464,192,32,32 };
+	temp_electric.actual_animation.PushBack(temp_frame);
+	temp_frame.rect = { 464 + 32,192,32,32 };
+	temp_electric.actual_animation.PushBack(temp_frame);
 	Object* ret = new ElectricBall(temp_electric);
 	ret->collider = App->collision->AddCollider({ ret->rect }, collider_electric_ball, (Entity*)ret, this);
+	
 	V_Objects.push_back(ret);
 
 	//FindObject("door_1");

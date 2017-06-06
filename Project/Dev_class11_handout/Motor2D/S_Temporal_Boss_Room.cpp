@@ -87,6 +87,11 @@ bool S_TempBossRoom::Start()
 
 bool S_TempBossRoom::Update()
 {
+	for (int i = 0; i < App->object->V_Objects.size(); i++) {
+		if (App->object->V_Objects[i]->type == objectType::electric_ball) {
+			App->object->V_Objects[i]->texture_rect = App->object->V_Objects[i]->actual_animation.GetCurrentFrame().rect;
+		}
+	}
 	if (App->videoplayer->video_finished && done_video_boss == false)
 	{
 		App->audio->CleanUp();

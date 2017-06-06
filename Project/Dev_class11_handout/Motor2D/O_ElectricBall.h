@@ -18,6 +18,8 @@ public:
 		collider_tiles = obj.collider_tiles;
 		//object_animation = obj.object_animation;
 		object_animation.speed = 0.08f;
+		actual_animation = obj.actual_animation;
+		actual_animation.speed = 0.05;
 		texture_rect = { 464,192,32,32 };
 		active_phase = obj.active_phase;
 	}

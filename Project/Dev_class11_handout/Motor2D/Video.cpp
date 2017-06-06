@@ -191,6 +191,7 @@ void Video::PlayVideo(const char *fname, SDL_Rect r)
 
 bool Video::PostUpdate()
 {
+	
 	if (!THEORAPLAY_isDecoding(decoder))
 		video_finished = true;
 	if (want_to_play && !quit && THEORAPLAY_isDecoding(decoder))
@@ -241,12 +242,13 @@ bool Video::PostUpdate()
 
 			THEORAPLAY_freeVideo(video);
 			video = NULL;
-			video_finished = false;
+			
 		}
 
 		// TODO 4: Render the texture. Use SDL_RenderCopy and the rendering rect (if you want).
 		SDL_RenderCopy(App->render->renderer, texture, NULL, &rendering_rect);
 		//App->render->Blit(texture, App->player->Link->pos.y, App->player->Link->pos.y);
+		video_finished = false;
 	}
 
 	if (quit) {
