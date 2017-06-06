@@ -15,6 +15,8 @@ public:
 public:
 	char* test = nullptr;
 	uint World_Audio;
+	bool temp = true;
+	bool cutscene = false;
 };
 
 #endif // 

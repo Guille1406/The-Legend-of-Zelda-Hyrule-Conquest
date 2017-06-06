@@ -69,6 +69,8 @@ bool S_TopOfTheMountain::Start()
 		//App->map->CreateLogicMap();
 	}
 
+	temp = true;
+	cutscene = false;
 	App->audio->PlayMusic("audio/music/Top-of-the-Mountain.ogg", 0);
 	App->audio->VolumeMusic(100);
 
@@ -94,12 +96,13 @@ bool S_TopOfTheMountain::Update()
 bool S_TopOfTheMountain::PostUpdate()
 {
 
-	static bool cutscene = false;
-	static bool temp = true;
+	
+	
 	if (App->cutscenemanager->FinishCutscene() && temp) {
 		SDL_Rect r = { 0,0,1280,720 };
 		App->videoplayer->video_finished = false;
 		App->videoplayer->PlayVideo("Top-of-the-mountain-video.ogv", r);
+		App->videoplayer->video_finished = false;
 		cutscene = true;
 		temp = false;
 

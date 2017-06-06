@@ -41,6 +41,7 @@ bool S_TempBossRoom::Start()
 	App->pathfinding->paused = false;
 	SDL_Rect r = { 0,0,1280,720 };
 	App->videoplayer->PlayVideo("Boss video.ogv", r);
+	App->videoplayer->video_finished = false;
 
 	if (App->map->Load("final_boss_map_advanced.tmx") == true)
 
