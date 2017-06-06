@@ -70,6 +70,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool DrawParticles();
 	//FUNCTIONS TO CREATE
 
 	//Create & Delete Follow Group

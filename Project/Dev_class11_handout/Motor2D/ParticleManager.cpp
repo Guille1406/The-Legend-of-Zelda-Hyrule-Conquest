@@ -141,6 +141,37 @@ bool ParticleManager::Update(float dt)
 
 bool ParticleManager::PostUpdate()
 {
+	
+	return true;
+}
+
+bool ParticleManager::CleanUp()
+{
+	for (std::list<P_Follow*>::iterator item = Group_Follow.begin(); item != Group_Follow.cend(); ++item)
+		RELEASE(*item);
+	Group_Follow.clear();
+
+	for (std::list<P_Fire*>::iterator item = Group_Fire.begin(); item != Group_Fire.cend(); ++item)
+		RELEASE(*item);
+	Group_Fire.clear();
+
+	for (std::list<P_Explosion*>::iterator item = Group_Explosion.begin(); item != Group_Explosion.cend(); ++item)
+		RELEASE(*item);
+	Group_Explosion.clear();
+
+	for (std::list<P_Firework*>::iterator item = Group_Firework.begin(); item != Group_Firework.cend(); ++item)
+		RELEASE(*item);
+	Group_Firework.clear();
+
+	App->tex->UnLoad(atlas_particle);
+	
+	atlas_particle = nullptr;
+	
+	return true;
+}
+
+bool ParticleManager::DrawParticles()
+{
 	//Iterate all list
 	//Group FOLLOW -------------------------------------------------
 	std::list<P_Follow*>::iterator item = Group_Follow.begin();
@@ -170,35 +201,10 @@ bool ParticleManager::PostUpdate()
 	std::list<P_Firework*>::iterator item_4 = Group_Firework.begin();
 	while (item_4 != Group_Firework.end())
 	{
-		item_4._Ptr->_Myval->PostUpdate();
-		item_4++;
+	item_4._Ptr->_Myval->PostUpdate();
+	item_4++;
 	}
 	*/
-	return true;
-}
-
-bool ParticleManager::CleanUp()
-{
-	for (std::list<P_Follow*>::iterator item = Group_Follow.begin(); item != Group_Follow.cend(); ++item)
-		RELEASE(*item);
-	Group_Follow.clear();
-
-	for (std::list<P_Fire*>::iterator item = Group_Fire.begin(); item != Group_Fire.cend(); ++item)
-		RELEASE(*item);
-	Group_Fire.clear();
-
-	for (std::list<P_Explosion*>::iterator item = Group_Explosion.begin(); item != Group_Explosion.cend(); ++item)
-		RELEASE(*item);
-	Group_Explosion.clear();
-
-	for (std::list<P_Firework*>::iterator item = Group_Firework.begin(); item != Group_Firework.cend(); ++item)
-		RELEASE(*item);
-	Group_Firework.clear();
-
-	App->tex->UnLoad(atlas_particle);
-	
-	atlas_particle = nullptr;
-	
 	return true;
 }
 

@@ -7,6 +7,7 @@
 #include "j1Render.h"
 #include "j1Input.h"
 #include "j1Player.h"
+#include "ParticleManager.h"
 #include <cmath>
 #define VSYNC true
 
@@ -200,8 +201,10 @@ void j1Render::Draw()
 				App->player->Draw(i, n);
 			
 		}
+		
 		App->player->Zelda->UpdateArrows(i);
 	}
+	App->particlemanager->DrawParticles();
 }
 
 // Blit to screen
