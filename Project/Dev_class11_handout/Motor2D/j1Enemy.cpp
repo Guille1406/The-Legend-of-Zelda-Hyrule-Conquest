@@ -508,7 +508,7 @@ void j1Enemy::OnCollision(Collider * collider1, Collider * collider2)
 	}
 	else if (collider1->type == COLLIDER_TYPE::collider_enemy_sword && collider2->type == COLLIDER_TYPE::collider_zelda && !App->player->god_mode) {
 		Enemy* n_enemy = (Enemy*)collider1->parent;
-		if (App->player->Zelda->is_rolling == false) {
+		if (App->player->Zelda->is_rolling == false && App->player->Zelda->actual_event != throw_) {
 			if (App->player->Link->collision_by_enemy_timmer.Read() > 1500) {
 				App->player->Link->collision_by_enemy_timmer.Start();
 				App->player->Zelda->actual_event = player_event::push_backwards;
