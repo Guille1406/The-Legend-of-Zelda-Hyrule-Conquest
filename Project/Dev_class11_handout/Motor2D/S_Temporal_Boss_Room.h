@@ -18,7 +18,7 @@ public:
 	char* test = nullptr;
 	uint World_Audio;
 	bool done_video_boss=false;
-	
+	bool done_second_video = false;
 };
 
 #endif // 

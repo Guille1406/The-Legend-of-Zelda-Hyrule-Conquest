@@ -776,9 +776,13 @@ void THEORAPLAY_freeAudio(const THEORAPLAY_AudioPacket *_item)
 	THEORAPLAY_AudioPacket *item = (THEORAPLAY_AudioPacket *)_item;
 	if (item != NULL)
 	{
-		assert(item->next == NULL);
+		if (item->next == NULL) {
+			return 0;
+		}//assert(item->next == NULL);
+		
 		free(item->samples);
 		free(item);
+		
 	} // if
 } // THEORAPLAY_freeAudio
 
