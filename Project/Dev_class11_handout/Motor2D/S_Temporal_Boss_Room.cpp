@@ -97,9 +97,7 @@ bool S_TempBossRoom::Update()
 	}
 	if (App->videoplayer->video_finished && done_video_boss == false)
 	{
-		App->audio->CleanUp();
-		App->audio->Awake(App->config);
-		App->audio->Start();
+		App->audio->RestartAudio();
 		App->player->paused = false;
 		done_video_boss = true;
 		App->audio->PlayMusic("audio/music/Final-boss-theme.ogg", 0);
@@ -150,9 +148,7 @@ bool S_TempBossRoom::PostUpdate()
 	if (App->enemy->Final_Boss != nullptr) {
 		
 			if (App->videoplayer->video_finished && done_second_video)  {
-				App->audio->CleanUp();
-				App->audio->Awake(App->config);
-				App->audio->Start();
+				App->audio->RestartAudio();
 				App->player->paused = false;
 				done_video_boss = true;
 				App->scene->ChangeScene(Scene_ID::credits);

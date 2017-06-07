@@ -202,8 +202,8 @@ bool Video::PostUpdate()
 
 		// Events -------------------------------------------------------
 
-		/*if ((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_DOWN) || (App->input->GetControllerButton(1, 0) == j1KeyState::KEY_DOWN))
-			quit = 1;*/
+		if ((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) || (App->input->GetControllerButton(0, 0) == j1KeyState::KEY_DOWN) || (App->input->GetControllerButton(1, 0) == j1KeyState::KEY_DOWN))
+			quit = 1;
 
 		// ----------------------------------------------------------------
 

@@ -31,6 +31,8 @@ public:
 	// Load a WAV in memory
 	unsigned int LoadFx(const char* path);
 
+	void RestartAudio();
+
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int repeat = 0);
 	uint button_sound = 0;
@@ -40,6 +42,7 @@ public:
 	uint boss_invencible_sound = 0;
 	uint boss_laser_sound = 0;
 	uint boss_dies_sound = 0;
+
 
 	bool StopMusic(float fade_time);
 	bool ResumeMusic();

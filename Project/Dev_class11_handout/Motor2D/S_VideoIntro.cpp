@@ -32,9 +32,7 @@ bool S_VideoIntro::Update()
 	//if(!App->videoplayer->active) //Change scene
 	if (App->videoplayer->video_finished)
 	{
-		App->audio->CleanUp();
-		App->audio->Awake(App->config);
-		App->audio->Start();
+		App->audio->RestartAudio();
 		App->scene->ChangeScene(Scene_ID::mainmenu);
 		App->startmenuback->Enable();
 	}
